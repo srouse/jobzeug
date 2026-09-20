@@ -28,3 +28,27 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 #### Next
 
 - Continue project capture; invoke session-checkpoint at end of sessions
+
+### [2026-09-20T12:13:05-05:00]
+
+#### Summary
+
+- Redacted Greenhouse job-board ENV tokens in the saved HTML snapshot to clear the GitGuardian Rollbar false positive on HEAD.
+
+#### Changes
+
+- Evidence / records: Replaced Rollbar/geocode/Google/Dropbox/reCAPTCHA values with REDACTED in original.html; job posting body unchanged
+- Skills / tooling:
+- Other:
+
+#### Decisions
+
+- Keep the HTML provenance snapshot; redact only credential-shaped ENV values (Greenhouse public client keys, not Jobzeug secrets)
+
+#### Plans cached
+
+- none
+
+#### Next
+
+- Resolve GitGuardian incident as false positive / fixed on tip if desired; history still contains prior commit
