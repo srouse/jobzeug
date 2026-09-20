@@ -1,0 +1,89 @@
+Scott Rouse 
+scott.rouse@gmail.com | https://linkedin.com/in/scottfrouse 
+Senior design technologist and software engineer specializing in design systems, structured content, and AI-driven workflows. I bridge design, development, and strategy to turn complex platforms into clear, scalable demos, products, and systems—helping teams move faster, reduce technical debt, and tell compelling stories through working software.
+Senior Product Architect
+Contentful | February 2026 - Present
+Created and launched Contentful for Figma, a public Figma Community widget that brings live, structured Contentful content into Figma components and full-page designs.
+Connected structured content to design-system components so teams can test realistic variations earlier, review experiences with production-like content, and create clearer handoffs to development.
+https://www.figma.com/community/widget/1644421339192517412/contentful-for-figma
+I focus on connecting design systems, Figma, structured content, and AI to build scalable, production ready workflows across Contentful.
+On the Contentful Insights and Adoption team, I lead the development of internal tools, platforms, and best practices that power post sales delivery and customer adoption, aligning design, development, and automation across the organization.
+Solution Specialist
+Contentful | February 2025 - Present 
+Design and prototype AI-driven workflows that accelerate demo creation, from research and content modeling to design-system integration and layout generation.
+Partner closely with Solution Engineers to deliver high-impact demos and proof-of-concepts tailored to enterprise customers.
+Advise teams on aligning structured content, design systems, and AI to reduce technical debt and increase delivery speed.
+Contribute to innovation strategy by identifying gaps in tooling and workflows and building forward-looking prototypes to address them.
+Senior Software Engineer 
+Contentful | February 2024 - January 2025 
+Created scalable, repeatable demos showcasing Contentful’s platform, with a focus on enterprise design systems and content architectures.
+Supported product launches and sales motions by translating complex capabilities into clear, compelling technical narratives.
+Authored high-performing technical articles, including a top-five Contentful blog post of the year.
+Presented Design Systems and AI during Contentful’s 2024 Partnership Tour.
+Selected Writing:
+Design Tokens: Building a Token-Driven System. A top performing blog post for over a year.
+
+[ https://www.contentful.com/blog/design-token-system/](https://www.contentful.com/blog/design-token-system/)
+Sr. UX Generalist – Design Systems 
+State Farm Insurance / Synergis | July 2023 - February 2024 
+Led modernization of State Farm’s enterprise design system through design tokens, web components, and new governance processes.
+Bridged designers, developers, and executives through hands-on prototypes, real-time code examples, and strategic presentations.
+Mentored team members and led training sessions to drive adoption and long-term sustainability of the system.
+Experience Designer 
+Summit Credit Union | Aug 2020 - Jun 2023 
+Accelerated digital transformation by designing and building a new design system and content platform.
+Built a reusable design system using StencilJS and Lit for applications and marketing sites.
+Implemented Contentful as a decentralized content platform and rebuilt the brand website using a static site generator.
+Created Rates Central, a single source of truth for all financial rate products, built on the design system and Contentful.
+Established AWS-based CI/CD pipelines for static applications.
+Mentored designers, developers, and innovation teams.
+Senior UX Designer/Developer 
+American Family Insurance | Nov 2019 - Aug 2020 
+Initiated development of an enterprise, cross-brand design system.
+Collaborated with R&D teams exploring natural language AI models and knowledge management systems.
+UX Designer & Web/Mobile Developer - Design Innovation Team Summit Credit Union | Aug 2018 - Nov 2019 
+Defined UX and UI for next-generation digital banking products.
+Led rapid prototyping across native iOS (Swift) and web (React) to validate and modernize user experiences.
+
+Web/Mobile Developer, UX/UI Designer, & Co-Founder Aha Notes | Jan 2017 - Nov 2018 
+Co-founded a mobile app focused on capturing and connecting ideas.
+Built end-to-end design, development, and business workflows to rapidly validate customer value.
+Gained hands-on experience across UX, engineering, product strategy, and marketing.
+UX/UI Designer & Web/Mobile Developer 
+Earthling Interactive | Aug 2014 - Aug 2018 
+Designed and prototyped mobile and web applications for 30+ companies, primarily startups.
+Developed a fast, iterative prototyping approach combining mockups, interactive code prototypes, and user testing.
+CTO, Designer, & Web/Mobile Developer 
+OpenHomes | Jun 2013 - Aug 2014 
+Led all technical and design efforts for a real-estate platform connecting buyers and sellers directly.
+Accepted into the Summer 2013 gener8tor accelerator cohort.
+Lead Software Developer & UI Designer 
+Propeller Health | Nov 2012 - Jun 2013 
+Architected and implemented user-centric web and iOS prototypes.
+Led redesign of the iPhone application through iterative HTML prototyping and close collaboration with iOS engineers.
+Head of Usability/Mobile Developer 
+StudyBlue | Sep 2011 - Nov 2012 
+Led the migration of StudyBlue’s application to iPad.
+Promoted to Head of Usability, overseeing product experience across the platform.
+Established a user-driven development process using rapid prototyping, testing, analytics, and interviews.
+Supported a product with nearly two million users.
+
+Education 
+Bachelor of Science, Art & Philosophy
+University of Wisconsin–Madison
+Governor’s School for the Arts (Summer Program)
+Middle Tennessee State University | Summer 1990
+Selective, full-scholarship summer program focused on intensive arts education
+
+
+Participated in interdisciplinary, conservatory-style training alongside ballet, visual arts, orchestra, and theater programs.
+Awards & Scholarships
+Savannah College of Art and Design Scholarship | 1990, 1991
+Two-time recipient of a $10,000 merit-based scholarship.
+
+
+Hallmark Award | 1990, 1991
+Two-time recipient; awarded to only two students in Middle Tennessee for exhibition in New York City.
+
+
+First and only time the recipient’s high school received this recognition.

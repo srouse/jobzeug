@@ -1,0 +1,24 @@
+# Figma Role project index
+
+Existing-material candidates are listed in the parent README. The records below capture Scott's accounts as **projects** and distinguish them from unconfirmed leads.
+
+| ID | Project | Employer / dates / resume role | Relevant themes | Evidence status | Next detail needed |
+|---|---|---|---|---|---|
+| S001 | [Blueprints](S001%20-%20Blueprints.md) | Contentful CIA / dates pending / [R001](../roles/R001-contentful-senior-product-architect.md); [P002](../perspectives/P002-build-deep-to-influence.md) | Figma-first DS, Contentful for Figma, Design System Squared, ~50 components, Experience Orchestration influence | Expanded Scott account; artifacts and EO project pending | Design System Squared artifacts; install/adoption; EO project |
+| S002 | [Bulk Editor](S002%20-%20Bulk%20Editor.md) | Contentful / dates pending / provisionally [R002](../roles/R002-contentful-solution-specialist.md); customers [CU001 Tri Pointe](../customers/CU001-tri-pointe-homes.md), [CU002 Trek](../customers/CU002-trek.md) (disclosure not cleared) | Customer prototype, bulk content UI, AI chat + semantic search, ecosystem handoff, production app | Expanded Scott account; images and ARR/popularity claims unverified | Images; app name; how ARR/popularity measured; stack; disclosure clearance |
+| S003 | [DemAI](S003%20-%20DemAI.md) | Contentful / early 2025–early 2026 (Scott) / provisionally [R002](../roles/R002-contentful-solution-specialist.md) (SE) | SE demos, Firecrawl, design-system abstraction, top-down content model, one-button agents/Mastra; separate from Blueprints/Agent Kit | Expanded Scott account; portfolio metrics unverified | Full step list; evaluation; artifacts; portfolio 68% claim |
+| S004 | [State Farm design system refresh](S004%20-%20State%20Farm%20design%20system%20refresh.md) | State Farm / under 1 year; [R004](../roles/R004-state-farm-design-systems.md) | **Umbrella** linking S005–S007 | Spine only; children hold detail | Shared outcomes; public framing |
+| S005 | [State Farm tokens persuasion](S005%20-%20State%20Farm%20tokens%20persuasion.md) | State Farm / [R004](../roles/R004-state-farm-design-systems.md); child of S004 | Executive decks, landing slide, tokens buy-in | Initial account | Landing deck artifact; political partner |
+| S006 | [State Farm Figma design system](S006%20-%20State%20Farm%20Figma%20design%20system.md) | State Farm / [R004](../roles/R004-state-farm-design-systems.md); child of S004 | Figma tokens, components, plugin→git, Google DS expert, systematic Figma mentoring | Initial account (Figma leg expanded) | Library/plugin artifacts; Google expert; plugin vs widget |
+| S007 | [State Farm Lit engineering bridge](S007%20-%20State%20Farm%20Lit%20engineering%20bridge.md) | State Farm / [R004](../roles/R004-state-farm-design-systems.md); child of S004 | Lit/web components enablement, design↔dev bridge, token adoption | Initial account | Lit authorship vs coaching; artifacts |
+| S008 | [Contentful for Figma widget](S008%20-%20Contentful%20for%20Figma%20widget.md) | Contentful / v1 under [R002](../roles/R002-contentful-solution-specialist.md), production under [R001](../roles/R001-contentful-senior-product-architect.md) CIA; [P002](../perspectives/P002-build-deep-to-influence.md) | Figma widget, content binding/assembly, content-status blueprint UX, public GA outside product | Initial account; low usage claimed; EO comparison is Scott’s judgment | Community URL; prospects; binding feature list; EO project |
+
+Themes may include customer discovery, engineering, production delivery, design systems, Figma, AI/agents, enterprise constraints, technical communication, adoption, reusable solutions, and product influence. Apply only themes supported by the account. AI or Figma involvement is not required for a project to be valuable.
+
+## Maintenance
+
+Use stable S-prefixed IDs (**S = project**) and link each known role with an R-prefixed role record. Keep uncertain associations labeled provisional and allow projects to span roles. Add a row when capturing a project and update the corresponding role record. S001 is a project ID; S1–S6 in Goal.md identify skill groups, not projects.
+
+[Role index](../roles/INDEX.md) · [Sources](../sources/INDEX.md) · [Workspace guide](../README.md)
+
+[Perspectives](../perspectives/INDEX.md) holds broader viewpoints that can be supported by these projects.

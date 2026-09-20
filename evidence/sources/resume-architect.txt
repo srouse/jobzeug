@@ -1,0 +1,119 @@
+Scott Rouse
+scott.rouse@gmail.com | https://linkedin.com/in/scottfrouse
+
+Contentful Architect | Senior Product Architect | Design Technologist
+
+Contentful architect and senior design technologist with more than 15 years of experience building digital products and more than five years designing structured-content platforms, reusable design systems, and delivery workflows. Hands-on experience implementing Contentful as a decentralized content platform, modeling reusable content, building static applications supported by AWS CI/CD, and translating complex platform capabilities into scalable demos and production-ready workflows. Bridge architecture, development, design, and business stakeholders to improve platform adoption and delivery.
+
+Relevant Expertise
+
+Contentful and structured content: Content modeling, reusable content architecture, platform implementation, design-system integration, enterprise demos and proof-of-concepts, adoption workflows, and technical enablement
+
+Architecture and engineering: Headless and static-site architectures, React, StencilJS, Lit, web components, AWS-based CI/CD, rapid prototyping, and internal platform tooling
+
+Technical leadership: Cross-functional architecture guidance, executive presentations, mentoring, training, stakeholder alignment, technical writing, and translating complex systems into practical implementation patterns
+
+Professional Experience
+
+Senior Product Architect
+Contentful | February 2026 - Present
+
+- Lead development of internal tools, platforms, and implementation practices that support post-sales delivery and customer adoption across Contentful.
+- Connect structured content, design systems, Figma, and AI-assisted workflows to create scalable approaches for designing and delivering digital experiences.
+- Created and launched Contentful for Figma, a public Figma Community widget that brings live, structured Contentful content into Figma components and full-page designs.
+- Align design, development, and automation practices across the Contentful Insights and Adoption team.
+
+Contentful for Figma: https://www.figma.com/community/widget/1644421339192517412/contentful-for-figma
+
+Solution Specialist
+Contentful | February 2025 - Present
+
+- Design and prototype workflows spanning research, content modeling, design-system integration, layout generation, and AI-assisted demo creation.
+- Partner with Solution Engineers to deliver enterprise demos and proof-of-concepts tailored to customer requirements.
+- Advise teams on aligning structured content and design systems to reduce technical debt and improve delivery speed.
+- Identify gaps in platform tooling and workflows, then build forward-looking prototypes to demonstrate practical solutions.
+
+Senior Software Engineer
+Contentful | February 2024 - January 2025
+
+- Created scalable, repeatable demonstrations of Contentful's platform, emphasizing enterprise content architectures and design-system integration.
+- Translated complex platform capabilities into clear technical narratives supporting product launches, sales initiatives, and partner conversations.
+- Authored a top-five Contentful blog post of the year and presented on design systems and AI during Contentful's 2024 Partnership Tour.
+
+Selected writing: Design Tokens: Building a Token-Driven System
+https://www.contentful.com/blog/design-token-system/
+
+Senior UX Generalist - Design Systems
+State Farm Insurance / Synergis | July 2023 - February 2024
+
+- Led modernization of an enterprise design system through design tokens, web components, and new governance practices.
+- Bridged design, development, and executive stakeholders through working prototypes, real-time code examples, and architecture-focused presentations.
+- Mentored team members and led training sessions to improve adoption and long-term sustainability.
+
+Experience Designer
+Summit Credit Union | August 2020 - June 2023
+
+- Implemented Contentful as a decentralized content platform and helped establish a reusable structured-content architecture.
+- Rebuilt the organization's brand website using a static-site approach supported by AWS-based CI/CD pipelines.
+- Designed and built a reusable design system with StencilJS and Lit for product applications and marketing sites.
+- Created Rates Central, a single source of truth for financial rate products built on Contentful and the design system.
+- Mentored designers, developers, and innovation teams on shared platform and delivery practices.
+
+Senior UX Designer / Developer
+American Family Insurance | November 2019 - August 2020
+
+- Initiated development of an enterprise, cross-brand design system.
+- Collaborated with research and development teams exploring natural-language AI models and knowledge-management systems.
+
+UX Designer and Web/Mobile Developer - Design Innovation Team
+Summit Credit Union | August 2018 - November 2019
+
+- Defined UX and UI for next-generation digital banking products.
+- Built rapid prototypes in Swift and React to validate and modernize customer experiences.
+
+Web/Mobile Developer, UX/UI Designer, and Co-Founder
+Aha Notes | January 2017 - November 2018
+
+- Co-founded and built a mobile product focused on capturing and connecting ideas.
+- Managed design, development, product strategy, and validation workflows from concept through implementation.
+
+UX/UI Designer and Web/Mobile Developer
+Earthling Interactive | August 2014 - August 2018
+
+- Designed and prototyped web and mobile applications for more than 30 companies, primarily startups.
+- Combined mockups, coded prototypes, and user testing in a fast, iterative product-development process.
+
+CTO, Designer, and Web/Mobile Developer
+OpenHomes | June 2013 - August 2014
+
+- Led product design and engineering for a real-estate platform connecting buyers and sellers directly.
+- Selected for the Summer 2013 gener8tor accelerator cohort.
+
+Lead Software Developer and UI Designer
+Propeller Health | November 2012 - June 2013
+
+- Architected and implemented user-centered web and iOS prototypes.
+- Led an iterative redesign of the iPhone application in collaboration with iOS engineers.
+
+Head of Usability / Mobile Developer
+StudyBlue | September 2011 - November 2012
+
+- Led the migration of StudyBlue's application to iPad and oversaw product experience across the platform.
+- Established a user-driven development process using prototyping, testing, analytics, and interviews for a product serving nearly two million users.
+
+Education
+
+Bachelor of Science, Art and Philosophy
+University of Wisconsin-Madison
+
+Governor's School for the Arts, Summer Program
+Middle Tennessee State University | Summer 1990
+Selective, full-scholarship program focused on intensive interdisciplinary arts education
+
+Awards and Scholarships
+
+Savannah College of Art and Design Scholarship | 1990, 1991
+Two-time recipient of a $10,000 merit-based scholarship
+
+Hallmark Award | 1990, 1991
+Two-time recipient; awarded to only two students in Middle Tennessee for exhibition in New York City
