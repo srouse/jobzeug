@@ -32,6 +32,9 @@ Researched September 19, 2026. Company background is independent of Scott’s ex
 - [S003 DemAI](../projects/S003%20-%20DemAI.md), provisionally R002 (SE / Solution Specialist).
 - [S008 Contentful for Figma widget](../projects/S008%20-%20Contentful%20for%20Figma%20widget.md), v1 R002 / production R001.
 
+- [S009 AI content and component binding](../projects/S009%20-%20AI%20content%20and%20component%20binding.md), R001.
+- [S010 Berlin prototype exploration](../projects/S010%20-%20Berlin%20prototype%20exploration.md), provisionally R001.
+
 ## Customers (via Contentful engagements)
 
 - [CU001 Tri Pointe Homes](../customers/CU001-tri-pointe-homes.md) — S002

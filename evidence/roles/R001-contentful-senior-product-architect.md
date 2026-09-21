@@ -24,6 +24,9 @@ Titles can vary in wording between resume variants. Preserve original wording in
 - [S001: Blueprints](../projects/S001%20-%20Blueprints.md) — Customer Insights and Adoption (CIA) team; Design System Squared / Figma-centric ~50 components; project calendar dates still unconfirmed.
 - [S008: Contentful for Figma widget](../projects/S008%20-%20Contentful%20for%20Figma%20widget.md) — production under CIA / R001; v1 originated in SE work (also linked on R002).
 
+- [S009: AI content and component binding](../projects/S009%20-%20AI%20content%20and%20component%20binding.md) — latest-role exploration; not yet integrated into the widget.
+- [S010: Berlin prototype exploration](../projects/S010%20-%20Berlin%20prototype%20exploration.md) — provisional role association; event dates and full account pending.
+
 ## Source references
 
 - [Full working resume](../sources/resume-working-copy.txt)

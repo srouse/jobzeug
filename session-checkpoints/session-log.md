@@ -76,3 +76,27 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 #### Next
 
 - Continue evidence capture; invoke session-checkpoint at end of sessions
+
+### [2026-09-21T12:13:30-05:00]
+
+#### Summary
+
+- Scaffolded Next.js + Mastra with Postgres storage so the repo can be linked to Vercel and DATABASE_URL provisioned.
+
+#### Changes
+
+- Evidence / records: S009/S010 and related index/role/employer updates present in working tree
+- Skills / tooling: Next.js App Router app; Mastra jobzeug-agent; @mastra/pg PostgresStore singleton; /chat smoke test; concurrent Studio scripts
+- Other: .env.example (OPENAI_API_KEY, DATABASE_URL); README; next.config serverExternalPackages; .gitignore Mastra/Next merges
+
+#### Decisions
+
+- Single package (no monorepo); Studio local-only; Vercel Postgres via DATABASE_URL instead of LibSQL
+
+#### Plans cached
+
+- next.js_mastra_scaffold_718b8d31.plan.md
+
+#### Next
+
+- Create/link Vercel project; attach Marketplace Postgres; set DATABASE_URL + OPENAI_API_KEY; run dev:all

@@ -83,3 +83,9 @@ Top-tier Figma FDE portfolio piece once URL and binding details are documented. 
 ## Addition — September 20, 2026
 
 Initial capture: SE-driven v1, content-status blueprint unlock, CIA production path, public live widget, binding vs Experience Orchestration comparison.
+
+## Addition — September 21, 2026
+
+Scott described a separate AI binding exploration for the widget: [S009 AI content and component binding](S009%20-%20AI%20content%20and%20component%20binding.md). It uses semantic metadata from content entries and component examples to improve mappings and explore repair. Scott reports consistent experimental results, but this capability is **not yet integrated into the shipped widget**: safe metadata storage remains unresolved. See S009 for the full account.
+
+He presented that work during [S010 Berlin prototype exploration](S010%20-%20Berlin%20prototype%20exploration.md); the broader Berlin account is pending. The existing widget terminology is retained from his earlier explicit correction; his latest narration also called it a plugin.
