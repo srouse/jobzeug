@@ -100,3 +100,28 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 #### Next
 
 - Create/link Vercel project; attach Marketplace Postgres; set DATABASE_URL + OPENAI_API_KEY; run dev:all
+
+### [2026-09-21T12:54:18-05:00]
+
+#### Summary
+
+- Site password gate, evidence workspace on jobzeug-agent, drop Mastra observability noise, migrate middleware→proxy.
+
+#### Changes
+
+- Evidence / records:
+- Skills / tooling: SITE_PASSWORD session via /login + src/proxy.ts; read-only evidence Workspace with BM25; removed @mastra/observability
+- Other: .env.example SESSION_SECRET/SITE_PASSWORD; README updates
+
+#### Decisions
+
+- Hobby-friendly code password gate instead of Vercel Deployment Protection; evidence entire folder read-only BM25 markdown index; observability off to silence Studio PG feedback errors
+
+#### Plans cached
+
+- evidence_mastra_workspace_4e07deca.plan.md
+- site_password_gate_c3c92081.plan.md
+
+#### Next
+
+- Redeploy with SITE_PASSWORD/SESSION_SECRET on Vercel; exercise agent against evidence in Studio/chat

@@ -22,6 +22,12 @@ export default function Home() {
           >
             Open agent chat
           </Link>
+          <Link
+            href="/api/logout"
+            className="rounded-md border border-zinc-600 px-4 py-2 text-sm text-zinc-300 transition hover:border-zinc-400"
+          >
+            Log out
+          </Link>
           <span className="self-center text-xs text-zinc-500">
             Studio: npm run dev:studio
           </span>

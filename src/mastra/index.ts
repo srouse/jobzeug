@@ -1,13 +1,13 @@
 import { Mastra } from "@mastra/core/mastra";
 import { PinoLogger } from "@mastra/loggers";
-import {
-  Observability,
-  MastraStorageExporter,
-  SensitiveDataFilter,
-} from "@mastra/observability";
 
 import { jobzeugAgent } from "./agents/jobzeug-agent";
 import { storage } from "./storage";
+import { ensureEvidenceWorkspace } from "./workspace";
+
+void ensureEvidenceWorkspace().catch((err) => {
+  console.error("[jobzeug] evidence workspace init failed:", err);
+});
 
 export const mastra = new Mastra({
   agents: { jobzeugAgent },
@@ -15,14 +15,5 @@ export const mastra = new Mastra({
   logger: new PinoLogger({
     name: "Jobzeug",
     level: "info",
-  }),
-  observability: new Observability({
-    configs: {
-      default: {
-        serviceName: "jobzeug",
-        exporters: [new MastraStorageExporter()],
-        spanOutputProcessors: [new SensitiveDataFilter()],
-      },
-    },
   }),
 });
