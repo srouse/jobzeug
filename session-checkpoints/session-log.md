@@ -52,3 +52,27 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 #### Next
 
 - Resolve GitGuardian incident as false positive / fixed on tip if desired; history still contains prior commit
+
+### [2026-09-21T11:34:02-05:00]
+
+#### Summary
+
+- Moved project skills from `.cursor/skills/` to `.agents/skills/` and checkpointed the relocation.
+
+#### Changes
+
+- Evidence / records:
+- Skills / tooling: add-project and session-checkpoint now under `.agents/skills/`; removed `.cursor/skills/` copies
+- Other:
+
+#### Decisions
+
+- Use `.agents/skills/` as the canonical skill location for Jobzeug (session-checkpoint staging paths updated accordingly)
+
+#### Plans cached
+
+- none
+
+#### Next
+
+- Continue evidence capture; invoke session-checkpoint at end of sessions

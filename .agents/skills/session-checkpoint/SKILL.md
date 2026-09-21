@@ -125,7 +125,7 @@ Set:
 If there is anything to commit among:
 
 - `evidence/`
-- `.cursor/skills/`
+- `.agents/skills/`
 - `session-checkpoints/`
 - `.gitignore`
 - other intentional project files already tracked or clearly part of this workspace
@@ -137,7 +137,7 @@ Then perform a full Git check-in.
 Stage intentionally (examples):
 
 ```bash
-git add evidence/ .cursor/skills/ session-checkpoints/ .gitignore
+git add evidence/ .agents/skills/ session-checkpoints/ .gitignore
 ```
 
 Add other relevant paths only when they changed and belong in the repo.
@@ -166,7 +166,7 @@ Type rules:
 Scope rules (Jobzeug):
 
 - `evidence` — evidence records, indexes, Goal/README
-- `skills` — `.cursor/skills/`
+- `skills` — `.agents/skills/`
 - `session` — session-checkpoints log and plan cache
 - or combined if needed
 
