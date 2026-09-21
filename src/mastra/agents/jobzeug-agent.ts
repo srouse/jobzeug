@@ -34,6 +34,9 @@ Keep answers concise and cite file paths when you rely on them.`,
   memory: new Memory({
     options: {
       generateTitle: true,
+      observationalMemory: {
+        model: "openai/gpt-4o-mini",
+      },
     },
   }),
 });

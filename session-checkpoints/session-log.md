@@ -125,3 +125,33 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 #### Next
 
 - Redeploy with SITE_PASSWORD/SESSION_SECRET on Vercel; exercise agent against evidence in Studio/chat
+
+### [2026-09-21T13:02:32-05:00]
+
+#### Summary
+
+- Enabled Observational Memory on jobzeug-agent with OpenAI gpt-4o-mini for long-thread compression.
+
+#### Changes
+
+- Evidence / records:
+- Skills / tooling: Memory options now include observationalMemory model openai/gpt-4o-mini
+- Other:
+
+#### Decisions
+
+- Use OpenAI mini for OM observer calls to keep cost down while compressing past ~30k tokens
+
+#### Plans cached
+
+- add_story_skill_2a282f5c.plan.md
+- customers_evidence_log_51450833.plan.md
+- evidence_mastra_workspace_4e07deca.plan.md
+- next.js_mastra_scaffold_718b8d31.plan.md
+- session_checkpoint_skill_65575be3.plan.md
+- site_password_gate_c3c92081.plan.md
+- stories_to_projects_rename_34704978.plan.md
+
+#### Next
+
+- Restart Studio/Next; verify OM engages on longer chats; ensure Vercel has SITE_PASSWORD/SESSION_SECRET
