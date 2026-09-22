@@ -1,0 +1,116 @@
+{
+  "version": "0.4.21",
+  "environment": "cursor",
+  "installedAt": "2026-09-22T20:01:39.115Z",
+  "lastUpdatedAt": null,
+  "files": [
+    {
+      "path": ".cursor/commands/ds2.component.analyze.md",
+      "hash": "5694689fa1c9ab4332eb1315ce3704e492d5f9de3629b7bff83f75cb9bb0d6cb",
+      "templateSource": "shared-commands/ds2.component.analyze.md",
+      "installedAt": "2026-09-22T20:01:39.099Z"
+    },
+    {
+      "path": ".cursor/commands/ds2.component.md",
+      "hash": "97622fb937017bef645fbb3d386c4b21b37266872deeb137d4078b7c6db9f976",
+      "templateSource": "shared-commands/ds2.component.md",
+      "installedAt": "2026-09-22T20:01:39.099Z"
+    },
+    {
+      "path": ".cursor/commands/ds2.figma.analyze.md",
+      "hash": "a5e42c7c348549195e981d1172cf42fcb1fa691760a45b606ed6264d359a5bd8",
+      "templateSource": "shared-commands/ds2.figma.analyze.md",
+      "installedAt": "2026-09-22T20:01:39.099Z"
+    },
+    {
+      "path": ".cursor/commands/ds2.figma.components.lint.md",
+      "hash": "0bd11738e3e2244f9f1cb424bd682a75012d41957c544cc37198cb6169fbb8bc",
+      "templateSource": "shared-commands/ds2.figma.components.lint.md",
+      "installedAt": "2026-09-22T20:01:39.099Z"
+    },
+    {
+      "path": ".cursor/commands/ds2.figma.components.node.remediate.md",
+      "hash": "ce8cbbf0493002c26e60fcef47f9bd45adb11b15168c59fdc4eb521869e76125",
+      "templateSource": "shared-commands/ds2.figma.components.node.remediate.md",
+      "installedAt": "2026-09-22T20:01:39.099Z"
+    },
+    {
+      "path": ".cursor/commands/ds2.figma.components.update.md",
+      "hash": "c82915bbb5f34ba45da52dcabdea5df08fcdfe688938d558e8acf3a9dc237fb3",
+      "templateSource": "shared-commands/ds2.figma.components.update.md",
+      "installedAt": "2026-09-22T20:01:39.099Z"
+    },
+    {
+      "path": ".cursor/commands/ds2.figma.variables.sync.md",
+      "hash": "97209569fcff91e3d737ee90a2972e328d1501e6e0f7f7ebfd76b75382676790",
+      "templateSource": "shared-commands/ds2.figma.variables.sync.md",
+      "installedAt": "2026-09-22T20:01:39.099Z"
+    },
+    {
+      "path": ".cursor/commands/ds2.init.md",
+      "hash": "44f0d38fbc8da9080199ab37621f0d58b833fd395ad5cfa6ae43a257235d6f85",
+      "templateSource": "shared-commands/ds2.init.md",
+      "installedAt": "2026-09-22T20:01:39.099Z"
+    },
+    {
+      "path": ".cursor/commands/ds2.status.md",
+      "hash": "667567d6ba89fa0b71f2cd493149e3fe0483768ed07fa18d6f7b33aa1887f80d",
+      "templateSource": "shared-commands/ds2.status.md",
+      "installedAt": "2026-09-22T20:01:39.099Z"
+    },
+    {
+      "path": ".cursor/commands/ds2.tokens.analyze.md",
+      "hash": "4b4d381f30a6dbc94ee5199b1f5f26b57bb1abe5765ff488606a820a4201e490",
+      "templateSource": "shared-commands/ds2.tokens.analyze.md",
+      "installedAt": "2026-09-22T20:01:39.099Z"
+    },
+    {
+      "path": ".cursor/commands/ds2.tokens.boolean.md",
+      "hash": "5929533e84612d6bf23589167263ecd5fa299b548d1477db2ae37dd487a810a2",
+      "templateSource": "shared-commands/ds2.tokens.boolean.md",
+      "installedAt": "2026-09-22T20:01:39.099Z"
+    },
+    {
+      "path": ".cursor/commands/ds2.tokens.checklist.md",
+      "hash": "24856cc96eb6679c72cd98527e2a8caab1cf390e792ba44fd3c01959758752de",
+      "templateSource": "shared-commands/ds2.tokens.checklist.md",
+      "installedAt": "2026-09-22T20:01:39.099Z"
+    },
+    {
+      "path": ".cursor/commands/ds2.tokens.create.md",
+      "hash": "078f21d4be6bd59f0231e6dc09b9a52bbc4221eda0a5a87b5fdee49908a286f3",
+      "templateSource": "shared-commands/ds2.tokens.create.md",
+      "installedAt": "2026-09-22T20:01:39.099Z"
+    },
+    {
+      "path": ".cursor/commands/ds2.tokens.update.md",
+      "hash": "9f6babeb652c92d832da35c0048c2ea128744d20d37d8fb51683004e36e13642",
+      "templateSource": "shared-commands/ds2.tokens.update.md",
+      "installedAt": "2026-09-22T20:01:39.099Z"
+    },
+    {
+      "path": ".cursor/commands/ds2.update.md",
+      "hash": "7fd9160847867ace3d590e0b6d18614c158d336a15f048d1fb78ab9ff842adf1",
+      "templateSource": "shared-commands/ds2.update.md",
+      "installedAt": "2026-09-22T20:01:39.099Z"
+    },
+    {
+      "path": "src/designSystem/components/AGENTS.md",
+      "hash": "cb7e1cd7724904416979807e95fcab0a17d1ab088d0e3dff80d7198891f6369a",
+      "templateSource": "project/src/designSystem/components/AGENTS.md",
+      "installedAt": "2026-09-22T20:01:39.099Z"
+    },
+    {
+      "path": "src/designSystem/components/definitions/README.md",
+      "hash": "c9f46b8b02516881467576d6e56fc0962ef94659ee9020b701af2b3e65c783a8",
+      "templateSource": "project/src/designSystem/components/definitions/README.md",
+      "installedAt": "2026-09-22T20:01:39.099Z"
+    },
+    {
+      "path": "src/designSystem/tokens/core.tokens.ts",
+      "hash": "18aeef54dd009b66141b44a7dc08c18e640f42b99b4b0f46844fc9552955303f",
+      "templateSource": "project/src/designSystem/tokens/core.tokens.ts",
+      "installedAt": "2026-09-22T20:01:39.099Z"
+    }
+  ]
+}

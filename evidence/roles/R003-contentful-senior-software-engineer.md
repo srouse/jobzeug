@@ -13,15 +13,22 @@ Dates are resume-source claims and have not been separately confirmed.
 
 Titles can vary in wording between resume variants. Preserve original wording in the linked snapshots; the title above comes from the extracted resume variant data.
 
-## Existing resume claims
+## LinkedIn description
 
+LinkedIn source claim (Scott’s profile copy). Not independently verified.
+
+As a member of Contentful’s demo team, I built stories that showcased the platform’s capabilities in clear, compelling ways. I combined design, development, and storytelling skills to help product teams bring new features to market—crafting demos that were both easy to understand and easy to replicate for prospects and customers alike.
+
+I also authored internal and external articles and presentations on the intersection of design systems and AI, helping shape thought leadership and internal strategy in this emerging space.
+
+## Existing resume claims
 - Built scalable, repeatable demos focused on enterprise design systems and structured content architectures.
 - Translated complex platform capabilities into clear technical narratives for launches, sales motions, and partner audiences.
 - Authored a top-five Contentful blog post of the year and presented on design systems and AI during the 2024 Partnership Tour.
 
 ## Linked projects
 
-No captured projects linked yet. Resume bullets are discovery leads, not completed project accounts.
+- [S014: Design tokens Contentful blog](../projects/S014%20-%20Design%20tokens%20Contentful%20blog.md) — published May 16, 2024; layered token system guide; Scott reports sustained top-10 performance / Google visibility.
 
 ## Source references
 

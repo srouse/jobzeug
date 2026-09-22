@@ -1,0 +1,12 @@
+{
+  "evidenceId": "S013",
+  "employer": "C003",
+  "roles": [
+    "R007"
+  ],
+  "name": "Contentful Content Type widget (personal)",
+  "showOnResume": true,
+  "tags": [
+    "personal"
+  ]
+}

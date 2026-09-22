@@ -1,0 +1,278 @@
+.article {
+  background: #ffffff;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 640px) {
+  .article {
+    padding: 3rem;
+  }
+}
+
+.docHeader {
+  border-bottom: 1px solid var(--jz-color-neutral-300, #d4d4d4);
+  padding-bottom: 1.25rem;
+}
+
+.name {
+  margin: 0;
+  font-size: 1.875rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--jz-color-neutral-950, #0a0a0a);
+}
+
+@media (min-width: 640px) {
+  .name {
+    font-size: 2.25rem;
+  }
+}
+
+.sectionLabel {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--jz-color-neutral-500, #737373);
+}
+
+.stack {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.employerSpaceTight {
+  margin-top: 0.75rem;
+  transition: margin 500ms ease-in-out;
+}
+
+.employerSpaceRoomy {
+  margin-top: 2.5rem;
+  transition: margin 500ms ease-in-out;
+}
+
+.roleSpaceTight {
+  margin-top: 0.5rem;
+  transition: margin 500ms ease-in-out;
+}
+
+.roleSpaceRoomy {
+  margin-top: 1.5rem;
+  transition: margin 500ms ease-in-out;
+}
+
+.employerHead {
+  border-bottom: 1px solid var(--jz-color-neutral-200, #e5e5e5);
+  padding-bottom: 0.25rem;
+}
+
+.employerTitle {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--jz-color-neutral-950, #0a0a0a);
+}
+
+.employerDesc {
+  margin: 0.25rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.625;
+  color: var(--jz-color-neutral-500, #737373);
+}
+
+.roles {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.roleHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+}
+
+.roleTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--jz-color-neutral-900, #171717);
+}
+
+.roleDate {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--jz-color-neutral-500, #737373);
+}
+
+.roleBody {
+  margin: 0.75rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.625;
+  color: var(--jz-color-neutral-700, #404040);
+  white-space: pre-line;
+}
+
+.highlights {
+  margin: 0.75rem 0 0;
+  padding-left: 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.625;
+  color: var(--jz-color-neutral-700, #404040);
+  list-style: disc;
+}
+
+.highlights li + li {
+  margin-top: 0.375rem;
+}
+
+.projects {
+  margin-top: 0.75rem;
+}
+
+.projectsLabel {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--jz-color-neutral-500, #737373);
+}
+
+.projectList {
+  margin: 0.375rem 0 0;
+  padding-left: 1.25rem;
+  font-size: 0.875rem;
+  color: #525252;
+  list-style: disc;
+}
+
+.projectList li + li {
+  margin-top: 0.25rem;
+}
+
+.projectName {
+  font-size: 0.875rem;
+  color: #525252;
+}
+
+.cited {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: var(--app-cite);
+}
+
+.citedIcon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  color: var(--app-cite);
+}
+
+.weightSemibold {
+  font-weight: 600;
+}
+
+.weightMedium {
+  font-weight: 500;
+}
+
+.overlay {
+  position: relative;
+}
+
+.stubLayer {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  z-index: 10;
+  transition: opacity 500ms ease-in-out;
+}
+
+.stubVisible {
+  opacity: 1;
+}
+
+.stubHidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.collapse {
+  display: grid;
+  transition: grid-template-rows 500ms ease-in-out;
+}
+
+.collapseOpen {
+  grid-template-rows: 1fr;
+}
+
+.collapseClosed {
+  grid-template-rows: 0fr;
+}
+
+.collapseClip {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.collapseBody {
+  transition: opacity 500ms ease-in-out;
+}
+
+.collapseBodyOpen {
+  opacity: 1;
+}
+
+.collapseBodyClosed {
+  opacity: 0;
+}
+
+.stubBar {
+  height: 100%;
+  border-radius: 0 9999px 9999px 0;
+  background: var(--jz-color-neutral-200, #e5e5e5);
+}
+
+.stubBarGrow {
+  height: 100%;
+  min-width: 0;
+  flex: 1;
+  border-radius: 0 9999px 9999px 0;
+  background: var(--jz-color-neutral-200, #e5e5e5);
+}
+
+.stubBarFull {
+  height: 100%;
+  width: 100%;
+  border-radius: 0 9999px 9999px 0;
+  background: var(--jz-color-neutral-200, #e5e5e5);
+}
+
+.employerStub {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+}
+
+.employerStubLabel {
+  max-width: 40%;
+  flex-shrink: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--jz-color-neutral-500, #737373);
+}

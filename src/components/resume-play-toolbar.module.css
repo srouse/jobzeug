@@ -1,0 +1,15 @@
+.root {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}

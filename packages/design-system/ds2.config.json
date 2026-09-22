@@ -1,0 +1,12 @@
+{
+  "figmaLibraryId": "48XCsmDKWB6OqcsoDGteYt",
+  "sourceRoot": "src/designSystem",
+  "distRoot": [
+    "dist/designSystem"
+  ],
+  "domainPrefix": "jz",
+  "fonts": [{
+    "name": "Montserrat",
+    "url": "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+  }]
+}

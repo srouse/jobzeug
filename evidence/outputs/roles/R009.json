@@ -1,0 +1,16 @@
+{
+  "evidenceId": "R009",
+  "employer": "C006",
+  "title": "UX/UI Designer & Web/Mobile Developer",
+  "dateLabel": "Aug 2014 - Aug 2018",
+  "startDate": "2014-08-01",
+  "endDate": "2018-08-31",
+  "summary": "With Earthling Interactive I worked with over 30 companies, mostly startups, to design, prototype, and help develop their mobile and web applications. I developed a short iterative approach to prototyping, focusing on synthesizing UI and product solutions via mockups, interactive prototypes in native code (html, objective c, etc), and validation through formal user testing.",
+  "highlights": [
+    "Designed and prototyped web and mobile products for 30+ companies using mockups, coded prototypes, and user testing."
+  ],
+  "showOnResume": true,
+  "tags": [
+    "agency"
+  ]
+}

@@ -155,3 +155,44 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 #### Next
 
 - Restart Studio/Next; verify OM engages on longer chats; ensure Vercel has SITE_PASSWORD/SESSION_SECRET
+
+### [2026-09-22T17:23:20-05:00]
+
+#### Summary
+
+- Wired design-system consumption in the Next app (JzButton, tokens), dropped the JzFormSubmit wrapper, and locked agents out of editing `packages/design-system`.
+
+#### Changes
+
+- Evidence / records: LinkedIn additions (employers C010–C014, roles R018–R022, projects S011–S016), compress outputs under evidence/outputs/, Contentful schema/tags work
+- Skills / tooling: session-checkpoint skill; compress-to-contentful skill; always-apply ignore-design-system Cursor rule + AGENTS.md boundary; app uses `@jobzeug/design-system` buttons/tokens; login form client boundary for JzButton submit
+- Other: local DS2 CLI wiring plans; Specs rip / Lit restore / resume SPA / floating chat plans cached
+
+#### Decisions
+
+- Design system package is owned elsewhere — agents must never modify it (fonts/Montserrat/tokens included); app only consumes published exports
+- Form submits use JzButton + requestSubmit at call sites instead of a shared submit abstraction
+
+#### Plans cached
+
+- add_story_skill_2a282f5c.plan.md
+- comp-make_skill_429bbef5.plan.md
+- customers_evidence_log_51450833.plan.md
+- evidence_contentful_compress_793daf55.plan.md
+- evidence_mastra_workspace_4e07deca.plan.md
+- montserrat_entry_css_f8261a2c.plan.md
+- next.js_mastra_scaffold_718b8d31.plan.md
+- resume_cite_highlights_ae4c6a1c.plan.md
+- resume_floating_chat_c02c45c0.plan.md
+- resume_spa_contentful_5d3d3333.plan.md
+- rip_specs_restore_lit_8e08794a.plan.md
+- session_checkpoint_skill_65575be3.plan.md
+- site_password_gate_c3c92081.plan.md
+- specs_ds_import_3ed8c9e7.plan.md
+- stories_to_projects_rename_34704978.plan.md
+- web_components_ds_b1737d33.plan.md
+- wire_local_ds2_cli_cc2d5484.plan.md
+
+#### Next
+
+- Keep design-system edits outside this repo’s agent context; verify Montserrat/tokens from DS package alone; continue resume/chat polish without touching packages/design-system

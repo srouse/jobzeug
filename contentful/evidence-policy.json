@@ -1,0 +1,79 @@
+{
+  "roleAggregates": {
+    "R006": ["R014", "R015"],
+    "R012": ["R016", "R017"]
+  },
+  "showOnResume": {
+    "roles": {
+      "R001": true,
+      "R002": true,
+      "R003": true,
+      "R004": true,
+      "R005": true,
+      "R006": true,
+      "R007": true,
+      "R009": true,
+      "R010": true,
+      "R011": true,
+      "R012": true,
+      "R013": true,
+      "R014": false,
+      "R015": false,
+      "R016": false,
+      "R017": false,
+      "R018": true,
+      "R019": true,
+      "R020": true,
+      "R021": true,
+      "R022": true
+    },
+    "projects": {
+      "S001": true,
+      "S002": true,
+      "S003": true,
+      "S004": true,
+      "S005": true,
+      "S006": true,
+      "S007": true,
+      "S008": true,
+      "S009": true,
+      "S010": true,
+      "S011": true,
+      "S012": true,
+      "S013": true,
+      "S014": true,
+      "S015": true,
+      "S016": true
+    }
+  },
+  "tags": {
+    "employers": {
+      "C001": ["cms", "enterprise"],
+      "C002": ["enterprise", "insurance"],
+      "C003": ["fintech", "enterprise"],
+      "C004": ["enterprise", "insurance"],
+      "C006": ["agency"],
+      "C007": ["startup"],
+      "C008": ["startup", "health"],
+      "C009": ["startup", "education"],
+      "C010": ["startup"],
+      "C011": ["fintech", "enterprise"],
+      "C012": ["agency"],
+      "C013": ["enterprise"],
+      "C014": ["media", "enterprise"]
+    },
+    "roles": {
+      "R006": ["aggregate"],
+      "R012": ["aggregate"],
+      "R014": ["linkedinDetail"],
+      "R015": ["linkedinDetail"],
+      "R016": ["linkedinDetail"],
+      "R017": ["linkedinDetail"]
+    },
+    "projects": {
+      "S011": ["personal"],
+      "S012": ["personal"],
+      "S013": ["personal"]
+    }
+  }
+}

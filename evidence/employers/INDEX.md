@@ -12,9 +12,14 @@ Employer records group roles and projects without moving or duplicating their ca
 | [OpenHomes](C007-openhomes.md) | C007 | R010 |
 | [Propeller Health](C008-propeller-health.md) | C008 | R011 |
 | [StudyBlue](C009-studyblue.md) | C009 | R012, R016, R017 |
+| [Shoutlet](C010-shoutlet.md) | C010 | R018 |
+| [World Council of Credit Unions](C011-world-council-of-credit-unions.md) | C011 | R019 |
+| [FullHouse Interactive](C012-fullhouse-interactive.md) | C012 | R020 |
+| [LeMans Corporation](C013-lemans-corporation.md) | C013 | R021 |
+| [Milwaukee Journal Sentinel](C014-milwaukee-journal-sentinel.md) | C014 | R022 |
 
 [Workspace guide](../README.md) · [Role index](../roles/INDEX.md)
 
-Employer descriptions researched September 19, 2026. Each record contains citations and distinguishes current context from historical descriptions. Eight active employers; retired C005 is excluded from this application.
+Employer descriptions researched September 19–22, 2026. Each record contains citations and distinguishes current context from historical descriptions. Thirteen active employers; retired C005 is excluded from this application.
 
 [Employer scale and credibility](Scale%20and%20credibility.md): dated rankings, business scale, acquisition values, and suggested descriptors.

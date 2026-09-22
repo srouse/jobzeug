@@ -54,3 +54,4 @@ Thumbs.db
 # contentful / local dumps (kept outside version control)
 *.export.json
 contentful/backups/
+

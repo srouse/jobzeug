@@ -11,9 +11,15 @@
 
 LinkedIn-specific position within resume aggregate [R012](R012-studyblue-usability-mobile.md). Do not double-count the aggregate and this position or assign aggregate accomplishments to this subrole without evidence.
 
-## LinkedIn description summary
+## LinkedIn description
 
-Primary iOS developer; led iPhone-to-iPad migration launched July 2012. Promoted during the process, expanding responsibility across the product. Introduced wireframing, prototyping, hallway testing, analytics and interviews. Describes nearly two million users, approximately half using mobile; historical source claim.
+LinkedIn source claim (Scott’s profile copy). Not independently verified.
+
+At StudyBlue, I was the primary iOS developer and spearheaded the migration of StudyBlue's iPhone application to the iPad that launched in July 2012. During this process I was promoted to Head of Usability, expanding my responsibilities to include product development across the entire product. I implemented a user driven development processes that emphasizes rapid concepting with wireframing, prototyping, hallway testing, analytics integration and user interviews.
+
+StudyBlue is a Madison based start-up that focuses on student based applications, with nearly two million users overall of which approximately half log in via mobile devices.
+
+
 
 ## Linked projects
 

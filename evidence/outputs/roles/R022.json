@@ -1,0 +1,14 @@
+{
+  "evidenceId": "R022",
+  "employer": "C014",
+  "title": "Web Developer/Designer",
+  "dateLabel": "2001 - 2002",
+  "startDate": "2001-01-01",
+  "endDate": "2002-12-31",
+  "summary": "As part of the Journal Interactive team, I designed and implemented many sites for companies in Milwaukee and took the initiative to implement the RealMedia ad system on JSOnline. This included updating and mapping each page/section on JSOnline as well as creating and testing the tags necessary to serve rich media ads, which JSOnline was subsequently able to do for the first time. I also was the first in the company to experiment with interactive content, including games, within ads.",
+  "showOnResume": true,
+  "tags": [
+    "media",
+    "enterprise"
+  ]
+}

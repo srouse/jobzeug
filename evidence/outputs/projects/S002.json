@@ -1,0 +1,9 @@
+{
+  "evidenceId": "S002",
+  "employer": "C001",
+  "roles": [
+    "R002"
+  ],
+  "name": "Bulk Editor",
+  "showOnResume": true
+}

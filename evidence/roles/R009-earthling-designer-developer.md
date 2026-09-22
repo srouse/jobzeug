@@ -13,8 +13,13 @@ Dates are resume-source claims and have not been separately confirmed.
 
 Titles can vary in wording between resume variants. Preserve original wording in the linked snapshots; the title above comes from the extracted resume variant data.
 
-## Existing resume claims
+## LinkedIn description
 
+LinkedIn source claim (Scott’s profile copy). Not independently verified.
+
+With Earthling Interactive I worked with over 30 companies, mostly startups, to design, prototype, and help develop their mobile and web applications. I developed a short iterative approach to prototyping, focusing on synthesizing UI and product solutions via mockups, interactive prototypes in native code (html, objective c, etc), and validation through formal user testing.
+
+## Existing resume claims
 - Designed and prototyped web and mobile products for 30+ companies using mockups, coded prototypes, and user testing.
 
 ## Linked projects

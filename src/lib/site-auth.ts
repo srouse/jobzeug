@@ -1,7 +1,7 @@
 export const SESSION_COOKIE = "jobzeug_session";
 export const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 7; // 7 days
 
-const SESSION_PAYLOAD = "authenticated";
+type SessionPayload = { v: 1; sid: string };
 
 export function hasAuthEnv(): boolean {
   return Boolean(process.env.SITE_PASSWORD && process.env.SESSION_SECRET);
@@ -33,25 +33,80 @@ function timingSafeEqualHex(a: string, b: string): boolean {
   return mismatch === 0;
 }
 
-async function sessionToken(): Promise<string> {
-  const secret = process.env.SESSION_SECRET;
-  if (!secret) {
-    throw new Error("SESSION_SECRET is not defined");
+function toBase64Url(value: string): string {
+  const bytes = new TextEncoder().encode(value);
+  let binary = "";
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+}
+
+function fromBase64Url(value: string): string {
+  const padded = value.replace(/-/g, "+").replace(/_/g, "/");
+  const pad = padded.length % 4 === 0 ? "" : "=".repeat(4 - (padded.length % 4));
+  const binary = atob(padded + pad);
+  const bytes = Uint8Array.from(binary, (ch) => ch.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
+}
+
+function canonicalPayload(payload: SessionPayload): string {
+  return JSON.stringify({ v: payload.v, sid: payload.sid });
+}
+
+function parseSessionPayload(raw: string): SessionPayload | null {
+  try {
+    const data = JSON.parse(raw) as SessionPayload;
+    if (data?.v !== 1 || typeof data.sid !== "string") return null;
+    if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(data.sid)) {
+      return null;
+    }
+    return { v: 1, sid: data.sid };
+  } catch {
+    return null;
   }
-  return hmacHex(secret, SESSION_PAYLOAD);
+}
+
+async function signPayload(payload: SessionPayload): Promise<string> {
+  const secret = process.env.SESSION_SECRET;
+  if (!secret) throw new Error("SESSION_SECRET is not defined");
+  const body = canonicalPayload(payload);
+  const sig = await hmacHex(secret, body);
+  return `${toBase64Url(body)}.${sig}`;
+}
+
+async function verifyAndParse(value: string): Promise<SessionPayload | null> {
+  const [encoded, sig] = value.split(".");
+  if (!encoded || !sig) return null;
+  const body = fromBase64Url(encoded);
+  const payload = parseSessionPayload(body);
+  if (!payload) return null;
+  const secret = process.env.SESSION_SECRET;
+  if (!secret) return null;
+  const expected = await hmacHex(secret, canonicalPayload(payload));
+  if (!timingSafeEqualHex(sig, expected)) return null;
+  return payload;
 }
 
 export async function isValidSessionCookie(
   value: string | undefined,
 ): Promise<boolean> {
-  if (!value || !process.env.SESSION_SECRET) {
-    return false;
-  }
+  if (!value || !process.env.SESSION_SECRET) return false;
   try {
-    const expected = await sessionToken();
-    return timingSafeEqualHex(value, expected);
+    return (await verifyAndParse(value)) !== null;
   } catch {
     return false;
+  }
+}
+
+/** Returns the session UUID from a valid cookie, or null. */
+export async function getSessionId(
+  value: string | undefined,
+): Promise<string | null> {
+  if (!value || !process.env.SESSION_SECRET) return null;
+  try {
+    const payload = await verifyAndParse(value);
+    return payload?.sid ?? null;
+  } catch {
+    return null;
   }
 }
 
@@ -76,8 +131,22 @@ export function getSessionCookieOptions(secure: boolean) {
   };
 }
 
+/** Create a new signed session cookie value with a fresh UUID. */
 export async function createSessionValue(): Promise<string> {
-  return sessionToken();
+  return signPayload({ v: 1, sid: crypto.randomUUID() });
+}
+
+export type ChatSurface = "chat" | "resume";
+
+export function parseChatSurface(value: unknown): ChatSurface {
+  return value === "resume" ? "resume" : "chat";
+}
+
+export function chatMemoryIds(sid: string, surface: ChatSurface) {
+  return {
+    resource: `session:${sid}`,
+    thread: `${surface}:${sid}`,
+  };
 }
 
 /** Safe internal redirect path only (no open redirects). */

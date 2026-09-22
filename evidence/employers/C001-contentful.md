@@ -34,6 +34,9 @@ Researched September 19, 2026. Company background is independent of Scott’s ex
 
 - [S009 AI content and component binding](../projects/S009%20-%20AI%20content%20and%20component%20binding.md), R001.
 - [S010 Berlin prototype exploration](../projects/S010%20-%20Berlin%20prototype%20exploration.md), provisionally R001.
+- [S014 Design tokens Contentful blog](../projects/S014%20-%20Design%20tokens%20Contentful%20blog.md), R003 (May 2024).
+- [S015 Understanding AI building blocks](../projects/S015%20-%20Understanding%20AI%20building%20blocks.md), R001 (Feb–Mar 2026 series).
+- [S016 Technical debt Contentful blog](../projects/S016%20-%20Technical%20debt%20Contentful%20blog.md), R002 (June 2025).
 
 ## Customers (via Contentful engagements)
 

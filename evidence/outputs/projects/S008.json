@@ -1,0 +1,10 @@
+{
+  "evidenceId": "S008",
+  "employer": "C001",
+  "roles": [
+    "R002",
+    "R001"
+  ],
+  "name": "Contentful for Figma widget",
+  "showOnResume": true
+}

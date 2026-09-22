@@ -1,0 +1,17 @@
+{
+  "evidenceId": "R007",
+  "employer": "C003",
+  "title": "UX Designer & Web/Mobile Developer - Design Innovation",
+  "dateLabel": "Aug 2018 - Nov 2019",
+  "startDate": "2018-08-01",
+  "endDate": "2019-11-30",
+  "summary": "I am responsible for generating all UX and UI Designs defining Summit's next generation software. This includes helping visualize how people are interacting with Summit and where opportunities are all the way down to new designs for reimagined banking. I also contribute heavily to prototype production in a number of various technologies such as native iOS (Swift) and web development (React, etc).",
+  "highlights": [
+    "Defined UX and UI for next-generation digital banking and built rapid prototypes in Swift and React to validate concepts."
+  ],
+  "showOnResume": true,
+  "tags": [
+    "fintech",
+    "enterprise"
+  ]
+}

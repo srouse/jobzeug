@@ -1,0 +1,46 @@
+{
+  "manifestVersion": 1,
+  "layout": "perVariant",
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt",
+  "component": {
+    "nodeId": "1483:28028",
+    "name": "blue-divider",
+    "page": "🟢 blue-divider",
+    "frame": "blue-divider"
+  },
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "variantAxes": [],
+  "sharedVariablesById": {
+    "VariableID:5:127": {
+      "name": "border/default",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    }
+  },
+  "variantsMeta": {
+    "componentPropertyDefinitions": {}
+  },
+  "states": [
+    {
+      "stateId": "node_1483_28028",
+      "componentNodeId": "1483:28028",
+      "variantProperties": {},
+      "name": "blue-divider",
+      "label": "(default)",
+      "files": {
+        "png": "snapshot/states/node_1483_28028/preview.png",
+        "json": "snapshot/states/node_1483_28028/snapshot.json",
+        "md": "snapshot/states/node_1483_28028/token-map.md"
+      }
+    }
+  ],
+  "definition": "definition.ts",
+  "propsTypes": "definition.props.gen.ts",
+  "slug": "blue-divider",
+  "ds2Capture": {
+    "contentFingerprint": "bd690cf767b2c82b1b16d9ab899ef9041aea3c13ff01bab161dfe5c9accf0e84",
+    "capturedAt": "2026-09-22T21:46:53.412Z"
+  }
+}

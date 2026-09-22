@@ -1,15 +1,44 @@
 import { handleChatStream } from "@mastra/ai-sdk";
 import { toAISdkMessages } from "@mastra/ai-sdk/ui";
 import { createUIMessageStreamResponse } from "ai";
-import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
 
 import { mastra } from "@/mastra";
+import {
+  SESSION_COOKIE,
+  chatMemoryIds,
+  getSessionId,
+  parseChatSurface,
+  type ChatSurface,
+} from "@/lib/site-auth";
 
-const THREAD_ID = "jobzeug-local";
-const RESOURCE_ID = "jobzeug-chat";
+async function requireSession(): Promise<
+  { sid: string } | { error: NextResponse }
+> {
+  const jar = await cookies();
+  const sid = await getSessionId(jar.get(SESSION_COOKIE)?.value);
+  if (!sid) {
+    return { error: NextResponse.json({ error: "Unauthorized" }, { status: 401 }) };
+  }
+  return { sid };
+}
 
-export async function POST(req: Request) {
+function resolveSurface(req: NextRequest, body?: { surface?: unknown }): ChatSurface {
+  const fromQuery = req.nextUrl.searchParams.get("surface");
+  if (fromQuery != null) return parseChatSurface(fromQuery);
+  if (body && "surface" in body) return parseChatSurface(body.surface);
+  return "chat";
+}
+
+export async function POST(req: NextRequest) {
+  const session = await requireSession();
+  if ("error" in session) return session.error;
+
   const params = await req.json();
+  const surface = resolveSurface(req, params);
+  const { resource, thread } = chatMemoryIds(session.sid, surface);
+
   const stream = await handleChatStream({
     mastra,
     agentId: "jobzeug-agent",
@@ -18,22 +47,27 @@ export async function POST(req: Request) {
       ...params,
       memory: {
         ...params.memory,
-        thread: THREAD_ID,
-        resource: RESOURCE_ID,
+        thread,
+        resource,
       },
     },
   });
   return createUIMessageStreamResponse({ stream });
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const session = await requireSession();
+  if ("error" in session) return session.error;
+
+  const surface = resolveSurface(req);
+  const { resource, thread } = chatMemoryIds(session.sid, surface);
   const memory = await mastra.getAgentById("jobzeug-agent").getMemory();
   let response = null;
 
   try {
     response = await memory?.recall({
-      threadId: THREAD_ID,
-      resourceId: RESOURCE_ID,
+      threadId: thread,
+      resourceId: resource,
     });
   } catch {
     console.log("No previous messages found.");
@@ -44,4 +78,25 @@ export async function GET() {
   });
 
   return NextResponse.json(uiMessages);
+}
+
+/** Wipe this session's surface thread and start fresh. */
+export async function DELETE(req: NextRequest) {
+  const session = await requireSession();
+  if ("error" in session) return session.error;
+
+  const surface = resolveSurface(req);
+  const { thread } = chatMemoryIds(session.sid, surface);
+  const memory = await mastra.getAgentById("jobzeug-agent").getMemory();
+  if (!memory) {
+    return NextResponse.json({ error: "Memory unavailable" }, { status: 503 });
+  }
+
+  try {
+    await memory.deleteThread(thread);
+  } catch {
+    // Thread may not exist yet — treat as already clear.
+  }
+
+  return NextResponse.json({ ok: true });
 }

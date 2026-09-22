@@ -1,0 +1,447 @@
+{
+  "snapshotVersion": 2,
+  "layout": "perVariant",
+  "generatedAt": "2026-09-22T21:53:24.750Z",
+  "componentSetNodeId": "8:337",
+  "componentNodeId": "1501:92798",
+  "componentSetName": "blue-button",
+  "variantProperties": {
+    "Style": "Inverse",
+    "Size": "Default",
+    "Interactive": "Active"
+  },
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "tree": {
+    "id": "1501:92798",
+    "type": "COMPONENT",
+    "name": "Style=Inverse, Size=Default, Interactive=Active",
+    "visible": true,
+    "width": 104,
+    "height": 40,
+    "x": 464,
+    "y": 184,
+    "variantProperties": {
+      "Style": "Inverse",
+      "Size": "Default",
+      "Interactive": "Active"
+    },
+    "boundVariableIds": [
+      "VariableID:1030:32893",
+      "VariableID:5:107",
+      "VariableID:5:157",
+      "VariableID:5:163",
+      "VariableID:7:60",
+      "VariableID:80:395"
+    ],
+    "boundVariableNames": [
+      "background/control/default/active",
+      "gap/sm",
+      "padding/md",
+      "padding/sm",
+      "radius/full",
+      "stroke/width/md"
+    ],
+    "boundVariables": [
+      {
+        "id": "VariableID:1030:32893",
+        "name": "background/control/default/active"
+      },
+      {
+        "id": "VariableID:5:107",
+        "name": "radius/full"
+      },
+      {
+        "id": "VariableID:5:157",
+        "name": "gap/sm"
+      },
+      {
+        "id": "VariableID:5:163",
+        "name": "padding/sm"
+      },
+      {
+        "id": "VariableID:7:60",
+        "name": "padding/md"
+      },
+      {
+        "id": "VariableID:80:395",
+        "name": "stroke/width/md"
+      }
+    ],
+    "variableBindingsByLocation": [
+      {
+        "location": "Auto-layout spacing (main axis)",
+        "names": [
+          "gap/sm"
+        ]
+      },
+      {
+        "location": "Background color · color",
+        "names": [
+          "background/control/default/active"
+        ]
+      },
+      {
+        "location": "Corner radius (bottom-left)",
+        "names": [
+          "radius/full"
+        ]
+      },
+      {
+        "location": "Corner radius (bottom-right)",
+        "names": [
+          "radius/full"
+        ]
+      },
+      {
+        "location": "Corner radius (top-left)",
+        "names": [
+          "radius/full"
+        ]
+      },
+      {
+        "location": "Corner radius (top-right)",
+        "names": [
+          "radius/full"
+        ]
+      },
+      {
+        "location": "Padding bottom",
+        "names": [
+          "padding/sm"
+        ]
+      },
+      {
+        "location": "Padding left",
+        "names": [
+          "padding/md"
+        ]
+      },
+      {
+        "location": "Padding right",
+        "names": [
+          "padding/md"
+        ]
+      },
+      {
+        "location": "Padding top",
+        "names": [
+          "padding/sm"
+        ]
+      },
+      {
+        "location": "Stroke weight (bottom)",
+        "names": [
+          "stroke/width/md"
+        ]
+      },
+      {
+        "location": "Stroke weight (left)",
+        "names": [
+          "stroke/width/md"
+        ]
+      },
+      {
+        "location": "Stroke weight (right)",
+        "names": [
+          "stroke/width/md"
+        ]
+      },
+      {
+        "location": "Stroke weight (top)",
+        "names": [
+          "stroke/width/md"
+        ]
+      }
+    ],
+    "tokenMapPresentation": {
+      "presentationVersion": 1,
+      "background": [
+        {
+          "index": 1,
+          "kind": "SOLID",
+          "token": "background/control/default/active",
+          "raw": "#e5e5e5"
+        }
+      ],
+      "cornerRadius": {
+        "topLeft": {
+          "token": "radius/full",
+          "raw": "9999"
+        },
+        "topRight": {
+          "token": "radius/full",
+          "raw": "9999"
+        },
+        "bottomLeft": {
+          "token": "radius/full",
+          "raw": "9999"
+        },
+        "bottomRight": {
+          "token": "radius/full",
+          "raw": "9999"
+        }
+      },
+      "padding": {
+        "top": {
+          "token": "padding/sm",
+          "raw": "8"
+        },
+        "right": {
+          "token": "padding/md",
+          "raw": "16"
+        },
+        "bottom": {
+          "token": "padding/sm",
+          "raw": "8"
+        },
+        "left": {
+          "token": "padding/md",
+          "raw": "16"
+        }
+      },
+      "gap": {
+        "mainAxis": {
+          "token": "gap/sm",
+          "raw": "8"
+        },
+        "counterAxis": {
+          "raw": "0"
+        },
+        "gridRow": {
+          "raw": "0"
+        },
+        "gridColumn": {
+          "raw": "0"
+        }
+      },
+      "layout": [
+        {
+          "property": "Mode",
+          "value": "HORIZONTAL"
+        },
+        {
+          "property": "Primary axis align",
+          "value": "CENTER"
+        },
+        {
+          "property": "Counter axis align",
+          "value": "CENTER"
+        },
+        {
+          "property": "Wrap",
+          "value": "NO_WRAP"
+        },
+        {
+          "property": "Horizontal sizing",
+          "value": "HUG"
+        },
+        {
+          "property": "Vertical sizing",
+          "value": "HUG"
+        }
+      ]
+    },
+    "children": [
+      {
+        "id": "1501:92799",
+        "type": "INSTANCE",
+        "name": "icon",
+        "visible": true,
+        "mainComponentName": "blue-icon",
+        "instanceComponentProperties": [
+          {
+            "propertyKey": "Color",
+            "displayName": "Color",
+            "type": "VARIANT",
+            "value": "Inverse"
+          },
+          {
+            "propertyKey": "Size",
+            "displayName": "Size",
+            "type": "VARIANT",
+            "value": "Medium"
+          },
+          {
+            "propertyKey": "icon#148:36",
+            "displayName": "icon",
+            "type": "INSTANCE_SWAP",
+            "value": "1587:53302"
+          }
+        ],
+        "nestedInstanceCaptureMode": "surface",
+        "childrenOmitted": true
+      },
+      {
+        "id": "1501:92800",
+        "type": "TEXT",
+        "name": "Label",
+        "visible": true,
+        "width": 40,
+        "height": 20,
+        "x": 48,
+        "y": 10,
+        "textStyle": {
+          "fontFamily": "Montserrat",
+          "fontStyle": "SemiBold",
+          "fontSize": 14,
+          "lineHeight": {
+            "unit": "PIXELS",
+            "value": 20
+          },
+          "letterSpacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "textCase": "ORIGINAL",
+          "textDecoration": "NONE",
+          "textAlignHorizontal": "LEFT",
+          "textAlignVertical": "TOP",
+          "paragraphIndent": 0,
+          "paragraphSpacing": 0,
+          "listSpacing": 0,
+          "textAutoResize": "WIDTH_AND_HEIGHT",
+          "textTruncation": "ENDING",
+          "maxLines": 1,
+          "leadingTrim": "NONE",
+          "textStyleId": "S:4744b52f4013c4aafc284221660b62faccf41c46,",
+          "textStyleName": "semantic type/label"
+        },
+        "boundVariableIds": [
+          "VariableID:805:15058"
+        ],
+        "boundVariableNames": [
+          "text/default/active"
+        ],
+        "boundVariables": [
+          {
+            "id": "VariableID:805:15058",
+            "name": "text/default/active"
+          }
+        ],
+        "variableBindingsByLocation": [
+          {
+            "location": "Text color · color",
+            "names": [
+              "text/default/active"
+            ]
+          }
+        ],
+        "tokenMapPresentation": {
+          "presentationVersion": 1,
+          "textColor": {
+            "token": "text/default/active",
+            "raw": "#404040"
+          }
+        }
+      }
+    ]
+  },
+  "variablesById": {
+    "VariableID:1030:32893": {
+      "name": "background/control/default/active",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:107": {
+      "name": "radius/full",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:3"
+    },
+    "VariableID:5:157": {
+      "name": "gap/sm",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:5:163": {
+      "name": "padding/sm",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:7:60": {
+      "name": "padding/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:80:395": {
+      "name": "stroke/width/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:3"
+    },
+    "VariableID:805:15058": {
+      "name": "text/default/active",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    }
+  },
+  "variants": {
+    "componentPropertyDefinitions": {
+      "ShowIcon#85:11": {
+        "type": "BOOLEAN",
+        "defaultValue": true
+      },
+      "ShowText#85:14": {
+        "type": "BOOLEAN",
+        "defaultValue": true
+      },
+      "label#612:0": {
+        "type": "TEXT",
+        "defaultValue": "Label"
+      },
+      "Style": {
+        "type": "VARIANT",
+        "defaultValue": "Primary",
+        "variantOptions": [
+          "Primary",
+          "Secondary",
+          "Inverse",
+          "Dark"
+        ]
+      },
+      "Size": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "Small"
+        ]
+      },
+      "Interactive": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "Hover",
+          "Disabled",
+          "Active"
+        ]
+      }
+    },
+    "variantGroupProperties": {
+      "Style": {
+        "values": [
+          "Primary",
+          "Secondary",
+          "Inverse",
+          "Dark"
+        ]
+      },
+      "Size": {
+        "values": [
+          "Default",
+          "Small"
+        ]
+      },
+      "Interactive": {
+        "values": [
+          "Default",
+          "Hover",
+          "Disabled",
+          "Active"
+        ]
+      }
+    }
+  },
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt"
+}

@@ -1,0 +1,19 @@
+---
+description: Stay inside the design-system package — never edit sibling packages or the monorepo app unless the user explicitly asks.
+alwaysApply: true
+---
+
+# Stay in this package
+
+This workspace is **`packages/design-system`**. Treat that directory as the project root.
+
+## Hard boundary
+
+- **Read / write / delete / commit / build only under this package** (`packages/design-system/**`), unless the user **explicitly** names a path outside it.
+- **Do not** edit the Next app, other monorepo packages, or the repo root (e.g. `src/`, `apps/`, sibling packages) to “fix the consumer,” update call sites, or clean up imports.
+- **Do not** “helpfully” change consumers after changing this package’s API. Say what the consumer must change; leave those files alone.
+- Package-local paths are fine: `src/`, `dist/`, `.agents/`, `.cursor/`, `scripts/`, `package.json`, `vite.config.ts`, `ds2.config.json`.
+
+## If something outside seems broken
+
+Describe the issue and the change needed. Wait for the user to ask you to touch that path, or to switch context.

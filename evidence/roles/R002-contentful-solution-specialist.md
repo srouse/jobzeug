@@ -13,8 +13,13 @@ Conflicting sources: variant role data says Feb 2025–Jan 2026; working and arc
 
 Titles can vary in wording between resume variants. Preserve original wording in the linked snapshots; the title above comes from the extracted resume variant data.
 
-## Existing resume claims
+## LinkedIn description
 
+LinkedIn source claim (Scott’s profile copy). Not independently verified.
+
+In this role, I explore AI-driven ways to speed up demo creation—from research and content modeling to design system integration and layout generation. I work closely with solution engineers to design and build high-impact demos and proof-of-concepts, and help teams think through how design systems, structured content, and AI can reduce technical debt and move faster. I also contribute to innovation strategy by identifying gaps in tooling and workflows and prototyping forward-looking solutions to address them.
+
+## Existing resume claims
 - Design and prototype AI-driven workflows spanning research, content modeling, design-system integration, and layout generation.
 - Partner with Solution Engineers to create enterprise demos and proof-of-concepts tailored to customer needs.
 - Advise teams on aligning structured content, design systems, and AI to reduce technical debt and accelerate delivery.
@@ -25,6 +30,7 @@ Titles can vary in wording between resume variants. Preserve original wording in
 - [S002: Bulk Editor](../projects/S002%20-%20Bulk%20Editor.md) — provisional role association; Scott described SE work; project dates unconfirmed.
 - [S003: DemAI](../projects/S003%20-%20DemAI.md) — provisional; SE AI demo platform; dates placed before late-2025 AI shift.
 - [S008: Contentful for Figma widget](../projects/S008%20-%20Contentful%20for%20Figma%20widget.md) — v1 built as SE request (2–3 days); production later under R001/CIA.
+- [S016: Technical debt Contentful blog](../projects/S016%20-%20Technical%20debt%20Contentful%20blog.md) — published June 2, 2025; marketer-facing Insights piece.
 
 ## Source references
 

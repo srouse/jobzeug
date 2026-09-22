@@ -1,0 +1,19 @@
+---
+description: Never modify packages/design-system — owned and worked on separately.
+alwaysApply: true
+---
+
+# Ignore `packages/design-system`
+
+Treat **`packages/design-system`** as out of bounds for this repo’s agents.
+
+## Hard rule
+
+- **Do not** read to edit, write, delete, rename, commit, or run build/codegen scripts that change anything under `packages/design-system/**`.
+- **Do not** “fix” fonts, tokens, Lit components, `ds2.config.json`, `dist/`, or package exports inside that tree — even if the app looks broken because of them.
+- **Do not** add Google Fonts / Montserrat (or any other) loading in the app to compensate; font and token ownership stays in the design-system package (maintained elsewhere).
+- The app may **import and consume** published exports (e.g. `@jobzeug/design-system`, `@jobzeug/design-system/tokens.css`, `JzButton`). That is use, not ownership.
+
+## If something in the design system seems wrong
+
+Say what you observed and what would need to change in the design-system package. Stop. Do not patch it from this workspace.

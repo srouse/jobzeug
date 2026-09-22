@@ -1,0 +1,772 @@
+{
+  "manifestVersion": 1,
+  "layout": "perVariant",
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt",
+  "component": {
+    "nodeId": "8:337",
+    "name": "blue-button",
+    "page": "🟢 blue-button",
+    "frame": "blue-button"
+  },
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "variantAxes": [
+    {
+      "property": "Style",
+      "values": [
+        "Primary",
+        "Secondary",
+        "Inverse",
+        "Dark"
+      ]
+    },
+    {
+      "property": "Size",
+      "values": [
+        "Default",
+        "Small"
+      ]
+    },
+    {
+      "property": "Interactive",
+      "values": [
+        "Default",
+        "Hover",
+        "Disabled",
+        "Active"
+      ]
+    }
+  ],
+  "sharedVariablesById": {
+    "VariableID:1302:48295": {
+      "name": "background/control/inverse/default",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:107": {
+      "name": "radius/full",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:3"
+    },
+    "VariableID:5:157": {
+      "name": "gap/sm",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:5:163": {
+      "name": "padding/sm",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:7:60": {
+      "name": "padding/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:5:140": {
+      "name": "text/inverse",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:1302:48297": {
+      "name": "background/control/inverse/hover",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:805:15063": {
+      "name": "text/inverse/hover",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:1302:48296": {
+      "name": "background/control/inverse/disabled",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:805:15062": {
+      "name": "text/inverse/disabled",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:1302:48294": {
+      "name": "background/control/inverse/active",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:127": {
+      "name": "border/default",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:80:395": {
+      "name": "stroke/width/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:3"
+    },
+    "VariableID:805:15061": {
+      "name": "text/inverse/active",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:1030:32892": {
+      "name": "background/control/default",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:138": {
+      "name": "text/default",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:1030:32895": {
+      "name": "background/control/default/hover",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:805:15060": {
+      "name": "text/default/hover",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:1030:32894": {
+      "name": "background/control/default/disabled",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:805:15059": {
+      "name": "text/default/disabled",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:1030:32893": {
+      "name": "background/control/default/active",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:805:15058": {
+      "name": "text/default/active",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:128": {
+      "name": "border/strong",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:141": {
+      "name": "text/muted",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:1030:32901": {
+      "name": "background/control/brand/inverse/primary",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:1030:32904": {
+      "name": "background/control/brand/inverse/primary/hover",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:1030:32903": {
+      "name": "background/control/brand/inverse/primary/disabled",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:1030:32902": {
+      "name": "background/control/brand/inverse/primary/active",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    }
+  },
+  "variantsMeta": {
+    "componentPropertyDefinitions": {
+      "ShowIcon#85:11": {
+        "type": "BOOLEAN",
+        "defaultValue": true
+      },
+      "ShowText#85:14": {
+        "type": "BOOLEAN",
+        "defaultValue": true
+      },
+      "label#612:0": {
+        "type": "TEXT",
+        "defaultValue": "Label"
+      },
+      "Style": {
+        "type": "VARIANT",
+        "defaultValue": "Primary",
+        "variantOptions": [
+          "Primary",
+          "Secondary",
+          "Inverse",
+          "Dark"
+        ]
+      },
+      "Size": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "Small"
+        ]
+      },
+      "Interactive": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "Hover",
+          "Disabled",
+          "Active"
+        ]
+      }
+    },
+    "variantGroupProperties": {
+      "Style": {
+        "values": [
+          "Primary",
+          "Secondary",
+          "Inverse",
+          "Dark"
+        ]
+      },
+      "Size": {
+        "values": [
+          "Default",
+          "Small"
+        ]
+      },
+      "Interactive": {
+        "values": [
+          "Default",
+          "Hover",
+          "Disabled",
+          "Active"
+        ]
+      }
+    }
+  },
+  "states": [
+    {
+      "stateId": "Interactive--Active__Size--Default__Style--Dark",
+      "componentNodeId": "1297:41666",
+      "variantProperties": {
+        "Style": "Dark",
+        "Size": "Default",
+        "Interactive": "Active"
+      },
+      "name": "Style=Dark, Size=Default, Interactive=Active",
+      "label": "Interactive=Active, Size=Default, Style=Dark",
+      "files": {
+        "png": "snapshot/states/Interactive--Active__Size--Default__Style--Dark/preview.png",
+        "json": "snapshot/states/Interactive--Active__Size--Default__Style--Dark/snapshot.json",
+        "md": "snapshot/states/Interactive--Active__Size--Default__Style--Dark/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Active__Size--Default__Style--Inverse",
+      "componentNodeId": "1501:92798",
+      "variantProperties": {
+        "Style": "Inverse",
+        "Size": "Default",
+        "Interactive": "Active"
+      },
+      "name": "Style=Inverse, Size=Default, Interactive=Active",
+      "label": "Interactive=Active, Size=Default, Style=Inverse",
+      "files": {
+        "png": "snapshot/states/Interactive--Active__Size--Default__Style--Inverse/preview.png",
+        "json": "snapshot/states/Interactive--Active__Size--Default__Style--Inverse/snapshot.json",
+        "md": "snapshot/states/Interactive--Active__Size--Default__Style--Inverse/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Active__Size--Default__Style--Primary",
+      "componentNodeId": "263:3166",
+      "variantProperties": {
+        "Style": "Primary",
+        "Size": "Default",
+        "Interactive": "Active"
+      },
+      "name": "Style=Primary, Size=Default, Interactive=Active",
+      "label": "Interactive=Active, Size=Default, Style=Primary",
+      "files": {
+        "png": "snapshot/states/Interactive--Active__Size--Default__Style--Primary/preview.png",
+        "json": "snapshot/states/Interactive--Active__Size--Default__Style--Primary/snapshot.json",
+        "md": "snapshot/states/Interactive--Active__Size--Default__Style--Primary/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Active__Size--Default__Style--Secondary",
+      "componentNodeId": "263:3200",
+      "variantProperties": {
+        "Style": "Secondary",
+        "Size": "Default",
+        "Interactive": "Active"
+      },
+      "name": "Style=Secondary, Size=Default, Interactive=Active",
+      "label": "Interactive=Active, Size=Default, Style=Secondary",
+      "files": {
+        "png": "snapshot/states/Interactive--Active__Size--Default__Style--Secondary/preview.png",
+        "json": "snapshot/states/Interactive--Active__Size--Default__Style--Secondary/snapshot.json",
+        "md": "snapshot/states/Interactive--Active__Size--Default__Style--Secondary/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Active__Size--Small__Style--Dark",
+      "componentNodeId": "1297:41684",
+      "variantProperties": {
+        "Style": "Dark",
+        "Size": "Small",
+        "Interactive": "Active"
+      },
+      "name": "Style=Dark, Size=Small, Interactive=Active",
+      "label": "Interactive=Active, Size=Small, Style=Dark",
+      "files": {
+        "png": "snapshot/states/Interactive--Active__Size--Small__Style--Dark/preview.png",
+        "json": "snapshot/states/Interactive--Active__Size--Small__Style--Dark/snapshot.json",
+        "md": "snapshot/states/Interactive--Active__Size--Small__Style--Dark/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Active__Size--Small__Style--Inverse",
+      "componentNodeId": "1501:92801",
+      "variantProperties": {
+        "Style": "Inverse",
+        "Size": "Small",
+        "Interactive": "Active"
+      },
+      "name": "Style=Inverse, Size=Small, Interactive=Active",
+      "label": "Interactive=Active, Size=Small, Style=Inverse",
+      "files": {
+        "png": "snapshot/states/Interactive--Active__Size--Small__Style--Inverse/preview.png",
+        "json": "snapshot/states/Interactive--Active__Size--Small__Style--Inverse/snapshot.json",
+        "md": "snapshot/states/Interactive--Active__Size--Small__Style--Inverse/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Active__Size--Small__Style--Primary",
+      "componentNodeId": "263:3181",
+      "variantProperties": {
+        "Style": "Primary",
+        "Size": "Small",
+        "Interactive": "Active"
+      },
+      "name": "Style=Primary, Size=Small, Interactive=Active",
+      "label": "Interactive=Active, Size=Small, Style=Primary",
+      "files": {
+        "png": "snapshot/states/Interactive--Active__Size--Small__Style--Primary/preview.png",
+        "json": "snapshot/states/Interactive--Active__Size--Small__Style--Primary/snapshot.json",
+        "md": "snapshot/states/Interactive--Active__Size--Small__Style--Primary/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Active__Size--Small__Style--Secondary",
+      "componentNodeId": "263:3215",
+      "variantProperties": {
+        "Style": "Secondary",
+        "Size": "Small",
+        "Interactive": "Active"
+      },
+      "name": "Style=Secondary, Size=Small, Interactive=Active",
+      "label": "Interactive=Active, Size=Small, Style=Secondary",
+      "files": {
+        "png": "snapshot/states/Interactive--Active__Size--Small__Style--Secondary/preview.png",
+        "json": "snapshot/states/Interactive--Active__Size--Small__Style--Secondary/snapshot.json",
+        "md": "snapshot/states/Interactive--Active__Size--Small__Style--Secondary/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Default__Size--Default__Style--Dark",
+      "componentNodeId": "1297:41672",
+      "variantProperties": {
+        "Style": "Dark",
+        "Size": "Default",
+        "Interactive": "Default"
+      },
+      "name": "Style=Dark, Size=Default, Interactive=Default",
+      "label": "Interactive=Default, Size=Default, Style=Dark",
+      "files": {
+        "png": "snapshot/states/Interactive--Default__Size--Default__Style--Dark/preview.png",
+        "json": "snapshot/states/Interactive--Default__Size--Default__Style--Dark/snapshot.json",
+        "md": "snapshot/states/Interactive--Default__Size--Default__Style--Dark/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Default__Size--Default__Style--Inverse",
+      "componentNodeId": "1501:92810",
+      "variantProperties": {
+        "Style": "Inverse",
+        "Size": "Default",
+        "Interactive": "Default"
+      },
+      "name": "Style=Inverse, Size=Default, Interactive=Default",
+      "label": "Interactive=Default, Size=Default, Style=Inverse",
+      "files": {
+        "png": "snapshot/states/Interactive--Default__Size--Default__Style--Inverse/preview.png",
+        "json": "snapshot/states/Interactive--Default__Size--Default__Style--Inverse/snapshot.json",
+        "md": "snapshot/states/Interactive--Default__Size--Default__Style--Inverse/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Default__Size--Default__Style--Primary",
+      "componentNodeId": "6:630",
+      "variantProperties": {
+        "Style": "Primary",
+        "Size": "Default",
+        "Interactive": "Default"
+      },
+      "name": "Style=Primary, Size=Default, Interactive=Default",
+      "label": "Interactive=Default, Size=Default, Style=Primary",
+      "files": {
+        "png": "snapshot/states/Interactive--Default__Size--Default__Style--Primary/preview.png",
+        "json": "snapshot/states/Interactive--Default__Size--Default__Style--Primary/snapshot.json",
+        "md": "snapshot/states/Interactive--Default__Size--Default__Style--Primary/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Default__Size--Default__Style--Secondary",
+      "componentNodeId": "8:338",
+      "variantProperties": {
+        "Style": "Secondary",
+        "Size": "Default",
+        "Interactive": "Default"
+      },
+      "name": "Style=Secondary, Size=Default, Interactive=Default",
+      "label": "Interactive=Default, Size=Default, Style=Secondary",
+      "files": {
+        "png": "snapshot/states/Interactive--Default__Size--Default__Style--Secondary/preview.png",
+        "json": "snapshot/states/Interactive--Default__Size--Default__Style--Secondary/snapshot.json",
+        "md": "snapshot/states/Interactive--Default__Size--Default__Style--Secondary/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Default__Size--Small__Style--Dark",
+      "componentNodeId": "1297:41675",
+      "variantProperties": {
+        "Style": "Dark",
+        "Size": "Small",
+        "Interactive": "Default"
+      },
+      "name": "Style=Dark, Size=Small, Interactive=Default",
+      "label": "Interactive=Default, Size=Small, Style=Dark",
+      "files": {
+        "png": "snapshot/states/Interactive--Default__Size--Small__Style--Dark/preview.png",
+        "json": "snapshot/states/Interactive--Default__Size--Small__Style--Dark/snapshot.json",
+        "md": "snapshot/states/Interactive--Default__Size--Small__Style--Dark/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Default__Size--Small__Style--Inverse",
+      "componentNodeId": "1501:92813",
+      "variantProperties": {
+        "Style": "Inverse",
+        "Size": "Small",
+        "Interactive": "Default"
+      },
+      "name": "Style=Inverse, Size=Small, Interactive=Default",
+      "label": "Interactive=Default, Size=Small, Style=Inverse",
+      "files": {
+        "png": "snapshot/states/Interactive--Default__Size--Small__Style--Inverse/preview.png",
+        "json": "snapshot/states/Interactive--Default__Size--Small__Style--Inverse/snapshot.json",
+        "md": "snapshot/states/Interactive--Default__Size--Small__Style--Inverse/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Default__Size--Small__Style--Primary",
+      "componentNodeId": "263:3143",
+      "variantProperties": {
+        "Style": "Primary",
+        "Size": "Small",
+        "Interactive": "Default"
+      },
+      "name": "Style=Primary, Size=Small, Interactive=Default",
+      "label": "Interactive=Default, Size=Small, Style=Primary",
+      "files": {
+        "png": "snapshot/states/Interactive--Default__Size--Small__Style--Primary/preview.png",
+        "json": "snapshot/states/Interactive--Default__Size--Small__Style--Primary/snapshot.json",
+        "md": "snapshot/states/Interactive--Default__Size--Small__Style--Primary/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Default__Size--Small__Style--Secondary",
+      "componentNodeId": "263:3146",
+      "variantProperties": {
+        "Style": "Secondary",
+        "Size": "Small",
+        "Interactive": "Default"
+      },
+      "name": "Style=Secondary, Size=Small, Interactive=Default",
+      "label": "Interactive=Default, Size=Small, Style=Secondary",
+      "files": {
+        "png": "snapshot/states/Interactive--Default__Size--Small__Style--Secondary/preview.png",
+        "json": "snapshot/states/Interactive--Default__Size--Small__Style--Secondary/snapshot.json",
+        "md": "snapshot/states/Interactive--Default__Size--Small__Style--Secondary/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Disabled__Size--Default__Style--Dark",
+      "componentNodeId": "1535:138738",
+      "variantProperties": {
+        "Style": "Dark",
+        "Size": "Default",
+        "Interactive": "Disabled"
+      },
+      "name": "Style=Dark, Size=Default, Interactive=Disabled",
+      "label": "Interactive=Disabled, Size=Default, Style=Dark",
+      "files": {
+        "png": "snapshot/states/Interactive--Disabled__Size--Default__Style--Dark/preview.png",
+        "json": "snapshot/states/Interactive--Disabled__Size--Default__Style--Dark/snapshot.json",
+        "md": "snapshot/states/Interactive--Disabled__Size--Default__Style--Dark/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Disabled__Size--Default__Style--Inverse",
+      "componentNodeId": "1297:41663",
+      "variantProperties": {
+        "Style": "Inverse",
+        "Size": "Default",
+        "Interactive": "Disabled"
+      },
+      "name": "Style=Inverse, Size=Default, Interactive=Disabled",
+      "label": "Interactive=Disabled, Size=Default, Style=Inverse",
+      "files": {
+        "png": "snapshot/states/Interactive--Disabled__Size--Default__Style--Inverse/preview.png",
+        "json": "snapshot/states/Interactive--Disabled__Size--Default__Style--Inverse/snapshot.json",
+        "md": "snapshot/states/Interactive--Disabled__Size--Default__Style--Inverse/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Disabled__Size--Default__Style--Primary",
+      "componentNodeId": "263:3163",
+      "variantProperties": {
+        "Style": "Primary",
+        "Size": "Default",
+        "Interactive": "Disabled"
+      },
+      "name": "Style=Primary, Size=Default, Interactive=Disabled",
+      "label": "Interactive=Disabled, Size=Default, Style=Primary",
+      "files": {
+        "png": "snapshot/states/Interactive--Disabled__Size--Default__Style--Primary/preview.png",
+        "json": "snapshot/states/Interactive--Disabled__Size--Default__Style--Primary/snapshot.json",
+        "md": "snapshot/states/Interactive--Disabled__Size--Default__Style--Primary/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Disabled__Size--Default__Style--Secondary",
+      "componentNodeId": "263:3192",
+      "variantProperties": {
+        "Style": "Secondary",
+        "Size": "Default",
+        "Interactive": "Disabled"
+      },
+      "name": "Style=Secondary, Size=Default, Interactive=Disabled",
+      "label": "Interactive=Disabled, Size=Default, Style=Secondary",
+      "files": {
+        "png": "snapshot/states/Interactive--Disabled__Size--Default__Style--Secondary/preview.png",
+        "json": "snapshot/states/Interactive--Disabled__Size--Default__Style--Secondary/snapshot.json",
+        "md": "snapshot/states/Interactive--Disabled__Size--Default__Style--Secondary/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Disabled__Size--Small__Style--Dark",
+      "componentNodeId": "1297:41681",
+      "variantProperties": {
+        "Style": "Dark",
+        "Size": "Small",
+        "Interactive": "Disabled"
+      },
+      "name": "Style=Dark, Size=Small, Interactive=Disabled",
+      "label": "Interactive=Disabled, Size=Small, Style=Dark",
+      "files": {
+        "png": "snapshot/states/Interactive--Disabled__Size--Small__Style--Dark/preview.png",
+        "json": "snapshot/states/Interactive--Disabled__Size--Small__Style--Dark/snapshot.json",
+        "md": "snapshot/states/Interactive--Disabled__Size--Small__Style--Dark/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Disabled__Size--Small__Style--Inverse",
+      "componentNodeId": "1501:92804",
+      "variantProperties": {
+        "Style": "Inverse",
+        "Size": "Small",
+        "Interactive": "Disabled"
+      },
+      "name": "Style=Inverse, Size=Small, Interactive=Disabled",
+      "label": "Interactive=Disabled, Size=Small, Style=Inverse",
+      "files": {
+        "png": "snapshot/states/Interactive--Disabled__Size--Small__Style--Inverse/preview.png",
+        "json": "snapshot/states/Interactive--Disabled__Size--Small__Style--Inverse/snapshot.json",
+        "md": "snapshot/states/Interactive--Disabled__Size--Small__Style--Inverse/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Disabled__Size--Small__Style--Primary",
+      "componentNodeId": "263:3175",
+      "variantProperties": {
+        "Style": "Primary",
+        "Size": "Small",
+        "Interactive": "Disabled"
+      },
+      "name": "Style=Primary, Size=Small, Interactive=Disabled",
+      "label": "Interactive=Disabled, Size=Small, Style=Primary",
+      "files": {
+        "png": "snapshot/states/Interactive--Disabled__Size--Small__Style--Primary/preview.png",
+        "json": "snapshot/states/Interactive--Disabled__Size--Small__Style--Primary/snapshot.json",
+        "md": "snapshot/states/Interactive--Disabled__Size--Small__Style--Primary/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Disabled__Size--Small__Style--Secondary",
+      "componentNodeId": "263:3210",
+      "variantProperties": {
+        "Style": "Secondary",
+        "Size": "Small",
+        "Interactive": "Disabled"
+      },
+      "name": "Style=Secondary, Size=Small, Interactive=Disabled",
+      "label": "Interactive=Disabled, Size=Small, Style=Secondary",
+      "files": {
+        "png": "snapshot/states/Interactive--Disabled__Size--Small__Style--Secondary/preview.png",
+        "json": "snapshot/states/Interactive--Disabled__Size--Small__Style--Secondary/snapshot.json",
+        "md": "snapshot/states/Interactive--Disabled__Size--Small__Style--Secondary/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Hover__Size--Default__Style--Dark",
+      "componentNodeId": "1297:41669",
+      "variantProperties": {
+        "Style": "Dark",
+        "Size": "Default",
+        "Interactive": "Hover"
+      },
+      "name": "Style=Dark, Size=Default, Interactive=Hover",
+      "label": "Interactive=Hover, Size=Default, Style=Dark",
+      "files": {
+        "png": "snapshot/states/Interactive--Hover__Size--Default__Style--Dark/preview.png",
+        "json": "snapshot/states/Interactive--Hover__Size--Default__Style--Dark/snapshot.json",
+        "md": "snapshot/states/Interactive--Hover__Size--Default__Style--Dark/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Hover__Size--Default__Style--Inverse",
+      "componentNodeId": "1501:92807",
+      "variantProperties": {
+        "Style": "Inverse",
+        "Size": "Default",
+        "Interactive": "Hover"
+      },
+      "name": "Style=Inverse, Size=Default, Interactive=Hover",
+      "label": "Interactive=Hover, Size=Default, Style=Inverse",
+      "files": {
+        "png": "snapshot/states/Interactive--Hover__Size--Default__Style--Inverse/preview.png",
+        "json": "snapshot/states/Interactive--Hover__Size--Default__Style--Inverse/snapshot.json",
+        "md": "snapshot/states/Interactive--Hover__Size--Default__Style--Inverse/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Hover__Size--Default__Style--Primary",
+      "componentNodeId": "263:3157",
+      "variantProperties": {
+        "Style": "Primary",
+        "Size": "Default",
+        "Interactive": "Hover"
+      },
+      "name": "Style=Primary, Size=Default, Interactive=Hover",
+      "label": "Interactive=Hover, Size=Default, Style=Primary",
+      "files": {
+        "png": "snapshot/states/Interactive--Hover__Size--Default__Style--Primary/preview.png",
+        "json": "snapshot/states/Interactive--Hover__Size--Default__Style--Primary/snapshot.json",
+        "md": "snapshot/states/Interactive--Hover__Size--Default__Style--Primary/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Hover__Size--Default__Style--Secondary",
+      "componentNodeId": "263:3184",
+      "variantProperties": {
+        "Style": "Secondary",
+        "Size": "Default",
+        "Interactive": "Hover"
+      },
+      "name": "Style=Secondary, Size=Default, Interactive=Hover",
+      "label": "Interactive=Hover, Size=Default, Style=Secondary",
+      "files": {
+        "png": "snapshot/states/Interactive--Hover__Size--Default__Style--Secondary/preview.png",
+        "json": "snapshot/states/Interactive--Hover__Size--Default__Style--Secondary/snapshot.json",
+        "md": "snapshot/states/Interactive--Hover__Size--Default__Style--Secondary/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Hover__Size--Small__Style--Dark",
+      "componentNodeId": "1297:41678",
+      "variantProperties": {
+        "Style": "Dark",
+        "Size": "Small",
+        "Interactive": "Hover"
+      },
+      "name": "Style=Dark, Size=Small, Interactive=Hover",
+      "label": "Interactive=Hover, Size=Small, Style=Dark",
+      "files": {
+        "png": "snapshot/states/Interactive--Hover__Size--Small__Style--Dark/preview.png",
+        "json": "snapshot/states/Interactive--Hover__Size--Small__Style--Dark/snapshot.json",
+        "md": "snapshot/states/Interactive--Hover__Size--Small__Style--Dark/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Hover__Size--Small__Style--Inverse",
+      "componentNodeId": "1501:92816",
+      "variantProperties": {
+        "Style": "Inverse",
+        "Size": "Small",
+        "Interactive": "Hover"
+      },
+      "name": "Style=Inverse, Size=Small, Interactive=Hover",
+      "label": "Interactive=Hover, Size=Small, Style=Inverse",
+      "files": {
+        "png": "snapshot/states/Interactive--Hover__Size--Small__Style--Inverse/preview.png",
+        "json": "snapshot/states/Interactive--Hover__Size--Small__Style--Inverse/snapshot.json",
+        "md": "snapshot/states/Interactive--Hover__Size--Small__Style--Inverse/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Hover__Size--Small__Style--Primary",
+      "componentNodeId": "263:3169",
+      "variantProperties": {
+        "Style": "Primary",
+        "Size": "Small",
+        "Interactive": "Hover"
+      },
+      "name": "Style=Primary, Size=Small, Interactive=Hover",
+      "label": "Interactive=Hover, Size=Small, Style=Primary",
+      "files": {
+        "png": "snapshot/states/Interactive--Hover__Size--Small__Style--Primary/preview.png",
+        "json": "snapshot/states/Interactive--Hover__Size--Small__Style--Primary/snapshot.json",
+        "md": "snapshot/states/Interactive--Hover__Size--Small__Style--Primary/token-map.md"
+      }
+    },
+    {
+      "stateId": "Interactive--Hover__Size--Small__Style--Secondary",
+      "componentNodeId": "263:3205",
+      "variantProperties": {
+        "Style": "Secondary",
+        "Size": "Small",
+        "Interactive": "Hover"
+      },
+      "name": "Style=Secondary, Size=Small, Interactive=Hover",
+      "label": "Interactive=Hover, Size=Small, Style=Secondary",
+      "files": {
+        "png": "snapshot/states/Interactive--Hover__Size--Small__Style--Secondary/preview.png",
+        "json": "snapshot/states/Interactive--Hover__Size--Small__Style--Secondary/snapshot.json",
+        "md": "snapshot/states/Interactive--Hover__Size--Small__Style--Secondary/token-map.md"
+      }
+    }
+  ],
+  "definition": "definition.ts",
+  "propsTypes": "definition.props.gen.ts",
+  "slug": "blue-button",
+  "ds2Capture": {
+    "contentFingerprint": "a3b920d91e8131003f8842480254fc32be9ecddc7c95528510bd21db8dff738d",
+    "capturedAt": "2026-09-22T21:53:25.607Z"
+  }
+}

@@ -13,8 +13,13 @@ Dates are resume-source claims and have not been separately confirmed.
 
 Titles can vary in wording between resume variants. Preserve original wording in the linked snapshots; the title above comes from the extracted resume variant data.
 
-## Existing resume claims
+## LinkedIn description
 
+LinkedIn source claim (Scott’s profile copy). Not independently verified.
+
+I focus on connecting design systems, Figma, structured content, and AI to build scalable, production ready workflows across Contentful. On the Contentful Insights and Adoption team, I lead the development of internal tools, platforms, and best practices that power post sales delivery and customer adoption, aligning design, development, and automation across the organization.
+
+## Existing resume claims
 - Lead development of internal tools, platforms, and implementation practices that support post-sales delivery and customer adoption.
 - Lead the design and development of Contentful for Figma, a public Figma Community widget that connects live, structured content to components and full-page designs.
 - Built binding workflows that map Contentful fields to Figma properties so teams can preview real content, test variations, and catch problems before handoff.
@@ -26,6 +31,7 @@ Titles can vary in wording between resume variants. Preserve original wording in
 
 - [S009: AI content and component binding](../projects/S009%20-%20AI%20content%20and%20component%20binding.md) — latest-role exploration; not yet integrated into the widget.
 - [S010: Berlin prototype exploration](../projects/S010%20-%20Berlin%20prototype%20exploration.md) — provisional role association; event dates and full account pending.
+- [S015: Understanding AI building blocks](../projects/S015%20-%20Understanding%20AI%20building%20blocks.md) — two-part Contentful Guides series (Feb–Mar 2026) with interactive prompt modules in Part 1.
 
 ## Source references
 

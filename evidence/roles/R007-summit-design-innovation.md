@@ -13,13 +13,20 @@ Dates are resume-source claims and have not been separately confirmed.
 
 Titles can vary in wording between resume variants. Preserve original wording in the linked snapshots; the title above comes from the extracted resume variant data.
 
-## Existing resume claims
+## LinkedIn description
 
+LinkedIn source claim (Scott’s profile copy). Not independently verified.
+
+I am responsible for generating all UX and UI Designs defining Summit's next generation software. This includes helping visualize how people are interacting with Summit and where opportunities are all the way down to new designs for reimagined banking. I also contribute heavily to prototype production in a number of various technologies such as native iOS (Swift) and web development (React, etc).
+
+## Existing resume claims
 - Defined UX and UI for next-generation digital banking and built rapid prototypes in Swift and React to validate concepts.
 
 ## Linked projects
 
-No captured projects linked yet. Resume bullets are discovery leads, not completed project accounts.
+- [S011: Figma Design System widget (personal)](../projects/S011%20-%20Figma%20Design%20System%20widget.md) — **personal project** date-anchored to this first Summit tenure; **not** Summit delivery. Public Figma Community widget + figmadesignsystem.app.
+- [S012: Presentation Deck widget (personal)](../projects/S012%20-%20Presentation%20Deck%20widget.md) — **personal project** date-anchored to Summit timespan; **not** Summit delivery. Public Figma Community widget + presentationdeck.app.
+- [S013: Contentful Content Type widget (personal)](../projects/S013%20-%20Contentful%20Content%20Type%20widget.md) — **personal project** date-anchored to Summit timespan; **not** Summit or Contentful employment delivery. Public Figma/FigJam Community widget + contentfulcontenttype.app.
 
 ## Source references
 

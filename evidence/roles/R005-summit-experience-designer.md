@@ -13,8 +13,13 @@ Dates are resume-source claims and have not been separately confirmed.
 
 Titles can vary in wording between resume variants. Preserve original wording in the linked snapshots; the title above comes from the extracted resume variant data.
 
-## Existing resume claims
+## LinkedIn description
 
+LinkedIn source claim (Scott’s profile copy). Not independently verified.
+
+As a designer and developer I have helped Summit accelerate their digital transformation by building and maintaining a new Design System, introducing a micro-app/frontend framework, contributing to the mortgage user experience, and helping to align the design and development teams.
+
+## Existing resume claims
 - Designed and built a reusable design system with StencilJS and Lit for product applications and marketing sites.
 - Implemented Contentful as a decentralized content platform and rebuilt the brand website with a static-site architecture.
 - Created Rates Central, a single source of truth for financial rate products, using the design system and Contentful.

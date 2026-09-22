@@ -16,6 +16,7 @@ See the [saved job listing](../job%20listing/INDEX.md), [experience index](../ro
 ## LinkedIn
 
 - [Experience capture](linkedin-experience-2026-09-19.md): structured extraction with paraphrased descriptions, September 19, 2026.
+- [Experience additions (scroll/paste)](linkedin-experience-2026-09-22-additions.md): Shoutlet through Journal Sentinel, September 22, 2026.
 - [Reconciliation notes](linkedin-reconciliation.md): differences, added positions and unresolved questions.
 
 ## Application exclusion

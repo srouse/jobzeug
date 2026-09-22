@@ -26,7 +26,9 @@ Researched September 19, 2026. Company background is independent of Scott’s ex
 
 ## Projects
 
-No captured projects linked yet.
+- [S011: Figma Design System widget (personal)](../projects/S011%20-%20Figma%20Design%20System%20widget.md) — **personal**, not Summit work; linked here only because Scott places timing in the first Summit tenure ([R007](../roles/R007-summit-design-innovation.md)).
+- [S012: Presentation Deck widget (personal)](../projects/S012%20-%20Presentation%20Deck%20widget.md) — **personal**, not Summit work; Summit timespan date anchor via [R007](../roles/R007-summit-design-innovation.md).
+- [S013: Contentful Content Type widget (personal)](../projects/S013%20-%20Contentful%20Content%20Type%20widget.md) — **personal**, not Summit work; Summit timespan date anchor via [R007](../roles/R007-summit-design-innovation.md).
 
 ## Sources
 

@@ -13,8 +13,13 @@ Dates are resume-source claims and have not been separately confirmed.
 
 Titles can vary in wording between resume variants. Preserve original wording in the linked snapshots; the title above comes from the extracted resume variant data.
 
-## Existing resume claims
+## LinkedIn description
 
+LinkedIn source claim (Scott’s profile copy). Not independently verified.
+
+As a member of the Design Systems team, I was lead architect for their next generation design system using web components, tokens, and Figma variables. I was instrumental in aligning designers and developers, collaborating with team members to develop a usable semantic token system, and creating a custom Figma widget that synchronizes variables with git repo tokens to empower designers.
+
+## Existing resume claims
 - Modernized an enterprise design system through design tokens, web components, governance, and adoption practices.
 - Connected designers, developers, and executives through working prototypes, live code examples, and strategic presentations.
 - Mentored team members and led training to improve adoption and long-term sustainability.

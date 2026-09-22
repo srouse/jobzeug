@@ -1,0 +1,471 @@
+{
+  "snapshotVersion": 2,
+  "layout": "perVariant",
+  "generatedAt": "2026-09-22T21:53:25.215Z",
+  "componentSetNodeId": "8:337",
+  "componentNodeId": "1535:138738",
+  "componentSetName": "blue-button",
+  "variantProperties": {
+    "Style": "Dark",
+    "Size": "Default",
+    "Interactive": "Disabled"
+  },
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "tree": {
+    "id": "1535:138738",
+    "type": "COMPONENT",
+    "name": "Style=Dark, Size=Default, Interactive=Disabled",
+    "visible": true,
+    "width": 104,
+    "height": 40,
+    "x": 690,
+    "y": 128,
+    "variantProperties": {
+      "Style": "Dark",
+      "Size": "Default",
+      "Interactive": "Disabled"
+    },
+    "boundVariableIds": [
+      "VariableID:1302:48296",
+      "VariableID:5:107",
+      "VariableID:5:127",
+      "VariableID:5:157",
+      "VariableID:5:163",
+      "VariableID:7:60",
+      "VariableID:80:395"
+    ],
+    "boundVariableNames": [
+      "background/control/inverse/disabled",
+      "border/default",
+      "gap/sm",
+      "padding/md",
+      "padding/sm",
+      "radius/full",
+      "stroke/width/md"
+    ],
+    "boundVariables": [
+      {
+        "id": "VariableID:1302:48296",
+        "name": "background/control/inverse/disabled"
+      },
+      {
+        "id": "VariableID:5:107",
+        "name": "radius/full"
+      },
+      {
+        "id": "VariableID:5:127",
+        "name": "border/default"
+      },
+      {
+        "id": "VariableID:5:157",
+        "name": "gap/sm"
+      },
+      {
+        "id": "VariableID:5:163",
+        "name": "padding/sm"
+      },
+      {
+        "id": "VariableID:7:60",
+        "name": "padding/md"
+      },
+      {
+        "id": "VariableID:80:395",
+        "name": "stroke/width/md"
+      }
+    ],
+    "variableBindingsByLocation": [
+      {
+        "location": "Auto-layout spacing (main axis)",
+        "names": [
+          "gap/sm"
+        ]
+      },
+      {
+        "location": "Background color · color",
+        "names": [
+          "background/control/inverse/disabled"
+        ]
+      },
+      {
+        "location": "Corner radius (bottom-left)",
+        "names": [
+          "radius/full"
+        ]
+      },
+      {
+        "location": "Corner radius (bottom-right)",
+        "names": [
+          "radius/full"
+        ]
+      },
+      {
+        "location": "Corner radius (top-left)",
+        "names": [
+          "radius/full"
+        ]
+      },
+      {
+        "location": "Corner radius (top-right)",
+        "names": [
+          "radius/full"
+        ]
+      },
+      {
+        "location": "Padding bottom",
+        "names": [
+          "padding/sm"
+        ]
+      },
+      {
+        "location": "Padding left",
+        "names": [
+          "padding/md"
+        ]
+      },
+      {
+        "location": "Padding right",
+        "names": [
+          "padding/md"
+        ]
+      },
+      {
+        "location": "Padding top",
+        "names": [
+          "padding/sm"
+        ]
+      },
+      {
+        "location": "Stroke (border) · color",
+        "names": [
+          "border/default"
+        ]
+      },
+      {
+        "location": "Stroke weight (bottom)",
+        "names": [
+          "stroke/width/md"
+        ]
+      },
+      {
+        "location": "Stroke weight (left)",
+        "names": [
+          "stroke/width/md"
+        ]
+      },
+      {
+        "location": "Stroke weight (right)",
+        "names": [
+          "stroke/width/md"
+        ]
+      },
+      {
+        "location": "Stroke weight (top)",
+        "names": [
+          "stroke/width/md"
+        ]
+      }
+    ],
+    "tokenMapPresentation": {
+      "presentationVersion": 1,
+      "background": [
+        {
+          "index": 1,
+          "kind": "SOLID",
+          "token": "background/control/inverse/disabled",
+          "raw": "#e5e5e5"
+        }
+      ],
+      "borders": [
+        {
+          "index": 1,
+          "weight": "2",
+          "colorToken": "border/default"
+        }
+      ],
+      "cornerRadius": {
+        "topLeft": {
+          "token": "radius/full",
+          "raw": "9999"
+        },
+        "topRight": {
+          "token": "radius/full",
+          "raw": "9999"
+        },
+        "bottomLeft": {
+          "token": "radius/full",
+          "raw": "9999"
+        },
+        "bottomRight": {
+          "token": "radius/full",
+          "raw": "9999"
+        }
+      },
+      "padding": {
+        "top": {
+          "token": "padding/sm",
+          "raw": "8"
+        },
+        "right": {
+          "token": "padding/md",
+          "raw": "16"
+        },
+        "bottom": {
+          "token": "padding/sm",
+          "raw": "8"
+        },
+        "left": {
+          "token": "padding/md",
+          "raw": "16"
+        }
+      },
+      "gap": {
+        "mainAxis": {
+          "token": "gap/sm",
+          "raw": "8"
+        },
+        "counterAxis": {
+          "raw": "0"
+        },
+        "gridRow": {
+          "raw": "0"
+        },
+        "gridColumn": {
+          "raw": "0"
+        }
+      },
+      "layout": [
+        {
+          "property": "Mode",
+          "value": "HORIZONTAL"
+        },
+        {
+          "property": "Primary axis align",
+          "value": "CENTER"
+        },
+        {
+          "property": "Counter axis align",
+          "value": "CENTER"
+        },
+        {
+          "property": "Wrap",
+          "value": "NO_WRAP"
+        },
+        {
+          "property": "Horizontal sizing",
+          "value": "HUG"
+        },
+        {
+          "property": "Vertical sizing",
+          "value": "HUG"
+        }
+      ]
+    },
+    "children": [
+      {
+        "id": "1535:138739",
+        "type": "INSTANCE",
+        "name": "icon",
+        "visible": true,
+        "mainComponentName": "blue-icon",
+        "instanceComponentProperties": [
+          {
+            "propertyKey": "Color",
+            "displayName": "Color",
+            "type": "VARIANT",
+            "value": "Inverse"
+          },
+          {
+            "propertyKey": "Size",
+            "displayName": "Size",
+            "type": "VARIANT",
+            "value": "Medium"
+          },
+          {
+            "propertyKey": "icon#148:36",
+            "displayName": "icon",
+            "type": "INSTANCE_SWAP",
+            "value": "1587:53302"
+          }
+        ],
+        "nestedInstanceCaptureMode": "surface",
+        "childrenOmitted": true
+      },
+      {
+        "id": "1535:138740",
+        "type": "TEXT",
+        "name": "Label",
+        "visible": true,
+        "width": 40,
+        "height": 20,
+        "x": 48,
+        "y": 10,
+        "textStyle": {
+          "fontFamily": "Montserrat",
+          "fontStyle": "SemiBold",
+          "fontSize": 14,
+          "lineHeight": {
+            "unit": "PIXELS",
+            "value": 20
+          },
+          "letterSpacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "textCase": "ORIGINAL",
+          "textDecoration": "NONE",
+          "textAlignHorizontal": "LEFT",
+          "textAlignVertical": "TOP",
+          "paragraphIndent": 0,
+          "paragraphSpacing": 0,
+          "listSpacing": 0,
+          "textAutoResize": "WIDTH_AND_HEIGHT",
+          "textTruncation": "ENDING",
+          "maxLines": 1,
+          "leadingTrim": "NONE",
+          "textStyleId": "S:4744b52f4013c4aafc284221660b62faccf41c46,",
+          "textStyleName": "semantic type/label"
+        },
+        "boundVariableIds": [
+          "VariableID:805:15062"
+        ],
+        "boundVariableNames": [
+          "text/inverse/disabled"
+        ],
+        "boundVariables": [
+          {
+            "id": "VariableID:805:15062",
+            "name": "text/inverse/disabled"
+          }
+        ],
+        "variableBindingsByLocation": [
+          {
+            "location": "Text color · color",
+            "names": [
+              "text/inverse/disabled"
+            ]
+          }
+        ],
+        "tokenMapPresentation": {
+          "presentationVersion": 1,
+          "textColor": {
+            "token": "text/inverse/disabled",
+            "raw": "#a3a3a3"
+          }
+        }
+      }
+    ]
+  },
+  "variablesById": {
+    "VariableID:1302:48296": {
+      "name": "background/control/inverse/disabled",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:107": {
+      "name": "radius/full",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:3"
+    },
+    "VariableID:5:127": {
+      "name": "border/default",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:157": {
+      "name": "gap/sm",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:5:163": {
+      "name": "padding/sm",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:7:60": {
+      "name": "padding/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:80:395": {
+      "name": "stroke/width/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:3"
+    },
+    "VariableID:805:15062": {
+      "name": "text/inverse/disabled",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    }
+  },
+  "variants": {
+    "componentPropertyDefinitions": {
+      "ShowIcon#85:11": {
+        "type": "BOOLEAN",
+        "defaultValue": true
+      },
+      "ShowText#85:14": {
+        "type": "BOOLEAN",
+        "defaultValue": true
+      },
+      "label#612:0": {
+        "type": "TEXT",
+        "defaultValue": "Label"
+      },
+      "Style": {
+        "type": "VARIANT",
+        "defaultValue": "Primary",
+        "variantOptions": [
+          "Primary",
+          "Secondary",
+          "Inverse",
+          "Dark"
+        ]
+      },
+      "Size": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "Small"
+        ]
+      },
+      "Interactive": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "Hover",
+          "Disabled",
+          "Active"
+        ]
+      }
+    },
+    "variantGroupProperties": {
+      "Style": {
+        "values": [
+          "Primary",
+          "Secondary",
+          "Inverse",
+          "Dark"
+        ]
+      },
+      "Size": {
+        "values": [
+          "Default",
+          "Small"
+        ]
+      },
+      "Interactive": {
+        "values": [
+          "Default",
+          "Hover",
+          "Disabled",
+          "Active"
+        ]
+      }
+    }
+  },
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt"
+}
