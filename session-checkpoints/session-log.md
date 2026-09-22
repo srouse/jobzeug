@@ -237,3 +237,44 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 #### Next
 
 - Confirm Vercel deploy passes with prebuilt dist; after DS changes locally run `npm run ds:build` and commit `packages/design-system/dist`
+
+### [2026-09-22T18:24:07-05:00]
+
+#### Summary
+
+- Excluded `packages/design-system` from the root TypeScript project so Next/Vercel typecheck consumes published dist types only.
+
+#### Changes
+
+- Evidence / records:
+- Skills / tooling: `tsconfig.json` exclude for design-system (fixes Lit decorator + missing agent-kit errors on `next build`)
+- Other:
+
+#### Decisions
+
+- App TS project must not typecheck design-system source; dist remains the deploy contract
+
+#### Plans cached
+
+- add_story_skill_2a282f5c.plan.md
+- comp-make_skill_429bbef5.plan.md
+- customers_evidence_log_51450833.plan.md
+- evidence_contentful_compress_793daf55.plan.md
+- evidence_mastra_workspace_4e07deca.plan.md
+- montserrat_entry_css_f8261a2c.plan.md
+- next.js_mastra_scaffold_718b8d31.plan.md
+- resume_cite_highlights_ae4c6a1c.plan.md
+- resume_floating_chat_c02c45c0.plan.md
+- resume_spa_contentful_5d3d3333.plan.md
+- rip_specs_restore_lit_8e08794a.plan.md
+- session_checkpoint_skill_65575be3.plan.md
+- site_password_gate_c3c92081.plan.md
+- specs_ds_import_3ed8c9e7.plan.md
+- stories_to_projects_rename_34704978.plan.md
+- vercel_ds_prebuilt_e09f8557.plan.md
+- web_components_ds_b1737d33.plan.md
+- wire_local_ds2_cli_cc2d5484.plan.md
+
+#### Next
+
+- Confirm Vercel `next build` passes after this exclude
