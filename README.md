@@ -37,7 +37,7 @@ The Next app is gated by a shared password (`/login`). After login, an httpOnly 
 | `npm run dev:all` | Next + Studio together |
 | `npm run ds:build` | Build `@jobzeug/design-system` → `packages/design-system/dist` |
 | `npm run ds:dev` | Watch-rebuild the design system |
-| `npm run build` / `npm start` | DS build + production Next build (includes Mastra in API routes) |
+| `npm run build` / `npm start` | Production Next build (includes Mastra in API routes; uses committed DS `dist`) |
 | `npm run contentful:compress` | Parse `evidence/` → `evidence/outputs/{employers,roles,projects}/*.json` |
 | `npm run contentful:apply` | Create/update Employer / Role / Project content types in Contentful |
 | `npm run contentful:push` | Upsert compressed JSON into Contentful (`jz-*` entry IDs) |
@@ -55,6 +55,8 @@ The Next app is gated by a shared password (`/login`). After login, an httpOnly 
 ## Design system
 
 See [`packages/design-system/README.md`](packages/design-system/README.md). Lit `jz-*` components and `--jz-*` tokens; consume via `@jobzeug/design-system/react`.
+
+Vercel installs with [`scripts/vercel-install.mjs`](scripts/vercel-install.mjs) and uses the committed `packages/design-system/dist` (the local ds2 agent-kit is not available on CI). After design-system changes, run `npm run ds:build` and commit `packages/design-system/dist` before pushing.
 
 ## Evidence
 

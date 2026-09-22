@@ -13,7 +13,7 @@
     "ds:dev": "npm run dev -w @jobzeug/design-system",
     "ds2": "npm run ds2 -w @jobzeug/design-system --",
     "postinstall": "node packages/design-system/scripts/build.mjs --soft",
-    "build": "npm run ds:build && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "contentful:compress": "node scripts/contentful/compress.mjs",

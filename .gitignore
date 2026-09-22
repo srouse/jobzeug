@@ -13,6 +13,9 @@ node_modules/
 out/
 build/
 dist/
+# Prebuilt design-system output is committed for Vercel (local-only ds2 kit).
+!packages/design-system/dist/
+!packages/design-system/dist/**
 
 # mastra
 .mastra/
