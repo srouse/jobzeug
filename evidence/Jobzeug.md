@@ -43,7 +43,7 @@ Jobzeug keeps (1) as a versioned Markdown workspace (`evidence/`), projects (2) 
 On `/resume`, several panels share one highlight context:
 
 - **Resume document** — employers, roles, and projects rendered from Contentful, each row tagged with a stable evidence ID (`C00x` / `R00x` / `S00x`) via `data-evidence-id`.
-- **Job posting panel** — the bound listing broken into lines with stable entry IDs (`jz-JP…-line-N`).
+- **Job posting panel** — the bound listing as overview meta, then Description / Responsibilities / Required / Preferred / Tools lines with stable entry IDs (`jz-JP…-line-N`).
 - **Resume chat dock** — conversation with `jobzeug-agent` (`surface=resume`). Assistant turns can activate an **evidence cluster** (cited IDs + timing).
 - **Play toolbar** — bind/unbind a posting URL and open chat.
 
@@ -54,7 +54,7 @@ Clicking a prior assistant message re-selects that turn’s citation cluster so 
 | Kind | Where it lives | What it is | What it is not |
 |---|---|---|---|
 | **Evidence** | `evidence/` Markdown (+ Contentful projections of employers/roles/projects) | Scott’s career record: orgs, tenures, projects, customers, clients, perspectives, sources | Not inventable; not equal to job-posting text |
-| **Need** | Session-bound posting (cookie + chat system context) | What the employer is hiring for: responsibilities, required/preferred lines, tools | **Never** evidence that Scott did those things |
+| **Need** | Session-bound posting (cookie + chat system context) | Structured need: meta (incl. compensation), description paragraphs, responsibilities / required / preferred lines, tools | **Never** evidence that Scott did those things |
 
 Full job listings are **not** stored under `evidence/`. Condensed historical notes may exist under `sources/job-posting-notes.md` only. Live listings are bound for the session in the app.
 
@@ -87,9 +87,9 @@ Evidence remains the source of truth; Contentful is the delivery projection for 
 ### B. Bind a job posting (need)
 
 1. User submits a posting URL from the resume UI.
-2. The server scrapes the page (Firecrawl), runs a **stateless** structurer agent (`job-posting-structurer`), and writes a Contentful tree with stable line IDs.
+2. The server scrapes the page (Firecrawl), runs a **stateless** structurer agent (`job-posting-structurer`) that extracts meta plus citeable lines (description paragraphs and responsibility / required / preferred bullets), and writes a Contentful tree with stable line IDs.
 3. A signed cookie binds that posting to the session.
-4. Chat requests inject a formatted need block as **system** context (slim line list, not a dump of the whole page as Scott’s history).
+4. Chat requests inject a formatted **structured** need block as **system** context (meta + description / requirement lines + tools — not a fullText dump of the page as Scott’s history).
 
 ### C. Chat → cite → highlight
 
@@ -97,7 +97,7 @@ Evidence remains the source of truth; Contentful is the delivery projection for 
 2. Optional client hand-off includes the bound posting payload so the server can format need without another CMA round-trip when possible.
 3. `jobzeug-agent` may use read-only workspace tools (list / read / grep / BM25 search over `evidence/**/*.md`) and **must** call `citeEvidence` with accurate `employers` / `roles` / `projects` / `jobLines` IDs.
 4. The UI extracts citation tool parts into an **EvidenceCluster**, sets highlighted IDs, and styles matching resume rows and posting lines (blue text — no icon rollup).
-5. The agent’s user-visible answer is a short third-person paragraph about Scott, framed to the need when a posting is bound.
+5. The agent’s user-visible answer is short third-person Markdown paragraphs about Scott (bold lead-ins, a few sentences each), framed to the need when a posting is bound.
 
 Memory threads are scoped per session and surface (`chat` vs `resume`) so resume rehearsal and smoke chat do not collide.
 

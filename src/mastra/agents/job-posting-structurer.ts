@@ -14,12 +14,13 @@ Return only the structured object requested by the schema.
 
 Rules:
 - Prefer the posting's own wording for each line's text.
-- section must be one of: responsibility (what you'll do), required (must-haves), preferred (nice-to-haves).
+- section must be one of: description (narrative paragraphs — role pitch, team/context, how the role is framed), responsibility (what you'll do), required (must-haves), preferred (nice-to-haves).
+- Extract 2–8 description lines as full paragraphs (not bullets). Use kind other (or soft) for those; keep theme short.
 - kind: use duty for responsibilities; years/skill/domain/soft/other for requirements and preferred.
-- theme: short kebab-ish label for search (e.g. design-systems-ai, customer-facing).
-- Extract 6–25 strong lines; do not turn the apply form, EEO, or benefits legalese into lines.
+- theme: short kebab-ish label for search (e.g. design-systems-ai, customer-facing, role-overview).
+- Also extract 6–25 strong responsibility/required/preferred lines; do not turn the apply form, EEO, or benefits legalese into any lines.
 - tools: named technologies (TypeScript, MCP, Code Connect, SSO, etc.) with context where they appeared.
-- company, title, location, seniority, yearsExperienceMin/Note from the listing when present.
+- company, title, location, seniority, employmentType, yearsExperienceMin/Note, travelNote, compensationNote from the listing when present (put salary/comp ranges in compensationNote).
 - summary: short narrative of the role, not the whole page.`,
   model: "openai/gpt-4o-mini",
 });

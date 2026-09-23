@@ -273,8 +273,11 @@ type FormatJobPostingInput = Pick<
   | "title"
   | "location"
   | "seniority"
+  | "employmentType"
   | "yearsExperienceNote"
   | "yearsExperienceMin"
+  | "travelNote"
+  | "compensationNote"
   | "summary"
   | "lines"
   | "tools"
@@ -283,6 +286,7 @@ type FormatJobPostingInput = Pick<
 /** Build agent system context from structured posting (no fullText dump). */
 export function formatJobPostingContext(view: FormatJobPostingInput): string {
   const linesBySection = {
+    description: view.lines.filter((l) => l.section === "description"),
     responsibility: view.lines.filter((l) => l.section === "responsibility"),
     required: view.lines.filter((l) => l.section === "required"),
     preferred: view.lines.filter((l) => l.section === "preferred"),
@@ -299,19 +303,23 @@ export function formatJobPostingContext(view: FormatJobPostingInput): string {
     `Active job posting — NEED only (session-bound; not Scott evidence): ${view.company} — ${view.title}`,
     view.location ? `Location: ${view.location}` : null,
     view.seniority ? `Seniority: ${view.seniority}` : null,
+    view.employmentType ? `Employment type: ${view.employmentType}` : null,
     view.yearsExperienceNote
       ? `Experience bar: ${view.yearsExperienceNote}`
       : view.yearsExperienceMin != null
         ? `Years experience (min): ${view.yearsExperienceMin}`
         : null,
+    view.travelNote ? `Travel: ${view.travelNote}` : null,
+    view.compensationNote ? `Compensation: ${view.compensationNote}` : null,
     view.summary ? `Summary: ${view.summary}` : null,
+    block("Description", linesBySection.description),
     block("Responsibilities", linesBySection.responsibility),
     block("Required", linesBySection.required),
     block("Preferred", linesBySection.preferred),
     view.tools.length
       ? `Tools: ${view.tools.map((t) => `${t.name} (${t.context})`).join(", ")}`
       : null,
-    "This block is NEED only (what the role asks for) — not evidence of Scott. Map evidence/ → these lines. Cite matching line entryIds in citeEvidence.jobLines and C/R/S for the proof. Do not invent another posting or treat listing text as Scott's history.",
+    "This block is NEED only (what the role asks for) — not evidence of Scott. Map evidence/ → these lines (including description paragraphs). Cite matching line entryIds in citeEvidence.jobLines and C/R/S for the proof. Do not invent another posting or treat listing text as Scott's history.",
   ].filter(Boolean);
 
   return parts.join("\n\n");

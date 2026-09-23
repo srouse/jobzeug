@@ -9,6 +9,7 @@ import { useJobPosting } from "./job-posting-context";
 import styles from "./job-posting-panel.module.css";
 
 const SECTION_ORDER = [
+  { id: "description" as const, label: "Description" },
   { id: "responsibility" as const, label: "Responsibilities" },
   { id: "required" as const, label: "Required" },
   { id: "preferred" as const, label: "Preferred" },
@@ -197,7 +198,7 @@ function ProcessingState({
       <JzText
         variant="caption"
         color="muted"
-        label="Scrape → structure → Contentful. This can take a bit."
+        label="Scrape → structure → Contentful."
         className={styles.processingHint}
       />
     </div>

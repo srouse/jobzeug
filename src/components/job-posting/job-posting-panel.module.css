@@ -163,6 +163,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--jz-semantic-space-gap-2xs, 0.25rem);
+  box-sizing: border-box;
+  padding-inline: var(--jz-semantic-space-padding-sm, 0.75rem);
 }
 
 .metaLabel {
@@ -178,6 +180,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--jz-semantic-space-gap-2xs, 0.35rem);
+  box-sizing: border-box;
+  padding-inline: var(--jz-semantic-space-padding-sm, 0.75rem);
 }
 
 .note {
@@ -187,6 +191,8 @@
 .summary {
   display: block;
   margin: var(--jz-semantic-space-gap-md, 1rem) 0 0;
+  box-sizing: border-box;
+  padding-inline: var(--jz-semantic-space-padding-sm, 0.75rem);
 }
 
 .section {
@@ -198,6 +204,8 @@
   margin: 0 0 var(--jz-semantic-space-gap-xs, 0.55rem);
   border-bottom: 1px solid var(--jz-semantic-color-border-default, #d4d4d4);
   padding-bottom: var(--jz-semantic-space-padding-2xs, 0.35rem);
+  box-sizing: border-box;
+  padding-inline: var(--jz-semantic-space-padding-sm, 0.75rem);
 }
 
 .lines {
@@ -237,10 +245,12 @@
 .tools {
   margin: 0;
   padding: 0;
+  padding-inline: var(--jz-semantic-space-padding-sm, 0.75rem);
   list-style: none;
   display: flex;
   flex-wrap: wrap;
   gap: var(--jz-semantic-space-gap-2xs, 0.4rem);
+  box-sizing: border-box;
 }
 
 .tool {

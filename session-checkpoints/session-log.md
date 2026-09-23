@@ -325,3 +325,51 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 #### Next
 
 - Continue connector/stage visual polish; keep design-system package edits out of this app workspace
+
+### [2026-09-23T18:50:36-05:00]
+
+#### Summary
+
+- Added citeable job-description paragraphs (`section: description`), richer structured NEED for chat (incl. compensation), readable multi-paragraph agent answers, and aligned job-panel horizontal spacing.
+
+#### Changes
+
+- Evidence / records: `evidence/Jobzeug.md` NEED / panel / answer-format notes
+- Skills / tooling:
+- Other: jobLine description section (schema + structurer + panel + formatJobPostingContext); agent response format (bold lead-ins, short paragraphs); job posting panel inset alignment; Vercel fixes earlier this session already on main
+
+#### Decisions
+
+- Hand agent structured NEED only (no fullText dump); description paragraphs reuse jobLine + citeEvidence.jobLines
+- Answer readability via system prompt, not UI redesign
+
+#### Plans cached
+
+- add_story_skill_2a282f5c.plan.md
+- comp-make_skill_429bbef5.plan.md
+- customers_evidence_log_51450833.plan.md
+- evidence_contentful_compress_793daf55.plan.md
+- evidence_mastra_workspace_4e07deca.plan.md
+- finish_docked_toolbar_52ac2998.plan.md
+- full_job_post_context_e1b35bf3.plan.md
+- job_cite_chat-only_c7f1d253.plan.md
+- jz-icon_phosphor_0589d485.plan.md
+- jztext_jzicon_migration_23ae0664.plan.md
+- montserrat_entry_css_f8261a2c.plan.md
+- next.js_mastra_scaffold_718b8d31.plan.md
+- resume_cite_highlights_ae4c6a1c.plan.md
+- resume_floating_chat_c02c45c0.plan.md
+- resume_spa_contentful_5d3d3333.plan.md
+- rip_specs_restore_lit_8e08794a.plan.md
+- session_checkpoint_skill_65575be3.plan.md
+- session_job_posting_28aa6696.plan.md
+- site_password_gate_c3c92081.plan.md
+- specs_ds_import_3ed8c9e7.plan.md
+- stories_to_projects_rename_34704978.plan.md
+- vercel_ds_prebuilt_e09f8557.plan.md
+- web_components_ds_b1737d33.plan.md
+- wire_local_ds2_cli_cc2d5484.plan.md
+
+#### Next
+
+- Re-bind postings to extract description lines; confirm salary + description cite highlights in UI

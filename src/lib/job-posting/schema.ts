@@ -4,6 +4,7 @@ const text = z.string().trim().min(1);
 const short = text.max(256);
 
 export const jobLineSectionSchema = z.enum([
+  "description",
   "responsibility",
   "required",
   "preferred",

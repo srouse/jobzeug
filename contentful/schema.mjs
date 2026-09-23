@@ -18,7 +18,7 @@ const roleId = z.string().regex(/^R\d{3,}$/);
 const projectId = z.string().regex(/^S\d{3,}$/);
 export const applicationId = z.string().regex(/^A\d{3,}$/);
 export const postingId = z.string().regex(/^JP[\w-]+$/);
-const lineSection = z.enum(['responsibility', 'required', 'preferred']);
+const lineSection = z.enum(['description', 'responsibility', 'required', 'preferred']);
 const lineKind = z.enum(['duty', 'years', 'skill', 'domain', 'soft', 'other']);
 const toolContext = z.enum(['required', 'preferred', 'responsibility']);
 const field = (type, schema, required = false, extra = {}) => ({ type, schema, required, ...extra });
