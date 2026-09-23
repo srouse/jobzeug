@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { JzButton, JzIcon, JzText } from "@jobzeug/design-system/react";
 import { useJobPosting } from "@/components/job-posting";
-import * as styles from "./resume-play-toolbar.css";
+import styles from "./resume-play-toolbar.module.css";
 
 type ColorMode = "light" | "dark" | "subtle" | "emphasized";
 
