@@ -23,12 +23,17 @@
   "sideEffects": [
     "./dist/index.js",
     "./dist/react/index.js",
-    "./dist/designSystem/tokens.css"
+    "./dist/jz-*.js",
+    "./dist/designSystem/tokens.css",
+    "**/*.css",
+    "**/*.woff2"
   ],
   "scripts": {
     "build": "node ./scripts/build.mjs",
     "prepare": "node ./scripts/build.mjs",
     "dev": "vite build --watch",
+    "clean": "rm -rf dist",
+    "rebuild": "npm run clean && npm run build",
     "tokens:emit": "ds2 tokens emit --formats all",
     "ds2": "ds2"
   },
@@ -37,13 +42,11 @@
   },
   "dependencies": {
     "@lit/react": "^1.0.7",
-    "@vanilla-extract/css": "^1.21.2",
     "lit": "^3.3.0"
   },
   "devDependencies": {
     "@contentful/design-system-squared-agent-kit": "file:../../../d2s-design-system-squared/packages/cli",
     "@types/react": "^19",
-    "@vanilla-extract/vite-plugin": "^5.1.2",
     "react": "19.2.8",
     "typescript": "^5",
     "vite": "^6.3.5",

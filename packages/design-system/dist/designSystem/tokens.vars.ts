@@ -138,6 +138,7 @@ export const vars = {
   "primitive.stroke.width.sm": "var(--jz-primitive-stroke-width-sm)",
   "semantic.color.background.canvas.default": "var(--jz-semantic-color-background-canvas-default)",
   "semantic.color.background.canvas.inverse": "var(--jz-semantic-color-background-canvas-inverse)",
+  "semantic.color.background.canvas.subtle": "var(--jz-semantic-color-background-canvas-subtle)",
   "semantic.color.background.control.brand.inverse.primary": "var(--jz-semantic-color-background-control-brand-inverse-primary)",
   "semantic.color.background.control.brand.inverse.primary.active": "var(--jz-semantic-color-background-control-brand-inverse-primary-active)",
   "semantic.color.background.control.brand.inverse.primary.disabled": "var(--jz-semantic-color-background-control-brand-inverse-primary-disabled)",

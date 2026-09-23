@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { JzText } from "@jobzeug/design-system/react";
 import styles from "./page.module.css";

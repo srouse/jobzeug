@@ -4,134 +4,71 @@
 /* Modes: set data-mode="<id>" on the document root or an ancestor; default = first mode in collection */
 
 @font-face {
-  font-family: 'Montserrat';
-  font-style: italic;
-  font-weight: 100;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jq6R8aX8.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Montserrat';
-  font-style: italic;
-  font-weight: 200;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jqyR9aX8.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Montserrat';
-  font-style: italic;
-  font-weight: 300;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jq_p9aX8.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Montserrat';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jq6R9aX8.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Montserrat';
-  font-style: italic;
-  font-weight: 500;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jq5Z9aX8.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Montserrat';
-  font-style: italic;
-  font-weight: 600;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jq3p6aX8.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Montserrat';
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jq0N6aX8.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Montserrat';
-  font-style: italic;
-  font-weight: 800;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jqyR6aX8.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Montserrat';
-  font-style: italic;
-  font-weight: 900;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jqw16aX8.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Montserrat';
+  font-family: 'Geist';
   font-style: normal;
   font-weight: 100;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Uw-.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/geist/v5/gyBhhwUxId8gMGYQMKR3pzfaWI_RnOI4nQ.ttf) format('truetype');
 }
 @font-face {
-  font-family: 'Montserrat';
+  font-family: 'Geist';
   font-style: normal;
   font-weight: 200;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCvr6Ew-.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/geist/v5/gyBhhwUxId8gMGYQMKR3pzfaWI_RHOM4nQ.ttf) format('truetype');
 }
 @font-face {
-  font-family: 'Montserrat';
+  font-family: 'Geist';
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCs16Ew-.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/geist/v5/gyBhhwUxId8gMGYQMKR3pzfaWI_RwuM4nQ.ttf) format('truetype');
 }
 @font-face {
-  font-family: 'Montserrat';
+  font-family: 'Geist';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Ew-.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/geist/v5/gyBhhwUxId8gMGYQMKR3pzfaWI_RnOM4nQ.ttf) format('truetype');
 }
 @font-face {
-  font-family: 'Montserrat';
+  font-family: 'Geist';
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtZ6Ew-.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/geist/v5/gyBhhwUxId8gMGYQMKR3pzfaWI_RruM4nQ.ttf) format('truetype');
 }
 @font-face {
-  font-family: 'Montserrat';
+  font-family: 'Geist';
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCu170w-.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/geist/v5/gyBhhwUxId8gMGYQMKR3pzfaWI_RQuQ4nQ.ttf) format('truetype');
 }
 @font-face {
-  font-family: 'Montserrat';
+  font-family: 'Geist';
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCuM70w-.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/geist/v5/gyBhhwUxId8gMGYQMKR3pzfaWI_Re-Q4nQ.ttf) format('truetype');
 }
 @font-face {
-  font-family: 'Montserrat';
+  font-family: 'Geist';
   font-style: normal;
   font-weight: 800;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCvr70w-.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/geist/v5/gyBhhwUxId8gMGYQMKR3pzfaWI_RHOQ4nQ.ttf) format('truetype');
 }
 @font-face {
-  font-family: 'Montserrat';
+  font-family: 'Geist';
   font-style: normal;
   font-weight: 900;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCvC70w-.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/geist/v5/gyBhhwUxId8gMGYQMKR3pzfaWI_RNeQ4nQ.ttf) format('truetype');
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Geist', sans-serif;
 }
 
 
@@ -218,7 +155,7 @@ body {
   --jz-primitive-effect-elevation-high: 0px 8px 8px 0px #00000029;
   --jz-primitive-effect-elevation-low: 0px 2px 8px 0px #00000014;
   --jz-primitive-effect-elevation-medium: 0px 4px 8px 0px #0000001f;
-  --jz-primitive-font-family-sans: "Montserrat";
+  --jz-primitive-font-family-sans: "Geist";
   --jz-primitive-font-lineheight-200: 14px;
   --jz-primitive-font-lineheight-300: 16px;
   --jz-primitive-font-lineheight-400: 20px;
@@ -270,6 +207,7 @@ body {
   --jz-primitive-stroke-width-sm: 1px;
   --jz-semantic-color-background-canvas-default: #ffffff;
   --jz-semantic-color-background-canvas-inverse: #171717;
+  --jz-semantic-color-background-canvas-subtle: #e5e5e5;
   --jz-semantic-color-background-control-brand-inverse-primary: #3b82f6;
   --jz-semantic-color-background-control-brand-inverse-primary-active: #1d4ed8;
   --jz-semantic-color-background-control-brand-inverse-primary-disabled: #e5e5e5;
@@ -400,63 +338,63 @@ body {
   --jz-semantic-space-padding-sm: 8px;
   --jz-semantic-space-padding-xl: 32px;
   --jz-semantic-space-padding-xs: 4px;
-  --jz-semantic-type-body-default-font: 400 15px/24px "Montserrat";
-  --jz-semantic-type-body-default-font-family: "Montserrat";
+  --jz-semantic-type-body-default-font: 400 15px/24px "Geist";
+  --jz-semantic-type-body-default-font-family: "Geist";
   --jz-semantic-type-body-default-font-size: 15px;
   --jz-semantic-type-body-default-font-weight: 400;
   --jz-semantic-type-body-default-line-height: 24px;
-  --jz-semantic-type-body-regular-font: 400 14px/24px "Montserrat";
-  --jz-semantic-type-body-regular-font-family: "Montserrat";
+  --jz-semantic-type-body-regular-font: 400 14px/24px "Geist";
+  --jz-semantic-type-body-regular-font-family: "Geist";
   --jz-semantic-type-body-regular-font-size: 14px;
   --jz-semantic-type-body-regular-font-weight: 400;
   --jz-semantic-type-body-regular-line-height: 24px;
-  --jz-semantic-type-body-strong-font: 600 14px/24px "Montserrat";
-  --jz-semantic-type-body-strong-font-family: "Montserrat";
+  --jz-semantic-type-body-strong-font: 600 14px/24px "Geist";
+  --jz-semantic-type-body-strong-font-family: "Geist";
   --jz-semantic-type-body-strong-font-size: 14px;
   --jz-semantic-type-body-strong-font-weight: 600;
   --jz-semantic-type-body-strong-line-height: 24px;
-  --jz-semantic-type-caption-font: 400 12px/16px "Montserrat";
-  --jz-semantic-type-caption-font-family: "Montserrat";
+  --jz-semantic-type-caption-font: 400 12px/16px "Geist";
+  --jz-semantic-type-caption-font-family: "Geist";
   --jz-semantic-type-caption-font-size: 12px;
   --jz-semantic-type-caption-font-weight: 400;
   --jz-semantic-type-caption-line-height: 16px;
-  --jz-semantic-type-display-font: 700 36px/44px "Montserrat";
-  --jz-semantic-type-display-font-family: "Montserrat";
+  --jz-semantic-type-display-font: 700 36px/44px "Geist";
+  --jz-semantic-type-display-font-family: "Geist";
   --jz-semantic-type-display-font-size: 36px;
   --jz-semantic-type-display-font-weight: 700;
-  --jz-semantic-type-display-large-font: 700 48px/56px "Montserrat";
-  --jz-semantic-type-display-large-font-family: "Montserrat";
+  --jz-semantic-type-display-large-font: 700 48px/56px "Geist";
+  --jz-semantic-type-display-large-font-family: "Geist";
   --jz-semantic-type-display-large-font-size: 48px;
   --jz-semantic-type-display-large-font-weight: 700;
   --jz-semantic-type-display-large-line-height: 56px;
   --jz-semantic-type-display-line-height: 44px;
-  --jz-semantic-type-heading-font: 600 20px/28px "Montserrat";
-  --jz-semantic-type-heading-font-family: "Montserrat";
+  --jz-semantic-type-heading-font: 600 20px/28px "Geist";
+  --jz-semantic-type-heading-font-family: "Geist";
   --jz-semantic-type-heading-font-size: 20px;
   --jz-semantic-type-heading-font-weight: 600;
   --jz-semantic-type-heading-line-height: 28px;
-  --jz-semantic-type-label-font: 600 14px/20px "Montserrat";
-  --jz-semantic-type-label-font-family: "Montserrat";
+  --jz-semantic-type-label-font: 600 14px/20px "Geist";
+  --jz-semantic-type-label-font-family: "Geist";
   --jz-semantic-type-label-font-size: 14px;
   --jz-semantic-type-label-font-weight: 600;
   --jz-semantic-type-label-line-height: 20px;
-  --jz-semantic-type-label-sm-font: 600 12px/20px "Montserrat";
-  --jz-semantic-type-label-sm-font-family: "Montserrat";
+  --jz-semantic-type-label-sm-font: 600 12px/20px "Geist";
+  --jz-semantic-type-label-sm-font-family: "Geist";
   --jz-semantic-type-label-sm-font-size: 12px;
   --jz-semantic-type-label-sm-font-weight: 600;
   --jz-semantic-type-label-sm-line-height: 20px;
-  --jz-semantic-type-overline-font: 600 11px/14px "Montserrat";
-  --jz-semantic-type-overline-font-family: "Montserrat";
+  --jz-semantic-type-overline-font: 600 11px/14px "Geist";
+  --jz-semantic-type-overline-font-family: "Geist";
   --jz-semantic-type-overline-font-size: 11px;
   --jz-semantic-type-overline-font-weight: 600;
   --jz-semantic-type-overline-line-height: 14px;
-  --jz-semantic-type-subtitle-font: 600 16px/26px "Montserrat";
-  --jz-semantic-type-subtitle-font-family: "Montserrat";
+  --jz-semantic-type-subtitle-font: 600 16px/26px "Geist";
+  --jz-semantic-type-subtitle-font-family: "Geist";
   --jz-semantic-type-subtitle-font-size: 16px;
   --jz-semantic-type-subtitle-font-weight: 600;
   --jz-semantic-type-subtitle-line-height: 26px;
-  --jz-semantic-type-title-font: 700 24px/32px "Montserrat";
-  --jz-semantic-type-title-font-family: "Montserrat";
+  --jz-semantic-type-title-font: 700 24px/32px "Geist";
+  --jz-semantic-type-title-font-family: "Geist";
   --jz-semantic-type-title-font-size: 24px;
   --jz-semantic-type-title-font-weight: 700;
   --jz-semantic-type-title-line-height: 32px;
@@ -465,6 +403,7 @@ body {
 [data-mode="dark"] {
   --jz-semantic-color-background-canvas-default: #080d1a;
   --jz-semantic-color-background-canvas-inverse: #0a0a0a;
+  --jz-semantic-color-background-canvas-subtle: #080d1a;
   --jz-semantic-color-background-control-brand-inverse-primary: #1e40af;
   --jz-semantic-color-background-control-brand-inverse-primary-active: #404040;
   --jz-semantic-color-background-control-brand-inverse-primary-disabled: #262626;
@@ -562,6 +501,7 @@ body {
 [data-mode="emphasized"] {
   --jz-semantic-color-background-canvas-default: #3b82f6;
   --jz-semantic-color-background-canvas-inverse: #f5f5f5;
+  --jz-semantic-color-background-canvas-subtle: #2563eb;
   --jz-semantic-color-background-control-brand-inverse-primary: #2563eb;
   --jz-semantic-color-background-control-brand-inverse-primary-active: #1d4ed8;
   --jz-semantic-color-background-control-brand-inverse-primary-disabled: #2563eb;
@@ -659,6 +599,7 @@ body {
 [data-mode="subtle"] {
   --jz-semantic-color-background-canvas-default: #f5f5f5;
   --jz-semantic-color-background-canvas-inverse: #171717;
+  --jz-semantic-color-background-canvas-subtle: #a3a3a3;
   --jz-semantic-color-background-control-brand-inverse-primary: #60a5fa;
   --jz-semantic-color-background-control-brand-inverse-primary-active: #2563eb;
   --jz-semantic-color-background-control-brand-inverse-primary-disabled: #737373;
@@ -712,7 +653,7 @@ body {
   --jz-semantic-color-background-surface-feedback-success: #bbf7d0;
   --jz-semantic-color-background-surface-feedback-warning: #fed7aa;
   --jz-semantic-color-background-surface-inverse: #a3a3a3;
-  --jz-semantic-color-background-surface-subtle: #e5e5e5;
+  --jz-semantic-color-background-surface-subtle: #f5f5f5;
   --jz-semantic-color-border-brand: #e5e5e5;
   --jz-semantic-color-border-default: #a3a3a3;
   --jz-semantic-color-border-strong: #a3a3a3;

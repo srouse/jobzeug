@@ -1,7 +1,6 @@
 import { LitElement } from 'lit';
-import { sizes, variants } from './blue-button.css.js';
-export type JzButtonVariant = keyof typeof variants;
-export type JzButtonSize = keyof typeof sizes;
+export type JzButtonVariant = "primary" | "secondary" | "inverse" | "dark";
+export type JzButtonSize = "default" | "small";
 /**
  * Button from the blue-button capture. Interaction is native
  * (`:hover`, `:active`, `disabled`). Text is `label` + `showText`.
@@ -9,6 +8,7 @@ export type JzButtonSize = keyof typeof sizes;
  * and Dark+Disabled border.
  */
 export declare class JzButtonElement extends LitElement {
+    static styles: import('lit').CSSResult;
     variant: JzButtonVariant;
     size: JzButtonSize;
     label: string;
@@ -20,8 +20,8 @@ export declare class JzButtonElement extends LitElement {
      */
     showIcon: boolean;
     disabled: boolean;
-    createRenderRoot(): HTMLElement | DocumentFragment;
-    render(): import('lit').TemplateResult<1>;
+    willUpdate(): void;
+    render(): import('lit-html').TemplateResult<1>;
 }
 declare global {
     interface HTMLElementTagNameMap {

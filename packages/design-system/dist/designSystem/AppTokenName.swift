@@ -136,6 +136,7 @@ public enum AppTokenName: String, CaseIterable {
     case primitive_stroke_width_sm = "primitive.stroke.width.sm"
     case semantic_color_background_canvas_default = "semantic.color.background.canvas.default"
     case semantic_color_background_canvas_inverse = "semantic.color.background.canvas.inverse"
+    case semantic_color_background_canvas_subtle = "semantic.color.background.canvas.subtle"
     case semantic_color_background_control_brand_inverse_primary = "semantic.color.background.control.brand.inverse.primary"
     case semantic_color_background_control_brand_inverse_primary_active = "semantic.color.background.control.brand.inverse.primary.active"
     case semantic_color_background_control_brand_inverse_primary_disabled = "semantic.color.background.control.brand.inverse.primary.disabled"

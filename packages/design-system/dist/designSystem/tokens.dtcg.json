@@ -1426,7 +1426,7 @@
       "family": {
         "sans": {
           "$type": "fontFamily",
-          "$value": "Montserrat",
+          "$value": "Geist",
           "$extensions": {
             "com.design2s": {
               "figmaTokenPath": "primitive.font.family.sans"
@@ -2106,6 +2106,48 @@
               "$extensions": {
                 "com.design2s": {
                   "figmaTokenPath": "semantic.color.background.canvas.inverse",
+                  "figmaMode": "subtle"
+                }
+              }
+            }
+          },
+          "subtle": {
+            "dark": {
+              "$type": "color",
+              "$value": "{primitive.color.black}",
+              "$extensions": {
+                "com.design2s": {
+                  "figmaTokenPath": "semantic.color.background.canvas.subtle",
+                  "figmaMode": "dark"
+                }
+              }
+            },
+            "emphasized": {
+              "$type": "color",
+              "$value": "{primitive.color.primary.400}",
+              "$extensions": {
+                "com.design2s": {
+                  "figmaTokenPath": "semantic.color.background.canvas.subtle",
+                  "figmaMode": "emphasized"
+                }
+              }
+            },
+            "light": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.800}",
+              "$extensions": {
+                "com.design2s": {
+                  "figmaTokenPath": "semantic.color.background.canvas.subtle",
+                  "figmaMode": "light"
+                }
+              }
+            },
+            "subtle": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.600}",
+              "$extensions": {
+                "com.design2s": {
+                  "figmaTokenPath": "semantic.color.background.canvas.subtle",
                   "figmaMode": "subtle"
                 }
               }
@@ -4390,7 +4432,7 @@
             },
             "subtle": {
               "$type": "color",
-              "$value": "{primitive.color.neutral.800}",
+              "$value": "{primitive.color.neutral.900}",
               "$extensions": {
                 "com.design2s": {
                   "figmaTokenPath": "semantic.color.background.surface.subtle",

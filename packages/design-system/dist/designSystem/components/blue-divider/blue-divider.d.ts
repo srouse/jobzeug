@@ -4,7 +4,7 @@ import { LitElement } from 'lit';
  * No props — fill is `border/default`, height is stroke `sm`.
  */
 export declare class JzDividerElement extends LitElement {
-    createRenderRoot(): HTMLElement | DocumentFragment;
+    static styles: import('lit').CSSResult;
     connectedCallback(): void;
     render(): symbol;
 }

@@ -118,7 +118,7 @@ Generated summary: **resolved values** for this theme build. CSS prefix `jz`.
 
 | Token path | Type | CSS variable | Resolved values |
 |------------|------|--------------|-----------------|
-| primitive.font.family.sans | fontFamily | `--jz-primitive-font-family-sans` | base: {"css":"Montserrat","primary":"Montserrat"} |
+| primitive.font.family.sans | fontFamily | `--jz-primitive-font-family-sans` | base: {"css":"Geist","primary":"Geist"} |
 | primitive.font.lineheight.200 | dimension | `--jz-primitive-font-lineheight-200` | base: "14px" |
 | primitive.font.lineheight.300 | dimension | `--jz-primitive-font-lineheight-300` | base: "16px" |
 | primitive.font.lineheight.400 | dimension | `--jz-primitive-font-lineheight-400` | base: "20px" |
@@ -195,6 +195,7 @@ Generated summary: **resolved values** for this theme build. CSS prefix `jz`.
 |------------|------|--------------|-----------------|
 | semantic.color.background.canvas.default | color | `--jz-semantic-color-background-canvas-default` | dark: "#080d1a" · emphasized: "#3b82f6" · light: "#ffffff" · subtle: "#f5f5f5" |
 | semantic.color.background.canvas.inverse | color | `--jz-semantic-color-background-canvas-inverse` | dark: "#0a0a0a" · emphasized: "#f5f5f5" · light: "#171717" · subtle: "#171717" |
+| semantic.color.background.canvas.subtle | color | `--jz-semantic-color-background-canvas-subtle` | dark: "#080d1a" · emphasized: "#2563eb" · light: "#e5e5e5" · subtle: "#a3a3a3" |
 | semantic.color.background.control.brand.inverse.primary | color | `--jz-semantic-color-background-control-brand-inverse-primary` | dark: "#1e40af" · emphasized: "#2563eb" · light: "#3b82f6" · subtle: "#60a5fa" |
 | semantic.color.background.control.brand.inverse.primary.active | color | `--jz-semantic-color-background-control-brand-inverse-primary-active` | dark: "#404040" · emphasized: "#1d4ed8" · light: "#1d4ed8" · subtle: "#2563eb" |
 | semantic.color.background.control.brand.inverse.primary.disabled | color | `--jz-semantic-color-background-control-brand-inverse-primary-disabled` | dark: "#262626" · emphasized: "#2563eb" · light: "#e5e5e5" · subtle: "#737373" |
@@ -248,7 +249,7 @@ Generated summary: **resolved values** for this theme build. CSS prefix `jz`.
 | semantic.color.background.surface.feedback.success | color | `--jz-semantic-color-background-surface-feedback-success` | dark: "#14532d" · emphasized: "#14532d" · light: "#dcfce7" · subtle: "#bbf7d0" |
 | semantic.color.background.surface.feedback.warning | color | `--jz-semantic-color-background-surface-feedback-warning` | dark: "#7c2d12" · emphasized: "#9a3412" · light: "#ffedd5" · subtle: "#fed7aa" |
 | semantic.color.background.surface.inverse | color | `--jz-semantic-color-background-surface-inverse` | dark: "#262626" · emphasized: "#1e3a8a" · light: "#171717" · subtle: "#a3a3a3" |
-| semantic.color.background.surface.subtle | color | `--jz-semantic-color-background-surface-subtle` | dark: "#404040" · emphasized: "#1e3a8a" · light: "#e5e5e5" · subtle: "#e5e5e5" |
+| semantic.color.background.surface.subtle | color | `--jz-semantic-color-background-surface-subtle` | dark: "#404040" · emphasized: "#1e3a8a" · light: "#e5e5e5" · subtle: "#f5f5f5" |
 | semantic.color.border.brand | color | `--jz-semantic-color-border-brand` | dark: "#1e40af" · emphasized: "#93c5fd" · light: "#dbeafe" · subtle: "#e5e5e5" |
 | semantic.color.border.default | color | `--jz-semantic-color-border-default` | dark: "#404040" · emphasized: "#93c5fd" · light: "#e5e5e5" · subtle: "#a3a3a3" |
 | semantic.color.border.strong | color | `--jz-semantic-color-border-strong` | dark: "#737373" · emphasized: "#93c5fd" · light: "#262626" · subtle: "#a3a3a3" |
@@ -350,15 +351,15 @@ Generated summary: **resolved values** for this theme build. CSS prefix `jz`.
 
 | Token path | Type | CSS variable | Resolved values |
 |------------|------|--------------|-----------------|
-| semantic.type.body.default | typography | `--jz-semantic-type-body-default` | base: {"fontFamily":{"css":"Montserrat","primary":"Montserrat"},"fontSize":"15px","fontWeight":400,"lineHeight":"24px"} |
-| semantic.type.body.regular | typography | `--jz-semantic-type-body-regular` | base: {"fontFamily":{"css":"Montserrat","primary":"Montserrat"},"fontSize":"14px","fontWeight":400,"lineHeight":"24px"} |
-| semantic.type.body.strong | typography | `--jz-semantic-type-body-strong` | base: {"fontFamily":{"css":"Montserrat","primary":"Montserrat"},"fontSize":"14px","fontWeight":600,"lineHeight":"24px"} |
-| semantic.type.caption | typography | `--jz-semantic-type-caption` | base: {"fontFamily":{"css":"Montserrat","primary":"Montserrat"},"fontSize":"12px","fontWeight":400,"lineHeight":"16px"} |
-| semantic.type.display | typography | `--jz-semantic-type-display` | base: {"fontFamily":{"css":"Montserrat","primary":"Montserrat"},"fontSize":"36px","fontWeight":700,"lineHeight":"44px"} |
-| semantic.type.display.large | typography | `--jz-semantic-type-display-large` | base: {"fontFamily":{"css":"Montserrat","primary":"Montserrat"},"fontSize":"48px","fontWeight":700,"lineHeight":"56px"} |
-| semantic.type.heading | typography | `--jz-semantic-type-heading` | base: {"fontFamily":{"css":"Montserrat","primary":"Montserrat"},"fontSize":"20px","fontWeight":600,"lineHeight":"28px"} |
-| semantic.type.label | typography | `--jz-semantic-type-label` | base: {"fontFamily":{"css":"Montserrat","primary":"Montserrat"},"fontSize":"14px","fontWeight":600,"lineHeight":"20px"} |
-| semantic.type.label.sm | typography | `--jz-semantic-type-label-sm` | base: {"fontFamily":{"css":"Montserrat","primary":"Montserrat"},"fontSize":"12px","fontWeight":600,"lineHeight":"20px"} |
-| semantic.type.overline | typography | `--jz-semantic-type-overline` | base: {"fontFamily":{"css":"Montserrat","primary":"Montserrat"},"fontSize":"11px","fontWeight":600,"lineHeight":"14px"} |
-| semantic.type.subtitle | typography | `--jz-semantic-type-subtitle` | base: {"fontFamily":{"css":"Montserrat","primary":"Montserrat"},"fontSize":"16px","fontWeight":600,"lineHeight":"26px"} |
-| semantic.type.title | typography | `--jz-semantic-type-title` | base: {"fontFamily":{"css":"Montserrat","primary":"Montserrat"},"fontSize":"24px","fontWeight":700,"lineHeight":"32px"} |
+| semantic.type.body.default | typography | `--jz-semantic-type-body-default` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"15px","fontWeight":400,"lineHeight":"24px"} |
+| semantic.type.body.regular | typography | `--jz-semantic-type-body-regular` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"14px","fontWeight":400,"lineHeight":"24px"} |
+| semantic.type.body.strong | typography | `--jz-semantic-type-body-strong` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"14px","fontWeight":600,"lineHeight":"24px"} |
+| semantic.type.caption | typography | `--jz-semantic-type-caption` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"12px","fontWeight":400,"lineHeight":"16px"} |
+| semantic.type.display | typography | `--jz-semantic-type-display` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"36px","fontWeight":700,"lineHeight":"44px"} |
+| semantic.type.display.large | typography | `--jz-semantic-type-display-large` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"48px","fontWeight":700,"lineHeight":"56px"} |
+| semantic.type.heading | typography | `--jz-semantic-type-heading` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"20px","fontWeight":600,"lineHeight":"28px"} |
+| semantic.type.label | typography | `--jz-semantic-type-label` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"14px","fontWeight":600,"lineHeight":"20px"} |
+| semantic.type.label.sm | typography | `--jz-semantic-type-label-sm` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"12px","fontWeight":600,"lineHeight":"20px"} |
+| semantic.type.overline | typography | `--jz-semantic-type-overline` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"11px","fontWeight":600,"lineHeight":"14px"} |
+| semantic.type.subtitle | typography | `--jz-semantic-type-subtitle` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"16px","fontWeight":600,"lineHeight":"26px"} |
+| semantic.type.title | typography | `--jz-semantic-type-title` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"24px","fontWeight":700,"lineHeight":"32px"} |
