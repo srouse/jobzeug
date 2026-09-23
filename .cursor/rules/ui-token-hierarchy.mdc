@@ -1,0 +1,54 @@
+---
+description: UI styling hierarchy — components first, then semantic tokens, primitives last.
+alwaysApply: true
+---
+
+# Design system consumption hierarchy
+
+When building any UI in this app, prefer the highest layer that works. Do not start at primitives.
+
+## 1. Components first
+
+Use published design-system components (`JzButton`, `JzText`, `JzIcon`, etc. from `@jobzeug/design-system/react`) before hand-rolling markup or styles for the same job.
+
+- Prefer component props (`variant`, `color`, `size`, `label`, `level`) over custom CSS that reimplements them.
+- Do not recreate buttons, text styles, or icons with raw HTML + tokens when a component already covers it.
+
+## 2. Semantic tokens second
+
+If you need raw CSS (layout shells, gaps, surfaces the components do not own), use **semantic** tokens (`--jz-semantic-*` / `vars["semantic.*"]`).
+
+Pick the right semantic layer for the job:
+
+- **Background / surface**: canvas, surface, control — e.g. `--jz-semantic-color-background-canvas-default`, `…-surface-default`, `…-control-default`
+- **Text**: `--jz-semantic-color-text-*` (default, secondary, muted, inverse, error, …) — prefer `JzText` `color` when possible
+- **Border, space, type**: semantic border / gap / padding / type tokens
+
+These follow `data-mode` (light / dark / subtle / emphasized). Mode-aware UI must stay on semantics.
+
+```css
+/* ✅ GOOD */
+background: var(--jz-semantic-color-background-canvas-default);
+color: var(--jz-semantic-color-text-secondary);
+gap: var(--jz-semantic-space-gap-md);
+```
+
+## 3. Primitives last (rare)
+
+Use **primitive** tokens (`--jz-primitive-*` / `vars["primitive.*"]`) only when no component and no semantic token fits — e.g. a one-off radius or elevation with no semantic alias.
+
+Primitives are mode-blind raw values. Prefer them almost never; if you reach for one, pause and check for a semantic equivalent first.
+
+```css
+/* ❌ BAD — skip semantics */
+background: var(--jz-primitive-color-gray-100);
+
+/* ✅ OK only when no semantic exists */
+border-radius: var(--jz-primitive-radius-sm);
+```
+
+## Quick check
+
+1. Is there a `Jz*` component? → use it  
+2. Else, is there a semantic token (surface / text / space / border)? → use it  
+3. Else → primitive, sparingly

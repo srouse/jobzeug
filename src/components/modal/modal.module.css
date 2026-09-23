@@ -1,0 +1,90 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--jz-semantic-layer-modal, 50) + 10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--jz-semantic-space-padding-md, 1rem);
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  background: color-mix(
+    in srgb,
+    var(--jz-semantic-color-text-default, #171717) 45%,
+    transparent
+  );
+}
+
+.dialog {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: min(48rem, calc(100vw - 2rem));
+  height: min(85dvh, calc(100dvh - 2rem));
+  max-height: calc(100dvh - 2rem);
+  overflow: hidden;
+  border-radius: var(--jz-primitive-radius-lg, 0.75rem);
+  border: 1px solid var(--jz-semantic-color-border-default, #e5e5e5);
+  background: var(--jz-semantic-color-background-surface-default, #ffffff);
+  box-shadow: var(--jz-primitive-effect-elevation-medium);
+  outline: none;
+}
+
+.header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--jz-semantic-space-gap-md, 1rem);
+  padding: var(--jz-semantic-space-padding-md, 1rem)
+    var(--jz-semantic-space-padding-lg, 1.5rem);
+  border-bottom: 1px solid var(--jz-semantic-color-border-default, #d4d4d4);
+}
+
+.title {
+  display: block;
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: var(--jz-semantic-space-padding-md, 1rem)
+    var(--jz-semantic-space-padding-lg, 1.5rem)
+    var(--jz-semantic-space-padding-lg, 1.5rem);
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--jz-semantic-color-text-muted, #737373) 40%, transparent)
+    transparent;
+}
+
+.body::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.body::-webkit-scrollbar-thumb {
+  background-color: color-mix(
+    in srgb,
+    var(--jz-semantic-color-text-muted, #737373) 40%,
+    transparent
+  );
+  border-radius: var(--jz-primitive-radius-full, 999px);
+}

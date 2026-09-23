@@ -1,297 +1,177 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
-import { BookmarkSimple } from "@phosphor-icons/react";
+import { JzText } from "@jobzeug/design-system/react";
 import type {
   ResumeEmployerGroup,
   ResumeProject,
-  ResumeRole,
   ResumeViewModel,
 } from "@/lib/contentful/resume-model";
 import { useResumeHighlights } from "@/components/resume-highlight-context";
 import styles from "./resume-document.module.css";
 
+function classNames(...parts: Array<string | false | null | undefined>) {
+  return parts.filter(Boolean).join(" ") || undefined;
+}
+
 function CitedTitle({
   active,
-  weightClass,
-  children,
+  variant,
+  level = 0,
+  color,
+  label,
 }: {
   active: boolean;
-  weightClass?: string;
-  children: ReactNode;
+  variant: string;
+  level?: number;
+  color?: string;
+  label: string;
 }) {
   return (
-    <span className={active ? styles.cited : undefined}>
-      {active && (
-        <BookmarkSimple className={styles.citedIcon} weight="fill" aria-hidden />
-      )}
-      <span className={weightClass}>{children}</span>
-    </span>
-  );
-}
-
-const STUB_HEIGHT_PX = 14;
-const COLLAPSE_MS = 500;
-
-function OverlayCollapse({
-  open,
-  stub,
-  className = "",
-  children,
-}: {
-  open: boolean;
-  stub: ReactNode;
-  className?: string;
-  children: ReactNode;
-}) {
-  return (
-    <div
-      className={`${styles.overlay} ${className}`.trim()}
-      style={open ? undefined : { minHeight: STUB_HEIGHT_PX }}
-    >
-      <div
-        className={`${styles.stubLayer} ${open ? styles.stubHidden : styles.stubVisible}`}
-        style={{ height: STUB_HEIGHT_PX }}
-        aria-hidden={open}
-      >
-        {stub}
-      </div>
-      <div
-        className={`${styles.collapse} ${open ? styles.collapseOpen : styles.collapseClosed}`}
-      >
-        <div className={styles.collapseClip}>
-          <div
-            className={`${styles.collapseBody} ${
-              open ? styles.collapseBodyOpen : styles.collapseBodyClosed
-            }`}
-          >
-            {children}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function StubBar({ grow }: { grow?: boolean }) {
-  return (
-    <div
-      className={grow ? styles.stubBarGrow : styles.stubBarFull}
-      aria-hidden
+    <JzText
+      level={level}
+      variant={variant}
+      color={active ? "primary" : color}
+      label={label}
     />
   );
 }
 
-function EmployerStub({ name }: { name: string }) {
-  return (
-    <div className={styles.employerStub}>
-      <span className={styles.employerStubLabel}>{name}</span>
-      <StubBar grow />
-    </div>
-  );
-}
-
-function RoleStub({ title }: { title: string }) {
-  return (
-    <div className={styles.employerStub}>
-      <span className={styles.employerStubLabel}>{title}</span>
-      <StubBar grow />
-    </div>
-  );
-}
-
-function LineStub() {
-  return <StubBar />;
-}
-
-function roleOnPath(role: ResumeRole, highlightedIds: Set<string>) {
-  if (highlightedIds.has(role.roleId)) return true;
-  return role.projects.some((project) => highlightedIds.has(project.evidenceId));
-}
-
-function employerOnPath(employer: ResumeEmployerGroup, highlightedIds: Set<string>) {
-  if (highlightedIds.has(employer.evidenceId)) return true;
-  return employer.roles.some((role) => roleOnPath(role, highlightedIds));
-}
-
-function stackSpacing(
-  index: number,
-  expanded: boolean,
-  prevExpanded: boolean | undefined,
-  tight: string,
-  roomy: string,
-) {
-  if (index === 0) return "";
-  if (!expanded && prevExpanded === false) return tight;
-  return roomy;
-}
-
 export function ResumeDocument({ resume }: { resume: ResumeViewModel }) {
-  const { highlightedIds, highlightMode } = useResumeHighlights();
-  const lastScrollKey = useRef<string>("");
-  const hasCitations = highlightedIds.size > 0;
-  const rollup = highlightMode === "rollup" && hasCitations;
-
-  useEffect(() => {
-    const ids = [...highlightedIds];
-    if (ids.length === 0) {
-      lastScrollKey.current = "";
-      return;
-    }
-    const key = ids.slice().sort().join(",");
-    if (key === lastScrollKey.current) return;
-    lastScrollKey.current = key;
-
-    // Wait for collapse/expand to settle so hash jumps don't fight the animation.
-    const timer = window.setTimeout(() => {
-      const first = ids.find((id) => document.getElementById(id));
-      if (!first) return;
-      document.getElementById(first)?.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-      });
-    }, COLLAPSE_MS + 50);
-
-    return () => window.clearTimeout(timer);
-  }, [highlightedIds]);
+  const { highlightedIds } = useResumeHighlights();
 
   return (
     <article className={styles.article}>
       <header className={styles.docHeader}>
-        <h1 className={styles.name}>{resume.name}</h1>
-        <p className={styles.sectionLabel}>Experience</p>
+        <JzText
+          variant="overline"
+          color="muted"
+          label="Resume"
+          className={styles.eyebrow}
+        />
+        <JzText
+          level={1}
+          variant="label"
+          label={resume.name}
+          className={styles.name}
+        />
       </header>
 
-      <div className={styles.stack}>
-        {resume.employers.map((employer, employerIndex) => {
-          const employerCited = highlightedIds.has(employer.evidenceId);
-          const employerExpanded = !rollup || employerOnPath(employer, highlightedIds);
-          const prevEmployer = resume.employers[employerIndex - 1];
-          const prevEmployerExpanded =
-            prevEmployer === undefined
-              ? undefined
-              : !rollup || employerOnPath(prevEmployer, highlightedIds);
+      <div className={styles.docBody} data-evidence-scroll>
+        <div className={styles.stack}>
+          {resume.employers.map((employer: ResumeEmployerGroup, employerIndex) => {
+            const employerCited = highlightedIds.has(employer.evidenceId);
 
-          return (
-            <section
-              key={employer.evidenceId}
-              id={employer.evidenceId}
-              data-evidence-id={employer.evidenceId}
-              className={stackSpacing(
-                employerIndex,
-                employerExpanded,
-                prevEmployerExpanded,
-                styles.employerSpaceTight,
-                styles.employerSpaceRoomy,
-              )}
-            >
-              <OverlayCollapse
-                open={employerExpanded}
-                stub={<EmployerStub name={employer.name} />}
+            return (
+              <section
+                key={employer.evidenceId}
+                className={
+                  employerIndex > 0 ? styles.employerSpaceRoomy : undefined
+                }
               >
-                <div className={styles.employerHead}>
-                  <h2 className={styles.employerTitle}>
-                    <CitedTitle active={employerCited} weightClass={styles.weightSemibold}>
-                      {employer.name}
-                    </CitedTitle>
-                  </h2>
-                  {employer.descriptor && (
-                    <p className={styles.employerDesc}>{employer.descriptor}</p>
+                {/* Title row only — not the whole employer section */}
+                <div
+                  id={employer.evidenceId}
+                  data-evidence-id={employer.evidenceId}
+                  className={classNames(
+                    styles.employerHead,
+                    employerCited && styles.cited,
                   )}
+                >
+                  <CitedTitle
+                    active={employerCited}
+                    level={2}
+                    variant="body-strong"
+                    label={employer.name}
+                  />
                 </div>
 
                 <div className={styles.roles}>
                   {employer.roles.map((role, roleIndex) => {
                     const roleCited = highlightedIds.has(role.roleId);
-                    const roleExpanded = !rollup || roleOnPath(role, highlightedIds);
-                    const prevRole = employer.roles[roleIndex - 1];
-                    const prevRoleExpanded =
-                      prevRole === undefined
-                        ? undefined
-                        : !rollup || roleOnPath(prevRole, highlightedIds);
 
                     return (
-                      <OverlayCollapse
+                      <div
                         key={role.roleId}
-                        open={roleExpanded}
-                        stub={<RoleStub title={role.title} />}
-                        className={stackSpacing(
-                          roleIndex,
-                          roleExpanded,
-                          prevRoleExpanded,
-                          styles.roleSpaceTight,
-                          styles.roleSpaceRoomy,
-                        )}
+                        className={
+                          roleIndex > 0 ? styles.roleSpaceRoomy : undefined
+                        }
                       >
-                        <div id={role.roleId} data-evidence-id={role.roleId}>
-                          <div className={styles.roleHead}>
-                            <h3 className={styles.roleTitle}>
-                              <CitedTitle active={roleCited} weightClass={styles.weightMedium}>
-                                {role.title}
-                              </CitedTitle>
-                            </h3>
-                            <p className={styles.roleDate}>{role.dateLabel}</p>
-                          </div>
-
-                          {role.summary && (
-                            <p className={styles.roleBody}>{role.summary}</p>
+                        {/* Title row (title + date) — not projects below */}
+                        <div
+                          id={role.roleId}
+                          data-evidence-id={role.roleId}
+                          className={classNames(
+                            styles.roleHead,
+                            roleCited && styles.cited,
                           )}
-
-                          {role.highlights.length > 0 && (
-                            <ul className={styles.highlights}>
-                              {role.highlights.map((item) => (
-                                <li key={item}>{item}</li>
-                              ))}
-                            </ul>
-                          )}
-
-                          {role.projects.length > 0 && (
-                            <div className={styles.projects}>
-                              <p className={styles.projectsLabel}>Projects</p>
-                              <ul className={styles.projectList}>
-                                {role.projects.map((project) => (
-                                  <ProjectRow
-                                    key={project.evidenceId}
-                                    project={project}
-                                    cited={highlightedIds.has(project.evidenceId)}
-                                    rollup={rollup}
-                                  />
-                                ))}
-                              </ul>
-                            </div>
-                          )}
+                        >
+                          <CitedTitle
+                            active={roleCited}
+                            level={3}
+                            variant="label"
+                            label={role.title}
+                          />
+                          <JzText
+                            variant="caption"
+                            color="muted"
+                            label={role.dateLabel}
+                          />
                         </div>
-                      </OverlayCollapse>
+
+                        <ProjectLine
+                          projects={role.projects}
+                          highlightedIds={highlightedIds}
+                        />
+                      </div>
                     );
                   })}
                 </div>
-              </OverlayCollapse>
-            </section>
-          );
-        })}
+              </section>
+            );
+          })}
+        </div>
       </div>
     </article>
   );
 }
 
-function ProjectRow({
-  project,
-  cited,
-  rollup,
+function ProjectLine({
+  projects,
+  highlightedIds,
 }: {
-  project: ResumeProject;
-  cited: boolean;
-  rollup: boolean;
+  projects: ResumeProject[];
+  highlightedIds: Set<string>;
 }) {
-  const expanded = !rollup || cited;
+  if (projects.length === 0) return null;
 
   return (
-    <li id={project.evidenceId} data-evidence-id={project.evidenceId}>
-      <OverlayCollapse open={expanded} stub={<LineStub />}>
-        <span className={styles.projectName}>
-          <CitedTitle active={cited}>{project.name}</CitedTitle>
-        </span>
-      </OverlayCollapse>
-    </li>
+    <div className={styles.projects}>
+      <JzText
+        variant="overline"
+        color="muted"
+        label="Projects"
+        className={styles.projectsLabel}
+      />
+      <div className={styles.projectStack}>
+        {projects.map((project) => {
+          const cited = highlightedIds.has(project.evidenceId);
+          return (
+            <div
+              key={project.evidenceId}
+              id={project.evidenceId}
+              data-evidence-id={project.evidenceId}
+              className={classNames(styles.projectName, cited && styles.cited)}
+            >
+              <CitedTitle
+                active={cited}
+                variant="caption"
+                color="muted"
+                label={project.name}
+              />
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }

@@ -1,0 +1,58 @@
+/* Above document lanes; below chat dock (modal=50) and toolbar (header). */
+.stage {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--jz-semantic-layer-modal, 50) - 10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--jz-semantic-space-padding-lg, 1.25rem);
+  padding-bottom: calc(
+    var(--resume-toolbar-height, 4.5rem) + var(--jz-semantic-space-padding-lg, 1.25rem)
+  );
+  box-sizing: border-box;
+}
+
+.card {
+  pointer-events: auto;
+  /*
+   * Center gutter plus --answer-overlap on each side so the stage
+   * sits 10px over the resume / job-posting page edges.
+   */
+  width: calc(
+    max(
+      0px,
+      max(
+        var(--resume-lane-gutter, 1.5rem),
+        100vw - 2 * var(--resume-column-max, 32rem)
+      ) + 2 * var(--answer-overlap, 10px)
+    )
+  );
+  overflow-y: auto;
+  box-sizing: border-box;
+  border-radius: var(--jz-primitive-radius-lg, 0.75rem);
+  border: none;
+  background: var(--jz-semantic-color-background-surface-brand-primary, #dbeafe);
+  color: var(--jz-semantic-color-text-default, #171717);
+  box-shadow: var(--jz-primitive-effect-elevation-medium);
+  padding: var(--jz-semantic-space-padding-md, 1rem);
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(
+      in srgb,
+      var(--jz-semantic-color-text-muted, #737373) 40%,
+      transparent
+    )
+    transparent;
+}
+
+.duration {
+  display: block;
+  margin: var(--jz-semantic-space-gap-xs, 0.5rem) 0 0;
+}
+
+@media (max-width: 959px) {
+  .card {
+    width: min(32rem, calc(100vw - 2rem));
+  }
+}

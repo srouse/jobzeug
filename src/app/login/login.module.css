@@ -4,8 +4,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: var(--app-bg-dark);
-  color: var(--app-fg-dark);
+  background: var(--jz-semantic-color-background-control-inverse-default);
+  color: var(--jz-semantic-color-text-inverse);
   padding: 0 1.5rem;
 }
 
@@ -15,22 +15,17 @@
 }
 
 .brand {
-  margin: 0;
-  font-size: 1.875rem;
-  font-weight: 600;
-  letter-spacing: -0.025em;
+  display: block;
 }
 
 .lede {
+  display: block;
   margin: 0.5rem 0 0;
-  font-size: 0.875rem;
-  color: var(--app-muted-dark);
 }
 
 .warn {
+  display: block;
   margin: 1.5rem 0 0;
-  font-size: 0.875rem;
-  color: var(--app-warn);
 }
 
 .form {
@@ -56,6 +51,5 @@
 
 .error {
   margin: 0;
-  font-size: 0.875rem;
-  color: #f87171;
+  display: block;
 }

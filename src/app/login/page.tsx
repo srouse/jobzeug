@@ -1,3 +1,4 @@
+import { JzText } from "@jobzeug/design-system/react";
 import { LoginForm } from "./login-form";
 import styles from "./login.module.css";
 
@@ -14,13 +15,27 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   return (
     <main className={styles.root}>
       <div className={styles.card}>
-        <p className={styles.brand}>Jobzeug</p>
-        <p className={styles.lede}>Enter the site password to continue.</p>
+        <JzText
+          variant="display"
+          color="inverse"
+          label="Jobzeug"
+          className={styles.brand}
+        />
+        <JzText
+          variant="label"
+          color="muted"
+          label="Enter the site password to continue."
+          className={styles.lede}
+        />
 
         {showConfig ? (
-          <p className={styles.warn} role="alert">
-            SITE_PASSWORD and SESSION_SECRET are not configured.
-          </p>
+          <JzText
+            variant="label"
+            color="warning"
+            label="SITE_PASSWORD and SESSION_SECRET are not configured."
+            role="alert"
+            className={styles.warn}
+          />
         ) : (
           <LoginForm next={next} showError={showError} />
         )}

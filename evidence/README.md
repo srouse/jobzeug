@@ -29,7 +29,7 @@ Prefer **customer** for sales/SE/product-adoption work; prefer **client** for �
 ## Navigation and reading order
 
 1. [Goal and skill framework](Goal.md): target outcomes and our interpretation of role priorities.
-2. [Job listing index](job%20listing/INDEX.md): original hiring requirements and saved snapshot.
+2. [Jobzeug — the living application](Jobzeug.md): what this product is, how resume / chat / citations / stack work (for “how does this app work?” questions).
 3. [Role index](roles/INDEX.md): employers, titles, dates, and linked projects.
 4. [Employer index](employers/INDEX.md): employer orgs and linked roles/projects.
 5. [Customer index](customers/INDEX.md) · [Client index](clients/INDEX.md): external engagement orgs.
@@ -39,6 +39,8 @@ Prefer **customer** for sales/SE/product-adoption work; prefer **client** for �
 9. [Question bank](Question%20bank.md): focused follow-ups when evidence is incomplete.
 
 Start with the indexes, then read the relevant records and their supporting sources. Collect maximal detail; select and simplify only when generating a particular output.
+
+**Job postings are not evidence.** Live listings are session-bound app data (bound in the resume UI / chat request). Never store full job postings under `evidence/`. Condensed application notes may live under [sources/job-posting-notes.md](sources/job-posting-notes.md) only.
 
 ## Application exclusions
 

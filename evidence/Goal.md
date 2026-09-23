@@ -10,7 +10,7 @@ Collect projects across Scott's career, connect them to resume roles, and select
 
 ## Ranked functions
 
-Source: [saved full job listing](job%20listing/Figma%20Forward%20Deployed%20Engineer%20-%20full%20text.txt).
+Source: [Greenhouse posting](https://job-boards.greenhouse.io/figma/jobs/6158162004) (read September 2026); condensed notes in [job-posting-notes.md](sources/job-posting-notes.md). Full listings are not stored in this workspace.
 Scores are our assessment of emphasis, not Figma's official ranking or a rating of Scott's abilities. 10 means essential; 1 means peripheral. Ties are intentional.
 
 | ID | Distinctive function | Value sought | Importance | Evidence needed |

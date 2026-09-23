@@ -1,0 +1,20 @@
+/* Above document lanes; below answer stage card / chat. */
+.overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--jz-semantic-layer-modal, 50) - 12);
+  overflow: visible;
+}
+
+.line {
+  stroke: var(--jz-semantic-color-text-primary, #2563eb);
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.dot {
+  fill: var(--jz-semantic-color-text-primary, #2563eb);
+  stroke: none;
+}

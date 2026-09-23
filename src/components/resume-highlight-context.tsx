@@ -2,41 +2,31 @@
 
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
 import {
-  emptyCitations,
-  type CiteEvidencePayload,
+  idsFromCitations,
+  type EvidenceCluster,
 } from "@/lib/evidence-citations";
 
-export type ResumeCitations = CiteEvidencePayload;
-export type ResumeHighlightMode = "titles" | "rollup";
-
 type ResumeHighlightContextValue = {
-  citations: ResumeCitations;
-  setCitations: (next: ResumeCitations) => void;
-  clearCitations: () => void;
+  activeCluster: EvidenceCluster | null;
+  setActiveCluster: (next: EvidenceCluster | null) => void;
+  clearActiveCluster: () => void;
   highlightedIds: Set<string>;
-  highlightMode: ResumeHighlightMode;
-  setHighlightMode: (mode: ResumeHighlightMode) => void;
 };
 
 const ResumeHighlightContext = createContext<ResumeHighlightContextValue | null>(null);
 
 export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
-  const [citations, setCitations] = useState<ResumeCitations>(emptyCitations);
-  const [highlightMode, setHighlightMode] = useState<ResumeHighlightMode>("titles");
+  const [activeCluster, setActiveCluster] = useState<EvidenceCluster | null>(null);
   const value = useMemo<ResumeHighlightContextValue>(
     () => ({
-      citations,
-      setCitations,
-      clearCitations: () => setCitations(emptyCitations),
-      highlightedIds: new Set([
-        ...citations.employers,
-        ...citations.roles,
-        ...citations.projects,
-      ]),
-      highlightMode,
-      setHighlightMode,
+      activeCluster,
+      setActiveCluster,
+      clearActiveCluster: () => setActiveCluster(null),
+      highlightedIds: new Set(
+        activeCluster ? idsFromCitations(activeCluster.citations) : [],
+      ),
     }),
-    [citations, highlightMode],
+    [activeCluster],
   );
   return (
     <ResumeHighlightContext.Provider value={value}>{children}</ResumeHighlightContext.Provider>

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { createClient } from 'contentful-management';
-import { coreContentTypes } from '../../contentful/schema.mjs';
+import { coreContentTypes, jobPostingContentTypes } from '../../contentful/schema.mjs';
 import { contentfulEnv, requireContentfulEnv } from './env.mjs';
 
 function isNotFound(error) {
@@ -15,7 +15,8 @@ function isNotFound(error) {
 }
 
 export async function applySchema({ dryRun = false } = {}) {
-  const types = coreContentTypes();
+  // jobLine/jobTool before jobPosting (parent links to children).
+  const types = [...coreContentTypes(), ...jobPostingContentTypes()];
   if (dryRun) {
     const { space, environment } = contentfulEnv({ required: false });
     return { space: space || '(unset)', environment: environment || '(unset)', planned: types.map(type => type.id) };

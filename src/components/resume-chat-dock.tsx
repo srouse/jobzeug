@@ -1,18 +1,22 @@
 "use client";
 
-import { useEffect, useRef, useState, type ComponentPropsWithoutRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { DefaultChatTransport } from "ai";
 import { useChat } from "@ai-sdk/react";
-import { JzButton } from "@jobzeug/design-system/react";
-import { CircleNotch } from "@phosphor-icons/react";
-import Markdown from "react-markdown";
+import { JzButton, JzIcon, JzText } from "@jobzeug/design-system/react";
 
+import { ChatMarkdown } from "@/components/chat-markdown";
+import { useJobPosting } from "@/components/job-posting";
 import { useResumeHighlights } from "@/components/resume-highlight-context";
+import { chatRunMetricsFromMessage } from "@/lib/chat-run-metrics";
+import { extractCiteEvidence } from "@/lib/extract-cite-evidence";
 import {
-  citationsFromMessages,
-  extractCiteEvidence,
-} from "@/lib/extract-cite-evidence";
-import type { CiteEvidencePayload } from "@/lib/evidence-citations";
+  emptyCitations,
+  formatElapsed,
+  formatRunMetricsLabel,
+  type EvidenceCluster,
+} from "@/lib/evidence-citations";
+import { toChatJobPostingPayload } from "@/lib/job-posting/schema";
 import styles from "./resume-chat-dock.module.css";
 
 const RESUME_CHAT_API = "/api/chat?surface=resume";
@@ -27,129 +31,68 @@ function textFromParts(parts: Array<{ type: string; text?: string }> | undefined
     .trim();
 }
 
-const markdownComponents = {
-  p: ({ children }: ComponentPropsWithoutRef<"p">) => (
-    <p className={styles.mdP}>{children}</p>
-  ),
-  ul: ({ children }: ComponentPropsWithoutRef<"ul">) => (
-    <ul className={styles.mdUl}>{children}</ul>
-  ),
-  ol: ({ children }: ComponentPropsWithoutRef<"ol">) => (
-    <ol className={styles.mdOl}>{children}</ol>
-  ),
-  li: ({ children }: ComponentPropsWithoutRef<"li">) => (
-    <li className={styles.mdLi}>{children}</li>
-  ),
-  strong: ({ children }: ComponentPropsWithoutRef<"strong">) => (
-    <strong className={styles.mdStrong}>{children}</strong>
-  ),
-  em: ({ children }: ComponentPropsWithoutRef<"em">) => <em>{children}</em>,
-  a: ({ href, children }: ComponentPropsWithoutRef<"a">) => {
-    const internal = href?.startsWith("#");
-    return (
-      <a
-        href={href}
-        className={styles.mdLink}
-        {...(internal ? {} : { target: "_blank", rel: "noreferrer" })}
-      >
-        {children}
-      </a>
-    );
-  },
-  code: ({ children }: ComponentPropsWithoutRef<"code">) => (
-    <code className={styles.mdCode}>{children}</code>
-  ),
-  pre: ({ children }: ComponentPropsWithoutRef<"pre">) => (
-    <pre className={styles.mdPre}>{children}</pre>
-  ),
-  h1: ({ children }: ComponentPropsWithoutRef<"h1">) => (
-    <p className={styles.mdHeading}>{children}</p>
-  ),
-  h2: ({ children }: ComponentPropsWithoutRef<"h2">) => (
-    <p className={styles.mdHeading}>{children}</p>
-  ),
-  h3: ({ children }: ComponentPropsWithoutRef<"h3">) => (
-    <p className={styles.mdHeading}>{children}</p>
-  ),
-  blockquote: ({ children }: ComponentPropsWithoutRef<"blockquote">) => (
-    <blockquote className={styles.mdQuote}>{children}</blockquote>
-  ),
-};
-
-function ChatMarkdown({ markdown }: { markdown: string }) {
-  return (
-    <div className={styles.mdRoot}>
-      <Markdown components={markdownComponents}>{markdown}</Markdown>
-    </div>
-  );
-}
-
-function CitationIdLink({ id }: { id: string }) {
-  return (
-    <a href={`#${id}`} className={styles.mdLink}>
-      {id}
-    </a>
-  );
-}
-
-function CitationIdList({ ids }: { ids: string[] }) {
-  return (
-    <>
-      {ids.map((id, index) => (
-        <span key={id}>
-          {index > 0 ? ", " : null}
-          <CitationIdLink id={id} />
-        </span>
-      ))}
-    </>
-  );
-}
-
-function CitationBlurb({ citations }: { citations: CiteEvidencePayload }) {
-  const groups = [
-    citations.employers.length
-      ? { label: "employers", ids: citations.employers }
-      : null,
-    citations.roles.length ? { label: "roles", ids: citations.roles } : null,
-    citations.projects.length
-      ? { label: "projects", ids: citations.projects }
-      : null,
-  ].filter(Boolean) as Array<{ label: string; ids: string[] }>;
-
-  if (!groups.length) return null;
-
-  return (
-    <p className={styles.citeBlurb}>
-      Cited:{" "}
-      {groups.map((group, index) => (
-        <span key={group.label}>
-          {index > 0 ? " · " : null}
-          {group.label} <CitationIdList ids={group.ids} />
-        </span>
-      ))}
-    </p>
-  );
-}
-
 function ThinkingMark() {
   return (
     <span className={styles.thinking}>
-      <CircleNotch className={styles.spin} weight="bold" aria-hidden />
-      Thinking…
+      <JzIcon
+        icon="CircleNotch"
+        weight="regular"
+        size="small"
+        spin
+        aria-hidden
+      />
+      <JzText variant="caption" color="muted" label="Thinking…" />
     </span>
   );
 }
 
-export function ResumeChatDock() {
-  const [open, setOpen] = useState(false);
+export function ResumeChatDock({
+  open,
+  onOpenChange,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
   const [input, setInput] = useState("");
   const [clearing, setClearing] = useState(false);
+  const [runStartedAt, setRunStartedAt] = useState<number | null>(null);
+  const [elapsedMs, setElapsedMs] = useState(0);
+  const [clusterByMessageId, setClusterByMessageId] = useState<
+    Record<string, EvidenceCluster>
+  >({});
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { setCitations, clearCitations } = useResumeHighlights();
+  const pendingStartRef = useRef<number | null>(null);
+  const { activeCluster, setActiveCluster, clearActiveCluster } =
+    useResumeHighlights();
+  const { data: jobPosting } = useJobPosting();
+  const jobPostingRef = useRef(jobPosting);
+  jobPostingRef.current = jobPosting;
+
+  const transport = useMemo(
+    () =>
+      new DefaultChatTransport({
+        api: RESUME_CHAT_API,
+        body: () => {
+          const current = jobPostingRef.current;
+          if (!current) return {};
+          return { jobPosting: toChatJobPostingPayload(current) };
+        },
+        // Memory owns history — only send the newest message (Mastra requirement).
+        prepareSendMessagesRequest({ messages, body }) {
+          const last = messages.at(-1);
+          return {
+            body: {
+              ...body,
+              messages: last ? [last] : [],
+            },
+          };
+        },
+      }),
+    [],
+  );
+
   const { messages, setMessages, sendMessage, status } = useChat({
-    transport: new DefaultChatTransport({
-      api: RESUME_CHAT_API,
-    }),
+    transport,
   });
 
   const isLoading = status === "submitted" || status === "streaming";
@@ -158,6 +101,8 @@ export function ResumeChatDock() {
     lastMessage?.role === "assistant" && Boolean(textFromParts(lastMessage.parts));
   const showStandaloneThinking =
     isLoading && !lastAssistantHasText && lastMessage?.role !== "assistant";
+  const liveElapsedLabel =
+    isLoading && runStartedAt != null ? formatElapsed(elapsedMs) : undefined;
 
   useEffect(() => {
     let cancelled = false;
@@ -173,20 +118,94 @@ export function ResumeChatDock() {
   }, [setMessages]);
 
   useEffect(() => {
+    if (!isLoading || runStartedAt == null) return;
+    const tick = () => setElapsedMs(Date.now() - runStartedAt);
+    tick();
+    const id = window.setInterval(tick, 250);
+    return () => window.clearInterval(id);
+  }, [isLoading, runStartedAt]);
+
+  useEffect(() => {
     if (status !== "ready") return;
-    setCitations(citationsFromMessages(messages));
-  }, [messages, status, setCitations]);
+    if (pendingStartRef.current == null) return;
+
+    const lastAssistant = [...messages]
+      .reverse()
+      .find((message) => message.role === "assistant");
+    pendingStartRef.current = null;
+    setRunStartedAt(null);
+
+    if (!lastAssistant) return;
+
+    const metrics = chatRunMetricsFromMessage(lastAssistant);
+    const citations =
+      extractCiteEvidence(lastAssistant.parts) ?? emptyCitations;
+    const cluster: EvidenceCluster = {
+      id: lastAssistant.id,
+      citations,
+      createdAt: Date.now(),
+      durationMs: metrics?.durationMs ?? 0,
+      inputTokens: metrics?.inputTokens,
+      outputTokens: metrics?.outputTokens,
+      totalTokens: metrics?.totalTokens,
+      answerMarkdown: textFromParts(lastAssistant.parts),
+    };
+    setClusterByMessageId((prev) => ({ ...prev, [lastAssistant.id]: cluster }));
+    setActiveCluster(cluster);
+  }, [status, messages, setActiveCluster]);
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
     el.scrollTop = el.scrollHeight;
-  }, [messages, status, open, isLoading]);
+  }, [messages, status, open, isLoading, elapsedMs]);
+
+  const selectAssistantCluster = (message: {
+    id: string;
+    parts?: unknown[];
+    metadata?: unknown;
+  }) => {
+    const answerMarkdown = textFromParts(
+      message.parts as Array<{ type: string; text?: string }> | undefined,
+    );
+    const metrics = chatRunMetricsFromMessage(message);
+    const existing = clusterByMessageId[message.id];
+    if (existing) {
+      const cluster: EvidenceCluster = {
+        ...existing,
+        answerMarkdown: answerMarkdown || existing.answerMarkdown,
+        durationMs: metrics?.durationMs ?? existing.durationMs,
+        inputTokens: metrics?.inputTokens ?? existing.inputTokens,
+        outputTokens: metrics?.outputTokens ?? existing.outputTokens,
+        totalTokens: metrics?.totalTokens ?? existing.totalTokens,
+      };
+      setClusterByMessageId((prev) => ({ ...prev, [message.id]: cluster }));
+      setActiveCluster(cluster);
+      return;
+    }
+    const citations = extractCiteEvidence(message.parts) ?? emptyCitations;
+    const cluster: EvidenceCluster = {
+      id: message.id,
+      citations,
+      createdAt: Date.now(),
+      durationMs: metrics?.durationMs ?? 0,
+      inputTokens: metrics?.inputTokens,
+      outputTokens: metrics?.outputTokens,
+      totalTokens: metrics?.totalTokens,
+      answerMarkdown,
+    };
+    setClusterByMessageId((prev) => ({ ...prev, [message.id]: cluster }));
+    setActiveCluster(cluster);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
-    clearCitations();
+    clearActiveCluster();
+    const startedAt = Date.now();
+    pendingStartRef.current = startedAt;
+    setRunStartedAt(startedAt);
+    setElapsedMs(0);
     sendMessage({ text: input });
     setInput("");
   };
@@ -199,7 +218,11 @@ export function ResumeChatDock() {
       if (!res.ok) return;
       setMessages([]);
       setInput("");
-      clearCitations();
+      setClusterByMessageId({});
+      pendingStartRef.current = null;
+      setRunStartedAt(null);
+      setElapsedMs(0);
+      clearActiveCluster();
     } finally {
       setClearing(false);
     }
@@ -211,8 +234,13 @@ export function ResumeChatDock() {
         <div className={styles.panel}>
           <header className={styles.header}>
             <div>
-              <p className={styles.title}>Resume chat</p>
-              <p className={styles.subtitle}>Session-scoped · jobzeug-agent</p>
+              <JzText variant="label" label="Resume chat" className={styles.title} />
+              <JzText
+                variant="caption"
+                color="muted"
+                label="Session-scoped · jobzeug-agent"
+                className={styles.subtitle}
+              />
             </div>
             <div className={styles.headerActions}>
               <JzButton
@@ -228,7 +256,7 @@ export function ResumeChatDock() {
                 size="small"
                 label="Close"
                 showIcon={false}
-                onClick={() => setOpen(false)}
+                onClick={() => onOpenChange(false)}
                 aria-label="Close chat"
               />
             </div>
@@ -237,47 +265,115 @@ export function ResumeChatDock() {
           <div ref={scrollRef} className={styles.scroll}>
             <div className={styles.messages}>
               {messages.length === 0 && !isLoading ? (
-                <p className={styles.empty}>
-                  Ask about this resume, roles, or evidence. Matching sections highlight on the
-                  page.
-                </p>
+                <JzText
+                  variant="caption"
+                  color="muted"
+                  label="Ask about this resume, roles, or a bound posting. Click an answer to highlight matching sections."
+                  className={styles.empty}
+                />
               ) : null}
               {messages.map((message, index) => {
                 const text = textFromParts(message.parts);
                 const isLast = index === messages.length - 1;
-                const citations =
-                  message.role === "assistant" ? extractCiteEvidence(message.parts) : null;
                 const waitingOnTools =
                   message.role === "assistant" && !text && isLoading && isLast;
+                const cluster = clusterByMessageId[message.id];
+                const messageMetrics = chatRunMetricsFromMessage(message);
+                const metricsLabelSource = cluster?.durationMs
+                  ? cluster
+                  : messageMetrics;
+                const selected = activeCluster?.id === message.id;
 
                 if (message.role === "assistant" && !text && !waitingOnTools) {
                   return null;
                 }
 
+                if (message.role === "user") {
+                  return (
+                    <div key={message.id} className={styles.bubbleUser}>
+                      <JzText
+                        variant="overline"
+                        color="muted"
+                        label={message.role}
+                        className={styles.role}
+                      />
+                      <JzText variant="caption" label={text} className={styles.prewrap} />
+                    </div>
+                  );
+                }
+
                 return (
-                  <div
+                  <button
                     key={message.id}
+                    type="button"
                     className={
-                      message.role === "user" ? styles.bubbleUser : styles.bubbleAssistant
+                      selected
+                        ? `${styles.bubbleAssistant} ${styles.bubbleAssistantSelected}`
+                        : styles.bubbleAssistant
                     }
+                    aria-pressed={selected}
+                    disabled={waitingOnTools}
+                    onClick={() => {
+                      if (waitingOnTools) return;
+                      if (selected) {
+                        clearActiveCluster();
+                        return;
+                      }
+                      selectAssistantCluster(message);
+                    }}
                   >
-                    <p className={styles.role}>{message.role}</p>
-                    {message.role === "user" ? (
-                      <p className={styles.prewrap}>{text}</p>
-                    ) : waitingOnTools ? (
+                    <div className={styles.roleRow}>
+                      <JzText
+                        variant="overline"
+                        color="muted"
+                        label={message.role}
+                        className={styles.role}
+                      />
+                      {waitingOnTools && liveElapsedLabel ? (
+                        <JzText
+                          variant="caption"
+                          color="muted"
+                          label={liveElapsedLabel}
+                          className={styles.elapsed}
+                        />
+                      ) : null}
+                      {!waitingOnTools &&
+                      metricsLabelSource &&
+                      metricsLabelSource.durationMs > 0 ? (
+                        <JzText
+                          variant="caption"
+                          color="muted"
+                          label={formatRunMetricsLabel(metricsLabelSource)}
+                          className={styles.elapsed}
+                        />
+                      ) : null}
+                    </div>
+                    {waitingOnTools ? (
                       <ThinkingMark />
                     ) : (
-                      <>
-                        <ChatMarkdown markdown={text} />
-                        {citations ? <CitationBlurb citations={citations} /> : null}
-                      </>
+                      <ChatMarkdown markdown={text} />
                     )}
-                  </div>
+                  </button>
                 );
               })}
               {showStandaloneThinking ? (
                 <div className={styles.bubbleAssistant}>
-                  <p className={styles.role}>assistant</p>
+                  <div className={styles.roleRow}>
+                    <JzText
+                      variant="overline"
+                      color="muted"
+                      label="assistant"
+                      className={styles.role}
+                    />
+                    {liveElapsedLabel ? (
+                      <JzText
+                        variant="caption"
+                        color="muted"
+                        label={liveElapsedLabel}
+                        className={styles.elapsed}
+                      />
+                    ) : null}
+                  </div>
                   <ThinkingMark />
                 </div>
               ) : null}
@@ -307,15 +403,6 @@ export function ResumeChatDock() {
           </form>
         </div>
       )}
-
-      <span className={styles.fabSlot}>
-        <JzButton
-          variant={open ? "secondary" : "primary"}
-          label={open ? "Close chat" : "Chat"}
-          showIcon={false}
-          onClick={() => setOpen((value) => !value)}
-        />
-      </span>
     </div>
   );
 }

@@ -17,11 +17,16 @@ const employerId = z.string().regex(/^C\d{3,}$/);
 const roleId = z.string().regex(/^R\d{3,}$/);
 const projectId = z.string().regex(/^S\d{3,}$/);
 export const applicationId = z.string().regex(/^A\d{3,}$/);
+export const postingId = z.string().regex(/^JP[\w-]+$/);
+const lineSection = z.enum(['responsibility', 'required', 'preferred']);
+const lineKind = z.enum(['duty', 'years', 'skill', 'domain', 'soft', 'other']);
+const toolContext = z.enum(['required', 'preferred', 'responsibility']);
 const field = (type, schema, required = false, extra = {}) => ({ type, schema, required, ...extra });
 const symbol = (required = false, schema = short) => field('Symbol', schema, required);
 const prose = (required = false) => field('Text', text, required);
 const date = (required = false) => field('Date', isoDate, required);
 const bool = (required = false) => field('Boolean', z.boolean(), required);
+const integer = (required = false) => field('Integer', z.number().int(), required);
 const symbols = () => field('Array', unique(short), false, { items: { type: 'Symbol' } });
 const object = (schema, required = false) => field('Object', schema, required);
 const reference = (target, schema, required = false) => field('Link', schema, required, { target });
@@ -62,11 +67,25 @@ export const definitions = {
     listingUrl: symbol(false, url), listingText: prose(true), captureDate: symbol(true, z.iso.date()),
     resume: reference('resume', short), coverLetter: reference('coverLetter', short),
   } },
+  jobLine: { name: 'Job Line', displayField: 'theme', fields: {
+    text: prose(true), section: symbol(true, lineSection), kind: symbol(true, lineKind), theme: symbol(true),
+  } },
+  jobTool: { name: 'Job Tool', displayField: 'name', fields: {
+    name: symbol(true), context: symbol(true, toolContext),
+  } },
+  jobPosting: { name: 'Job Posting', displayField: 'title', fields: {
+    postingId: symbol(true, postingId), sourceUrl: symbol(true, url), company: symbol(true), title: symbol(true),
+    location: symbol(), employmentType: symbol(), seniority: symbol(), summary: prose(),
+    yearsExperienceMin: integer(), yearsExperienceNote: symbol(), travelNote: prose(), compensationNote: prose(),
+    fullText: prose(true), lines: references('jobLine', short), tools: references('jobTool', short),
+  } },
 };
 export const typeId = kind => `jobzeug${kind[0].toUpperCase()}${kind.slice(1)}`;
 export const entryId = key => `jz-${key}`;
 /** Employer / Role / Project — the resume core synced from evidence. */
 export const coreKinds = ['employer', 'role', 'project'];
+/** Session job posting overlay — applied with core; not pushed from evidence/. */
+export const jobPostingKinds = ['jobLine', 'jobTool', 'jobPosting'];
 export const schemas = Object.fromEntries(Object.entries(definitions).map(([kind, definition]) => [kind,
   z.strictObject(Object.fromEntries(Object.entries(definition.fields).map(([name, spec]) =>
     [name, spec.required ? spec.schema : spec.schema.optional()]))),
@@ -105,4 +124,7 @@ export function contentTypes() {
 }
 export function coreContentTypes() {
   return contentTypes().filter(type => coreKinds.some(kind => type.id === typeId(kind)));
+}
+export function jobPostingContentTypes() {
+  return contentTypes().filter(type => jobPostingKinds.some(kind => type.id === typeId(kind)));
 }

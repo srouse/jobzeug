@@ -1,6 +1,6 @@
 "use client";
 
-import { JzButton } from "@jobzeug/design-system/react";
+import { JzButton, JzText } from "@jobzeug/design-system/react";
 import styles from "./login.module.css";
 
 export function LoginForm({
@@ -27,9 +27,13 @@ export function LoginForm({
         placeholder="Password"
       />
       {showError ? (
-        <p className={styles.error} role="alert">
-          Incorrect password.
-        </p>
+        <JzText
+          variant="label"
+          color="error"
+          label="Incorrect password."
+          role="alert"
+          className={styles.error}
+        />
       ) : null}
       <JzButton
         variant="inverse"
