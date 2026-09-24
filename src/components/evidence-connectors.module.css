@@ -1,9 +1,9 @@
-/* Above document lanes; below answer stage card / chat. */
+/* Above document lanes; below the header layer and the answer stage. */
 .overlay {
   pointer-events: none;
   position: fixed;
   inset: 0;
-  z-index: calc(var(--jz-semantic-layer-modal, 50) - 12);
+  z-index: var(--jz-semantic-layer-default, 1);
   overflow: visible;
 }
 
@@ -14,7 +14,19 @@
   stroke-linejoin: round;
 }
 
+.lineDimmed {
+  stroke: var(--jz-semantic-color-text-muted, #a3a3a3);
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .dot {
   fill: var(--jz-semantic-color-text-primary, #2563eb);
+  stroke: none;
+}
+
+.dotDimmed {
+  fill: var(--jz-semantic-color-text-muted, #a3a3a3);
   stroke: none;
 }

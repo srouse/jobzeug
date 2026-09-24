@@ -1,28 +1,43 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { ResumeViewModel } from "@/lib/contentful/resume-model";
 import {
   JobPostingPanel,
   JobPostingProvider,
-  useJobPosting,
 } from "@/components/job-posting";
 import { EvidenceConnectors } from "@/components/evidence-connectors";
+import { EvidenceFocusScroll } from "@/components/evidence-focus-scroll";
 import { ResumeAnswerStage } from "@/components/resume-answer-stage";
+import { ResumeChatProvider } from "@/components/resume-chat-context";
 import { ResumeChatDock } from "@/components/resume-chat-dock";
 import { ResumeDocument } from "@/components/resume-document";
 import { ResumeHighlightProvider } from "@/components/resume-highlight-context";
 import { ResumePlayToolbar } from "@/components/resume-play-toolbar";
-import { JzIcon, JzText } from "@jobzeug/design-system/react";
 import styles from "./resume.module.css";
+
+const ENTRY_ID_RE = /^[\w-]+$/;
+
+export function normalizeRouteEntryId(
+  raw: string | null | undefined,
+): string | null {
+  if (!raw) return null;
+  const trimmed = raw.trim();
+  return ENTRY_ID_RE.test(trimmed) ? trimmed : null;
+}
+
+/** Parse `/resume` or `/resume/{entryId}` from a pathname. */
+export function entryIdFromPathname(pathname: string): string | null {
+  const match = pathname.match(/^\/resume(?:\/([^/]+))?\/?$/);
+  if (!match) return null;
+  return normalizeRouteEntryId(match[1] ?? null);
+}
 
 function ResumePageBody() {
   const [resume, setResume] = useState<ResumeViewModel | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [chatOpen, setChatOpen] = useState(false);
-  const { data: jobPosting, busy } = useJobPosting();
-  const bound = Boolean(jobPosting) || busy;
 
   useEffect(() => {
     let cancelled = false;
@@ -63,46 +78,19 @@ function ResumePageBody() {
   return (
     <main className={styles.root}>
       <div className={styles.workspace}>
-        <div
-          className={
-            bound ? `${styles.inner} ${styles.innerBound}` : styles.inner
-          }
-        >
+        <div className={`${styles.inner} ${styles.innerBound}`}>
           <div className={styles.resumeColumn}>
-            {loading && (
-              <div
-                className={styles.loading}
-                role="status"
-                aria-live="polite"
-              >
-                <JzIcon
-                  icon="CircleNotch"
-                  weight="regular"
-                  size="small"
-                  spin
-                  aria-hidden
-                />
-                <JzText
-                  variant="caption"
-                  color="muted"
-                  label="Loading resume…"
-                />
-              </div>
-            )}
-            {error && (
-              <JzText
-                variant="label"
-                color="error"
-                label={error}
-                className={styles.error}
-              />
-            )}
-            {resume && <ResumeDocument resume={resume} />}
+            <ResumeDocument
+              resume={resume}
+              loading={loading}
+              error={error}
+            />
           </div>
           <JobPostingPanel />
         </div>
       </div>
       <EvidenceConnectors />
+      <EvidenceFocusScroll />
       <ResumeAnswerStage />
       <ResumePlayToolbar
         chatOpen={chatOpen}
@@ -113,11 +101,45 @@ function ResumePageBody() {
   );
 }
 
-export default function ResumePage() {
+/**
+ * Single client shell for `/resume` and `/resume/[entryId]`.
+ * Entry id is owned in React state; URL updates via history.pushState so
+ * Next does not remount this tree (no resume reload flash).
+ */
+export function ResumeWorkspace({
+  initialEntryId,
+}: {
+  initialEntryId: string | null;
+}) {
+  const [entryId, setEntryId] = useState<string | null>(() =>
+    normalizeRouteEntryId(initialEntryId),
+  );
+
+  useEffect(() => {
+    setEntryId(normalizeRouteEntryId(initialEntryId));
+  }, [initialEntryId]);
+
+  useEffect(() => {
+    const onPopState = () => {
+      setEntryId(entryIdFromPathname(window.location.pathname));
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+
+  const navigateEntryId = useCallback((next: string | null) => {
+    const resolved = normalizeRouteEntryId(next);
+    const url = resolved ? `/resume/${resolved}` : "/resume";
+    window.history.pushState(null, "", url);
+    setEntryId(resolved);
+  }, []);
+
   return (
     <ResumeHighlightProvider>
-      <JobPostingProvider>
-        <ResumePageBody />
+      <JobPostingProvider entryId={entryId} navigateEntryId={navigateEntryId}>
+        <ResumeChatProvider>
+          <ResumePageBody />
+        </ResumeChatProvider>
       </JobPostingProvider>
     </ResumeHighlightProvider>
   );

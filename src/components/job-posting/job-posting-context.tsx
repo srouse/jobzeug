@@ -12,23 +12,15 @@ import {
 } from "react";
 import type { JobPostingPanelData } from "@/lib/job-posting/schema";
 
-const BIND_PHASES = [
-  "Scraping listing…",
-  "Extracting structure…",
-  "Publishing to Contentful…",
-] as const;
+type BindInput = { url: string } | { entryId: string };
 
 type JobPostingContextValue = {
   data: JobPostingPanelData | null;
   loading: boolean;
   busy: boolean;
-  /** Human-readable phase while bind/unbind runs */
-  status: string | null;
-  /** URL currently being ingested */
-  pendingUrl: string | null;
   error: string | null;
   refresh: () => Promise<void>;
-  bind: (url: string) => Promise<void>;
+  bind: (input: BindInput) => Promise<void>;
   unbind: () => Promise<void>;
 };
 
@@ -58,38 +50,39 @@ function parsePanelPayload(raw: unknown): JobPostingPanelData | null {
   return rest as JobPostingPanelData;
 }
 
-export function JobPostingProvider({ children }: { children: ReactNode }) {
+export function JobPostingProvider({
+  children,
+  entryId,
+  navigateEntryId,
+}: {
+  children: ReactNode;
+  entryId: string | null;
+  /** SPA URL update — must not remount the resume shell. */
+  navigateEntryId: (entryId: string | null) => void;
+}) {
   const [data, setData] = useState<JobPostingPanelData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(Boolean(entryId));
   const [busy, setBusy] = useState(false);
-  const [status, setStatus] = useState<string | null>(null);
-  const [pendingUrl, setPendingUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const phaseTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const dataRef = useRef<JobPostingPanelData | null>(null);
   dataRef.current = data;
-
-  const clearPhaseTimer = useCallback(() => {
-    if (phaseTimerRef.current) {
-      clearInterval(phaseTimerRef.current);
-      phaseTimerRef.current = null;
-    }
-  }, []);
-
-  const startBindPhases = useCallback(() => {
-    clearPhaseTimer();
-    let index = 0;
-    setStatus(BIND_PHASES[0]);
-    phaseTimerRef.current = setInterval(() => {
-      index = Math.min(index + 1, BIND_PHASES.length - 1);
-      setStatus(BIND_PHASES[index]);
-      if (index >= BIND_PHASES.length - 1) clearPhaseTimer();
-    }, 2800);
-  }, [clearPhaseTimer]);
+  const entryIdRef = useRef(entryId);
+  entryIdRef.current = entryId;
 
   const refresh = useCallback(async () => {
+    const id = entryIdRef.current;
+    if (!id) {
+      setData(null);
+      setError(null);
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
     try {
-      const res = await fetch("/api/job-posting");
+      const res = await fetch(
+        `/api/job-posting?entryId=${encodeURIComponent(id)}`,
+      );
       if (!res.ok) {
         if (res.status === 401) {
           setData(null);
@@ -101,35 +94,50 @@ export function JobPostingProvider({ children }: { children: ReactNode }) {
       const body = await res.json();
       setData(parsePanelPayload(body));
       setError(null);
-    } catch {
+    } catch (err) {
       setData(null);
+      setError(err instanceof Error ? err.message : "Failed to load job posting");
     } finally {
       setLoading(false);
     }
   }, []);
 
   useEffect(() => {
+    if (!entryId) {
+      setData(null);
+      setError(null);
+      setLoading(false);
+      return;
+    }
+    // Already holding this posting (e.g. after URL ingest) — don't flash a reload.
+    if (dataRef.current?.entryId === entryId) {
+      setLoading(false);
+      return;
+    }
     void refresh();
-  }, [refresh]);
-
-  useEffect(() => () => clearPhaseTimer(), [clearPhaseTimer]);
+  }, [entryId, refresh]);
 
   const bind = useCallback(
-    async (url: string) => {
-      const trimmed = url.trim();
-      if (!trimmed) return;
+    async (input: BindInput) => {
+      const url = "url" in input ? input.url.trim() : "";
+      const nextEntryId = "entryId" in input ? input.entryId.trim() : "";
+      if (!url && !nextEntryId) return;
+
+      if (nextEntryId) {
+        setError(null);
+        navigateEntryId(nextEntryId);
+        return;
+      }
+
       const previous = dataRef.current;
       setBusy(true);
       setError(null);
-      setPendingUrl(trimmed);
-      // Hide stale posting while the new one processes.
       setData(null);
-      startBindPhases();
       try {
         const res = await fetch("/api/job-posting", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ url: trimmed }),
+          body: JSON.stringify({ url }),
         });
         const body = await res.json();
         if (!res.ok) {
@@ -137,60 +145,45 @@ export function JobPostingProvider({ children }: { children: ReactNode }) {
             (body as { error?: string }).error ?? `Bind failed (${res.status})`,
           );
         }
-        setStatus("Loading posting…");
         const panel = parsePanelPayload(body);
-        if (panel) {
-          setData(panel);
-        } else {
-          await refresh();
+        const publishedId =
+          panel?.entryId ??
+          (typeof (body as { entryId?: unknown }).entryId === "string"
+            ? (body as { entryId: string }).entryId
+            : null);
+        if (!publishedId) {
+          throw new Error("Bind succeeded without an entry id");
         }
+        if (panel) setData(panel);
+        navigateEntryId(publishedId);
       } catch (err) {
         setData(previous);
         setError(err instanceof Error ? err.message : "Bind failed");
         throw err;
       } finally {
-        clearPhaseTimer();
         setBusy(false);
-        setStatus(null);
-        setPendingUrl(null);
       }
     },
-    [clearPhaseTimer, refresh, startBindPhases],
+    [navigateEntryId],
   );
 
   const unbind = useCallback(async () => {
-    setBusy(true);
     setError(null);
-    setStatus("Clearing posting…");
-    try {
-      const res = await fetch("/api/job-posting", { method: "DELETE" });
-      if (!res.ok) {
-        const body = (await res.json()) as { error?: string };
-        throw new Error(body.error ?? `Clear failed (${res.status})`);
-      }
-      setData(null);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Clear failed");
-      throw err;
-    } finally {
-      setBusy(false);
-      setStatus(null);
-    }
-  }, []);
+    setData(null);
+    navigateEntryId(null);
+  }, [navigateEntryId]);
 
   const value = useMemo(
     () => ({
       data,
       loading,
       busy,
-      status,
-      pendingUrl,
       error,
       refresh,
       bind,
       unbind,
     }),
-    [data, loading, busy, status, pendingUrl, error, refresh, bind, unbind],
+    [data, loading, busy, error, refresh, bind, unbind],
   );
 
   return (

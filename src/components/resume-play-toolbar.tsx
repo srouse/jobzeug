@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { JzButton, JzIcon, JzText } from "@jobzeug/design-system/react";
-import { useJobPosting } from "@/components/job-posting";
+import { JzButton, JzText } from "@jobzeug/design-system/react";
+import {
+  useResumeHighlights,
+  type ResumeDensity,
+} from "@/components/resume-highlight-context";
 import styles from "./resume-play-toolbar.module.css";
 
 type ColorMode = "light" | "dark" | "subtle" | "emphasized";
@@ -12,6 +15,11 @@ const colorModes: { id: ColorMode; label: string }[] = [
   { id: "dark", label: "Dark" },
   { id: "subtle", label: "Subtle" },
   { id: "emphasized", label: "Emphasized" },
+];
+
+const densityTabs: { id: ResumeDensity; label: string }[] = [
+  { id: "full", label: "Full" },
+  { id: "rolled", label: "Rolled up" },
 ];
 
 function applyBodyColorMode(mode: ColorMode) {
@@ -30,10 +38,8 @@ export function ResumePlayToolbar({
   chatOpen: boolean;
   onToggleChat: () => void;
 }) {
-  const { data, busy, status, error, bind, unbind } = useJobPosting();
-
-  const [url, setUrl] = useState("");
   const [colorMode, setColorMode] = useState<ColorMode>("light");
+  const { density, setDensity } = useResumeHighlights();
 
   useEffect(() => {
     applyBodyColorMode(colorMode);
@@ -41,25 +47,6 @@ export function ResumePlayToolbar({
       document.body.removeAttribute("data-mode");
     };
   }, [colorMode]);
-
-  const bindUrl = async () => {
-    const trimmed = url.trim();
-    if (!trimmed || busy) return;
-    try {
-      await bind(trimmed);
-    } catch {
-      // error surfaced via context
-    }
-  };
-
-  const clearPosting = async () => {
-    if (busy) return;
-    try {
-      await unbind();
-    } catch {
-      // error surfaced via context
-    }
-  };
 
   return (
     <footer className={styles.root} aria-label="Resume tools">
@@ -82,74 +69,30 @@ export function ResumePlayToolbar({
           </select>
         </div>
 
-        <div className={styles.divider} aria-hidden />
-
-        <div className={styles.jobPosting} aria-label="Job posting bind">
-          <input
-            className={styles.urlInput}
-            type="url"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            placeholder="Job listing URL"
-            disabled={busy}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") void bindUrl();
-            }}
-          />
-          <JzButton
-            variant="primary"
-            size="small"
-            label={busy ? "Working…" : "Bind"}
-            showIcon={false}
-            disabled={busy || !url.trim()}
-            onClick={() => void bindUrl()}
-          />
-          {data && !busy ? (
-            <JzButton
-              variant="secondary"
-              size="small"
-              label="Unbind"
-              showIcon={false}
-              disabled={busy}
-              onClick={() => void clearPosting()}
-            />
-          ) : null}
-          {busy && status ? (
-            <p className={styles.jobStatus} role="status" aria-live="polite">
-              <JzIcon
-                icon="CircleNotch"
-                weight="regular"
-                size="small"
-                spin
-                aria-hidden
-              />
-              <JzText variant="body-strong" color="secondary" label={status} />
-            </p>
-          ) : null}
-          {data && !busy ? (
-            <p className={styles.boundMeta} title={data.entryId}>
-              <JzText
-                variant="body-strong"
-                label={`${data.company ? `${data.company} — ` : ""}${data.title}`}
-                className={styles.boundTitle}
-              />
-              <JzText
-                variant="caption"
-                color="muted"
-                label={data.entryId}
-                className={styles.entryId}
-              />
-            </p>
-          ) : null}
-          {error ? (
-            <JzText
-              variant="caption"
-              color="error"
-              label={error}
-              title={error}
-              className={styles.jobError}
-            />
-          ) : null}
+        <div
+          className={styles.densityTabs}
+          role="tablist"
+          aria-label="Document density"
+        >
+          {densityTabs.map((tab) => {
+            const selected = density === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                role="tab"
+                aria-selected={selected}
+                className={
+                  selected
+                    ? `${styles.densityTab} ${styles.densityTabActive}`
+                    : styles.densityTab
+                }
+                onClick={() => setDensity(tab.id)}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
         </div>
       </div>
 

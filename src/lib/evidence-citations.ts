@@ -34,6 +34,15 @@ export type EvidenceCluster = {
   totalTokens?: number | null;
   /** Assistant markdown body for the fixed answer stage. */
   answerMarkdown: string;
+  /** User question that produced this answer (shown in stage header). */
+  question: string;
+  /** Themed multi-section answer (accordion). Absent for legacy flat answers. */
+  sections?: Array<{
+    id: string;
+    title: string;
+    markdown: string;
+    citations: CiteEvidencePayload;
+  }>;
 };
 
 export function idsFromCitations(citations: CiteEvidencePayload): string[] {

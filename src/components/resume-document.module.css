@@ -12,8 +12,7 @@
 .docHeader {
   flex-shrink: 0;
   position: relative;
-  /* Above connector overlay (modal-12); same band as the bottom toolbar. */
-  z-index: calc(var(--jz-semantic-layer-modal, 100) - 5);
+  z-index: var(--jz-semantic-layer-header, 10);
   padding: var(--jz-semantic-space-padding-lg, 1.5rem)
     var(--resume-page-pad-inline, 40px);
   border-bottom: 1px solid var(--jz-semantic-color-border-default, #d4d4d4);
@@ -40,6 +39,8 @@
 .docBody {
   flex: 1;
   min-height: 0;
+  display: flex;
+  flex-direction: column;
   overflow: auto;
   overscroll-behavior: contain;
   padding: var(--jz-semantic-space-padding-md, 1rem)
@@ -89,30 +90,63 @@
   flex-direction: column;
 }
 
+.bodyStatus {
+  flex: 1;
+  min-height: 12rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--jz-semantic-space-gap-xs, 0.5rem);
+}
+
+.bodyError {
+  display: block;
+  margin: var(--jz-semantic-space-padding-sm, 0.75rem) 0 0;
+}
+
 .employerSpaceRoomy {
   margin-top: 2rem;
+  transition: margin-top 400ms ease-in-out;
 }
 
 .roleSpaceRoomy {
   margin-top: 1rem;
+  transition: margin-top 400ms ease-in-out;
 }
 
 .employerHead {
   width: 100%;
   box-sizing: border-box;
-  border-bottom: 1px solid var(--jz-semantic-color-border-subtle, #e5e5e5);
-  padding-block: var(--jz-semantic-space-padding-2xs, 0.25rem);
+  padding-top: var(--jz-semantic-space-padding-2xs, 0.25rem);
+  padding-bottom: 0;
   padding-inline: var(--jz-semantic-space-padding-sm, 0.75rem);
 }
 
+.employerTitleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--jz-semantic-color-border-subtle, #e5e5e5);
+  padding-bottom: var(--jz-semantic-space-padding-2xs, 0.25rem);
+}
+
 .employerTitle {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
   margin: 0;
+  box-sizing: border-box;
 }
 
 .roles {
   margin-top: 0.75rem;
   display: flex;
   flex-direction: column;
+  transition: margin-top 400ms ease-in-out;
 }
 
 .roleHead {
@@ -140,6 +174,9 @@
   display: flex;
   flex-direction: column;
   gap: 0.125rem;
+  transition:
+    margin-top 400ms ease-in-out,
+    gap 400ms ease-in-out;
 }
 
 .projectsLabel {
@@ -152,6 +189,7 @@
   flex-direction: column;
   gap: 0.125rem;
   align-items: stretch;
+  transition: gap 400ms ease-in-out;
 }
 
 .projectName {
@@ -166,4 +204,71 @@
 .cited {
   background: var(--jz-semantic-color-background-surface-brand-primary, #dbeafe);
   border-radius: var(--jz-primitive-radius-sm, 0.25rem);
+}
+
+.dimmed {
+  background: var(--jz-semantic-color-background-control-subtle, #f5f5f5);
+  border-radius: var(--jz-primitive-radius-sm, 0.25rem);
+}
+
+/* Smooth rollup: grid 1fr ↔ 0fr with residual skeleton bar */
+.shell {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition:
+    grid-template-rows 400ms ease-in-out,
+    margin-block 400ms ease-in-out;
+  width: 100%;
+  margin-block: 0;
+}
+
+.shell.isSkeleton {
+  grid-template-rows: 0fr;
+}
+
+.inner {
+  overflow: hidden;
+  min-height: 0;
+  transition:
+    min-height 400ms ease-in-out,
+    background-color 400ms ease-in-out;
+  border-radius: var(--jz-primitive-radius-sm, 0.25rem);
+}
+
+.shell.isSkeleton .inner {
+  min-height: 8px;
+  background: var(--jz-semantic-color-background-control-subtle, #f5f5f5);
+}
+
+.content {
+  transition: opacity 200ms ease-in-out;
+}
+
+.shell.isSkeleton .content {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/*
+ * Rolled: one spacing rhythm for every shell (employer / role / project /
+ * cited or skeleton). Hierarchical roomy margins collapse so company vs
+ * role gaps match.
+ */
+.stackRolled .employerSpaceRoomy,
+.stackRolled .roleSpaceRoomy {
+  margin-top: 0;
+}
+
+.stackRolled .roles,
+.stackRolled .projects {
+  margin-top: 0;
+}
+
+.stackRolled .projects,
+.stackRolled .projectStack {
+  gap: 0;
+}
+
+.stackRolled .shell {
+  margin-block: 4px;
 }

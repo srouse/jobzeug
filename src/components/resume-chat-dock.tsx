@@ -1,35 +1,17 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { DefaultChatTransport } from "ai";
-import { useChat } from "@ai-sdk/react";
+import { useEffect, useRef, useState } from "react";
 import { JzButton, JzIcon, JzText } from "@jobzeug/design-system/react";
 
 import { ChatMarkdown } from "@/components/chat-markdown";
-import { useJobPosting } from "@/components/job-posting";
+import {
+  textFromParts,
+  useResumeChat,
+} from "@/components/resume-chat-context";
 import { useResumeHighlights } from "@/components/resume-highlight-context";
 import { chatRunMetricsFromMessage } from "@/lib/chat-run-metrics";
-import { extractCiteEvidence } from "@/lib/extract-cite-evidence";
-import {
-  emptyCitations,
-  formatElapsed,
-  formatRunMetricsLabel,
-  type EvidenceCluster,
-} from "@/lib/evidence-citations";
-import { toChatJobPostingPayload } from "@/lib/job-posting/schema";
+import { formatRunMetricsLabel } from "@/lib/evidence-citations";
 import styles from "./resume-chat-dock.module.css";
-
-const RESUME_CHAT_API = "/api/chat?surface=resume";
-
-function textFromParts(parts: Array<{ type: string; text?: string }> | undefined): string {
-  if (!parts?.length) return "";
-  return parts
-    .filter((part) => part.type === "text" && typeof part.text === "string")
-    .map((part) => part.text ?? "")
-    .join("\n\n")
-    .replace(/\n{3,}/g, "\n\n")
-    .trim();
-}
 
 function ThinkingMark() {
   return (
@@ -54,178 +36,37 @@ export function ResumeChatDock({
   onOpenChange: (open: boolean) => void;
 }) {
   const [input, setInput] = useState("");
-  const [clearing, setClearing] = useState(false);
-  const [runStartedAt, setRunStartedAt] = useState<number | null>(null);
-  const [elapsedMs, setElapsedMs] = useState(0);
-  const [clusterByMessageId, setClusterByMessageId] = useState<
-    Record<string, EvidenceCluster>
-  >({});
   const scrollRef = useRef<HTMLDivElement>(null);
-  const pendingStartRef = useRef<number | null>(null);
-  const { activeCluster, setActiveCluster, clearActiveCluster } =
-    useResumeHighlights();
-  const { data: jobPosting } = useJobPosting();
-  const jobPostingRef = useRef(jobPosting);
-  jobPostingRef.current = jobPosting;
+  const { activeCluster, clearActiveCluster } = useResumeHighlights();
+  const {
+    messages,
+    isLoading,
+    clearing,
+    liveElapsedLabel,
+    clusterByMessageId,
+    ask,
+    clearSession,
+    selectAssistantCluster,
+  } = useResumeChat();
 
-  const transport = useMemo(
-    () =>
-      new DefaultChatTransport({
-        api: RESUME_CHAT_API,
-        body: () => {
-          const current = jobPostingRef.current;
-          if (!current) return {};
-          return { jobPosting: toChatJobPostingPayload(current) };
-        },
-        // Memory owns history — only send the newest message (Mastra requirement).
-        prepareSendMessagesRequest({ messages, body }) {
-          const last = messages.at(-1);
-          return {
-            body: {
-              ...body,
-              messages: last ? [last] : [],
-            },
-          };
-        },
-      }),
-    [],
-  );
-
-  const { messages, setMessages, sendMessage, status } = useChat({
-    transport,
-  });
-
-  const isLoading = status === "submitted" || status === "streaming";
   const lastMessage = messages.at(-1);
   const lastAssistantHasText =
-    lastMessage?.role === "assistant" && Boolean(textFromParts(lastMessage.parts));
+    lastMessage?.role === "assistant" &&
+    Boolean(textFromParts(lastMessage.parts));
   const showStandaloneThinking =
     isLoading && !lastAssistantHasText && lastMessage?.role !== "assistant";
-  const liveElapsedLabel =
-    isLoading && runStartedAt != null ? formatElapsed(elapsedMs) : undefined;
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      const res = await fetch(RESUME_CHAT_API);
-      if (!res.ok || cancelled) return;
-      const data = await res.json();
-      if (!cancelled) setMessages([...data]);
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [setMessages]);
-
-  useEffect(() => {
-    if (!isLoading || runStartedAt == null) return;
-    const tick = () => setElapsedMs(Date.now() - runStartedAt);
-    tick();
-    const id = window.setInterval(tick, 250);
-    return () => window.clearInterval(id);
-  }, [isLoading, runStartedAt]);
-
-  useEffect(() => {
-    if (status !== "ready") return;
-    if (pendingStartRef.current == null) return;
-
-    const lastAssistant = [...messages]
-      .reverse()
-      .find((message) => message.role === "assistant");
-    pendingStartRef.current = null;
-    setRunStartedAt(null);
-
-    if (!lastAssistant) return;
-
-    const metrics = chatRunMetricsFromMessage(lastAssistant);
-    const citations =
-      extractCiteEvidence(lastAssistant.parts) ?? emptyCitations;
-    const cluster: EvidenceCluster = {
-      id: lastAssistant.id,
-      citations,
-      createdAt: Date.now(),
-      durationMs: metrics?.durationMs ?? 0,
-      inputTokens: metrics?.inputTokens,
-      outputTokens: metrics?.outputTokens,
-      totalTokens: metrics?.totalTokens,
-      answerMarkdown: textFromParts(lastAssistant.parts),
-    };
-    setClusterByMessageId((prev) => ({ ...prev, [lastAssistant.id]: cluster }));
-    setActiveCluster(cluster);
-  }, [status, messages, setActiveCluster]);
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
     el.scrollTop = el.scrollHeight;
-  }, [messages, status, open, isLoading, elapsedMs]);
-
-  const selectAssistantCluster = (message: {
-    id: string;
-    parts?: unknown[];
-    metadata?: unknown;
-  }) => {
-    const answerMarkdown = textFromParts(
-      message.parts as Array<{ type: string; text?: string }> | undefined,
-    );
-    const metrics = chatRunMetricsFromMessage(message);
-    const existing = clusterByMessageId[message.id];
-    if (existing) {
-      const cluster: EvidenceCluster = {
-        ...existing,
-        answerMarkdown: answerMarkdown || existing.answerMarkdown,
-        durationMs: metrics?.durationMs ?? existing.durationMs,
-        inputTokens: metrics?.inputTokens ?? existing.inputTokens,
-        outputTokens: metrics?.outputTokens ?? existing.outputTokens,
-        totalTokens: metrics?.totalTokens ?? existing.totalTokens,
-      };
-      setClusterByMessageId((prev) => ({ ...prev, [message.id]: cluster }));
-      setActiveCluster(cluster);
-      return;
-    }
-    const citations = extractCiteEvidence(message.parts) ?? emptyCitations;
-    const cluster: EvidenceCluster = {
-      id: message.id,
-      citations,
-      createdAt: Date.now(),
-      durationMs: metrics?.durationMs ?? 0,
-      inputTokens: metrics?.inputTokens,
-      outputTokens: metrics?.outputTokens,
-      totalTokens: metrics?.totalTokens,
-      answerMarkdown,
-    };
-    setClusterByMessageId((prev) => ({ ...prev, [message.id]: cluster }));
-    setActiveCluster(cluster);
-  };
+  }, [messages, open, isLoading, liveElapsedLabel]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
-    clearActiveCluster();
-    const startedAt = Date.now();
-    pendingStartRef.current = startedAt;
-    setRunStartedAt(startedAt);
-    setElapsedMs(0);
-    sendMessage({ text: input });
+    ask(input);
     setInput("");
-  };
-
-  const handleClear = async () => {
-    if (clearing || isLoading) return;
-    setClearing(true);
-    try {
-      const res = await fetch(RESUME_CHAT_API, { method: "DELETE" });
-      if (!res.ok) return;
-      setMessages([]);
-      setInput("");
-      setClusterByMessageId({});
-      pendingStartRef.current = null;
-      setRunStartedAt(null);
-      setElapsedMs(0);
-      clearActiveCluster();
-    } finally {
-      setClearing(false);
-    }
   };
 
   return (
@@ -238,7 +79,7 @@ export function ResumeChatDock({
               <JzText
                 variant="caption"
                 color="muted"
-                label="Session-scoped · jobzeug-agent"
+                label="Session-scoped · themed outline + writers"
                 className={styles.subtitle}
               />
             </div>
@@ -249,7 +90,7 @@ export function ResumeChatDock({
                 label={clearing ? "Clearing…" : "Clear"}
                 disabled={clearing || isLoading}
                 showIcon={false}
-                onClick={() => void handleClear()}
+                onClick={() => void clearSession()}
               />
               <JzButton
                 variant="secondary"

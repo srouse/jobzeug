@@ -373,3 +373,57 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 #### Next
 
 - Re-bind postings to extract description lines; confirm salary + description cite highlights in UI
+
+### [2026-09-24T17:46:29-05:00]
+
+#### Summary
+
+- Built Design-tab session token overrides (brand URL/Firecrawl → knobs → full semantic CSS flood, curated Google Fonts, override highlights); simplified knobs by dropping tertiary/feedback; removed leftover employer logo-download pipeline.
+
+#### Changes
+
+- Evidence / records:
+- Skills / tooling: `.agents/skills/compress-to-contentful/SKILL.md` (drop fetch-logos / LOGO_DEV docs)
+- Other: `src/design/session-tokens/` + Design tab UI/API/agent; resume workspace / themed answer accordion work in tree; delete uncommitted `fetch-logos` plumbing; `.env.example` Firecrawl note for Design-tab branding
+
+#### Decisions
+
+- Session knobs stay isolated under `src/design/session-tokens/`; never edit `packages/design-system`
+- Tertiary/error/success/warning stay on fixed frozen mids in CSS flood but are not agent/UI knobs
+- Employer logos out of product — no logo.dev prefetch or Contentful Asset logo field in this app flow
+
+#### Plans cached
+
+- add_story_skill_2a282f5c.plan.md
+- brand_url_design_knobs_cc92b6b9.plan.md
+- comp-make_skill_429bbef5.plan.md
+- customers_evidence_log_51450833.plan.md
+- employer_logo_prefetch_02387199.plan.md
+- evidence_contentful_compress_793daf55.plan.md
+- evidence_mastra_workspace_4e07deca.plan.md
+- finish_docked_toolbar_52ac2998.plan.md
+- full_job_post_context_e1b35bf3.plan.md
+- job_cite_chat-only_c7f1d253.plan.md
+- jz-icon_phosphor_0589d485.plan.md
+- jztext_jzicon_migration_23ae0664.plan.md
+- montserrat_entry_css_f8261a2c.plan.md
+- next.js_mastra_scaffold_718b8d31.plan.md
+- persist_site_password_session_cc3eee20.plan.md
+- resume_cite_highlights_ae4c6a1c.plan.md
+- resume_floating_chat_c02c45c0.plan.md
+- resume_spa_contentful_5d3d3333.plan.md
+- rip_specs_restore_lit_8e08794a.plan.md
+- session_checkpoint_skill_65575be3.plan.md
+- session_design_tokens_20a67a82.plan.md
+- session_job_posting_28aa6696.plan.md
+- site_password_gate_c3c92081.plan.md
+- specs_ds_import_3ed8c9e7.plan.md
+- stories_to_projects_rename_34704978.plan.md
+- themed_answer_accordion_32662583.plan.md
+- vercel_ds_prebuilt_e09f8557.plan.md
+- web_components_ds_b1737d33.plan.md
+- wire_local_ds2_cli_cc2d5484.plan.md
+
+#### Next
+
+- Apply Contentful schema if Employer still has a logo field in the CMS; continue Design-tab polish without touching design-system package

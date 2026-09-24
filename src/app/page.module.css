@@ -66,10 +66,19 @@
   padding: 0.5rem 1rem;
   text-decoration: none;
   transition: border-color 150ms ease;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
 }
 
 .secondary:hover {
   border-color: #a1a1aa;
+}
+
+.logoutForm {
+  display: inline;
+  margin: 0;
 }
 
 .hint {

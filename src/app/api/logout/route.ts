@@ -13,7 +13,3 @@ export async function POST(req: NextRequest) {
   });
   return res;
 }
-
-export async function GET(req: NextRequest) {
-  return POST(req);
-}

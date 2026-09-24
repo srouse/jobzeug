@@ -6,7 +6,7 @@ Deterministically compress the evidence Markdown graph into Employer / Role / Pr
 
 Before running commands, confirm:
 
-1. `.env` has `CONTENTFUL_SPACE_ID`, `CONTENTFUL_ENVIRONMENT`, and `CONTENTFUL_MANAGEMENT_TOKEN` (required for apply/push; compress works without them)
+1. `.env` has `CONTENTFUL_SPACE_ID`, `CONTENTFUL_ENVIRONMENT`, and `CONTENTFUL_MANAGEMENT_TOKEN` (required for apply/push; compress works without them).
 2. `contentful/schema.mjs` — Employer / Role / Project field catalog
 3. `contentful/evidence-policy.json` — `showOnResume` defaults, aggregates, and tag assignments
 4. `contentful/tags.mjs` — public Contentful tag catalog
@@ -24,7 +24,7 @@ Before running commands, confirm:
 4. **Push** — `npm run contentful:push` (ensures public tags, then upsert + publish in dependency order with `metadata.tags`)
 5. **Summarize** — How many created/updated per type and the space/environment used
 
-Dry-run first when credentials are missing or the user asks to preview: `npm run contentful:apply -- --dry-run` and `npm run contentful:push -- --dry-run`.
+Dry-run first when credentials are missing or the user asks to preview: `npm run contentful:apply -- --dry-run`, `npm run contentful:push -- --dry-run`.
 
 ## Visibility and tags
 

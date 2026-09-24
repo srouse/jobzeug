@@ -28,9 +28,11 @@ export default function Home() {
           <Link href="/chat" className={styles.secondary}>
             <JzText variant="label" color="inverse" label="Open agent chat" />
           </Link>
-          <Link href="/api/logout" className={styles.secondary}>
-            <JzText variant="label" color="inverse" label="Log out" />
-          </Link>
+          <form method="POST" action="/api/logout" className={styles.logoutForm}>
+            <button type="submit" className={styles.secondary}>
+              <JzText variant="label" color="inverse" label="Log out" />
+            </button>
+          </form>
           <JzText
             variant="caption"
             color="muted"

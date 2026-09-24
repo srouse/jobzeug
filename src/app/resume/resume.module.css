@@ -9,6 +9,8 @@
   box-sizing: border-box;
   /* Shared with chat dock so the FAB clears the in-flow toolbar */
   --resume-toolbar-height: 4.5rem;
+  /* Column chrome (resume / job-posting headers) — stage sits below this */
+  --resume-header-height: 6rem;
   /* Minimum center gutter when columns are squeezed */
   --resume-lane-gutter: var(--jz-semantic-space-gap-lg, 1.5rem);
   /* Reading-width cap so extra viewport space lands in the center gutter */
@@ -17,8 +19,10 @@
   --resume-column-min: calc(var(--resume-column-max) - 100px);
   /* Horizontal padding inside the resume / job-posting page surfaces */
   --resume-page-pad-inline: 40px;
-  /* Answer stage overlaps each column edge by this amount */
-  --answer-overlap: 10px;
+  /* Gap between answer stage and each column edge */
+  --answer-gap: 10px;
+  /* Vertical breathing room below headers / above toolbar */
+  --answer-inset: 20px;
 }
 
 .workspace {

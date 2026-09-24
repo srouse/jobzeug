@@ -13,6 +13,10 @@ export const evidenceWorkspace = new Workspace({
   }),
   bm25: true,
   autoIndexPaths: ["**/*.md"],
+  // Replaced by evidenceReadFileTool (coerces offset 0 → 1). Built-in rejects 0.
+  tools: {
+    mastra_workspace_read_file: { enabled: false },
+  },
 });
 
 let initPromise: Promise<void> | undefined;

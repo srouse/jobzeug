@@ -1,0 +1,13 @@
+---
+description: Never open or use the IDE browser; the user inspects the UI themselves
+alwaysApply: true
+---
+
+# No IDE browser
+
+**Hard rule: do not open, navigate, snapshot, screenshot, or otherwise use the in-IDE browser.**
+
+- Do **not** call `cursor-ide-browser` tools (`browser_navigate`, `browser_snapshot`, `browser_take_screenshot`, `browser_lock`, `browser_click`, CDP, etc.).
+- Do **not** open Simple Browser, preview panes, or any automated browser tab to “verify” UI.
+- The user looks at the app themselves. Your job ends at code/changes; stop there.
+- If visual check seems needed, say what to look at (URL/path, what changed) in one short note — then stop. Do not open a browser.

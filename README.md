@@ -26,7 +26,7 @@ Never commit `.env`.
 
 ## Site password
 
-The Next app is gated by a shared password (`/login`). After login, an httpOnly cookie unlocks the whole site including `/api/chat`. Logout: `POST /api/logout` or visit that route.
+The Next app is gated by a shared password (`/login`). After login, an httpOnly cookie unlocks the whole site including `/api/chat`. Logout: `POST /api/logout`.
 
 ## Scripts
 

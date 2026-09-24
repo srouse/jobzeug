@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { JzButton, JzIcon, JzTag, JzText } from "@jobzeug/design-system/react";
 import type { JobPostingPanelData } from "@/lib/job-posting/schema";
 import { Modal } from "@/components/modal";
@@ -15,8 +15,19 @@ const SECTION_ORDER = [
   { id: "preferred" as const, label: "Preferred" },
 ];
 
-function DetailsBody({ data }: { data: JobPostingPanelData }) {
-  const { highlightedIds } = useResumeHighlights();
+function classNames(...parts: Array<string | false | null | undefined>) {
+  return parts.filter(Boolean).join(" ") || undefined;
+}
+
+function DetailsBody({
+  data,
+  onOpenFull,
+}: {
+  data: JobPostingPanelData;
+  onOpenFull: () => void;
+}) {
+  const { highlightedIds, focusedIds, density } = useResumeHighlights();
+  const rollActive = density === "rolled" && highlightedIds.size > 0;
   const metaItems: Array<{ label: string; value: string }> = [];
   if (data.location) metaItems.push({ label: "Location", value: data.location });
   if (data.seniority) metaItems.push({ label: "Seniority", value: data.seniority });
@@ -31,7 +42,11 @@ function DetailsBody({ data }: { data: JobPostingPanelData }) {
   }
 
   return (
-    <>
+    <div
+      className={
+        rollActive ? `${styles.details} ${styles.detailsRolled}` : styles.details
+      }
+    >
       {metaItems.length > 0 ? (
         <ul className={styles.meta}>
           {metaItems.map((item) => (
@@ -91,42 +106,98 @@ function DetailsBody({ data }: { data: JobPostingPanelData }) {
         />
       ) : null}
 
+      <div className={styles.fullPostingRow}>
+        <JzButton
+          variant="secondary"
+          size="small"
+          label="Full posting"
+          showIcon={false}
+          onClick={onOpenFull}
+        />
+        {data.sourceUrl ? (
+          <a
+            className={styles.sourceUrl}
+            href={data.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={data.sourceUrl}
+          >
+            {data.sourceUrl}
+          </a>
+        ) : null}
+      </div>
+
       {SECTION_ORDER.map(({ id, label }) => {
         const lines = data.lines.filter((line) => line.section === id);
         if (!lines.length) return null;
+        const sectionCited = lines.some((line) =>
+          highlightedIds.has(line.entryId),
+        );
+        const sectionSkeleton = rollActive && !sectionCited;
         return (
           <section key={id} className={styles.section}>
-            <JzText
-              level={3}
-              variant="overline"
-              color="muted"
-              label={label}
-              className={styles.sectionLabel}
-            />
+            <div
+              className={classNames(
+                styles.shell,
+                sectionSkeleton && styles.isSkeleton,
+              )}
+            >
+              <div className={styles.inner}>
+                <div
+                  className={classNames(
+                    styles.content,
+                    styles.sectionLabelIndent,
+                  )}
+                >
+                  <JzText
+                    level={3}
+                    variant="overline"
+                    color="muted"
+                    label={label}
+                    className={styles.sectionLabel}
+                  />
+                </div>
+              </div>
+            </div>
             <ul className={styles.lines}>
               {lines.map((line) => {
                 const cited = highlightedIds.has(line.entryId);
+                const focused = focusedIds.has(line.entryId);
+                const skeleton = rollActive && !cited;
                 return (
                   <li
                     key={line.entryId}
-                    id={line.entryId}
-                    data-evidence-id={line.entryId}
-                    className={
-                      cited ? `${styles.line} ${styles.lineCited}` : styles.line
-                    }
+                    className={classNames(
+                      styles.shell,
+                      skeleton && styles.isSkeleton,
+                    )}
+                    data-skeleton={skeleton || undefined}
                   >
-                    <JzText
-                      variant="caption"
-                      color={cited ? "primary" : "muted"}
-                      label={line.theme}
-                      className={styles.theme}
-                    />
-                    <JzText
-                      variant="body-regular"
-                      color={cited ? "primary" : undefined}
-                      label={line.text}
-                      className={styles.lineText}
-                    />
+                    <div className={styles.inner}>
+                      <div
+                        id={line.entryId}
+                        data-evidence-id={line.entryId}
+                        className={classNames(
+                          styles.content,
+                          styles.line,
+                          cited && focused && styles.lineCited,
+                          cited && !focused && styles.lineDimmed,
+                        )}
+                      >
+                        <JzText
+                          variant="caption"
+                          color={focused ? "primary" : "muted"}
+                          label={line.theme}
+                          className={styles.theme}
+                        />
+                        <JzText
+                          variant="body-regular"
+                          color={focused ? "primary" : undefined}
+                          label={line.text}
+                          className={styles.lineText}
+                        />
+                      </div>
+                    </div>
                   </li>
                 );
               })}
@@ -136,13 +207,15 @@ function DetailsBody({ data }: { data: JobPostingPanelData }) {
       })}
 
       <section className={styles.section}>
-        <JzText
-          level={3}
-          variant="overline"
-          color="muted"
-          label="Tools"
-          className={styles.sectionLabel}
-        />
+        <div className={styles.sectionLabelIndent}>
+          <JzText
+            level={3}
+            variant="overline"
+            color="muted"
+            label="Tools"
+            className={styles.sectionLabel}
+          />
+        </div>
         <ul className={styles.tools}>
           {data.tools.map((tool) => (
             <li key={tool.entryId} className={styles.tool}>
@@ -161,19 +234,13 @@ function DetailsBody({ data }: { data: JobPostingPanelData }) {
           </li>
         </ul>
       </section>
-    </>
+    </div>
   );
 }
 
-function ProcessingState({
-  status,
-  pendingUrl,
-}: {
-  status: string | null;
-  pendingUrl: string | null;
-}) {
+function LoadingState() {
   return (
-    <div className={styles.processing} role="status" aria-live="polite">
+    <div className={styles.loading} role="status" aria-live="polite">
       <JzIcon
         icon="CircleNotch"
         weight="regular"
@@ -181,35 +248,116 @@ function ProcessingState({
         spin
         aria-hidden
       />
+      <JzText variant="caption" color="muted" label="Loading job posting" />
+    </div>
+  );
+}
+
+function UnboundBindForm() {
+  const { busy, error, bind } = useJobPosting();
+  const [url, setUrl] = useState("");
+  const [entryId, setEntryId] = useState("");
+
+  const bindUrl = async () => {
+    const trimmed = url.trim();
+    if (!trimmed || busy) return;
+    try {
+      await bind({ url: trimmed });
+    } catch {
+      // error surfaced via context
+    }
+  };
+
+  const bindEntry = async () => {
+    const trimmed = entryId.trim();
+    if (!trimmed || busy) return;
+    try {
+      await bind({ entryId: trimmed });
+    } catch {
+      // error surfaced via context
+    }
+  };
+
+  return (
+    <div className={styles.bindForm}>
       <JzText
-        variant="title"
-        label={status ?? "Processing listing…"}
-        className={styles.processingTitle}
+        variant="body-default"
+        color="secondary"
+        label="Paste a job listing URL to ingest it, or bind an existing Contentful entry id."
+        className={styles.bindLead}
       />
-      {pendingUrl ? (
+      <div className={styles.bindRow}>
+        <input
+          className={styles.urlInput}
+          type="url"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          placeholder="Job listing URL"
+          disabled={busy}
+          aria-label="Job listing URL"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") void bindUrl();
+          }}
+        />
+        <JzButton
+          variant="primary"
+          size="small"
+          label="Bind"
+          showIcon={false}
+          disabled={busy || !url.trim()}
+          onClick={() => void bindUrl()}
+        />
+      </div>
+      <div className={styles.bindRow}>
+        <input
+          className={styles.urlInput}
+          type="text"
+          value={entryId}
+          onChange={(e) => setEntryId(e.target.value)}
+          placeholder="Contentful entry id"
+          disabled={busy}
+          aria-label="Contentful entry id"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") void bindEntry();
+          }}
+        />
+        <JzButton
+          variant="secondary"
+          size="small"
+          label="Load"
+          showIcon={false}
+          disabled={busy || !entryId.trim()}
+          onClick={() => void bindEntry()}
+        />
+      </div>
+      {error ? (
         <JzText
           variant="caption"
-          color="muted"
-          label={pendingUrl}
-          title={pendingUrl}
-          className={styles.processingUrl}
+          color="error"
+          label={error}
+          title={error}
+          className={styles.bindError}
         />
       ) : null}
-      <JzText
-        variant="caption"
-        color="muted"
-        label="Scrape → structure → Contentful."
-        className={styles.processingHint}
-      />
     </div>
   );
 }
 
 function BoundPanel({ data }: { data: JobPostingPanelData }) {
+  const { busy, unbind } = useJobPosting();
   const [fullOpen, setFullOpen] = useState(false);
   const modalTitle = data.company
     ? `${data.company} — ${data.title}`
     : data.title;
+
+  const clearPosting = async () => {
+    if (busy) return;
+    try {
+      await unbind();
+    } catch {
+      // error surfaced via context
+    }
+  };
 
   return (
     <>
@@ -218,38 +366,35 @@ function BoundPanel({ data }: { data: JobPostingPanelData }) {
           <JzText
             variant="overline"
             color="muted"
-            label="Job posting"
+            label={data.company?.trim() || "Job posting"}
             className={styles.eyebrow}
           />
           <div className={styles.titleRow}>
             <JzText
               level={2}
-              variant="label"
-              label={data.title}
+              variant="title"
+              title={data.title}
               className={styles.title}
-            />
-            {data.company ? (
-              <JzText
-                variant="label"
-                color="muted"
-                label={`· ${data.company}`}
-                className={styles.company}
-              />
-            ) : null}
+            >
+              <span className={styles.titleText}>{data.title}</span>
+            </JzText>
           </div>
         </div>
-        <div className={styles.headerActions}>
-          <JzButton
-            variant="secondary"
-            size="small"
-            label="Full posting"
-            showIcon={false}
-            onClick={() => setFullOpen(true)}
-          />
-        </div>
+        <JzButton
+          variant="inverse"
+          size="small"
+          label="Unbind"
+          icon="X"
+          showText={false}
+          showIcon
+          disabled={busy}
+          aria-label="Unbind"
+          className={styles.unbindFloat}
+          onClick={() => void clearPosting()}
+        />
       </header>
       <div className={styles.body} data-evidence-scroll>
-        <DetailsBody data={data} />
+        <DetailsBody data={data} onOpenFull={() => setFullOpen(true)} />
       </div>
       <Modal open={fullOpen} onOpenChange={setFullOpen} title={modalTitle}>
         <pre className={styles.fullText}>
@@ -260,29 +405,47 @@ function BoundPanel({ data }: { data: JobPostingPanelData }) {
   );
 }
 
-/** Bound Job Posting sheet, or a processing placeholder while ingest runs. */
+function PanelChrome({ children }: { children: ReactNode }) {
+  return (
+    <>
+      <header className={styles.header}>
+        <div className={styles.headerMain}>
+          <JzText
+            variant="overline"
+            color="muted"
+            label="Job posting"
+            className={styles.eyebrow}
+          />
+          <JzText
+            level={2}
+            variant="title"
+            label="No posting bound"
+            className={styles.title}
+          />
+        </div>
+      </header>
+      <div className={styles.body}>{children}</div>
+    </>
+  );
+}
+
+/** Persistent right-column Job Posting sheet: unbound bind form, busy, or bound details. */
 export function JobPostingPanel() {
-  const { data, busy, status, pendingUrl } = useJobPosting();
-
-  if (busy && !data) {
-    return (
-      <aside className={styles.panel} aria-label="Job posting">
-        <JzText
-          variant="overline"
-          color="muted"
-          label="Job posting"
-          className={styles.eyebrow}
-        />
-        <ProcessingState status={status} pendingUrl={pendingUrl} />
-      </aside>
-    );
-  }
-
-  if (!data) return null;
+  const { data, busy, loading } = useJobPosting();
 
   return (
     <aside className={styles.panel} aria-label="Job posting">
-      <BoundPanel data={data} />
+      {data ? (
+        <BoundPanel data={data} />
+      ) : busy || loading ? (
+        <PanelChrome>
+          <LoadingState />
+        </PanelChrome>
+      ) : (
+        <PanelChrome>
+          <UnboundBindForm />
+        </PanelChrome>
+      )}
     </aside>
   );
 }

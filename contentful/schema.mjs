@@ -87,8 +87,10 @@ export const coreKinds = ['employer', 'role', 'project'];
 /** Session job posting overlay — applied with core; not pushed from evidence/. */
 export const jobPostingKinds = ['jobLine', 'jobTool', 'jobPosting'];
 export const schemas = Object.fromEntries(Object.entries(definitions).map(([kind, definition]) => [kind,
-  z.strictObject(Object.fromEntries(Object.entries(definition.fields).map(([name, spec]) =>
-    [name, spec.required ? spec.schema : spec.schema.optional()]))),
+  z.strictObject(Object.fromEntries(
+    Object.entries(definition.fields)
+      .map(([name, spec]) => [name, spec.required ? spec.schema : spec.schema.optional()]),
+  )),
 ]));
 export const experienceSchema = schemas.resumeExperience.omit({ internalTitle: true });
 export const localResumeSchema = schemas.resume.extend({ experiences: z.array(experienceSchema).min(1) });

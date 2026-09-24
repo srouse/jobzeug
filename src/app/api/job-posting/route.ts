@@ -3,10 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 import {
-  JOB_POSTING_COOKIE,
-  createJobPostingCookieValue,
-  getBoundJobPostingEntryId,
-  getJobPostingCookieOptions,
   loadJobPostingByEntryId,
   publishJobPostingTree,
   scrapeJobListingMarkdown,
@@ -14,6 +10,12 @@ import {
   toJobPostingPanelData,
 } from "@/lib/job-posting";
 import { SESSION_COOKIE, getSessionId } from "@/lib/site-auth";
+
+const entryIdSchema = z
+  .string()
+  .trim()
+  .min(1)
+  .regex(/^[\w-]+$/, "Invalid entry id");
 
 const postBodySchema = z.object({
   url: z.url(),
@@ -30,30 +32,27 @@ async function requireSiteSession(): Promise<
   return { ok: true };
 }
 
-function isSecureRequest(req: NextRequest) {
-  return (
-    req.nextUrl.protocol === "https:" ||
-    process.env.NODE_ENV === "production"
-  );
-}
-
-/** Bound posting for this browser session (title + entry id + optional full view). */
-export async function GET() {
+/** Load a Contentful job posting by entry id (from the resume route). */
+export async function GET(req: NextRequest) {
   const session = await requireSiteSession();
   if ("error" in session) return session.error;
 
-  const jar = await cookies();
-  const entryId = await getBoundJobPostingEntryId(
-    jar.get(JOB_POSTING_COOKIE)?.value,
-  );
-  if (!entryId) {
-    return NextResponse.json({ bound: false });
+  const raw = req.nextUrl.searchParams.get("entryId");
+  const parsed = entryIdSchema.safeParse(raw ?? "");
+  if (!parsed.success) {
+    return NextResponse.json(
+      { error: "entryId query param is required" },
+      { status: 400 },
+    );
   }
 
   try {
-    const view = await loadJobPostingByEntryId(entryId);
+    const view = await loadJobPostingByEntryId(parsed.data);
     if (!view) {
-      return NextResponse.json({ bound: false, staleEntryId: entryId });
+      return NextResponse.json(
+        { error: "Job posting not found" },
+        { status: 404 },
+      );
     }
     return NextResponse.json({
       bound: true,
@@ -66,7 +65,7 @@ export async function GET() {
   }
 }
 
-/** Scrape URL → structure → Contentful → bind entry id cookie. */
+/** Scrape URL → structure → Contentful; returns panel payload (no cookie). */
 export async function POST(req: NextRequest) {
   const session = await requireSiteSession();
   if ("error" in session) return session.error;
@@ -88,10 +87,8 @@ export async function POST(req: NextRequest) {
       structured,
     });
 
-    const cookieValue = await createJobPostingCookieValue(entryId);
-    // Reload published tree so Bind returns the same panel payload as GET.
     const view = await loadJobPostingByEntryId(entryId);
-    const response = NextResponse.json(
+    return NextResponse.json(
       view
         ? { bound: true, ...toJobPostingPanelData(view) }
         : {
@@ -106,12 +103,6 @@ export async function POST(req: NextRequest) {
             tools: [],
           },
     );
-    response.cookies.set(
-      JOB_POSTING_COOKIE,
-      cookieValue,
-      getJobPostingCookieOptions(isSecureRequest(req)),
-    );
-    return response;
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Job posting ingest failed";
@@ -122,17 +113,4 @@ export async function POST(req: NextRequest) {
         : 500;
     return NextResponse.json({ error: message }, { status });
   }
-}
-
-/** Clear session binding (does not delete Contentful entries). */
-export async function DELETE(req: NextRequest) {
-  const session = await requireSiteSession();
-  if ("error" in session) return session.error;
-
-  const response = NextResponse.json({ ok: true, bound: false });
-  response.cookies.set(JOB_POSTING_COOKIE, "", {
-    ...getJobPostingCookieOptions(isSecureRequest(req)),
-    maxAge: 0,
-  });
-  return response;
 }

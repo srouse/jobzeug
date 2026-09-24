@@ -1,6 +1,7 @@
 "use client";
 
-import { JzText } from "@jobzeug/design-system/react";
+import type { ReactNode } from "react";
+import { JzIcon, JzText } from "@jobzeug/design-system/react";
 import type {
   ResumeEmployerGroup,
   ResumeProject,
@@ -9,35 +10,90 @@ import type {
 import { useResumeHighlights } from "@/components/resume-highlight-context";
 import styles from "./resume-document.module.css";
 
+const DEFAULT_NAME = "Scott Rouse";
+
 function classNames(...parts: Array<string | false | null | undefined>) {
   return parts.filter(Boolean).join(" ") || undefined;
 }
 
 function CitedTitle({
   active,
+  dimmed = false,
   variant,
   level = 0,
   color,
   label,
+  className,
 }: {
   active: boolean;
+  dimmed?: boolean;
   variant: string;
   level?: number;
   color?: string;
   label: string;
+  className?: string;
 }) {
   return (
     <JzText
       level={level}
       variant={variant}
-      color={active ? "primary" : color}
+      color={active ? "primary" : dimmed ? "muted" : color}
       label={label}
+      className={className}
     />
   );
 }
 
-export function ResumeDocument({ resume }: { resume: ResumeViewModel }) {
-  const { highlightedIds } = useResumeHighlights();
+function EvidenceShell({
+  id,
+  skeleton,
+  cited,
+  focused,
+  headClass,
+  children,
+}: {
+  id: string;
+  skeleton: boolean;
+  cited: boolean;
+  focused: boolean;
+  headClass: string;
+  children: ReactNode;
+}) {
+  return (
+    <div
+      className={classNames(styles.shell, skeleton && styles.isSkeleton)}
+      data-skeleton={skeleton || undefined}
+    >
+      <div className={styles.inner}>
+        <div
+          id={id}
+          data-evidence-id={id}
+          className={classNames(
+            styles.content,
+            headClass,
+            cited && focused && styles.cited,
+            cited && !focused && styles.dimmed,
+          )}
+        >
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function ResumeDocument({
+  resume,
+  loading = false,
+  error = null,
+}: {
+  resume: ResumeViewModel | null;
+  loading?: boolean;
+  error?: string | null;
+}) {
+  const { highlightedIds, focusedIds, density } = useResumeHighlights();
+  const name = resume?.name ?? DEFAULT_NAME;
+  const rollActive = density === "rolled" && highlightedIds.size > 0;
 
   return (
     <article className={styles.article}>
@@ -50,86 +106,124 @@ export function ResumeDocument({ resume }: { resume: ResumeViewModel }) {
         />
         <JzText
           level={1}
-          variant="label"
-          label={resume.name}
+          variant="title"
+          label={name}
           className={styles.name}
         />
       </header>
 
       <div className={styles.docBody} data-evidence-scroll>
-        <div className={styles.stack}>
-          {resume.employers.map((employer: ResumeEmployerGroup, employerIndex) => {
-            const employerCited = highlightedIds.has(employer.evidenceId);
+        {loading ? (
+          <div className={styles.bodyStatus} role="status" aria-live="polite">
+            <JzIcon
+              icon="CircleNotch"
+              weight="regular"
+              size="small"
+              spin
+              aria-hidden
+            />
+            <JzText variant="caption" color="muted" label="Loading" />
+          </div>
+        ) : error ? (
+          <JzText
+            variant="label"
+            color="error"
+            label={error}
+            className={styles.bodyError}
+          />
+        ) : resume ? (
+          <div
+            className={classNames(
+              styles.stack,
+              rollActive && styles.stackRolled,
+            )}
+          >
+            {resume.employers.map((employer: ResumeEmployerGroup, employerIndex) => {
+              const employerCited = highlightedIds.has(employer.evidenceId);
+              const employerFocused = focusedIds.has(employer.evidenceId);
+              const employerSkeleton = rollActive && !employerCited;
 
-            return (
-              <section
-                key={employer.evidenceId}
-                className={
-                  employerIndex > 0 ? styles.employerSpaceRoomy : undefined
-                }
-              >
-                {/* Title row only — not the whole employer section */}
-                <div
-                  id={employer.evidenceId}
-                  data-evidence-id={employer.evidenceId}
-                  className={classNames(
-                    styles.employerHead,
-                    employerCited && styles.cited,
-                  )}
+              return (
+                <section
+                  key={employer.evidenceId}
+                  className={
+                    employerIndex > 0 ? styles.employerSpaceRoomy : undefined
+                  }
                 >
-                  <CitedTitle
-                    active={employerCited}
-                    level={2}
-                    variant="body-strong"
-                    label={employer.name}
-                  />
-                </div>
+                  <EvidenceShell
+                    id={employer.evidenceId}
+                    skeleton={employerSkeleton}
+                    cited={employerCited}
+                    focused={employerFocused}
+                    headClass={styles.employerHead}
+                  >
+                    <div className={styles.employerTitleRow}>
+                      <CitedTitle
+                        active={employerFocused}
+                        dimmed={employerCited && !employerFocused}
+                        level={2}
+                        variant="heading"
+                        label={employer.name}
+                        className={styles.employerTitle}
+                      />
+                    </div>
+                  </EvidenceShell>
 
-                <div className={styles.roles}>
-                  {employer.roles.map((role, roleIndex) => {
-                    const roleCited = highlightedIds.has(role.roleId);
+                  <div className={styles.roles}>
+                    {employer.roles.map((role, roleIndex) => {
+                      const roleCited = highlightedIds.has(role.roleId);
+                      const roleFocused = focusedIds.has(role.roleId);
+                      const roleSkeleton = rollActive && !roleCited;
 
-                    return (
-                      <div
-                        key={role.roleId}
-                        className={
-                          roleIndex > 0 ? styles.roleSpaceRoomy : undefined
-                        }
-                      >
-                        {/* Title row (title + date) — not projects below */}
+                      return (
                         <div
-                          id={role.roleId}
-                          data-evidence-id={role.roleId}
-                          className={classNames(
-                            styles.roleHead,
-                            roleCited && styles.cited,
-                          )}
+                          key={role.roleId}
+                          className={
+                            roleIndex > 0 ? styles.roleSpaceRoomy : undefined
+                          }
                         >
-                          <CitedTitle
-                            active={roleCited}
-                            level={3}
-                            variant="label"
-                            label={role.title}
-                          />
-                          <JzText
-                            variant="caption"
-                            color="muted"
-                            label={role.dateLabel}
+                          <EvidenceShell
+                            id={role.roleId}
+                            skeleton={roleSkeleton}
+                            cited={roleCited}
+                            focused={roleFocused}
+                            headClass={styles.roleHead}
+                          >
+                            <CitedTitle
+                              active={roleFocused}
+                              dimmed={roleCited && !roleFocused}
+                              level={3}
+                              variant="subtitle"
+                              label={role.title}
+                            />
+                            <JzText
+                              variant="caption"
+                              color={
+                                roleFocused
+                                  ? "primary"
+                                  : roleCited
+                                    ? "muted"
+                                    : "muted"
+                              }
+                              label={role.dateLabel}
+                            />
+                          </EvidenceShell>
+
+                          <ProjectLine
+                            projects={role.projects}
+                            highlightedIds={highlightedIds}
+                            focusedIds={focusedIds}
+                            rollActive={rollActive}
                           />
                         </div>
-
-                        <ProjectLine
-                          projects={role.projects}
-                          highlightedIds={highlightedIds}
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
-            );
-          })}
-        </div>
+                      );
+                    })}
+                  </div>
+                </section>
+              );
+            })}
+          </div>
+        ) : null}
       </div>
     </article>
   );
@@ -138,37 +232,46 @@ export function ResumeDocument({ resume }: { resume: ResumeViewModel }) {
 function ProjectLine({
   projects,
   highlightedIds,
+  focusedIds,
+  rollActive,
 }: {
   projects: ResumeProject[];
   highlightedIds: Set<string>;
+  focusedIds: Set<string>;
+  rollActive: boolean;
 }) {
   if (projects.length === 0) return null;
 
   return (
     <div className={styles.projects}>
-      <JzText
-        variant="overline"
-        color="muted"
-        label="Projects"
-        className={styles.projectsLabel}
-      />
+      {!rollActive ? (
+        <div className={styles.projectsLabel}>
+          <JzText variant="overline" color="muted" label="Projects" />
+        </div>
+      ) : null}
       <div className={styles.projectStack}>
         {projects.map((project) => {
           const cited = highlightedIds.has(project.evidenceId);
+          const focused = focusedIds.has(project.evidenceId);
+          const skeleton = rollActive && !cited;
           return (
-            <div
+            <EvidenceShell
               key={project.evidenceId}
               id={project.evidenceId}
-              data-evidence-id={project.evidenceId}
-              className={classNames(styles.projectName, cited && styles.cited)}
+              skeleton={skeleton}
+              cited={cited}
+              focused={focused}
+              headClass={styles.projectName}
             >
               <CitedTitle
-                active={cited}
-                variant="caption"
+                active={focused}
+                dimmed={cited && !focused}
+                level={4}
+                variant="label"
                 color="muted"
                 label={project.name}
               />
-            </div>
+            </EvidenceShell>
           );
         })}
       </div>

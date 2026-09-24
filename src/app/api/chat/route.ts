@@ -10,11 +10,8 @@ import {
   type ChatRunMetrics,
 } from "@/lib/chat-run-metrics";
 import {
-  JOB_POSTING_COOKIE,
   chatJobPostingPayloadSchema,
   formatJobPostingContext,
-  getBoundJobPostingEntryId,
-  loadBoundJobPostingContext,
 } from "@/lib/job-posting";
 import { mastra } from "@/mastra";
 import {
@@ -43,40 +40,26 @@ function resolveSurface(req: NextRequest, body?: { surface?: unknown }): ChatSur
   return "chat";
 }
 
-/** Prefer client hand-off; fall back to CMA when body has no posting. */
+/** Prefer client hand-off of the bound posting from the resume UI. */
 async function resolveJobSystemContext(
   rawJobPosting: unknown,
 ): Promise<{ system: string | null; error?: NextResponse }> {
-  if (rawJobPosting !== undefined && rawJobPosting !== null) {
-    const parsed = chatJobPostingPayloadSchema.safeParse(rawJobPosting);
-    if (!parsed.success) {
-      return {
-        system: null,
-        error: NextResponse.json(
-          { error: "Invalid jobPosting payload" },
-          { status: 400 },
-        ),
-      };
-    }
-
-    const jar = await cookies();
-    const boundId = await getBoundJobPostingEntryId(
-      jar.get(JOB_POSTING_COOKIE)?.value,
-    );
-    if (boundId && boundId !== parsed.data.entryId) {
-      return {
-        system: null,
-        error: NextResponse.json(
-          { error: "jobPosting entryId does not match bound session" },
-          { status: 403 },
-        ),
-      };
-    }
-
-    return { system: formatJobPostingContext(parsed.data) };
+  if (rawJobPosting === undefined || rawJobPosting === null) {
+    return { system: null };
   }
 
-  return { system: await loadBoundJobPostingContext() };
+  const parsed = chatJobPostingPayloadSchema.safeParse(rawJobPosting);
+  if (!parsed.success) {
+    return {
+      system: null,
+      error: NextResponse.json(
+        { error: "Invalid jobPosting payload" },
+        { status: 400 },
+      ),
+    };
+  }
+
+  return { system: formatJobPostingContext(parsed.data) };
 }
 
 function usageFromUnknown(value: unknown): {
