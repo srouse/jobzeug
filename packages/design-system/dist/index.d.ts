@@ -1,3 +1,5 @@
+export { JzAccordionElement, } from './designSystem/components/jz-accordion/jz-accordion.js';
+export { JzAccordionItemElement, } from './designSystem/components/jz-accordion-item/jz-accordion-item.js';
 export { JzButtonElement, type JzButtonSize, type JzButtonVariant, } from './designSystem/components/jz-button/jz-button.js';
 export { JzDividerElement } from './designSystem/components/jz-divider/jz-divider.js';
 export { JzTabGroupElement, } from './designSystem/components/jz-tab-group/jz-tab-group.js';

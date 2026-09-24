@@ -51,7 +51,7 @@ t.styles = m`
       gap: var(--jz-semantic-space-gap-sm);
       padding: var(--jz-semantic-space-padding-sm)
         var(--jz-semantic-space-padding-md);
-      border-radius: var(--jz-primitive-radius-lg);
+      border-radius: var(--jz-primitive-radius-md);
     }
 
     button:disabled {
@@ -206,4 +206,4 @@ t = o([
 export {
   t as JzButtonElement
 };
-//# sourceMappingURL=jz-button-CL1AIyhq.js.map
+//# sourceMappingURL=jz-button-DjpAGgKV.js.map

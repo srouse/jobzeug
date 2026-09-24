@@ -12,6 +12,26 @@ function isNextBuild(): boolean {
   );
 }
 
+/**
+ * `pg` currently treats sslmode prefer/require/verify-ca as verify-full and warns.
+ * Pin verify-full so behavior stays the same without the deprecation noise.
+ */
+function normalizePgConnectionString(connectionString: string): string {
+  try {
+    const url = new URL(connectionString);
+    const mode = url.searchParams.get("sslmode")?.toLowerCase();
+    if (mode === "prefer" || mode === "require" || mode === "verify-ca") {
+      url.searchParams.set("sslmode", "verify-full");
+    }
+    return url.toString();
+  } catch {
+    return connectionString.replace(
+      /([?&]sslmode=)(prefer|require|verify-ca)\b/i,
+      "$1verify-full",
+    );
+  }
+}
+
 function createPgStore(): PostgresStore {
   const connectionString = process.env.DATABASE_URL;
 
@@ -30,7 +50,7 @@ function createPgStore(): PostgresStore {
 
   return new PostgresStore({
     id: "jobzeug-storage",
-    connectionString,
+    connectionString: normalizePgConnectionString(connectionString),
     ssl:
       process.env.DATABASE_SSL === "true"
         ? { rejectUnauthorized: false }

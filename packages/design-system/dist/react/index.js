@@ -1,31 +1,57 @@
 "use client";
-import n, { forwardRef as z, useState as J, useEffect as C, createElement as g } from "react";
-function a(e, t) {
-  let o = null, c = null;
-  const m = z(function(p, u) {
-    const [l, i] = J(
-      () => o
+import n, { forwardRef as u, useState as J, useEffect as C, createElement as g } from "react";
+function o(e, t) {
+  let a = null, c = null;
+  const m = u(function(p, z) {
+    const [i, l] = J(
+      () => a
     );
     return C(() => {
-      if (o) {
-        i(() => o);
+      if (a) {
+        l(() => a);
         return;
       }
-      c ?? (c = e().then((r) => (o = r, r)));
+      c ?? (c = e().then((r) => (a = r, r)));
       let s = !1;
       return c.then((r) => {
-        s || i(() => r);
+        s || l(() => r);
       }), () => {
         s = !0;
       };
-    }, []), l ? g(l, { ...p, ref: u }) : null;
+    }, []), i ? g(i, { ...p, ref: z }) : null;
   });
   return m.displayName = t, m;
 }
-const d = a(async () => {
+const T = o(async () => {
+  const [{ createComponent: e }, { JzAccordionElement: t }] = await Promise.all([
+    import("@lit/react"),
+    import("../jz-accordion-BUohjdWl.js")
+  ]);
+  return e({
+    tagName: "jz-accordion",
+    elementClass: t,
+    react: n,
+    events: {
+      onChange: "change"
+    }
+  });
+}, "JzAccordion"), f = o(async () => {
+  const [{ createComponent: e }, { JzAccordionItemElement: t }] = await Promise.all([
+    import("@lit/react"),
+    import("../jz-accordion-item-DVACjinn.js")
+  ]);
+  return e({
+    tagName: "jz-accordion-item",
+    elementClass: t,
+    react: n,
+    events: {
+      onToggle: "toggle"
+    }
+  });
+}, "JzAccordionItem"), E = o(async () => {
   const [{ createComponent: e }, { JzButtonElement: t }] = await Promise.all([
     import("@lit/react"),
-    import("../jz-button-CL1AIyhq.js")
+    import("../jz-button-DjpAGgKV.js")
   ]);
   return e({
     tagName: "jz-button",
@@ -35,7 +61,7 @@ const d = a(async () => {
       onClick: "click"
     }
   });
-}, "JzButton"), y = a(async () => {
+}, "JzButton"), w = o(async () => {
   const [{ createComponent: e }, { JzDividerElement: t }] = await Promise.all([
     import("@lit/react"),
     import("../jz-divider-DYZQvkmI.js")
@@ -45,7 +71,7 @@ const d = a(async () => {
     elementClass: t,
     react: n
   });
-}, "JzDivider"), b = a(async () => {
+}, "JzDivider"), N = o(async () => {
   const [{ createComponent: e }, { JzIconElement: t }] = await Promise.all([
     import("@lit/react"),
     import("../jz-icon-B52dtOZo.js")
@@ -55,7 +81,7 @@ const d = a(async () => {
     elementClass: t,
     react: n
   });
-}, "JzIcon"), E = a(async () => {
+}, "JzIcon"), b = o(async () => {
   const [{ createComponent: e }, { JzTabGroupElement: t }] = await Promise.all([
     import("@lit/react"),
     import("../jz-tab-group-Dt5L0Ksm.js")
@@ -68,7 +94,7 @@ const d = a(async () => {
       onChange: "change"
     }
   });
-}, "JzTabGroup"), w = a(async () => {
+}, "JzTabGroup"), j = o(async () => {
   const [{ createComponent: e }, { JzTabItemElement: t }] = await Promise.all([
     import("@lit/react"),
     import("../jz-tab-item-C8xaAIuT.js")
@@ -81,7 +107,7 @@ const d = a(async () => {
       onClick: "click"
     }
   });
-}, "JzTabItem"), N = a(async () => {
+}, "JzTabItem"), v = o(async () => {
   const [{ createComponent: e }, { JzTagElement: t }] = await Promise.all([
     import("@lit/react"),
     import("../jz-tag-E1gR6xfE.js")
@@ -91,10 +117,10 @@ const d = a(async () => {
     elementClass: t,
     react: n
   });
-}, "JzTag"), j = a(async () => {
+}, "JzTag"), I = o(async () => {
   const [{ createComponent: e }, { JzTextElement: t }] = await Promise.all([
     import("@lit/react"),
-    import("../jz-text-BKEibjj6.js")
+    import("../jz-text-DkXaIL3Z.js")
   ]);
   return e({
     tagName: "jz-text",
@@ -103,12 +129,14 @@ const d = a(async () => {
   });
 }, "JzText");
 export {
-  d as JzButton,
-  y as JzDivider,
-  b as JzIcon,
-  E as JzTabGroup,
-  w as JzTabItem,
-  N as JzTag,
-  j as JzText
+  T as JzAccordion,
+  f as JzAccordionItem,
+  E as JzButton,
+  w as JzDivider,
+  N as JzIcon,
+  b as JzTabGroup,
+  j as JzTabItem,
+  v as JzTag,
+  I as JzText
 };
 //# sourceMappingURL=index.js.map

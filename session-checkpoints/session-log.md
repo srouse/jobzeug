@@ -427,3 +427,56 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 #### Next
 
 - Apply Contentful schema if Employer still has a logo field in the CMS; continue Design-tab polish without touching design-system package
+
+### [2026-09-24T17:56:05-05:00]
+
+#### Summary
+
+- Cleared stale `.next` resume type stubs so local production build passes; silenced `pg` sslmode deprecation warnings by normalizing DATABASE_URL to `verify-full`.
+
+#### Changes
+
+- Evidence / records:
+- Skills / tooling:
+- Other: `src/mastra/storage.ts` sslmode normalize; `.env.example` note; ship staged `JzAccordion` dist exports already built for Vercel
+
+#### Decisions
+
+- Do not rewrite app accordion away from `JzAccordion` — consume published DS exports
+- Pin `sslmode=verify-full` in code so hosted URLs with `require` keep current pg behavior without warnings
+
+#### Plans cached
+
+- add_story_skill_2a282f5c.plan.md
+- brand_url_design_knobs_cc92b6b9.plan.md
+- comp-make_skill_429bbef5.plan.md
+- customers_evidence_log_51450833.plan.md
+- employer_logo_prefetch_02387199.plan.md
+- evidence_contentful_compress_793daf55.plan.md
+- evidence_mastra_workspace_4e07deca.plan.md
+- finish_docked_toolbar_52ac2998.plan.md
+- full_job_post_context_e1b35bf3.plan.md
+- job_cite_chat-only_c7f1d253.plan.md
+- jz-icon_phosphor_0589d485.plan.md
+- jztext_jzicon_migration_23ae0664.plan.md
+- montserrat_entry_css_f8261a2c.plan.md
+- next.js_mastra_scaffold_718b8d31.plan.md
+- persist_site_password_session_cc3eee20.plan.md
+- resume_cite_highlights_ae4c6a1c.plan.md
+- resume_floating_chat_c02c45c0.plan.md
+- resume_spa_contentful_5d3d3333.plan.md
+- rip_specs_restore_lit_8e08794a.plan.md
+- session_checkpoint_skill_65575be3.plan.md
+- session_design_tokens_20a67a82.plan.md
+- session_job_posting_28aa6696.plan.md
+- site_password_gate_c3c92081.plan.md
+- specs_ds_import_3ed8c9e7.plan.md
+- stories_to_projects_rename_34704978.plan.md
+- themed_answer_accordion_32662583.plan.md
+- vercel_ds_prebuilt_e09f8557.plan.md
+- web_components_ds_b1737d33.plan.md
+- wire_local_ds2_cli_cc2d5484.plan.md
+
+#### Next
+
+- Confirm Vercel deploy with JzAccordion dist on main; leave design-system source edits to DS ownership
