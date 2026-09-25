@@ -6,12 +6,16 @@ Evidence: Scott's direct account; resume also claims this widget — still not i
 
 ## Resume connection
 
-- Spans roles: **v1** under SE / Solution Specialist work ([R002](../roles/R002-contentful-solution-specialist.md), provisional); **production** under latest title / CIA — Customer Insights and Adoption ([R001 — Senior Product Architect](../roles/R001-contentful-senior-product-architect.md)).
+- Role record: [R001 — Senior Product Architect](../roles/R001-contentful-senior-product-architect.md) at [C001 Contentful](../employers/C001-contentful.md) (CIA — Customer Insights and Adoption). Canonical resume/compress link. **v1** began during Solution Specialist / SE work (two–three day prospect request); **production** operationalized under this title / CIA.
 - Employer: [C001 Contentful](../employers/C001-contentful.md)
 - Project dates: v1 in **two or three days** (SE request). Production operationalization over the **last two or three months** (Scott’s account, relative to capture date September 20, 2026). Exact calendar months TBD.
 - Collaborators: Requesting SE(s); **two or three prospects** involved early (names TBD — prospects deferred, do not create CU/CL yet). Later: **PM** via product marketing path; **security** sign-off. Sitting **outside core product**.
 - Perspective: Strong [P002](../perspectives/P002-build-deep-to-influence.md) example — walk ahead, then operationalize.
 - **Naming collision:** In-widget “blueprint” (wireframe outline showing content status) is **not** [S001 Blueprints](S001%20-%20Blueprints.md) the CIA installable repo/design system.
+
+## Resume summary
+
+I built and shipped Contentful for Figma, a public widget that binds live Contentful fields to Figma components—including content-status “blueprint” outlines—and operationalized it through product marketing, PM, and security outside the core product.
 
 ## Account summary
 

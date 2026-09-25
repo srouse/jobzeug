@@ -13,6 +13,10 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 - Related (future project): **Experience Orchestration** — Contentful major initiative (~year+); Scott says Blueprints became a centerpiece / highly influential there. Capture separately when told; do not invent that narrative here.
 - Perspective: [P002 Build deep to influence large initiatives](../perspectives/P002-build-deep-to-influence.md) — operating mode illustrated by this work.
 
+## Resume summary
+
+I took over Contentful’s Blueprints effort and built a ~50-component, Figma-centric design system with Design System Squared so Figma exports drive matching React components and tokens—battle-tested against real Contentful content.
+
 ## Account summary
 
 Coworkers on Customer Insights and Adoption started **Blueprints**: a repository prospects and customers can install to see **content-model best practices**, plus a **frontend** so people can see how a content model flows into a **design system** and into **web pages**.

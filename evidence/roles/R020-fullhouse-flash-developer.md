@@ -15,7 +15,7 @@ LinkedIn: Jul 2005 – Dec 2005 (6 months). Follows LeMans [R021](R021-lemans-we
 
 LinkedIn source claim (Scott’s profile copy). Not independently verified.
 
-My responsibilities involved overseeing the development of a Flash department including new hires, code standards, and the general Flash development architecture. I was instrumental in the MillerHighLife.com campaign with a search engine optimized, all-Flash site for the relaunch of Miller’s Girl in the Moon campaign.
+I oversaw Flash development at FullHouse—including new hires, code standards, and the general architecture—and was instrumental in the Miller High Life Girl in the Moon relaunch, delivering a search-engine-optimized all-Flash brand experience.
 
 
 

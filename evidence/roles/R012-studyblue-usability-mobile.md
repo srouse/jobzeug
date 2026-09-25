@@ -13,12 +13,15 @@ Dates are resume-source claims and have not been separately confirmed.
 
 Titles can vary in wording between resume variants. Preserve original wording in the linked snapshots; the title above comes from the full working resume.
 
+## LinkedIn description
+
+LinkedIn source claim (Scott’s profile copy). Not independently verified.
+
+At StudyBlue I began as a mobile developer leading the product’s move onto iPad, then stepped into Head of Usability with ownership of experience across the platform. I established a user-driven development loop—rapid prototyping, testing, analytics, and interviews—in support of a product used by nearly two million people.
+
 ## Existing resume claims
 
-- Led the migration of StudyBlue’s application to iPad.
-- Promoted to Head of Usability, overseeing product experience across the platform.
-- Established a user-driven development process using rapid prototyping, testing, analytics, and interviews.
-- Supported a product with nearly two million users.
+None — role narrative is in LinkedIn description; project-level detail lives on linked projects when captured.
 
 ## Linked projects
 

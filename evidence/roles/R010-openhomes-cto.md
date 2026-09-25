@@ -17,12 +17,11 @@ Titles can vary in wording between resume variants. Preserve original wording in
 
 LinkedIn source claim (Scott’s profile copy). Not independently verified.
 
-OpenHomes is a safe, affordable, modern way to buy or sell a home. We use technology to connect home buyers and sellers directly, without the need for an agent.
-
-OpenHomes was accepted into the Summer 2013 class of gener8tor, a Wisconsin tech accelerator. Serving as CTO, I have been responsible for every technical and design aspect of the site except the logo.
+As CTO of OpenHomes I owned product design and engineering for a direct home marketplace that connects buyers and sellers without an agent—every technical and design aspect of the product except the logo. The company was accepted into gener8tor’s Summer 2013 cohort while I was in that role.
 
 ## Existing resume claims
-- Led product design and engineering for a direct real-estate marketplace; selected for the Summer 2013 gener8tor cohort.
+
+None — role narrative is in LinkedIn description; project-level detail lives on linked projects when captured.
 
 ## Linked projects
 

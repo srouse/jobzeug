@@ -5,6 +5,7 @@
     "R007"
   ],
   "name": "Presentation Deck widget (personal)",
+  "summary": "I built a personal Figma Community presentation-deck widget with synced metadata, layouts, TOC, and PDF export—independent of Summit employment delivery.",
   "showOnResume": true,
   "tags": [
     "personal"

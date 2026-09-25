@@ -14,6 +14,22 @@ function isNotFound(error) {
   }
 }
 
+/** Contentful requires omit+publish before a field can be dropped from the model. */
+async function omitRemovedFields(client, params, contentTypeId, existing, desiredFieldIds) {
+  const toOmit = (existing.fields || []).filter(
+    (field) => !desiredFieldIds.has(field.id) && !field.omitted,
+  );
+  if (toOmit.length === 0) return existing;
+  const fields = existing.fields.map((field) =>
+    desiredFieldIds.has(field.id) ? field : { ...field, omitted: true },
+  );
+  const omitted = await client.contentType.update(
+    { ...params, contentTypeId },
+    { ...existing, fields },
+  );
+  return client.contentType.publish({ ...params, contentTypeId }, omitted);
+}
+
 export async function applySchema({ dryRun = false } = {}) {
   // jobLine/jobTool before jobPosting (parent links to children).
   const types = [...coreContentTypes(), ...jobPostingContentTypes()];
@@ -33,8 +49,10 @@ export async function applySchema({ dryRun = false } = {}) {
       displayField: desired.displayField,
       fields: desired.fields,
     };
+    const desiredFieldIds = new Set(desired.fields.map((field) => field.id));
     try {
-      const existing = await client.contentType.get({ ...params, contentTypeId });
+      let existing = await client.contentType.get({ ...params, contentTypeId });
+      existing = await omitRemovedFields(client, params, contentTypeId, existing, desiredFieldIds);
       const updated = await client.contentType.update({ ...params, contentTypeId }, { ...existing, ...body });
       await client.contentType.publish({ ...params, contentTypeId }, updated);
       results.push({ id: contentTypeId, action: 'updated' });

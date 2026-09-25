@@ -5,5 +5,6 @@
     "R001"
   ],
   "name": "Blueprints",
+  "summary": "I took over Contentful’s Blueprints effort and built a ~50-component, Figma-centric design system with Design System Squared so Figma exports drive matching React components and tokens—battle-tested against real Contentful content.",
   "showOnResume": true
 }

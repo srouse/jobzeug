@@ -1,0 +1,10 @@
+{
+  "evidenceId": "S017",
+  "employer": "C014",
+  "roles": [
+    "R022"
+  ],
+  "name": "JSOnline ad system installation",
+  "summary": "I installed and integrated a third-party ad system across JSOnline—Flash detection, image/HTML fallbacks, and site-wide section mapping—so rich media ads could serve in production.",
+  "showOnResume": true
+}

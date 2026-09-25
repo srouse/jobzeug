@@ -12,6 +12,10 @@ Evidence: Scott's direct account; no code, metadata samples, evaluation results,
 - Related presentation / prototype context: [S010 Berlin prototype exploration](S010%20-%20Berlin%20prototype%20exploration.md). Scott says he presented this binding work there; the broader Berlin project remains to be narrated.
 - Customers / clients: None named. Contentful is the employer and platform; Figma is the design platform, not a newly established customer or client engagement.
 
+## Resume summary
+
+I researched AI-assisted content and component binding—semantic metadata and agent-assisted repair patterns that help map structured content to design properties—still exploratory and unshipped beyond Figma/Contentful storage.
+
 ## Account summary
 
 Faithful summary of Scott's September 21 account, not a quotation:

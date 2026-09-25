@@ -1,0 +1,10 @@
+{
+  "evidenceId": "S015",
+  "employer": "C001",
+  "roles": [
+    "R001"
+  ],
+  "name": "Understanding AI by its building blocks (Contentful series)",
+  "summary": "I authored a two-part Contentful Guides series on AI building blocks, covering prompts through MCP, RAG, and agents, with interactive prompt modules in part one.",
+  "showOnResume": true
+}

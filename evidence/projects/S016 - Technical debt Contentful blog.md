@@ -6,11 +6,15 @@ Evidence: Artifact-supported (public article); byline title may reflect later ro
 
 ## Resume connection
 
-- Role record: [R002 — Solution Specialist](../roles/R002-contentful-solution-specialist.md) at [C001 Contentful](../employers/C001-contentful.md). **Published June 2, 2025** — inside R002 window (Feb 2025–early 2026). Page byline currently reads “Senior Product Architect - Internal Tools” (likely updated author bio)—**do not** reassign the project to R001 on byline alone.
+- Role record: [R002 — Solution Specialist](../roles/R002-contentful-solution-specialist.md) at [C001 Contentful](../employers/C001-contentful.md). **Published June 2, 2025** — inside Solution Specialist window (Feb 2025–early 2026). Page byline currently reads “Senior Product Architect - Internal Tools” (likely updated author bio)—**do not** reassign the project on byline alone; canonical role remains Solution Specialist.
 - Employer: [C001 Contentful](../employers/C001-contentful.md)
 - Public artifact: https://www.contentful.com/blog/technical-debt/
 - Author index: https://www.contentful.com/blog/author/scott-rouse/
 - Customers / clients: None named as CU/CL. Article is marketer-facing enablement; mentions implementation patterns when working with companies on Contentful (general, not a disclosed customer story). Clover appears only as a Contentful case-study link, not Scott’s personal engagement claim.
+
+## Resume summary
+
+I wrote a marketer-facing Contentful Insights piece on recognizing technical debt and how modularity, design systems, and structured content help teams move faster.
 
 ## Account summary
 

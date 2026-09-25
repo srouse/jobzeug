@@ -17,18 +17,16 @@ Titles can vary in wording between resume variants. Preserve original wording in
 
 LinkedIn source claim (Scott’s profile copy). Not independently verified.
 
-As a member of Contentful’s demo team, I built stories that showcased the platform’s capabilities in clear, compelling ways. I combined design, development, and storytelling skills to help product teams bring new features to market—crafting demos that were both easy to understand and easy to replicate for prospects and customers alike.
-
-I also authored internal and external articles and presentations on the intersection of design systems and AI, helping shape thought leadership and internal strategy in this emerging space.
+As a member of Contentful’s demo team, I built stories that showcased the platform in clear, compelling ways—combining design, development, and storytelling so product launches and sales motions had demos people could understand and reuse. I also wrote and spoke about the intersection of design systems and AI, helping shape thought leadership and internal strategy in that emerging space.
 
 ## Existing resume claims
-- Built scalable, repeatable demos focused on enterprise design systems and structured content architectures.
-- Translated complex platform capabilities into clear technical narratives for launches, sales motions, and partner audiences.
-- Authored a top-five Contentful blog post of the year and presented on design systems and AI during the 2024 Partnership Tour.
+
+None — role narrative is in LinkedIn description; project-level detail lives on linked projects.
 
 ## Linked projects
 
 - [S014: Design tokens Contentful blog](../projects/S014%20-%20Design%20tokens%20Contentful%20blog.md) — published May 16, 2024; layered token system guide; Scott reports sustained top-10 performance / Google visibility.
+- [S022: 2024 Partnership Tour - AI design systems](../projects/S022%20-%202024%20Partnership%20Tour%20AI%20design%20systems.md) — Chicago, Brooklyn, Toronto; AI×DS exploratory partner talks; soft precursor to later Contentful product (Scott).
 
 ## Source references
 

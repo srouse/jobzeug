@@ -11,6 +11,10 @@ Parent umbrella: [S004 State Farm design system refresh](S004%20-%20State%20Farm
 - Employer: [C002 State Farm](../employers/C002-state-farm.md)
 - Collaborators: Design-system **development** team (Lit / web components); design-system **design** team as the other side of the bridge. Token/Figma craft detail in [S006](S006%20-%20State%20Farm%20Figma%20design%20system.md); executive buy-in in [S005](S005%20-%20State%20Farm%20tokens%20persuasion.md).
 
+## Resume summary
+
+I enabled State Farm’s engineering team on Lit and web components and acted as the design↔dev bridge so token decisions stayed coherent across both sides.
+
 ## Account summary
 
 Scott helped the design-system **development** team understand and **accelerate** learning on **web components**, using **Lit**. He already had **years of Lit experience**, answered questions cleanly and early, and built strong rapport and friendships on that team — getting past the harder Lit parts **quickly**.

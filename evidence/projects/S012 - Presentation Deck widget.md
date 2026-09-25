@@ -16,6 +16,10 @@ Evidence: Scott’s direct account (personal project); public product copy and C
 - Project abbreviation on the site: **PD**
 - Site lists developer email scott.rouse@gmail.com (public site metadata).
 
+## Resume summary
+
+I built a personal Figma Community presentation-deck widget with synced metadata, layouts, TOC, and PDF export—independent of Summit employment delivery.
+
 ## Account summary
 
 Scott built a **Presentation Deck** Figma Community **widget** (personal): a synchronized presentation-deck system on canvas. Public framing (presentationdeck.app / Community): page templates including cover, descriptor pages (full and minimized), and layout guides; each page carries **project title, author, and date** synchronized across Presentation Deck widgets on update; pages organize into **sequentially numbered** exports. Landscape legal + PDF merge path aimed at decks that read well on **16:9** and print predictably.

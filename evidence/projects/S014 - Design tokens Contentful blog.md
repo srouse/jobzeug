@@ -13,6 +13,10 @@ Evidence: Artifact-supported (public article); Scott’s accounts for ranking/SE
 - Customers / clients: None. Thought-leadership / enablement writing, not a named CU/CL engagement.
 - Related: State Farm token work [S005](S005%20-%20State%20Farm%20tokens%20persuasion.md) / [S006](S006%20-%20State%20Farm%20Figma%20design%20system.md) is earlier enterprise practice; this article is Contentful-published teaching, not State Farm delivery.
 
+## Resume summary
+
+I wrote Contentful’s public guide on layered design tokens—primitive, semantic, and component—using color as the worked example for distribution across Figma, code, and Studio.
+
 ## Account summary
 
 **Published guide** (Scott Rouse, Contentful blog, May 16, 2024): walks readers from first principles through building a **layered design-token system**, using **color** as the worked example.

@@ -5,10 +5,7 @@
   "dateLabel": "Nov 2012 - Jun 2013",
   "startDate": "2012-11-01",
   "endDate": "2013-06-30",
-  "summary": "I created, architected, and implemented user-centric prototypes and design solutions for the web and iOS. I was the lead designer and developer in the redesign of Propeller's iPhone application, which included multiple iterations of HTML UI prototypes that resulted in solutions that informed an equally iterative design process. I subsequently worked with another iOS developer to implement this application.",
-  "highlights": [
-    "Architected user-centered web and iOS prototypes and led an iterative redesign of the iPhone application."
-  ],
+  "summary": "I created, architected, and implemented user-centered prototypes and design solutions for web and iOS. As lead designer and developer on Propeller’s iPhone redesign, I drove multiple rounds of HTML UI prototypes that informed an equally iterative design process, then partnered with another iOS developer to ship the application.",
   "showOnResume": true,
   "tags": [
     "startup",

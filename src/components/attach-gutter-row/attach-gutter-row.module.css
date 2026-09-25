@@ -1,0 +1,50 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  border-radius: var(--jz-primitive-radius-sm, 0.25rem);
+  transition: background-color 150ms ease;
+}
+
+.attachable {
+  cursor: pointer;
+}
+
+.attachable:hover {
+  background: var(
+    --jz-semantic-color-background-control-default-hover,
+    #f5f5f5
+  );
+}
+
+.gutter {
+  flex: 0 0 var(--resume-page-pad-inline, 40px);
+  width: var(--resume-page-pad-inline, 40px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+}
+
+.checkbox {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  accent-color: var(--jz-semantic-color-text-primary, #2563eb);
+  cursor: pointer;
+}
+
+.content {
+  flex: 1 1 auto;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.contentHit {
+  cursor: pointer;
+}

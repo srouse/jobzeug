@@ -64,6 +64,7 @@ async function writeThemeParagraph(input: {
   question: string;
   themeId: string;
   title: string;
+  highlight: string;
   facts: string[];
   needLines: string[];
 }): Promise<{ markdown: string; usage: UsageTotals }> {
@@ -75,13 +76,14 @@ async function writeThemeParagraph(input: {
   const prompt = `User question: ${input.question}
 
 Section id: ${input.themeId}
-Section title: ${input.title}
+Caption title (already on card): ${input.title}
+Highlight line (already on card): ${input.highlight}
 
 Facts you may use (only these):
 ${input.facts.map((fact) => `- ${fact}`).join("\n")}
 ${needBlock}
 
-Write the section paragraph. Echo themeId "${input.themeId}".`;
+Write the short description only (1–2 sentences). Prefer he/his; use "Scott" at most once. Echo themeId "${input.themeId}".`;
 
   const runOnce = async () => {
     const result = await agent.generate(prompt, {
@@ -164,6 +166,7 @@ export async function runThemedAnswer(input: {
   const shells: AnswerSection[] = outline.themes.map((theme) => ({
     id: theme.id,
     title: theme.title,
+    highlight: theme.highlight,
     markdown: "",
     citations: citeEvidenceSchema.parse(theme.citations ?? emptyCitations),
   }));
@@ -178,12 +181,14 @@ export async function runThemedAnswer(input: {
         question: input.question,
         themeId: theme.id,
         title: theme.title,
+        highlight: theme.highlight,
         facts: theme.facts,
         needLines: jobLineSnippets(input.jobPosting, citations.jobLines),
       });
       const section: AnswerSection = {
         id: theme.id,
         title: theme.title,
+        highlight: theme.highlight,
         markdown,
         citations,
       };

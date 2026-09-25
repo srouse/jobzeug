@@ -5,12 +5,7 @@
   "dateLabel": "Sep 2011 - Nov 2012",
   "startDate": "2011-09-01",
   "endDate": "2012-11-30",
-  "highlights": [
-    "Led the migration of StudyBlue’s application to iPad.",
-    "Promoted to Head of Usability, overseeing product experience across the platform.",
-    "Established a user-driven development process using rapid prototyping, testing, analytics, and interviews.",
-    "Supported a product with nearly two million users."
-  ],
+  "summary": "At StudyBlue I began as a mobile developer leading the product’s move onto iPad, then stepped into Head of Usability with ownership of experience across the platform. I established a user-driven development loop—rapid prototyping, testing, analytics, and interviews—in support of a product used by nearly two million people.",
   "showOnResume": true,
   "tags": [
     "startup",

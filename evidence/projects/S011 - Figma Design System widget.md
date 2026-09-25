@@ -14,6 +14,10 @@ Evidence: Scott’s direct account (personal project); public product copy and C
   - Figma Community widget: https://www.figma.com/community/widget/1219461874726507820/figma-design-system (widget id `1219461874726507820`)
 - Project abbreviation on the site: **FDS**
 
+## Resume summary
+
+I built a personal Figma Community design-system widget (tokens, ADA, fonts, npm deploy) that helps teams operationalize design systems in Figma—independent of Summit employment delivery.
+
 ## Account summary
 
 Scott built a **Figma Design System** Community **widget** (personal) that tries to integrate design-system concerns (ADA, color/typography sets) with Figma structures (styles, components) and to explore how much of a design-system build tool can live **inside Figma**, using existing services (Font Awesome, Google Fonts, GitHub repos / npm packaging).

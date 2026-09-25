@@ -145,6 +145,63 @@ function proseBlock(block) {
     .join('\n\n');
 }
 
+/** Strip common Markdown markers from extracted prose (bold, links, backticks). */
+function stripMarkdown(text) {
+  return text
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/[*_]{1,3}([^*_]+)[*_]{1,3}/g, '$1')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
+ * Brief resume blurb for Contentful /resume.
+ * Prefer ## Resume summary (1–2 sentences written for the resume).
+ * Fallback: first usable paragraph of ## Account summary…, skipping capture-meta lines.
+ */
+function projectAccountSummary(md, maxChars = 420) {
+  const resumeBlock = section(md, 'Resume summary');
+  if (resumeBlock) {
+    const prose = proseBlock(resumeBlock.replace(/^-\s+.+$/gm, '').trim());
+    const brief = stripMarkdown(prose.split(/\n\s*\n/)[0] || '');
+    if (brief) return brief.slice(0, maxChars).trim() || undefined;
+  }
+
+  const start = md.search(/^## Account summary\b.*$/m);
+  if (start < 0) return undefined;
+  const after = md.slice(start).split('\n').slice(1).join('\n');
+  const end = after.search(/^## /m);
+  const block = (end < 0 ? after : after.slice(0, end)).trim();
+  if (!block) return undefined;
+
+  const metaish = /^(scott describes|scott frames|scott says|correction vs|wants captured|pending|tbd\b|do not confuse|not independently)/i;
+  const paragraphs = proseBlock(block)
+    .split(/\n\s*\n/)
+    .map(stripMarkdown)
+    .filter(Boolean)
+    .filter(part => !metaish.test(part));
+  if (!paragraphs.length) return undefined;
+
+  const labeled = paragraphs.find(part =>
+    /^(what he built|what he took on|delivery|capabilities)\b/i.test(part),
+  );
+  let brief = labeled
+    ? labeled.replace(/^(what he built|what he took on|delivery|capabilities)\s*:\s*/i, '')
+    : paragraphs[0];
+
+  if (/:\s*$/.test(brief)) {
+    const sentences = brief.match(/[^.!?]+[.!?]+/g);
+    if (sentences?.length) brief = sentences.join('').trim();
+  }
+  if (brief.length > maxChars) {
+    const cut = brief.slice(0, maxChars);
+    const lastStop = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('; '), cut.lastIndexOf('—'));
+    brief = (lastStop > maxChars * 0.5 ? cut.slice(0, lastStop + 1) : `${cut.trimEnd()}…`).trim();
+  }
+  return brief || undefined;
+}
+
 function linkedInSummary(md) {
   for (const heading of ['LinkedIn description', 'LinkedIn description summary']) {
     const block = section(md, heading);
@@ -195,10 +252,11 @@ async function compressProjects() {
     const roles = uniqueIds(connection, ROLE_RE);
     if (!employer) throw new Error(`Missing employer for ${id}`);
     if (!roles.length) throw new Error(`Missing roles for ${id}`);
+    const summary = projectAccountSummary(md);
     const showOnResume = parseShowOnResume(md, 'project', id);
     const tags = parseTags(md, 'project', id, employer);
     out.push(await writeOutput('project', id, compact({
-      evidenceId: id, employer, roles, name, showOnResume,
+      evidenceId: id, employer, roles, name, summary, showOnResume,
     }), tags));
   }
   return out;

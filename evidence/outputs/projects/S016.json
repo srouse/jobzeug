@@ -1,0 +1,10 @@
+{
+  "evidenceId": "S016",
+  "employer": "C001",
+  "roles": [
+    "R002"
+  ],
+  "name": "Hidden cost of technical debt (Contentful blog)",
+  "summary": "I wrote a marketer-facing Contentful Insights piece on recognizing technical debt and how modularity, design systems, and structured content help teams move faster.",
+  "showOnResume": true
+}

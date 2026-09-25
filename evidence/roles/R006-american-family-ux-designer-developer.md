@@ -13,9 +13,15 @@ Dates are resume-source claims and have not been separately confirmed.
 
 Titles can vary in wording between resume variants. Preserve original wording in the linked snapshots; the title above comes from the extracted resume variant data.
 
+## LinkedIn description
+
+LinkedIn source claim (Scott’s profile copy). Not independently verified.
+
+At American Family I worked as a senior UX designer and developer initiating an enterprise, cross-brand design system and collaborating with R&D teams on exploratory natural-language AI and knowledge-system work. The role sat at the intersection of design systems, product UX, and early AI experimentation inside a large insurance footprint.
+
 ## Existing resume claims
 
-- Initiated an enterprise, cross-brand design system and collaborated with R&D teams exploring natural-language AI and knowledge systems.
+None — role narrative is in LinkedIn description; project-level detail lives on linked projects when captured.
 
 ## Linked projects
 

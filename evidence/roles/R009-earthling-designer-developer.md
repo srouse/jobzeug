@@ -17,10 +17,11 @@ Titles can vary in wording between resume variants. Preserve original wording in
 
 LinkedIn source claim (Scott’s profile copy). Not independently verified.
 
-With Earthling Interactive I worked with over 30 companies, mostly startups, to design, prototype, and help develop their mobile and web applications. I developed a short iterative approach to prototyping, focusing on synthesizing UI and product solutions via mockups, interactive prototypes in native code (html, objective c, etc), and validation through formal user testing.
+At Earthling Interactive I worked with more than thirty companies—mostly startups—to design, prototype, and help develop their mobile and web products. I developed a short iterative prototyping approach that synthesized UI and product solutions through mockups, coded interactive prototypes (HTML, Objective-C, and related stacks), and validation via formal user testing.
 
 ## Existing resume claims
-- Designed and prototyped web and mobile products for 30+ companies using mockups, coded prototypes, and user testing.
+
+None — role narrative is in LinkedIn description; project-level detail lives on linked projects when captured.
 
 ## Linked projects
 

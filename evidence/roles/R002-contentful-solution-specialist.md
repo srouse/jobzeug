@@ -17,19 +17,16 @@ Titles can vary in wording between resume variants. Preserve original wording in
 
 LinkedIn source claim (Scott’s profile copy). Not independently verified.
 
-In this role, I explore AI-driven ways to speed up demo creation—from research and content modeling to design system integration and layout generation. I work closely with solution engineers to design and build high-impact demos and proof-of-concepts, and help teams think through how design systems, structured content, and AI can reduce technical debt and move faster. I also contribute to innovation strategy by identifying gaps in tooling and workflows and prototyping forward-looking solutions to address them.
+In this role I explore AI-driven ways to speed up demo creation—from research and content modeling through design-system integration and layout generation. I partner closely with solution engineers on high-impact demos and proofs of concept, and help teams think through how design systems, structured content, and AI reduce technical debt and move faster. I also contribute to innovation strategy by spotting tooling and workflow gaps and prototyping forward-looking fixes.
 
 ## Existing resume claims
-- Design and prototype AI-driven workflows spanning research, content modeling, design-system integration, and layout generation.
-- Partner with Solution Engineers to create enterprise demos and proof-of-concepts tailored to customer needs.
-- Advise teams on aligning structured content, design systems, and AI to reduce technical debt and accelerate delivery.
-- Identify workflow and tooling gaps, then build forward-looking prototypes that inform innovation strategy.
+
+None — role narrative is in LinkedIn description; project-level detail lives on linked projects.
 
 ## Linked projects
 
 - [S002: Bulk Editor](../projects/S002%20-%20Bulk%20Editor.md) — provisional role association; Scott described SE work; project dates unconfirmed.
 - [S003: DemAI](../projects/S003%20-%20DemAI.md) — provisional; SE AI demo platform; dates placed before late-2025 AI shift.
-- [S008: Contentful for Figma widget](../projects/S008%20-%20Contentful%20for%20Figma%20widget.md) — v1 built as SE request (2–3 days); production later under R001/CIA.
 - [S016: Technical debt Contentful blog](../projects/S016%20-%20Technical%20debt%20Contentful%20blog.md) — published June 2, 2025; marketer-facing Insights piece.
 
 ## Source references

@@ -13,6 +13,10 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts. Port
 - Collaborators: Other SEs as intended/actual users; specific co-builders not named.
 - Customers / clients: None named for this capture.
 
+## Resume summary
+
+I built DemAI, an SE demo platform that turns crawled sites and design-system abstractions into one-button, agent-driven Contentful demos with a top-down content model.
+
 ## Account summary
 
 Scott built **DemAI**, an application for Contentful solution engineers. The core idea: the best SE presentation looks like the customer’s own site, while still using Contentful with **best-practice content modeling** — not a hastily assembled lookalike with a weak content model.

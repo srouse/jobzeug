@@ -6,17 +6,28 @@ import {
   JobPostingPanel,
   JobPostingProvider,
 } from "@/components/job-posting";
-import { EvidenceConnectors } from "@/components/evidence-connectors";
-import { EvidenceFocusScroll } from "@/components/evidence-focus-scroll";
-import { ResumeAnswerStage } from "@/components/resume-answer-stage";
-import { ResumeChatProvider } from "@/components/resume-chat-context";
-import { ResumeChatDock } from "@/components/resume-chat-dock";
-import { ResumeDocument } from "@/components/resume-document";
-import { ResumeHighlightProvider } from "@/components/resume-highlight-context";
-import { ResumePlayToolbar } from "@/components/resume-play-toolbar";
+import {
+  EvidenceConnectors,
+  LAYOUT_MEDIUM_MIN_PX,
+  LAYOUT_WIDE_MIN_PX,
+  ResumeChatDock,
+  ResumeChatProvider,
+  ResumeDocument,
+  ResumeHighlightProvider,
+  useResumeHighlights,
+  type EvidencePage,
+} from "@/components/resume";
+import { AnswerStage, DesignModal, DesignSessionProvider } from "@/components/stage";
+import { JzButton } from "@jobzeug/design-system/react";
 import styles from "./resume.module.css";
 
 const ENTRY_ID_RE = /^[\w-]+$/;
+
+const MOBILE_TABS: Array<{ id: EvidencePage; label: string }> = [
+  { id: "resume", label: "Resume" },
+  { id: "stage", label: "Answer" },
+  { id: "job", label: "Job posting" },
+];
 
 export function normalizeRouteEntryId(
   raw: string | null | undefined,
@@ -34,10 +45,14 @@ export function entryIdFromPathname(pathname: string): string | null {
 }
 
 function ResumePageBody() {
+  const { evidencePage, setEvidencePage } = useResumeHighlights();
   const [resume, setResume] = useState<ResumeViewModel | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [chatOpen, setChatOpen] = useState(false);
+  const [designOpen, setDesignOpen] = useState(false);
+  const [wide, setWide] = useState(true);
+  const [mobile, setMobile] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -75,26 +90,137 @@ function ResumePageBody() {
     };
   }, []);
 
+  useEffect(() => {
+    const wideMq = window.matchMedia(`(min-width: ${LAYOUT_WIDE_MIN_PX}px)`);
+    const mobileMq = window.matchMedia(
+      `(max-width: ${LAYOUT_MEDIUM_MIN_PX - 1}px)`,
+    );
+    const sync = () => {
+      setWide(wideMq.matches);
+      setMobile(mobileMq.matches);
+    };
+    sync();
+    wideMq.addEventListener("change", sync);
+    mobileMq.addEventListener("change", sync);
+    return () => {
+      wideMq.removeEventListener("change", sync);
+      mobileMq.removeEventListener("change", sync);
+    };
+  }, []);
+
+  // Medium left-rail only knows resume|job — leave stage if we leave mobile.
+  useEffect(() => {
+    if (!mobile && evidencePage === "stage") {
+      setEvidencePage("resume");
+    }
+  }, [mobile, evidencePage, setEvidencePage]);
+
+  const resumeActive = wide || evidencePage === "resume";
+  const jobActive = wide || evidencePage === "job";
+  const stageVisible = !mobile || evidencePage === "stage";
+  const pagesVisible = !mobile || evidencePage !== "stage";
+
+  const selectPage = (page: EvidencePage) => {
+    setEvidencePage(page);
+  };
+
   return (
-    <main className={styles.root}>
+    <main
+      className={styles.root}
+      data-mobile-view={mobile ? evidencePage : undefined}
+    >
       <div className={styles.workspace}>
         <div className={`${styles.inner} ${styles.innerBound}`}>
-          <div className={styles.resumeColumn}>
-            <ResumeDocument
-              resume={resume}
-              loading={loading}
-              error={error}
-            />
+          <div
+            className={styles.leftRail}
+            hidden={!pagesVisible ? true : undefined}
+            inert={!pagesVisible ? true : undefined}
+          >
+            <div className={styles.paneHost}>
+              <div
+                className={`${styles.pagePane} ${styles.pagePaneResume}`}
+                data-evidence-pane="resume"
+                data-evidence-pane-active={resumeActive ? "" : undefined}
+                hidden={!resumeActive ? true : undefined}
+                inert={!resumeActive ? true : undefined}
+              >
+                <ResumeDocument
+                  resume={resume}
+                  loading={loading}
+                  error={error}
+                  onOpenDesign={() => setDesignOpen(true)}
+                />
+              </div>
+              <div
+                className={`${styles.pagePane} ${styles.pagePaneJob}`}
+                data-evidence-pane="job"
+                data-evidence-pane-active={jobActive ? "" : undefined}
+                hidden={!jobActive ? true : undefined}
+                inert={!jobActive ? true : undefined}
+              >
+                <JobPostingPanel />
+              </div>
+            </div>
+            <nav className={styles.pageTabs} aria-label="Evidence pages">
+              <button
+                type="button"
+                className={
+                  evidencePage === "resume"
+                    ? `${styles.pageTab} ${styles.pageTabSelected}`
+                    : styles.pageTab
+                }
+                aria-pressed={evidencePage === "resume"}
+                onClick={() => selectPage("resume")}
+              >
+                Resume
+              </button>
+              <button
+                type="button"
+                className={
+                  evidencePage === "job"
+                    ? `${styles.pageTab} ${styles.pageTabSelected}`
+                    : styles.pageTab
+                }
+                aria-pressed={evidencePage === "job"}
+                onClick={() => selectPage("job")}
+              >
+                Job posting
+              </button>
+            </nav>
           </div>
-          <JobPostingPanel />
         </div>
       </div>
       <EvidenceConnectors />
-      <EvidenceFocusScroll />
-      <ResumeAnswerStage />
-      <ResumePlayToolbar
-        chatOpen={chatOpen}
-        onToggleChat={() => setChatOpen((value) => !value)}
+      <AnswerStage hidden={!stageVisible} />
+      <nav className={styles.mobileTabBar} aria-label="Views">
+        {MOBILE_TABS.map((tab) => {
+          const selected = evidencePage === tab.id;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              className={
+                selected
+                  ? `${styles.pageTab} ${styles.pageTabSelected}`
+                  : styles.pageTab
+              }
+              aria-pressed={selected}
+              onClick={() => selectPage(tab.id)}
+            >
+              {tab.label}
+            </button>
+          );
+        })}
+      </nav>
+      <DesignModal open={designOpen} onOpenChange={setDesignOpen} />
+      <JzButton
+        variant={chatOpen ? "secondary" : "primary"}
+        size="small"
+        label={chatOpen ? "Close chat" : "Chat"}
+        showIcon={false}
+        className={styles.chatFab}
+        onClick={() => setChatOpen((value) => !value)}
+        aria-pressed={chatOpen}
       />
       <ResumeChatDock open={chatOpen} onOpenChange={setChatOpen} />
     </main>
@@ -138,7 +264,9 @@ export function ResumeWorkspace({
     <ResumeHighlightProvider>
       <JobPostingProvider entryId={entryId} navigateEntryId={navigateEntryId}>
         <ResumeChatProvider>
-          <ResumePageBody />
+          <DesignSessionProvider>
+            <ResumePageBody />
+          </DesignSessionProvider>
         </ResumeChatProvider>
       </JobPostingProvider>
     </ResumeHighlightProvider>

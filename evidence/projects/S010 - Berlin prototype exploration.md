@@ -12,6 +12,10 @@ Evidence: Scott's direct account; no event or presentation artifacts inspected
 - Related product: [S008 Contentful for Figma widget](S008%20-%20Contentful%20for%20Figma%20widget.md).
 - Customers / clients: None established in this account.
 
+## Resume summary
+
+I owned a Berlin prototype exploration and presentation on AI binding for Contentful, walking a small partner audience through how structured content can connect to design systems.
+
 ## Account summary
 
 Faithful summary of Scott's September 21 account, not a quotation:

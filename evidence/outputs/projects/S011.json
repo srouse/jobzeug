@@ -5,6 +5,7 @@
     "R007"
   ],
   "name": "Figma Design System widget (personal)",
+  "summary": "I built a personal Figma Community design-system widget (tokens, ADA, fonts, npm deploy) that helps teams operationalize design systems in Figma—independent of Summit employment delivery.",
   "showOnResume": true,
   "tags": [
     "personal"

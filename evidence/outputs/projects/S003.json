@@ -5,5 +5,6 @@
     "R002"
   ],
   "name": "DemAI",
+  "summary": "I built DemAI, an SE demo platform that turns crawled sites and design-system abstractions into one-button, agent-driven Contentful demos with a top-down content model.",
   "showOnResume": true
 }

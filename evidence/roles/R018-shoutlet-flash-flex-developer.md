@@ -15,7 +15,7 @@ LinkedIn lists year-only **2008 – 2009** (no months). Overlaps Earthling tenur
 
 LinkedIn source claim (Scott’s profile copy). Not independently verified.
 
-Leading development of a widget framework for Shoutlet.com. I created a lightweight framework based on Flex (MXML based, Box layout, etc) that was significantly smaller in file size (10x) without compromising on skinning, MVC/Cairngorm, and layout power. This has allowed Shoutlet to reinvent existing movie and podcast widgets and expand into more complex widgets utilizing multimedia messaging, Twitter, and FormSpring. My widget builder was featured on Flex.org.
+I led development of a widget framework for Shoutlet.com—a lightweight Flex-based approach that stayed skinning- and layout-capable while cutting file size dramatically versus the prior stack. That let the team reinvent existing movie and podcast widgets and expand into more complex multimedia, Twitter, and FormSpring experiences; the widget builder was featured on Flex.org.
 
 
 

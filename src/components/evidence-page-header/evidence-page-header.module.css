@@ -1,0 +1,36 @@
+.root {
+  flex-shrink: 0;
+  flex-grow: 0;
+  position: relative;
+  z-index: var(--jz-semantic-layer-header, 10);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--jz-semantic-space-gap-md, 1rem);
+  box-sizing: border-box;
+  height: var(--resume-header-height, 6rem);
+  min-height: var(--resume-header-height, 6rem);
+  max-height: var(--resume-header-height, 6rem);
+  /* Leading pad matches page body; trailing pad hugs the icon slot. */
+  padding-block: 0;
+  padding-inline-start: var(--resume-page-pad-inline, 40px);
+  padding-inline-end: var(--jz-semantic-space-padding-md, 1rem);
+  overflow: hidden;
+  border-bottom: 1px solid var(--jz-semantic-color-border-subtle, #d4d4d4);
+  background: var(--jz-semantic-color-background-surface-default, #ffffff);
+}
+
+.main {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.actions {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--jz-semantic-space-gap-2xs, 0.25rem);
+}

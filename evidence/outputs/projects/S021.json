@@ -1,0 +1,10 @@
+{
+  "evidenceId": "S021",
+  "employer": "C003",
+  "roles": [
+    "R005"
+  ],
+  "name": "Rates Central",
+  "summary": "I built Rates Central in Contentful—a single rates hub with dynamic logic and a live preview app—so rate changes that used to take about a week could ship in minutes to the website and other endpoints.",
+  "showOnResume": true
+}

@@ -5,5 +5,6 @@
     "R001"
   ],
   "name": "AI content and component binding",
+  "summary": "I researched AI-assisted content and component binding—semantic metadata and agent-assisted repair patterns that help map structured content to design properties—still exploratory and unshipped beyond Figma/Contentful storage.",
   "showOnResume": true
 }

@@ -1,0 +1,10 @@
+{
+  "evidenceId": "S014",
+  "employer": "C001",
+  "roles": [
+    "R003"
+  ],
+  "name": "Design tokens explained (Contentful blog)",
+  "summary": "I wrote Contentful’s public guide on layered design tokens—primitive, semantic, and component—using color as the worked example for distribution across Figma, code, and Studio.",
+  "showOnResume": true
+}

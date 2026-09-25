@@ -17,17 +17,17 @@ Titles can vary in wording between resume variants. Preserve original wording in
 
 LinkedIn source claim (Scott’s profile copy). Not independently verified.
 
-As a designer and developer I have helped Summit accelerate their digital transformation by building and maintaining a new Design System, introducing a micro-app/frontend framework, contributing to the mortgage user experience, and helping to align the design and development teams.
+As a designer and developer at Summit I helped accelerate digital transformation by standing up shared design and frontend foundations, aligning design and engineering, and shaping product experience across the credit union—including mortgage. The work was less about one-off screens and more about making reusable systems, content platforms, and delivery practices the default way teams shipped.
 
 ## Existing resume claims
-- Designed and built a reusable design system with StencilJS and Lit for product applications and marketing sites.
-- Implemented Contentful as a decentralized content platform and rebuilt the brand website with a static-site architecture.
-- Created Rates Central, a single source of truth for financial rate products, using the design system and Contentful.
-- Established AWS-based CI/CD pipelines and mentored designers, developers, and innovation teams.
+
+None — role narrative is in LinkedIn description; project-level detail lives on linked projects.
 
 ## Linked projects
 
-No captured projects linked yet. Resume bullets are discovery leads, not completed project accounts.
+- [S019: Summit application design system](../projects/S019%20-%20Summit%20application%20design%20system.md) — confirmed Experience Designer tenure; Stencil→Lit application DS, tokens, unnamed Figma plugins; internal consumers include branch teller UI.
+- [S020: Summit marketing website rebuild](../projects/S020%20-%20Summit%20marketing%20website%20rebuild.md) — headless Contentful rebuild of brand site; marketing design system #2; CMO/CIO persuasion.
+- [S021: Rates Central](../projects/S021%20-%20Rates%20Central.md) — Contentful-centralized rates + custom app / real-time preview; ~week→minutes rate changes (Scott).
 
 ## Source references
 

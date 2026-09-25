@@ -1,8 +1,20 @@
 import { z } from "zod";
 
-const employerId = z.string().regex(/^C\d{3,}$/);
-const roleId = z.string().regex(/^R\d{3,}$/);
-const projectId = z.string().regex(/^S\d{3,}$/);
+/** Models sometimes emit `C002-state-farm`; keep the C/R/S### prefix only. */
+function coercePrefixedId(prefix: "C" | "R" | "S") {
+  const extract = new RegExp(`^${prefix}(\\d{3,})`, "i");
+  const exact = new RegExp(`^${prefix}\\d{3,}$`);
+  return z.preprocess((val) => {
+    if (typeof val !== "string") return val;
+    const match = val.trim().match(extract);
+    if (!match) return val.trim();
+    return `${prefix}${match[1]}`;
+  }, z.string().regex(exact));
+}
+
+const employerId = coercePrefixedId("C");
+const roleId = coercePrefixedId("R");
+const projectId = coercePrefixedId("S");
 /** Contentful job line entry ids: jz-JP…-line-N */
 const jobLineId = z.string().regex(/^jz-JP.+-line-\d+$/);
 
@@ -36,10 +48,11 @@ export type EvidenceCluster = {
   answerMarkdown: string;
   /** User question that produced this answer (shown in stage header). */
   question: string;
-  /** Themed multi-section answer (accordion). Absent for legacy flat answers. */
+  /** Themed multi-section answer (highlight cards). Absent for legacy flat answers. */
   sections?: Array<{
     id: string;
     title: string;
+    highlight?: string;
     markdown: string;
     citations: CiteEvidencePayload;
   }>;
@@ -52,6 +65,22 @@ export function idsFromCitations(citations: CiteEvidencePayload): string[] {
     ...citations.projects,
     ...citations.jobLines,
   ];
+}
+
+/**
+ * First accordion section (in order) whose citations include `evidenceId`.
+ * Used for side → middle focus (resume / job click).
+ */
+export function firstSectionIdForEvidence(
+  sections: Array<{ id: string; citations: CiteEvidencePayload }>,
+  evidenceId: string,
+): string | null {
+  for (const section of sections) {
+    if (idsFromCitations(section.citations).includes(evidenceId)) {
+      return section.id;
+    }
+  }
+  return null;
 }
 
 /** Format elapsed wall time: `3s` under 60s, then `M:SS`. */

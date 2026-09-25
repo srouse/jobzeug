@@ -17,10 +17,11 @@ Titles can vary in wording between resume variants. Preserve original wording in
 
 LinkedIn source claim (Scott’s profile copy). Not independently verified.
 
-I created, architected, and implemented user-centric prototypes and design solutions for the web and iOS. I was the lead designer and developer in the redesign of Propeller's iPhone application, which included multiple iterations of HTML UI prototypes that resulted in solutions that informed an equally iterative design process. I subsequently worked with another iOS developer to implement this application.
+I created, architected, and implemented user-centered prototypes and design solutions for web and iOS. As lead designer and developer on Propeller’s iPhone redesign, I drove multiple rounds of HTML UI prototypes that informed an equally iterative design process, then partnered with another iOS developer to ship the application.
 
 ## Existing resume claims
-- Architected user-centered web and iOS prototypes and led an iterative redesign of the iPhone application.
+
+None — role narrative is in LinkedIn description; project-level detail lives on linked projects when captured.
 
 ## Linked projects
 

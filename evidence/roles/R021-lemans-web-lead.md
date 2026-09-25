@@ -15,7 +15,7 @@ LinkedIn: Jan 2003 – May 2005 (2 yrs 5 mos).
 
 LinkedIn source claim (Scott’s profile copy). Not independently verified.
 
-I managed and developed Flash based websites for the company's brand sites. Over a half dozen sites were all managed from Intranet applications I initiated, including content management, catalog management, rider biographies, race results, and dealer locater. Visits for www.mooseracing.com tripled over a 3-4 month period and page hits tripled for www.thormx.com after I updated these sites. I also managed and developed the company e-commerce site redesign (www.partsnetweb.com), which handled transactions totaling hundreds of millions annually.
+I managed and developed Flash-based brand sites for LeMans and initiated intranet applications that centralized content, catalog, rider biographies, race results, and dealer locator workflows across multiple properties. Traffic and engagement rose sharply on key brand sites after those updates, and I also owned the redesign of the company e-commerce site that handled large annual transaction volume.
 
 
 

@@ -15,11 +15,13 @@ export function Modal({
   onOpenChange,
   title,
   children,
+  footer,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   title: string;
   children: ReactNode;
+  footer?: ReactNode;
 }) {
   const titleId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -74,6 +76,7 @@ export function Modal({
           />
         </header>
         <div className={styles.body}>{children}</div>
+        {footer ? <div className={styles.footer}>{footer}</div> : null}
       </div>
     </div>,
     document.body,

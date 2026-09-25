@@ -15,22 +15,21 @@ LinkedIn lists year-only **2001 – 2002** (no months).
 
 LinkedIn source claim (Scott’s profile copy). Not independently verified.
 
-As part of the Journal Interactive team, I designed and implemented many sites for companies in Milwaukee and took the initiative to implement the RealMedia ad system on JSOnline. This included updating and mapping each page/section on JSOnline as well as creating and testing the tags necessary to serve rich media ads, which JSOnline was subsequently able to do for the first time. I also was the first in the company to experiment with interactive content, including games, within ads.
-
-
+On the Journal Interactive team I designed and built sites for Milwaukee advertisers and took ownership of getting JSOnline ready for rich media advertising—mapping pages and sections, implementing tags, and validating that rich ads could serve for the first time. I also pushed early experiments with interactive content inside ads, treating the newsroom’s digital surface as both a publishing and advertising platform.
 
 ## Existing resume claims
 
-None captured in current resume snapshots.
+None — role narrative is in LinkedIn description; project-level detail lives on linked projects.
 
 ## Linked projects
 
-None captured.
+- [S017: JSOnline ad system installation](../projects/S017%20-%20JSOnline%20ad%20system%20installation.md) — third-party ad system on JSOnline; Flash detect; image/HTML fallbacks; site-wide mapping (Scott account September 25, 2026). **Not** the interactive games-within-ads work (separate project TBD).
+- [S018: Journal Interactive advertiser studio](../projects/S018%20-%20Journal%20Interactive%20advertiser%20studio.md) — client websites / interactive pieces for JSOnline advertisers; Water Street Flash map; Art Museum redesign involvement; early client contact + design (September 25, 2026).
 
 ## Open questions
 
-- Exact months and title on HR records.
-- RealMedia implementation artifacts; which interactive ad experiments shipped.
+- Exact months and title on HR records (optional).
+- Interactive content / games within ads — capture as its own project (distinct from S017).
 - Client sites built for Milwaukee companies (names; disclosure).
 
 ## Sources

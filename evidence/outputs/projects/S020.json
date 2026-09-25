@@ -1,0 +1,10 @@
+{
+  "evidenceId": "S020",
+  "employer": "C003",
+  "roles": [
+    "R005"
+  ],
+  "name": "Summit marketing website rebuild",
+  "summary": "I drove Summit’s headless rebuild of the marketing site on Contentful—persuading CMO/CIO, standing up a second marketing design system, and cutting a bloated component set down to a composable dozen.",
+  "showOnResume": true
+}

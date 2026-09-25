@@ -22,6 +22,10 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 
 Do not duplicate child narratives here. This record is the **arc**: how the three legs reinforced each other in under a year.
 
+## Resume summary
+
+I led a short State Farm design-system refresh that tied executive token persuasion, a new Figma system, and Lit/web-component engineering enablement into one arc so design and development could move together.
+
 ## Account summary (spine only)
 
 At State Farm, design-system progress was blocked by politics, split org structure (DS design vs DS development), and weak brand-decision guidance. Scott’s short tenure combined three moves:

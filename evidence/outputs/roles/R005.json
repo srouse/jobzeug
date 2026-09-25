@@ -5,13 +5,7 @@
   "dateLabel": "Aug 2020 - Jun 2023",
   "startDate": "2020-08-01",
   "endDate": "2023-06-30",
-  "summary": "As a designer and developer I have helped Summit accelerate their digital transformation by building and maintaining a new Design System, introducing a micro-app/frontend framework, contributing to the mortgage user experience, and helping to align the design and development teams.",
-  "highlights": [
-    "Designed and built a reusable design system with StencilJS and Lit for product applications and marketing sites.",
-    "Implemented Contentful as a decentralized content platform and rebuilt the brand website with a static-site architecture.",
-    "Created Rates Central, a single source of truth for financial rate products, using the design system and Contentful.",
-    "Established AWS-based CI/CD pipelines and mentored designers, developers, and innovation teams."
-  ],
+  "summary": "As a designer and developer at Summit I helped accelerate digital transformation by standing up shared design and frontend foundations, aligning design and engineering, and shaping product experience across the credit union—including mortgage. The work was less about one-off screens and more about making reusable systems, content platforms, and delivery practices the default way teams shipped.",
   "showOnResume": true,
   "tags": [
     "fintech",

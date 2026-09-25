@@ -7,10 +7,13 @@ import {
   type EvidenceCluster,
 } from "@/lib/evidence-citations";
 
-/** One accordion section in a themed answer. */
+/** One highlight section in a themed answer. */
 export type AnswerSection = {
   id: string;
+  /** 2–3 word caption for jz-highlight title. */
   title: string;
+  /** Short primary line for jz-highlight highlight. */
+  highlight: string;
   markdown: string;
   citations: CiteEvidencePayload;
 };
@@ -18,6 +21,7 @@ export type AnswerSection = {
 export const answerSectionSchema = z.object({
   id: z.string().min(1),
   title: z.string().min(1),
+  highlight: z.string().min(1),
   markdown: z.string().default(""),
   citations: citeEvidenceSchema,
 });
@@ -34,7 +38,15 @@ export const themeOutlineSchema = z.object({
         title: z
           .string()
           .min(1)
-          .describe("Short accordion header / bold lead-in"),
+          .describe(
+            "Exactly 2–3 words — tight caption summary for the highlight card title",
+          ),
+        highlight: z
+          .string()
+          .min(1)
+          .describe(
+            "Short primary line for the highlight body (about 4–8 words), not a full sentence",
+          ),
         citations: citeEvidenceSchema,
         facts: z
           .array(z.string().min(1))
@@ -55,7 +67,9 @@ export const themeWriterSchema = z.object({
   markdown: z
     .string()
     .min(1)
-    .describe("2–3 sentences in third person; no raw evidence IDs"),
+    .describe(
+      "1–2 short sentences in third person; prefer he/his; Scott at most once; no raw evidence IDs",
+    ),
 });
 
 export type ThemeWriterResult = z.infer<typeof themeWriterSchema>;
@@ -87,9 +101,10 @@ export function sectionsToAnswerMarkdown(sections: AnswerSection[]): string {
   return sections
     .map((section) => {
       const body = section.markdown.trim();
-      if (!body) return `**${section.title}.**`;
+      const lead = section.highlight.trim() || section.title;
+      if (!body) return `**${lead}.**`;
       if (body.startsWith("**")) return body;
-      return `**${section.title}.** ${body}`;
+      return `**${lead}.** ${body}`;
     })
     .join("\n\n")
     .trim();

@@ -5,6 +5,7 @@
     "R007"
   ],
   "name": "Contentful Content Type widget (personal)",
+  "summary": "I built a personal Figma/FigJam widget for proposing and loading Contentful content types with entry examples—independent of Summit or Contentful employment delivery.",
   "showOnResume": true,
   "tags": [
     "personal"

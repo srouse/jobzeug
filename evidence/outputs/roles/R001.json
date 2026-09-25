@@ -4,12 +4,7 @@
   "title": "Senior Product Architect",
   "dateLabel": "Feb 2026 - Present",
   "startDate": "2026-02-01",
-  "summary": "I focus on connecting design systems, Figma, structured content, and AI to build scalable, production ready workflows across Contentful. On the Contentful Insights and Adoption team, I lead the development of internal tools, platforms, and best practices that power post sales delivery and customer adoption, aligning design, development, and automation across the organization.",
-  "highlights": [
-    "Lead development of internal tools, platforms, and implementation practices that support post-sales delivery and customer adoption.",
-    "Lead the design and development of Contentful for Figma, a public Figma Community widget that connects live, structured content to components and full-page designs.",
-    "Built binding workflows that map Contentful fields to Figma properties so teams can preview real content, test variations, and catch problems before handoff."
-  ],
+  "summary": "I focus on connecting design systems, Figma, structured content, and AI into scalable, production-ready workflows at Contentful. On the Customer Insights and Adoption team, I lead internal tools, platforms, and practices that power post-sales delivery and customer adoption—aligning design, development, and automation so teams can work from live structured content instead of static handoffs.",
   "showOnResume": true,
   "tags": [
     "cms",

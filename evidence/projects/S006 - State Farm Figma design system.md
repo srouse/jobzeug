@@ -12,6 +12,10 @@ Parent umbrella: [S004 State Farm design system refresh](S004%20-%20State%20Farm
 - Collaborators: Higher-level / senior designers (systematic Figma thinking). **Design system expert from Google** — deep conversations on making the system robust yet usable by developers. DS design team generally. Political colleague from [S005](S005%20-%20State%20Farm%20tokens%20persuasion.md) helped with examples for the broader program.
 - Sources note Figma **plugin** vs **widget** for token sync — preserve both labels pending clarification.
 
+## Resume summary
+
+I built State Farm’s Figma design system—tokens, components, and a repo-sync plugin—and mentored senior designers toward systematic Figma practice, including deep work with a Google design-system expert.
+
 ## Account summary
 
 Scott built the **Figma-side design system** work in depth: **literal tokens**, **components** (he underscored that he **made the components**, not only token plumbing), and a **Figma plugin** that edited token values while checking them into the **repo**.

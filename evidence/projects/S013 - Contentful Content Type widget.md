@@ -16,6 +16,10 @@ Evidence: Scott’s direct account (personal project); public product copy and C
 - Project abbreviation on the site: **CCT**
 - Site lists developer email scott.rouse@gmail.com (public site metadata).
 
+## Resume summary
+
+I built a personal Figma/FigJam widget for proposing and loading Contentful content types with entry examples—independent of Summit or Contentful employment delivery.
+
 ## Account summary
 
 Scott built a **Contentful Content Type** Figma Community **widget** (personal): a Contentful content-type and entry visualization tool on canvas. Public framing (contentfulcontenttype.app / Community): for **new** types, construct a **proposed** content type using Contentful property types; for **existing** types, supply space id, environment, and **CDA** access token to load and visualize a published content type; from a content type, “+” in the header creates an **Entry** example of that type.

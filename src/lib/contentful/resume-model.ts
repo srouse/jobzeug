@@ -5,6 +5,7 @@ import { fetchCoreCatalog } from "./delivery";
 export type ResumeProject = {
   evidenceId: string;
   name: string;
+  summary?: string;
 };
 
 export type ResumeRole = {
@@ -62,7 +63,11 @@ export function assembleResume(catalog: CoreCatalog): ResumeViewModel {
         (project) =>
           project.showOnResume && project.roleIds.includes(role.evidenceId),
       )
-      .map((project) => ({ evidenceId: project.evidenceId, name: project.name }))
+      .map((project) => ({
+        evidenceId: project.evidenceId,
+        name: project.name,
+        summary: project.summary,
+      }))
       .sort((a, b) => a.name.localeCompare(b.name));
 
     let group = byEmployer.get(employer.evidenceId);

@@ -1,0 +1,10 @@
+{
+  "evidenceId": "S019",
+  "employer": "C003",
+  "roles": [
+    "R005"
+  ],
+  "name": "Summit application design system",
+  "summary": "I built Summit’s application design system—web components and tokens on Stencil, later Lit—so teams could ship custom internal apps instead of fighting off-the-shelf UI tooling.",
+  "showOnResume": true
+}

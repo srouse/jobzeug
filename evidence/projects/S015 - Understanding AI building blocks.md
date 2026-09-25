@@ -6,7 +6,7 @@ Evidence: Artifact-supported (public articles); Scott’s account that the inter
 
 ## Resume connection
 
-- Role record: **[R001 — Senior Product Architect](../roles/R001-contentful-senior-product-architect.md)** at [C001 Contentful](../employers/C001-contentful.md). Publish dates **February 26, 2026** (Part 1) and **March 5, 2026** (Part 2). March 5 is clearly R001. February 26 sits in the R001/R002 February 2026 transition (LinkedIn: R002 ends Feb 2026; R001 starts Feb 2026)—**primary link R001**; flag Part 1 as **provisional** if Scott prefers SE/Solution Specialist ownership for drafting.
+- Role record: **[R001 — Senior Product Architect](../roles/R001-contentful-senior-product-architect.md)** at [C001 Contentful](../employers/C001-contentful.md). Publish dates **February 26, 2026** (Part 1) and **March 5, 2026** (Part 2). Canonical role is Senior Product Architect for both parts (Part 1 falls in the Feb 2026 title transition from Solution Specialist; do not dual-link).
 - Employer: [C001 Contentful](../employers/C001-contentful.md)
 - Public artifacts:
   - Part 1 (interactive prompt anatomy): https://www.contentful.com/blog/understanding-ai-building-blocks-anatomy-prompt/
@@ -15,6 +15,10 @@ Evidence: Artifact-supported (public articles); Scott’s account that the inter
 - Scott asked to **roll both parts into one project** even though they are two posts.
 - Customers / clients: None. Educational / thought-leadership series.
 - Related: Distinct from [S009 AI content and component binding](S009%20-%20AI%20content%20and%20component%20binding.md) (product research) and [S003 DemAI](S003%20-%20DemAI.md) (SE demo platform).
+
+## Resume summary
+
+I authored a two-part Contentful Guides series on AI building blocks, covering prompts through MCP, RAG, and agents, with interactive prompt modules in part one.
 
 ## Account summary
 
@@ -73,8 +77,7 @@ Article (Part 1):
 
 ## Follow-up queue
 
-- Confirm R001 vs R002 ownership for Part 1 (Feb 26 transition).
-- Stack/hosting of the interactive modules; fix/redeploy if embeds still 404.
+- Confirm interactive-module stack/hosting; fix/redeploy if embeds still 404.
 - Did Scott personally build the interactive app end-to-end, or partner with Contentful web/engineering?
 - Any internal usage metrics or Partnership Tour crossover?
 

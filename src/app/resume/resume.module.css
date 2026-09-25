@@ -1,3 +1,15 @@
+@property --resume-column-max {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 28.8rem;
+}
+
+@property --resume-page-pad-inline {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 40px;
+}
+
 .root {
   height: 100dvh;
   max-height: 100dvh;
@@ -7,22 +19,22 @@
   background: var(--jz-semantic-color-background-canvas-subtle);
   color: var(--jz-semantic-color-text-default);
   box-sizing: border-box;
-  /* Shared with chat dock so the FAB clears the in-flow toolbar */
-  --resume-toolbar-height: 4.5rem;
-  /* Column chrome (resume / job-posting headers) — stage sits below this */
+  /* Shared with chat dock — no bottom toolbar */
+  --resume-toolbar-height: 0px;
+  /* Fixed chrome height for resume / job-posting / stage headers (hard lock) */
   --resume-header-height: 6rem;
   /* Minimum center gutter when columns are squeezed */
   --resume-lane-gutter: var(--jz-semantic-space-gap-lg, 1.5rem);
-  /* Reading-width cap so extra viewport space lands in the center gutter */
-  --resume-column-max: 32rem;
+  /* Fixed reading-width cap for both pages at every breakpoint (~10% under 32rem) */
+  --resume-column-max: 28.8rem;
   /* Allow columns to flex ~100px under the cap before the center eats space */
   --resume-column-min: calc(var(--resume-column-max) - 100px);
   /* Horizontal padding inside the resume / job-posting page surfaces */
   --resume-page-pad-inline: 40px;
-  /* Gap between answer stage and each column edge */
-  --answer-gap: 10px;
-  /* Vertical breathing room below headers / above toolbar */
-  --answer-inset: 20px;
+  /* Gap between answer stage and each column edge (flush = 0) */
+  --answer-gap: 0px;
+  /* Vertical breathing room below headers / above toolbar (unused; stage is full-bleed) */
+  --answer-inset: 0px;
 }
 
 .workspace {
@@ -55,11 +67,14 @@
   margin: 0;
 }
 
-@media (min-width: 960px) {
+/*
+ * Wide (≥1400): leftRail / paneHost use display:contents so resume + job
+ * become direct grid children in columns 1 and 3.
+ */
+@media (min-width: 1400px) {
   .innerBound {
     padding-inline: 0;
     display: grid;
-    /* Flush to viewport edges; center gutter takes leftover space */
     grid-template-columns:
       minmax(var(--resume-column-min), var(--resume-column-max))
       minmax(var(--resume-lane-gutter), 1fr)
@@ -69,35 +84,222 @@
     gap: 0;
   }
 
-  .innerBound > :first-child {
-    grid-column: 1;
+  .leftRail,
+  .paneHost {
+    display: contents;
   }
 
-  .innerBound > :last-child {
+  .pagePaneResume {
+    grid-column: 1;
+    transform-origin: left center;
+  }
+
+  .pagePaneJob {
     grid-column: 3;
+    transform-origin: right center;
+  }
+
+  .pageTabs {
+    display: none;
   }
 }
 
-.resumeColumn {
+/*
+ * Medium (900–1399): stacked pages in a left rail + free lane for stage.
+ */
+@media (min-width: 900px) and (max-width: 1399px) {
+  .innerBound {
+    padding-inline: 0;
+    display: grid;
+    grid-template-columns:
+      minmax(0, min(var(--resume-column-max), 50vw))
+      minmax(0, 1fr);
+    justify-content: stretch;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .leftRail {
+    grid-column: 1;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .paneHost {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template: 1fr / 1fr;
+  }
+
+  .pagePane {
+    grid-area: 1 / 1;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .pagePane[hidden] {
+    display: none;
+  }
+
+  .pageTabs {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    border-top: 1px solid var(--jz-semantic-color-border-default, #d4d4d4);
+    background: var(--jz-semantic-color-background-surface-default, #ffffff);
+  }
+
+  .pageTab {
+    flex: 1 1 0;
+    margin: 0;
+    padding: var(--jz-semantic-space-padding-sm, 0.75rem)
+      var(--jz-semantic-space-padding-md, 1rem);
+    border: none;
+    border-right: 1px solid var(--jz-semantic-color-border-default, #e5e5e5);
+    background: transparent;
+    color: var(--jz-semantic-color-text-muted, #737373);
+    font-family: var(--jz-semantic-type-label-sm-font-family, inherit);
+    font-size: var(--jz-semantic-type-label-sm-font-size, 0.8125rem);
+    line-height: var(--jz-semantic-type-label-sm-line-height, 1.25);
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+
+  .pageTab:last-child {
+    border-right: none;
+  }
+
+  .pageTab:hover {
+    color: var(--jz-semantic-color-text-default, #171717);
+    background: var(--jz-semantic-color-background-control-subtle, #f5f5f5);
+  }
+
+  .pageTabSelected {
+    color: var(--jz-semantic-color-text-primary, #2563eb);
+    box-shadow: inset 0 2px 0
+      var(--jz-semantic-color-border-brand-strong, #2563eb);
+  }
+}
+
+/* Mobile (<900): one surface at a time + bottom three-way tabs. */
+@media (max-width: 899px) {
+  .root {
+    --resume-mobile-tab-height: 2.75rem;
+  }
+
+  .innerBound {
+    padding-inline: 0;
+    max-width: none;
+  }
+
+  .leftRail {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .leftRail[hidden] {
+    display: none;
+  }
+
+  .paneHost {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template: 1fr / 1fr;
+  }
+
+  .pagePane {
+    grid-area: 1 / 1;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .pagePane[hidden] {
+    display: none;
+  }
+
+  /* Medium-style left-rail tabs stay off; use the full-width mobile bar. */
+  .pageTabs {
+    display: none;
+  }
+
+  .mobileTabBar {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    height: var(--resume-mobile-tab-height, 2.75rem);
+    border-top: 1px solid var(--jz-semantic-color-border-default, #d4d4d4);
+    background: var(--jz-semantic-color-background-surface-default, #ffffff);
+    z-index: calc(var(--jz-semantic-layer-header, 10) + 2);
+  }
+
+  .mobileTabBar .pageTab {
+    flex: 1 1 0;
+    margin: 0;
+    padding: 0 var(--jz-semantic-space-padding-sm, 0.75rem);
+    border: none;
+    border-right: 1px solid var(--jz-semantic-color-border-default, #e5e5e5);
+    background: transparent;
+    color: var(--jz-semantic-color-text-muted, #737373);
+    font-family: var(--jz-semantic-type-label-sm-font-family, inherit);
+    font-size: var(--jz-semantic-type-label-sm-font-size, 0.8125rem);
+    line-height: var(--jz-semantic-type-label-sm-line-height, 1.25);
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+
+  .mobileTabBar .pageTab:last-child {
+    border-right: none;
+  }
+
+  .mobileTabBar .pageTab:hover {
+    color: var(--jz-semantic-color-text-default, #171717);
+    background: var(--jz-semantic-color-background-control-subtle, #f5f5f5);
+  }
+
+  .mobileTabBar .pageTabSelected {
+    color: var(--jz-semantic-color-text-primary, #2563eb);
+    box-shadow: inset 0 2px 0
+      var(--jz-semantic-color-border-brand-strong, #2563eb);
+  }
+
+  .chatFab {
+    bottom: calc(
+      var(--resume-mobile-tab-height, 2.75rem) +
+        var(--jz-semantic-space-padding-lg, 1.25rem)
+    );
+  }
+}
+
+@media (min-width: 900px) {
+  .mobileTabBar {
+    display: none;
+  }
+}
+
+.pagePane {
   min-width: 0;
   min-height: 0;
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* visible so the article elevation shadow isn't clipped */
+  /* visible so the article elevation shadow isn't clipped (wide) */
   overflow: visible;
-}
-
-@media (max-width: 959px) {
-  .innerBound {
-    padding-block: var(--resume-lane-gutter);
-  }
-
-  .innerBound .resumeColumn {
-    flex: 1 1 50%;
-    height: auto;
-    max-height: 48%;
-  }
 }
 
 .nav {
@@ -143,4 +345,12 @@
   background: var(--jz-semantic-color-background-surface-feedback-error, #fef2f2);
   padding: var(--jz-semantic-space-padding-sm, 0.75rem)
     var(--jz-semantic-space-padding-md, 1rem);
+}
+
+.chatFab {
+  position: fixed;
+  right: var(--jz-semantic-space-padding-lg, 1.25rem);
+  bottom: var(--jz-semantic-space-padding-lg, 1.25rem);
+  z-index: calc(var(--jz-semantic-layer-modal, 100) - 5);
+  pointer-events: auto;
 }

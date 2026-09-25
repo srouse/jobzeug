@@ -12,6 +12,10 @@ Parent umbrella: [S004 State Farm design system refresh](S004%20-%20State%20Farm
 - Collaborators: Colleague who navigated State Farm politics better than Scott — helped craft examples (name unknown). Senior management as audience.
 - Related: Working Figma/code examples that made the decks concrete live primarily in [S006](S006%20-%20State%20Farm%20Figma%20design%20system.md); do not re-own that craft here.
 
+## Resume summary
+
+I built the executive persuasion case—and landing deck—that got State Farm leadership to buy into design tokens as the foundation for the next-generation system.
+
 ## Account summary
 
 Scott spent **many months** building a story to convince **senior management** that **design tokens** needed to happen at State Farm — including how the design system should be made and how the program should go.

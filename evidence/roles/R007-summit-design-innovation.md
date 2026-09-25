@@ -17,10 +17,11 @@ Titles can vary in wording between resume variants. Preserve original wording in
 
 LinkedIn source claim (Scott’s profile copy). Not independently verified.
 
-I am responsible for generating all UX and UI Designs defining Summit's next generation software. This includes helping visualize how people are interacting with Summit and where opportunities are all the way down to new designs for reimagined banking. I also contribute heavily to prototype production in a number of various technologies such as native iOS (Swift) and web development (React, etc).
+I owned UX and UI for Summit’s next-generation digital banking software—visualizing how members interact with the credit union, finding opportunity areas, and carrying concepts down into reimagined banking flows. I also contributed heavily to prototype production across native iOS (Swift) and web (React and related stacks) so ideas could be validated in working software, not only in static comps.
 
 ## Existing resume claims
-- Defined UX and UI for next-generation digital banking and built rapid prototypes in Swift and React to validate concepts.
+
+None — role narrative is in LinkedIn description; linked Figma widgets under this tenure are personal projects, not Summit delivery.
 
 ## Linked projects
 

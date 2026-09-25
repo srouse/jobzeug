@@ -5,5 +5,6 @@
     "R002"
   ],
   "name": "Bulk Editor",
+  "summary": "I designed and built a customer-facing prototype for bulk content operations in Contentful, combining a bulk editing UI with AI chat and semantic search before handing the work into the broader ecosystem.",
   "showOnResume": true
 }

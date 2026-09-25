@@ -13,6 +13,10 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 - Collaborators: Contentful ecosystem team (handoff recipients who built a crude version Scott later cleaned up). Names and titles unknown.
 - Customers: [CU001 Tri Pointe Homes](../customers/CU001-tri-pointe-homes.md) (V1); [CU002 Trek](../customers/CU002-trek.md) (V2). Scott reports both related sales closed. **Public disclosure not cleared** — do not use these names in application copy until cleared.
 
+## Resume summary
+
+I designed and built a customer-facing prototype for bulk content operations in Contentful, combining a bulk editing UI with AI chat and semantic search before handing the work into the broader ecosystem.
+
 ## Account summary
 
 Scott describes a recurring pattern from his SE work: a last-minute request arrives, and within two or three days he builds an almost-functional prototype that he personally presents.
