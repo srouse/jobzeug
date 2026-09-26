@@ -1,3 +1,86 @@
+---
+schema_version: "1.1"
+project_id: S015
+title: Understanding AI by its building blocks (Contentful series)
+record_kind: project
+project_origin: employment
+ranking_eligible: true
+exclusion_reason: null
+parent_project_id: null
+related_project_ids:
+  - S022
+role_links:
+  - id: R001
+    relationship: delivery
+    status: confirmed
+    note: Canonical role for both article parts; do not dual-link the title transition.
+employer_links:
+  - id: C001
+    relationship: delivery
+    status: confirmed
+    note: Employer association recorded in the project account.
+customer_ids: []
+client_ids: []
+year: 2026
+year_basis: sourced
+year_note: 2026 publication year recorded for both parts (February 26 and March 5).
+delivery_stage: mixed
+annotation:
+  status: needs_review
+  vocabulary_version: 1.0.0
+  reviewed_by: Codex
+  reviewed_at: "2026-09-26"
+public_disclosure: needs_review
+evidence:
+  - id: S015-E001
+    statement: Authored a two-part published series explaining model calls, context, structured output,
+      tools, MCP, retrieval, and agents.
+    concept_ids:
+      - local:technical-writing
+      - local:technical-article
+      - local:ai-system-fundamentals
+    ownership: sole
+    scope: external_audience
+    delivery_stage: production
+    provenance: existing_material
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Authored a two-part published series explaining model calls, context, structured output,
+          tools, MCP, retrieval, and agents.
+    limitations:
+      - Based on the preserved publication capture, not a fresh live check.
+      - This is educational authorship, not evidence of implementing every architecture discussed.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+  - id: S015-E002
+    statement: The captured Part 1 article includes interactive learning modules showing how changing
+      model-call inputs changes behavior.
+    concept_ids:
+      - local:interactive-learning-material
+    ownership: unknown
+    scope: external_audience
+    delivery_stage: unknown
+    provenance: existing_material
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: The captured Part 1 article includes interactive learning modules showing how changing
+          model-call inputs changes behavior.
+    limitations:
+      - Scott’s personal implementation ownership and stack are unresolved.
+      - Several embeds returned deployment errors at the recorded scrape; availability has not been
+        rechecked.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+concept_proposals: []
+---
 # S015: Understanding AI by its building blocks (Contentful series)
 
 Captured: September 22, 2026
@@ -21,6 +104,8 @@ Evidence: Artifact-supported (public articles); Scott’s account that the inter
 I authored a two-part Contentful Guides series on AI building blocks, covering prompts through MCP, RAG, and agents, with interactive prompt modules in part one.
 
 ## Account summary
+
+<a id="source-account"></a>
 
 Two-part **Contentful Guides** series by Scott Rouse that teaches modern AI systems **from the inside out**, starting at a single model call and then zooming out to the ecosystem built around that primitive.
 

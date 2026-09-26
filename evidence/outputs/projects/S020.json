@@ -6,5 +6,144 @@
   ],
   "name": "Summit marketing website rebuild",
   "summary": "I drove Summit’s headless rebuild of the marketing site on Contentful—persuading CMO/CIO, standing up a second marketing design system, and cutting a bloated component set down to a composable dozen.",
-  "showOnResume": true
+  "matchingMetadata": {
+    "schema_version": "1.1",
+    "project_id": "S020",
+    "title": "Summit marketing website rebuild",
+    "record_kind": "project",
+    "project_origin": "employment",
+    "ranking_eligible": true,
+    "exclusion_reason": null,
+    "parent_project_id": null,
+    "related_project_ids": [
+      "S019",
+      "S021"
+    ],
+    "role_links": [
+      {
+        "id": "R005",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Preserved canonical association from the project account; role-source date caveats remain in the role record."
+      }
+    ],
+    "employer_links": [
+      {
+        "id": "C003",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Employer association recorded in the project account."
+      }
+    ],
+    "customer_ids": [],
+    "client_ids": [],
+    "year": 2022,
+    "year_basis": "estimated",
+    "year_note": "Estimated as 2022 near the midpoint of R005 (August 2020–June 2023); does not establish sequence among Summit projects.",
+    "delivery_stage": "production",
+    "annotation": {
+      "status": "reviewed",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-09-26",
+      "vocabulary_version": "1.0.0"
+    },
+    "public_disclosure": "needs_review",
+    "evidence": [
+      {
+        "id": "S020-E001",
+        "statement": "Led research into CMS alternatives and persuaded the CMO and CIO to choose a headless Contentful approach.",
+        "concept_ids": [
+          "local:technology-selection",
+          "local:persuasion",
+          "local:decision-making",
+          "local:headless-content-management",
+          "local:stakeholder-alignment"
+        ],
+        "ownership": "lead",
+        "scope": "organization",
+        "delivery_stage": "production",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#source-account",
+            "locator": "Account summary",
+            "supports": "Led research into CMS alternatives and persuaded the CMO and CIO to choose a headless Contentful approach."
+          }
+        ],
+        "limitations": [
+          "Competitors were evaluated, not necessarily implemented.",
+          "Earlier Drupal version is an uncertain recollection."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26"
+        }
+      },
+      {
+        "id": "S020-E002",
+        "statement": "Implemented marketing-system components and set up the Figma file as part of a custom statically built Contentful website.",
+        "concept_ids": [
+          "local:front-end-development",
+          "local:design-system-development",
+          "local:component-library",
+          "local:figma",
+          "local:contentful",
+          "local:platform-migration",
+          "local:cross-functional-work"
+        ],
+        "ownership": "contributor",
+        "scope": "multiple_teams",
+        "delivery_stage": "production",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#source-account",
+            "locator": "Account summary",
+            "supports": "Implemented marketing-system components and set up the Figma file as part of a custom statically built Contentful website."
+          }
+        ],
+        "limitations": [
+          "A separate design lead designed the visual components; do not assign that authorship to Scott."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26"
+        }
+      },
+      {
+        "id": "S020-E003",
+        "statement": "Reports reducing more than 100 largely duplicative components to a couple dozen and substantially improving website performance.",
+        "concept_ids": [
+          "local:component-consolidation",
+          "local:web-performance-improvement"
+        ],
+        "ownership": "contributor",
+        "scope": "organization",
+        "delivery_stage": "production",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#source-account",
+            "locator": "Account summary",
+            "supports": "Reports reducing more than 100 largely duplicative components to a couple dozen and substantially improving website performance."
+          }
+        ],
+        "limitations": [
+          "Component counts are approximate self-report; performance has no measured baseline in the record.",
+          "The continued existence of the public site does not independently verify these results."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26"
+        }
+      }
+    ],
+    "concept_proposals": []
+  }
 }

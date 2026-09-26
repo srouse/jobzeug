@@ -1,3 +1,90 @@
+---
+schema_version: "1.1"
+project_id: S009
+title: AI content and component binding
+record_kind: project
+project_origin: employment
+ranking_eligible: true
+exclusion_reason: null
+parent_project_id: null
+related_project_ids:
+  - S008
+  - S010
+role_links:
+  - id: R001
+    relationship: delivery
+    status: confirmed
+    note: Preserved canonical association from the project account; role-source date caveats remain in
+      the role record.
+employer_links:
+  - id: C001
+    relationship: delivery
+    status: confirmed
+    note: Employer association recorded in the project account.
+customer_ids: []
+client_ids: []
+year: 2026
+year_basis: estimated
+year_note: Estimated from R001 (February 2026–present as of September 2026); project-specific year
+  was not supplied.
+delivery_stage: prototype
+annotation:
+  status: reviewed
+  vocabulary_version: 1.0.0
+  reviewed_by: Codex
+  reviewed_at: "2026-09-26"
+public_disclosure: needs_review
+evidence:
+  - id: S009-E001
+    statement: Independently investigated content-to-component binding and developed richer semantic
+      metadata for content properties and components.
+    concept_ids:
+      - local:semantic-metadata-design
+      - local:systems-analysis
+      - local:content-modeling
+    ownership: sole
+    scope: individual
+    delivery_stage: prototype
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Independently investigated content-to-component binding and developed richer semantic
+          metadata for content properties and components.
+    limitations:
+      - Metadata schema, storage, and automated derivation details remain unspecified.
+      - The capability is not integrated into the public S008 widget.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+  - id: S009-E002
+    statement: Iterated on AI binding and repair experiments, examining results and downstream effects
+      when one side changed.
+    concept_ids:
+      - local:ai-workflow-engineering
+      - local:ai-output-evaluation
+      - local:critical-thinking
+    ownership: sole
+    scope: individual
+    delivery_stage: prototype
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Iterated on AI binding and repair experiments, examining results and downstream effects
+          when one side changed.
+    limitations:
+      - Consistent and near-correct results are qualitative self-assessments, not a formal benchmark.
+      - Model/provider and repair boundaries remain unrecorded.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+concept_proposals: []
+---
 # S009: AI content and component binding
 
 Captured: September 21, 2026
@@ -17,6 +104,8 @@ Evidence: Scott's direct account; no code, metadata samples, evaluation results,
 I researched AI-assisted content and component binding—semantic metadata and agent-assisted repair patterns that help map structured content to design properties—still exploratory and unshipped beyond Figma/Contentful storage.
 
 ## Account summary
+
+<a id="source-account"></a>
 
 Faithful summary of Scott's September 21 account, not a quotation:
 

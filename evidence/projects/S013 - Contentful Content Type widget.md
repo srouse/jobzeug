@@ -1,3 +1,91 @@
+---
+schema_version: "1.1"
+project_id: S013
+title: Contentful Content Type widget (personal)
+record_kind: project
+project_origin: personal
+ranking_eligible: true
+exclusion_reason: null
+parent_project_id: null
+related_project_ids:
+  - S011
+  - S012
+role_links:
+  - id: R007
+    relationship: calendar_anchor
+    status: provisional
+    note: Calendar placement only; this is personal work, not employer delivery.
+employer_links:
+  - id: C003
+    relationship: calendar_anchor
+    status: provisional
+    note: Tenure anchor only; do not attribute project outcomes to Summit.
+customer_ids: []
+client_ids: []
+year: null
+year_basis: unknown
+year_note: "Year unresolved: provisional R007 calendar anchor is 2018–2019, while captured public
+  widget version history is 2022–2023. Preserve the conflict rather than guessing a build year."
+delivery_stage: production
+annotation:
+  status: needs_review
+  vocabulary_version: 1.0.0
+  reviewed_by: Codex
+  reviewed_at: "2026-09-26"
+public_disclosure: needs_review
+evidence:
+  - id: S013-E001
+    statement: Built a personal Figma Community widget and documentation site for visualizing Contentful
+      content types and entry examples.
+    concept_ids:
+      - local:figma-extension
+      - local:figma
+      - local:contentful
+      - local:developer-and-designer-tools
+    ownership: contributor
+    scope: external_audience
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "#source-ownership"
+        locator: Ownership and scope
+        supports: Built a personal Figma Community widget and documentation site for visualizing Contentful
+          content types and entry examples.
+    limitations:
+      - Not a Contentful or Summit employment deliverable.
+      - Calendar role and project year remain unresolved.
+      - Personal authorship is recorded; absence of collaborators is not independently established.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+  - id: S013-E002
+    statement: The captured product description documents proposed type modeling, loading existing types
+      through Contentful credentials, and creating example entries.
+    concept_ids:
+      - local:content-modeling
+      - local:api-integration
+      - local:contentful
+    ownership: unknown
+    scope: external_audience
+    delivery_stage: production
+    provenance: existing_material
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: The captured product description documents proposed type modeling, loading existing types
+          through Contentful credentials, and creating example entries.
+    limitations:
+      - Feature behavior is based on prior public-source capture, not fresh API testing.
+      - Use of customer-supplied credentials does not establish a named customer engagement.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+concept_proposals: []
+---
 # S013: Contentful Content Type widget (personal)
 
 Captured: September 22, 2026
@@ -21,6 +109,8 @@ Evidence: Scott’s direct account (personal project); public product copy and C
 I built a personal Figma/FigJam widget for proposing and loading Contentful content types with entry examples—independent of Summit or Contentful employment delivery.
 
 ## Account summary
+
+<a id="source-account"></a>
 
 Scott built a **Contentful Content Type** Figma Community **widget** (personal): a Contentful content-type and entry visualization tool on canvas. Public framing (contentfulcontenttype.app / Community): for **new** types, construct a **proposed** content type using Contentful property types; for **existing** types, supply space id, environment, and **CDA** access token to load and visualize a published content type; from a content type, “+” in the header creates an **Entry** example of that type.
 
@@ -57,6 +147,8 @@ Scott:
 Public Community / site (product copy): complete Contentful content-type visualization for types and entries; proposed vs loaded vs example modes; CDA credentials for live types.
 
 ## Ownership and scope
+
+<a id="source-ownership"></a>
 
 - Scott: personal authorship of the Community widget and contentfulcontenttype.app docs site.
 - Not Summit delivery; not Contentful employment deliverable; no CU/CL.

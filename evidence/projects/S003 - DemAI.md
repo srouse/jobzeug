@@ -1,3 +1,87 @@
+---
+schema_version: "1.1"
+project_id: S003
+title: DemAI
+record_kind: project
+project_origin: employment
+ranking_eligible: true
+exclusion_reason: null
+parent_project_id: null
+related_project_ids: []
+role_links:
+  - id: R002
+    relationship: delivery
+    status: provisional
+    note: Preserved provisional association from the project record.
+employer_links:
+  - id: C001
+    relationship: delivery
+    status: confirmed
+    note: Employer association recorded in the project account.
+customer_ids: []
+client_ids: []
+year: 2025
+year_basis: reported
+year_note: Scott places the project from early 2025 through early 2026; 2025 is its representative
+  first year, not the full duration.
+delivery_stage: mixed
+annotation:
+  status: reviewed
+  vocabulary_version: 1.0.0
+  reviewed_by: Codex
+  reviewed_at: "2026-09-26"
+public_disclosure: needs_review
+evidence:
+  - id: S003-E001
+    statement: Built a guided multi-step workflow using Firecrawl and later Mastra to derive content
+      models, populate Contentful, and generate components for demos.
+    concept_ids:
+      - local:ai-workflow-engineering
+      - local:content-modeling
+      - local:firecrawl
+      - local:mastra
+      - local:contentful
+    ownership: contributor
+    scope: unknown
+    delivery_stage: mixed
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Built a guided multi-step workflow using Firecrawl and later Mastra to derive content
+          models, populate Contentful, and generate components for demos.
+    limitations:
+      - Full page assembly was not completed.
+      - Agent versus deterministic step boundaries and production status are not recorded.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+  - id: S003-E002
+    statement: Reports using DemAI across his SE projects, with broader usage concentrating on ad hoc
+      content-model creation.
+    concept_ids:
+      - local:product-adoption
+    ownership: contributor
+    scope: unknown
+    delivery_stage: mixed
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Reports using DemAI across his SE projects, with broader usage concentrating on ad hoc
+          content-model creation.
+    limitations:
+      - User counts and adoption period are not established.
+      - The portfolio’s 68% speed claim remains outside this approved claim.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+concept_proposals: []
+---
 # S003: DemAI
 
 Captured: September 20, 2026
@@ -18,6 +102,8 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts. Port
 I built DemAI, an SE demo platform that turns crawled sites and design-system abstractions into one-button, agent-driven Contentful demos with a top-down content model.
 
 ## Account summary
+
+<a id="source-account"></a>
 
 Scott built **DemAI**, an application for Contentful solution engineers. The core idea: the best SE presentation looks like the customer’s own site, while still using Contentful with **best-practice content modeling** — not a hastily assembled lookalike with a weak content model.
 

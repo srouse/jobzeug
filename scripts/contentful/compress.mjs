@@ -2,10 +2,11 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { schemas } from '../../contentful/schema.mjs';
+import { schemas, outputDirectory } from '../../contentful/schema.mjs';
 import { assertTagIds } from '../../contentful/tags.mjs';
 import policy from '../../contentful/evidence-policy.json' with { type: 'json' };
 import { parseDateRange } from './dates.mjs';
+import { loadMatchingInputs } from './matching.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const EMPLOYER_RE = /\bC\d{3,}\b/g;
@@ -65,7 +66,7 @@ function parseTags(md, kind, id, employerId) {
 }
 
 async function writeOutput(kind, id, fields, tags = []) {
-  const dir = path.join(root, 'evidence/outputs', `${kind}s`);
+  const dir = path.join(root, 'evidence/outputs', outputDirectory(kind));
   await fs.mkdir(dir, { recursive: true });
   const parsed = schemas[kind].parse(fields);
   const file = path.join(dir, `${id}.json`);
@@ -239,12 +240,12 @@ async function compressRoles(nameIndex) {
   return out;
 }
 
-async function compressProjects() {
+async function compressProjects(matchingProjects) {
   const files = (await listMd('evidence/projects')).filter(name => /^S\d{3,}/.test(name));
   const out = [];
   for (const filename of files) {
     const id = filename.match(/^(S\d{3,})/)[1];
-    const md = await read(`evidence/projects/${filename}`);
+    const { body: md, metadata: matchingMetadata } = matchingProjects.get(id);
     const name = md.match(/^# S\d{3,}:\s*(.+)$/m)?.[1]?.trim();
     if (!name) throw new Error(`Missing project name for ${id}`);
     const connection = section(md, 'Resume connection') || md;
@@ -253,10 +254,9 @@ async function compressProjects() {
     if (!employer) throw new Error(`Missing employer for ${id}`);
     if (!roles.length) throw new Error(`Missing roles for ${id}`);
     const summary = projectAccountSummary(md);
-    const showOnResume = parseShowOnResume(md, 'project', id);
     const tags = parseTags(md, 'project', id, employer);
     out.push(await writeOutput('project', id, compact({
-      evidenceId: id, employer, roles, name, summary, showOnResume,
+      evidenceId: id, employer, roles, name, summary, matchingMetadata,
     }), tags));
   }
   return out;
@@ -264,18 +264,24 @@ async function compressProjects() {
 
 export async function compress(workspaceRoot = root) {
   if (workspaceRoot !== root) throw new Error('compress currently runs from repo root only');
+  // Validate the entire matching graph before writing any output.
+  const matching = await loadMatchingInputs(root);
   const nameIndex = parseEmployerIndex(await read('evidence/employers/INDEX.md'));
   const descriptors = parseScaleDescriptors(await read('evidence/employers/Scale and credibility.md'));
   const employers = await compressEmployers(nameIndex, descriptors);
   const roles = await compressRoles(nameIndex);
-  const projects = await compressProjects();
-  return { employers, roles, projects };
+  const matchingVocabulary = await writeOutput('matchingVocabulary', `MV-${matching.registry.vocabulary_version}`, {
+    evidenceId: `MV-${matching.registry.vocabulary_version}`, name: matching.registry.title,
+    vocabularyVersion: matching.registry.vocabulary_version, registry: matching.registry,
+  });
+  const projects = await compressProjects(matching.projects);
+  return { employers, roles, projects, matchingVocabulary };
 }
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
-  compress().then(({ employers, roles, projects }) => {
-    console.log(`Compressed ${employers.length} employers, ${roles.length} roles, ${projects.length} projects → evidence/outputs/`);
+  compress().then(({ employers, roles, projects, matchingVocabulary }) => {
+    console.log(`Compressed ${employers.length} employers, ${roles.length} roles, ${projects.length} projects and vocabulary ${matchingVocabulary.vocabularyVersion} → evidence/outputs/`);
   }).catch(error => {
     console.error(error.message || error);
     process.exitCode = 1;

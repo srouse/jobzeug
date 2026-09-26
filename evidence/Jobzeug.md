@@ -69,7 +69,7 @@ Full job listings are **not** stored under `evidence/`. Condensed historical not
 | **CL00x** | Client | `clients/` |
 | **P00x** | Perspective | `perspectives/` |
 
-Goal.md skill IDs **S1–S6** are a separate namespace from project IDs **S00x**. Prefer indexes (`README.md`, `Goal.md`, role/employer/project indexes) then search then read.
+Project IDs **S00x** identify bounded bodies of work. Prefer indexes (`README.md`, role/employer/project indexes) then search then read. For matching policy, read `matching/engine.md` and `matching/project-header-schema.md`; these are proposed specifications, not an implemented runtime.
 
 Public disclosure: customer and client names default to **not cleared** for polished public copy unless a record says otherwise.
 
@@ -158,7 +158,7 @@ Do not claim features that are not shipped. Prefer this file over improvising ar
 ## Related workspace entry points
 
 - [Workspace guide](README.md) — how to navigate the evidence corpus
-- [Goal and skill framework](Goal.md) — Figma FDE candidacy framing (F1–F10, S1–S6)
+- [Project matching specification](matching/engine.md) — reusable evidence categories and posting-specific ranking
 - [Sources index](sources/INDEX.md) — provenance snapshots
 - Repo root `README.md` — operator setup, env vars, scripts (outside this folder; mention only at a high level unless the user is asking for run instructions)
 

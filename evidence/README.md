@@ -1,8 +1,8 @@
-# Figma Role workspace
+# Career evidence workspace
 
 ## Workspace entry point
 
-This folder is a self-contained Markdown knowledge workspace intended for a future Mastra agent. It preserves comprehensive career evidence so agents can build a targeted resume, six portfolio examples, an interactive webpage, cover letters, and interview materials. No Mastra runtime or webpage is implemented here. Read local records rather than relying on prior conversation history or files outside this folder.
+This folder is a self-contained Markdown knowledge workspace intended for a future Mastra agent. It preserves comprehensive career evidence so agents can build tailored resumes, portfolio selections, interactive webpages, cover letters, and interview materials for different opportunities. No Mastra runtime or webpage is implemented here. Read local records rather than relying on prior conversation history or files outside this folder.
 
 ## Evidence entity types
 
@@ -12,7 +12,7 @@ Keep these graphs distinct. **Projects** are the detailed work records (metadata
 |---|---|---|
 | Employer | [employers/](employers/INDEX.md) **C00x** | Org that employed Scott. C = employer (historical prefix). Retired C005 unused. |
 | Role | [roles/](roles/INDEX.md) **R00x** | A job/title tenure at an employer. R = role. |
-| Project | [projects/](projects/INDEX.md) **S00x** | Bounded body of work. S = project (historical prefix). Goal.md **S1–S6** are skill IDs, not projects. |
+| Project | [projects/](projects/INDEX.md) **S00x** | Bounded body of work. S = project (historical prefix). |
 | Customer | [customers/](customers/INDEX.md) **CU00x** | Product/platform buyer Scott sold, demoed, or adopted with. |
 | Client | [clients/](clients/INDEX.md) **CL00x** | Org that hired Scott’s employer for service/delivery work. |
 | Perspective | [perspectives/](perspectives/INDEX.md) **P00x** | Operating principles / viewpoints. |
@@ -28,7 +28,7 @@ Prefer **customer** for sales/SE/product-adoption work; prefer **client** for �
 
 ## Navigation and reading order
 
-1. [Goal and skill framework](Goal.md): target outcomes and our interpretation of role priorities.
+1. [Project matching specification](matching/engine.md): reusable categories, evidence matching, and posting-specific ranking.
 2. [Jobzeug — the living application](Jobzeug.md): what this product is, how resume / chat / citations / stack work (for “how does this app work?” questions).
 3. [Role index](roles/INDEX.md): employers, titles, dates, and linked projects.
 4. [Employer index](employers/INDEX.md): employer orgs and linked roles/projects.
@@ -48,10 +48,12 @@ Aha Notes is excluded from this Figma application at Scott’s explicit request 
 
 ## Evidence and maintenance contract
 
+For the proposed project-to-job matching system, read the [engine specification](matching/engine.md), [project YAML header schema](matching/project-header-schema.md), and [controlled vocabulary](matching/vocabulary.yaml). All 21 current project records have schema 1.1 headers with source-linked evidence claims. See the [migration report and discussion queue](matching/project-header-migration.md) for review status, estimated years, and unresolved decisions. Annotation review means source fidelity, not independent verification or public clearance. The [Contentful storage pipeline and validated delivery loader](../contentful/matching.md) are implemented; ranking/scoring is not yet implemented.
+
 - Role records describe employment context; **projects** hold detailed accounts. Link them in both directions instead of duplicating narratives.
 - Distinguish **source claims**, **Scott's accounts**, **artifact-supported details**, and **inferred relevance**. State what an artifact actually supports; its existence does not validate every outcome.
 - Preserve conflicting dates, uncertain ownership, prototypes versus production, and planned versus shipped features. Never infer missing metrics or silently resolve conflicting sources.
-- Keep stable role IDs (R001 onward), project IDs (S001 onward), employer IDs (C001 onward), customer IDs (CU001 onward), and client IDs (CL001 onward); use relative links within this workspace. Goal.md skill IDs S1–S6 are a separate namespace.
+- Keep stable role IDs (R001 onward), project IDs (S001 onward), employer IDs (C001 onward), customer IDs (CU001 onward), and client IDs (CL001 onward); use relative links within this workspace.
 - On each substantive addition, update the record, its index, and affected cross-links. Preserve prior uncertainty or corrections with context; append dated additions to projects.
 - Preserve source snapshots and provenance. Historical paths are labels only, not required external dependencies. Sources may describe provisional recommendations that later records supersede.
 - Keep generated application copy separate from evidence records, in an `outputs` folder when output generation begins. Do not overwrite evidence with polished claims.
@@ -60,11 +62,11 @@ Aha Notes is excluded from this Figma application at Scott’s explicit request 
 
 ## Purpose
 
-Build an evidence-based application for Figma's Forward Deployed Engineer role by capturing Scott's projects across his career, initially emphasizing the past five to ten years. Connect each project to the appropriate employer, dates, and resume role. Use them holistically across the resume, six selected portfolio examples, eventual cover letter, and interviews. Preserve all useful projects before deciding what goes forward.
+Maintain a reusable, evidence-based record of Scott’s projects across his career. Connect each project to the appropriate employer, dates, and resume role while preserving personal-work and provisional associations. Match projects to each incoming posting using the controlled vocabulary and evidence rules in the matching specification. Select application materials for the current opportunity; no employer, role, or portfolio count defines the collection.
 
 ## Task context and direction
 
-- This task is named Figma Role. The former Project Archive folder was renamed to match.
+- This workspace began with a Figma application. Its evidence collection and matching policy now serve multiple opportunities; historical source notes retain their original context.
 - Scott will return periodically and narrate work in any order, sometimes covering several projects in one account. Capture first; organize and follow up without requiring a formal interview each time.
 - The intended future deliverable includes a deeply interactive webpage demonstrating the work and its AI dimensions. Its format, implementation, and publishing approach remain open. Gather material now; build it in a later phase.
 - The resume, website, and eventual cover letter should reinforce the same evidence while serving different purposes: quick fit, technical proof, and motivation respectively.
@@ -73,7 +75,7 @@ Build an evidence-based application for Figma's Forward Deployed Engineer role b
 
 ## Accessible project records
 
-- [Goal and skill framework](Goal.md): ranked role functions, supporting skill sets, and criteria for selecting evidence.
+- [Project matching specification](matching/engine.md): controlled vocabulary, requirement weighting, and evidence-based project ranking.
 - [Project index](projects/INDEX.md): entry point for captured projects, resume connections, themes, and outstanding details.
 - [Follow-up question bank](Question bank.md): prompts for later refinement, not a questionnaire Scott must complete before speaking.
 - Use stable project IDs such as S001 and descriptive filenames. Record capture dates and later additions. Link related projects rather than assuming they are one effort or duplicating their outcomes.
@@ -89,7 +91,7 @@ Build an evidence-based application for Figma's Forward Deployed Engineer role b
 - Existing resume and portfolio claims are leads, not independently verified facts. Do not invent metrics or fill factual gaps.
 - Preserve uncertainty, corrections, and unresolved questions. Flag sensitive customer and client details before using them in public copy; respect the disclosure field on CU/CL records.
 - After each substantive exchange, update the project record and index. Keep application prose separate from evidence notes.
-- Choose the final six portfolio examples after discovery; do not force six from the initial candidates.
+- Choose complementary portfolio examples after discovery according to the current application; there is no fixed required count.
 
 ## Project record fields
 
@@ -117,7 +119,7 @@ These are provisional leads from existing materials. Dates and scope require con
 | Design System Agent Kit | Contentful | Section of AI Demos case study | Not interviewed; standalone scope unconfirmed |
 | Customer-specific technical engagements | Contentful | Resume mentions SE partnerships | Specific examples needed |
 | Internal adoption tools and implementation practices | Contentful | Current-role resume description | Specific examples needed |
-| Enterprise design-system modernization | State Farm | [S004](projects/S004%20-%20State%20Farm%20design%20system%20refresh.md) umbrella + [S005](projects/S005%20-%20State%20Farm%20tokens%20persuasion.md)–[S007](projects/S007%20-%20State%20Farm%20Lit%20engineering%20bridge.md) | Split into four project records |
+| Enterprise design-system modernization | State Farm | [S004](roles/R004-state-farm-design-systems.md#state-farm-design-system-context) role context + [S005](projects/S005%20-%20State%20Farm%20tokens%20persuasion.md)–[S007](projects/S007%20-%20State%20Farm%20Lit%20engineering%20bridge.md) | Three independent projects; overarching narrative preserved in role context |
 | Figma token plugin | State Farm | [S006](projects/S006%20-%20State%20Farm%20Figma%20design%20system.md) | Captured with components, tokens, Google expert, designer mentoring |
 | Design system and content-platform migration | Summit Credit Union | Portfolio and resume | Not interviewed |
 | Rates Central | Summit Credit Union | Portfolio and resume | Not interviewed |
@@ -138,6 +140,6 @@ Assess concrete personal engineering ownership, direct customer collaboration, t
 - [Figma portfolio research](sources/portfolio-research.md)
 - [Figma posting notes](sources/job-posting-notes.md)
 
-## First conversation prompt
+## Project discovery prompt
 
 Across the last five to ten years, which project best represents how Scott works when a difficult problem lands with him? Begin with what was happening, why he became involved, and what he did. Project choice remains open to Scott.

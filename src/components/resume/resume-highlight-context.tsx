@@ -39,6 +39,12 @@ type ResumeHighlightContextValue = {
   /** Selected highlight section id (themed answers). */
   focusedSectionId: string | null;
   setFocusedSectionId: (id: string | null) => void;
+  /**
+   * When false, hide connector/page cite visuals without clearing the answer.
+   * Default true while a cluster is active.
+   */
+  pageBindingsVisible: boolean;
+  setPageBindingsVisible: (next: boolean) => void;
   /** Union of all turn citations — drives rollup (uncited → skeleton). */
   highlightedIds: Set<string>;
   /** Citations for the selected highlight section (selected / primary). */
@@ -78,6 +84,7 @@ export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
     return "resume";
   });
   const [askContextItems, setAskContextItems] = useState<AskContextItem[]>([]);
+  const [pageBindingsVisible, setPageBindingsVisible] = useState(true);
   const clusterIdRef = useRef<string | null>(null);
 
   const clearAskContext = useCallback(() => {
@@ -118,6 +125,8 @@ export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
 
     if (prevId !== nextId) {
       setFocusedSectionId(firstSectionId(next));
+      // New answer (or clear) → show page bindings again.
+      setPageBindingsVisible(Boolean(next));
       return;
     }
 
@@ -134,16 +143,18 @@ export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
     clusterIdRef.current = null;
     setActiveClusterState(null);
     setFocusedSectionId(null);
+    setPageBindingsVisible(true);
   }, []);
 
   const value = useMemo<ResumeHighlightContextValue>(() => {
-    const highlightedIds = new Set(
-      activeCluster ? idsFromCitations(activeCluster.citations) : [],
-    );
+    const emptyIds = new Set<string>();
+    const highlightedIds = !pageBindingsVisible
+      ? emptyIds
+      : new Set(activeCluster ? idsFromCitations(activeCluster.citations) : []);
 
     const sections = activeCluster?.sections;
-    let focusedIds = new Set<string>();
-    if (sections?.length) {
+    let focusedIds = emptyIds;
+    if (pageBindingsVisible && sections?.length) {
       // No open section → nothing focused; columns stay full (no roll).
       const match = focusedSectionId
         ? sections.find((section) => section.id === focusedSectionId)
@@ -151,7 +162,7 @@ export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
       if (match) {
         focusedIds = new Set(idsFromCitations(match.citations));
       }
-    } else {
+    } else if (pageBindingsVisible) {
       focusedIds = highlightedIds;
     }
 
@@ -161,6 +172,8 @@ export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
       clearActiveCluster,
       focusedSectionId,
       setFocusedSectionId,
+      pageBindingsVisible,
+      setPageBindingsVisible,
       highlightedIds,
       focusedIds,
       density,
@@ -175,6 +188,7 @@ export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
   }, [
     activeCluster,
     focusedSectionId,
+    pageBindingsVisible,
     density,
     evidencePage,
     askContextItems,

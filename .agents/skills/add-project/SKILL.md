@@ -73,7 +73,7 @@ Match employer-record discipline:
 - Do not surface Aha Notes; never reuse C005 or R008
 - Distinguish **source claims**, **Scott's accounts**, **artifact-supported details**, and **inferred relevance**
 - Do not overwrite evidence with polished application copy; keep outputs separate when they exist
-- Project IDs (`S001`…) are not Goal.md skill IDs (`S1`–`S6`)
+- Preserve existing project IDs (`S001`…). For matching claims and vocabulary `concept_ids`, use **annotate-project** after capture (see `evidence/matching/engine.md`).
 - One project can span roles; mark uncertain links provisional
 - Preserve uncertainty; never invent metrics, dates, or AI involvement
 - Do not retrofit AI or Figma into older work
@@ -84,4 +84,5 @@ Match employer-record discipline:
 - Creating employers or roles
 - Creating prospects
 - Generating resume/portfolio/cover-letter copy
+- Matching annotation / vocabulary tagging (annotate-project)
 - Auto-invoking from ambient chat without this skill

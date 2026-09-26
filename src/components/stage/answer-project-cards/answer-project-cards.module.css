@@ -1,0 +1,42 @@
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--jz-semantic-space-gap-md, 1rem);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cardHit {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.cardHit:focus-visible {
+  outline: var(--jz-primitive-stroke-width-md, 2px) solid
+    var(--jz-semantic-color-border-strong, #0a0a0a);
+  outline-offset: var(--jz-primitive-stroke-width-md, 2px);
+  border-radius: var(--jz-primitive-radius-xl, 1rem);
+}
+
+.card {
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 719px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+}

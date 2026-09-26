@@ -1,3 +1,87 @@
+---
+schema_version: "1.1"
+project_id: S012
+title: Presentation Deck widget (personal)
+record_kind: project
+project_origin: personal
+ranking_eligible: true
+exclusion_reason: null
+parent_project_id: null
+related_project_ids:
+  - S011
+  - S013
+role_links:
+  - id: R007
+    relationship: calendar_anchor
+    status: provisional
+    note: Calendar placement only; this is personal work, not employer delivery.
+employer_links:
+  - id: C003
+    relationship: calendar_anchor
+    status: provisional
+    note: Tenure anchor only; do not attribute project outcomes to Summit.
+customer_ids: []
+client_ids: []
+year: null
+year_basis: unknown
+year_note: "Year unresolved: provisional R007 calendar anchor is 2018–2019, while captured public
+  widget version history is 2022–2023. Preserve the conflict rather than guessing a build year."
+delivery_stage: production
+annotation:
+  status: needs_review
+  vocabulary_version: 1.0.0
+  reviewed_by: Codex
+  reviewed_at: "2026-09-26"
+public_disclosure: needs_review
+evidence:
+  - id: S012-E001
+    statement: Built a personal Figma Community presentation widget and documentation site, independent
+      of Summit delivery.
+    concept_ids:
+      - local:figma-extension
+      - local:figma
+      - local:developer-and-designer-tools
+    ownership: contributor
+    scope: external_audience
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "#source-ownership"
+        locator: Ownership and scope
+        supports: Built a personal Figma Community presentation widget and documentation site, independent
+          of Summit delivery.
+    limitations:
+      - Role-calendar association is provisional and conflicts with later public version dates.
+      - Personal authorship is recorded; absence of collaborators is not independently established.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+  - id: S012-E002
+    statement: The captured product description documents synchronized title, author, and date fields,
+      layouts, table-of-contents behavior, and ordered exports.
+    concept_ids:
+      - local:interaction-design
+    ownership: unknown
+    scope: external_audience
+    delivery_stage: production
+    provenance: existing_material
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: The captured product description documents synchronized title, author, and date fields,
+          layouts, table-of-contents behavior, and ordered exports.
+    limitations:
+      - Feature behavior is based on the prior source capture, not a fresh functional test.
+      - Static page layouts do not establish responsive-interface implementation.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+concept_proposals: []
+---
 # S012: Presentation Deck widget (personal)
 
 Captured: September 22, 2026
@@ -21,6 +105,8 @@ Evidence: Scott’s direct account (personal project); public product copy and C
 I built a personal Figma Community presentation-deck widget with synced metadata, layouts, TOC, and PDF export—independent of Summit employment delivery.
 
 ## Account summary
+
+<a id="source-account"></a>
 
 Scott built a **Presentation Deck** Figma Community **widget** (personal): a synchronized presentation-deck system on canvas. Public framing (presentationdeck.app / Community): page templates including cover, descriptor pages (full and minimized), and layout guides; each page carries **project title, author, and date** synchronized across Presentation Deck widgets on update; pages organize into **sequentially numbered** exports. Landscape legal + PDF merge path aimed at decks that read well on **16:9** and print predictably.
 
@@ -64,6 +150,8 @@ Scott:
 Public Community / site (product copy): synchronized title/author/date; numbered pages for PDF merge; landscape legal for 16:9 and print.
 
 ## Ownership and scope
+
+<a id="source-ownership"></a>
 
 - Scott: personal authorship of the Community widget and presentationdeck.app docs site.
 - Not Summit delivery; no CU/CL.

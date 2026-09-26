@@ -76,5 +76,5 @@ After: `design systems, Figma, tokens, Lit, design↔eng bridge` for R004 — on
 
 - Contentful schema, compress, or push
 - Capturing new projects (add-project)
-- Rewriting project narratives or Goal.md skill framework
+- Rewriting project narratives or the matching specifications in `evidence/matching/`
 - Auto-invoking from ambient chat without this skill

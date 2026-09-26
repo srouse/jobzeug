@@ -104,6 +104,15 @@
   }
 }
 
+.pageTabs,
+.mobileTabBar {
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+  border-top: 1px solid var(--jz-semantic-color-border-default);
+  background: var(--jz-semantic-color-background-control-default);
+}
+
 /*
  * Medium (900–1399): stacked pages in a left rail + free lane for stage.
  */
@@ -149,50 +158,18 @@
   }
 
   .pageTabs {
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    border-top: 1px solid var(--jz-semantic-color-border-default, #d4d4d4);
-    background: var(--jz-semantic-color-background-surface-default, #ffffff);
-  }
-
-  .pageTab {
-    flex: 1 1 0;
-    margin: 0;
-    padding: var(--jz-semantic-space-padding-sm, 0.75rem)
-      var(--jz-semantic-space-padding-md, 1rem);
-    border: none;
-    border-right: 1px solid var(--jz-semantic-color-border-default, #e5e5e5);
-    background: transparent;
-    color: var(--jz-semantic-color-text-muted, #737373);
-    font-family: var(--jz-semantic-type-label-sm-font-family, inherit);
-    font-size: var(--jz-semantic-type-label-sm-font-size, 0.8125rem);
-    line-height: var(--jz-semantic-type-label-sm-line-height, 1.25);
-    cursor: pointer;
-    box-sizing: border-box;
-  }
-
-  .pageTab:last-child {
-    border-right: none;
-  }
-
-  .pageTab:hover {
-    color: var(--jz-semantic-color-text-default, #171717);
-    background: var(--jz-semantic-color-background-control-subtle, #f5f5f5);
-  }
-
-  .pageTabSelected {
-    color: var(--jz-semantic-color-text-primary, #2563eb);
-    box-shadow: inset 0 2px 0
-      var(--jz-semantic-color-border-brand-strong, #2563eb);
+    display: block;
   }
 }
 
-/* Mobile (<900): one surface at a time + bottom three-way tabs. */
+/* Mobile (<900): one surface at a time + bottom tab group. */
 @media (max-width: 899px) {
   .root {
-    --resume-mobile-tab-height: 2.75rem;
+    /* Matches jz-tab padding + body line until the bar is measured. */
+    --resume-mobile-tab-height: calc(
+      var(--jz-semantic-space-padding-md) * 2 +
+        var(--jz-semantic-type-body-regular-font-size) * 1.2
+    );
   }
 
   .innerBound {
@@ -238,44 +215,9 @@
   }
 
   .mobileTabBar {
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    height: var(--resume-mobile-tab-height, 2.75rem);
-    border-top: 1px solid var(--jz-semantic-color-border-default, #d4d4d4);
-    background: var(--jz-semantic-color-background-surface-default, #ffffff);
+    display: block;
+    min-height: var(--resume-mobile-tab-height);
     z-index: calc(var(--jz-semantic-layer-header, 10) + 2);
-  }
-
-  .mobileTabBar .pageTab {
-    flex: 1 1 0;
-    margin: 0;
-    padding: 0 var(--jz-semantic-space-padding-sm, 0.75rem);
-    border: none;
-    border-right: 1px solid var(--jz-semantic-color-border-default, #e5e5e5);
-    background: transparent;
-    color: var(--jz-semantic-color-text-muted, #737373);
-    font-family: var(--jz-semantic-type-label-sm-font-family, inherit);
-    font-size: var(--jz-semantic-type-label-sm-font-size, 0.8125rem);
-    line-height: var(--jz-semantic-type-label-sm-line-height, 1.25);
-    cursor: pointer;
-    box-sizing: border-box;
-  }
-
-  .mobileTabBar .pageTab:last-child {
-    border-right: none;
-  }
-
-  .mobileTabBar .pageTab:hover {
-    color: var(--jz-semantic-color-text-default, #171717);
-    background: var(--jz-semantic-color-background-control-subtle, #f5f5f5);
-  }
-
-  .mobileTabBar .pageTabSelected {
-    color: var(--jz-semantic-color-text-primary, #2563eb);
-    box-shadow: inset 0 2px 0
-      var(--jz-semantic-color-border-brand-strong, #2563eb);
   }
 
   .chatFab {

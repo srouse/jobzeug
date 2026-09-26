@@ -535,3 +535,58 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 
 - Visual polish on attach gutter / highlight mapping if needed after fresh asks
 
+
+### [2026-09-26T10:48:42-0500]
+
+#### Summary
+
+- Added annotate-project skill, matching catalog/scoring services (AI map at ingest, deterministic score API), S023 ListenAssist evidence, and a stage Match debug button; compress/push published matching metadata.
+
+#### Changes
+
+- Evidence / records: S023 AmFam ListenAssist; project YAML matching headers; vocabulary outputs; compress updates including S023
+- Skills / tooling: annotate-project; compress/add-project cross-links; job-posting requirement mapper; matching-score + `/api/job-posting/match`; stage Match console button
+- Other: Contentful matching schema fields on jobLine/jobPosting; matching tests
+
+#### Decisions
+
+- Forward-only posting mapping (no legacy backfill); AI produces requirement material once, scoring stays deterministic without LLM; Match UI deferred to console debug only
+
+#### Plans cached
+
+- add_story_skill_2a282f5c.plan.md
+- brand_url_design_knobs_cc92b6b9.plan.md
+- comp-make_skill_429bbef5.plan.md
+- customers_evidence_log_51450833.plan.md
+- employer_logo_prefetch_02387199.plan.md
+- evidence_contentful_compress_793daf55.plan.md
+- evidence_mastra_workspace_4e07deca.plan.md
+- finish_docked_toolbar_52ac2998.plan.md
+- full_job_post_context_e1b35bf3.plan.md
+- job_cite_chat-only_c7f1d253.plan.md
+- job_matching_services_910e861f.plan.md
+- jz-icon_phosphor_0589d485.plan.md
+- jztext_jzicon_migration_23ae0664.plan.md
+- montserrat_entry_css_f8261a2c.plan.md
+- next.js_mastra_scaffold_718b8d31.plan.md
+- one_role_per_project_ea3747a0.plan.md
+- persist_site_password_session_cc3eee20.plan.md
+- resume_cite_highlights_ae4c6a1c.plan.md
+- resume_floating_chat_c02c45c0.plan.md
+- resume_spa_contentful_5d3d3333.plan.md
+- rip_specs_restore_lit_8e08794a.plan.md
+- session_checkpoint_skill_65575be3.plan.md
+- session_design_tokens_20a67a82.plan.md
+- session_job_posting_28aa6696.plan.md
+- site_password_gate_c3c92081.plan.md
+- specs_ds_import_3ed8c9e7.plan.md
+- stories_to_projects_rename_34704978.plan.md
+- themed_answer_accordion_32662583.plan.md
+- vercel_ds_prebuilt_e09f8557.plan.md
+- web_components_ds_b1737d33.plan.md
+- wire_local_ds2_cli_cc2d5484.plan.md
+
+#### Next
+
+- Improve requirement mapper so project-scoped lines get concept_ids (current Match runs show all-unmapped zeros); optional match UI after mapping quality is good
+

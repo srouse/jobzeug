@@ -6,5 +6,81 @@
   ],
   "name": "2024 Partnership Tour - AI design systems",
   "summary": "I presented AI and design systems on Contentful’s 2024 Partnership Tour across Chicago, Brooklyn, and Toronto—exploratory partner talks that foreshadowed later product direction.",
-  "showOnResume": true
+  "matchingMetadata": {
+    "schema_version": "1.1",
+    "project_id": "S022",
+    "title": "2024 Partnership Tour - AI design systems",
+    "record_kind": "project",
+    "project_origin": "employment",
+    "ranking_eligible": true,
+    "exclusion_reason": null,
+    "parent_project_id": null,
+    "related_project_ids": [
+      "S014",
+      "S015"
+    ],
+    "role_links": [
+      {
+        "id": "R003",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Preserved canonical association from the project account; role-source date caveats remain in the role record."
+      }
+    ],
+    "employer_links": [
+      {
+        "id": "C001",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Employer association recorded in the project account."
+      }
+    ],
+    "customer_ids": [],
+    "client_ids": [],
+    "year": 2024,
+    "year_basis": "reported",
+    "year_note": "Scott identifies the 2024 Partnership Tour; finer dates are intentionally not requested.",
+    "delivery_stage": "unknown",
+    "annotation": {
+      "status": "reviewed",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-09-26",
+      "vocabulary_version": "1.0.0"
+    },
+    "public_disclosure": "needs_review",
+    "evidence": [
+      {
+        "id": "S022-E001",
+        "statement": "Conceived and delivered exploratory AI/design-system presentations on the 2024 Partnership Tour in Chicago, Brooklyn, and Toronto.",
+        "concept_ids": [
+          "local:public-technical-presentation",
+          "local:speaking",
+          "local:ai-system-fundamentals"
+        ],
+        "ownership": "contributor",
+        "scope": "external_audience",
+        "delivery_stage": "unknown",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#source-account",
+            "locator": "Account summary",
+            "supports": "Conceived and delivered exploratory AI/design-system presentations on the 2024 Partnership Tour in Chicago, Brooklyn, and Toronto."
+          }
+        ],
+        "limitations": [
+          "Sole versus shared deck authorship is not specified.",
+          "The exploration is not proof of a shipped AI feature or formal roadmap influence.",
+          "Tour year is sufficient; finer dates and a universal-component-definition deep dive were deprioritized by Scott."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26"
+        }
+      }
+    ],
+    "concept_proposals": []
+  }
 }

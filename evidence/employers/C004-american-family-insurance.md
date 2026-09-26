@@ -20,13 +20,15 @@ Researched September 19, 2026. Company background is independent of Scott’s ex
 
 ## Role records
 
+Canonical employment for application materials: [R006](../roles/R006-american-family-ux-designer-developer.md). LinkedIn-only splits R014/R015 remain for provenance and must not be counted as extra jobs.
+
 - [R006: American Family Insurance — Senior UX Designer / Developer](../roles/R006-american-family-ux-designer-developer.md)
-- [R014: American Family Insurance — Senior UX Designer](../roles/R014-american-family-senior-ux-designer.md)
-- [R015: American Family Insurance — UX Designer / Developer](../roles/R015-american-family-contract-ux-developer.md)
+- [R014: American Family Insurance — Senior UX Designer](../roles/R014-american-family-senior-ux-designer.md) (LinkedIn provenance)
+- [R015: American Family Insurance — UX Designer / Developer](../roles/R015-american-family-contract-ux-developer.md) (LinkedIn provenance)
 
 ## Projects
 
-No captured projects linked yet.
+- [S023 AmFam R&D ListenAssist prototypes](../projects/S023%20-%20AmFam%20R%26D%20ListenAssist%20prototypes.md)
 
 ## Sources
 

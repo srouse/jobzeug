@@ -25,7 +25,7 @@ None — role narrative is in LinkedIn description; project-level detail lives o
 
 ## Linked projects
 
-No captured projects linked yet. Resume bullets are discovery leads, not completed project accounts.
+- [S023 AmFam R&D ListenAssist prototypes](../projects/S023%20-%20AmFam%20R%26D%20ListenAssist%20prototypes.md) — React ListenAssist + shadowing user tests (expanded account).
 
 ## Source references
 
@@ -41,14 +41,14 @@ No captured projects linked yet. Resume bullets are discovery leads, not complet
 
 ## Relevance and evidence development
 
-Map specific projects to the [Figma role goal and skill framework](../Goal.md) after capturing the underlying work. Role titles and resume claims alone do not establish proficiency, customer outcomes, or AI/Figma experience.
+Map specific projects to the [project matching specification](../matching/engine.md) after capturing the underlying work. Role titles and resume claims alone do not establish proficiency, customer outcomes, or AI/Figma experience.
 
 [Role index](INDEX.md) · [Project index](../projects/INDEX.md) · [Workspace guide](../README.md)
 
 ## Reconciliation note
 
-This record is a resume aggregate. LinkedIn separates the contract UX Designer / Developer role (R015) from the full-time Senior UX Designer role (R014). Do not count this aggregate as a third job.
+**Canonical employment for Scott’s AmFam story is this record (R006)** — one employer tenure at [C004](../employers/C004-american-family-insurance.md). Contract-to-hire was how he arrived; do not treat that path as a second job when linking projects.
 
-LinkedIn positions: [R014](R014-american-family-senior-ux-designer.md), [R015](R015-american-family-contract-ux-developer.md).
+LinkedIn still lists two overlapping positions ([R014](R014-american-family-senior-ux-designer.md), [R015](R015-american-family-contract-ux-developer.md)) for provenance only. Keep them so source diffs stay auditable; **do not count them as additional jobs** and **do not require projects to pin to R014 vs R015**.
 
 Employer context: [American Family Insurance](../employers/C004-american-family-insurance.md).

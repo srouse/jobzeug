@@ -13,16 +13,26 @@ import type { AnswerSection } from "@/lib/themed-answer";
 import { AnswerStageBody } from "./answer-stage-body";
 import { AnswerStageFooter } from "./answer-stage-footer";
 import styles from "./answer-stage.module.css";
+import type { ResumeViewModel } from "@/lib/contentful/resume-model";
 
 /**
  * Fixed center stage: body (question + answer) and optional pre-ask composer.
  */
-export function AnswerStage({ hidden = false }: { hidden?: boolean }) {
+export function AnswerStage({
+  hidden = false,
+  resume = null,
+}: {
+  hidden?: boolean;
+  /** Already-loaded resume — used to label cited projects (no extra fetch). */
+  resume?: ResumeViewModel | null;
+}) {
   const [input, setInput] = useState("");
   const {
     activeCluster,
     focusedSectionId,
     setFocusedSectionId,
+    pageBindingsVisible,
+    setPageBindingsVisible,
     askContextItems,
     removeAskContext,
   } = useResumeHighlights();
@@ -104,6 +114,11 @@ export function AnswerStage({ hidden = false }: { hidden?: boolean }) {
           question={question}
           metricsLabel={metricsLabel}
           busy={busy}
+          resume={resume}
+          pageBindingsVisible={pageBindingsVisible}
+          onTogglePageBindings={() =>
+            setPageBindingsVisible(!pageBindingsVisible)
+          }
           onClear={handleClear}
           onOpenSection={(id) => setFocusedSectionId(id || null)}
           onPrompt={submitResumeQuestion}

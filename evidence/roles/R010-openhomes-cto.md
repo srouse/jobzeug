@@ -41,7 +41,7 @@ No captured projects linked yet. Resume bullets are discovery leads, not complet
 
 ## Relevance and evidence development
 
-Map specific projects to the [Figma role goal and skill framework](../Goal.md) after capturing the underlying work. Role titles and resume claims alone do not establish proficiency, customer outcomes, or AI/Figma experience.
+Map specific projects to the [project matching specification](../matching/engine.md) after capturing the underlying work. Role titles and resume claims alone do not establish proficiency, customer outcomes, or AI/Figma experience.
 
 [Role index](INDEX.md) · [Project index](../projects/INDEX.md) · [Workspace guide](../README.md)
 

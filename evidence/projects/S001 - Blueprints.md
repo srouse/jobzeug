@@ -1,3 +1,115 @@
+---
+schema_version: "1.1"
+project_id: S001
+title: Blueprints
+record_kind: project
+project_origin: employment
+ranking_eligible: true
+exclusion_reason: null
+parent_project_id: null
+related_project_ids:
+  - S008
+role_links:
+  - id: R001
+    relationship: delivery
+    status: confirmed
+    note: Preserved canonical association from the project account; role-source date caveats remain in
+      the role record.
+employer_links:
+  - id: C001
+    relationship: delivery
+    status: confirmed
+    note: Employer association recorded in the project account.
+customer_ids: []
+client_ids: []
+year: 2026
+year_basis: estimated
+year_note: Estimated from R001 (February 2026–present as of September 2026); project-specific year
+  was not supplied.
+delivery_stage: unknown
+annotation:
+  status: reviewed
+  vocabulary_version: 1.0.0
+  reviewed_by: Codex
+  reviewed_at: "2026-09-26"
+public_disclosure: needs_review
+evidence:
+  - id: S001-E001
+    statement: Built a Figma-centered system of approximately 50 components and checked them against
+      real Contentful content.
+    concept_ids:
+      - local:design-system-development
+      - local:component-library
+      - local:figma
+      - local:contentful
+      - local:design-token-engineering
+    ownership: contributor
+    scope: single_team
+    delivery_stage: unknown
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Built a Figma-centered system of approximately 50 components and checked them against real
+          Contentful content.
+    limitations:
+      - Original visual-design ownership is not established; Scott describes assembly and
+        implementation.
+      - Release status and actual customer adoption are unconfirmed.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+  - id: S001-E002
+    statement: Created the Design System Squared CLI/skills workflow to export Figma context into
+      Markdown, generate React components, and synchronize tokens.
+    concept_ids:
+      - local:command-line-tool
+      - local:design-token-pipeline
+      - local:ai-workflow-engineering
+      - local:react
+    ownership: contributor
+    scope: unknown
+    delivery_stage: unknown
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Created the Design System Squared CLI/skills workflow to export Figma context into
+          Markdown, generate React components, and synchronize tokens.
+    limitations:
+      - Scott explicitly says he did not hand-write the generated React code.
+      - Component fidelity is Scott’s assessment, without a recorded formal evaluation.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+  - id: S001-E003
+    statement: Mentored a designer for several weeks, then took over the work when the timeline could
+      not accommodate the original pace.
+    concept_ids:
+      - local:mentoring
+      - local:deadline-pressure
+    ownership: contributor
+    scope: single_team
+    delivery_stage: unknown
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Mentored a designer for several weeks, then took over the work when the timeline could not
+          accommodate the original pace.
+    limitations:
+      - No personnel-management authority is asserted.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+concept_proposals: []
+---
 # S001: Blueprints
 
 Captured: September 18, 2026
@@ -18,6 +130,8 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 I took over Contentful’s Blueprints effort and built a ~50-component, Figma-centric design system with Design System Squared so Figma exports drive matching React components and tokens—battle-tested against real Contentful content.
 
 ## Account summary
+
+<a id="source-account"></a>
 
 Coworkers on Customer Insights and Adoption started **Blueprints**: a repository prospects and customers can install to see **content-model best practices**, plus a **frontend** so people can see how a content model flows into a **design system** and into **web pages**.
 

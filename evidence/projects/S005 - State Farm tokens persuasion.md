@@ -1,9 +1,73 @@
+---
+schema_version: "1.1"
+project_id: S005
+title: State Farm tokens persuasion
+record_kind: project
+project_origin: employment
+ranking_eligible: true
+exclusion_reason: null
+parent_project_id: null
+related_project_ids:
+  - S006
+  - S007
+  - S014
+role_links:
+  - id: R004
+    relationship: delivery
+    status: confirmed
+    note: Preserved canonical association from the project account; role-source date caveats remain in
+      the role record.
+employer_links:
+  - id: C002
+    relationship: delivery
+    status: confirmed
+    note: Employer association recorded in the project account.
+customer_ids: []
+client_ids: []
+year: 2023
+year_basis: estimated
+year_note: Estimated as 2023, the main calendar year of R004 (July 2023–January/February 2024);
+  exact project timing is not established.
+delivery_stage: unknown
+annotation:
+  status: reviewed
+  vocabulary_version: 1.0.0
+  reviewed_by: Codex
+  reviewed_at: "2026-09-26"
+public_disclosure: needs_review
+evidence:
+  - id: S005-E001
+    statement: Iterated executive presentations and used concrete examples of ambiguous color guidance
+      to persuade management to support design tokens.
+    concept_ids:
+      - local:persuasion
+      - local:speaking
+      - local:stakeholder-alignment
+    ownership: contributor
+    scope: organization
+    delivery_stage: unknown
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Iterated executive presentations and used concrete examples of ambiguous color guidance to
+          persuade management to support design tokens.
+    limitations:
+      - A colleague helped navigate organizational politics; sole ownership is not asserted.
+      - Approval of the direction is not proof of completed rollout.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+concept_proposals: []
+---
 # S005: State Farm tokens persuasion
 
 Captured: September 20, 2026
 Status: Initial account; artifacts pending
 Evidence: Scott's direct account, not yet supported by inspected artifacts
-Parent umbrella: [S004 State Farm design system refresh](S004%20-%20State%20Farm%20design%20system%20refresh.md)
+Shared role context: [State Farm design system refresh](../roles/R004-state-farm-design-systems.md#state-farm-design-system-context)
 
 ## Resume connection
 
@@ -17,6 +81,8 @@ Parent umbrella: [S004 State Farm design system refresh](S004%20-%20State%20Farm
 I built the executive persuasion case—and landing deck—that got State Farm leadership to buy into design tokens as the foundation for the next-generation system.
 
 ## Account summary
+
+<a id="source-account"></a>
 
 Scott spent **many months** building a story to convince **senior management** that **design tokens** needed to happen at State Farm — including how the design system should be made and how the program should go.
 

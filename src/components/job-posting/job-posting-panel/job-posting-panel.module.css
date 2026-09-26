@@ -285,7 +285,10 @@
 }
 
 .lineCited {
-  background: var(--jz-semantic-color-background-surface-brand-primary, #dbeafe);
+  background: var(
+    --jz-semantic-color-background-surface-brand-primary-subtle,
+    #eff6ff
+  );
   border-radius: var(--jz-primitive-radius-sm, 0.25rem);
 }
 

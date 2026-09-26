@@ -1,4 +1,8 @@
 import { z } from "zod";
+import {
+  matchingRequirementSchema,
+  matchingSnapshotSchema,
+} from "../../../contentful/matching-schema.mjs";
 
 const text = z.string().trim().min(1);
 const short = text.max(256);
@@ -22,6 +26,14 @@ export const jobToolContextSchema = z.enum([
   "preferred",
   "responsibility",
 ]);
+
+export {
+  matchingRequirementSchema,
+  matchingSnapshotSchema,
+};
+
+export type MatchingRequirement = z.infer<typeof matchingRequirementSchema>;
+export type MatchingSnapshot = z.infer<typeof matchingSnapshotSchema>;
 
 /** Structured output from job-posting-structurer (no Contentful entry ids). */
 export const structuredJobPostingSchema = z.object({
@@ -80,12 +92,14 @@ export type JobPostingView = {
     section: z.infer<typeof jobLineSectionSchema>;
     kind: z.infer<typeof jobLineKindSchema>;
     theme: string;
+    matchingRequirement?: MatchingRequirement;
   }>;
   tools: Array<{
     entryId: string;
     name: string;
     context: z.infer<typeof jobToolContextSchema>;
   }>;
+  matchingSnapshot?: MatchingSnapshot;
 };
 
 /** Browser/API payload for the Job Posting panel (includes fullText for the Full tab). */
@@ -118,6 +132,7 @@ export const chatJobPostingPayloadSchema = z.object({
         section: jobLineSectionSchema,
         kind: jobLineKindSchema,
         theme: short,
+        matchingRequirement: matchingRequirementSchema.optional(),
       }),
     )
     .min(1)
@@ -132,6 +147,7 @@ export const chatJobPostingPayloadSchema = z.object({
     )
     .max(40)
     .default([]),
+  matchingSnapshot: matchingSnapshotSchema.optional(),
 });
 
 export type ChatJobPostingPayload = z.infer<typeof chatJobPostingPayloadSchema>;

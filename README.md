@@ -38,8 +38,8 @@ The Next app is gated by a shared password (`/login`). After login, an httpOnly 
 | `npm run ds:build` | Build `@jobzeug/design-system` → `packages/design-system/dist` |
 | `npm run ds:dev` | Watch-rebuild the design system |
 | `npm run build` / `npm start` | Production Next build (includes Mastra in API routes; uses committed DS `dist`) |
-| `npm run contentful:compress` | Parse `evidence/` → `evidence/outputs/{employers,roles,projects}/*.json` |
-| `npm run contentful:apply` | Create/update Employer / Role / Project content types in Contentful |
+| `npm run contentful:compress` | Parse `evidence/` → `evidence/outputs/{employers,roles,projects,matchingVocabularies}/*.json` |
+| `npm run contentful:apply` | Create/update content types, including the matching vocabulary |
 | `npm run contentful:push` | Upsert compressed JSON into Contentful (`jz-*` entry IDs) |
 
 ## App routes
@@ -62,7 +62,7 @@ Vercel installs with [`scripts/vercel-install.mjs`](scripts/vercel-install.mjs) 
 
 [`evidence/`](evidence/) is the canonical source for employers, roles, projects, customers, clients, and perspectives. It is mounted on `jobzeug-agent` as a **read-only** Mastra Workspace (`src/mastra/workspace.ts`) with BM25 search over `**/*.md`. The agent can list/read/grep/search those files; it cannot write them.
 
-Compressed resume-core payloads live under `evidence/outputs/` (Employer / Role / Project). Run `contentful:compress` after evidence edits, then `contentful:apply` / `contentful:push` to sync Contentful. Use `@compress-to-contentful` to run that flow from an agent.
+Compressed payloads live under `evidence/outputs/` (Employer / Role / Project / Matching Vocabulary). Project payloads include structured matching headers. See [Matching data in Contentful](contentful/matching.md) for metadata-only updates, direct CMS editing, and the deterministic Delivery API loader. Run `contentful:compress` after evidence edits, then `contentful:apply` / `contentful:push` to sync Contentful. Use `@compress-to-contentful` to run that flow from an agent.
 
 After large evidence edits, restart Next or Studio so the auto-index refreshes.
 

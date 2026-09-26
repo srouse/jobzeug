@@ -47,6 +47,7 @@ function CitedTitle({
   dimmed = false,
   variant,
   level = 0,
+  weight,
   color,
   label,
   className,
@@ -56,6 +57,7 @@ function CitedTitle({
   dimmed?: boolean;
   variant: string;
   level?: number;
+  weight?: "400" | "500" | "600" | "700";
   color?: string;
   label: string;
   className?: string;
@@ -65,6 +67,7 @@ function CitedTitle({
     <JzText
       level={level}
       variant={variant}
+      weight={weight}
       color={
         selected || active ? "primary" : dimmed ? "muted" : color
       }
@@ -87,7 +90,6 @@ function EvidenceShell({
 }: {
   id: string;
   skeleton: boolean;
-  cited?: boolean;
   focused: boolean;
   headClass: string;
   /** Prompt stage: reserve left page-pad column for checkbox. */
@@ -137,7 +139,6 @@ export function ResumeDocument({
   onOpenDesign?: () => void;
 }) {
   const {
-    highlightedIds,
     focusedIds,
     density,
     setDensity,
@@ -266,7 +267,6 @@ export function ResumeDocument({
           >
             {resume.employers.map(
               (employer: ResumeEmployerGroup, employerIndex) => {
-                const employerCited = highlightedIds.has(employer.evidenceId);
                 const employerFocused = focusedIds.has(employer.evidenceId);
                 const employerSkeleton = rollActive && !employerFocused;
                 const employerAttached = attachedIds.has(employer.evidenceId);
@@ -292,7 +292,6 @@ export function ResumeDocument({
                     <EvidenceShell
                       id={employer.evidenceId}
                       skeleton={employerSkeleton}
-                      cited={employerCited}
                       focused={employerFocused}
                       headClass={styles.employerHead}
                       gutter={canAttachContext}
@@ -305,6 +304,7 @@ export function ResumeDocument({
                           active={employerFocused}
                           level={2}
                           variant="heading"
+                          weight="500"
                           label={employer.name}
                           className={styles.employerTitle}
                           selected={employerAttached}
@@ -314,7 +314,6 @@ export function ResumeDocument({
 
                     <div className={styles.roles}>
                       {employer.roles.map((role, roleIndex) => {
-                        const roleCited = highlightedIds.has(role.roleId);
                         const roleFocused = focusedIds.has(role.roleId);
                         const roleSkeleton = rollActive && !roleFocused;
                         const roleAttached = attachedIds.has(role.roleId);
@@ -340,7 +339,6 @@ export function ResumeDocument({
                             <EvidenceShell
                               id={role.roleId}
                               skeleton={roleSkeleton}
-                              cited={roleCited}
                               focused={roleFocused}
                               headClass={styles.roleBlock}
                               gutter={canAttachContext}
@@ -352,7 +350,7 @@ export function ResumeDocument({
                                 <CitedTitle
                                   active={roleFocused}
                                   level={3}
-                                  variant="subtitle"
+                                  variant="heading3"
                                   label={role.title}
                                   selected={roleAttached}
                                 />
@@ -362,45 +360,10 @@ export function ResumeDocument({
                                   label={role.dateLabel}
                                 />
                               </div>
-                              {roleFocused &&
-                              (role.summary || role.highlights.length > 0) ? (
-                                <div className={styles.roleDetails}>
-                                  {role.summary ? (
-                                    <JzText
-                                      variant="body-regular"
-                                      color={
-                                        roleFocused ? "primary" : "default"
-                                      }
-                                      label={role.summary}
-                                    />
-                                  ) : null}
-                                  {role.highlights.length > 0 ? (
-                                    <ul className={styles.roleHighlights}>
-                                      {role.highlights.map((highlight) => (
-                                        <li
-                                          key={highlight}
-                                          className={styles.roleHighlight}
-                                        >
-                                          <JzText
-                                            variant="caption"
-                                            color={
-                                              roleFocused
-                                                ? "primary"
-                                                : "muted"
-                                            }
-                                            label={highlight}
-                                          />
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  ) : null}
-                                </div>
-                              ) : null}
                             </EvidenceShell>
 
                             <ProjectLine
                               projects={role.projects}
-                              highlightedIds={highlightedIds}
                               focusedIds={focusedIds}
                               rollActive={rollActive}
                               canAttachContext={canAttachContext}
@@ -424,7 +387,6 @@ export function ResumeDocument({
 
 function ProjectLine({
   projects,
-  highlightedIds,
   focusedIds,
   rollActive,
   canAttachContext,
@@ -432,7 +394,6 @@ function ProjectLine({
   toggleAskContext,
 }: {
   projects: ResumeProject[];
-  highlightedIds: Set<string>;
   focusedIds: Set<string>;
   rollActive: boolean;
   canAttachContext: boolean;
@@ -445,19 +406,8 @@ function ProjectLine({
 
   return (
     <div className={styles.projects}>
-      {!rollActive ? (
-        <div
-          className={classNames(
-            styles.projectsLabel,
-            canAttachContext && styles.attachGutterIndent,
-          )}
-        >
-          <JzText variant="overline" color="muted" label="Projects" />
-        </div>
-      ) : null}
       <div className={styles.projectStack}>
         {projects.map((project) => {
-          const cited = highlightedIds.has(project.evidenceId);
           const focused = focusedIds.has(project.evidenceId);
           const skeleton = rollActive && !focused;
           const attached = attachedIds.has(project.evidenceId);
@@ -475,7 +425,6 @@ function ProjectLine({
               key={project.evidenceId}
               id={project.evidenceId}
               skeleton={skeleton}
-              cited={cited}
               focused={focused}
               headClass={styles.projectName}
               gutter={canAttachContext}
@@ -483,22 +432,29 @@ function ProjectLine({
               pressed={attached}
               onActivate={onActivate}
             >
-              <CitedTitle
-                active={focused}
-                level={4}
-                variant="label"
-                color="muted"
-                label={project.name}
-                selected={attached}
-              />
-              {focused && project.summary ? (
-                <JzText
-                  variant="caption"
-                  color="primary"
-                  label={project.summary}
-                  className={styles.projectSummary}
-                />
-              ) : null}
+              <div className={styles.projectBody}>
+                <div className={styles.projectTitleRow}>
+                  <JzIcon
+                    icon="Circle"
+                    weight="fill"
+                    size="small"
+                    inheritColor
+                    aria-hidden
+                    className={classNames(
+                      styles.projectBullet,
+                      focused && styles.projectBulletFocused,
+                    )}
+                  />
+                  <CitedTitle
+                    active={focused}
+                    level={4}
+                    variant="label"
+                    color="muted"
+                    label={project.name}
+                    selected={attached}
+                  />
+                </div>
+              </div>
             </EvidenceShell>
           );
         })}

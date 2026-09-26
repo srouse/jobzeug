@@ -1,5 +1,14 @@
 import { createClient, type PlainClientAPI } from "contentful-management";
-import type { JobPostingView, StructuredJobPosting } from "./schema";
+import {
+  matchingRequirementSchema,
+  matchingSnapshotSchema,
+} from "../../../contentful/matching-schema.mjs";
+import type {
+  JobPostingView,
+  MatchingRequirement,
+  MatchingSnapshot,
+  StructuredJobPosting,
+} from "./schema";
 
 function typeId(kind: string) {
   return `jobzeug${kind[0]!.toUpperCase()}${kind.slice(1)}`;
@@ -113,6 +122,10 @@ export async function publishJobPostingTree(input: {
   sourceUrl: string;
   fullText: string;
   structured: StructuredJobPosting;
+  matching?: {
+    lineRequirements: MatchingRequirement[];
+    snapshot: MatchingSnapshot;
+  };
 }): Promise<{ entryId: string; postingId: string }> {
   const { space, environment, token, locale } = requireCmaEnv();
   const client = getPlainClient(token);
@@ -120,15 +133,33 @@ export async function publishJobPostingTree(input: {
   const postingId = mintPostingId(input.sourceUrl);
   const parentEntryId = entryId(postingId);
 
+  const lineRequirements = input.matching?.lineRequirements ?? [];
+  if (
+    input.matching &&
+    lineRequirements.length !== input.structured.lines.length
+  ) {
+    throw new Error("matching.lineRequirements length must match structured lines");
+  }
+
   const lineIds: string[] = [];
   for (const [index, line] of input.structured.lines.entries()) {
     const id = entryId(`${postingId}-line-${index + 1}`);
-    await upsertAndPublish(client, params, typeId("jobLine"), id, {
+    const requirement = lineRequirements[index]
+      ? matchingRequirementSchema.parse({
+          ...lineRequirements[index],
+          id,
+        })
+      : undefined;
+    const lineFields: Record<string, unknown> = {
       text: localized(locale, line.text),
       section: localized(locale, line.section),
       kind: localized(locale, line.kind),
       theme: localized(locale, line.theme),
-    });
+    };
+    if (requirement) {
+      lineFields.matchingRequirement = localized(locale, requirement);
+    }
+    await upsertAndPublish(client, params, typeId("jobLine"), id, lineFields);
     lineIds.push(id);
   }
 
@@ -168,6 +199,13 @@ export async function publishJobPostingTree(input: {
       toolIds.map((id) => entryLink(id)),
     ),
   };
+
+  if (input.matching?.snapshot) {
+    fields.matchingSnapshot = localized(
+      locale,
+      matchingSnapshotSchema.parse(input.matching.snapshot),
+    );
+  }
 
   // Drop undefined localized wrappers so CMA does not get { "en-US": undefined }
   for (const key of Object.keys(fields)) {
@@ -217,7 +255,20 @@ export async function loadJobPostingByEntryId(
       const kind = asString(lat("kind")) as JobPostingView["lines"][0]["kind"] | undefined;
       const theme = asString(lat("theme"));
       if (!text || !section || !kind || !theme) continue;
-      lines.push({ entryId: id, text, section, kind, theme });
+      const matchingRaw = lat("matchingRequirement");
+      const matchingRequirement = matchingRaw
+        ? matchingRequirementSchema.safeParse(matchingRaw).success
+          ? matchingRequirementSchema.parse(matchingRaw)
+          : undefined
+        : undefined;
+      lines.push({
+        entryId: id,
+        text,
+        section,
+        kind,
+        theme,
+        ...(matchingRequirement ? { matchingRequirement } : {}),
+      });
     } catch {
       // skip missing child
     }
@@ -247,6 +298,13 @@ export async function loadJobPostingByEntryId(
     return null;
   }
 
+  const snapshotRaw = at("matchingSnapshot");
+  const matchingSnapshot = snapshotRaw
+    ? matchingSnapshotSchema.safeParse(snapshotRaw).success
+      ? matchingSnapshotSchema.parse(snapshotRaw)
+      : undefined
+    : undefined;
+
   return {
     entryId: entryIdValue,
     postingId: postingIdValue,
@@ -264,6 +322,7 @@ export async function loadJobPostingByEntryId(
     fullText,
     lines,
     tools,
+    ...(matchingSnapshot ? { matchingSnapshot } : {}),
   };
 }
 

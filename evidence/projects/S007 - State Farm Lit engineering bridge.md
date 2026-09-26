@@ -1,9 +1,76 @@
+---
+schema_version: "1.1"
+project_id: S007
+title: State Farm Lit engineering bridge
+record_kind: project
+project_origin: employment
+ranking_eligible: true
+exclusion_reason: null
+parent_project_id: null
+related_project_ids:
+  - S005
+  - S006
+role_links:
+  - id: R004
+    relationship: delivery
+    status: confirmed
+    note: Preserved canonical association from the project account; role-source date caveats remain in
+      the role record.
+employer_links:
+  - id: C002
+    relationship: delivery
+    status: confirmed
+    note: Employer association recorded in the project account.
+customer_ids: []
+client_ids: []
+year: 2023
+year_basis: estimated
+year_note: Estimated as 2023, the main calendar year of R004 (July 2023–January/February 2024);
+  exact project timing is not established.
+delivery_stage: unknown
+annotation:
+  status: reviewed
+  vocabulary_version: 1.0.0
+  reviewed_by: Codex
+  reviewed_at: "2026-09-26"
+public_disclosure: needs_review
+evidence:
+  - id: S007-E001
+    statement: Coached the engineering team through Lit and web-component questions and helped designers
+      and developers understand the shared token model.
+    concept_ids:
+      - local:instructing
+      - local:mentoring
+      - local:web-component-architecture
+      - local:lit
+      - local:coordination
+      - local:cross-functional-work
+      - local:stakeholder-alignment
+    ownership: contributor
+    scope: multiple_teams
+    delivery_stage: unknown
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Coached the engineering team through Lit and web-component questions and helped designers
+          and developers understand the shared token model.
+    limitations:
+      - Hands-on Lit implementation is not established by this coaching account.
+      - Contribution to adoption is qualitative; rollout scope is not recorded.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+concept_proposals: []
+---
 # S007: State Farm Lit engineering bridge
 
 Captured: September 20, 2026
 Status: Initial account; artifacts pending
 Evidence: Scott's direct account, not yet supported by inspected artifacts
-Parent umbrella: [S004 State Farm design system refresh](S004%20-%20State%20Farm%20design%20system%20refresh.md)
+Shared role context: [State Farm design system refresh](../roles/R004-state-farm-design-systems.md#state-farm-design-system-context)
 
 ## Resume connection
 
@@ -16,6 +83,8 @@ Parent umbrella: [S004 State Farm design system refresh](S004%20-%20State%20Farm
 I enabled State Farm’s engineering team on Lit and web components and acted as the design↔dev bridge so token decisions stayed coherent across both sides.
 
 ## Account summary
+
+<a id="source-account"></a>
 
 Scott helped the design-system **development** team understand and **accelerate** learning on **web components**, using **Lit**. He already had **years of Lit experience**, answered questions cleanly and early, and built strong rapport and friendships on that team — getting past the harder Lit parts **quickly**.
 

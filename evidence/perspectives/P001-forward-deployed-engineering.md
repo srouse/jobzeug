@@ -24,9 +24,9 @@ A possible central idea: experience provides the judgment to understand a custom
 
 This could frame the website introduction, a short viewpoint essay, the cover letter’s motivation, or interview answers. It should be supported by projects rather than presented as proof of results by itself.
 
-## Links to the role framework
+## Potential matching relevance
 
-Inferred relevance to [Goal.md](../Goal.md): working inside customer environments (F2), engineering through adoption barriers (F1/F5), earning technical trust (F7), finding a credible path to value (F9), and potentially reuse (F6). Strongest skill connections: customer discovery/partnership, engineering, AI workflows and delivery judgment.
+Potential relevance: customer discovery and technical partnership, engineering through adoption barriers, technical communication, AI workflows, and delivery judgment. These are interpretive leads, not approved taxonomy assignments or proof of capability. Use the [project matching specification](../matching/engine.md) to map supporting project evidence to the current posting.
 
 ## Supporting evidence to develop
 

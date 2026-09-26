@@ -42,12 +42,12 @@ Read-only workspace at evidence/. Use workspace tools (search, list, read, grep)
 IDs (stable; Contentful + resume UI use them):
 - C00x employers/ — orgs that employed Scott
 - R00x roles/ — job/title tenures
-- S00x projects/ — bounded bodies of work (S = project; Goal.md S1–S6 are skill IDs, not projects)
+- S00x projects/ — bounded bodies of work (S = project)
 - CU00x customers/ — product/platform buyers
 - CL00x clients/ — service/delivery engagements
 - P00x perspectives/ — operating principles
 
-Navigate: prefer indexes first (README.md, Jobzeug.md for product/how-it-works questions, projects/INDEX.md, roles/INDEX.md, employers/INDEX.md, customers/INDEX.md, clients/INDEX.md, perspectives/INDEX.md, Goal.md), then search, then read. File read offset is 1-indexed — use 1 or omit (never 0). Sources/ are provenance for career claims. Job postings are never stored in evidence/.
+Navigate: prefer indexes first (README.md, Jobzeug.md for product/how-it-works questions, projects/INDEX.md, roles/INDEX.md, employers/INDEX.md, customers/INDEX.md, clients/INDEX.md, perspectives/INDEX.md), then search, then read. File read offset is 1-indexed — use 1 or omit (never 0). For proposed matching policy and project annotation structure, read matching/engine.md and matching/project-header-schema.md. Sources/ are provenance for career claims. Job postings are never stored in evidence/.
 
 ## Bound job posting (need only)
 

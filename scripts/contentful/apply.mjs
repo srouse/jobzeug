@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 import { createClient } from 'contentful-management';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { coreContentTypes, jobPostingContentTypes } from '../../contentful/schema.mjs';
 import { contentfulEnv, requireContentfulEnv } from './env.mjs';
 
@@ -30,9 +32,10 @@ async function omitRemovedFields(client, params, contentTypeId, existing, desire
   return client.contentType.publish({ ...params, contentTypeId }, omitted);
 }
 
-export async function applySchema({ dryRun = false } = {}) {
+export async function applySchema({ dryRun = false, matchingOnly = false } = {}) {
   // jobLine/jobTool before jobPosting (parent links to children).
-  const types = [...coreContentTypes(), ...jobPostingContentTypes()];
+  const types = [...coreContentTypes(), ...jobPostingContentTypes()].filter(type =>
+    !matchingOnly || ['jobzeugMatchingVocabulary', 'jobzeugProject'].includes(type.id));
   if (dryRun) {
     const { space, environment } = contentfulEnv({ required: false });
     return { space: space || '(unset)', environment: environment || '(unset)', planned: types.map(type => type.id) };
@@ -52,7 +55,18 @@ export async function applySchema({ dryRun = false } = {}) {
     const desiredFieldIds = new Set(desired.fields.map((field) => field.id));
     try {
       let existing = await client.contentType.get({ ...params, contentTypeId });
-      existing = await omitRemovedFields(client, params, contentTypeId, existing, desiredFieldIds);
+      if (matchingOnly && contentTypeId === 'jobzeugProject') {
+        if (!existing.sys.publishedVersion || existing.sys.version > existing.sys.publishedVersion + 1) {
+          throw new Error('Project content type has unpublished changes; publish or discard those separately first.');
+        }
+        const matchingField = desired.fields.find(field => field.id === 'matchingMetadata');
+        body.name = existing.name;
+        body.description = existing.description;
+        body.displayField = existing.displayField;
+        body.fields = [...existing.fields.filter(field => field.id !== 'matchingMetadata'), matchingField];
+      } else {
+        existing = await omitRemovedFields(client, params, contentTypeId, existing, desiredFieldIds);
+      }
       const updated = await client.contentType.update({ ...params, contentTypeId }, { ...existing, ...body });
       await client.contentType.publish({ ...params, contentTypeId }, updated);
       results.push({ id: contentTypeId, action: 'updated' });
@@ -67,7 +81,8 @@ export async function applySchema({ dryRun = false } = {}) {
 }
 
 const dryRun = process.argv.includes('--dry-run');
-applySchema({ dryRun }).then(result => {
+const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+if (isMain) applySchema({ dryRun, matchingOnly: process.argv.includes('--matching-only') }).then(result => {
   if (dryRun) {
     console.log(`Would apply ${result.planned.length} content types to ${result.space}/${result.environment}:`);
     for (const id of result.planned) console.log(`  ${id}`);

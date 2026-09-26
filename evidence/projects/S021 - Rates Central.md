@@ -1,3 +1,107 @@
+---
+schema_version: "1.1"
+project_id: S021
+title: Rates Central
+record_kind: project
+project_origin: employment
+ranking_eligible: true
+exclusion_reason: null
+parent_project_id: null
+related_project_ids:
+  - S019
+  - S020
+role_links:
+  - id: R005
+    relationship: delivery
+    status: confirmed
+    note: Preserved canonical association from the project account; role-source date caveats remain in
+      the role record.
+employer_links:
+  - id: C003
+    relationship: delivery
+    status: confirmed
+    note: Employer association recorded in the project account.
+customer_ids: []
+client_ids: []
+year: 2022
+year_basis: estimated
+year_note: Estimated as 2022 near the midpoint of R005 (August 2020–June 2023); does not establish
+  sequence among Summit projects.
+delivery_stage: production
+annotation:
+  status: reviewed
+  vocabulary_version: 1.0.0
+  reviewed_by: Codex
+  reviewed_at: "2026-09-26"
+public_disclosure: needs_review
+evidence:
+  - id: S021-E001
+    statement: Created Rates Central in Contentful, including rate logic and a custom application with
+      real-time editing previews.
+    concept_ids:
+      - local:content-modeling
+      - local:contentful
+      - local:interaction-design
+      - local:financial-services
+    ownership: contributor
+    scope: organization
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Created Rates Central in Contentful, including rate logic and a custom application with
+          real-time editing previews.
+    limitations:
+      - Sole authorship, app SDK version, and detailed validation constraints are not established.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+  - id: S021-E002
+    statement: Used the Contentful build workflow to distribute centrally managed rates to the website,
+      dealership PDFs, and other endpoints.
+    concept_ids:
+      - local:headless-content-management
+      - local:systems-analysis
+    ownership: contributor
+    scope: organization
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Used the Contentful build workflow to distribute centrally managed rates to the website,
+          dealership PDFs, and other endpoints.
+    limitations:
+      - This was the usual Contentful build process, not an asserted bespoke publishing pipeline.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+  - id: S021-E003
+    statement: Reports reducing rate-update turnaround from about a week to five or ten minutes.
+    concept_ids:
+      - local:workflow-time-reduction
+    ownership: contributor
+    scope: organization
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Reports reducing rate-update turnaround from about a week to five or ten minutes.
+    limitations:
+      - Self-reported before/after estimate; measurement method and artifacts are not recorded.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+concept_proposals: []
+---
 # S021: Rates Central
 
 Captured: September 25, 2026
@@ -17,6 +121,8 @@ Evidence: Scott's direct account; aligns with R005 resume “Rates Central… de
 I built Rates Central in Contentful—a single rates hub with dynamic logic and a live preview app—so rate changes that used to take about a week could ship in minutes to the website and other endpoints.
 
 ## Account summary
+
+<a id="source-account"></a>
 
 **Rates Central** centrally managed **rates across all of Summit’s products**, built **entirely in Contentful**.
 

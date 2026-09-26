@@ -1,0 +1,24 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+}
+
+/* jz-divider only paints border/default today; remap to subtle for design=subtle. */
+.divider {
+  width: 100%;
+  flex-shrink: 0;
+  margin-block: var(--jz-semantic-space-padding-xs, 0.5rem);
+  --jz-semantic-color-border-default: var(
+    --jz-semantic-color-border-subtle,
+    #e5e5e5
+  );
+}
+
+.below {
+  width: 100%;
+  box-sizing: border-box;
+  padding-inline: var(--jz-semantic-space-padding-md, 1rem);
+  padding-block-start: var(--jz-semantic-space-padding-sm, 0.75rem);
+}

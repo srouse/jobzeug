@@ -1,3 +1,89 @@
+---
+schema_version: "1.1"
+project_id: S018
+title: Journal Interactive advertiser studio
+record_kind: project
+project_origin: employment
+ranking_eligible: true
+exclusion_reason: null
+parent_project_id: null
+related_project_ids:
+  - S017
+role_links:
+  - id: R022
+    relationship: delivery
+    status: confirmed
+    note: Preserved canonical association from the project account; role-source date caveats remain in
+      the role record.
+employer_links:
+  - id: C014
+    relationship: delivery
+    status: confirmed
+    note: Employer association recorded in the project account.
+customer_ids: []
+client_ids:
+  - CL001
+  - CL002
+year: 2001
+year_basis: estimated
+year_note: Estimated as 2001 within R022 (2001–2002); a representative year, not a confirmed delivery date.
+delivery_stage: unknown
+annotation:
+  status: reviewed
+  vocabulary_version: 1.0.0
+  reviewed_by: Codex
+  reviewed_at: "2026-09-26"
+public_disclosure: restricted
+evidence:
+  - id: S018-E001
+    statement: Designed and built an interactive Flash restaurant map for the Water Street district.
+    concept_ids:
+      - local:front-end-development
+      - local:interaction-design
+      - local:visual-interface-design
+      - local:flash
+    ownership: contributor
+    scope: external_audience
+    delivery_stage: unknown
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Designed and built an interactive Flash restaurant map for the Water Street district.
+    limitations:
+      - Sponsoring organization and release artifacts are not established.
+    public_disclosure: restricted
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+  - id: S018-E002
+    statement: Worked directly with advertiser clients on studio web projects and contributed
+      implementation and design-process input to the Art Museum site.
+    concept_ids:
+      - local:customer-facing-work
+      - local:front-end-development
+      - local:cross-functional-work
+    ownership: contributor
+    scope: external_audience
+    delivery_stage: unknown
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Worked directly with advertiser clients on studio web projects and contributed
+          implementation and design-process input to the Art Museum site.
+    limitations:
+      - Scott explicitly did not design the Art Museum site.
+      - Named client disclosure is not cleared.
+      - The modern Trostel website is not the historical deliverable.
+    public_disclosure: restricted
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+concept_proposals: []
+---
 # S018: Journal Interactive advertiser studio
 
 Captured: September 25, 2026
@@ -22,6 +108,8 @@ Evidence: Scott's direct account; org research on linked clients is separate fro
 I designed and built interactive client sites and pieces for Journal Interactive advertisers, including early client contact and Flash map work for Milwaukee businesses.
 
 ## Account summary
+
+<a id="source-account"></a>
 
 Scott worked in a Journal Interactive **department that built websites for advertisers on JSOnline** — effectively a **consulting / client studio** inside the newspaper: relatively **lightweight** sites, but for **interesting local clients**.
 

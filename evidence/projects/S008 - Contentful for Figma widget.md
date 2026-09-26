@@ -1,3 +1,116 @@
+---
+schema_version: "1.1"
+project_id: S008
+title: Contentful for Figma widget
+record_kind: project
+project_origin: employment
+ranking_eligible: true
+exclusion_reason: null
+parent_project_id: null
+related_project_ids:
+  - S001
+  - S009
+role_links:
+  - id: R001
+    relationship: delivery
+    status: confirmed
+    note: Canonical CIA role; earlier SE prototype remains historical context, not a second role link.
+employer_links:
+  - id: C001
+    relationship: delivery
+    status: confirmed
+    note: Employer association recorded in the project account.
+customer_ids: []
+client_ids: []
+year: 2026
+year_basis: estimated
+year_note: Estimated from R001 (February 2026–present as of September 2026); project-specific year
+  was not supplied. Represents CIA-era production work; the initial SE prototype is earlier.
+delivery_stage: production
+annotation:
+  status: reviewed
+  vocabulary_version: 1.0.0
+  reviewed_by: Codex
+  reviewed_at: "2026-09-26"
+public_disclosure: needs_review
+evidence:
+  - id: S008-E001
+    statement: Built the initial Contentful-to-Figma widget prototype and a content-status visualization
+      to show how content connects to design.
+    concept_ids:
+      - local:prototyping
+      - local:technical-prototype
+      - local:figma-extension
+      - local:figma
+      - local:contentful
+      - local:interaction-design
+      - local:deadline-pressure
+    ownership: contributor
+    scope: unknown
+    delivery_stage: prototype
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Built the initial Contentful-to-Figma widget prototype and a content-status visualization
+          to show how content connects to design.
+    limitations:
+      - Initial work began during SE/Solution Specialist work; canonical role remains R001.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+  - id: S008-E002
+    statement: Took the widget through product marketing, PM involvement, security work, and release as
+      a public capability.
+    concept_ids:
+      - local:production-release
+      - local:coordination
+      - local:cross-functional-work
+    ownership: lead
+    scope: multiple_teams
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Took the widget through product marketing, PM involvement, security work, and release as a
+          public capability.
+    limitations:
+      - Release is Scott’s account; security tasks and checks are not described.
+      - Usage was low; public release does not establish strong adoption.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+  - id: S008-E003
+    statement: Implemented content-to-component binding and assembly, including joining entry properties
+      and handling dates.
+    concept_ids:
+      - local:api-integration
+      - local:interaction-design
+      - local:contentful
+      - local:figma
+    ownership: contributor
+    scope: unknown
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Implemented content-to-component binding and assembly, including joining entry properties
+          and handling dates.
+    limitations:
+      - The claimed comparison with Experience Orchestration is not a measured benchmark.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+concept_proposals: []
+---
 # S008: Contentful for Figma widget
 
 Captured: September 20, 2026
@@ -18,6 +131,8 @@ Evidence: Scott's direct account; resume also claims this widget — still not i
 I built and shipped Contentful for Figma, a public widget that binds live Contentful fields to Figma components—including content-status “blueprint” outlines—and operationalized it through product marketing, PM, and security outside the core product.
 
 ## Account summary
+
+<a id="source-account"></a>
 
 An SE asked Scott for an example of **connecting Figma to Contentful** for a prospect sale. About **two or three prospects** were in the mix; initial requester name TBD.
 

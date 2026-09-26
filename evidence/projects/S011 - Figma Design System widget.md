@@ -1,3 +1,94 @@
+---
+schema_version: "1.1"
+project_id: S011
+title: Figma Design System widget (personal)
+record_kind: project
+project_origin: personal
+ranking_eligible: true
+exclusion_reason: null
+parent_project_id: null
+related_project_ids:
+  - S012
+  - S013
+role_links:
+  - id: R007
+    relationship: calendar_anchor
+    status: provisional
+    note: Calendar placement only; this is personal work, not employer delivery.
+employer_links:
+  - id: C003
+    relationship: calendar_anchor
+    status: provisional
+    note: Tenure anchor only; do not attribute project outcomes to Summit.
+customer_ids: []
+client_ids: []
+year: null
+year_basis: unknown
+year_note: "Year unresolved: provisional R007 calendar anchor is 2018–2019, while captured public
+  widget version history is 2022–2023. Preserve the conflict rather than guessing a build year."
+delivery_stage: production
+annotation:
+  status: needs_review
+  vocabulary_version: 1.0.0
+  reviewed_by: Codex
+  reviewed_at: "2026-09-26"
+public_disclosure: needs_review
+evidence:
+  - id: S011-E001
+    statement: Built a personal Figma Community design-system widget and accompanying documentation
+      site, independent of Summit delivery.
+    concept_ids:
+      - local:figma-extension
+      - local:figma
+      - local:design-system-development
+      - local:developer-and-designer-tools
+    ownership: contributor
+    scope: external_audience
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "#source-ownership"
+        locator: Ownership and scope
+        supports: Built a personal Figma Community design-system widget and accompanying documentation site,
+          independent of Summit delivery.
+    limitations:
+      - Representative year is unresolved because role placement and public version history differ.
+      - Personal authorship is recorded; absence of collaborators is not independently established.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+  - id: S011-E002
+    statement: The captured public product description documents token editing, accessibility feedback,
+      multi-target exports, and GitHub-hosted npm deployment.
+    concept_ids:
+      - local:design-token-engineering
+      - local:design-token-pipeline
+      - local:github
+      - local:accessibility-principles
+    ownership: unknown
+    scope: external_audience
+    delivery_stage: production
+    provenance: existing_material
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: The captured public product description documents token editing, accessibility feedback,
+          multi-target exports, and GitHub-hosted npm deployment.
+    limitations:
+      - Feature inventory is from a prior public-source capture and was not re-tested during this
+        migration.
+      - Component tokens were described as not implemented; export targets do not establish
+        hand-written language expertise.
+      - Accessibility feedback is not a complete compliance audit.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+concept_proposals: []
+---
 # S011: Figma Design System widget (personal)
 
 Captured: September 22, 2026
@@ -19,6 +110,8 @@ Evidence: Scott’s direct account (personal project); public product copy and C
 I built a personal Figma Community design-system widget (tokens, ADA, fonts, npm deploy) that helps teams operationalize design systems in Figma—independent of Summit employment delivery.
 
 ## Account summary
+
+<a id="source-account"></a>
 
 Scott built a **Figma Design System** Community **widget** (personal) that tries to integrate design-system concerns (ADA, color/typography sets) with Figma structures (styles, components) and to explore how much of a design-system build tool can live **inside Figma**, using existing services (Font Awesome, Google Fonts, GitHub repos / npm packaging).
 
@@ -65,6 +158,8 @@ Scott:
 Public Community / site (paraphrase labeled as product copy): integrate ADA and color/typography sets with Figma styles/components; tokenize → transform → GitHub npm package; small-to-medium / first design-system exploration.
 
 ## Ownership and scope
+
+<a id="source-ownership"></a>
 
 - Scott: personal authorship of the Figma Community widget and accompanying figmadesignsystem.app documentation site (site presents him as creator; Community lists Scott Rouse as creator).
 - Not Summit delivery work; no CU/CL on this capture.

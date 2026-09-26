@@ -18,7 +18,8 @@
     "lint": "eslint",
     "contentful:compress": "node scripts/contentful/compress.mjs",
     "contentful:apply": "node scripts/contentful/apply.mjs",
-    "contentful:push": "node scripts/contentful/push.mjs"
+    "contentful:push": "node scripts/contentful/push.mjs",
+    "test:matching": "node --test scripts/contentful/matching.test.mjs scripts/matching/score.test.mjs"
   },
   "dependencies": {
     "@ai-sdk/react": "^4.0.110",
@@ -36,7 +37,8 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-markdown": "^10.1.0",
-    "zod": "^4.6.5"
+    "zod": "^4.6.5",
+    "yaml": "^2.9.1"
   },
   "devDependencies": {
     "@types/node": "^20",

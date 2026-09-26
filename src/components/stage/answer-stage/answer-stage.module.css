@@ -138,8 +138,12 @@
   white-space: nowrap;
 }
 
-.stripClear {
+.stripActions {
   flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--jz-semantic-space-gap-xs, 0.25rem);
 }
 
 .promptPanel {

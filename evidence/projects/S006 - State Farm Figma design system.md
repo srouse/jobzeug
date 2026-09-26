@@ -1,9 +1,100 @@
+---
+schema_version: "1.1"
+project_id: S006
+title: State Farm Figma design system
+record_kind: project
+project_origin: employment
+ranking_eligible: true
+exclusion_reason: null
+parent_project_id: null
+related_project_ids:
+  - S005
+  - S007
+  - S014
+role_links:
+  - id: R004
+    relationship: delivery
+    status: confirmed
+    note: Preserved canonical association from the project account; role-source date caveats remain in
+      the role record.
+employer_links:
+  - id: C002
+    relationship: delivery
+    status: confirmed
+    note: Employer association recorded in the project account.
+customer_ids: []
+client_ids: []
+year: 2023
+year_basis: estimated
+year_note: Estimated as 2023, the main calendar year of R004 (July 2023–January/February 2024);
+  exact project timing is not established.
+delivery_stage: unknown
+annotation:
+  status: reviewed
+  vocabulary_version: 1.0.0
+  reviewed_by: Codex
+  reviewed_at: "2026-09-26"
+public_disclosure: needs_review
+evidence:
+  - id: S006-E001
+    statement: Built Figma tokens and components plus an extension that edited token values and checked
+      them into a repository.
+    concept_ids:
+      - local:design-system-development
+      - local:design-token-engineering
+      - local:component-library
+      - local:figma
+      - local:figma-extension
+      - local:design-token-pipeline
+    ownership: contributor
+    scope: multiple_teams
+    delivery_stage: unknown
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Built Figma tokens and components plus an extension that edited token values and checked
+          them into a repository.
+    limitations:
+      - Plugin versus widget terminology remains unresolved.
+      - Production status and collaborator boundaries are not established.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+  - id: S006-E002
+    statement: Helped senior designers work more systematically in Figma and collaborated with a Google
+      design-system expert.
+    concept_ids:
+      - local:mentoring
+      - local:instructing
+      - local:figma
+      - local:cross-functional-work
+    ownership: contributor
+    scope: multiple_teams
+    delivery_stage: unknown
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Helped senior designers work more systematically in Figma and collaborated with a Google
+          design-system expert.
+    limitations:
+      - Specific training outcomes and division of authorship are not recorded.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+concept_proposals: []
+---
 # S006: State Farm Figma design system
 
 Captured: September 20, 2026
 Status: Initial account; artifacts pending
 Evidence: Scott's direct account, not yet supported by inspected artifacts
-Parent umbrella: [S004 State Farm design system refresh](S004%20-%20State%20Farm%20design%20system%20refresh.md)
+Shared role context: [State Farm design system refresh](../roles/R004-state-farm-design-systems.md#state-farm-design-system-context)
 
 ## Resume connection
 
@@ -17,6 +108,8 @@ Parent umbrella: [S004 State Farm design system refresh](S004%20-%20State%20Farm
 I built State Farm’s Figma design system—tokens, components, and a repo-sync plugin—and mentored senior designers toward systematic Figma practice, including deep work with a Google design-system expert.
 
 ## Account summary
+
+<a id="source-account"></a>
 
 Scott built the **Figma-side design system** work in depth: **literal tokens**, **components** (he underscored that he **made the components**, not only token plumbing), and a **Figma plugin** that edited token values while checking them into the **repo**.
 
@@ -72,7 +165,7 @@ Direct: Figma components, tokens/variables, plugin to repo, mentoring designers 
 
 ## Candidate uses
 
-Primary Figma FDE portfolio candidate from the State Farm cluster. Pair with S004 umbrella and optionally S005 for “why it mattered.”
+Primary Figma FDE portfolio candidate from the State Farm cluster. Pair with the State Farm role context and optionally S005 for “why it mattered.”
 
 ## Addition — September 20, 2026
 

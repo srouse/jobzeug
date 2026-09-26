@@ -2,14 +2,18 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
+import { loadMatchingCatalog } from "@/lib/contentful/matching";
 import {
   loadJobPostingByEntryId,
+  mapJobPostingRequirements,
   publishJobPostingTree,
   scrapeJobListingMarkdown,
   structureJobPosting,
   toJobPostingPanelData,
 } from "@/lib/job-posting";
 import { SESSION_COOKIE, getSessionId } from "@/lib/site-auth";
+
+type MatchingCatalog = Awaited<ReturnType<typeof loadMatchingCatalog>>;
 
 const entryIdSchema = z
   .string()
@@ -30,6 +34,19 @@ async function requireSiteSession(): Promise<
     return { error: NextResponse.json({ error: "Unauthorized" }, { status: 401 }) };
   }
   return { ok: true };
+}
+
+function pickApprovedVocabulary(vocabularies: MatchingCatalog["vocabularies"]) {
+  const approved = [...vocabularies.values()].filter((v) => v.status === "approved");
+  if (!approved.length) {
+    throw new Error("No approved matching vocabulary published");
+  }
+  approved.sort((a, b) =>
+    b.vocabulary_version.localeCompare(a.vocabulary_version, undefined, {
+      numeric: true,
+    }),
+  );
+  return approved[0]!;
 }
 
 /** Load a Contentful job posting by entry id (from the resume route). */
@@ -65,7 +82,7 @@ export async function GET(req: NextRequest) {
   }
 }
 
-/** Scrape URL → structure → Contentful; returns panel payload (no cookie). */
+/** Scrape → structure → map requirements → Contentful (forward-only; no legacy remap). */
 export async function POST(req: NextRequest) {
   const session = await requireSiteSession();
   if ("error" in session) return session.error;
@@ -81,10 +98,19 @@ export async function POST(req: NextRequest) {
   try {
     const fullText = await scrapeJobListingMarkdown(url);
     const structured = await structureJobPosting({ sourceUrl: url, fullText });
+
+    const catalog = await loadMatchingCatalog();
+    const vocabulary = pickApprovedVocabulary(catalog.vocabularies);
+    const matching = await mapJobPostingRequirements({
+      structured,
+      vocabulary,
+    });
+
     const { entryId, postingId } = await publishJobPostingTree({
       sourceUrl: url,
       fullText,
       structured,
+      matching,
     });
 
     const view = await loadJobPostingByEntryId(entryId);
@@ -101,6 +127,7 @@ export async function POST(req: NextRequest) {
             fullText,
             lines: [],
             tools: [],
+            matchingSnapshot: matching.snapshot,
           },
     );
   } catch (error) {
@@ -108,7 +135,8 @@ export async function POST(req: NextRequest) {
       error instanceof Error ? error.message : "Job posting ingest failed";
     const status = message.includes("FIRECRAWL") || message.includes("Firecrawl")
       ? 502
-      : message.includes("Missing Contentful")
+      : message.includes("Missing Contentful") ||
+          message.includes("matching vocabulary")
         ? 503
         : 500;
     return NextResponse.json({ error: message }, { status });

@@ -148,6 +148,7 @@
   max-width: 100%;
   margin: 0;
   box-sizing: border-box;
+  text-transform: uppercase;
 }
 
 .roles {
@@ -159,11 +160,11 @@
 
 .roleHead {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.25rem 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--jz-semantic-space-gap-2xs, 0.125rem);
   width: 100%;
+  min-width: 0;
   box-sizing: border-box;
 }
 
@@ -215,11 +216,6 @@
     gap 400ms ease-in-out;
 }
 
-.projectsLabel {
-  display: block;
-  padding-inline: var(--jz-semantic-space-padding-sm, 0.75rem);
-}
-
 .projectStack {
   display: flex;
   flex-direction: column;
@@ -229,12 +225,46 @@
 }
 
 .projectName {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: var(--jz-semantic-space-gap-2xs, 0.125rem);
   min-width: 0;
   width: 100%;
   box-sizing: border-box;
   padding-block: var(--jz-semantic-space-padding-2xs, 0.25rem);
   padding-inline: var(--jz-semantic-space-padding-sm, 0.75rem);
+}
+
+.projectTitleRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--jz-semantic-space-gap-xs, 0.5rem);
+  min-width: 0;
+  width: 100%;
+}
+
+.projectBullet {
+  flex-shrink: 0;
+  /* List-marker scale — override jz-icon size tokens on the host. */
+  width: 0.375rem !important;
+  height: 0.375rem !important;
+  min-width: 0.375rem !important;
+  min-height: 0.375rem !important;
+  font-size: 0.375rem !important;
+  color: var(--jz-semantic-color-text-muted);
+}
+
+.projectBulletFocused {
+  color: var(--jz-semantic-color-text-primary);
+}
+
+.projectBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--jz-semantic-space-gap-2xs, 0.125rem);
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .projectSummary {
@@ -243,7 +273,10 @@
 }
 
 .cited {
-  background: var(--jz-semantic-color-background-surface-brand-primary, #dbeafe);
+  background: var(
+    --jz-semantic-color-background-surface-brand-primary-subtle,
+    #eff6ff
+  );
   border-radius: var(--jz-primitive-radius-sm, 0.25rem);
 }
 

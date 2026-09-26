@@ -6,5 +6,84 @@
   ],
   "name": "State Farm Lit engineering bridge",
   "summary": "I enabled State Farm’s engineering team on Lit and web components and acted as the design↔dev bridge so token decisions stayed coherent across both sides.",
-  "showOnResume": true
+  "matchingMetadata": {
+    "schema_version": "1.1",
+    "project_id": "S007",
+    "title": "State Farm Lit engineering bridge",
+    "record_kind": "project",
+    "project_origin": "employment",
+    "ranking_eligible": true,
+    "exclusion_reason": null,
+    "parent_project_id": null,
+    "related_project_ids": [
+      "S005",
+      "S006"
+    ],
+    "role_links": [
+      {
+        "id": "R004",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Preserved canonical association from the project account; role-source date caveats remain in the role record."
+      }
+    ],
+    "employer_links": [
+      {
+        "id": "C002",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Employer association recorded in the project account."
+      }
+    ],
+    "customer_ids": [],
+    "client_ids": [],
+    "year": 2023,
+    "year_basis": "estimated",
+    "year_note": "Estimated as 2023, the main calendar year of R004 (July 2023–January/February 2024); exact project timing is not established.",
+    "delivery_stage": "unknown",
+    "annotation": {
+      "status": "reviewed",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-09-26",
+      "vocabulary_version": "1.0.0"
+    },
+    "public_disclosure": "needs_review",
+    "evidence": [
+      {
+        "id": "S007-E001",
+        "statement": "Coached the engineering team through Lit and web-component questions and helped designers and developers understand the shared token model.",
+        "concept_ids": [
+          "local:instructing",
+          "local:mentoring",
+          "local:web-component-architecture",
+          "local:lit",
+          "local:coordination",
+          "local:cross-functional-work",
+          "local:stakeholder-alignment"
+        ],
+        "ownership": "contributor",
+        "scope": "multiple_teams",
+        "delivery_stage": "unknown",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#source-account",
+            "locator": "Account summary",
+            "supports": "Coached the engineering team through Lit and web-component questions and helped designers and developers understand the shared token model."
+          }
+        ],
+        "limitations": [
+          "Hands-on Lit implementation is not established by this coaching account.",
+          "Contribution to adoption is qualitative; rollout scope is not recorded."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26"
+        }
+      }
+    ],
+    "concept_proposals": []
+  }
 }

@@ -4,6 +4,7 @@ import { PinoLogger } from "@mastra/loggers";
 import { jobzeugAgent } from "./agents/jobzeug-agent";
 import { jobzeugDesignTokensAgent } from "./agents/jobzeug-design-tokens";
 import { jobPostingStructurerAgent } from "./agents/job-posting-structurer";
+import { jobPostingRequirementMapperAgent } from "./agents/job-posting-requirement-mapper";
 import { jobzeugThemeOutlineAgent } from "./agents/jobzeug-theme-outline";
 import { jobzeugThemeWriterAgent } from "./agents/jobzeug-theme-writer";
 import { storage } from "./storage";
@@ -18,6 +19,7 @@ export const mastra = new Mastra({
     jobzeugAgent,
     jobzeugDesignTokensAgent,
     jobPostingStructurerAgent,
+    jobPostingRequirementMapperAgent,
     jobzeugThemeOutlineAgent,
     jobzeugThemeWriterAgent,
   },

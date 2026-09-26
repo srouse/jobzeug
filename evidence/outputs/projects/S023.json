@@ -1,0 +1,168 @@
+{
+  "evidenceId": "S023",
+  "employer": "C004",
+  "roles": [
+    "R006",
+    "R014",
+    "R015"
+  ],
+  "name": "AmFam R&D ListenAssist prototypes",
+  "summary": "I built ListenAssist—a React prototype that listened to live AmFam call-center calls and pulled pre-LLM ML answers from R&D’s custom database—and learned by shadowing agents that terse answers fail; they need conceptual context to explain.",
+  "matchingMetadata": {
+    "schema_version": "1.1",
+    "project_id": "S023",
+    "title": "AmFam R&D ListenAssist prototypes",
+    "record_kind": "project",
+    "project_origin": "employment",
+    "ranking_eligible": true,
+    "exclusion_reason": null,
+    "parent_project_id": null,
+    "related_project_ids": [],
+    "role_links": [
+      {
+        "id": "R006",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Canonical American Family employment record (Nov 2019–Aug 2020). Contract-to-hire is how Scott arrived; do not split this project across LinkedIn subroles R014/R015."
+      }
+    ],
+    "employer_links": [
+      {
+        "id": "C004",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Employer association from Scott’s account."
+      }
+    ],
+    "customer_ids": [],
+    "client_ids": [],
+    "year": 2020,
+    "year_basis": "estimated",
+    "year_note": "Estimated within R006 tenure (Nov 2019–Aug 2020); project-specific calendar not supplied.",
+    "delivery_stage": "prototype",
+    "annotation": {
+      "status": "draft",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "vocabulary_version": "1.0.0"
+    },
+    "public_disclosure": "needs_review",
+    "evidence": [
+      {
+        "id": "S023-E001",
+        "statement": "Built rapid React front-end prototypes for an AmFam R&D team of PhD computer scientists exploring pre-LLM machine-learning efficiencies backed by a custom ML database they maintained.",
+        "concept_ids": [
+          "local:prototyping",
+          "local:technical-prototype",
+          "local:front-end-development",
+          "local:react",
+          "local:financial-services",
+          "local:cross-functional-work"
+        ],
+        "ownership": "contributor",
+        "scope": "single_team",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e001",
+            "locator": "Account summary — R&D prototyping lane",
+            "supports": "Rapid React front-end prototyping with AmFam R&D PhDs whose custom ML database backed the work; Scott did not author the database."
+          }
+        ],
+        "limitations": [
+          "Contents and architecture of the PhDs’ custom ML database are unknown to Scott.",
+          "Production deployment is not claimed; Scott characterizes capability as rudimentary vs modern systems.",
+          "Do not map this claim to modern LLM/AI workflow concepts; the account is explicitly pre-LLM."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S023-E002",
+        "statement": "Built the ListenAssist call-center prototype (React) that listened on the telephone line to agent–customer conversation and surfaced automatic answers drawn from the R&D custom ML database.",
+        "concept_ids": [
+          "local:prototyping",
+          "local:technical-prototype",
+          "local:front-end-development",
+          "local:react",
+          "local:interaction-design",
+          "local:financial-services"
+        ],
+        "ownership": "contributor",
+        "scope": "single_team",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e002",
+            "locator": "Account summary — ListenAssist behavior",
+            "supports": "ListenAssist listened on the telephone line and surfaced conversation-aligned automatic answers from the R&D custom ML database; React front-end was Scott’s lane."
+          }
+        ],
+        "limitations": [
+          "Exact telephony listen/transcription mechanism is not detailed beyond “listening on the line.”",
+          "Whether ListenAssist shipped beyond research prototypes is unknown.",
+          "Integration with the ML database is consumption only; no API or model authorship is claimed."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S023-E003",
+        "statement": "Shadowed real call-center employees, then had them try ListenAssist in mimicked situations; was surprised they strongly disliked terse answers and needed paragraph-level conceptual context to explain to customers.",
+        "concept_ids": [
+          "local:user-research",
+          "local:usability-testing",
+          "local:interaction-design",
+          "local:critical-thinking",
+          "local:financial-services"
+        ],
+        "ownership": "contributor",
+        "scope": "single_team",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e003",
+            "locator": "Account summary — shadowing and situational tests",
+            "supports": "Shadowed call-center employees, ran mimicked-situation trials of ListenAssist, and compared terse answers unfavorably to paragraph/conceptual assists agents could explain."
+          }
+        ],
+        "limitations": [
+          "Exact participant count and surviving test artifacts are not established.",
+          "Comparison to contemporaneous Google short-answer patterns is Scott’s framing, not a formal study citation.",
+          "Call-center employees are internal operators, not external customers; do not treat as customer-facing sales/discovery work."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      }
+    ],
+    "concept_proposals": [
+      {
+        "label": "Pre-LLM machine learning productization",
+        "category": "skill",
+        "definition": "Applying classical or custom machine-learning systems (not large language models) to product or operations problems through prototypes or integrations.",
+        "reason": "Account centers pre-LLM R&D and a custom ML database; approved AI concepts imply modern LLM/agent stacks (ai-workflow-engineering, ai-system-fundamentals) and would mis-tag this work."
+      },
+      {
+        "label": "Operator / call-center assist UX",
+        "category": "deliverable",
+        "definition": "An interface that assists frontline operators during live customer conversations with context-aware suggested answers or explanations.",
+        "reason": "ListenAssist is a conversation-aligned agent assist; no approved deliverable covers operator-assist products beyond generic technical-prototype."
+      }
+    ]
+  }
+}

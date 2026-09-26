@@ -1,3 +1,64 @@
+---
+schema_version: "1.1"
+project_id: S010
+title: Berlin prototype exploration
+record_kind: project
+project_origin: employment
+ranking_eligible: true
+exclusion_reason: null
+parent_project_id: null
+related_project_ids:
+  - S009
+role_links:
+  - id: R001
+    relationship: delivery
+    status: provisional
+    note: Preserved provisional association from the project record.
+employer_links:
+  - id: C001
+    relationship: delivery
+    status: confirmed
+    note: Employer association recorded in the project account.
+customer_ids: []
+client_ids: []
+year: 2026
+year_basis: estimated
+year_note: Estimated from R001 (February 2026–present as of September 2026); project-specific year
+  was not supplied. R001 itself is provisional for this event; discuss the year together with the
+  role.
+delivery_stage: unknown
+annotation:
+  status: needs_review
+  vocabulary_version: 1.0.0
+  reviewed_by: Codex
+  reviewed_at: "2026-09-26"
+public_disclosure: needs_review
+evidence:
+  - id: S010-E001
+    statement: Prepared and delivered a presentation of the separate S009 binding research to an
+      audience of approximately two dozen people in Berlin.
+    concept_ids:
+      - local:speaking
+    ownership: sole
+    scope: unknown
+    delivery_stage: unknown
+    provenance: self_report
+    sources:
+      - ref: "#source-addition"
+        locator: "Addition — September 21, 2026: presentation ownership and reception"
+        supports: Prepared and delivered a presentation of the separate S009 binding research to an audience
+          of approximately two dozen people in Berlin.
+    limitations:
+      - Audience composition, event year, and broader Berlin prototype scope remain unresolved.
+      - Technical research evidence stays on S009; this claim covers the presentation only.
+      - Reception is recalled feedback, not an independent assessment.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+concept_proposals: []
+---
 # S010: Berlin prototype exploration
 
 Captured: September 21, 2026
@@ -58,6 +119,8 @@ Inferred candidate themes: technical demonstration, prototyping in a collaborati
 Potential presentation/prototyping interview account; not yet detailed enough for portfolio selection or public attribution claims.
 
 ## Addition — September 21, 2026: presentation ownership and reception
+
+<a id="source-addition"></a>
 
 Faithful summary of Scott's follow-up account:
 

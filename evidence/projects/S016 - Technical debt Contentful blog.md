@@ -1,3 +1,64 @@
+---
+schema_version: "1.1"
+project_id: S016
+title: Hidden cost of technical debt (Contentful blog)
+record_kind: project
+project_origin: employment
+ranking_eligible: true
+exclusion_reason: null
+parent_project_id: null
+related_project_ids: []
+role_links:
+  - id: R002
+    relationship: delivery
+    status: confirmed
+    note: Preserved canonical association from the project account; role-source date caveats remain in
+      the role record.
+employer_links:
+  - id: C001
+    relationship: delivery
+    status: confirmed
+    note: Employer association recorded in the project account.
+customer_ids: []
+client_ids: []
+year: 2025
+year_basis: sourced
+year_note: 2025 publication year recorded for the June 2, 2025 article.
+delivery_stage: production
+annotation:
+  status: reviewed
+  vocabulary_version: 1.0.0
+  reviewed_by: Codex
+  reviewed_at: "2026-09-26"
+public_disclosure: needs_review
+evidence:
+  - id: S016-E001
+    statement: Authored a published marketer-facing article explaining technical debt, reuse, and
+      collaboration around content and design systems.
+    concept_ids:
+      - local:technical-writing
+      - local:technical-article
+      - local:marketing-technology
+    ownership: sole
+    scope: external_audience
+    delivery_stage: production
+    provenance: existing_material
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Authored a published marketer-facing article explaining technical debt, reuse, and
+          collaboration around content and design systems.
+    limitations:
+      - Local publication capture supports authorship and subject matter, not customer
+        implementation outcomes.
+      - Article anecdotes do not establish named personal customer engagements.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+concept_proposals: []
+---
 # S016: Hidden cost of technical debt (Contentful blog)
 
 Captured: September 22, 2026
@@ -17,6 +78,8 @@ Evidence: Artifact-supported (public article); byline title may reflect later ro
 I wrote a marketer-facing Contentful Insights piece on recognizing technical debt and how modularity, design systems, and structured content help teams move faster.
 
 ## Account summary
+
+<a id="source-account"></a>
 
 **Insights** post aimed at **marketers**: technical debt as *felt drag*—slow changes, stalled progress, marketer↔developer blame cycles—rather than a purely code metric.
 

@@ -61,7 +61,7 @@ export function assembleResume(catalog: CoreCatalog): ResumeViewModel {
     const projects = [...catalog.projects.values()]
       .filter(
         (project) =>
-          project.showOnResume && project.roleIds.includes(role.evidenceId),
+          project.roleIds.includes(role.evidenceId),
       )
       .map((project) => ({
         evidenceId: project.evidenceId,

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type Ref } from "react";
 import type { ResumeViewModel } from "@/lib/contentful/resume-model";
 import {
   JobPostingPanel,
@@ -18,16 +18,65 @@ import {
   type EvidencePage,
 } from "@/components/resume";
 import { AnswerStage, DesignModal, DesignSessionProvider } from "@/components/stage";
-import { JzButton } from "@jobzeug/design-system/react";
+import { JzButton, JzTab, JzTabGroup } from "@jobzeug/design-system/react";
 import styles from "./resume.module.css";
 
 const ENTRY_ID_RE = /^[\w-]+$/;
+
+const MEDIUM_TABS: Array<{ id: EvidencePage; label: string }> = [
+  { id: "resume", label: "Resume" },
+  { id: "job", label: "Job posting" },
+];
 
 const MOBILE_TABS: Array<{ id: EvidencePage; label: string }> = [
   { id: "resume", label: "Resume" },
   { id: "stage", label: "Answer" },
   { id: "job", label: "Job posting" },
 ];
+
+function isEvidencePage(value: string): value is EvidencePage {
+  return value === "resume" || value === "job" || value === "stage";
+}
+
+function selectedTabFromChange(event: Event): string | null {
+  const detail = (event as CustomEvent<{ selectedTab?: string }>).detail;
+  return typeof detail?.selectedTab === "string" ? detail.selectedTab : null;
+}
+
+/** Design-system tabs. `direction="top"` puts the mark on the content-facing edge. */
+function EvidenceTabBar({
+  tabs,
+  selected,
+  onSelect,
+  label,
+  className,
+  barRef,
+}: {
+  tabs: ReadonlyArray<{ id: EvidencePage; label: string }>;
+  selected: EvidencePage;
+  onSelect: (page: EvidencePage) => void;
+  label: string;
+  className: string;
+  barRef?: Ref<HTMLDivElement>;
+}) {
+  return (
+    <div className={className} ref={barRef}>
+      <JzTabGroup
+        aria-label={label}
+        direction="top"
+        selectedTab={selected}
+        onChange={(event: Event) => {
+          const next = selectedTabFromChange(event);
+          if (next && isEvidencePage(next)) onSelect(next);
+        }}
+      >
+        {tabs.map((tab) => (
+          <JzTab key={tab.id} label={tab.label} value={tab.id} />
+        ))}
+      </JzTabGroup>
+    </div>
+  );
+}
 
 export function normalizeRouteEntryId(
   raw: string | null | undefined,
@@ -53,6 +102,8 @@ function ResumePageBody() {
   const [designOpen, setDesignOpen] = useState(false);
   const [wide, setWide] = useState(true);
   const [mobile, setMobile] = useState(false);
+  const rootRef = useRef<HTMLElement>(null);
+  const mobileTabBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -108,6 +159,28 @@ function ResumePageBody() {
     };
   }, []);
 
+  // Publish the design-system tab height so fixed chrome clears the bar.
+  useEffect(() => {
+    const root = rootRef.current;
+    const bar = mobileTabBarRef.current;
+    if (!mobile || !root || !bar) return;
+
+    const publish = () => {
+      const height = bar.getBoundingClientRect().height;
+      if (height > 0) {
+        root.style.setProperty("--resume-mobile-tab-height", `${height}px`);
+      }
+    };
+
+    publish();
+    const observer = new ResizeObserver(publish);
+    observer.observe(bar);
+    return () => {
+      observer.disconnect();
+      root.style.removeProperty("--resume-mobile-tab-height");
+    };
+  }, [mobile]);
+
   // Medium left-rail only knows resume|job — leave stage if we leave mobile.
   useEffect(() => {
     if (!mobile && evidencePage === "stage") {
@@ -126,6 +199,7 @@ function ResumePageBody() {
 
   return (
     <main
+      ref={rootRef}
       className={styles.root}
       data-mobile-view={mobile ? evidencePage : undefined}
     >
@@ -161,57 +235,26 @@ function ResumePageBody() {
                 <JobPostingPanel />
               </div>
             </div>
-            <nav className={styles.pageTabs} aria-label="Evidence pages">
-              <button
-                type="button"
-                className={
-                  evidencePage === "resume"
-                    ? `${styles.pageTab} ${styles.pageTabSelected}`
-                    : styles.pageTab
-                }
-                aria-pressed={evidencePage === "resume"}
-                onClick={() => selectPage("resume")}
-              >
-                Resume
-              </button>
-              <button
-                type="button"
-                className={
-                  evidencePage === "job"
-                    ? `${styles.pageTab} ${styles.pageTabSelected}`
-                    : styles.pageTab
-                }
-                aria-pressed={evidencePage === "job"}
-                onClick={() => selectPage("job")}
-              >
-                Job posting
-              </button>
-            </nav>
+            <EvidenceTabBar
+              className={styles.pageTabs}
+              label="Evidence pages"
+              tabs={MEDIUM_TABS}
+              selected={evidencePage === "stage" ? "resume" : evidencePage}
+              onSelect={selectPage}
+            />
           </div>
         </div>
       </div>
       <EvidenceConnectors />
-      <AnswerStage hidden={!stageVisible} />
-      <nav className={styles.mobileTabBar} aria-label="Views">
-        {MOBILE_TABS.map((tab) => {
-          const selected = evidencePage === tab.id;
-          return (
-            <button
-              key={tab.id}
-              type="button"
-              className={
-                selected
-                  ? `${styles.pageTab} ${styles.pageTabSelected}`
-                  : styles.pageTab
-              }
-              aria-pressed={selected}
-              onClick={() => selectPage(tab.id)}
-            >
-              {tab.label}
-            </button>
-          );
-        })}
-      </nav>
+      <AnswerStage hidden={!stageVisible} resume={resume} />
+      <EvidenceTabBar
+        className={styles.mobileTabBar}
+        barRef={mobileTabBarRef}
+        label="Views"
+        tabs={MOBILE_TABS}
+        selected={evidencePage}
+        onSelect={selectPage}
+      />
       <DesignModal open={designOpen} onOpenChange={setDesignOpen} />
       <JzButton
         variant={chatOpen ? "secondary" : "primary"}

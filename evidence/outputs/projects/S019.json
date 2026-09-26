@@ -6,5 +6,141 @@
   ],
   "name": "Summit application design system",
   "summary": "I built Summit’s application design system—web components and tokens on Stencil, later Lit—so teams could ship custom internal apps instead of fighting off-the-shelf UI tooling.",
-  "showOnResume": true
+  "matchingMetadata": {
+    "schema_version": "1.1",
+    "project_id": "S019",
+    "title": "Summit application design system",
+    "record_kind": "project",
+    "project_origin": "employment",
+    "ranking_eligible": true,
+    "exclusion_reason": null,
+    "parent_project_id": null,
+    "related_project_ids": [
+      "S020",
+      "S021"
+    ],
+    "role_links": [
+      {
+        "id": "R005",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Preserved canonical association from the project account; role-source date caveats remain in the role record."
+      }
+    ],
+    "employer_links": [
+      {
+        "id": "C003",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Employer association recorded in the project account."
+      }
+    ],
+    "customer_ids": [],
+    "client_ids": [],
+    "year": 2022,
+    "year_basis": "estimated",
+    "year_note": "Estimated as 2022 near the midpoint of R005 (August 2020–June 2023); does not establish sequence among Summit projects.",
+    "delivery_stage": "production",
+    "annotation": {
+      "status": "reviewed",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-09-26",
+      "vocabulary_version": "1.0.0"
+    },
+    "public_disclosure": "needs_review",
+    "evidence": [
+      {
+        "id": "S019-E001",
+        "statement": "Created an application design system with web components and tokens, initially using Stencil and subsequently porting it to Lit.",
+        "concept_ids": [
+          "local:design-system-development",
+          "local:component-library",
+          "local:design-token-engineering",
+          "local:web-component-architecture",
+          "local:stencil",
+          "local:lit",
+          "local:platform-migration",
+          "local:financial-services"
+        ],
+        "ownership": "contributor",
+        "scope": "unknown",
+        "delivery_stage": "production",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#source-account",
+            "locator": "Account summary",
+            "supports": "Created an application design system with web components and tokens, initially using Stencil and subsequently porting it to Lit."
+          }
+        ],
+        "limitations": [
+          "Sole authorship and team size are not established.",
+          "The timing of the Lit port relative to the initial launch remains unknown."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26"
+        }
+      },
+      {
+        "id": "S019-E002",
+        "statement": "Built Figma extensions to support the design-to-system process.",
+        "concept_ids": [
+          "local:figma-extension",
+          "local:figma"
+        ],
+        "ownership": "contributor",
+        "scope": "unknown",
+        "delivery_stage": "unknown",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#source-account",
+            "locator": "Account summary",
+            "supports": "Built Figma extensions to support the design-to-system process."
+          }
+        ],
+        "limitations": [
+          "Names and specifics were deliberately left unspecified by Scott; do not invent or request a plugin list."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26"
+        }
+      },
+      {
+        "id": "S019-E003",
+        "statement": "Reports that teams used the system within two or three months and that it remained in use for internal applications.",
+        "concept_ids": [
+          "local:product-adoption"
+        ],
+        "ownership": "contributor",
+        "scope": "organization",
+        "delivery_stage": "production",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#source-account",
+            "locator": "Account summary",
+            "supports": "Reports that teams used the system within two or three months and that it remained in use for internal applications."
+          }
+        ],
+        "limitations": [
+          "Self-reported adoption and continued use, not independently verified.",
+          "The teller application is a consumer example, not proof that Scott authored all its APIs."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26"
+        }
+      }
+    ],
+    "concept_proposals": []
+  }
 }

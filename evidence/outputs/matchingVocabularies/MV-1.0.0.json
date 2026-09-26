@@ -1,0 +1,2498 @@
+{
+  "evidenceId": "MV-1.0.0",
+  "name": "Jobzeug project matching vocabulary",
+  "vocabularyVersion": "1.0.0",
+  "registry": {
+    "schema_version": "1.0",
+    "vocabulary_version": "1.0.0",
+    "title": "Jobzeug project matching vocabulary",
+    "status": "approved",
+    "created_at": "2026-09-26",
+    "review": {
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-09-26",
+      "scope": "Agent-reviewed initial vocabulary definitions and mappings. Scott has not individually reviewed these concepts. Project annotations are reviewed separately in project headers; this file does not approve them."
+    },
+    "purpose": "Shared controlled concepts for project evidence and incoming job requirements; no fixed employer, posting, or project ranking.",
+    "categories": {
+      "skill": "A learned capability demonstrated through an action.",
+      "knowledge": "Subject-matter understanding, distinct from implementation.",
+      "work_activity": "An action performed in a project.",
+      "work_context": "Conditions under which work occurred.",
+      "tool": "A named technology, language, platform, or framework.",
+      "domain": "Local extension describing the product, industry, or audience setting.",
+      "deliverable": "Local extension describing an artifact or system produced.",
+      "outcome": "Local extension describing an observed result, requiring separate evidence."
+    },
+    "external_source": {
+      "system": "O*NET",
+      "release": "31.0",
+      "file": "content_model_reference.json",
+      "url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+      "sha256": "58f597d04b4bf1f457a4b50eaed67ddd120740df602acd404578acd78129e32e",
+      "retrieved_at": "2026-09-26",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_details_url": "https://www.onetcenter.org/license_db.html",
+      "attribution": "Includes adapted information from the O*NET 31.0 Database by the U.S. Department of Labor, Employment and Training Administration (USDOL/ETA), used under CC BY 4.0. O*NET is a trademark of USDOL/ETA. Jobzeug has modified and added definitions and selected mappings; USDOL/ETA has not approved, endorsed, or tested these modifications.",
+      "modifications": "Local IDs, paraphrased definitions, selected external mappings, domain-specific extensions, evidence rules, and coverage checks. No occupation ratings imported."
+    },
+    "rules": [
+      "Every ID is local. external_mappings identifies verified O*NET relationships; an empty mapping list means no external mapping asserted, not that no mapping could exist.",
+      "Mapping relation is from the local concept to the external concept: narrower means the local concept is more specific. Related is not equivalence. External mappings do not confer match credit.",
+      "broader_ids organizes local concepts. Tag the most specific supported concept; do not sum parent and child matches for the same requirement.",
+      "Labels and aliases are case-insensitive lookup candidates, not automatic evidence. Short abbreviations require domain context.",
+      "basis.project_ids are vocabulary-discovery leads only. They do not assign tags to projects, prove competence, or resolve ownership and outcome uncertainty.",
+      "basis.requirement_source_ids document demand-side vocabulary checks. Requirements with no project lead are deliberately retained so gaps can be represented.",
+      "Scope, ownership, stage, dates, disclosure, and source reliability belong on claims and requirements, not in tag IDs.",
+      "No importance or proficiency weights belong here. Weights are specific to a posting; evidence match values are specific to a project-requirement pair.",
+      "Unknown requirements stay unmapped. Add concepts or aliases only through an explicit vocabulary revision, never during routine matching.",
+      "Approve or revise definitions separately from reviewing evidence annotations. Codex definition review does not imply Scott reviewed a concept or confirmed a claim.",
+      "Tools researched, mentioned in an article, or generated as output are not automatically tools personally implemented with.",
+      "Full job postings are not stored here. URLs and condensed category checks are provenance only, not career evidence."
+    ],
+    "project_sources": {
+      "S002": "../projects/S002 - Bulk Editor.md",
+      "S005": "../projects/S005 - State Farm tokens persuasion.md",
+      "S007": "../projects/S007 - State Farm Lit engineering bridge.md",
+      "S011": "../projects/S011 - Figma Design System widget.md",
+      "S016": "../projects/S016 - Technical debt Contentful blog.md",
+      "S003": "../projects/S003 - DemAI.md",
+      "S008": "../projects/S008 - Contentful for Figma widget.md",
+      "S012": "../projects/S012 - Presentation Deck widget.md",
+      "S022": "../projects/S022 - 2024 Partnership Tour AI design systems.md",
+      "S015": "../projects/S015 - Understanding AI building blocks.md",
+      "S014": "../projects/S014 - Design tokens Contentful blog.md",
+      "S020": "../projects/S020 - Summit marketing website rebuild.md",
+      "S006": "../projects/S006 - State Farm Figma design system.md",
+      "S009": "../projects/S009 - AI content and component binding.md",
+      "S001": "../projects/S001 - Blueprints.md",
+      "S018": "../projects/S018 - Journal Interactive advertiser studio.md",
+      "S019": "../projects/S019 - Summit application design system.md",
+      "S004": "../roles/R004-state-farm-design-systems.md#state-farm-design-system-context",
+      "S021": "../projects/S021 - Rates Central.md",
+      "S010": "../projects/S010 - Berlin prototype exploration.md",
+      "S013": "../projects/S013 - Contentful Content Type widget.md",
+      "S017": "../projects/S017 - JSOnline ad system installation.md"
+    },
+    "requirement_sources": [
+      {
+        "id": "J01",
+        "title": "LearnVector — Design Engineer",
+        "url": "https://jobs.lever.co/AIFund/0effe809-7447-4ff5-8e0e-1ada19658c90",
+        "accessed_at": "2026-09-26",
+        "coverage_note": "Checked interface craft, front-end implementation, accessibility, responsive behavior, motion, performance, and direct learner observation; no ranking weights copied."
+      },
+      {
+        "id": "J02",
+        "title": "Hightouch — Solutions Engineer, Enterprise East (Pre-Sales)",
+        "url": "https://job-boards.greenhouse.io/hightouch/jobs/5134194004",
+        "accessed_at": "2026-09-26",
+        "coverage_note": "Checked technical discovery, demonstrations, integration understanding, stakeholder communication, and proof-of-concept validation. Specialized data platforms and sales frameworks remain unmapped."
+      },
+      {
+        "id": "J03",
+        "title": "Livefront — Product Designer",
+        "url": "https://job-boards.greenhouse.io/livefront/jobs/4215612009",
+        "accessed_at": "2026-09-26",
+        "coverage_note": "Checked user research, usability testing, visual and interaction design, prototypes, design systems, and cross-functional delivery."
+      }
+    ],
+    "coverage_checks": [
+      {
+        "source": "J01",
+        "requirement_summary": "Implement accessible responsive interfaces",
+        "concept_ids": [
+          "local:front-end-development",
+          "local:accessible-interface-development",
+          "local:responsive-interface-development"
+        ],
+        "constraint": "All capabilities must be connected to the same work; production stage is a separate condition."
+      },
+      {
+        "source": "J02",
+        "requirement_summary": "Lead discovery and validate a customer proof of concept",
+        "concept_ids": [
+          "local:technical-discovery",
+          "local:technical-prototype",
+          "local:software-testing"
+        ],
+        "constraint": "Leadership, customer context, and agreed validation criteria require evidence; a demo alone is insufficient."
+      },
+      {
+        "source": "J03",
+        "requirement_summary": "Conduct research and usability testing to guide design",
+        "concept_ids": [
+          "local:user-research",
+          "local:usability-testing",
+          "local:interaction-design"
+        ],
+        "constraint": "Require user methods and resulting design decisions; no existing project assignment asserted."
+      }
+    ],
+    "known_unmapped_examples": [
+      {
+        "source": "J02",
+        "requirement": "Specific CDP or cloud data warehouse expertise",
+        "reason": "Content modeling and Contentful use are not equivalents; add specific concepts when needed."
+      },
+      {
+        "source": "J02",
+        "requirement": "MEDDPICC or another named enterprise sales methodology",
+        "reason": "Sales contributions do not establish a specific methodology."
+      },
+      {
+        "source": "J01",
+        "requirement": "Conversational voice interfaces or real-time generative graphics",
+        "reason": "General interaction design and AI workflows do not establish these specialties."
+      }
+    ],
+    "limitations": [
+      "Initial coverage review uses 22 project records and three diverse postings; this is not an exhaustive occupational ontology or an evaluated ranking benchmark.",
+      "Project annotation and claim-level review are tracked in project headers and project-header-migration.md, separately from vocabulary approval.",
+      "No automatic synonym expansion, graph propagation, or project ranking is implemented by this data file."
+    ],
+    "concepts": [
+      {
+        "id": "local:programming",
+        "label": "Programming",
+        "definition": "Writing computer programs to perform specified tasks.",
+        "category": "skill",
+        "aliases": [
+          "computer programming"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.3.e",
+            "source_label": "Programming",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "exact"
+          }
+        ],
+        "evidence_rule": "Require a described implementation contribution; prompting generated code alone does not establish hand-written programming.",
+        "basis": {
+          "project_ids": [
+            "S002",
+            "S017"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:troubleshooting",
+        "label": "Troubleshooting",
+        "definition": "Identifying the cause of an operating failure and choosing a corrective action.",
+        "category": "skill",
+        "aliases": [
+          "fault diagnosis"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.3.k",
+            "source_label": "Troubleshooting",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "exact"
+          }
+        ],
+        "evidence_rule": "Require the fault and diagnostic or corrective contribution; encountering a bug is insufficient.",
+        "basis": {
+          "project_ids": [
+            "S002",
+            "S017"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:critical-thinking",
+        "label": "Critical thinking",
+        "definition": "Comparing reasoning and evidence to assess competing explanations or approaches.",
+        "category": "skill",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.A.2.a",
+            "source_label": "Critical Thinking",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "exact"
+          }
+        ],
+        "evidence_rule": "Require an actual comparison or reasoned decision, not a self-description.",
+        "basis": {
+          "project_ids": [
+            "S009",
+            "S020"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:persuasion",
+        "label": "Persuasion",
+        "definition": "Influencing a person's decision or behavior through a reasoned case.",
+        "category": "skill",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.1.c",
+            "source_label": "Persuasion",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "exact"
+          }
+        ],
+        "evidence_rule": "Describe audience and argument; attempted persuasion and successful persuasion are distinct claims.",
+        "basis": {
+          "project_ids": [
+            "S005",
+            "S020"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:writing",
+        "label": "Writing",
+        "definition": "Communicating in written form suited to an audience and purpose.",
+        "category": "skill",
+        "aliases": [
+          "written communication"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.A.1.c",
+            "source_label": "Writing",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "exact"
+          }
+        ],
+        "evidence_rule": "A byline or attributable text supports authorship, not every technical implementation discussed.",
+        "basis": {
+          "project_ids": [
+            "S014",
+            "S015",
+            "S016"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:speaking",
+        "label": "Speaking",
+        "definition": "Conveying information clearly through spoken communication.",
+        "category": "skill",
+        "aliases": [
+          "oral communication"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.A.1.d",
+            "source_label": "Speaking",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "exact"
+          }
+        ],
+        "evidence_rule": "Require an actual talk, explanation, or presentation; distinguish audience reach from reception.",
+        "basis": {
+          "project_ids": [
+            "S010",
+            "S022"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:instructing",
+        "label": "Instructing",
+        "definition": "Teaching another person how to perform a task.",
+        "category": "skill",
+        "aliases": [
+          "instruction"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.1.e",
+            "source_label": "Instructing",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "exact"
+          }
+        ],
+        "evidence_rule": "Teaching a technology is not equivalent to implementing it in production.",
+        "basis": {
+          "project_ids": [
+            "S006",
+            "S007"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:coordination",
+        "label": "Coordination",
+        "definition": "Adjusting one's actions in response to the actions of other people.",
+        "category": "skill",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.1.b",
+            "source_label": "Coordination",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "exact"
+          }
+        ],
+        "evidence_rule": "Working near another team is insufficient; identify the coordination performed.",
+        "basis": {
+          "project_ids": [
+            "S007",
+            "S008"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:systems-analysis",
+        "label": "Systems analysis",
+        "definition": "Reasoning about how a system operates and how changes affect its behavior.",
+        "category": "skill",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.4.g",
+            "source_label": "Systems Analysis",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "exact"
+          }
+        ],
+        "evidence_rule": "Require system relationships or change effects; do not infer from an architect title.",
+        "basis": {
+          "project_ids": [
+            "S009",
+            "S019",
+            "S021"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:decision-making",
+        "label": "Judgment and decision making",
+        "definition": "Choosing an action by comparing its likely benefits and costs.",
+        "category": "skill",
+        "aliases": [
+          "judgment and decision making"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.4.e",
+            "source_label": "Judgment and Decision Making",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "exact"
+          }
+        ],
+        "evidence_rule": "Describe the alternatives and tradeoff, not merely the selected technology.",
+        "basis": {
+          "project_ids": [
+            "S020"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:front-end-development",
+        "label": "Front-end development",
+        "definition": "Implementing the interfaces and behavior people use in a web application.",
+        "category": "skill",
+        "aliases": [
+          "frontend development",
+          "front end development"
+        ],
+        "status": "approved",
+        "broader_ids": [
+          "local:programming"
+        ],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.3.e",
+            "source_label": "Programming",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "Require implementation evidence; an interface design or generated-code artifact alone does not establish personal coding depth.",
+        "basis": {
+          "project_ids": [
+            "S018",
+            "S019",
+            "S020"
+          ],
+          "requirement_source_ids": [
+            "J01"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:interaction-design",
+        "label": "Interaction design",
+        "definition": "Designing how a person acts on an interface and how the interface responds.",
+        "category": "skill",
+        "aliases": [
+          "IxD"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.3.b",
+            "source_label": "Technology Design",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "Identify behavior, states, or flows designed; visual appearance alone is insufficient.",
+        "basis": {
+          "project_ids": [
+            "S002",
+            "S008",
+            "S012"
+          ],
+          "requirement_source_ids": [
+            "J01",
+            "J03"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:visual-interface-design",
+        "label": "Visual interface design",
+        "definition": "Designing interface layout, typography, color, and visual hierarchy.",
+        "category": "skill",
+        "aliases": [
+          "UI visual design"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Require personal design contribution; S020 explicitly attributes component visual design to a design lead.",
+        "basis": {
+          "project_ids": [
+            "S006",
+            "S018"
+          ],
+          "requirement_source_ids": [
+            "J01",
+            "J03"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:design-system-development",
+        "label": "Design-system development",
+        "definition": "Creating or evolving reusable interface components, foundations, and usage rules.",
+        "category": "skill",
+        "aliases": [
+          "design system development"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Using a library does not establish building one; record design-side versus code-side contribution.",
+        "basis": {
+          "project_ids": [
+            "S001",
+            "S006",
+            "S019",
+            "S020"
+          ],
+          "requirement_source_ids": [
+            "J01",
+            "J03"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:design-token-engineering",
+        "label": "Design-token engineering",
+        "definition": "Structuring and transforming named design decisions for consistent use across tools or products.",
+        "category": "skill",
+        "aliases": [
+          "design token engineering"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.4.g",
+            "source_label": "Systems Analysis",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "Distinguish implementing a token pipeline, designing its model, and writing about tokens.",
+        "basis": {
+          "project_ids": [
+            "S001",
+            "S006",
+            "S011",
+            "S014"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:content-modeling",
+        "label": "Content modeling",
+        "definition": "Defining content types, properties, references, and constraints for structured content.",
+        "category": "skill",
+        "aliases": [
+          "content modelling"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.4.g",
+            "source_label": "Systems Analysis",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "Distinguish content modeling from general database architecture or data-warehouse modeling.",
+        "basis": {
+          "project_ids": [
+            "S003",
+            "S013",
+            "S021"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:api-integration",
+        "label": "API integration",
+        "definition": "Connecting software through application programming interfaces to exchange data or invoke behavior.",
+        "category": "skill",
+        "aliases": [
+          "API integrations"
+        ],
+        "status": "approved",
+        "broader_ids": [
+          "local:programming"
+        ],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.3.e",
+            "source_label": "Programming",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "Identify the interfaces and personal contribution; a consumer app example is not proof of authoring all its APIs.",
+        "basis": {
+          "project_ids": [
+            "S008",
+            "S013",
+            "S017"
+          ],
+          "requirement_source_ids": [
+            "J02"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:prototyping",
+        "label": "Prototyping",
+        "definition": "Building a limited representation or implementation to explore or demonstrate an idea.",
+        "category": "skill",
+        "aliases": [
+          "prototype development"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.3.b",
+            "source_label": "Technology Design",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "Record fidelity and actual scope; prototyping does not establish production reliability.",
+        "basis": {
+          "project_ids": [
+            "S002",
+            "S008",
+            "S010"
+          ],
+          "requirement_source_ids": [
+            "J01",
+            "J02",
+            "J03"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:ai-workflow-engineering",
+        "label": "AI workflow engineering",
+        "definition": "Implementing a sequence of model calls, context preparation, tools, and application logic.",
+        "category": "skill",
+        "aliases": [
+          "agent workflow engineering"
+        ],
+        "status": "approved",
+        "broader_ids": [
+          "local:programming"
+        ],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.3.e",
+            "source_label": "Programming",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "Require implemented orchestration or experiments; using an AI assistant or writing about agents is insufficient.",
+        "basis": {
+          "project_ids": [
+            "S003",
+            "S009"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:semantic-search-integration",
+        "label": "Semantic search integration",
+        "definition": "Incorporating meaning-based retrieval into an application workflow.",
+        "category": "skill",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Using a search service does not establish training a retrieval model or building its index infrastructure.",
+        "basis": {
+          "project_ids": [
+            "S002"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:semantic-metadata-design",
+        "label": "Semantic metadata design",
+        "definition": "Defining descriptions of meaning, intent, and relationships that help systems interpret content or components.",
+        "category": "skill",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Preserve what was actually represented and evaluated; descriptive metadata is not automatically a formal ontology.",
+        "basis": {
+          "project_ids": [
+            "S009"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:technical-writing",
+        "label": "Technical writing",
+        "definition": "Explaining technical concepts or procedures in writing for a defined audience.",
+        "category": "skill",
+        "aliases": [
+          "technical authorship"
+        ],
+        "status": "approved",
+        "broader_ids": [
+          "local:writing"
+        ],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.A.1.c",
+            "source_label": "Writing",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "Technical authorship is evidence of communication and potentially knowledge, not necessarily implementation.",
+        "basis": {
+          "project_ids": [
+            "S014",
+            "S015",
+            "S016"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:user-research",
+        "label": "User research",
+        "definition": "Systematically gathering and interpreting evidence about users' needs, behavior, or context.",
+        "category": "skill",
+        "aliases": [
+          "UX research"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.3.a",
+            "source_label": "Operations Analysis",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "related"
+          }
+        ],
+        "evidence_rule": "Require a research method, participants or data, and findings; customer contact and technical experiments alone are insufficient.",
+        "basis": {
+          "project_ids": [],
+          "requirement_source_ids": [
+            "J03"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:usability-testing",
+        "label": "Usability testing",
+        "definition": "Observing people attempt tasks with an interface to identify usability problems.",
+        "category": "skill",
+        "aliases": [
+          "usability evaluation"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.3.m",
+            "source_label": "Quality Control Analysis",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "Require user tasks and observations; code testing and informal product opinions are not substitutes.",
+        "basis": {
+          "project_ids": [],
+          "requirement_source_ids": [
+            "J03"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:accessible-interface-development",
+        "label": "Accessible interface development",
+        "definition": "Implementing interface behavior or presentation to reduce barriers for people with disabilities.",
+        "category": "skill",
+        "aliases": [
+          "accessibility implementation"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.3.b",
+            "source_label": "Technology Design",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "Name implemented measures and checks; a contrast feature does not establish complete accessibility or legal compliance.",
+        "basis": {
+          "project_ids": [
+            "S011"
+          ],
+          "requirement_source_ids": [
+            "J01"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:responsive-interface-development",
+        "label": "Responsive interface development",
+        "definition": "Implementing interfaces that adapt to differing screen sizes and device constraints.",
+        "category": "skill",
+        "aliases": [
+          "responsive web development"
+        ],
+        "status": "approved",
+        "broader_ids": [
+          "local:front-end-development"
+        ],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.3.e",
+            "source_label": "Programming",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "Require demonstrated adaptation; multiple static layouts do not establish responsive behavior.",
+        "basis": {
+          "project_ids": [],
+          "requirement_source_ids": [
+            "J01"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:interface-motion-design",
+        "label": "Interface motion design",
+        "definition": "Designing transitions or animation that communicate state, hierarchy, or feedback.",
+        "category": "skill",
+        "aliases": [
+          "UI motion design"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Require authored motion behavior; a token for duration alone is insufficient.",
+        "basis": {
+          "project_ids": [],
+          "requirement_source_ids": [
+            "J01"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:web-performance-optimization",
+        "label": "Web performance optimization",
+        "definition": "Diagnosing and changing a web experience to improve loading or runtime performance.",
+        "category": "skill",
+        "aliases": [
+          "frontend performance optimization"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.4.h",
+            "source_label": "Systems Evaluation",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "Record the change and evidence; informal speed claims are not measured benchmarks.",
+        "basis": {
+          "project_ids": [
+            "S020"
+          ],
+          "requirement_source_ids": [
+            "J01"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:web-component-architecture",
+        "label": "Web component architecture",
+        "definition": "Knowledge of reusable browser components and their interoperability across application frameworks.",
+        "category": "knowledge",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.C.3.a",
+            "source_label": "Computers and Electronics",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "Teaching or explaining can establish knowledge without establishing authorship of a deployed library.",
+        "basis": {
+          "project_ids": [
+            "S007",
+            "S019",
+            "S020"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:headless-content-management",
+        "label": "Headless content management",
+        "definition": "Knowledge of separating structured content management from the interfaces that consume it.",
+        "category": "knowledge",
+        "aliases": [
+          "headless CMS architecture"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.C.3.a",
+            "source_label": "Computers and Electronics",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "Name the architectural understanding; mere familiarity with a CMS brand is insufficient.",
+        "basis": {
+          "project_ids": [
+            "S003",
+            "S020",
+            "S021"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:ai-system-fundamentals",
+        "label": "AI system fundamentals",
+        "definition": "Knowledge of model calls, context, retrieval, tool execution, and orchestration in AI applications.",
+        "category": "knowledge",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.C.3.a",
+            "source_label": "Computers and Electronics",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "An educational article can support knowledge; do not convert it to shipped AI engineering experience.",
+        "basis": {
+          "project_ids": [
+            "S009",
+            "S015",
+            "S022"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:accessibility-principles",
+        "label": "Accessibility principles",
+        "definition": "Knowledge of design and technical principles for reducing disability-related barriers.",
+        "category": "knowledge",
+        "aliases": [
+          "digital accessibility principles"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Preserve which principles are supported; do not infer certification, audits, or broad standards compliance.",
+        "basis": {
+          "project_ids": [
+            "S011",
+            "S014"
+          ],
+          "requirement_source_ids": [
+            "J01"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:technical-discovery",
+        "label": "Technical discovery",
+        "definition": "Investigating a customer's systems, constraints, goals, and requirements to shape a solution.",
+        "category": "work_activity",
+        "aliases": [
+          "technical requirements discovery"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "4.A.1.a.1",
+            "source_label": "Getting Information",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "Require discovery actions and findings; receiving a feature request alone is partial evidence.",
+        "basis": {
+          "project_ids": [
+            "S002",
+            "S018"
+          ],
+          "requirement_source_ids": [
+            "J02"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:customer-demonstration",
+        "label": "Customer demonstration",
+        "definition": "Presenting product behavior or a tailored solution to a customer or prospect.",
+        "category": "work_activity",
+        "aliases": [
+          "product demo",
+          "customer demo"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "4.A.4.a.3",
+            "source_label": "Communicating with People Outside the Organization",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "Demonstration does not establish a closed sale or customer production deployment.",
+        "basis": {
+          "project_ids": [
+            "S002",
+            "S003",
+            "S008"
+          ],
+          "requirement_source_ids": [
+            "J02"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:mentoring",
+        "label": "Mentoring",
+        "definition": "Helping another person develop their knowledge or skills over time.",
+        "category": "work_activity",
+        "aliases": [
+          "coaching and development"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "4.A.4.b.5",
+            "source_label": "Coaching and Developing Others",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "Require a developmental contribution; answering one question is not automatically sustained mentoring.",
+        "basis": {
+          "project_ids": [
+            "S001",
+            "S006",
+            "S007"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:technology-selection",
+        "label": "Technology selection",
+        "definition": "Evaluating technology alternatives and recommending a choice against requirements.",
+        "category": "work_activity",
+        "aliases": [
+          "vendor evaluation",
+          "platform selection"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "4.A.2.b.1",
+            "source_label": "Making Decisions and Solving Problems",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "An evaluated product must not become a tool-used claim.",
+        "basis": {
+          "project_ids": [
+            "S020"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:stakeholder-alignment",
+        "label": "Stakeholder alignment",
+        "definition": "Working through different stakeholder needs to establish a shared direction.",
+        "category": "work_activity",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "4.A.4.b.1",
+            "source_label": "Coordinating the Work and Activities of Others",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "related"
+          }
+        ],
+        "evidence_rule": "Identify the alignment work; meetings alone do not establish agreement or adoption.",
+        "basis": {
+          "project_ids": [
+            "S005",
+            "S007",
+            "S008",
+            "S020"
+          ],
+          "requirement_source_ids": [
+            "J02"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:platform-migration",
+        "label": "Platform migration",
+        "definition": "Moving a system or workflow from one platform or framework to another.",
+        "category": "work_activity",
+        "aliases": [
+          "replatforming"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Distinguish completed migration from a recommendation; preserve source and destination.",
+        "basis": {
+          "project_ids": [
+            "S019",
+            "S020"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:public-technical-presentation",
+        "label": "Public technical presentation",
+        "definition": "Delivering a technical explanation to an external professional audience.",
+        "category": "work_activity",
+        "aliases": [
+          "conference presentation",
+          "technical talk"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "4.A.4.a.3",
+            "source_label": "Communicating with People Outside the Organization",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "Audience reactions remain self-report unless independently supported; do not imply a peer-reviewed publication.",
+        "basis": {
+          "project_ids": [
+            "S022"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:ai-output-evaluation",
+        "label": "AI output evaluation",
+        "definition": "Examining AI outputs against stated expectations to identify errors and guide changes.",
+        "category": "work_activity",
+        "aliases": [
+          "AI evaluation"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Record method, sample, and limitations; iterative impressions do not establish a formal benchmark.",
+        "basis": {
+          "project_ids": [
+            "S009"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:production-release",
+        "label": "Production release",
+        "definition": "Completing the work needed to make a capability available for operational use.",
+        "category": "work_activity",
+        "aliases": [
+          "production launch"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Require release evidence and personal responsibility; prototype completion is insufficient.",
+        "basis": {
+          "project_ids": [
+            "S002",
+            "S008",
+            "S017"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:software-testing",
+        "label": "Software testing",
+        "definition": "Executing checks against expected software behavior and investigating discrepancies.",
+        "category": "work_activity",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "2.B.3.m",
+            "source_label": "Quality Control Analysis",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "Record manual versus automated checks; do not infer a test suite or coverage from general testing.",
+        "basis": {
+          "project_ids": [
+            "S001",
+            "S017"
+          ],
+          "requirement_source_ids": [
+            "J02"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:product-strategy",
+        "label": "Product strategy",
+        "definition": "Defining product goals and choosing a direction based on user, business, and technical considerations.",
+        "category": "work_activity",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "4.A.2.b.4",
+            "source_label": "Developing Objectives and Strategies",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "narrower"
+          }
+        ],
+        "evidence_rule": "An idea or later similarity to another product does not establish roadmap ownership.",
+        "basis": {
+          "project_ids": [
+            "S008",
+            "S020"
+          ],
+          "requirement_source_ids": [
+            "J03"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:cross-functional-work",
+        "label": "Cross-functional work",
+        "definition": "Work involving collaboration across distinct disciplines or organizational functions.",
+        "category": "work_context",
+        "aliases": [
+          "cross-disciplinary work"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Context only; leadership and coordination must be supported separately.",
+        "basis": {
+          "project_ids": [
+            "S007",
+            "S008",
+            "S020"
+          ],
+          "requirement_source_ids": [
+            "J01",
+            "J03"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:customer-facing-work",
+        "label": "Customer-facing work",
+        "definition": "Work involving direct interaction with external customers or prospects.",
+        "category": "work_context",
+        "aliases": [
+          "client-facing work"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Does not establish discovery, sales ownership, or customer satisfaction on its own.",
+        "basis": {
+          "project_ids": [
+            "S002",
+            "S018"
+          ],
+          "requirement_source_ids": [
+            "J02"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:deadline-pressure",
+        "label": "Deadline pressure",
+        "definition": "Work performed under an explicit tight delivery deadline.",
+        "category": "work_context",
+        "aliases": [
+          "time-constrained delivery"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [
+          {
+            "system": "O*NET Content Model",
+            "release": "31.0",
+            "source_file": "content_model_reference.json",
+            "source_id": "4.C.3.d.1",
+            "source_label": "Time Pressure",
+            "source_url": "https://www.onetcenter.org/dl_files/database/db_31_0_json/content_model_reference.json",
+            "relation": "related"
+          }
+        ],
+        "evidence_rule": "This is a local project condition, not an O*NET occupational frequency rating.",
+        "basis": {
+          "project_ids": [
+            "S001",
+            "S002",
+            "S008"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:legacy-system-integration",
+        "label": "Legacy system integration context",
+        "definition": "Work constrained by an existing older system that must be accommodated or replaced.",
+        "category": "work_context",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Require the relevant constraint; age of a project alone is not legacy-system evidence.",
+        "basis": {
+          "project_ids": [
+            "S017",
+            "S020"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:figma",
+        "label": "Figma",
+        "definition": "The Figma design platform used to create, inspect, or extend design artifacts.",
+        "category": "tool",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Using Figma is separate from authoring its plugins or widgets.",
+        "basis": {
+          "project_ids": [
+            "S001",
+            "S006",
+            "S008",
+            "S011",
+            "S012",
+            "S013"
+          ],
+          "requirement_source_ids": [
+            "J03"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:contentful",
+        "label": "Contentful",
+        "definition": "The Contentful content platform and its APIs or app interfaces.",
+        "category": "tool",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Keep personal integrations distinct from Contentful employment.",
+        "basis": {
+          "project_ids": [
+            "S002",
+            "S003",
+            "S008",
+            "S013",
+            "S020",
+            "S021"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:lit",
+        "label": "Lit",
+        "definition": "The Lit library for authoring web components.",
+        "category": "tool",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Coaching Lit and implementing Lit are different evidence relationships.",
+        "basis": {
+          "project_ids": [
+            "S007",
+            "S019"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:stencil",
+        "label": "Stencil",
+        "definition": "The Stencil toolchain for building web components.",
+        "category": "tool",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Preserve the migration sequence; Stencil and Lit are not synonyms.",
+        "basis": {
+          "project_ids": [
+            "S019"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:react",
+        "label": "React",
+        "definition": "The React library for building user interfaces.",
+        "category": "tool",
+        "aliases": [
+          "React.js"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "S001 describes agent-generated React; do not claim hand-written React on that basis.",
+        "basis": {
+          "project_ids": [
+            "S001"
+          ],
+          "requirement_source_ids": [
+            "J01"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:typescript",
+        "label": "TypeScript",
+        "definition": "The TypeScript programming language.",
+        "category": "tool",
+        "aliases": [
+          "TS"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "An export target does not establish programming proficiency; preserve use versus generated output.",
+        "basis": {
+          "project_ids": [
+            "S011"
+          ],
+          "requirement_source_ids": [
+            "J01"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:javascript",
+        "label": "JavaScript",
+        "definition": "The JavaScript programming language.",
+        "category": "tool",
+        "aliases": [
+          "JS"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "An export target is not evidence of hand-written source code.",
+        "basis": {
+          "project_ids": [
+            "S011"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:css",
+        "label": "CSS",
+        "definition": "Cascading Style Sheets for styling web documents.",
+        "category": "tool",
+        "aliases": [
+          "Cascading Style Sheets"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Distinguish generating CSS tokens from implementing a complete responsive stylesheet.",
+        "basis": {
+          "project_ids": [
+            "S011"
+          ],
+          "requirement_source_ids": [
+            "J01"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:html",
+        "label": "HTML",
+        "definition": "HyperText Markup Language for web document structure.",
+        "category": "tool",
+        "aliases": [
+          "HyperText Markup Language"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Require actual use; do not infer a whole front-end stack.",
+        "basis": {
+          "project_ids": [
+            "S017"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:git",
+        "label": "Git",
+        "definition": "The distributed version-control system.",
+        "category": "tool",
+        "aliases": [
+          "Git version control"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "A GitHub account or repository reference alone does not establish a Git workflow.",
+        "basis": {
+          "project_ids": [
+            "S006"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:github",
+        "label": "GitHub",
+        "definition": "The GitHub platform for hosting repositories and related development workflows.",
+        "category": "tool",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "A GitHub integration does not establish use of GitHub Actions or a particular CI system.",
+        "basis": {
+          "project_ids": [
+            "S011"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:mastra",
+        "label": "Mastra",
+        "definition": "The Mastra framework used to implement AI applications and agent workflows.",
+        "category": "tool",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Distinguish framework use from authorship of the framework.",
+        "basis": {
+          "project_ids": [
+            "S003"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:firecrawl",
+        "label": "Firecrawl",
+        "definition": "The Firecrawl service or tooling used to retrieve website content.",
+        "category": "tool",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Use of a crawler does not establish search-engine development.",
+        "basis": {
+          "project_ids": [
+            "S003"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:flash",
+        "label": "Flash",
+        "definition": "The historical Flash platform for interactive web content.",
+        "category": "tool",
+        "aliases": [
+          "Adobe Flash",
+          "Macromedia Flash"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Preserve historical context; Flash detection is distinct from authoring Flash content.",
+        "basis": {
+          "project_ids": [
+            "S017",
+            "S018"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:financial-services",
+        "label": "Financial services",
+        "definition": "Products or workflows serving banking, lending, insurance, or related financial services.",
+        "category": "domain",
+        "aliases": [
+          "financial sector"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Domain context does not establish regulatory expertise or compliance work.",
+        "basis": {
+          "project_ids": [
+            "S005",
+            "S019",
+            "S020",
+            "S021"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:digital-publishing",
+        "label": "Digital publishing",
+        "definition": "Products or workflows for creating and distributing editorial or media content.",
+        "category": "domain",
+        "aliases": [
+          "online publishing"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Distinguish publishing domain from personal article authorship.",
+        "basis": {
+          "project_ids": [
+            "S017",
+            "S018"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:marketing-technology",
+        "label": "Marketing technology",
+        "definition": "Systems used to create, manage, distribute, or support marketing experiences.",
+        "category": "domain",
+        "aliases": [
+          "martech"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Do not infer expertise in every marketing platform or attribution method.",
+        "basis": {
+          "project_ids": [
+            "S002",
+            "S020",
+            "S021"
+          ],
+          "requirement_source_ids": [
+            "J02"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:developer-and-designer-tools",
+        "label": "Developer and designer tools",
+        "definition": "Products whose users create software or design artifacts.",
+        "category": "domain",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Audience context is not proof of developer advocacy, API design, or adoption.",
+        "basis": {
+          "project_ids": [
+            "S001",
+            "S006",
+            "S011",
+            "S012",
+            "S013"
+          ],
+          "requirement_source_ids": [
+            "J01"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:component-library",
+        "label": "Component library",
+        "definition": "A reusable collection of interface components with defined variants or behavior.",
+        "category": "deliverable",
+        "aliases": [
+          "UI component library"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Specify design assets versus code components; a library is one part of a design system.",
+        "basis": {
+          "project_ids": [
+            "S001",
+            "S006",
+            "S019",
+            "S020"
+          ],
+          "requirement_source_ids": [
+            "J01",
+            "J03"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:design-token-pipeline",
+        "label": "Design-token pipeline",
+        "definition": "A repeatable mechanism for transforming or synchronizing design-token data across targets.",
+        "category": "deliverable",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Require a mechanism, not merely a file containing token values.",
+        "basis": {
+          "project_ids": [
+            "S001",
+            "S006",
+            "S011"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:figma-extension",
+        "label": "Figma extension",
+        "definition": "A plugin or widget that extends Figma functionality.",
+        "category": "deliverable",
+        "aliases": [
+          "Figma plugin or widget"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Preserve plugin versus widget in the claim; uncertainty must not be resolved by this broader term.",
+        "basis": {
+          "project_ids": [
+            "S006",
+            "S008",
+            "S011",
+            "S012",
+            "S013"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:command-line-tool",
+        "label": "Command-line tool",
+        "definition": "A program operated through a command-line interface.",
+        "category": "deliverable",
+        "aliases": [
+          "CLI tool"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Require authored tool behavior; running an existing command is not creating a CLI.",
+        "basis": {
+          "project_ids": [
+            "S001"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:technical-article",
+        "label": "Technical article",
+        "definition": "A published or prepared written explanation of a technical subject.",
+        "category": "deliverable",
+        "aliases": [
+          "technical guide"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Record authorship and publication status; topic coverage is not implementation evidence.",
+        "basis": {
+          "project_ids": [
+            "S014",
+            "S015",
+            "S016"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:interactive-learning-material",
+        "label": "Interactive learning material",
+        "definition": "Educational content in which readers manipulate an example to observe behavior.",
+        "category": "deliverable",
+        "aliases": [
+          "interactive tutorial"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Preserve unresolved implementation ownership and unavailable embeds.",
+        "basis": {
+          "project_ids": [
+            "S015"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:technical-prototype",
+        "label": "Technical prototype",
+        "definition": "A limited working implementation used to explore feasibility or demonstrate behavior.",
+        "category": "deliverable",
+        "aliases": [
+          "proof of concept",
+          "PoC"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "A validated customer PoC has additional success criteria; do not equate every prototype with one.",
+        "basis": {
+          "project_ids": [
+            "S002",
+            "S008",
+            "S010"
+          ],
+          "requirement_source_ids": [
+            "J02"
+          ]
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:product-adoption",
+        "label": "Product adoption",
+        "definition": "Observed use of a delivered capability by its intended users.",
+        "category": "outcome",
+        "aliases": [
+          "tool adoption"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Require evidence of actual use; intended audience, release, installs, and active use are different facts.",
+        "basis": {
+          "project_ids": [
+            "S003",
+            "S011",
+            "S012",
+            "S013",
+            "S019",
+            "S021"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:workflow-time-reduction",
+        "label": "Workflow time reduction",
+        "definition": "A decrease in the time required to complete a specified workflow.",
+        "category": "outcome",
+        "aliases": [
+          "cycle-time reduction"
+        ],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Preserve baseline, comparison, measurement method, and self-reported status.",
+        "basis": {
+          "project_ids": [
+            "S021"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:component-consolidation",
+        "label": "Component consolidation",
+        "definition": "A reduction in redundant component definitions through reuse or standardization.",
+        "category": "outcome",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Fewer components do not automatically prove faster delivery or better usability.",
+        "basis": {
+          "project_ids": [
+            "S020"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:sales-contribution",
+        "label": "Sales contribution",
+        "definition": "A documented relationship between project work and a sales outcome.",
+        "category": "outcome",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Association is not sole causation; preserve attribution limits and restricted customer names.",
+        "basis": {
+          "project_ids": [
+            "S002"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:web-performance-improvement",
+        "label": "Web performance improvement",
+        "definition": "An observed improvement in a web experience's loading or runtime behavior.",
+        "category": "outcome",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Distinguish qualitative reports from measured timings; optimization activity alone is insufficient.",
+        "basis": {
+          "project_ids": [
+            "S020"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      },
+      {
+        "id": "local:product-direction-influence",
+        "label": "Product direction influence",
+        "definition": "Evidence that project learning or artifacts affected a subsequent product decision.",
+        "category": "outcome",
+        "aliases": [],
+        "status": "approved",
+        "broader_ids": [],
+        "external_mappings": [],
+        "evidence_rule": "Similarity or temporal precedence alone is not causation; preserve the softer precursor claim in S022.",
+        "basis": {
+          "project_ids": [
+            "S001",
+            "S022"
+          ],
+          "requirement_source_ids": []
+        },
+        "review": {
+          "reviewed_by": "Codex",
+          "reviewed_at": "2026-09-26",
+          "scope": "Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any project claim."
+        }
+      }
+    ]
+  }
+}

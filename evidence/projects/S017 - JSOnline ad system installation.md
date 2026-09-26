@@ -1,3 +1,89 @@
+---
+schema_version: "1.1"
+project_id: S017
+title: JSOnline ad system installation
+record_kind: project
+project_origin: employment
+ranking_eligible: true
+exclusion_reason: null
+parent_project_id: null
+related_project_ids:
+  - S018
+role_links:
+  - id: R022
+    relationship: delivery
+    status: confirmed
+    note: Preserved canonical association from the project account; role-source date caveats remain in
+      the role record.
+employer_links:
+  - id: C014
+    relationship: delivery
+    status: confirmed
+    note: Employer association recorded in the project account.
+customer_ids: []
+client_ids: []
+year: 2001
+year_basis: estimated
+year_note: Estimated as 2001 within R022 (2001–2002); a representative year, not a confirmed delivery date.
+delivery_stage: production
+annotation:
+  status: reviewed
+  vocabulary_version: 1.0.0
+  reviewed_by: Codex
+  reviewed_at: "2026-09-26"
+public_disclosure: needs_review
+evidence:
+  - id: S017-E001
+    statement: Installed and integrated the purchased ad-management system across JSOnline, including
+      Flash detection, HTML/image fallbacks, and section attachment points.
+    concept_ids:
+      - local:programming
+      - local:html
+      - local:flash
+      - local:legacy-system-integration
+      - local:digital-publishing
+    ownership: contributor
+    scope: organization
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Installed and integrated the purchased ad-management system across JSOnline, including
+          Flash detection, HTML/image fallbacks, and section attachment points.
+    limitations:
+      - Ad vendor and CMS specifics are not retained; do not infer API details or PHP authorship.
+      - Flash detection does not establish authoring Flash advertisements.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+  - id: S017-E002
+    statement: Tested the ad integration through production publication and reports that it operated
+      successfully.
+    concept_ids:
+      - local:software-testing
+      - local:production-release
+    ownership: contributor
+    scope: organization
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Tested the ad integration through production publication and reports that it operated
+          successfully.
+    limitations:
+      - Specific test methods and performance measurements are not recorded.
+      - Interactive games inside ads are a separate, uncaptured project.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+concept_proposals: []
+---
 # S017: JSOnline ad system installation
 
 Captured: September 25, 2026
@@ -17,6 +103,8 @@ Evidence: Scott's direct account; LinkedIn paste is a separate source claim on R
 I installed and integrated a third-party ad system across JSOnline—Flash detection, image/HTML fallbacks, and site-wide section mapping—so rich media ads could serve in production.
 
 ## Account summary
+
+<a id="source-account"></a>
 
 Scott frames early-career work as **self-taught**: initiative and problem-solving under incomplete knowledge — learning complex systems while shipping.
 

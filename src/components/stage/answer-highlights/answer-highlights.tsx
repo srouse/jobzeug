@@ -3,14 +3,19 @@
 import {
   createElement,
   forwardRef,
+  Fragment,
   useEffect,
   useState,
   type ComponentType,
+  type ReactNode,
   type Ref,
 } from "react";
 import React from "react";
+import { JzDivider } from "@jobzeug/design-system/react";
 
 import { LAYOUT_MEDIUM_MIN_PX } from "@/components/resume/resume-highlight-context";
+
+import styles from "./answer-highlights.module.css";
 
 export type AnswerHighlightItem = {
   id: string;
@@ -112,6 +117,7 @@ export function AnswerHighlights({
   resetKey,
   selectedId: selectedIdProp,
   onSelectedIdChange,
+  renderBelow,
 }: {
   items: AnswerHighlightItem[];
   /** When this changes (e.g. new cluster id), select the first item. */
@@ -119,6 +125,8 @@ export function AnswerHighlights({
   /** Controlled selection from focusedSectionId; empty/null = none. */
   selectedId?: string | null;
   onSelectedIdChange?: (id: string) => void;
+  /** Persistent content under each highlight (not gated on selection). */
+  renderBelow?: (item: AnswerHighlightItem) => ReactNode;
 }) {
   const [selectedId, setSelectedId] = useState("");
   const [breakpoint, setBreakpoint] = useState<"default" | "mobile">(
@@ -160,26 +168,32 @@ export function AnswerHighlights({
       : "";
 
   return (
-    <>
-      {items.map((item) => {
+    <div className={styles.stack}>
+      {items.map((item, index) => {
         const selected = resolvedSelected === item.id;
+        const below = renderBelow?.(item) ?? null;
         return (
-          <JzHighlight
-            key={item.id}
-            breakpoint={breakpoint}
-            title={item.title}
-            highlight={item.highlight}
-            description={item.description}
-            selected={selected}
-            onClick={() => {
-              const next = selected ? "" : item.id;
-              setSelectedId(next);
-              onSelectedIdChange?.(next);
-            }}
-          />
+          <Fragment key={item.id}>
+            {index > 0 ? (
+              <JzDivider design="subtle" className={styles.divider} />
+            ) : null}
+            <JzHighlight
+              breakpoint={breakpoint}
+              title={item.title}
+              highlight={item.highlight}
+              description={item.description}
+              selected={selected}
+              onClick={() => {
+                const next = selected ? "" : item.id;
+                setSelectedId(next);
+                onSelectedIdChange?.(next);
+              }}
+            />
+            {below ? <div className={styles.below}>{below}</div> : null}
+          </Fragment>
         );
       })}
-    </>
+    </div>
   );
 }
 

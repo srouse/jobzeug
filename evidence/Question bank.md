@@ -2,7 +2,7 @@
 
 Use later to tighten project accounts. Ask only the few questions most useful for the current account, and let Scott narrate freely first. A project need not cover every category.
 
-Use the [goal and skill framework](Goal.md) to identify which functions and capabilities an account supports. Choose follow-ups that establish missing evidence; do not turn the framework into a mandatory checklist for every project.
+Use the [project matching specification](matching/engine.md) to identify which functions and capabilities an account supports. Choose follow-ups that establish missing evidence; do not turn the framework into a mandatory checklist for every project.
 
 1. Where and when did this happen, and which resume role does it belong to?
 2. What was the starting situation? Who needed something to change, and why did it matter?

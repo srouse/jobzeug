@@ -1,7 +1,8 @@
 "use client";
 
-import { JzIcon, JzIconButton, JzText } from "@jobzeug/design-system/react";
+import { JzButton, JzIcon, JzIconButton, JzText } from "@jobzeug/design-system/react";
 
+import { useJobPosting } from "@/components/job-posting";
 import { RESUME_DEFAULT_PROMPTS } from "@/lib/resume-default-prompts";
 import type { AnswerSection } from "@/lib/themed-answer";
 import { useIdleScrollbar } from "@/lib/use-idle-scrollbar";
@@ -9,9 +10,11 @@ import {
   AnswerHighlights,
   markdownToPlain,
 } from "../answer-highlights";
+import { AnswerProjectCards, citedProjectsFromSection } from "../answer-project-cards";
 import { ChatMarkdown } from "../chat-markdown";
 
 import styles from "./answer-stage.module.css";
+import type { ResumeViewModel } from "@/lib/contentful/resume-model";
 
 export function AnswerStageBody({
   showLoading,
@@ -26,6 +29,9 @@ export function AnswerStageBody({
   question,
   metricsLabel,
   busy,
+  resume,
+  pageBindingsVisible,
+  onTogglePageBindings,
   onClear,
   onOpenSection,
   onPrompt,
@@ -42,11 +48,32 @@ export function AnswerStageBody({
   question: string;
   metricsLabel: string | null;
   busy: boolean;
+  resume: ResumeViewModel | null;
+  pageBindingsVisible: boolean;
+  onTogglePageBindings: () => void;
   onClear: () => void;
   onOpenSection: (id: string) => void;
   onPrompt: (prompt: string) => void;
 }) {
   const { ref: scrollRef, scrolling } = useIdleScrollbar();
+  const { data: jobPosting } = useJobPosting();
+
+  const runMatchDebug = async () => {
+    const entryId = jobPosting?.entryId;
+    if (!entryId) {
+      console.log("[job-match] no posting bound");
+      return;
+    }
+    try {
+      const res = await fetch(
+        `/api/job-posting/match?entryId=${encodeURIComponent(entryId)}`,
+      );
+      const json = await res.json();
+      console.log("[job-match]", res.status, json);
+    } catch (error) {
+      console.error("[job-match] failed", error);
+    }
+  };
 
   return (
     <div
@@ -75,13 +102,47 @@ export function AnswerStageBody({
               className={styles.stripMetrics}
             />
           ) : null}
-          <JzIconButton
-            label="Clear session"
-            icon="X"
-            disabled={sessionLoading}
-            className={styles.stripClear}
-            onClick={onClear}
-          />
+          <div className={styles.stripActions}>
+            <JzButton
+              label="Match"
+              variant="ghost"
+              size="small"
+              showIcon={false}
+              title={
+                jobPosting?.entryId
+                  ? "Log job match scores to console"
+                  : "Bind a posting first"
+              }
+              onClick={() => {
+                void runMatchDebug();
+              }}
+            />
+            {hasSections || markdown ? (
+              <JzIconButton
+                label={
+                  pageBindingsVisible
+                    ? "Hide page bindings"
+                    : "Show page bindings"
+                }
+                icon={
+                  pageBindingsVisible ? "LinkSimple" : "LinkSimpleBreak"
+                }
+                title={
+                  pageBindingsVisible
+                    ? "Bound to pages"
+                    : "Unbound from pages"
+                }
+                aria-pressed={pageBindingsVisible}
+                onClick={onTogglePageBindings}
+              />
+            ) : null}
+            <JzIconButton
+              label="Clear session"
+              icon="X"
+              disabled={sessionLoading}
+              onClick={onClear}
+            />
+          </div>
         </div>
 
         {showLoading ? (
@@ -122,6 +183,18 @@ export function AnswerStageBody({
                     : "Writing…"
                   : "No paragraph yet",
             }))}
+            renderBelow={(item) => {
+              const section = sections.find((s) => s.id === item.id);
+              if (!section) return null;
+              const cards = citedProjectsFromSection(section, resume, 2);
+              if (!cards.length) return null;
+              return (
+                <AnswerProjectCards
+                  cards={cards}
+                  onSelectSection={onOpenSection}
+                />
+              );
+            }}
           />
         ) : markdown ? (
           <ChatMarkdown markdown={markdown} />

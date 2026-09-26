@@ -1,3 +1,67 @@
+---
+schema_version: "1.1"
+project_id: S014
+title: Design tokens explained (Contentful blog)
+record_kind: project
+project_origin: employment
+ranking_eligible: true
+exclusion_reason: null
+parent_project_id: null
+related_project_ids:
+  - S005
+  - S006
+  - S022
+role_links:
+  - id: R003
+    relationship: delivery
+    status: confirmed
+    note: Preserved canonical association from the project account; role-source date caveats remain in
+      the role record.
+employer_links:
+  - id: C001
+    relationship: delivery
+    status: confirmed
+    note: Employer association recorded in the project account.
+customer_ids: []
+client_ids: []
+year: 2024
+year_basis: sourced
+year_note: 2024 publication year recorded for the May 16, 2024 article.
+delivery_stage: production
+annotation:
+  status: reviewed
+  vocabulary_version: 1.0.0
+  reviewed_by: Codex
+  reviewed_at: "2026-09-26"
+public_disclosure: needs_review
+evidence:
+  - id: S014-E001
+    statement: Authored the published guide explaining primitive, semantic, and component token layers
+      and distribution across design and code tools.
+    concept_ids:
+      - local:technical-writing
+      - local:technical-article
+    ownership: sole
+    scope: external_audience
+    delivery_stage: production
+    provenance: existing_material
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Authored the published guide explaining primitive, semantic, and component token layers
+          and distribution across design and code tools.
+    limitations:
+      - Authorship and publication are recorded in the local public-source capture; the live article
+        was not rechecked in this migration.
+      - Article content does not prove implementation of every described integration.
+      - Search ranking and top-performing claims require separate verification.
+    public_disclosure: needs_review
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+concept_proposals: []
+---
 # S014: Design tokens explained (Contentful blog)
 
 Captured: September 22, 2026
@@ -18,6 +82,8 @@ Evidence: Artifact-supported (public article); Scott’s accounts for ranking/SE
 I wrote Contentful’s public guide on layered design tokens—primitive, semantic, and component—using color as the worked example for distribution across Figma, code, and Studio.
 
 ## Account summary
+
+<a id="source-account"></a>
 
 **Published guide** (Scott Rouse, Contentful blog, May 16, 2024): walks readers from first principles through building a **layered design-token system**, using **color** as the worked example.
 

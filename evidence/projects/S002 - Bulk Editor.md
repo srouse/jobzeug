@@ -1,3 +1,137 @@
+---
+schema_version: "1.1"
+project_id: S002
+title: Bulk Editor
+record_kind: project
+project_origin: employment
+ranking_eligible: true
+exclusion_reason: null
+parent_project_id: null
+related_project_ids: []
+role_links:
+  - id: R002
+    relationship: delivery
+    status: provisional
+    note: Preserved provisional association from the project record.
+employer_links:
+  - id: C001
+    relationship: delivery
+    status: confirmed
+    note: Employer association recorded in the project account.
+customer_ids:
+  - CU001
+  - CU002
+client_ids: []
+year: 2025
+year_basis: estimated
+year_note: Estimated as 2025 within R002 (February 2025–early 2026, with conflicting end-date
+  sources); not an exact project date.
+delivery_stage: mixed
+annotation:
+  status: reviewed
+  vocabulary_version: 1.0.0
+  reviewed_by: Codex
+  reviewed_at: "2026-09-26"
+public_disclosure: restricted
+evidence:
+  - id: S002-E001
+    statement: Designed and built tailored bulk-content-editing prototypes and presented them to two
+      prospective customer audiences.
+    concept_ids:
+      - local:prototyping
+      - local:technical-prototype
+      - local:interaction-design
+      - local:customer-demonstration
+      - local:customer-facing-work
+      - local:contentful
+      - local:deadline-pressure
+    ownership: contributor
+    scope: external_audience
+    delivery_stage: prototype
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Designed and built tailored bulk-content-editing prototypes and presented them to two
+          prospective customer audiences.
+    limitations:
+      - Customer identities are not cleared for public use.
+      - Exact stack and division of later implementation are unresolved.
+    public_disclosure: restricted
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+  - id: S002-E002
+    statement: Added contextual AI chat and integrated Contentful semantic search to explore where
+      content changes might be needed.
+    concept_ids:
+      - local:semantic-search-integration
+      - local:interaction-design
+      - local:contentful
+    ownership: contributor
+    scope: external_audience
+    delivery_stage: prototype
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Added contextual AI chat and integrated Contentful semantic search to explore where
+          content changes might be needed.
+    limitations:
+      - Model/provider and execution safeguards are not recorded; do not infer autonomous publishing.
+    public_disclosure: restricted
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+  - id: S002-E003
+    statement: After ecosystem-team handoff, returned to fix bugs and add requested object filtering;
+      Scott reports the app reached production.
+    concept_ids:
+      - local:troubleshooting
+      - local:programming
+      - local:production-release
+    ownership: contributor
+    scope: multiple_teams
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: After ecosystem-team handoff, returned to fix bugs and add requested object filtering;
+          Scott reports the app reached production.
+    limitations:
+      - Intermediate version was built by the ecosystem team; boundaries of original versus
+        rewritten code remain unclear.
+      - Production status is self-reported.
+    public_disclosure: restricted
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+  - id: S002-E004
+    statement: Reports that both sales associated with his prototype presentations closed.
+    concept_ids:
+      - local:sales-contribution
+    ownership: contributor
+    scope: external_audience
+    delivery_stage: unknown
+    provenance: self_report
+    sources:
+      - ref: "#source-account"
+        locator: Account summary
+        supports: Reports that both sales associated with his prototype presentations closed.
+    limitations:
+      - Association does not establish sole sales causation.
+      - ARR attribution and popularity rankings remain unverified and are not part of this claim.
+    public_disclosure: restricted
+    review:
+      status: approved
+      reviewed_by: Codex
+      reviewed_at: "2026-09-26"
+concept_proposals: []
+---
 # S002: Bulk Editor
 
 Captured: September 20, 2026
@@ -18,6 +152,8 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 I designed and built a customer-facing prototype for bulk content operations in Contentful, combining a bulk editing UI with AI chat and semantic search before handing the work into the broader ecosystem.
 
 ## Account summary
+
+<a id="source-account"></a>
 
 Scott describes a recurring pattern from his SE work: a last-minute request arrives, and within two or three days he builds an almost-functional prototype that he personally presents.
 

@@ -55,20 +55,20 @@ Best current illustration of the template:
 | Build State Farm–specific tokens and components (enough to show, not the whole final DS) | [S006](../projects/S006%20-%20State%20Farm%20Figma%20design%20system.md) |
 | Build and show working code to developers while not owning final eng delivery | [S007](../projects/S007%20-%20State%20Farm%20Lit%20engineering%20bridge.md) |
 | Proactive presentations; concrete examples when challenged | [S005](../projects/S005%20-%20State%20Farm%20tokens%20persuasion.md) |
-| Arc: persuasion + craft + eng enablement reinforcing each other | [S004](../projects/S004%20-%20State%20Farm%20design%20system%20refresh.md) |
+| Arc: persuasion + craft + eng enablement reinforcing each other | [State Farm role context](../roles/R004-state-farm-design-systems.md#state-farm-design-system-context) |
 
 Scott’s account: he was consistently ahead because the artifacts already existed; the landing deck worked because it was grounded in that reality.
 
-## Links to the role framework
+## Potential matching relevance
 
-Inferred relevance to [Goal.md](../Goal.md): engineering through adoption barriers (F1/F5), turning fixes into reusable capability (F6), bringing field learning into the product (F8), finding a credible path to value (F9), helping establish practices amid ambiguity (F10). Skills: engineering, product judgment, reusable tooling, design-to-code, customer/stakeholder partnership.
+Potential relevance: engineering, reusable tooling, product judgment, design-to-code, and customer/stakeholder partnership. These are interpretive leads, not approved taxonomy assignments or proof of capability. Use the [project matching specification](../matching/engine.md) to map supporting project evidence to the current posting.
 
 ## Supporting evidence to develop
 
 - [S001 Blueprints](../projects/S001%20-%20Blueprints.md) — deep Figma/design-system build influencing Experience Orchestration (orchestration project still pending).
 - [S002 Bulk Editor](../projects/S002%20-%20Bulk%20Editor.md) — fast prototype that shaped a production app path.
 - [S003 DemAI](../projects/S003%20-%20DemAI.md) — deep SE tooling that guided non-experts through content modeling.
-- **State Farm cluster (strong template match):** [S004](../projects/S004%20-%20State%20Farm%20design%20system%20refresh.md)–[S007](../projects/S007%20-%20State%20Farm%20Lit%20engineering%20bridge.md).
+- **State Farm cluster (strong template match):** [State Farm role context](../roles/R004-state-farm-design-systems.md#state-farm-design-system-context) plus [S007](../projects/S007%20-%20State%20Farm%20Lit%20engineering%20bridge.md).
 - [S008 Contentful for Figma widget](../projects/S008%20-%20Contentful%20for%20Figma%20widget.md) — SE v1 in days → CIA production in months; binding ahead of Experience Orchestration; public live.
 - Additional examples (Summit, etc.) still to capture.
 - Experience Orchestration as a dedicated project (compare fairly to S008; Blueprints “centerpiece” claim on S001).

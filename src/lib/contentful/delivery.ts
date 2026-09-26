@@ -28,12 +28,6 @@ export type NormalizedProject = {
   roleIds: string[];
   name: string;
   summary?: string;
-  startDate?: string;
-  endDate?: string;
-  highlights?: string[];
-  technologies?: string[];
-  url?: string;
-  showOnResume: boolean;
   tags: string[];
 };
 
@@ -178,12 +172,6 @@ export async function fetchCoreCatalog(): Promise<CoreCatalog> {
       roleIds,
       name,
       summary: asString(fields.summary),
-      startDate: asDateString(fields.startDate),
-      endDate: asDateString(fields.endDate),
-      highlights: asStringArray(fields.highlights),
-      technologies: asStringArray(fields.technologies),
-      url: asString(fields.url),
-      showOnResume: asBoolean(fields.showOnResume, true),
       tags: entryTags(entry),
     });
   }

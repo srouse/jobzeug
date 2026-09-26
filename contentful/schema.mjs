@@ -1,4 +1,10 @@
 import { z } from 'zod';
+import {
+  projectMatchingSchema,
+  matchingVocabularySchema,
+  matchingRequirementSchema,
+  matchingSnapshotSchema,
+} from './matching-schema.mjs';
 
 const text = z.string().trim().min(1);
 const short = text.max(256);
@@ -45,8 +51,11 @@ export const definitions = {
   project: { name: 'Project', displayField: 'name', fields: {
     evidenceId: symbol(true, projectId), employer: reference('employer', employerId, true),
     roles: references('role', roleId, true), name: symbol(true), summary: prose(),
-    startDate: date(), endDate: date(), highlights: symbols(), technologies: symbols(), url: symbol(false, url),
-    showOnResume: bool(true),
+    matchingMetadata: object(projectMatchingSchema),
+  } },
+  matchingVocabulary: { name: 'Matching Vocabulary', displayField: 'name', fields: {
+    evidenceId: symbol(true, z.string().regex(/^MV-\d+\.\d+\.\d+$/)),
+    name: symbol(true), vocabularyVersion: symbol(true), registry: object(matchingVocabularySchema, true),
   } },
   resumeExperience: { name: 'Resume Experience', displayField: 'internalTitle', fields: {
     internalTitle: symbol(true), role: reference('role', roleId, true), summary: prose(),
@@ -69,6 +78,7 @@ export const definitions = {
   } },
   jobLine: { name: 'Job Line', displayField: 'theme', fields: {
     text: prose(true), section: symbol(true, lineSection), kind: symbol(true, lineKind), theme: symbol(true),
+    matchingRequirement: object(matchingRequirementSchema),
   } },
   jobTool: { name: 'Job Tool', displayField: 'name', fields: {
     name: symbol(true), context: symbol(true, toolContext),
@@ -78,12 +88,14 @@ export const definitions = {
     location: symbol(), employmentType: symbol(), seniority: symbol(), summary: prose(),
     yearsExperienceMin: integer(), yearsExperienceNote: symbol(), travelNote: prose(), compensationNote: prose(),
     fullText: prose(true), lines: references('jobLine', short), tools: references('jobTool', short),
+    matchingSnapshot: object(matchingSnapshotSchema),
   } },
 };
 export const typeId = kind => `jobzeug${kind[0].toUpperCase()}${kind.slice(1)}`;
 export const entryId = key => `jz-${key}`;
-/** Employer / Role / Project — the resume core synced from evidence. */
-export const coreKinds = ['employer', 'role', 'project'];
+/** Resume core plus the versioned vocabulary synced from evidence. */
+export const coreKinds = ['employer', 'role', 'matchingVocabulary', 'project'];
+export const outputDirectory = kind => kind === 'matchingVocabulary' ? 'matchingVocabularies' : `${kind}s`;
 /** Session job posting overlay — applied with core; not pushed from evidence/. */
 export const jobPostingKinds = ['jobLine', 'jobTool', 'jobPosting'];
 export const schemas = Object.fromEntries(Object.entries(definitions).map(([kind, definition]) => [kind,
