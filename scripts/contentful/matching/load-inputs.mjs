@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { parseDocument } from 'yaml';
-import { projectMatchingSchema, matchingVocabularySchema, validateMatchingCatalog } from '../../contentful/matching-schema.mjs';
+import { projectMatchingSchema, matchingVocabularySchema, validateMatchingCatalog } from './project-schema.mjs';
 
 export function parseYaml(text, label) {
   const doc = parseDocument(text, { uniqueKeys: true, version: '1.2' });

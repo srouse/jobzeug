@@ -131,7 +131,11 @@
   cursor: not-allowed;
 }
 
-.hexInput,
+.hexInput {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 .numberInput,
 .select {
   flex: 1 1 auto;
@@ -148,7 +152,6 @@
   font-size: var(--jz-semantic-type-caption-font-size, 0.75rem);
 }
 
-.hexInput:disabled,
 .numberInput:disabled,
 .select:disabled {
   opacity: 0.6;

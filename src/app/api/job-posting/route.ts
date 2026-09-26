@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
-import { loadMatchingCatalog } from "@/lib/contentful/matching";
+import { loadMatchingCatalog } from "@/lib/matching/catalog";
 import {
   loadJobPostingByEntryId,
   mapJobPostingRequirements,

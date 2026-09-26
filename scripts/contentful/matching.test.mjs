@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-import { loadMatchingInputs, parseProjectHeader } from './matching.mjs';
-import { projectMatchingSchema, validateMatchingCatalog } from '../../contentful/matching-schema.mjs';
-import { fetchMatchingCatalog } from '../../contentful/matching-catalog.mjs';
-import { schemas, contentTypes } from '../../contentful/schema.mjs';
+import { loadMatchingInputs, parseProjectHeader } from './matching/load-inputs.mjs';
+import { projectMatchingSchema, validateMatchingCatalog } from './matching/project-schema.mjs';
+import { fetchMatchingCatalog } from './matching/published-catalog.mjs';
+import { schemas, contentTypes } from './lib/schema.mjs';
 import { payload } from './local.mjs';
 import { loadCoreOutputs, upsertEntry } from './push.mjs';
 

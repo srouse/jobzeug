@@ -1,6 +1,6 @@
 # Project matching engine specification
 
-Status: proposed v1 ranking contract, September 26, 2026. This document specifies future runtime behavior. The vocabulary and initial project headers now exist; see the [migration report](project-header-migration.md) for annotation review and unresolved questions. The [Contentful storage pipeline and delivery loader](../../contentful/matching.md) are implemented; this specification still describes future scoring behavior.
+Status: proposed v1 ranking contract, September 26, 2026. This document specifies ranking behavior. The vocabulary and project headers exist; see the [migration report](project-header-migration.md) for annotation review and unresolved questions. The [compress matching pipeline](../../scripts/contentful/matching/README.md) and app scorer in `src/lib/matching/` implement storage and scoring.
 
 Read this first, then [Project header schema](project-header-schema.md), the [controlled vocabulary](vocabulary.yaml), and the [workspace evidence contract](../README.md). The specifications separate ranking policy from the durable project data format; the vocabulary supplies the shared concept IDs. Follow the workspace's disclosure, provenance, and entity rules.
 
@@ -85,25 +85,37 @@ These weights are local starting defaults to evaluate, not O*NET ratings. Do not
 
 ## Evidence matching and scoring
 
-For every eligible project and every project-level requirement, build an evidence assessment. A small personal collection should be scored exhaustively; search infrastructure is unnecessary for v1.
+For every eligible project and every project-scoped job line, build a **relationship** assessment from that project’s scorable claims. A small personal collection should be scored exhaustively; search infrastructure is unnecessary for v1.
 
-| Match value | Rule |
-|---|---|
-| 1 | Approved evidence directly supports the requirement and all its necessary constraints |
-| 0.5 | Approved evidence supports a meaningful part or a defensible transferable equivalent; explicitly name the missing condition or transfer rationale |
-| 0 | No approved documented support, a conflicting condition, or unresolved mapping |
+Scoring is **additive** (engine v2). Constraints never veto a concept overlap; they only add bonus points when they align.
 
-Similarity, a matching keyword, or a broad parent concept alone is insufficient for 0.5. For each assessment save requirement ID, project ID, evidence IDs, match value, rationale, unmet constraints, and review status. AI may propose assessments; accepted assessments and frozen inputs produce deterministic arithmetic. Deterministic scoring does not make an AI's initial semantic judgments deterministic or correct.
+| Hit | Points | Rule |
+|---|---|---|
+| Exact concept overlap | +10 each | Shared approved vocabulary id between the job line (`concept_ids` / tool ids) and a claim |
+| Ownership align | +12 | Job line lists a real `constraints.ownership` value and the claim’s ownership is that value |
+| Scope align | +12 | Same for `constraints.scope` |
+| Delivery stage align | +12 | Same for `constraints.delivery_stage` |
+| Empty or placeholder axis | 0 | Empty lists, and values `unknown`, `null`, or blank, are ignored — not a filter and not a hit |
 
-For each requirement, take the strongest coherent evidence assessment within that project, not a sum of all mentions. Multiple claims can jointly support a requirement only if their relationship establishes the requested combination. Do not combine evidence across different projects for individual project scores.
+Broader/narrower hierarchy, aliases, and keyword similarity do **not** add points in v2. Inferred claims never score. For each project×line, keep the **best claim** (highest points). Do not sum multiple claims for the same line. Do not combine evidence across different projects for individual project scores.
 
-`score(project) = 100 * sum(weight(requirement) * match(project, requirement)) / sum(weight(requirement))`
+`score(project) = sum over project-scoped job lines of bestClaimPoints(project, line)`
 
-The denominator includes every distinct project-level requirement, including unmapped ones. Unmapped requirements contribute zero and are visibly reported as unresolved, not declared capability deficits. If mappings or assessments are unfinished, label the ranking provisional. If no project-level requirements exist, return `score: null` and explain that there is nothing to rank against.
+Unmapped / empty-concept lines contribute zero and appear in `unmappedJobLineEntryIds`. Requirement `weight` is retained as metadata and is **not** multiplied into the score. If mappings are unfinished, label the ranking provisional. If no project-level requirements exist, return `score: null` and explain that there is nothing to rank against.
 
-Sort on unrounded score descending, then project ID ascending for reproducible ties. Round only displayed scores to one decimal. Do not add hidden employer prestige, recency, evidence length, tag count, or general project importance bonuses. Preserve provenance alongside the result; source type is not a hidden numeric multiplier.
+Sort on unrounded score descending, then project ID ascending for reproducible ties. Do not add hidden employer prestige, recency, evidence length, tag count, or general project importance bonuses.
 
-Example: weights 3, 3, 1 with matches 1, 1, 0 produce 85.7. Matches 0.5, 0, 1 produce 35.7. These are relative evidence-coverage scores for one posting; do not compare them as universal project quality scores across postings.
+Example: two lines each with one exact concept hit and no constraint bonuses → score `20`. One line with two concept overlaps plus matching ownership → score `20 + 12 = 32`. These totals are relative relationship strength for one posting; do not compare them as universal project quality across postings.
+
+## Job post fit, resume fit, and job relevancy
+
+These three numbers are separate from `score(project)`. They do not change project ranking.
+
+**Job post fit** asks how much of the posting the resume covers. A box is one concept on a project-scoped line (10) or one set ownership, scope, or stage axis on that line (12). The ceiling is every box at full value, which is one project that hits all of them. Boxes the strongest project checks count in full. Boxes only other projects check count at half. The total never exceeds the ceiling.
+
+**Resume fit** asks how much of the resume the posting lands on. A box is one concept on one scorable claim (10). Repeating that concept on another claim adds another box, so more projects in this kind of work raise the score. The ceiling is every claim concept on the resume. A box counts in full when any project-scoped line lists that concept. A posting with no shared concepts scores 0 against the same ceiling.
+
+**Job relevancy** asks how much of the posting can be said in the tag vocabulary. The resume is not an input. Each project-scoped line is full at 3 concepts (30 points). Fewer concepts score less. More than 3 do not add points. Lines with no concepts score 0 and remain in the ceiling (`line count × 30`). Candidate-scoped lines are excluded.
 
 ## Hierarchy, exclusions, and result contract
 

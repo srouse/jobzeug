@@ -590,3 +590,66 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 
 - Improve requirement mapper so project-scoped lines get concept_ids (current Match runs show all-unmapped zeros); optional match UI after mapping quality is good
 
+
+### [2026-09-26T18:10:50-0500]
+
+#### Summary
+
+- Relationship scoring now adds integer points for real concept and axis hits, and the match result includes job post fit, resume fit, and job relevancy. Blank optional fields from the job structurer no longer abort ingest.
+
+#### Changes
+
+- Evidence / records: matching engine notes for additive points, the two fit scores, job relevancy, and ignored placeholder axes
+- Skills / tooling: compress-to-contentful skill touch; matching code moved under src/lib/matching
+- Other: fit.ts and debug match-concepts page; unknown/null/blank axes do not score; structurer schema omits empty optional strings; session plan cache
+
+#### Decisions
+
+- Job post fit caps at one project that covers every posting box; boxes only other projects cover count at half
+- Resume fit stacks claim concepts so more work in the same tags raises the score
+- Job relevancy is posting-only: each project-scoped line is full at three concepts, and empty lines stay in the ceiling
+- unknown, null, and blank ownership, scope, and stage are missing data, not matches
+- Empty structurer strings are omitted fields, not validation failures
+
+#### Plans cached
+
+- add_story_skill_2a282f5c.plan.md
+- brand_url_design_knobs_cc92b6b9.plan.md
+- comp-make_skill_429bbef5.plan.md
+- cumulative_relationship_scoring_d08863de.plan.md
+- customers_evidence_log_51450833.plan.md
+- employer_logo_prefetch_02387199.plan.md
+- evidence_contentful_compress_793daf55.plan.md
+- evidence_mastra_workspace_4e07deca.plan.md
+- finish_docked_toolbar_52ac2998.plan.md
+- full_job_post_context_e1b35bf3.plan.md
+- job_cite_chat-only_c7f1d253.plan.md
+- job_matching_services_910e861f.plan.md
+- job_relevancy_score_e9cdd39b.plan.md
+- jz-icon_phosphor_0589d485.plan.md
+- jztext_jzicon_migration_23ae0664.plan.md
+- montserrat_entry_css_f8261a2c.plan.md
+- next.js_mastra_scaffold_718b8d31.plan.md
+- one_role_per_project_ea3747a0.plan.md
+- persist_site_password_session_cc3eee20.plan.md
+- resume_cite_highlights_ae4c6a1c.plan.md
+- resume_fit_score_4eb3f154.plan.md
+- resume_floating_chat_c02c45c0.plan.md
+- resume_spa_contentful_5d3d3333.plan.md
+- rip_specs_restore_lit_8e08794a.plan.md
+- robust_parallel_line_mapper_50922044.plan.md
+- session_checkpoint_skill_65575be3.plan.md
+- session_design_tokens_20a67a82.plan.md
+- session_job_posting_28aa6696.plan.md
+- site_password_gate_c3c92081.plan.md
+- specs_ds_import_3ed8c9e7.plan.md
+- stories_to_projects_rename_34704978.plan.md
+- themed_answer_accordion_32662583.plan.md
+- vercel_ds_prebuilt_e09f8557.plan.md
+- web_components_ds_b1737d33.plan.md
+- wire_local_ds2_cli_cc2d5484.plan.md
+
+#### Next
+
+- Re-run the job posting that failed structure validation
+- Review job relevancy on a posting that barely maps into the vocabulary

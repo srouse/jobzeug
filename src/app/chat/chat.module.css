@@ -98,14 +98,5 @@
 
 .input {
   flex: 1;
-  border-radius: 0.5rem;
-  border: 1px solid var(--jz-semantic-color-border-default);
-  background: transparent;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;
-  outline: none;
-}
-
-.input:focus {
-  border-color: #737373;
+  min-width: 0;
 }

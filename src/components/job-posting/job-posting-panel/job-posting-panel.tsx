@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { JzButton, JzIcon, JzIconButton, JzTag, JzText } from "@jobzeug/design-system/react";
+import { JzButton, JzIcon, JzIconButton, JzInput, JzTag, JzText } from "@jobzeug/design-system/react";
 import type { JobPostingPanelData } from "@/lib/job-posting/schema";
 import { EvidencePageHeader } from "@/components/evidence-page-header";
 import { AttachGutterRow } from "@/components/attach-gutter-row";
@@ -76,12 +76,7 @@ function DetailsBody({
         data-skeleton={rollActive || undefined}
       >
         <div className={styles.inner}>
-          <div
-            className={classNames(
-              styles.content,
-              canAttachContext && styles.attachGutterIndent,
-            )}
-          >
+          <div className={styles.content}>
             {metaItems.length > 0 ? (
               <ul className={styles.meta}>
                 {metaItems.map((item) => (
@@ -136,7 +131,6 @@ function DetailsBody({
 
             {data.summary ? (
               <AttachGutterRow
-                gutter={canAttachContext}
                 checked={attachedIds.has(summaryId)}
                 onToggle={summaryActivate}
                 label="Add summary to question context"
@@ -151,12 +145,7 @@ function DetailsBody({
               </AttachGutterRow>
             ) : null}
 
-            <div
-              className={classNames(
-                styles.fullPostingRow,
-                canAttachContext && styles.attachGutterIndent,
-              )}
-            >
+            <div className={styles.fullPostingRow}>
               <JzButton
                 variant="secondary"
                 size="small"
@@ -199,7 +188,6 @@ function DetailsBody({
                   className={classNames(
                     styles.content,
                     styles.sectionLabelIndent,
-                    canAttachContext && styles.attachGutterIndent,
                   )}
                 >
                   <JzText
@@ -237,7 +225,6 @@ function DetailsBody({
                   >
                     <div className={styles.inner}>
                       <AttachGutterRow
-                        gutter={canAttachContext}
                         checked={attached}
                         onToggle={
                           interactive && !skeleton ? onActivate : undefined
@@ -275,12 +262,7 @@ function DetailsBody({
       })}
 
       <section className={styles.section}>
-        <div
-          className={classNames(
-            styles.sectionLabelIndent,
-            canAttachContext && styles.attachGutterIndent,
-          )}
-        >
+        <div className={styles.sectionLabelIndent}>
           <JzText
             level={3}
             variant="overline"
@@ -289,12 +271,7 @@ function DetailsBody({
             className={styles.sectionLabel}
           />
         </div>
-        <ul
-          className={classNames(
-            styles.tools,
-            canAttachContext && styles.attachGutterIndent,
-          )}
-        >
+        <ul className={styles.tools}>
           {data.tools.map((tool) => (
             <li key={tool.entryId} className={styles.tool}>
               <JzTag
@@ -358,22 +335,19 @@ function UnboundBindForm() {
 
   return (
     <div className={styles.bindForm}>
-      <JzText
-        variant="body-default"
-        color="secondary"
-        label="Paste a job listing URL to ingest it, or bind an existing Contentful entry id."
-        className={styles.bindLead}
-      />
       <div className={styles.bindRow}>
-        <input
+        <JzInput
           className={styles.urlInput}
-          type="url"
           value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          placeholder="Job listing URL"
-          disabled={busy}
           aria-label="Job listing URL"
-          onKeyDown={(e) => {
+          onInput={(event: Event) => {
+            if (busy) return;
+            const host = event.currentTarget as HTMLElement & {
+              value?: string;
+            };
+            setUrl(typeof host.value === "string" ? host.value : "");
+          }}
+          onKeyDown={(e: KeyboardEvent) => {
             if (e.key === "Enter") void bindUrl();
           }}
         />
@@ -387,15 +361,18 @@ function UnboundBindForm() {
         />
       </div>
       <div className={styles.bindRow}>
-        <input
+        <JzInput
           className={styles.urlInput}
-          type="text"
           value={entryId}
-          onChange={(e) => setEntryId(e.target.value)}
-          placeholder="Contentful entry id"
-          disabled={busy}
           aria-label="Contentful entry id"
-          onKeyDown={(e) => {
+          onInput={(event: Event) => {
+            if (busy) return;
+            const host = event.currentTarget as HTMLElement & {
+              value?: string;
+            };
+            setEntryId(typeof host.value === "string" ? host.value : "");
+          }}
+          onKeyDown={(e: KeyboardEvent) => {
             if (e.key === "Enter") void bindEntry();
           }}
         />
@@ -423,7 +400,6 @@ function UnboundBindForm() {
 
 function BoundPanel({ data }: { data: JobPostingPanelData }) {
   const { busy, unbind } = useJobPosting();
-  const { canAttachContext } = useResumeChat();
   const { ref: scrollRef, scrolling } = useIdleScrollbar();
   const [fullOpen, setFullOpen] = useState(false);
   const modalTitle = data.company
@@ -470,7 +446,6 @@ function BoundPanel({ data }: { data: JobPostingPanelData }) {
         ref={scrollRef}
         className={styles.body}
         data-evidence-scroll
-        data-attach-gutter={canAttachContext || undefined}
         data-scrolling={scrolling || undefined}
       >
         <DetailsBody data={data} onOpenFull={() => setFullOpen(true)} />

@@ -90,39 +90,8 @@ export const matchingVocabularySchema = z.strictObject({
   for (const c of v.concepts) walk(c.id, new Set());
 });
 
-/** Job-line requirement material produced at ingest for deterministic scoring. */
-export const matchingRequirementConstraintsSchema = z.strictObject({
-  ownership: z.array(ownership).default([]),
-  scope: z.array(claimScope).default([]),
-  delivery_stage: z.array(stage).default([]),
-  tool_concept_ids: unique(conceptId).default([]),
-  note: text.nullable().default(null),
-});
-
-export const matchingRequirementSchema = z.strictObject({
-  id: text,
-  source_text: text,
-  source_location: text,
-  normalized_statement: text,
-  scope: z.enum(['project', 'candidate']),
-  priority: z.enum(['core', 'supporting', 'preferred']),
-  priority_basis: z.strictObject({
-    kind: z.enum(['explicit', 'inferred']),
-    rationale: text,
-  }),
-  weight: z.number().positive(),
-  concept_ids: unique(conceptId),
-  constraints: matchingRequirementConstraintsSchema,
-  mapping_status: z.enum(['proposed', 'approved', 'unmapped']),
-});
-
-export const matchingSnapshotSchema = z.strictObject({
-  vocabularyVersion: version,
-  mapperVersion: version,
-  sourceHash: z.string().regex(/^[a-f0-9]{64}$/),
-  status: z.enum(['provisional', 'ready']),
-  concept_proposals: z.array(z.strictObject({ label: text, category, definition: text, reason: text })).default([]),
-});
+/** Shared enums for requirement-schema (job posting CMA fields). */
+export const matchingEnums = { category, stage, ownership, claimScope, conceptId, version, unique, text };
 
 /** Validate references without inferring, filtering, scoring, or silently dropping pending projects. */
 export function validateMatchingCatalog(projects, vocabularies) {
@@ -154,29 +123,4 @@ export function validateMatchingCatalog(projects, vocabularies) {
     }
   }
   return { projects: catalog, vocabularies: versions };
-}
-
-/** Drop concept IDs not approved in the pinned vocabulary; mark empty as unmapped. */
-export function sanitizeMatchingRequirement(requirement, vocabulary) {
-  const concepts = new Map(vocabulary.concepts.map(c => [c.id, c]));
-  const keep = ids => ids.filter(key => concepts.get(key)?.status === 'approved');
-  const concept_ids = keep(requirement.concept_ids);
-  const tool_concept_ids = keep(requirement.constraints?.tool_concept_ids ?? []);
-  const mapping_status = concept_ids.length === 0 && tool_concept_ids.length === 0
-    ? 'unmapped'
-    : requirement.mapping_status === 'unmapped' && concept_ids.length
-      ? 'proposed'
-      : requirement.mapping_status;
-  return matchingRequirementSchema.parse({
-    ...requirement,
-    concept_ids,
-    mapping_status,
-    constraints: {
-      ownership: requirement.constraints?.ownership ?? [],
-      scope: requirement.constraints?.scope ?? [],
-      delivery_stage: requirement.constraints?.delivery_stage ?? [],
-      tool_concept_ids,
-      note: requirement.constraints?.note ?? null,
-    },
-  });
 }

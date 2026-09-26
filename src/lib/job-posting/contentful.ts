@@ -2,7 +2,7 @@ import { createClient, type PlainClientAPI } from "contentful-management";
 import {
   matchingRequirementSchema,
   matchingSnapshotSchema,
-} from "../../../contentful/matching-schema.mjs";
+} from "@/lib/matching/schema";
 import type {
   JobPostingView,
   MatchingRequirement,
@@ -244,10 +244,20 @@ export async function loadJobPostingByEntryId(
   const lineEntryIds = linkIds(at("lines"));
   const toolEntryIds = linkIds(at("tools"));
 
+  const lineRevisions: NonNullable<JobPostingView["entryRevisions"]>["jobzeugJobLine"] =
+    [];
+  const toolRevisions: NonNullable<JobPostingView["entryRevisions"]>["jobzeugJobTool"] =
+    [];
+
   const lines: JobPostingView["lines"] = [];
   for (const id of lineEntryIds) {
     try {
       const lineEntry = await client.entry.get({ ...params, entryId: id });
+      lineRevisions.push({
+        entryId: lineEntry.sys.id,
+        revision: lineEntry.sys.version,
+        updatedAt: String(lineEntry.sys.updatedAt ?? ""),
+      });
       const lf = lineEntry.fields as Record<string, Record<string, unknown>>;
       const lat = (name: string) => lf[name]?.[locale] ?? lf[name]?.["en-US"];
       const text = asString(lat("text"));
@@ -256,11 +266,11 @@ export async function loadJobPostingByEntryId(
       const theme = asString(lat("theme"));
       if (!text || !section || !kind || !theme) continue;
       const matchingRaw = lat("matchingRequirement");
-      const matchingRequirement = matchingRaw
-        ? matchingRequirementSchema.safeParse(matchingRaw).success
-          ? matchingRequirementSchema.parse(matchingRaw)
-          : undefined
-        : undefined;
+      let matchingRequirement: JobPostingView["lines"][0]["matchingRequirement"];
+      if (matchingRaw) {
+        const parsed = matchingRequirementSchema.safeParse(matchingRaw);
+        matchingRequirement = parsed.success ? parsed.data : undefined;
+      }
       lines.push({
         entryId: id,
         text,
@@ -278,6 +288,11 @@ export async function loadJobPostingByEntryId(
   for (const id of toolEntryIds) {
     try {
       const toolEntry = await client.entry.get({ ...params, entryId: id });
+      toolRevisions.push({
+        entryId: toolEntry.sys.id,
+        revision: toolEntry.sys.version,
+        updatedAt: String(toolEntry.sys.updatedAt ?? ""),
+      });
       const tf = toolEntry.fields as Record<string, Record<string, unknown>>;
       const tat = (name: string) => tf[name]?.[locale] ?? tf[name]?.["en-US"];
       const name = asString(tat("name"));
@@ -323,6 +338,17 @@ export async function loadJobPostingByEntryId(
     lines,
     tools,
     ...(matchingSnapshot ? { matchingSnapshot } : {}),
+    entryRevisions: {
+      jobzeugJobPosting: [
+        {
+          entryId: entry.sys.id,
+          revision: entry.sys.version,
+          updatedAt: String(entry.sys.updatedAt ?? ""),
+        },
+      ],
+      jobzeugJobLine: lineRevisions,
+      jobzeugJobTool: toolRevisions,
+    },
   };
 }
 

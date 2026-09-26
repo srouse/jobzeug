@@ -1,4 +1,4 @@
-import policy from "../../../contentful/evidence-policy.json";
+import policy from "../../../scripts/contentful/lib/evidence-policy.json";
 import type { CoreCatalog } from "./delivery";
 import { fetchCoreCatalog } from "./delivery";
 

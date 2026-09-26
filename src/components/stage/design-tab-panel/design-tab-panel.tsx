@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { JzButton, JzText } from "@jobzeug/design-system/react";
+import { JzButton, JzInput, JzText } from "@jobzeug/design-system/react";
 
 import { useDesignSession } from "../design-session-context";
 import {
@@ -166,15 +166,18 @@ export function DesignTabPanel() {
                       patchKnobs({ [key]: e.target.value });
                     }}
                   />
-                  <input
-                    type="text"
+                  <JzInput
                     className={styles.hexInput}
                     value={hexDrafts[key] ?? hex}
-                    disabled={busy}
-                    spellCheck={false}
                     aria-label={`${label} hex`}
-                    onChange={(e) => {
-                      const next = e.target.value.trim();
+                    onInput={(event: Event) => {
+                      if (busy) return;
+                      const host = event.currentTarget as HTMLElement & {
+                        value?: string;
+                      };
+                      const next = (
+                        typeof host.value === "string" ? host.value : ""
+                      ).trim();
                       setHexDrafts((drafts) => ({ ...drafts, [key]: next }));
                       if (/^#[0-9a-fA-F]{6}$/.test(next)) {
                         patchKnobs({ [key]: next.toLowerCase() });
@@ -185,7 +188,7 @@ export function DesignTabPanel() {
                         });
                       }
                     }}
-                    onBlur={() => {
+                    onChange={() => {
                       setHexDrafts((drafts) => {
                         const cleared = { ...drafts };
                         delete cleared[key];

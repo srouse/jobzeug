@@ -3,11 +3,11 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createClient } from 'contentful-management';
-import { coreKinds, entryId, schemas, typeId, outputDirectory } from '../../contentful/schema.mjs';
-import { assertTagIds, tagCatalog } from '../../contentful/tags.mjs';
+import { coreKinds, entryId, schemas, typeId, outputDirectory } from './lib/schema.mjs';
+import { assertTagIds, tagCatalog } from './lib/tags.mjs';
 import { payload } from './local.mjs';
 import { contentfulEnv, requireContentfulEnv } from './env.mjs';
-import { validateMatchingCatalog } from '../../contentful/matching-schema.mjs';
+import { validateMatchingCatalog } from './matching/project-schema.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 

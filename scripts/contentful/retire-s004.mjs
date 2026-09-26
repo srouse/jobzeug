@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { createClient } from 'contentful-management';
 import { createClient as deliveryClient } from 'contentful';
 import { requireContentfulEnv } from './env.mjs';
-import { fetchMatchingCatalog } from '../../contentful/matching-catalog.mjs';
+import { fetchMatchingCatalog } from './matching/published-catalog.mjs';
 
 async function main() {
   const {space, environment, token, locale} = requireContentfulEnv();

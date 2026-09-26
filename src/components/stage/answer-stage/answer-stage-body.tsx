@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { JzButton, JzIcon, JzIconButton, JzText } from "@jobzeug/design-system/react";
 
 import { useJobPosting } from "@/components/job-posting";
@@ -57,21 +58,25 @@ export function AnswerStageBody({
 }) {
   const { ref: scrollRef, scrolling } = useIdleScrollbar();
   const { data: jobPosting } = useJobPosting();
+  const [matchLoading, setMatchLoading] = useState(false);
 
   const runMatchDebug = async () => {
     const entryId = jobPosting?.entryId;
-    if (!entryId) {
-      console.log("[job-match] no posting bound");
+    if (!entryId || matchLoading) {
+      if (!entryId) console.log("[job-match] no posting bound");
       return;
     }
+    setMatchLoading(true);
     try {
       const res = await fetch(
-        `/api/job-posting/match?entryId=${encodeURIComponent(entryId)}`,
+        `/api/job-posting/match?jobPostingEntryId=${encodeURIComponent(entryId)}`,
       );
       const json = await res.json();
       console.log("[job-match]", res.status, json);
     } catch (error) {
       console.error("[job-match] failed", error);
+    } finally {
+      setMatchLoading(false);
     }
   };
 
@@ -108,6 +113,8 @@ export function AnswerStageBody({
               variant="ghost"
               size="small"
               showIcon={false}
+              loading={matchLoading}
+              disabled={!jobPosting?.entryId || matchLoading}
               title={
                 jobPosting?.entryId
                   ? "Log job match scores to console"

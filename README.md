@@ -62,7 +62,7 @@ Vercel installs with [`scripts/vercel-install.mjs`](scripts/vercel-install.mjs) 
 
 [`evidence/`](evidence/) is the canonical source for employers, roles, projects, customers, clients, and perspectives. It is mounted on `jobzeug-agent` as a **read-only** Mastra Workspace (`src/mastra/workspace.ts`) with BM25 search over `**/*.md`. The agent can list/read/grep/search those files; it cannot write them.
 
-Compressed payloads live under `evidence/outputs/` (Employer / Role / Project / Matching Vocabulary). Project payloads include structured matching headers. See [Matching data in Contentful](contentful/matching.md) for metadata-only updates, direct CMS editing, and the deterministic Delivery API loader. Run `contentful:compress` after evidence edits, then `contentful:apply` / `contentful:push` to sync Contentful. Use `@compress-to-contentful` to run that flow from an agent.
+Compressed payloads live under `evidence/outputs/` (Employer / Role / Project / Matching Vocabulary). Project payloads include structured matching headers. See [Compress matching](scripts/contentful/matching/README.md) for metadata-only updates and the Delivery API loader. Run `contentful:compress` after evidence edits, then `contentful:apply` / `contentful:push` to sync Contentful. Use `@compress-to-contentful` to run that flow from an agent.
 
 After large evidence edits, restart Next or Studio so the auto-index refreshes.
 

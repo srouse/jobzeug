@@ -2,9 +2,11 @@ import { z } from 'zod';
 import {
   projectMatchingSchema,
   matchingVocabularySchema,
+} from '../matching/project-schema.mjs';
+import {
   matchingRequirementSchema,
   matchingSnapshotSchema,
-} from './matching-schema.mjs';
+} from '../matching/requirement-schema.mjs';
 
 const text = z.string().trim().min(1);
 const short = text.max(256);

@@ -2,7 +2,7 @@
 import { createClient } from 'contentful-management';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { coreContentTypes, jobPostingContentTypes } from '../../contentful/schema.mjs';
+import { coreContentTypes, jobPostingContentTypes } from './lib/schema.mjs';
 import { contentfulEnv, requireContentfulEnv } from './env.mjs';
 
 function isNotFound(error) {

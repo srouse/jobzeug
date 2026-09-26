@@ -56,7 +56,7 @@ Thumbs.db
 
 # contentful / local dumps (kept outside version control)
 *.export.json
-contentful/backups/
+scripts/contentful/backups/
 
 # agent scratch (Firecrawl CLI dumps)
 .firecrawl/

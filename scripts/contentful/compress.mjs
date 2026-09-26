@@ -2,11 +2,11 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { schemas, outputDirectory } from '../../contentful/schema.mjs';
-import { assertTagIds } from '../../contentful/tags.mjs';
-import policy from '../../contentful/evidence-policy.json' with { type: 'json' };
+import { schemas, outputDirectory } from './lib/schema.mjs';
+import { assertTagIds } from './lib/tags.mjs';
+import policy from './lib/evidence-policy.json' with { type: 'json' };
 import { parseDateRange } from './dates.mjs';
-import { loadMatchingInputs } from './matching.mjs';
+import { loadMatchingInputs } from './matching/load-inputs.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const EMPLOYER_RE = /\bC\d{3,}\b/g;

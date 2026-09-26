@@ -2,13 +2,11 @@
 
 import {
   createElement,
-  forwardRef,
   Fragment,
   useEffect,
   useState,
   type ComponentType,
   type ReactNode,
-  type Ref,
 } from "react";
 import React from "react";
 import { JzDivider } from "@jobzeug/design-system/react";
@@ -38,10 +36,7 @@ type HighlightProps = {
  * Loads jz-highlight once. Survives HMR redefine by falling back to
  * customElements.get — the package React wrapper rejects and renders null.
  */
-const JzHighlight = forwardRef(function JzHighlight(
-  props: HighlightProps,
-  ref: Ref<HTMLElement>,
-) {
+function JzHighlight(props: HighlightProps) {
   const [Comp, setComp] = useState<ComponentType<HighlightProps> | null>(
     () => highlightCache,
   );
@@ -65,10 +60,8 @@ const JzHighlight = forwardRef(function JzHighlight(
   }, []);
 
   if (!Comp) return null;
-  return createElement(Comp, { ...props, ref });
-});
-
-JzHighlight.displayName = "JzHighlight";
+  return createElement(Comp, props);
+}
 
 let highlightCache: ComponentType<HighlightProps> | null = null;
 let highlightPending: Promise<ComponentType<HighlightProps>> | null = null;

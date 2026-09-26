@@ -82,7 +82,6 @@ function EvidenceShell({
   skeleton,
   focused,
   headClass,
-  gutter,
   interactive,
   pressed,
   onActivate,
@@ -92,8 +91,6 @@ function EvidenceShell({
   skeleton: boolean;
   focused: boolean;
   headClass: string;
-  /** Prompt stage: reserve left page-pad column for checkbox. */
-  gutter?: boolean;
   /** Ask-context attach. */
   interactive?: boolean;
   pressed?: boolean;
@@ -101,7 +98,6 @@ function EvidenceShell({
   children: ReactNode;
 }) {
   const canActivate = Boolean(interactive && onActivate && !skeleton);
-  const showGutter = Boolean(gutter);
   return (
     <div
       className={classNames(styles.shell, skeleton && styles.isSkeleton)}
@@ -109,7 +105,6 @@ function EvidenceShell({
     >
       <div className={styles.inner}>
         <AttachGutterRow
-          gutter={showGutter}
           checked={pressed}
           onToggle={canActivate ? onActivate : undefined}
           label="Add to question context"
@@ -237,7 +232,6 @@ export function ResumeDocument({
         ref={scrollRef}
         className={styles.docBody}
         data-evidence-scroll
-        data-attach-gutter={canAttachContext || undefined}
         data-scrolling={scrolling || undefined}
       >
         {loading ? (
@@ -294,7 +288,6 @@ export function ResumeDocument({
                       skeleton={employerSkeleton}
                       focused={employerFocused}
                       headClass={styles.employerHead}
-                      gutter={canAttachContext}
                       interactive={employerActivate.interactive}
                       pressed={employerActivate.pressed}
                       onActivate={employerActivate.onActivate}
@@ -341,7 +334,6 @@ export function ResumeDocument({
                               skeleton={roleSkeleton}
                               focused={roleFocused}
                               headClass={styles.roleBlock}
-                              gutter={canAttachContext}
                               interactive={roleActivate.interactive}
                               pressed={roleActivate.pressed}
                               onActivate={roleActivate.onActivate}
@@ -427,7 +419,6 @@ function ProjectLine({
               skeleton={skeleton}
               focused={focused}
               headClass={styles.projectName}
-              gutter={canAttachContext}
               interactive={interactive}
               pressed={attached}
               onActivate={onActivate}

@@ -1,4 +1,12 @@
-import { validateMatchingCatalog, projectMatchingSchema, matchingVocabularySchema } from './matching-schema.mjs';
+import { validateMatchingCatalog, projectMatchingSchema, matchingVocabularySchema } from './project-schema.mjs';
+
+function entryRevision(entry) {
+  return {
+    entryId: entry.sys.id,
+    revision: entry.sys.revision,
+    updatedAt: entry.sys.updatedAt,
+  };
+}
 
 /** CDA reads only; shared by the server loader and deterministic integration tests. */
 export async function fetchMatchingCatalog(client, { locale = 'en-US' } = {}) {
@@ -37,6 +45,9 @@ export async function fetchMatchingCatalog(client, { locale = 'en-US' } = {}) {
     ...catalog,
     pendingProjectIds: projects.filter(p => p.annotation.status !== 'reviewed').map(p => p.project_id),
     excludedProjectIds: projects.filter(p => !p.ranking_eligible).map(p => p.project_id),
-    revisions: [...entries, ...vocabularyEntries].map(e => ({ entryId: e.sys.id, revision: e.sys.revision, updatedAt: e.sys.updatedAt })),
+    entryRevisions: {
+      jobzeugProject: entries.map(entryRevision),
+      jobzeugMatchingVocabulary: vocabularyEntries.map(entryRevision),
+    },
   };
 }

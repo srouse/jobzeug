@@ -1,10 +1,15 @@
 "use client";
 
-import { JzButton, JzTag } from "@jobzeug/design-system/react";
+import { JzButton, JzInput, JzTag } from "@jobzeug/design-system/react";
 
 import type { AskContextItem } from "@/components/resume";
 
 import styles from "./answer-stage.module.css";
+
+function jzInputValue(event: Event): string {
+  const host = event.currentTarget as HTMLElement & { value?: string };
+  return typeof host.value === "string" ? host.value : "";
+}
 
 export function AnswerStageFooter({
   showComposer,
@@ -50,13 +55,21 @@ export function AnswerStageFooter({
         </div>
       ) : null}
       <form onSubmit={onResumeSubmit} className={styles.composer}>
-        <input
+        <JzInput
           className={styles.input}
           value={input}
-          onChange={(e) => onInputChange(e.target.value)}
-          placeholder="Ask a question…"
-          disabled={busy}
           aria-label="Question"
+          onInput={(event: Event) => {
+            if (busy) return;
+            onInputChange(jzInputValue(event));
+          }}
+          onKeyDown={(event: KeyboardEvent) => {
+            if (event.key !== "Enter") return;
+            event.preventDefault();
+            (event.currentTarget as HTMLElement | null)
+              ?.closest("form")
+              ?.requestSubmit();
+          }}
         />
         <JzButton
           label="Answer"

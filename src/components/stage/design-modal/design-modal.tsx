@@ -1,6 +1,6 @@
 "use client";
 
-import { JzButton } from "@jobzeug/design-system/react";
+import { JzButton, JzInput } from "@jobzeug/design-system/react";
 
 import { Modal } from "@/components/modal";
 import { DesignTabPanel } from "../design-tab-panel";
@@ -9,6 +9,11 @@ import {
   useDesignSession,
 } from "../design-session-context";
 import styles from "./design-modal.module.css";
+
+function jzInputValue(event: Event): string {
+  const host = event.currentTarget as HTMLElement & { value?: string };
+  return typeof host.value === "string" ? host.value : "";
+}
 
 export function DesignModal({
   open,
@@ -27,13 +32,21 @@ export function DesignModal({
       title="Design"
       footer={
         <form onSubmit={handleSubmit} className={styles.composer}>
-          <input
+          <JzInput
             className={styles.input}
             value={design.input}
-            onChange={(e) => design.setInput(e.target.value)}
-            placeholder="e.g. Colder grays, violet primary, slightly tighter type…"
-            disabled={design.busy}
             aria-label="Design instruction"
+            onInput={(event: Event) => {
+              if (design.busy) return;
+              design.setInput(jzInputValue(event));
+            }}
+            onKeyDown={(event: KeyboardEvent) => {
+              if (event.key !== "Enter") return;
+              event.preventDefault();
+              (event.currentTarget as HTMLElement | null)
+                ?.closest("form")
+                ?.requestSubmit();
+            }}
           />
           <JzButton
             label={design.busy ? "Updating…" : "Update"}

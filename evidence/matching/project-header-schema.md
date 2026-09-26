@@ -1,6 +1,6 @@
 # Project YAML header schema
 
-Status: schema version `1.1`, September 26, 2026, applied to all 21 active project records. Companions: [Project matching engine](engine.md), [controlled vocabulary](vocabulary.yaml), and [migration report](project-header-migration.md). This defines the header data contract. The [Contentful pipeline and delivery loader](../../contentful/matching.md) consume these fields as structured data; ranking/scoring remains unimplemented. Original narratives remain beneath the headers.
+Status: schema version `1.1`, September 26, 2026, applied to all 21 active project records. Companions: [Project matching engine](engine.md), [controlled vocabulary](vocabulary.yaml), and [migration report](project-header-migration.md). This defines the header data contract. The [compress matching pipeline](../../scripts/contentful/matching/README.md) consumes these fields as structured data; app scoring lives in `src/lib/matching/`. Original narratives remain beneath the headers.
 
 ## File shape and source of truth
 

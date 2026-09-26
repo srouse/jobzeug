@@ -3,10 +3,15 @@ import assert from 'node:assert/strict';
 import {
   matchingRequirementSchema,
   matchingSnapshotSchema,
-  sanitizeMatchingRequirement,
-  matchingVocabularySchema,
-} from '../../contentful/matching-schema.mjs';
-import { scorePostingAgainstCatalog, SCORING_VERSION } from '../../contentful/matching-score.mjs';
+} from '../../scripts/contentful/matching/requirement-schema.mjs';
+import { matchingVocabularySchema } from '../../scripts/contentful/matching/project-schema.mjs';
+import { sanitizeMatchingRequirement } from '../../src/lib/matching/sanitize.ts';
+import {
+  scorePostingAgainstCatalog,
+  SCORING_VERSION,
+  CONCEPT_HIT_POINTS,
+  AXIS_HIT_POINTS,
+} from '../../src/lib/matching/score.ts';
 
 const vocabulary = matchingVocabularySchema.parse({
   schema_version: '1.0',
@@ -138,7 +143,7 @@ function catalog(projects, pending = [], excluded = []) {
     vocabularies: new Map([['1.0.0', vocabulary]]),
     pendingProjectIds: pending,
     excludedProjectIds: excluded,
-    revisions: [],
+    entryRevisions: {},
   };
 }
 
@@ -152,7 +157,7 @@ test('legacy posting without snapshot returns not_mapped', () => {
   assert.equal(result.projects.length, 0);
 });
 
-test('weights 3/3/1 with matches 1/1/0 yield 85.7', () => {
+test('two concept hits across lines sum to 2 points', () => {
   const p = project('S100', [
     claim({ id: 'S100-E001', statement: 'React', concept_ids: ['local:react'] }),
     claim({ id: 'S100-E002', statement: 'Proto', concept_ids: ['local:prototyping'] }),
@@ -174,10 +179,11 @@ test('weights 3/3/1 with matches 1/1/0 yield 85.7', () => {
   const result = scorePostingAgainstCatalog({ posting, catalog: catalog([p]) });
   assert.equal(result.scoringVersion, SCORING_VERSION);
   assert.equal(result.projects.length, 1);
-  assert.ok(Math.abs(result.projects[0].score - (100 * (3 + 3 + 0) / 7)) < 1e-9);
+  assert.equal(result.projects[0].score, 2 * CONCEPT_HIT_POINTS);
+  assert.equal(result.projects[0].contributions.length, 2);
 });
 
-test('broader parent concept yields 0.5', () => {
+test('exact concept only — broader parent does not score', () => {
   const p = project('S101', [
     claim({ id: 'S101-E001', statement: 'Programming', concept_ids: ['local:programming'] }),
   ]);
@@ -201,11 +207,125 @@ test('broader parent concept yields 0.5', () => {
     ],
   };
   const result = scorePostingAgainstCatalog({ posting, catalog: catalog([p]) });
-  assert.equal(result.projects[0].score, 50);
-  assert.equal(result.byLine[0].matchSummaries[0].match, 0.5);
+  assert.equal(result.projects[0].score, 0);
+  assert.equal(result.jobLines[0].matchSummaries.length, 0);
 });
 
-test('unmapped requirement stays in denominator as zero', () => {
+test('ownership axis adds 12 when lined up; mismatch does not veto concept hits', () => {
+  const p = project('S107', [
+    claim({
+      id: 'S107-E001',
+      statement: 'React as contributor',
+      concept_ids: ['local:react'],
+      ownership: 'contributor',
+    }),
+  ]);
+  const withOwn = {
+    matchingSnapshot: matchingSnapshotSchema.parse({
+      vocabularyVersion: '1.0.0',
+      mapperVersion: '1.0.0',
+      sourceHash: 'aa'.repeat(32),
+      status: 'ready',
+    }),
+    lines: [
+      {
+        entryId: 'o1',
+        matchingRequirement: requirement({
+          id: 'o1',
+          concept_ids: ['local:react'],
+          constraints: {
+            ownership: ['contributor'],
+            scope: [],
+            delivery_stage: [],
+            tool_concept_ids: [],
+            note: null,
+          },
+        }),
+      },
+    ],
+  };
+  const aligned = scorePostingAgainstCatalog({ posting: withOwn, catalog: catalog([p]) });
+  assert.equal(
+    aligned.projects[0].score,
+    CONCEPT_HIT_POINTS + AXIS_HIT_POINTS,
+  );
+
+  const mismatched = {
+    ...withOwn,
+    matchingSnapshot: matchingSnapshotSchema.parse({
+      vocabularyVersion: '1.0.0',
+      mapperVersion: '1.0.0',
+      sourceHash: 'ab'.repeat(32),
+      status: 'ready',
+    }),
+    lines: [
+      {
+        entryId: 'o2',
+        matchingRequirement: requirement({
+          id: 'o2',
+          concept_ids: ['local:react'],
+          constraints: {
+            ownership: ['lead'],
+            scope: [],
+            delivery_stage: [],
+            tool_concept_ids: [],
+            note: null,
+          },
+        }),
+      },
+    ],
+  };
+  const blockedAxis = scorePostingAgainstCatalog({
+    posting: mismatched,
+    catalog: catalog([p]),
+  });
+  assert.equal(blockedAxis.projects[0].score, CONCEPT_HIT_POINTS);
+  assert.equal(blockedAxis.projects[0].contributions[0].ownershipHit, false);
+});
+
+test('unknown axis values do not score', () => {
+  const p = project('S108', [
+    claim({
+      id: 'S108-E001',
+      statement: 'React, axes unknown',
+      concept_ids: ['local:react'],
+      ownership: 'unknown',
+      scope: 'unknown',
+      delivery_stage: 'unknown',
+    }),
+  ]);
+  const posting = {
+    matchingSnapshot: matchingSnapshotSchema.parse({
+      vocabularyVersion: '1.0.0',
+      mapperVersion: '1.0.0',
+      sourceHash: 'ac'.repeat(32),
+      status: 'ready',
+    }),
+    lines: [
+      {
+        entryId: 'u1',
+        matchingRequirement: requirement({
+          id: 'u1',
+          concept_ids: ['local:react'],
+          constraints: {
+            ownership: ['unknown'],
+            scope: ['unknown'],
+            delivery_stage: ['unknown'],
+            tool_concept_ids: [],
+            note: null,
+          },
+        }),
+      },
+    ],
+  };
+  const result = scorePostingAgainstCatalog({ posting, catalog: catalog([p]) });
+  assert.equal(result.projects[0].score, CONCEPT_HIT_POINTS);
+  assert.equal(result.projects[0].contributions[0].ownershipHit, false);
+  assert.equal(result.projects[0].contributions[0].scopeHit, false);
+  assert.equal(result.projects[0].contributions[0].stageHit, false);
+});
+
+test('unmapped line contributes zero; mapped line still scores', () => {
   const p = project('S102', [
     claim({ id: 'S102-E001', statement: 'React', concept_ids: ['local:react'] }),
   ]);
@@ -222,6 +342,8 @@ test('unmapped requirement stays in denominator as zero', () => {
         entryId: 'b',
         matchingRequirement: requirement({
           id: 'b',
+          source_text: 'Unrelated eligibility wording with no vocabulary hit',
+          normalized_statement: 'Unrelated eligibility wording with no vocabulary hit',
           concept_ids: [],
           mapping_status: 'unmapped',
           weight: 3,
@@ -230,8 +352,8 @@ test('unmapped requirement stays in denominator as zero', () => {
     ],
   };
   const result = scorePostingAgainstCatalog({ posting, catalog: catalog([p]) });
-  assert.deepEqual(result.unmappedRequirementIds, ['b']);
-  assert.ok(Math.abs(result.projects[0].score - 50) < 1e-9);
+  assert.deepEqual(result.unmappedJobLineEntryIds, ['b']);
+  assert.equal(result.projects[0].score, CONCEPT_HIT_POINTS);
 });
 
 test('empty project-scoped requirements yield null scores', () => {

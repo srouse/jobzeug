@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { DefaultChatTransport } from "ai";
 import { useChat } from "@ai-sdk/react";
-import { JzButton, JzText } from "@jobzeug/design-system/react";
+import { JzButton, JzInput, JzText } from "@jobzeug/design-system/react";
 import Link from "next/link";
 import styles from "./chat.module.css";
 
@@ -129,12 +129,24 @@ export default function ChatPage() {
       </div>
 
       <form onSubmit={handleSubmit} className={styles.composer}>
-        <input
+        <JzInput
           className={styles.input}
           value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Type a message…"
-          disabled={status !== "ready"}
+          aria-label="Message"
+          onInput={(event: Event) => {
+            if (status !== "ready") return;
+            const host = event.currentTarget as HTMLElement & {
+              value?: string;
+            };
+            setInput(typeof host.value === "string" ? host.value : "");
+          }}
+          onKeyDown={(event: KeyboardEvent) => {
+            if (event.key !== "Enter") return;
+            event.preventDefault();
+            (event.currentTarget as HTMLElement | null)
+              ?.closest("form")
+              ?.requestSubmit();
+          }}
         />
         <JzButton
           label="Send"

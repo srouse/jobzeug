@@ -44,4 +44,4 @@ Resume aggregates (not separate LinkedIn rows): **R006** AmFam Nov 2019–Aug 20
 
 Active experience records: 19 distinct LinkedIn-described positions plus two resume aggregates (R006, R012) = **21 role records** (C005/R008 still retired). Counts describe records, not independently verified employment.
 
-Visibility and tags: [`contentful/evidence-policy.json`](../../contentful/evidence-policy.json). Override with `- Show on resume:` / `- Tags:` in Markdown meta.
+Visibility and tags: [`scripts/contentful/lib/evidence-policy.json`](../../scripts/contentful/lib/evidence-policy.json). Override with `- Show on resume:` / `- Tags:` in Markdown meta.

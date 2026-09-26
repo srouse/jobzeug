@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
-import { definitions, schemas, localResumeSchema, localApplicationSchema, provenanceSchema, entryId, typeId } from '../../contentful/schema.mjs';
+import { definitions, schemas, localResumeSchema, localApplicationSchema, provenanceSchema, entryId, typeId } from './lib/schema.mjs';
 
 export const canonical = value => JSON.stringify(sort(value));
 function sort(value) {
@@ -55,7 +55,7 @@ export async function loadBundle(root, id) {
   }
   const selectedRoles = resume.experiences.map(exp => exp.role);
   if (new Set(selectedRoles).size !== selectedRoles.length) throw new Error('Resume includes a role twice');
-  const policyFile = 'contentful/evidence-policy.json';
+  const policyFile = 'scripts/contentful/lib/evidence-policy.json';
   const policy = await read(policyFile);
   for (const [aggregate, components] of Object.entries(policy.roleAggregates)) {
     if (selectedRoles.includes(aggregate) && components.some(role => selectedRoles.includes(role)))

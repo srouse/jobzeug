@@ -1,6 +1,7 @@
 import "server-only";
-import { fetchMatchingCatalog } from "../../../contentful/matching-catalog.mjs";
-import { getDeliveryClient } from "./delivery";
+
+import { fetchMatchingCatalog } from "../../../scripts/contentful/matching/published-catalog.mjs";
+import { getDeliveryClient } from "@/lib/contentful/delivery";
 
 /** Published structured evidence for a deterministic engine. No filesystem or AI fallback. */
 export async function loadMatchingCatalog() {

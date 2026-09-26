@@ -38,19 +38,11 @@
   scrollbar-color: transparent transparent;
 }
 
-.docBody[data-attach-gutter] {
-  padding-inline-start: 0;
-}
-
 @media (min-width: 640px) {
   .docBody {
     padding-block: var(--jz-semantic-space-padding-md, 1rem)
       var(--jz-semantic-space-padding-xl, 1.75rem);
     padding-inline: var(--resume-page-pad-inline, 40px);
-  }
-
-  .docBody[data-attach-gutter] {
-    padding-inline-start: 0;
   }
 }
 
@@ -318,11 +310,6 @@
   transition:
     opacity 200ms ease-in-out,
     background-color 150ms ease;
-}
-
-.attachGutterIndent {
-  padding-inline-start: var(--resume-page-pad-inline, 40px);
-  box-sizing: border-box;
 }
 
 .shell.isSkeleton .content {

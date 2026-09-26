@@ -100,7 +100,7 @@ No Contentful compression, push, publish, or application deployment was performe
 
 ## Contentful follow-up
 
-The subsequent [Contentful integration](../../contentful/matching.md) adds structured header compression, versioned vocabulary storage, and a validated Delivery API loader. The no-publish statement above records the original header-migration pass, not this later integration. Concept IDs remain claim data, separate from Contentful tags.
+The subsequent [Contentful integration](../../scripts/contentful/matching/README.md) adds structured header compression, versioned vocabulary storage, and a validated Delivery API loader. The no-publish statement above records the original header-migration pass, not this later integration. Concept IDs remain claim data, separate from Contentful tags.
 
 ## S004 retirement
 

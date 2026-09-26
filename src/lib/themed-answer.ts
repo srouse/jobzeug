@@ -97,11 +97,13 @@ export function unionCitations(
   };
 }
 
-export function sectionsToAnswerMarkdown(sections: AnswerSection[]): string {
+export function sectionsToAnswerMarkdown(
+  sections: Array<{ title: string; highlight?: string; markdown: string }>,
+): string {
   return sections
     .map((section) => {
       const body = section.markdown.trim();
-      const lead = section.highlight.trim() || section.title;
+      const lead = (section.highlight?.trim() || section.title).trim();
       if (!body) return `**${lead}.**`;
       if (body.startsWith("**")) return body;
       return `**${lead}.** ${body}`;

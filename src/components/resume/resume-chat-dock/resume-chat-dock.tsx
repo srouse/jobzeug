@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { JzButton, JzIcon, JzText } from "@jobzeug/design-system/react";
+import { JzButton, JzIcon, JzInput, JzText } from "@jobzeug/design-system/react";
 
 import { ChatMarkdown } from "@/components/stage";
 import { chatRunMetricsFromMessage } from "@/lib/chat-run-metrics";
@@ -219,12 +219,24 @@ export function ResumeChatDock({
           </div>
 
           <form onSubmit={handleSubmit} className={styles.composer}>
-            <input
+            <JzInput
               className={styles.input}
               value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask about the resume…"
-              disabled={isLoading}
+              aria-label="Ask about the resume"
+              onInput={(event: Event) => {
+                if (isLoading) return;
+                const host = event.currentTarget as HTMLElement & {
+                  value?: string;
+                };
+                setInput(typeof host.value === "string" ? host.value : "");
+              }}
+              onKeyDown={(event: KeyboardEvent) => {
+                if (event.key !== "Enter") return;
+                event.preventDefault();
+                (event.currentTarget as HTMLElement | null)
+                  ?.closest("form")
+                  ?.requestSubmit();
+              }}
             />
             <JzButton
               label="Send"
