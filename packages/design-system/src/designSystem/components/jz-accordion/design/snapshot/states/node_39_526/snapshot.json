@@ -1,0 +1,341 @@
+{
+  "snapshotVersion": 2,
+  "layout": "perVariant",
+  "generatedAt": "2026-09-24T20:30:02.945Z",
+  "componentSetNodeId": "39:526",
+  "componentNodeId": "39:526",
+  "componentSetName": "jz-accordion",
+  "variantProperties": {},
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "tree": {
+    "id": "39:526",
+    "type": "COMPONENT",
+    "name": "jz-accordion",
+    "visible": true,
+    "width": 500,
+    "height": 249,
+    "x": 100,
+    "y": 203,
+    "tokenMapPresentation": {
+      "presentationVersion": 1,
+      "padding": {
+        "top": {
+          "raw": "0"
+        },
+        "right": {
+          "raw": "0"
+        },
+        "bottom": {
+          "raw": "0"
+        },
+        "left": {
+          "raw": "0"
+        }
+      },
+      "gap": {
+        "mainAxis": {
+          "raw": "0"
+        },
+        "counterAxis": {
+          "raw": "0"
+        },
+        "gridRow": {
+          "raw": "0"
+        },
+        "gridColumn": {
+          "raw": "0"
+        }
+      },
+      "layout": [
+        {
+          "property": "Mode",
+          "value": "VERTICAL"
+        },
+        {
+          "property": "Primary axis align",
+          "value": "MIN"
+        },
+        {
+          "property": "Counter axis align",
+          "value": "MIN"
+        },
+        {
+          "property": "Wrap",
+          "value": "NO_WRAP"
+        },
+        {
+          "property": "Horizontal sizing",
+          "value": "FIXED"
+        },
+        {
+          "property": "Vertical sizing",
+          "value": "HUG"
+        }
+      ]
+    },
+    "children": [
+      {
+        "id": "1533:123311",
+        "type": "SLOT",
+        "name": "Slot",
+        "visible": true,
+        "width": 500,
+        "height": 249,
+        "x": 0,
+        "y": 0,
+        "tokenMapPresentation": {
+          "presentationVersion": 1,
+          "padding": {
+            "top": {
+              "raw": "0"
+            },
+            "right": {
+              "raw": "0"
+            },
+            "bottom": {
+              "raw": "0"
+            },
+            "left": {
+              "raw": "0"
+            }
+          },
+          "gap": {
+            "mainAxis": {
+              "raw": "0"
+            },
+            "counterAxis": {
+              "raw": "0"
+            },
+            "gridRow": {
+              "raw": "0"
+            },
+            "gridColumn": {
+              "raw": "0"
+            }
+          },
+          "layout": [
+            {
+              "property": "Mode",
+              "value": "VERTICAL"
+            },
+            {
+              "property": "Primary axis align",
+              "value": "MIN"
+            },
+            {
+              "property": "Counter axis align",
+              "value": "MIN"
+            },
+            {
+              "property": "Wrap",
+              "value": "NO_WRAP"
+            },
+            {
+              "property": "Horizontal sizing",
+              "value": "FILL"
+            },
+            {
+              "property": "Vertical sizing",
+              "value": "HUG"
+            }
+          ]
+        },
+        "children": [
+          {
+            "id": "39:439",
+            "type": "INSTANCE",
+            "name": "jz-accordion-item",
+            "visible": true,
+            "mainComponentName": "jz-accordion-item",
+            "instanceComponentProperties": [
+              {
+                "propertyKey": "Description#39:31",
+                "displayName": "Description",
+                "type": "TEXT",
+                "value": "Description"
+              },
+              {
+                "propertyKey": "Show Content#39:20",
+                "displayName": "Show Content",
+                "type": "BOOLEAN",
+                "value": true
+              },
+              {
+                "propertyKey": "Show Subtitle#43:3",
+                "displayName": "Show Subtitle",
+                "type": "BOOLEAN",
+                "value": true
+              },
+              {
+                "propertyKey": "Show slot#39:23",
+                "displayName": "Show slot",
+                "type": "BOOLEAN",
+                "value": true
+              },
+              {
+                "propertyKey": "Slot#39:22",
+                "displayName": "Slot",
+                "type": "SLOT"
+              },
+              {
+                "propertyKey": "Subtitle#43:0",
+                "displayName": "Subtitle",
+                "type": "TEXT",
+                "value": "Subtitle"
+              },
+              {
+                "propertyKey": "Title#39:28",
+                "displayName": "Title",
+                "type": "TEXT",
+                "value": "Accordion title"
+              },
+              {
+                "propertyKey": "interactive",
+                "displayName": "interactive",
+                "type": "VARIANT",
+                "value": "Default"
+              }
+            ],
+            "nestedInstanceCaptureMode": "surface",
+            "childrenOmitted": true
+          },
+          {
+            "id": "39:446",
+            "type": "INSTANCE",
+            "name": "jz-accordion-item",
+            "visible": true,
+            "mainComponentName": "jz-accordion-item",
+            "instanceComponentProperties": [
+              {
+                "propertyKey": "Description#39:31",
+                "displayName": "Description",
+                "type": "TEXT",
+                "value": "Description"
+              },
+              {
+                "propertyKey": "Show Content#39:20",
+                "displayName": "Show Content",
+                "type": "BOOLEAN",
+                "value": false
+              },
+              {
+                "propertyKey": "Show Subtitle#43:3",
+                "displayName": "Show Subtitle",
+                "type": "BOOLEAN",
+                "value": true
+              },
+              {
+                "propertyKey": "Show slot#39:23",
+                "displayName": "Show slot",
+                "type": "BOOLEAN",
+                "value": true
+              },
+              {
+                "propertyKey": "Slot#39:22",
+                "displayName": "Slot",
+                "type": "SLOT"
+              },
+              {
+                "propertyKey": "Subtitle#43:0",
+                "displayName": "Subtitle",
+                "type": "TEXT",
+                "value": "Subtitle"
+              },
+              {
+                "propertyKey": "Title#39:28",
+                "displayName": "Title",
+                "type": "TEXT",
+                "value": "Accordion title"
+              },
+              {
+                "propertyKey": "interactive",
+                "displayName": "interactive",
+                "type": "VARIANT",
+                "value": "Default"
+              }
+            ],
+            "nestedInstanceCaptureMode": "surface",
+            "childrenOmitted": true
+          },
+          {
+            "id": "39:453",
+            "type": "INSTANCE",
+            "name": "jz-accordion-item",
+            "visible": true,
+            "mainComponentName": "jz-accordion-item",
+            "instanceComponentProperties": [
+              {
+                "propertyKey": "Description#39:31",
+                "displayName": "Description",
+                "type": "TEXT",
+                "value": "Description"
+              },
+              {
+                "propertyKey": "Show Content#39:20",
+                "displayName": "Show Content",
+                "type": "BOOLEAN",
+                "value": false
+              },
+              {
+                "propertyKey": "Show Subtitle#43:3",
+                "displayName": "Show Subtitle",
+                "type": "BOOLEAN",
+                "value": true
+              },
+              {
+                "propertyKey": "Show slot#39:23",
+                "displayName": "Show slot",
+                "type": "BOOLEAN",
+                "value": true
+              },
+              {
+                "propertyKey": "Slot#39:22",
+                "displayName": "Slot",
+                "type": "SLOT"
+              },
+              {
+                "propertyKey": "Subtitle#43:0",
+                "displayName": "Subtitle",
+                "type": "TEXT",
+                "value": "Subtitle"
+              },
+              {
+                "propertyKey": "Title#39:28",
+                "displayName": "Title",
+                "type": "TEXT",
+                "value": "Accordion title"
+              },
+              {
+                "propertyKey": "interactive",
+                "displayName": "interactive",
+                "type": "VARIANT",
+                "value": "Default"
+              }
+            ],
+            "nestedInstanceCaptureMode": "surface",
+            "childrenOmitted": true
+          }
+        ]
+      }
+    ]
+  },
+  "variablesById": {},
+  "variants": {
+    "componentPropertyDefinitions": {
+      "Slot#1533:33": {
+        "type": "SLOT",
+        "preferredValues": [
+          {
+            "type": "COMPONENT_SET",
+            "key": "b3d71a437ec81d630635f61bf2ffe9b07f7d0014"
+          }
+        ],
+        "description": "test"
+      }
+    },
+    "variantGroupProperties": {}
+  },
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt"
+}

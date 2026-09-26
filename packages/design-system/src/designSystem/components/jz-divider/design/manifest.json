@@ -1,0 +1,136 @@
+{
+  "manifestVersion": 1,
+  "layout": "perVariant",
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt",
+  "component": {
+    "nodeId": "8973:142",
+    "name": "jz-divider",
+    "page": "🟠 jz-divider",
+    "frame": "jz-divider"
+  },
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "variantAxes": [
+    {
+      "property": "design",
+      "values": [
+        "Default",
+        "subtle",
+        "strong",
+        "brand"
+      ]
+    }
+  ],
+  "sharedVariablesById": {
+    "VariableID:5:127": {
+      "name": "border/default",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:129": {
+      "name": "border/subtle",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:128": {
+      "name": "border/strong",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:1896:26437": {
+      "name": "border/brand",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    }
+  },
+  "variantsMeta": {
+    "componentPropertyDefinitions": {
+      "design": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "subtle",
+          "strong",
+          "brand"
+        ]
+      }
+    },
+    "variantGroupProperties": {
+      "design": {
+        "values": [
+          "Default",
+          "subtle",
+          "strong",
+          "brand"
+        ]
+      }
+    }
+  },
+  "states": [
+    {
+      "stateId": "design--brand",
+      "componentNodeId": "8973:283",
+      "variantProperties": {
+        "design": "brand"
+      },
+      "name": "design=brand",
+      "label": "design=brand",
+      "files": {
+        "png": "snapshot/states/design--brand/preview.png",
+        "json": "snapshot/states/design--brand/snapshot.json",
+        "md": "snapshot/states/design--brand/token-map.md"
+      }
+    },
+    {
+      "stateId": "design--Default",
+      "componentNodeId": "1483:28028",
+      "variantProperties": {
+        "design": "Default"
+      },
+      "name": "design=Default",
+      "label": "design=Default",
+      "files": {
+        "png": "snapshot/states/design--Default/preview.png",
+        "json": "snapshot/states/design--Default/snapshot.json",
+        "md": "snapshot/states/design--Default/token-map.md"
+      }
+    },
+    {
+      "stateId": "design--strong",
+      "componentNodeId": "8973:281",
+      "variantProperties": {
+        "design": "strong"
+      },
+      "name": "design=strong",
+      "label": "design=strong",
+      "files": {
+        "png": "snapshot/states/design--strong/preview.png",
+        "json": "snapshot/states/design--strong/snapshot.json",
+        "md": "snapshot/states/design--strong/token-map.md"
+      }
+    },
+    {
+      "stateId": "design--subtle",
+      "componentNodeId": "8973:279",
+      "variantProperties": {
+        "design": "subtle"
+      },
+      "name": "design=subtle",
+      "label": "design=subtle",
+      "files": {
+        "png": "snapshot/states/design--subtle/preview.png",
+        "json": "snapshot/states/design--subtle/snapshot.json",
+        "md": "snapshot/states/design--subtle/token-map.md"
+      }
+    }
+  ],
+  "definition": "definition.ts",
+  "propsTypes": "definition.props.gen.ts",
+  "slug": "jz-divider",
+  "ds2Capture": {
+    "contentFingerprint": "4eb918ad9317c1925c6e606d2cd291dd3a327f568ae41fe891e7324664b3808f",
+    "capturedAt": "2026-09-26T13:11:47.207Z"
+  }
+}

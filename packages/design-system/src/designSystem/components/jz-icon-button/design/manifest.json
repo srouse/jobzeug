@@ -1,0 +1,221 @@
+{
+  "manifestVersion": 1,
+  "layout": "perVariant",
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt",
+  "component": {
+    "nodeId": "8963:23139",
+    "name": "jz-icon-button",
+    "page": "🟠 jz-button",
+    "frame": "jz-icon-button"
+  },
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "variantAxes": [
+    {
+      "property": "interactive",
+      "values": [
+        "Default",
+        "hover",
+        "active",
+        "disabled"
+      ]
+    },
+    {
+      "property": "size",
+      "values": [
+        "Medium",
+        "Small"
+      ]
+    }
+  ],
+  "sharedVariablesById": {
+    "VariableID:5:111": {
+      "name": "radius/sm",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:3"
+    },
+    "VariableID:5:163": {
+      "name": "padding/sm",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:1030:32895": {
+      "name": "background/control/default/hover",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:1030:32893": {
+      "name": "background/control/default/active",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    }
+  },
+  "variantsMeta": {
+    "componentPropertyDefinitions": {
+      "interactive": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "hover",
+          "active",
+          "disabled"
+        ]
+      },
+      "size": {
+        "type": "VARIANT",
+        "defaultValue": "Small",
+        "variantOptions": [
+          "Medium",
+          "Small"
+        ]
+      }
+    },
+    "variantGroupProperties": {
+      "interactive": {
+        "values": [
+          "Default",
+          "hover",
+          "active",
+          "disabled"
+        ]
+      },
+      "size": {
+        "values": [
+          "Medium",
+          "Small"
+        ]
+      }
+    }
+  },
+  "states": [
+    {
+      "stateId": "interactive--active__size--Medium",
+      "componentNodeId": "8963:23144",
+      "variantProperties": {
+        "interactive": "active",
+        "size": "Medium"
+      },
+      "name": "interactive=active, size=Medium",
+      "label": "interactive=active, size=Medium",
+      "files": {
+        "png": "snapshot/states/interactive--active__size--Medium/preview.png",
+        "json": "snapshot/states/interactive--active__size--Medium/snapshot.json",
+        "md": "snapshot/states/interactive--active__size--Medium/token-map.md"
+      }
+    },
+    {
+      "stateId": "interactive--active__size--Small",
+      "componentNodeId": "8963:23185",
+      "variantProperties": {
+        "interactive": "active",
+        "size": "Small"
+      },
+      "name": "interactive=active, size=Small",
+      "label": "interactive=active, size=Small",
+      "files": {
+        "png": "snapshot/states/interactive--active__size--Small/preview.png",
+        "json": "snapshot/states/interactive--active__size--Small/snapshot.json",
+        "md": "snapshot/states/interactive--active__size--Small/token-map.md"
+      }
+    },
+    {
+      "stateId": "interactive--Default__size--Medium",
+      "componentNodeId": "8963:23138",
+      "variantProperties": {
+        "interactive": "Default",
+        "size": "Medium"
+      },
+      "name": "interactive=Default, size=Medium",
+      "label": "interactive=Default, size=Medium",
+      "files": {
+        "png": "snapshot/states/interactive--Default__size--Medium/preview.png",
+        "json": "snapshot/states/interactive--Default__size--Medium/snapshot.json",
+        "md": "snapshot/states/interactive--Default__size--Medium/token-map.md"
+      }
+    },
+    {
+      "stateId": "interactive--Default__size--Small",
+      "componentNodeId": "8963:23189",
+      "variantProperties": {
+        "interactive": "Default",
+        "size": "Small"
+      },
+      "name": "interactive=Default, size=Small",
+      "label": "interactive=Default, size=Small",
+      "files": {
+        "png": "snapshot/states/interactive--Default__size--Small/preview.png",
+        "json": "snapshot/states/interactive--Default__size--Small/snapshot.json",
+        "md": "snapshot/states/interactive--Default__size--Small/token-map.md"
+      }
+    },
+    {
+      "stateId": "interactive--disabled__size--Medium",
+      "componentNodeId": "8963:23148",
+      "variantProperties": {
+        "interactive": "disabled",
+        "size": "Medium"
+      },
+      "name": "interactive=disabled, size=Medium",
+      "label": "interactive=disabled, size=Medium",
+      "files": {
+        "png": "snapshot/states/interactive--disabled__size--Medium/preview.png",
+        "json": "snapshot/states/interactive--disabled__size--Medium/snapshot.json",
+        "md": "snapshot/states/interactive--disabled__size--Medium/token-map.md"
+      }
+    },
+    {
+      "stateId": "interactive--disabled__size--Small",
+      "componentNodeId": "8963:23183",
+      "variantProperties": {
+        "interactive": "disabled",
+        "size": "Small"
+      },
+      "name": "interactive=disabled, size=Small",
+      "label": "interactive=disabled, size=Small",
+      "files": {
+        "png": "snapshot/states/interactive--disabled__size--Small/preview.png",
+        "json": "snapshot/states/interactive--disabled__size--Small/snapshot.json",
+        "md": "snapshot/states/interactive--disabled__size--Small/token-map.md"
+      }
+    },
+    {
+      "stateId": "interactive--hover__size--Medium",
+      "componentNodeId": "8963:23140",
+      "variantProperties": {
+        "interactive": "hover",
+        "size": "Medium"
+      },
+      "name": "interactive=hover, size=Medium",
+      "label": "interactive=hover, size=Medium",
+      "files": {
+        "png": "snapshot/states/interactive--hover__size--Medium/preview.png",
+        "json": "snapshot/states/interactive--hover__size--Medium/snapshot.json",
+        "md": "snapshot/states/interactive--hover__size--Medium/token-map.md"
+      }
+    },
+    {
+      "stateId": "interactive--hover__size--Small",
+      "componentNodeId": "8963:23187",
+      "variantProperties": {
+        "interactive": "hover",
+        "size": "Small"
+      },
+      "name": "interactive=hover, size=Small",
+      "label": "interactive=hover, size=Small",
+      "files": {
+        "png": "snapshot/states/interactive--hover__size--Small/preview.png",
+        "json": "snapshot/states/interactive--hover__size--Small/snapshot.json",
+        "md": "snapshot/states/interactive--hover__size--Small/token-map.md"
+      }
+    }
+  ],
+  "definition": "definition.ts",
+  "propsTypes": "definition.props.gen.ts",
+  "slug": "jz-icon-button",
+  "ds2Capture": {
+    "contentFingerprint": "dab2efedc047b39b2beffe24c1e4922a63a9323f4ec85e0acc8141153b6d5326",
+    "capturedAt": "2026-09-25T20:05:58.482Z"
+  }
+}

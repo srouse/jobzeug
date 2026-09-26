@@ -1,0 +1,187 @@
+{
+  "snapshotVersion": 2,
+  "layout": "perVariant",
+  "generatedAt": "2026-09-23T16:19:57.630Z",
+  "componentSetNodeId": "593:6024",
+  "componentNodeId": "593:6031",
+  "componentSetName": "jz-icon",
+  "variantProperties": {
+    "Size": "Medium",
+    "Color": "Primary"
+  },
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "tree": {
+    "id": "593:6031",
+    "type": "COMPONENT",
+    "name": "Size=Medium, Color=Primary",
+    "visible": true,
+    "width": 24,
+    "height": 24,
+    "x": 276,
+    "y": 12,
+    "variantProperties": {
+      "Size": "Medium",
+      "Color": "Primary"
+    },
+    "boundVariableIds": [
+      "VariableID:523:2769"
+    ],
+    "boundVariableNames": [
+      "icon/md"
+    ],
+    "boundVariables": [
+      {
+        "id": "VariableID:523:2769",
+        "name": "icon/md"
+      }
+    ],
+    "variableBindingsByLocation": [
+      {
+        "location": "Height",
+        "names": [
+          "icon/md"
+        ]
+      },
+      {
+        "location": "Width",
+        "names": [
+          "icon/md"
+        ]
+      }
+    ],
+    "tokenMapPresentation": {
+      "presentationVersion": 1,
+      "padding": {
+        "top": {
+          "raw": "0"
+        },
+        "right": {
+          "raw": "0"
+        },
+        "bottom": {
+          "raw": "0"
+        },
+        "left": {
+          "raw": "0"
+        }
+      },
+      "gap": {
+        "mainAxis": {
+          "raw": "10"
+        },
+        "counterAxis": {
+          "raw": "0"
+        },
+        "gridRow": {
+          "raw": "0"
+        },
+        "gridColumn": {
+          "raw": "0"
+        }
+      },
+      "layout": [
+        {
+          "property": "Mode",
+          "value": "HORIZONTAL"
+        },
+        {
+          "property": "Primary axis align",
+          "value": "MIN"
+        },
+        {
+          "property": "Counter axis align",
+          "value": "CENTER"
+        },
+        {
+          "property": "Wrap",
+          "value": "NO_WRAP"
+        },
+        {
+          "property": "Horizontal sizing",
+          "value": "FIXED"
+        },
+        {
+          "property": "Vertical sizing",
+          "value": "FIXED"
+        }
+      ]
+    },
+    "children": [
+      {
+        "id": "593:6032",
+        "type": "INSTANCE",
+        "name": "icon",
+        "visible": true,
+        "mainComponentName": "Info",
+        "instanceComponentProperties": [
+          {
+            "propertyKey": "Format",
+            "displayName": "Format",
+            "type": "VARIANT",
+            "value": "Outline"
+          },
+          {
+            "propertyKey": "Weight",
+            "displayName": "Weight",
+            "type": "VARIANT",
+            "value": "Regular"
+          }
+        ],
+        "nestedInstanceCaptureMode": "surface",
+        "childrenOmitted": true
+      }
+    ]
+  },
+  "variablesById": {
+    "VariableID:523:2769": {
+      "name": "icon/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    }
+  },
+  "variants": {
+    "componentPropertyDefinitions": {
+      "icon#148:36": {
+        "type": "INSTANCE_SWAP",
+        "defaultValue": "1587:53302"
+      },
+      "Size": {
+        "type": "VARIANT",
+        "defaultValue": "Large",
+        "variantOptions": [
+          "Medium",
+          "Small",
+          "Large"
+        ]
+      },
+      "Color": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "Primary",
+          "Inverse"
+        ]
+      }
+    },
+    "variantGroupProperties": {
+      "Size": {
+        "values": [
+          "Medium",
+          "Small",
+          "Large"
+        ]
+      },
+      "Color": {
+        "values": [
+          "Default",
+          "Primary",
+          "Inverse"
+        ]
+      }
+    }
+  },
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt"
+}

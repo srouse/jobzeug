@@ -1,0 +1,189 @@
+{
+  "manifestVersion": 1,
+  "layout": "perVariant",
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt",
+  "component": {
+    "nodeId": "39:527",
+    "name": "jz-accordion-item",
+    "page": "🟠 jz-accordion",
+    "frame": "jz-accordion-item"
+  },
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "variantAxes": [
+    {
+      "property": "interactive",
+      "values": [
+        "Default",
+        "hover",
+        "active",
+        "disabled"
+      ]
+    }
+  ],
+  "sharedVariablesById": {
+    "VariableID:5:129": {
+      "name": "border/subtle",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:7:60": {
+      "name": "padding/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:5:138": {
+      "name": "text/default",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:157": {
+      "name": "gap/sm",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:7:62": {
+      "name": "padding/xs",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:5:156": {
+      "name": "gap/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:805:15060": {
+      "name": "text/default/hover",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:805:15058": {
+      "name": "text/default/active",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:805:15059": {
+      "name": "text/default/disabled",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    }
+  },
+  "variantsMeta": {
+    "componentPropertyDefinitions": {
+      "Show Content#39:20": {
+        "type": "BOOLEAN",
+        "defaultValue": false
+      },
+      "Slot#39:22": {
+        "type": "SLOT",
+        "preferredValues": []
+      },
+      "Show slot#39:23": {
+        "type": "BOOLEAN",
+        "defaultValue": true
+      },
+      "Title#39:28": {
+        "type": "TEXT",
+        "defaultValue": "Accordion title"
+      },
+      "Description#39:31": {
+        "type": "TEXT",
+        "defaultValue": "Description"
+      },
+      "Subtitle#43:0": {
+        "type": "TEXT",
+        "defaultValue": "Subtitle"
+      },
+      "Show Subtitle#43:3": {
+        "type": "BOOLEAN",
+        "defaultValue": true
+      },
+      "interactive": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "hover",
+          "active",
+          "disabled"
+        ]
+      }
+    },
+    "variantGroupProperties": {
+      "interactive": {
+        "values": [
+          "Default",
+          "hover",
+          "active",
+          "disabled"
+        ]
+      }
+    }
+  },
+  "states": [
+    {
+      "stateId": "interactive--active",
+      "componentNodeId": "1534:133763",
+      "variantProperties": {
+        "interactive": "active"
+      },
+      "name": "interactive=active",
+      "label": "interactive=active",
+      "files": {
+        "png": "snapshot/states/interactive--active/preview.png",
+        "json": "snapshot/states/interactive--active/snapshot.json",
+        "md": "snapshot/states/interactive--active/token-map.md"
+      }
+    },
+    {
+      "stateId": "interactive--Default",
+      "componentNodeId": "39:415",
+      "variantProperties": {
+        "interactive": "Default"
+      },
+      "name": "interactive=Default",
+      "label": "interactive=Default",
+      "files": {
+        "png": "snapshot/states/interactive--Default/preview.png",
+        "json": "snapshot/states/interactive--Default/snapshot.json",
+        "md": "snapshot/states/interactive--Default/token-map.md"
+      }
+    },
+    {
+      "stateId": "interactive--disabled",
+      "componentNodeId": "1534:133773",
+      "variantProperties": {
+        "interactive": "disabled"
+      },
+      "name": "interactive=disabled",
+      "label": "interactive=disabled",
+      "files": {
+        "png": "snapshot/states/interactive--disabled/preview.png",
+        "json": "snapshot/states/interactive--disabled/snapshot.json",
+        "md": "snapshot/states/interactive--disabled/token-map.md"
+      }
+    },
+    {
+      "stateId": "interactive--hover",
+      "componentNodeId": "1534:133753",
+      "variantProperties": {
+        "interactive": "hover"
+      },
+      "name": "interactive=hover",
+      "label": "interactive=hover",
+      "files": {
+        "png": "snapshot/states/interactive--hover/preview.png",
+        "json": "snapshot/states/interactive--hover/snapshot.json",
+        "md": "snapshot/states/interactive--hover/token-map.md"
+      }
+    }
+  ],
+  "definition": "definition.ts",
+  "propsTypes": "definition.props.gen.ts",
+  "slug": "jz-accordion-item",
+  "ds2Capture": {
+    "contentFingerprint": "935f97cbdb4552185fa6dbda73220cdb2180516bc654e4fec1ffade5d24943c1",
+    "capturedAt": "2026-09-24T20:29:25.830Z"
+  }
+}

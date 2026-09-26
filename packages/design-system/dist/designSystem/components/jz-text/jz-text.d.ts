@@ -1,6 +1,6 @@
 import { LitElement } from 'lit';
 export type JzTextLevel = 0 | 1 | 2 | 3 | 4 | 5 | 6;
-export type JzTextVariant = "display-large" | "display" | "title" | "heading" | "subtitle" | "body-default" | "body-regular" | "body-strong" | "label" | "label-sm" | "caption" | "overline";
+export type JzTextVariant = "display-large" | "display" | "title" | "heading" | "heading2" | "heading3" | "subtitle" | "body-default" | "body-regular" | "body-strong" | "label" | "label-sm" | "caption" | "overline";
 export type JzTextWeight = "400" | "500" | "600" | "700";
 export type JzTextColor = "default" | "muted" | "primary" | "secondary" | "tertiary" | "inverse" | "error" | "success" | "warning";
 /**
@@ -8,8 +8,10 @@ export type JzTextColor = "default" | "muted" | "primary" | "secondary" | "terti
  * `semantic.type`; optional `weight` / `color` override from primitives
  * and semantic text colors. `level` picks the semantic tag; `label` is
  * slot fallback; light-DOM children project through `<slot>`.
+ * Opt-in `interactive` / `disabled` use control background + text tokens.
  */
 export declare class JzTextElement extends LitElement {
+    #private;
     static styles: import('lit').CSSResult;
     variant: JzTextVariant;
     /** Unset keeps the recipe’s stock weight. */
@@ -22,7 +24,13 @@ export declare class JzTextElement extends LitElement {
     level: JzTextLevel;
     /** Slot fallback when there are no light-DOM children. */
     label: string;
+    /** Opt-in control mode: pointer + control-default-hover background. */
+    interactive: boolean;
+    disabled: boolean;
+    connectedCallback(): void;
+    disconnectedCallback(): void;
     willUpdate(): void;
+    updated(): void;
     render(): import('lit-html').TemplateResult;
 }
 declare global {

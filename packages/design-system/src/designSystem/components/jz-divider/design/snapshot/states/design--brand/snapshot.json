@@ -1,0 +1,159 @@
+{
+  "snapshotVersion": 2,
+  "layout": "perVariant",
+  "generatedAt": "2026-09-26T13:11:47.168Z",
+  "componentSetNodeId": "8973:142",
+  "componentNodeId": "8973:283",
+  "componentSetName": "jz-divider",
+  "variantProperties": {
+    "design": "brand"
+  },
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "tree": {
+    "id": "8973:283",
+    "type": "COMPONENT",
+    "name": "design=brand",
+    "visible": true,
+    "width": 336,
+    "height": 1,
+    "x": 20,
+    "y": 83,
+    "variantProperties": {
+      "design": "brand"
+    },
+    "tokenMapPresentation": {
+      "presentationVersion": 1,
+      "padding": {
+        "top": {
+          "raw": "0"
+        },
+        "right": {
+          "raw": "0"
+        },
+        "bottom": {
+          "raw": "0"
+        },
+        "left": {
+          "raw": "0"
+        }
+      },
+      "gap": {
+        "mainAxis": {
+          "raw": "10"
+        },
+        "counterAxis": {
+          "raw": "0"
+        },
+        "gridRow": {
+          "raw": "0"
+        },
+        "gridColumn": {
+          "raw": "0"
+        }
+      },
+      "layout": [
+        {
+          "property": "Mode",
+          "value": "VERTICAL"
+        },
+        {
+          "property": "Primary axis align",
+          "value": "MIN"
+        },
+        {
+          "property": "Counter axis align",
+          "value": "MIN"
+        },
+        {
+          "property": "Wrap",
+          "value": "NO_WRAP"
+        },
+        {
+          "property": "Horizontal sizing",
+          "value": "FIXED"
+        },
+        {
+          "property": "Vertical sizing",
+          "value": "FIXED"
+        }
+      ]
+    },
+    "children": [
+      {
+        "id": "8973:284",
+        "type": "RECTANGLE",
+        "name": "divider",
+        "visible": true,
+        "width": 336,
+        "height": 1,
+        "x": 0,
+        "y": 0,
+        "boundVariableIds": [
+          "VariableID:1896:26437"
+        ],
+        "boundVariableNames": [
+          "border/brand"
+        ],
+        "boundVariables": [
+          {
+            "id": "VariableID:1896:26437",
+            "name": "border/brand"
+          }
+        ],
+        "variableBindingsByLocation": [
+          {
+            "location": "Background color · color",
+            "names": [
+              "border/brand"
+            ]
+          }
+        ],
+        "tokenMapPresentation": {
+          "presentationVersion": 1,
+          "background": [
+            {
+              "index": 1,
+              "kind": "SOLID",
+              "token": "border/brand",
+              "raw": "#bfdbfe"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "variablesById": {
+    "VariableID:1896:26437": {
+      "name": "border/brand",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    }
+  },
+  "variants": {
+    "componentPropertyDefinitions": {
+      "design": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "subtle",
+          "strong",
+          "brand"
+        ]
+      }
+    },
+    "variantGroupProperties": {
+      "design": {
+        "values": [
+          "Default",
+          "subtle",
+          "strong",
+          "brand"
+        ]
+      }
+    }
+  },
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt"
+}

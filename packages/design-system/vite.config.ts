@@ -1,7 +1,25 @@
-import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
-import { defineConfig } from "vite";
-import { resolve } from "node:path";
+import { existsSync, readdirSync, rmSync } from "node:fs";
+import { join, resolve } from "node:path";
+import { defineConfig, type Plugin } from "vite";
 import dts from "vite-plugin-dts";
+
+/**
+ * Wipe everything under dist/ except designSystem/ (token emit output).
+ * Vite emptyOutDir is boolean-only and cannot spare a subfolder.
+ */
+function preserveDesignSystemDist(): Plugin {
+  const dist = resolve(__dirname, "dist");
+  return {
+    name: "preserve-design-system-dist",
+    buildStart() {
+      if (!existsSync(dist)) return;
+      for (const name of readdirSync(dist)) {
+        if (name === "designSystem") continue;
+        rmSync(join(dist, name), { recursive: true, force: true });
+      }
+    },
+  };
+}
 
 export default defineConfig({
   build: {
@@ -14,6 +32,14 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
+      // Custom elements + Phosphor inject are load-time side effects; don't
+      // drop `import "../jz-icon/jz-icon.js"` from tag/button chunks.
+      treeshake: {
+        moduleSideEffects: (id) =>
+          id.includes("/designSystem/components/") ||
+          id.includes("Phosphor") ||
+          id.includes("?inline"),
+      },
       external: [
         "lit",
         "lit/decorators.js",
@@ -39,11 +65,11 @@ export default defineConfig({
       },
     },
     outDir: "dist",
-    emptyOutDir: true,
+    emptyOutDir: false,
     sourcemap: true,
   },
   plugins: [
-    vanillaExtractPlugin({ unstable_mode: "transform" }),
+    preserveDesignSystemDist(),
     dts({
       include: ["src"],
       rollupTypes: false,

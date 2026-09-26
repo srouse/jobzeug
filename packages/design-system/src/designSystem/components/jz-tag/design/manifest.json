@@ -1,0 +1,324 @@
+{
+  "manifestVersion": 1,
+  "layout": "perVariant",
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt",
+  "component": {
+    "nodeId": "85:1880",
+    "name": "jz-tag",
+    "page": "🟠 jz-tag",
+    "frame": "jz-tag"
+  },
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "variantAxes": [
+    {
+      "property": "Style",
+      "values": [
+        "Default",
+        "primary",
+        "outline"
+      ]
+    },
+    {
+      "property": "State",
+      "values": [
+        "Default",
+        "Hover",
+        "Active"
+      ]
+    }
+  ],
+  "sharedVariablesById": {
+    "VariableID:1030:32892": {
+      "name": "background/control/default",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:109": {
+      "name": "radius/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:3"
+    },
+    "VariableID:5:127": {
+      "name": "border/default",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:163": {
+      "name": "padding/sm",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:7:62": {
+      "name": "padding/xs",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:5:138": {
+      "name": "text/default",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:42": {
+      "name": "color/neutral/500",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:3"
+    },
+    "VariableID:5:140": {
+      "name": "text/inverse",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:45": {
+      "name": "color/neutral/800",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:3"
+    },
+    "VariableID:1030:32889": {
+      "name": "background/control/brand/primary",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:57": {
+      "name": "color/primary/900",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:3"
+    },
+    "VariableID:5:142": {
+      "name": "text/primary",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:1030:32901": {
+      "name": "background/control/brand/inverse/primary",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:1030:32902": {
+      "name": "background/control/brand/inverse/primary/active",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:55": {
+      "name": "color/primary/700",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:3"
+    },
+    "VariableID:1030:33927": {
+      "name": "background/surface/default",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:128": {
+      "name": "border/strong",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:141": {
+      "name": "text/muted",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:1030:32896": {
+      "name": "background/control/elevated",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:39": {
+      "name": "color/neutral/300",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:3"
+    }
+  },
+  "variantsMeta": {
+    "componentPropertyDefinitions": {
+      "Show Icon#197:4": {
+        "type": "BOOLEAN",
+        "defaultValue": true
+      },
+      "title#601:9": {
+        "type": "TEXT",
+        "defaultValue": "Title"
+      },
+      "Style": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "primary",
+          "outline"
+        ]
+      },
+      "State": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "Hover",
+          "Active"
+        ]
+      }
+    },
+    "variantGroupProperties": {
+      "Style": {
+        "values": [
+          "Default",
+          "primary",
+          "outline"
+        ]
+      },
+      "State": {
+        "values": [
+          "Default",
+          "Hover",
+          "Active"
+        ]
+      }
+    }
+  },
+  "states": [
+    {
+      "stateId": "State--Active__Style--Default",
+      "componentNodeId": "322:3492",
+      "variantProperties": {
+        "Style": "Default",
+        "State": "Active"
+      },
+      "name": "Style=Default, State=Active",
+      "label": "State=Active, Style=Default",
+      "files": {
+        "png": "snapshot/states/State--Active__Style--Default/preview.png",
+        "json": "snapshot/states/State--Active__Style--Default/snapshot.json",
+        "md": "snapshot/states/State--Active__Style--Default/token-map.md"
+      }
+    },
+    {
+      "stateId": "State--Active__Style--outline",
+      "componentNodeId": "322:3482",
+      "variantProperties": {
+        "Style": "outline",
+        "State": "Active"
+      },
+      "name": "Style=outline, State=Active",
+      "label": "State=Active, Style=outline",
+      "files": {
+        "png": "snapshot/states/State--Active__Style--outline/preview.png",
+        "json": "snapshot/states/State--Active__Style--outline/snapshot.json",
+        "md": "snapshot/states/State--Active__Style--outline/token-map.md"
+      }
+    },
+    {
+      "stateId": "State--Active__Style--primary",
+      "componentNodeId": "322:3472",
+      "variantProperties": {
+        "Style": "primary",
+        "State": "Active"
+      },
+      "name": "Style=primary, State=Active",
+      "label": "State=Active, Style=primary",
+      "files": {
+        "png": "snapshot/states/State--Active__Style--primary/preview.png",
+        "json": "snapshot/states/State--Active__Style--primary/snapshot.json",
+        "md": "snapshot/states/State--Active__Style--primary/token-map.md"
+      }
+    },
+    {
+      "stateId": "State--Default__Style--Default",
+      "componentNodeId": "85:1877",
+      "variantProperties": {
+        "Style": "Default",
+        "State": "Default"
+      },
+      "name": "Style=Default, State=Default",
+      "label": "State=Default, Style=Default",
+      "files": {
+        "png": "snapshot/states/State--Default__Style--Default/preview.png",
+        "json": "snapshot/states/State--Default__Style--Default/snapshot.json",
+        "md": "snapshot/states/State--Default__Style--Default/token-map.md"
+      }
+    },
+    {
+      "stateId": "State--Default__Style--outline",
+      "componentNodeId": "85:1883",
+      "variantProperties": {
+        "Style": "outline",
+        "State": "Default"
+      },
+      "name": "Style=outline, State=Default",
+      "label": "State=Default, Style=outline",
+      "files": {
+        "png": "snapshot/states/State--Default__Style--outline/preview.png",
+        "json": "snapshot/states/State--Default__Style--outline/snapshot.json",
+        "md": "snapshot/states/State--Default__Style--outline/token-map.md"
+      }
+    },
+    {
+      "stateId": "State--Default__Style--primary",
+      "componentNodeId": "85:1881",
+      "variantProperties": {
+        "Style": "primary",
+        "State": "Default"
+      },
+      "name": "Style=primary, State=Default",
+      "label": "State=Default, Style=primary",
+      "files": {
+        "png": "snapshot/states/State--Default__Style--primary/preview.png",
+        "json": "snapshot/states/State--Default__Style--primary/snapshot.json",
+        "md": "snapshot/states/State--Default__Style--primary/token-map.md"
+      }
+    },
+    {
+      "stateId": "State--Hover__Style--Default",
+      "componentNodeId": "225:3990",
+      "variantProperties": {
+        "Style": "Default",
+        "State": "Hover"
+      },
+      "name": "Style=Default, State=Hover",
+      "label": "State=Hover, Style=Default",
+      "files": {
+        "png": "snapshot/states/State--Hover__Style--Default/preview.png",
+        "json": "snapshot/states/State--Hover__Style--Default/snapshot.json",
+        "md": "snapshot/states/State--Hover__Style--Default/token-map.md"
+      }
+    },
+    {
+      "stateId": "State--Hover__Style--outline",
+      "componentNodeId": "225:4013",
+      "variantProperties": {
+        "Style": "outline",
+        "State": "Hover"
+      },
+      "name": "Style=outline, State=Hover",
+      "label": "State=Hover, Style=outline",
+      "files": {
+        "png": "snapshot/states/State--Hover__Style--outline/preview.png",
+        "json": "snapshot/states/State--Hover__Style--outline/snapshot.json",
+        "md": "snapshot/states/State--Hover__Style--outline/token-map.md"
+      }
+    },
+    {
+      "stateId": "State--Hover__Style--primary",
+      "componentNodeId": "225:4010",
+      "variantProperties": {
+        "Style": "primary",
+        "State": "Hover"
+      },
+      "name": "Style=primary, State=Hover",
+      "label": "State=Hover, Style=primary",
+      "files": {
+        "png": "snapshot/states/State--Hover__Style--primary/preview.png",
+        "json": "snapshot/states/State--Hover__Style--primary/snapshot.json",
+        "md": "snapshot/states/State--Hover__Style--primary/token-map.md"
+      }
+    }
+  ],
+  "definition": "definition.ts",
+  "propsTypes": "definition.props.gen.ts",
+  "slug": "jz-tag",
+  "ds2Capture": {
+    "contentFingerprint": "acaced58b43d109bf3105d7b4cd34de187d0b65f02075b3658f01139831fcfed",
+    "capturedAt": "2026-09-23T21:32:13.726Z"
+  }
+}

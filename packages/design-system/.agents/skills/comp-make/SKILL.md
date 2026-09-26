@@ -2,9 +2,9 @@
 name: comp-make
 description: >-
   Builds or updates one design-system component from its captured design
-  folder: a Lit element, vanilla-extract styles bound to token CSS variables,
+  folder: a Lit element with Lit static styles bound to token CSS variables,
   and a thin @lit/react wrapper. Use when the user invokes comp-make, or asks
-  to build or update a component from a registry slug such as blue-button.
+  to build or update a component from a registry slug such as jz-button.
 disable-model-invocation: true
 ---
 
@@ -67,7 +67,7 @@ Keep the matrix in working notes for this turn (do not invent a new committed ar
 
 ### 4. Map findings to code
 
-- Appearance axes that change **host** tokens → real vanilla-extract variants with those token vars. **Empty `styleVariants` / `{}` objects are a failure** unless step 3 proved the axis does not affect the host **and** that is written in `{slug}/AGENTS.md`.
+- Appearance axes that change **host** tokens → Lit `static styles` with `:host([attr])` and those token vars. **Empty variant blocks / no CSS for a public appearance prop are a failure** unless step 3 proved the axis does not affect the host **and** that is written in `{slug}/AGENTS.md`.
 - Axes that only change a **nested** instance → compose that child when it has an implementation; otherwise document the gap in `{slug}/AGENTS.md`. Do not invent host padding/type just because an axis exists.
 - Interaction axes → `:hover`, `:active`, `disabled` with the matching token paths from the matrix.
 - Never invent host styles that no snapshot shows.
@@ -83,24 +83,23 @@ Keep the matrix in working notes for this turn (do not invent a new committed ar
 
 Beside the capture, inside the slug folder:
 
-- `{slug}/{slug}.ts` — Lit element. Light DOM: `createRenderRoot()` returns `this`, so vanilla-extract classes and inherited token variables both apply.
-- `{slug}/{slug}.css.ts` — `@vanilla-extract/css`, driven by the matrix.
+- `{slug}/{slug}.ts` — Lit element with **shadow DOM** (Lit default). **Never** return `this` from `createRenderRoot()`. Put all chrome in Lit `static styles` (`css` + `var(--jz-*)` on `:host` and shadow descendants). Document CSS does not pierce the shadow tree.
 - `{slug}/AGENTS.md` — special cases the code cannot show (nested-only axes while the child is missing, odd commands). Not boilerplate for a normal component.
 
 Thin React wrapper only. Do not reimplement styles or behavior in React.
 
-- `src/react/{name}.ts` — **lazy** `@lit/react` wrapper via `createLazyLitComponent` from `src/react/lazy-lit.ts`. `{name}` is the unprefixed component (`button.ts` for `blue-button`). **Never** static-import the Lit element or `@lit/react` at the top of this file (Lit touches `document` at module load and breaks Next / Node SSR).
-- Re-export it from `src/react/index.ts` (keep `"use client"` on that entry). That file is already the package `./react` entry. Do not add another export in `package.json`.
+- `src/react/{name}.ts` — **lazy** `@lit/react` wrapper via `createLazyLitComponent` from `src/react/lazy-lit.ts`. `{name}` is the unprefixed component (`button.ts` for `jz-button`). **Never** static-import the Lit element or `@lit/react` at the top of this file (Lit touches `document` at module load and breaks Next / Node SSR).
+- Re-export it from `src/react/index.ts`. Do **not** put `"use client"` in source — Vite’s `banner` in `vite.config.ts` prepends it to `dist/react/*` (except `react-server`). That file is already the package `./react` entry. Do not add another export in `package.json`.
 
 Export the Lit class from `src/index.ts` (browser Lit entry — not for React SSR).
 
-On the first component, if they are missing, add `@vanilla-extract/css` and `@vanilla-extract/vite-plugin`, and register the Vite plugin in `vite.config.ts`. `@lit/react`, `lazy-lit.ts`, and the React build entry already exist.
+`@lit/react`, `lazy-lit.ts`, and the React build entry already exist. Do **not** add vanilla-extract.
 
 ## Names
 
 The leading `blue-` on a slug is the Figma library name. Drop it.
 
-| | `blue-button` |
+| | `jz-button` |
 |---|---|
 | Lit class | `JzButtonElement` |
 | React export | `JzButton` |
@@ -119,7 +118,7 @@ Use `definition.ts`, `manifest.json` `variantAxes`, and the **snapshot matrix** 
 - **`show*` is how Figma hides a layer.** When `showtext` sits next to `label`, `label` is the text and `showtext` means that text can be hidden. Same for `showicon` and icon content. Prefer that pairing; exposing `show*` beside the content attribute is fine when unclear.
 - **Nested instance props** (`nestedFrom`) stay on the child. Compose only when that slug is implemented. Do not invent a child or a stand-in slot.
 
-## Tokens and vanilla-extract
+## Tokens and Lit styles
 
 Every paint, radius, space, and text style in the token maps becomes a custom property from `dist/designSystem/tokens.css`. Resolve the token-map name to an emitted `--jz-*` variable. Do not copy hex or pixel literals from the token map. Do not invent a variable that is not in the CSS file.
 
@@ -138,15 +137,13 @@ Lit is **browser-only**. A static import of a Lit element (or `@lit/react` + the
 Always wrap with `createLazyLitComponent` so Lit loads only after mount:
 
 ```ts
-"use client";
-
 import React from "react";
 import { createLazyLitComponent } from "./lazy-lit.js";
 
 export const JzButton = createLazyLitComponent(async () => {
   const [{ createComponent }, { JzButtonElement }] = await Promise.all([
     import("@lit/react"),
-    import("../designSystem/components/blue-button/blue-button.js"),
+    import("../designSystem/components/jz-button/jz-button.js"),
   ]);
   return createComponent({
     tagName: "jz-button",
@@ -159,6 +156,7 @@ export const JzButton = createLazyLitComponent(async () => {
 }, "JzButton");
 ```
 
+Do **not** put `"use client"` in this source file — the Vite build banner adds it to `dist/react/*`.
 Do **not** write a top-level `createComponent({ elementClass: JzButtonElement, ... })` that imports the Lit class statically.
 
 React props are the Lit public attributes. Add `events` only for real DOM events. Children only when `definition.slots` has an entry. Do not re-declare `interactive` or nested instance props.
@@ -177,7 +175,7 @@ Do not import `@jobzeug/design-system/react` from a React Server Component (`rea
 
 If `{slug}/{slug}.ts` already exists, change it to match the current snapshots (after a fresh matrix). Do not add a second component. Update `src/react/{name}.ts` in the same pass so events and forwarded props match the Lit public API.
 
-## Worked example: `blue-button` (API sketch only)
+## Worked example: `jz-button` (API sketch only)
 
 This is naming and API shape — **not** a substitute for the snapshot matrix. Whatever Style, Size, and Interactive actually change in the capture must land in CSS, composition, or `{slug}/AGENTS.md`.
 
@@ -185,6 +183,6 @@ Definition props include `interactive`, `style`, `size`, `label`, `showtext`, `s
 
 - Tag `jz-button`, class `JzButtonElement`, React `JzButton`.
 - `variant` from `style`; `size` from `Size`; `label` attribute; `disabled` for Disabled interactive.
-- No `interactive` attribute. No invented children. Nested `icon-*` only via composed `blue-icon` when that slug exists.
+- No `interactive` attribute. No invented children. Nested `icon-*` only via composed `jz-icon` when that slug exists.
 - Resolve every axis through the matrix before shipping styles. Empty size (or any) variants without a matrix-backed AGENTS note are a failure.
 - Tokens come from the maps (e.g. primary resting fill `--jz-semantic-color-background-control-brand-inverse-primary`). Do not copy hex or pixel literals into the CSS module.

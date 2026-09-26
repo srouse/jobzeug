@@ -1,5 +1,3 @@
-"use client";
-
 import {
   createElement,
   forwardRef,
@@ -10,6 +8,16 @@ import {
 } from "react";
 
 type AnyProps = Record<string, unknown>;
+
+/**
+ * `@lit/react` types `createComponent({ react })` as `typeof React` from
+ * *its* resolved `@types/react`. Workspaces often have a second physical copy
+ * (hoisted vs package `.pnpm`), so the same runtime module fails assignability.
+ * Cast once here; runtime is unchanged.
+ */
+export function litReactModule(react: typeof import("react")): never {
+  return react as never;
+}
 
 /**
  * Defers importing Lit / `@lit/react` until the client mounts.

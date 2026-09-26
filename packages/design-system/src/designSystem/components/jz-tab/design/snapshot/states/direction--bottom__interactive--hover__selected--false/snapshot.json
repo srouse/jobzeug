@@ -1,0 +1,299 @@
+{
+  "snapshotVersion": 2,
+  "layout": "perVariant",
+  "generatedAt": "2026-09-26T15:07:07.056Z",
+  "componentSetNodeId": "85:2250",
+  "componentNodeId": "8974:21283",
+  "componentSetName": "jz-tab",
+  "variantProperties": {
+    "interactive": "hover",
+    "selected": "false",
+    "direction": "bottom"
+  },
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "tree": {
+    "id": "8974:21283",
+    "type": "COMPONENT",
+    "name": "interactive=hover, selected=false, direction=bottom",
+    "visible": true,
+    "width": 80,
+    "height": 50,
+    "x": 116,
+    "y": 25,
+    "variantProperties": {
+      "interactive": "hover",
+      "selected": "false",
+      "direction": "bottom"
+    },
+    "boundVariableIds": [
+      "VariableID:1030:32892",
+      "VariableID:5:162",
+      "VariableID:7:60"
+    ],
+    "boundVariableNames": [
+      "background/control/default",
+      "padding/lg",
+      "padding/md"
+    ],
+    "boundVariables": [
+      {
+        "id": "VariableID:1030:32892",
+        "name": "background/control/default"
+      },
+      {
+        "id": "VariableID:5:162",
+        "name": "padding/lg"
+      },
+      {
+        "id": "VariableID:7:60",
+        "name": "padding/md"
+      }
+    ],
+    "variableBindingsByLocation": [
+      {
+        "location": "Background color · color",
+        "names": [
+          "background/control/default"
+        ]
+      },
+      {
+        "location": "Padding bottom",
+        "names": [
+          "padding/md"
+        ]
+      },
+      {
+        "location": "Padding left",
+        "names": [
+          "padding/lg"
+        ]
+      },
+      {
+        "location": "Padding right",
+        "names": [
+          "padding/lg"
+        ]
+      },
+      {
+        "location": "Padding top",
+        "names": [
+          "padding/md"
+        ]
+      }
+    ],
+    "tokenMapPresentation": {
+      "presentationVersion": 1,
+      "background": [
+        {
+          "index": 1,
+          "kind": "SOLID",
+          "token": "background/control/default",
+          "raw": "#ffffff"
+        }
+      ],
+      "padding": {
+        "top": {
+          "token": "padding/md",
+          "raw": "16"
+        },
+        "right": {
+          "token": "padding/lg",
+          "raw": "24"
+        },
+        "bottom": {
+          "token": "padding/md",
+          "raw": "16"
+        },
+        "left": {
+          "token": "padding/lg",
+          "raw": "24"
+        }
+      },
+      "gap": {
+        "mainAxis": {
+          "raw": "10"
+        },
+        "counterAxis": {
+          "raw": "0"
+        },
+        "gridRow": {
+          "raw": "0"
+        },
+        "gridColumn": {
+          "raw": "0"
+        }
+      },
+      "layout": [
+        {
+          "property": "Mode",
+          "value": "HORIZONTAL"
+        },
+        {
+          "property": "Primary axis align",
+          "value": "CENTER"
+        },
+        {
+          "property": "Counter axis align",
+          "value": "CENTER"
+        },
+        {
+          "property": "Wrap",
+          "value": "NO_WRAP"
+        },
+        {
+          "property": "Horizontal sizing",
+          "value": "HUG"
+        },
+        {
+          "property": "Vertical sizing",
+          "value": "HUG"
+        }
+      ]
+    },
+    "children": [
+      {
+        "id": "8974:21284",
+        "type": "TEXT",
+        "name": "label",
+        "visible": true,
+        "width": 32,
+        "height": 18,
+        "x": 24,
+        "y": 16,
+        "textStyle": {
+          "fontFamily": "Geist",
+          "fontStyle": "Regular",
+          "fontSize": 14,
+          "lineHeight": {
+            "unit": "AUTO"
+          },
+          "letterSpacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "textCase": "ORIGINAL",
+          "textDecoration": "NONE",
+          "textAlignHorizontal": "LEFT",
+          "textAlignVertical": "TOP",
+          "paragraphIndent": 0,
+          "paragraphSpacing": 0,
+          "listSpacing": 0,
+          "textAutoResize": "WIDTH_AND_HEIGHT",
+          "textTruncation": "DISABLED",
+          "maxLines": null,
+          "leadingTrim": "NONE",
+          "textStyleId": "S:b10ec6910341171622be503d04422505cc26f61a,",
+          "textStyleName": "semantic type/body/regular"
+        },
+        "boundVariableIds": [
+          "VariableID:805:15060"
+        ],
+        "boundVariableNames": [
+          "text/default/hover"
+        ],
+        "boundVariables": [
+          {
+            "id": "VariableID:805:15060",
+            "name": "text/default/hover"
+          }
+        ],
+        "variableBindingsByLocation": [
+          {
+            "location": "Text color · color",
+            "names": [
+              "text/default/hover"
+            ]
+          }
+        ],
+        "tokenMapPresentation": {
+          "presentationVersion": 1,
+          "textColor": {
+            "token": "text/default/hover",
+            "raw": "#1e40af"
+          }
+        }
+      }
+    ]
+  },
+  "variablesById": {
+    "VariableID:1030:32892": {
+      "name": "background/control/default",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:162": {
+      "name": "padding/lg",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:7:60": {
+      "name": "padding/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:805:15060": {
+      "name": "text/default/hover",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    }
+  },
+  "variants": {
+    "componentPropertyDefinitions": {
+      "label#659:0": {
+        "type": "TEXT",
+        "defaultValue": "label"
+      },
+      "interactive": {
+        "type": "VARIANT",
+        "defaultValue": "default",
+        "variantOptions": [
+          "default",
+          "hover",
+          "active",
+          "disabeld"
+        ]
+      },
+      "selected": {
+        "type": "VARIANT",
+        "defaultValue": "false",
+        "variantOptions": [
+          "false",
+          "true"
+        ]
+      },
+      "direction": {
+        "type": "VARIANT",
+        "defaultValue": "bottom",
+        "variantOptions": [
+          "bottom",
+          "top"
+        ]
+      }
+    },
+    "variantGroupProperties": {
+      "interactive": {
+        "values": [
+          "default",
+          "hover",
+          "active",
+          "disabeld"
+        ]
+      },
+      "selected": {
+        "values": [
+          "false",
+          "true"
+        ]
+      },
+      "direction": {
+        "values": [
+          "bottom",
+          "top"
+        ]
+      }
+    }
+  },
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt"
+}

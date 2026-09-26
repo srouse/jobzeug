@@ -1,7 +1,5 @@
-"use client";
-
 import React from "react";
-import { createLazyLitComponent } from "./lazy-lit.js";
+import { createLazyLitComponent, litReactModule } from "./lazy-lit.js";
 
 /**
  * Browser-only React wrapper for `<jz-divider>`.
@@ -10,11 +8,11 @@ import { createLazyLitComponent } from "./lazy-lit.js";
 export const JzDivider = createLazyLitComponent(async () => {
   const [{ createComponent }, { JzDividerElement }] = await Promise.all([
     import("@lit/react"),
-    import("../designSystem/components/blue-divider/blue-divider.js"),
+    import("../designSystem/components/jz-divider/jz-divider.js"),
   ]);
   return createComponent({
     tagName: "jz-divider",
     elementClass: JzDividerElement,
-    react: React,
+    react: litReactModule(React),
   }) as React.ComponentType<Record<string, unknown>>;
 }, "JzDivider");

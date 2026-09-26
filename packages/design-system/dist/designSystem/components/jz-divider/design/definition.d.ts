@@ -9,7 +9,12 @@ export declare const jzDividerDefinition: {
         nodeId: string;
     };
     name: string;
-    props: never[];
+    props: {
+        default: string;
+        enum: string[];
+        name: string;
+        type: "string";
+    }[];
     version: string;
 };
 //# sourceMappingURL=definition.d.ts.map

@@ -1,0 +1,582 @@
+{
+  "snapshotVersion": 2,
+  "layout": "perVariant",
+  "generatedAt": "2026-09-24T20:29:25.792Z",
+  "componentSetNodeId": "39:527",
+  "componentNodeId": "1534:133773",
+  "componentSetName": "jz-accordion-item",
+  "variantProperties": {
+    "interactive": "disabled"
+  },
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "tree": {
+    "id": "1534:133773",
+    "type": "COMPONENT",
+    "name": "interactive=disabled",
+    "visible": true,
+    "width": 476,
+    "height": 52,
+    "x": 16,
+    "y": 220,
+    "variantProperties": {
+      "interactive": "disabled"
+    },
+    "tokenMapPresentation": {
+      "presentationVersion": 1,
+      "padding": {
+        "top": {
+          "raw": "0"
+        },
+        "right": {
+          "raw": "0"
+        },
+        "bottom": {
+          "raw": "0"
+        },
+        "left": {
+          "raw": "0"
+        }
+      },
+      "gap": {
+        "mainAxis": {
+          "raw": "0"
+        },
+        "counterAxis": {
+          "raw": "0"
+        },
+        "gridRow": {
+          "raw": "0"
+        },
+        "gridColumn": {
+          "raw": "0"
+        }
+      },
+      "layout": [
+        {
+          "property": "Mode",
+          "value": "VERTICAL"
+        },
+        {
+          "property": "Primary axis align",
+          "value": "MIN"
+        },
+        {
+          "property": "Counter axis align",
+          "value": "MIN"
+        },
+        {
+          "property": "Wrap",
+          "value": "NO_WRAP"
+        },
+        {
+          "property": "Horizontal sizing",
+          "value": "FILL"
+        },
+        {
+          "property": "Vertical sizing",
+          "value": "HUG"
+        }
+      ]
+    },
+    "children": [
+      {
+        "id": "1534:133774",
+        "type": "FRAME",
+        "name": "Base",
+        "visible": true,
+        "width": 476,
+        "height": 52,
+        "x": 0,
+        "y": 0,
+        "boundVariableIds": [
+          "VariableID:5:129",
+          "VariableID:7:60"
+        ],
+        "boundVariableNames": [
+          "border/subtle",
+          "padding/md"
+        ],
+        "boundVariables": [
+          {
+            "id": "VariableID:5:129",
+            "name": "border/subtle"
+          },
+          {
+            "id": "VariableID:7:60",
+            "name": "padding/md"
+          }
+        ],
+        "variableBindingsByLocation": [
+          {
+            "location": "Padding bottom",
+            "names": [
+              "padding/md"
+            ]
+          },
+          {
+            "location": "Padding top",
+            "names": [
+              "padding/md"
+            ]
+          },
+          {
+            "location": "Stroke (border) · color",
+            "names": [
+              "border/subtle"
+            ]
+          }
+        ],
+        "tokenMapPresentation": {
+          "presentationVersion": 1,
+          "borders": [
+            {
+              "index": 1,
+              "weight": "T 1 · R 0 · B 0 · L 0",
+              "colorToken": "border/subtle"
+            }
+          ],
+          "padding": {
+            "top": {
+              "token": "padding/md",
+              "raw": "16"
+            },
+            "right": {
+              "raw": "0"
+            },
+            "bottom": {
+              "token": "padding/md",
+              "raw": "16"
+            },
+            "left": {
+              "raw": "0"
+            }
+          },
+          "gap": {
+            "mainAxis": {
+              "raw": "255"
+            },
+            "counterAxis": {
+              "raw": "0"
+            },
+            "gridRow": {
+              "raw": "0"
+            },
+            "gridColumn": {
+              "raw": "0"
+            }
+          },
+          "layout": [
+            {
+              "property": "Mode",
+              "value": "HORIZONTAL"
+            },
+            {
+              "property": "Primary axis align",
+              "value": "SPACE_BETWEEN"
+            },
+            {
+              "property": "Counter axis align",
+              "value": "CENTER"
+            },
+            {
+              "property": "Wrap",
+              "value": "NO_WRAP"
+            },
+            {
+              "property": "Horizontal sizing",
+              "value": "FILL"
+            },
+            {
+              "property": "Vertical sizing",
+              "value": "HUG"
+            }
+          ]
+        },
+        "children": [
+          {
+            "id": "1534:133775",
+            "type": "TEXT",
+            "name": "Accordion title",
+            "visible": true,
+            "width": 460,
+            "height": 20,
+            "x": 0,
+            "y": 16,
+            "textStyle": {
+              "fontFamily": "Geist",
+              "fontStyle": "Medium",
+              "fontSize": 15,
+              "lineHeight": {
+                "unit": "AUTO"
+              },
+              "letterSpacing": {
+                "unit": "PERCENT",
+                "value": 0
+              },
+              "textCase": "ORIGINAL",
+              "textDecoration": "NONE",
+              "textAlignHorizontal": "LEFT",
+              "textAlignVertical": "TOP",
+              "paragraphIndent": 0,
+              "paragraphSpacing": 0,
+              "listSpacing": 0,
+              "textAutoResize": "HEIGHT",
+              "textTruncation": "DISABLED",
+              "maxLines": null,
+              "leadingTrim": "NONE",
+              "textStyleId": "S:65be4f4d7f990f4f14bbe6d8e58c77210674fdf6,",
+              "textStyleName": "semantic type/subtitle"
+            },
+            "boundVariableIds": [
+              "VariableID:805:15059"
+            ],
+            "boundVariableNames": [
+              "text/default/disabled"
+            ],
+            "boundVariables": [
+              {
+                "id": "VariableID:805:15059",
+                "name": "text/default/disabled"
+              }
+            ],
+            "variableBindingsByLocation": [
+              {
+                "location": "Text color · color",
+                "names": [
+                  "text/default/disabled"
+                ]
+              }
+            ],
+            "tokenMapPresentation": {
+              "presentationVersion": 1,
+              "textColor": {
+                "token": "text/default/disabled",
+                "raw": "#a3a3a3"
+              }
+            }
+          },
+          {
+            "id": "1534:133776",
+            "type": "INSTANCE",
+            "name": "jz-icon",
+            "visible": true,
+            "mainComponentName": "jz-icon",
+            "instanceComponentProperties": [
+              {
+                "propertyKey": "Color",
+                "displayName": "Color",
+                "type": "VARIANT",
+                "value": "Default"
+              },
+              {
+                "propertyKey": "Size",
+                "displayName": "Size",
+                "type": "VARIANT",
+                "value": "Small"
+              },
+              {
+                "propertyKey": "icon#148:36",
+                "displayName": "icon",
+                "type": "INSTANCE_SWAP",
+                "value": "1026:15929"
+              }
+            ],
+            "nestedInstanceCaptureMode": "surface",
+            "childrenOmitted": true
+          }
+        ]
+      },
+      {
+        "id": "1534:133777",
+        "type": "FRAME",
+        "name": "Expanded",
+        "visible": false,
+        "width": 476,
+        "height": 133,
+        "x": 0,
+        "y": 58,
+        "boundVariableIds": [
+          "VariableID:5:157",
+          "VariableID:7:60",
+          "VariableID:7:62"
+        ],
+        "boundVariableNames": [
+          "gap/sm",
+          "padding/md",
+          "padding/xs"
+        ],
+        "boundVariables": [
+          {
+            "id": "VariableID:5:157",
+            "name": "gap/sm"
+          },
+          {
+            "id": "VariableID:7:60",
+            "name": "padding/md"
+          },
+          {
+            "id": "VariableID:7:62",
+            "name": "padding/xs"
+          }
+        ],
+        "variableBindingsByLocation": [
+          {
+            "location": "Auto-layout spacing (main axis)",
+            "names": [
+              "gap/sm"
+            ]
+          },
+          {
+            "location": "Padding bottom",
+            "names": [
+              "padding/md"
+            ]
+          },
+          {
+            "location": "Padding top",
+            "names": [
+              "padding/xs"
+            ]
+          }
+        ],
+        "tokenMapPresentation": {
+          "presentationVersion": 1,
+          "padding": {
+            "top": {
+              "token": "padding/xs",
+              "raw": "4"
+            },
+            "right": {
+              "raw": "0"
+            },
+            "bottom": {
+              "token": "padding/md",
+              "raw": "16"
+            },
+            "left": {
+              "raw": "0"
+            }
+          },
+          "gap": {
+            "mainAxis": {
+              "token": "gap/sm",
+              "raw": "8"
+            },
+            "counterAxis": {
+              "raw": "0"
+            },
+            "gridRow": {
+              "raw": "0"
+            },
+            "gridColumn": {
+              "raw": "0"
+            }
+          },
+          "layout": [
+            {
+              "property": "Mode",
+              "value": "VERTICAL"
+            },
+            {
+              "property": "Primary axis align",
+              "value": "MIN"
+            },
+            {
+              "property": "Counter axis align",
+              "value": "MIN"
+            },
+            {
+              "property": "Wrap",
+              "value": "NO_WRAP"
+            },
+            {
+              "property": "Horizontal sizing",
+              "value": "FIXED"
+            },
+            {
+              "property": "Vertical sizing",
+              "value": "HUG"
+            }
+          ]
+        },
+        "children": [
+          {
+            "id": "1534:133780",
+            "type": "SLOT",
+            "name": "Slot",
+            "visible": true,
+            "width": 476,
+            "height": 69,
+            "x": 0,
+            "y": 48,
+            "boundVariableIds": [
+              "VariableID:5:156"
+            ],
+            "boundVariableNames": [
+              "gap/md"
+            ],
+            "boundVariables": [
+              {
+                "id": "VariableID:5:156",
+                "name": "gap/md"
+              }
+            ],
+            "variableBindingsByLocation": [
+              {
+                "location": "Auto-layout spacing (main axis)",
+                "names": [
+                  "gap/md"
+                ]
+              }
+            ],
+            "tokenMapPresentation": {
+              "presentationVersion": 1,
+              "padding": {
+                "top": {
+                  "raw": "0"
+                },
+                "right": {
+                  "raw": "0"
+                },
+                "bottom": {
+                  "raw": "0"
+                },
+                "left": {
+                  "raw": "0"
+                }
+              },
+              "gap": {
+                "mainAxis": {
+                  "token": "gap/md",
+                  "raw": "16"
+                },
+                "counterAxis": {
+                  "raw": "0"
+                },
+                "gridRow": {
+                  "raw": "0"
+                },
+                "gridColumn": {
+                  "raw": "0"
+                }
+              },
+              "layout": [
+                {
+                  "property": "Mode",
+                  "value": "HORIZONTAL"
+                },
+                {
+                  "property": "Primary axis align",
+                  "value": "MIN"
+                },
+                {
+                  "property": "Counter axis align",
+                  "value": "MIN"
+                },
+                {
+                  "property": "Wrap",
+                  "value": "NO_WRAP"
+                },
+                {
+                  "property": "Horizontal sizing",
+                  "value": "FILL"
+                },
+                {
+                  "property": "Vertical sizing",
+                  "value": "HUG"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "variablesById": {
+    "VariableID:5:129": {
+      "name": "border/subtle",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:7:60": {
+      "name": "padding/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:805:15059": {
+      "name": "text/default/disabled",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:157": {
+      "name": "gap/sm",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:7:62": {
+      "name": "padding/xs",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:5:156": {
+      "name": "gap/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    }
+  },
+  "variants": {
+    "componentPropertyDefinitions": {
+      "Show Content#39:20": {
+        "type": "BOOLEAN",
+        "defaultValue": false
+      },
+      "Slot#39:22": {
+        "type": "SLOT",
+        "preferredValues": []
+      },
+      "Show slot#39:23": {
+        "type": "BOOLEAN",
+        "defaultValue": true
+      },
+      "Title#39:28": {
+        "type": "TEXT",
+        "defaultValue": "Accordion title"
+      },
+      "Description#39:31": {
+        "type": "TEXT",
+        "defaultValue": "Description"
+      },
+      "Subtitle#43:0": {
+        "type": "TEXT",
+        "defaultValue": "Subtitle"
+      },
+      "Show Subtitle#43:3": {
+        "type": "BOOLEAN",
+        "defaultValue": true
+      },
+      "interactive": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "hover",
+          "active",
+          "disabled"
+        ]
+      }
+    },
+    "variantGroupProperties": {
+      "interactive": {
+        "values": [
+          "Default",
+          "hover",
+          "active",
+          "disabled"
+        ]
+      }
+    }
+  },
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt"
+}

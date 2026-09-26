@@ -1,0 +1,445 @@
+{
+  "manifestVersion": 1,
+  "layout": "perVariant",
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt",
+  "component": {
+    "nodeId": "8963:24348",
+    "name": "jz-highlight",
+    "page": "🟠 jz-highlight",
+    "frame": "jz-highlight"
+  },
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "variantAxes": [
+    {
+      "property": "breakpoint",
+      "values": [
+        "Default",
+        "mobile"
+      ]
+    },
+    {
+      "property": "interactive",
+      "values": [
+        "Default",
+        "hover",
+        "active",
+        "disabled"
+      ]
+    },
+    {
+      "property": "isSelected",
+      "values": [
+        "false",
+        "true"
+      ]
+    }
+  ],
+  "sharedVariablesById": {
+    "VariableID:5:109": {
+      "name": "radius/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:3"
+    },
+    "VariableID:5:156": {
+      "name": "gap/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:7:60": {
+      "name": "padding/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:5:141": {
+      "name": "text/muted",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:155": {
+      "name": "gap/lg",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:5:138": {
+      "name": "text/default",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:1030:32889": {
+      "name": "background/control/brand/primary",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:1030:32893": {
+      "name": "background/control/default/active",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:805:15058": {
+      "name": "text/default/active",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:1030:32894": {
+      "name": "background/control/default/disabled",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:805:15059": {
+      "name": "text/default/disabled",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:157": {
+      "name": "gap/sm",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:8968:24424": {
+      "name": "background/control/brand/primary/hover",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:8968:24425": {
+      "name": "background/control/brand/primary/active",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:8968:24426": {
+      "name": "background/control/brand/primary/disabled",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    }
+  },
+  "variantsMeta": {
+    "componentPropertyDefinitions": {
+      "highlight#8963:7": {
+        "type": "TEXT",
+        "defaultValue": "highlight"
+      },
+      "description#8963:8": {
+        "type": "TEXT",
+        "defaultValue": "description"
+      },
+      "title#8963:9": {
+        "type": "TEXT",
+        "defaultValue": "title"
+      },
+      "breakpoint": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "mobile"
+        ]
+      },
+      "interactive": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "hover",
+          "active",
+          "disabled"
+        ]
+      },
+      "isSelected": {
+        "type": "VARIANT",
+        "defaultValue": "false",
+        "variantOptions": [
+          "false",
+          "true"
+        ]
+      }
+    },
+    "variantGroupProperties": {
+      "breakpoint": {
+        "values": [
+          "Default",
+          "mobile"
+        ]
+      },
+      "interactive": {
+        "values": [
+          "Default",
+          "hover",
+          "active",
+          "disabled"
+        ]
+      },
+      "isSelected": {
+        "values": [
+          "false",
+          "true"
+        ]
+      }
+    }
+  },
+  "states": [
+    {
+      "stateId": "breakpoint--Default__interactive--active__isSelected--false",
+      "componentNodeId": "8963:24359",
+      "variantProperties": {
+        "breakpoint": "Default",
+        "interactive": "active",
+        "isSelected": "false"
+      },
+      "name": "breakpoint=Default, interactive=active, isSelected=false",
+      "label": "breakpoint=Default, interactive=active, isSelected=false",
+      "files": {
+        "png": "snapshot/states/breakpoint--Default__interactive--active__isSelected--false/preview.png",
+        "json": "snapshot/states/breakpoint--Default__interactive--active__isSelected--false/snapshot.json",
+        "md": "snapshot/states/breakpoint--Default__interactive--active__isSelected--false/token-map.md"
+      }
+    },
+    {
+      "stateId": "breakpoint--Default__interactive--active__isSelected--true",
+      "componentNodeId": "8968:24409",
+      "variantProperties": {
+        "breakpoint": "Default",
+        "interactive": "active",
+        "isSelected": "true"
+      },
+      "name": "breakpoint=Default, interactive=active, isSelected=true",
+      "label": "breakpoint=Default, interactive=active, isSelected=true",
+      "files": {
+        "png": "snapshot/states/breakpoint--Default__interactive--active__isSelected--true/preview.png",
+        "json": "snapshot/states/breakpoint--Default__interactive--active__isSelected--true/snapshot.json",
+        "md": "snapshot/states/breakpoint--Default__interactive--active__isSelected--true/token-map.md"
+      }
+    },
+    {
+      "stateId": "breakpoint--Default__interactive--Default__isSelected--false",
+      "componentNodeId": "8963:24346",
+      "variantProperties": {
+        "breakpoint": "Default",
+        "interactive": "Default",
+        "isSelected": "false"
+      },
+      "name": "breakpoint=Default, interactive=Default, isSelected=false",
+      "label": "breakpoint=Default, interactive=Default, isSelected=false",
+      "files": {
+        "png": "snapshot/states/breakpoint--Default__interactive--Default__isSelected--false/preview.png",
+        "json": "snapshot/states/breakpoint--Default__interactive--Default__isSelected--false/snapshot.json",
+        "md": "snapshot/states/breakpoint--Default__interactive--Default__isSelected--false/token-map.md"
+      }
+    },
+    {
+      "stateId": "breakpoint--Default__interactive--Default__isSelected--true",
+      "componentNodeId": "8968:24419",
+      "variantProperties": {
+        "breakpoint": "Default",
+        "interactive": "Default",
+        "isSelected": "true"
+      },
+      "name": "breakpoint=Default, interactive=Default, isSelected=true",
+      "label": "breakpoint=Default, interactive=Default, isSelected=true",
+      "files": {
+        "png": "snapshot/states/breakpoint--Default__interactive--Default__isSelected--true/preview.png",
+        "json": "snapshot/states/breakpoint--Default__interactive--Default__isSelected--true/snapshot.json",
+        "md": "snapshot/states/breakpoint--Default__interactive--Default__isSelected--true/token-map.md"
+      }
+    },
+    {
+      "stateId": "breakpoint--Default__interactive--disabled__isSelected--false",
+      "componentNodeId": "8963:24364",
+      "variantProperties": {
+        "breakpoint": "Default",
+        "interactive": "disabled",
+        "isSelected": "false"
+      },
+      "name": "breakpoint=Default, interactive=disabled, isSelected=false",
+      "label": "breakpoint=Default, interactive=disabled, isSelected=false",
+      "files": {
+        "png": "snapshot/states/breakpoint--Default__interactive--disabled__isSelected--false/preview.png",
+        "json": "snapshot/states/breakpoint--Default__interactive--disabled__isSelected--false/snapshot.json",
+        "md": "snapshot/states/breakpoint--Default__interactive--disabled__isSelected--false/token-map.md"
+      }
+    },
+    {
+      "stateId": "breakpoint--Default__interactive--disabled__isSelected--true",
+      "componentNodeId": "8968:24404",
+      "variantProperties": {
+        "breakpoint": "Default",
+        "interactive": "disabled",
+        "isSelected": "true"
+      },
+      "name": "breakpoint=Default, interactive=disabled, isSelected=true",
+      "label": "breakpoint=Default, interactive=disabled, isSelected=true",
+      "files": {
+        "png": "snapshot/states/breakpoint--Default__interactive--disabled__isSelected--true/preview.png",
+        "json": "snapshot/states/breakpoint--Default__interactive--disabled__isSelected--true/snapshot.json",
+        "md": "snapshot/states/breakpoint--Default__interactive--disabled__isSelected--true/token-map.md"
+      }
+    },
+    {
+      "stateId": "breakpoint--Default__interactive--hover__isSelected--false",
+      "componentNodeId": "8963:24354",
+      "variantProperties": {
+        "breakpoint": "Default",
+        "interactive": "hover",
+        "isSelected": "false"
+      },
+      "name": "breakpoint=Default, interactive=hover, isSelected=false",
+      "label": "breakpoint=Default, interactive=hover, isSelected=false",
+      "files": {
+        "png": "snapshot/states/breakpoint--Default__interactive--hover__isSelected--false/preview.png",
+        "json": "snapshot/states/breakpoint--Default__interactive--hover__isSelected--false/snapshot.json",
+        "md": "snapshot/states/breakpoint--Default__interactive--hover__isSelected--false/token-map.md"
+      }
+    },
+    {
+      "stateId": "breakpoint--Default__interactive--hover__isSelected--true",
+      "componentNodeId": "8968:24414",
+      "variantProperties": {
+        "breakpoint": "Default",
+        "interactive": "hover",
+        "isSelected": "true"
+      },
+      "name": "breakpoint=Default, interactive=hover, isSelected=true",
+      "label": "breakpoint=Default, interactive=hover, isSelected=true",
+      "files": {
+        "png": "snapshot/states/breakpoint--Default__interactive--hover__isSelected--true/preview.png",
+        "json": "snapshot/states/breakpoint--Default__interactive--hover__isSelected--true/snapshot.json",
+        "md": "snapshot/states/breakpoint--Default__interactive--hover__isSelected--true/token-map.md"
+      }
+    },
+    {
+      "stateId": "breakpoint--mobile__interactive--active__isSelected--false",
+      "componentNodeId": "8963:24374",
+      "variantProperties": {
+        "breakpoint": "mobile",
+        "interactive": "active",
+        "isSelected": "false"
+      },
+      "name": "breakpoint=mobile, interactive=active, isSelected=false",
+      "label": "breakpoint=mobile, interactive=active, isSelected=false",
+      "files": {
+        "png": "snapshot/states/breakpoint--mobile__interactive--active__isSelected--false/preview.png",
+        "json": "snapshot/states/breakpoint--mobile__interactive--active__isSelected--false/snapshot.json",
+        "md": "snapshot/states/breakpoint--mobile__interactive--active__isSelected--false/token-map.md"
+      }
+    },
+    {
+      "stateId": "breakpoint--mobile__interactive--active__isSelected--true",
+      "componentNodeId": "8968:24389",
+      "variantProperties": {
+        "breakpoint": "mobile",
+        "interactive": "active",
+        "isSelected": "true"
+      },
+      "name": "breakpoint=mobile, interactive=active, isSelected=true",
+      "label": "breakpoint=mobile, interactive=active, isSelected=true",
+      "files": {
+        "png": "snapshot/states/breakpoint--mobile__interactive--active__isSelected--true/preview.png",
+        "json": "snapshot/states/breakpoint--mobile__interactive--active__isSelected--true/snapshot.json",
+        "md": "snapshot/states/breakpoint--mobile__interactive--active__isSelected--true/token-map.md"
+      }
+    },
+    {
+      "stateId": "breakpoint--mobile__interactive--Default__isSelected--false",
+      "componentNodeId": "8963:24349",
+      "variantProperties": {
+        "breakpoint": "mobile",
+        "interactive": "Default",
+        "isSelected": "false"
+      },
+      "name": "breakpoint=mobile, interactive=Default, isSelected=false",
+      "label": "breakpoint=mobile, interactive=Default, isSelected=false",
+      "files": {
+        "png": "snapshot/states/breakpoint--mobile__interactive--Default__isSelected--false/preview.png",
+        "json": "snapshot/states/breakpoint--mobile__interactive--Default__isSelected--false/snapshot.json",
+        "md": "snapshot/states/breakpoint--mobile__interactive--Default__isSelected--false/token-map.md"
+      }
+    },
+    {
+      "stateId": "breakpoint--mobile__interactive--Default__isSelected--true",
+      "componentNodeId": "8968:24399",
+      "variantProperties": {
+        "breakpoint": "mobile",
+        "interactive": "Default",
+        "isSelected": "true"
+      },
+      "name": "breakpoint=mobile, interactive=Default, isSelected=true",
+      "label": "breakpoint=mobile, interactive=Default, isSelected=true",
+      "files": {
+        "png": "snapshot/states/breakpoint--mobile__interactive--Default__isSelected--true/preview.png",
+        "json": "snapshot/states/breakpoint--mobile__interactive--Default__isSelected--true/snapshot.json",
+        "md": "snapshot/states/breakpoint--mobile__interactive--Default__isSelected--true/token-map.md"
+      }
+    },
+    {
+      "stateId": "breakpoint--mobile__interactive--disabled__isSelected--false",
+      "componentNodeId": "8963:24369",
+      "variantProperties": {
+        "breakpoint": "mobile",
+        "interactive": "disabled",
+        "isSelected": "false"
+      },
+      "name": "breakpoint=mobile, interactive=disabled, isSelected=false",
+      "label": "breakpoint=mobile, interactive=disabled, isSelected=false",
+      "files": {
+        "png": "snapshot/states/breakpoint--mobile__interactive--disabled__isSelected--false/preview.png",
+        "json": "snapshot/states/breakpoint--mobile__interactive--disabled__isSelected--false/snapshot.json",
+        "md": "snapshot/states/breakpoint--mobile__interactive--disabled__isSelected--false/token-map.md"
+      }
+    },
+    {
+      "stateId": "breakpoint--mobile__interactive--disabled__isSelected--true",
+      "componentNodeId": "8968:24384",
+      "variantProperties": {
+        "breakpoint": "mobile",
+        "interactive": "disabled",
+        "isSelected": "true"
+      },
+      "name": "breakpoint=mobile, interactive=disabled, isSelected=true",
+      "label": "breakpoint=mobile, interactive=disabled, isSelected=true",
+      "files": {
+        "png": "snapshot/states/breakpoint--mobile__interactive--disabled__isSelected--true/preview.png",
+        "json": "snapshot/states/breakpoint--mobile__interactive--disabled__isSelected--true/snapshot.json",
+        "md": "snapshot/states/breakpoint--mobile__interactive--disabled__isSelected--true/token-map.md"
+      }
+    },
+    {
+      "stateId": "breakpoint--mobile__interactive--hover__isSelected--false",
+      "componentNodeId": "8963:24379",
+      "variantProperties": {
+        "breakpoint": "mobile",
+        "interactive": "hover",
+        "isSelected": "false"
+      },
+      "name": "breakpoint=mobile, interactive=hover, isSelected=false",
+      "label": "breakpoint=mobile, interactive=hover, isSelected=false",
+      "files": {
+        "png": "snapshot/states/breakpoint--mobile__interactive--hover__isSelected--false/preview.png",
+        "json": "snapshot/states/breakpoint--mobile__interactive--hover__isSelected--false/snapshot.json",
+        "md": "snapshot/states/breakpoint--mobile__interactive--hover__isSelected--false/token-map.md"
+      }
+    },
+    {
+      "stateId": "breakpoint--mobile__interactive--hover__isSelected--true",
+      "componentNodeId": "8968:24394",
+      "variantProperties": {
+        "breakpoint": "mobile",
+        "interactive": "hover",
+        "isSelected": "true"
+      },
+      "name": "breakpoint=mobile, interactive=hover, isSelected=true",
+      "label": "breakpoint=mobile, interactive=hover, isSelected=true",
+      "files": {
+        "png": "snapshot/states/breakpoint--mobile__interactive--hover__isSelected--true/preview.png",
+        "json": "snapshot/states/breakpoint--mobile__interactive--hover__isSelected--true/snapshot.json",
+        "md": "snapshot/states/breakpoint--mobile__interactive--hover__isSelected--true/token-map.md"
+      }
+    }
+  ],
+  "definition": "definition.ts",
+  "propsTypes": "definition.props.gen.ts",
+  "slug": "jz-highlight",
+  "ds2Capture": {
+    "contentFingerprint": "7d927c686fcd98fca57237c1f94883d7c614f53872b0cde91b4851f0903e8a8b",
+    "capturedAt": "2026-09-25T20:54:23.490Z"
+  }
+}

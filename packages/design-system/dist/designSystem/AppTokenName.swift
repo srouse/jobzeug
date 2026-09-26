@@ -150,6 +150,9 @@ public enum AppTokenName: String, CaseIterable {
     case semantic_color_background_control_brand_inverse_tertiary_disabled = "semantic.color.background.control.brand.inverse.tertiary.disabled"
     case semantic_color_background_control_brand_inverse_tertiary_hover = "semantic.color.background.control.brand.inverse.tertiary.hover"
     case semantic_color_background_control_brand_primary = "semantic.color.background.control.brand.primary"
+    case semantic_color_background_control_brand_primary_active = "semantic.color.background.control.brand.primary.active"
+    case semantic_color_background_control_brand_primary_disabled = "semantic.color.background.control.brand.primary.disabled"
+    case semantic_color_background_control_brand_primary_hover = "semantic.color.background.control.brand.primary.hover"
     case semantic_color_background_control_brand_secondary = "semantic.color.background.control.brand.secondary"
     case semantic_color_background_control_brand_tertiary = "semantic.color.background.control.brand.tertiary"
     case semantic_color_background_control_default = "semantic.color.background.control.default"
@@ -180,6 +183,7 @@ public enum AppTokenName: String, CaseIterable {
     case semantic_color_background_surface_brand_inverse_tertiary_disabled = "semantic.color.background.surface.brand.inverse.tertiary.disabled"
     case semantic_color_background_surface_brand_inverse_tertiary_hover = "semantic.color.background.surface.brand.inverse.tertiary.hover"
     case semantic_color_background_surface_brand_primary = "semantic.color.background.surface.brand.primary"
+    case semantic_color_background_surface_brand_primary_subtle = "semantic.color.background.surface.brand.primary.subtle"
     case semantic_color_background_surface_brand_secondary = "semantic.color.background.surface.brand.secondary"
     case semantic_color_background_surface_brand_tertiary = "semantic.color.background.surface.brand.tertiary"
     case semantic_color_background_surface_default = "semantic.color.background.surface.default"
@@ -192,6 +196,7 @@ public enum AppTokenName: String, CaseIterable {
     case semantic_color_background_surface_inverse = "semantic.color.background.surface.inverse"
     case semantic_color_background_surface_subtle = "semantic.color.background.surface.subtle"
     case semantic_color_border_brand = "semantic.color.border.brand"
+    case semantic_color_border_brand_strong = "semantic.color.border.brand.strong"
     case semantic_color_border_default = "semantic.color.border.default"
     case semantic_color_border_strong = "semantic.color.border.strong"
     case semantic_color_border_subtle = "semantic.color.border.subtle"
@@ -229,14 +234,6 @@ public enum AppTokenName: String, CaseIterable {
     case semantic_color_text_text_primary_disabled = "semantic.color.text.text.primary.disabled"
     case semantic_color_text_text_primary_hover = "semantic.color.text.text.primary.hover"
     case semantic_color_text_warning = "semantic.color.text.warning"
-    case semantic_contentful_2ac1345dd883856fd0fbcf862d0124e19d32c80e36kglh2baqql5blueprintsfigmadata = "semantic.contentful.2ac1345dd883856fd0fbcf862d0124e19d32c80e36kglh2baqql5blueprintsfigmadata"
-    case semantic_contentful_2ac1345dd883856fd0fbcf862d0124e19d32c80e36kglh2baqql5blueprintsfigmametadata = "semantic.contentful.2ac1345dd883856fd0fbcf862d0124e19d32c80e36kglh2baqql5blueprintsfigmametadata"
-    case semantic_contentful_2ac1345dd883856fd0fbcf862d0124e19d32c80e36kglh2baqql5designmasterdata = "semantic.contentful.2ac1345dd883856fd0fbcf862d0124e19d32c80e36kglh2baqql5designmasterdata"
-    case semantic_contentful_2ac1345dd883856fd0fbcf862d0124e19d32c80e36kglh2baqql5designmastermetadata = "semantic.contentful.2ac1345dd883856fd0fbcf862d0124e19d32c80e36kglh2baqql5designmastermetadata"
-    case semantic_contentful_2ac1345dd883856fd0fbcf862d0124e19d32c80e3so2fdyfws0xgfigmadata = "semantic.contentful.2ac1345dd883856fd0fbcf862d0124e19d32c80e3so2fdyfws0xgfigmadata"
-    case semantic_contentful_2ac1345dd883856fd0fbcf862d0124e19d32c80e3so2fdyfws0xgfigmametadata = "semantic.contentful.2ac1345dd883856fd0fbcf862d0124e19d32c80e3so2fdyfws0xgfigmametadata"
-    case semantic_contentful_2ac1345dd883856fd0fbcf862d0124e19d32c80e3so2fdyfws0xgmaindata = "semantic.contentful.2ac1345dd883856fd0fbcf862d0124e19d32c80e3so2fdyfws0xgmaindata"
-    case semantic_contentful_2ac1345dd883856fd0fbcf862d0124e19d32c80e3so2fdyfws0xgmainmetadata = "semantic.contentful.2ac1345dd883856fd0fbcf862d0124e19d32c80e3so2fdyfws0xgmainmetadata"
     case semantic_layer_base = "semantic.layer.base"
     case semantic_layer_default = "semantic.layer.default"
     case semantic_layer_dropdown = "semantic.layer.dropdown"
@@ -274,6 +271,8 @@ public enum AppTokenName: String, CaseIterable {
     case semantic_type_display = "semantic.type.display"
     case semantic_type_display_large = "semantic.type.display.large"
     case semantic_type_heading = "semantic.type.heading"
+    case semantic_type_heading2 = "semantic.type.heading2"
+    case semantic_type_heading3 = "semantic.type.heading3"
     case semantic_type_label = "semantic.type.label"
     case semantic_type_label_sm = "semantic.type.label.sm"
     case semantic_type_overline = "semantic.type.overline"
@@ -285,8 +284,8 @@ public enum AppTokenName: String, CaseIterable {
 public struct AppSemanticTypeBodyDefault {
     public static let composite = AppTokenName.semantic_type_body_default
     public static let fontFamily = AppTokenName.primitive_font_family_sans
-    public static let fontSize: String = "15px"
-    public static let lineHeight: String = "24px"
+    public static let fontSize: String = "14px"
+    public static let lineHeight: String = "auto"
     public static let fontWeight = AppTokenName.primitive_font_weight_400
 }
 
@@ -295,7 +294,7 @@ public struct AppSemanticTypeBodyRegular {
     public static let composite = AppTokenName.semantic_type_body_regular
     public static let fontFamily = AppTokenName.primitive_font_family_sans
     public static let fontSize: String = "14px"
-    public static let lineHeight: String = "24px"
+    public static let lineHeight: String = "auto"
     public static let fontWeight = AppTokenName.primitive_font_weight_400
 }
 
@@ -304,7 +303,7 @@ public struct AppSemanticTypeBodyStrong {
     public static let composite = AppTokenName.semantic_type_body_strong
     public static let fontFamily = AppTokenName.primitive_font_family_sans
     public static let fontSize: String = "14px"
-    public static let lineHeight: String = "24px"
+    public static let lineHeight: String = "auto"
     public static let fontWeight = AppTokenName.primitive_font_weight_600
 }
 
@@ -313,7 +312,7 @@ public struct AppSemanticTypeCaption {
     public static let composite = AppTokenName.semantic_type_caption
     public static let fontFamily = AppTokenName.primitive_font_family_sans
     public static let fontSize: String = "12px"
-    public static let lineHeight: String = "16px"
+    public static let lineHeight: String = "auto"
     public static let fontWeight = AppTokenName.primitive_font_weight_400
 }
 
@@ -321,8 +320,8 @@ public struct AppSemanticTypeCaption {
 public struct AppSemanticTypeDisplay {
     public static let composite = AppTokenName.semantic_type_display
     public static let fontFamily = AppTokenName.primitive_font_family_sans
-    public static let fontSize: String = "36px"
-    public static let lineHeight: String = "44px"
+    public static let fontSize: String = "32px"
+    public static let lineHeight: String = "auto"
     public static let fontWeight = AppTokenName.primitive_font_weight_700
 }
 
@@ -330,8 +329,8 @@ public struct AppSemanticTypeDisplay {
 public struct AppSemanticTypeDisplayLarge {
     public static let composite = AppTokenName.semantic_type_display_large
     public static let fontFamily = AppTokenName.primitive_font_family_sans
-    public static let fontSize: String = "48px"
-    public static let lineHeight: String = "56px"
+    public static let fontSize: String = "42px"
+    public static let lineHeight: String = "auto"
     public static let fontWeight = AppTokenName.primitive_font_weight_700
 }
 
@@ -340,8 +339,26 @@ public struct AppSemanticTypeHeading {
     public static let composite = AppTokenName.semantic_type_heading
     public static let fontFamily = AppTokenName.primitive_font_family_sans
     public static let fontSize: String = "20px"
-    public static let lineHeight: String = "28px"
+    public static let lineHeight: String = "auto"
     public static let fontWeight = AppTokenName.primitive_font_weight_600
+}
+
+/// Typography composite — same token paths as CSS `-font` shorthand clusters.
+public struct AppSemanticTypeHeading2 {
+    public static let composite = AppTokenName.semantic_type_heading2
+    public static let fontFamily = AppTokenName.primitive_font_family_sans
+    public static let fontSize: String = "18px"
+    public static let lineHeight: String = "auto"
+    public static let fontWeight = AppTokenName.primitive_font_weight_500
+}
+
+/// Typography composite — same token paths as CSS `-font` shorthand clusters.
+public struct AppSemanticTypeHeading3 {
+    public static let composite = AppTokenName.semantic_type_heading3
+    public static let fontFamily = AppTokenName.primitive_font_family_sans
+    public static let fontSize: String = "16px"
+    public static let lineHeight: String = "auto"
+    public static let fontWeight = AppTokenName.primitive_font_weight_500
 }
 
 /// Typography composite — same token paths as CSS `-font` shorthand clusters.
@@ -349,8 +366,8 @@ public struct AppSemanticTypeLabel {
     public static let composite = AppTokenName.semantic_type_label
     public static let fontFamily = AppTokenName.primitive_font_family_sans
     public static let fontSize: String = "14px"
-    public static let lineHeight: String = "20px"
-    public static let fontWeight = AppTokenName.primitive_font_weight_600
+    public static let lineHeight: String = "auto"
+    public static let fontWeight = AppTokenName.primitive_font_weight_500
 }
 
 /// Typography composite — same token paths as CSS `-font` shorthand clusters.
@@ -358,7 +375,7 @@ public struct AppSemanticTypeLabelSm {
     public static let composite = AppTokenName.semantic_type_label_sm
     public static let fontFamily = AppTokenName.primitive_font_family_sans
     public static let fontSize: String = "12px"
-    public static let lineHeight: String = "20px"
+    public static let lineHeight: String = "auto"
     public static let fontWeight = AppTokenName.primitive_font_weight_600
 }
 
@@ -375,9 +392,9 @@ public struct AppSemanticTypeOverline {
 public struct AppSemanticTypeSubtitle {
     public static let composite = AppTokenName.semantic_type_subtitle
     public static let fontFamily = AppTokenName.primitive_font_family_sans
-    public static let fontSize: String = "16px"
-    public static let lineHeight: String = "26px"
-    public static let fontWeight = AppTokenName.primitive_font_weight_600
+    public static let fontSize: String = "15px"
+    public static let lineHeight: String = "auto"
+    public static let fontWeight = AppTokenName.primitive_font_weight_500
 }
 
 /// Typography composite — same token paths as CSS `-font` shorthand clusters.
@@ -385,7 +402,7 @@ public struct AppSemanticTypeTitle {
     public static let composite = AppTokenName.semantic_type_title
     public static let fontFamily = AppTokenName.primitive_font_family_sans
     public static let fontSize: String = "24px"
-    public static let lineHeight: String = "32px"
+    public static let lineHeight: String = "auto"
     public static let fontWeight = AppTokenName.primitive_font_weight_700
 }
 

@@ -9,14 +9,14 @@ export declare class JzTabItemElement extends LitElement {
     label: string;
     /**
      * When set, the tab is an `<a>` for navigation. When empty, it is a
-     * `<button>` (in-page selection only).
+     * `<button>` (in-page selection only). Empty string does not reflect.
      */
     href: string;
     /** Selection key for `jz-tab-group` `selected-tab`. Falls back to index. */
     value: string;
     /** Figma State=Selected. */
     selected: boolean;
-    render(): import('lit-html').TemplateResult<1>;
+    render(): import('lit').TemplateResult<1>;
 }
 declare global {
     interface HTMLElementTagNameMap {

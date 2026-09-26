@@ -15,6 +15,9 @@ export declare const jzTabGroupDefinition: {
         name: string;
         type: "string";
     }[];
+    slots: {
+        name: string;
+    }[];
     version: string;
 };
 //# sourceMappingURL=definition.d.ts.map

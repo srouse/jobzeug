@@ -1,0 +1,261 @@
+{
+  "snapshotVersion": 2,
+  "layout": "perVariant",
+  "generatedAt": "2026-09-25T20:05:58.402Z",
+  "componentSetNodeId": "8963:23139",
+  "componentNodeId": "8963:23140",
+  "componentSetName": "jz-icon-button",
+  "variantProperties": {
+    "interactive": "hover",
+    "size": "Medium"
+  },
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "tree": {
+    "id": "8963:23140",
+    "type": "COMPONENT",
+    "name": "interactive=hover, size=Medium",
+    "visible": true,
+    "width": 40,
+    "height": 40,
+    "x": 289,
+    "y": 21,
+    "variantProperties": {
+      "interactive": "hover",
+      "size": "Medium"
+    },
+    "boundVariableIds": [
+      "VariableID:1030:32895",
+      "VariableID:5:111",
+      "VariableID:5:163"
+    ],
+    "boundVariableNames": [
+      "background/control/default/hover",
+      "padding/sm",
+      "radius/sm"
+    ],
+    "boundVariables": [
+      {
+        "id": "VariableID:1030:32895",
+        "name": "background/control/default/hover"
+      },
+      {
+        "id": "VariableID:5:111",
+        "name": "radius/sm"
+      },
+      {
+        "id": "VariableID:5:163",
+        "name": "padding/sm"
+      }
+    ],
+    "variableBindingsByLocation": [
+      {
+        "location": "Background color · color",
+        "names": [
+          "background/control/default/hover"
+        ]
+      },
+      {
+        "location": "Corner Radius",
+        "names": [
+          "radius/sm"
+        ]
+      },
+      {
+        "location": "Padding bottom",
+        "names": [
+          "padding/sm"
+        ]
+      },
+      {
+        "location": "Padding left",
+        "names": [
+          "padding/sm"
+        ]
+      },
+      {
+        "location": "Padding right",
+        "names": [
+          "padding/sm"
+        ]
+      },
+      {
+        "location": "Padding top",
+        "names": [
+          "padding/sm"
+        ]
+      }
+    ],
+    "tokenMapPresentation": {
+      "presentationVersion": 1,
+      "background": [
+        {
+          "index": 1,
+          "kind": "SOLID",
+          "token": "background/control/default/hover",
+          "raw": "#e5e5e5"
+        }
+      ],
+      "cornerRadius": {
+        "topLeft": {
+          "raw": "4"
+        },
+        "topRight": {
+          "raw": "4"
+        },
+        "bottomLeft": {
+          "raw": "4"
+        },
+        "bottomRight": {
+          "raw": "4"
+        }
+      },
+      "padding": {
+        "top": {
+          "token": "padding/sm",
+          "raw": "8"
+        },
+        "right": {
+          "token": "padding/sm",
+          "raw": "8"
+        },
+        "bottom": {
+          "token": "padding/sm",
+          "raw": "8"
+        },
+        "left": {
+          "token": "padding/sm",
+          "raw": "8"
+        }
+      },
+      "gap": {
+        "mainAxis": {
+          "raw": "10"
+        },
+        "counterAxis": {
+          "raw": "0"
+        },
+        "gridRow": {
+          "raw": "0"
+        },
+        "gridColumn": {
+          "raw": "0"
+        }
+      },
+      "layout": [
+        {
+          "property": "Mode",
+          "value": "HORIZONTAL"
+        },
+        {
+          "property": "Primary axis align",
+          "value": "MIN"
+        },
+        {
+          "property": "Counter axis align",
+          "value": "CENTER"
+        },
+        {
+          "property": "Wrap",
+          "value": "NO_WRAP"
+        },
+        {
+          "property": "Horizontal sizing",
+          "value": "HUG"
+        },
+        {
+          "property": "Vertical sizing",
+          "value": "HUG"
+        }
+      ]
+    },
+    "children": [
+      {
+        "id": "8963:23141",
+        "type": "INSTANCE",
+        "name": "jz-icon",
+        "visible": true,
+        "mainComponentName": "jz-icon",
+        "instanceComponentProperties": [
+          {
+            "propertyKey": "Color",
+            "displayName": "Color",
+            "type": "VARIANT",
+            "value": "Default"
+          },
+          {
+            "propertyKey": "Size",
+            "displayName": "Size",
+            "type": "VARIANT",
+            "value": "Medium"
+          },
+          {
+            "propertyKey": "icon#148:36",
+            "displayName": "icon",
+            "type": "INSTANCE_SWAP",
+            "value": "8962:21988"
+          }
+        ],
+        "nestedInstanceCaptureMode": "surface",
+        "childrenOmitted": true
+      }
+    ]
+  },
+  "variablesById": {
+    "VariableID:1030:32895": {
+      "name": "background/control/default/hover",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:111": {
+      "name": "radius/sm",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:3"
+    },
+    "VariableID:5:163": {
+      "name": "padding/sm",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    }
+  },
+  "variants": {
+    "componentPropertyDefinitions": {
+      "interactive": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "hover",
+          "active",
+          "disabled"
+        ]
+      },
+      "size": {
+        "type": "VARIANT",
+        "defaultValue": "Small",
+        "variantOptions": [
+          "Medium",
+          "Small"
+        ]
+      }
+    },
+    "variantGroupProperties": {
+      "interactive": {
+        "values": [
+          "Default",
+          "hover",
+          "active",
+          "disabled"
+        ]
+      },
+      "size": {
+        "values": [
+          "Medium",
+          "Small"
+        ]
+      }
+    }
+  },
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt"
+}

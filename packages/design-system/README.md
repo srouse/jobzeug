@@ -6,11 +6,18 @@ Lit web components (`jz-*`) plus a small `--jz-*` token sheet. Consumed by the N
 
 | | |
 |---|---|
-| Build | `npm run ds:build` |
-| Watch | `npm run ds:dev` |
+| Build | `npm run ds:build` (or `npm run build` in this package) |
+| Watch | `npm run ds:dev` / `npm run dev` |
+| Clean | `npm run clean` — deletes **all** of `dist/` including tokens |
+| Rebuild | `npm run rebuild` — `clean` then full build + emit |
 | DS2 CLI | `npm run ds2 -- …` |
+| Tokens only | `npm run tokens:emit` |
 
-From this package: `npm run build` · `npm run dev` · `npm run ds2 -- …`.
+### Dist cleaning
+
+Normal Vite builds (**build** / **dev**) wipe sibling JS/chunks under `dist/` but **preserve `dist/designSystem/`** (emitted `tokens.css` and related artifacts). Do not set Vite `emptyOutDir: true` — that would delete tokens again.
+
+Only **`clean`** / **`rebuild`** remove `designSystem`. After a hard clean, run `build` or `tokens:emit` so tokens exist again.
 
 ## DS2 CLI (local)
 
@@ -47,6 +54,6 @@ Do not import `@jobzeug/design-system/react` from a React Server Component.
 |---|---|
 | `src/designSystem/tokens/` | TokenSet source |
 | `dist/designSystem/tokens.css` | Emitted `--jz-*` custom properties (`pnpm run build` / `tokens:emit`) |
-| `src/designSystem/components/{slug}/` | Lit element + vanilla-extract + design capture |
+| `src/designSystem/components/{slug}/` | Lit element + Lit styles + design capture |
 | `src/react/` | Lazy `@lit/react` wrappers (`lazy-lit.ts`) |
 | `dist/` | Built package |

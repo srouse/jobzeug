@@ -1,0 +1,591 @@
+{
+  "snapshotVersion": 2,
+  "layout": "perVariant",
+  "generatedAt": "2026-09-25T20:54:23.113Z",
+  "componentSetNodeId": "8963:24348",
+  "componentNodeId": "8963:24374",
+  "componentSetName": "jz-highlight",
+  "variantProperties": {
+    "breakpoint": "mobile",
+    "interactive": "active",
+    "isSelected": "false"
+  },
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "tree": {
+    "id": "8963:24374",
+    "type": "COMPONENT",
+    "name": "breakpoint=mobile, interactive=active, isSelected=false",
+    "visible": true,
+    "width": 950,
+    "height": 116,
+    "x": 21,
+    "y": 733,
+    "variantProperties": {
+      "breakpoint": "mobile",
+      "interactive": "active",
+      "isSelected": "false"
+    },
+    "boundVariableIds": [
+      "VariableID:1030:32893",
+      "VariableID:5:109",
+      "VariableID:5:157",
+      "VariableID:7:60"
+    ],
+    "boundVariableNames": [
+      "background/control/default/active",
+      "gap/sm",
+      "padding/md",
+      "radius/md"
+    ],
+    "boundVariables": [
+      {
+        "id": "VariableID:1030:32893",
+        "name": "background/control/default/active"
+      },
+      {
+        "id": "VariableID:5:109",
+        "name": "radius/md"
+      },
+      {
+        "id": "VariableID:5:157",
+        "name": "gap/sm"
+      },
+      {
+        "id": "VariableID:7:60",
+        "name": "padding/md"
+      }
+    ],
+    "variableBindingsByLocation": [
+      {
+        "location": "Auto-layout spacing (main axis)",
+        "names": [
+          "gap/sm"
+        ]
+      },
+      {
+        "location": "Background color · color",
+        "names": [
+          "background/control/default/active"
+        ]
+      },
+      {
+        "location": "Corner radius (bottom-left)",
+        "names": [
+          "radius/md"
+        ]
+      },
+      {
+        "location": "Corner radius (bottom-right)",
+        "names": [
+          "radius/md"
+        ]
+      },
+      {
+        "location": "Corner radius (top-left)",
+        "names": [
+          "radius/md"
+        ]
+      },
+      {
+        "location": "Corner radius (top-right)",
+        "names": [
+          "radius/md"
+        ]
+      },
+      {
+        "location": "Padding bottom",
+        "names": [
+          "padding/md"
+        ]
+      },
+      {
+        "location": "Padding left",
+        "names": [
+          "padding/md"
+        ]
+      },
+      {
+        "location": "Padding right",
+        "names": [
+          "padding/md"
+        ]
+      },
+      {
+        "location": "Padding top",
+        "names": [
+          "padding/md"
+        ]
+      }
+    ],
+    "tokenMapPresentation": {
+      "presentationVersion": 1,
+      "background": [
+        {
+          "index": 1,
+          "kind": "SOLID",
+          "token": "background/control/default/active",
+          "raw": "#e5e5e5"
+        }
+      ],
+      "cornerRadius": {
+        "topLeft": {
+          "token": "radius/md",
+          "raw": "8"
+        },
+        "topRight": {
+          "token": "radius/md",
+          "raw": "8"
+        },
+        "bottomLeft": {
+          "token": "radius/md",
+          "raw": "8"
+        },
+        "bottomRight": {
+          "token": "radius/md",
+          "raw": "8"
+        }
+      },
+      "padding": {
+        "top": {
+          "token": "padding/md",
+          "raw": "16"
+        },
+        "right": {
+          "token": "padding/md",
+          "raw": "16"
+        },
+        "bottom": {
+          "token": "padding/md",
+          "raw": "16"
+        },
+        "left": {
+          "token": "padding/md",
+          "raw": "16"
+        }
+      },
+      "gap": {
+        "mainAxis": {
+          "token": "gap/sm",
+          "raw": "8"
+        },
+        "counterAxis": {
+          "raw": "0"
+        },
+        "gridRow": {
+          "raw": "0"
+        },
+        "gridColumn": {
+          "raw": "0"
+        }
+      },
+      "layout": [
+        {
+          "property": "Mode",
+          "value": "VERTICAL"
+        },
+        {
+          "property": "Primary axis align",
+          "value": "MIN"
+        },
+        {
+          "property": "Counter axis align",
+          "value": "MIN"
+        },
+        {
+          "property": "Wrap",
+          "value": "NO_WRAP"
+        },
+        {
+          "property": "Horizontal sizing",
+          "value": "FIXED"
+        },
+        {
+          "property": "Vertical sizing",
+          "value": "HUG"
+        }
+      ]
+    },
+    "children": [
+      {
+        "id": "8963:24375",
+        "type": "TEXT",
+        "name": "title",
+        "visible": true,
+        "width": 918,
+        "height": 16,
+        "x": 16,
+        "y": 16,
+        "textStyle": {
+          "fontFamily": "Geist",
+          "fontStyle": "Regular",
+          "fontSize": 12,
+          "lineHeight": {
+            "unit": "AUTO"
+          },
+          "letterSpacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "textCase": "ORIGINAL",
+          "textDecoration": "NONE",
+          "textAlignHorizontal": "LEFT",
+          "textAlignVertical": "TOP",
+          "paragraphIndent": 0,
+          "paragraphSpacing": 0,
+          "listSpacing": 0,
+          "textAutoResize": "HEIGHT",
+          "textTruncation": "DISABLED",
+          "maxLines": null,
+          "leadingTrim": "NONE",
+          "textStyleId": "S:4a4c5b5a2ae5ca7729696fd454f19c880bcab04f,",
+          "textStyleName": "semantic type/caption"
+        },
+        "boundVariableIds": [
+          "VariableID:5:141"
+        ],
+        "boundVariableNames": [
+          "text/muted"
+        ],
+        "boundVariables": [
+          {
+            "id": "VariableID:5:141",
+            "name": "text/muted"
+          }
+        ],
+        "variableBindingsByLocation": [
+          {
+            "location": "Text color · color",
+            "names": [
+              "text/muted"
+            ]
+          }
+        ],
+        "tokenMapPresentation": {
+          "presentationVersion": 1,
+          "textColor": {
+            "token": "text/muted",
+            "raw": "#525252"
+          }
+        }
+      },
+      {
+        "id": "8963:24376",
+        "type": "FRAME",
+        "name": "Frame 1",
+        "visible": true,
+        "width": 918,
+        "height": 60,
+        "x": 16,
+        "y": 40,
+        "boundVariableIds": [
+          "VariableID:5:156"
+        ],
+        "boundVariableNames": [
+          "gap/md"
+        ],
+        "boundVariables": [
+          {
+            "id": "VariableID:5:156",
+            "name": "gap/md"
+          }
+        ],
+        "variableBindingsByLocation": [
+          {
+            "location": "Auto-layout spacing (main axis)",
+            "names": [
+              "gap/md"
+            ]
+          }
+        ],
+        "tokenMapPresentation": {
+          "presentationVersion": 1,
+          "padding": {
+            "top": {
+              "raw": "0"
+            },
+            "right": {
+              "raw": "0"
+            },
+            "bottom": {
+              "raw": "0"
+            },
+            "left": {
+              "raw": "0"
+            }
+          },
+          "gap": {
+            "mainAxis": {
+              "token": "gap/md",
+              "raw": "16"
+            },
+            "counterAxis": {
+              "raw": "0"
+            },
+            "gridRow": {
+              "raw": "0"
+            },
+            "gridColumn": {
+              "raw": "0"
+            }
+          },
+          "layout": [
+            {
+              "property": "Mode",
+              "value": "VERTICAL"
+            },
+            {
+              "property": "Primary axis align",
+              "value": "MIN"
+            },
+            {
+              "property": "Counter axis align",
+              "value": "MIN"
+            },
+            {
+              "property": "Wrap",
+              "value": "NO_WRAP"
+            },
+            {
+              "property": "Horizontal sizing",
+              "value": "FILL"
+            },
+            {
+              "property": "Vertical sizing",
+              "value": "HUG"
+            }
+          ]
+        },
+        "children": [
+          {
+            "id": "8963:24377",
+            "type": "TEXT",
+            "name": "highlight",
+            "visible": true,
+            "width": 918,
+            "height": 26,
+            "x": 0,
+            "y": 0,
+            "textStyle": {
+              "fontFamily": "Geist",
+              "fontStyle": "SemiBold",
+              "fontSize": 20,
+              "lineHeight": {
+                "unit": "AUTO"
+              },
+              "letterSpacing": {
+                "unit": "PERCENT",
+                "value": 0
+              },
+              "textCase": "ORIGINAL",
+              "textDecoration": "NONE",
+              "textAlignHorizontal": "LEFT",
+              "textAlignVertical": "TOP",
+              "paragraphIndent": 0,
+              "paragraphSpacing": 0,
+              "listSpacing": 0,
+              "textAutoResize": "HEIGHT",
+              "textTruncation": "DISABLED",
+              "maxLines": null,
+              "leadingTrim": "NONE",
+              "textStyleId": "S:cdabce229d33f89cdb07c02b38a1f32771b00caf,",
+              "textStyleName": "semantic type/heading"
+            },
+            "boundVariableIds": [
+              "VariableID:805:15058"
+            ],
+            "boundVariableNames": [
+              "text/default/active"
+            ],
+            "boundVariables": [
+              {
+                "id": "VariableID:805:15058",
+                "name": "text/default/active"
+              }
+            ],
+            "variableBindingsByLocation": [
+              {
+                "location": "Text color · color",
+                "names": [
+                  "text/default/active"
+                ]
+              }
+            ],
+            "tokenMapPresentation": {
+              "presentationVersion": 1,
+              "textColor": {
+                "token": "text/default/active",
+                "raw": "#404040"
+              }
+            }
+          },
+          {
+            "id": "8963:24378",
+            "type": "TEXT",
+            "name": "description",
+            "visible": true,
+            "width": 918,
+            "height": 18,
+            "x": 0,
+            "y": 42,
+            "textStyle": {
+              "fontFamily": "Geist",
+              "fontStyle": "Regular",
+              "fontSize": 14,
+              "lineHeight": {
+                "unit": "AUTO"
+              },
+              "letterSpacing": {
+                "unit": "PERCENT",
+                "value": 0
+              },
+              "textCase": "ORIGINAL",
+              "textDecoration": "NONE",
+              "textAlignHorizontal": "LEFT",
+              "textAlignVertical": "TOP",
+              "paragraphIndent": 0,
+              "paragraphSpacing": 0,
+              "listSpacing": 0,
+              "textAutoResize": "HEIGHT",
+              "textTruncation": "DISABLED",
+              "maxLines": null,
+              "leadingTrim": "NONE",
+              "textStyleId": "S:b10ec6910341171622be503d04422505cc26f61a,",
+              "textStyleName": "semantic type/body/regular"
+            },
+            "boundVariableIds": [
+              "VariableID:5:141"
+            ],
+            "boundVariableNames": [
+              "text/muted"
+            ],
+            "boundVariables": [
+              {
+                "id": "VariableID:5:141",
+                "name": "text/muted"
+              }
+            ],
+            "variableBindingsByLocation": [
+              {
+                "location": "Text color · color",
+                "names": [
+                  "text/muted"
+                ]
+              }
+            ],
+            "tokenMapPresentation": {
+              "presentationVersion": 1,
+              "textColor": {
+                "token": "text/muted",
+                "raw": "#525252"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "variablesById": {
+    "VariableID:1030:32893": {
+      "name": "background/control/default/active",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:109": {
+      "name": "radius/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:3"
+    },
+    "VariableID:5:157": {
+      "name": "gap/sm",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:7:60": {
+      "name": "padding/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:5:141": {
+      "name": "text/muted",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:156": {
+      "name": "gap/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:805:15058": {
+      "name": "text/default/active",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    }
+  },
+  "variants": {
+    "componentPropertyDefinitions": {
+      "highlight#8963:7": {
+        "type": "TEXT",
+        "defaultValue": "highlight"
+      },
+      "description#8963:8": {
+        "type": "TEXT",
+        "defaultValue": "description"
+      },
+      "title#8963:9": {
+        "type": "TEXT",
+        "defaultValue": "title"
+      },
+      "breakpoint": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "mobile"
+        ]
+      },
+      "interactive": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "hover",
+          "active",
+          "disabled"
+        ]
+      },
+      "isSelected": {
+        "type": "VARIANT",
+        "defaultValue": "false",
+        "variantOptions": [
+          "false",
+          "true"
+        ]
+      }
+    },
+    "variantGroupProperties": {
+      "breakpoint": {
+        "values": [
+          "Default",
+          "mobile"
+        ]
+      },
+      "interactive": {
+        "values": [
+          "Default",
+          "hover",
+          "active",
+          "disabled"
+        ]
+      },
+      "isSelected": {
+        "values": [
+          "false",
+          "true"
+        ]
+      }
+    }
+  },
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt"
+}

@@ -1,7 +1,5 @@
-"use client";
-
 import React from "react";
-import { createLazyLitComponent } from "./lazy-lit.js";
+import { createLazyLitComponent, litReactModule } from "./lazy-lit.js";
 
 /**
  * Browser-only React wrapper for `<jz-button>`.
@@ -10,12 +8,12 @@ import { createLazyLitComponent } from "./lazy-lit.js";
 export const JzButton = createLazyLitComponent(async () => {
   const [{ createComponent }, { JzButtonElement }] = await Promise.all([
     import("@lit/react"),
-    import("../designSystem/components/blue-button/blue-button.js"),
+    import("../designSystem/components/jz-button/jz-button.js"),
   ]);
   return createComponent({
     tagName: "jz-button",
     elementClass: JzButtonElement,
-    react: React,
+    react: litReactModule(React),
     events: {
       onClick: "click",
     },

@@ -1,0 +1,91 @@
+{
+  "manifestVersion": 1,
+  "layout": "perVariant",
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt",
+  "component": {
+    "nodeId": "8974:21469",
+    "name": "jz-tab-group",
+    "page": "🟠 jz-tabs",
+    "frame": "jz-tab-group"
+  },
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "variantAxes": [
+    {
+      "property": "direction",
+      "values": [
+        "bottom",
+        "top"
+      ]
+    }
+  ],
+  "sharedVariablesById": {},
+  "variantsMeta": {
+    "componentPropertyDefinitions": {
+      "Slot#8974:0": {
+        "type": "SLOT",
+        "preferredValues": [
+          {
+            "type": "COMPONENT_SET",
+            "key": "31fd033e20871cbcef97cab2ba0b225c6eccb5e4",
+            "name": "jz-tab"
+          }
+        ]
+      },
+      "direction": {
+        "type": "VARIANT",
+        "defaultValue": "bottom",
+        "variantOptions": [
+          "bottom",
+          "top"
+        ]
+      }
+    },
+    "variantGroupProperties": {
+      "direction": {
+        "values": [
+          "bottom",
+          "top"
+        ]
+      }
+    }
+  },
+  "states": [
+    {
+      "stateId": "direction--bottom",
+      "componentNodeId": "8974:21468",
+      "variantProperties": {
+        "direction": "bottom"
+      },
+      "name": "direction=bottom",
+      "label": "direction=bottom",
+      "files": {
+        "png": "snapshot/states/direction--bottom/preview.png",
+        "json": "snapshot/states/direction--bottom/snapshot.json",
+        "md": "snapshot/states/direction--bottom/token-map.md"
+      }
+    },
+    {
+      "stateId": "direction--top",
+      "componentNodeId": "8974:21470",
+      "variantProperties": {
+        "direction": "top"
+      },
+      "name": "direction=top",
+      "label": "direction=top",
+      "files": {
+        "png": "snapshot/states/direction--top/preview.png",
+        "json": "snapshot/states/direction--top/snapshot.json",
+        "md": "snapshot/states/direction--top/token-map.md"
+      }
+    }
+  ],
+  "definition": "definition.ts",
+  "propsTypes": "definition.props.gen.ts",
+  "slug": "jz-tab-group",
+  "ds2Capture": {
+    "contentFingerprint": "1a7a78cdcd51c8030358fb851c9b7250ce3f58a606f35aa32a3209ee0f766a9c",
+    "capturedAt": "2026-09-26T15:07:25.155Z"
+  }
+}

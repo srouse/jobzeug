@@ -20,6 +20,7 @@ export declare class JzTagElement extends LitElement {
     /**
      * When set, the tag is a link: hover/active chrome applies and content is
      * wrapped in an anchor. Omit for a static (non-interactive) tag.
+     * Empty string does **not** reflect (avoids `href=""` matching `:host([href])`).
      */
     href: string;
     willUpdate(): void;

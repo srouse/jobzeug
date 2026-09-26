@@ -1,29 +1,161 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-22T21:53:25.654Z",
-  "headVersion": 3,
+  "generatedAt": "2026-09-26T21:11:18.648Z",
+  "headVersion": 35,
   "components": [
     {
-      "slug": "blue-button",
-      "componentSetName": "blue-button",
-      "setNodeId": "8:337",
-      "definition": "src/designSystem/components/blue-button/design/definition.ts",
-      "designManifest": "src/designSystem/components/blue-button/design/manifest.json",
+      "slug": "frame-2",
+      "componentSetName": "Frame 2",
+      "setNodeId": "8963:24348",
+      "definition": "src/designSystem/components/frame-2/design/definition.ts",
+      "designManifest": "src/designSystem/components/frame-2/design/manifest.json",
       "status": "ok",
-      "contentVersion": 3,
-      "contentFingerprint": "a3b920d91e8131003f8842480254fc32be9ecddc7c95528510bd21db8dff738d",
-      "contentGeneratedAt": "2026-09-22T21:53:25.607Z"
+      "contentVersion": 19,
+      "contentFingerprint": "cf5b056de2ee482fed6544df383f15c41cc7276b5d0d33b404b906b7f127bfdc",
+      "contentGeneratedAt": "2026-09-25T20:12:13.895Z"
     },
     {
-      "slug": "blue-divider",
-      "componentSetName": "blue-divider",
-      "setNodeId": "1483:28028",
-      "definition": "src/designSystem/components/blue-divider/design/definition.ts",
-      "designManifest": "src/designSystem/components/blue-divider/design/manifest.json",
+      "slug": "js-project-card",
+      "componentSetName": "js-project-card",
+      "setNodeId": "8959:21439",
+      "definition": "src/designSystem/components/js-project-card/design/definition.ts",
+      "designManifest": "src/designSystem/components/js-project-card/design/manifest.json",
       "status": "ok",
-      "contentVersion": 2,
-      "contentFingerprint": "bd690cf767b2c82b1b16d9ab899ef9041aea3c13ff01bab161dfe5c9accf0e84",
-      "contentGeneratedAt": "2026-09-22T21:46:53.412Z"
+      "contentVersion": 27,
+      "contentFingerprint": "9d1ad9a0d3a2e18a41de0da0632f3052adfccdc1cfbfbd6ccbec7014e7413554",
+      "contentGeneratedAt": "2026-09-26T13:49:58.818Z"
+    },
+    {
+      "slug": "jz-accordion",
+      "componentSetName": "jz-accordion",
+      "setNodeId": "39:526",
+      "definition": "src/designSystem/components/jz-accordion/design/definition.ts",
+      "designManifest": "src/designSystem/components/jz-accordion/design/manifest.json",
+      "status": "ok",
+      "contentVersion": 15,
+      "contentFingerprint": "ac7b398220d62279b8c9151f77bf2e37c0be077f00bc148beaf0379380ee6bba",
+      "contentGeneratedAt": "2026-09-24T20:30:03.008Z"
+    },
+    {
+      "slug": "jz-accordion-item",
+      "componentSetName": "jz-accordion-item",
+      "setNodeId": "39:527",
+      "definition": "src/designSystem/components/jz-accordion-item/design/definition.ts",
+      "designManifest": "src/designSystem/components/jz-accordion-item/design/manifest.json",
+      "status": "ok",
+      "contentVersion": 14,
+      "contentFingerprint": "935f97cbdb4552185fa6dbda73220cdb2180516bc654e4fec1ffade5d24943c1",
+      "contentGeneratedAt": "2026-09-24T20:29:25.830Z"
+    },
+    {
+      "slug": "jz-button",
+      "componentSetName": "jz-button",
+      "setNodeId": "8:337",
+      "definition": "src/designSystem/components/jz-button/design/definition.ts",
+      "designManifest": "src/designSystem/components/jz-button/design/manifest.json",
+      "status": "ok",
+      "contentVersion": 34,
+      "contentFingerprint": "88274016a92268c1d3b66e3094fe99240c45c581cca21c47f534c610a2d29f33",
+      "contentGeneratedAt": "2026-09-26T20:18:03.220Z"
+    },
+    {
+      "slug": "jz-divider",
+      "componentSetName": "jz-divider",
+      "setNodeId": "8973:142",
+      "definition": "src/designSystem/components/jz-divider/design/definition.ts",
+      "designManifest": "src/designSystem/components/jz-divider/design/manifest.json",
+      "status": "ok",
+      "contentVersion": 26,
+      "contentFingerprint": "4eb918ad9317c1925c6e606d2cd291dd3a327f568ae41fe891e7324664b3808f",
+      "contentGeneratedAt": "2026-09-26T13:11:47.207Z"
+    },
+    {
+      "slug": "jz-highlight",
+      "componentSetName": "jz-highlight",
+      "setNodeId": "8963:24348",
+      "definition": "src/designSystem/components/jz-highlight/design/definition.ts",
+      "designManifest": "src/designSystem/components/jz-highlight/design/manifest.json",
+      "status": "ok",
+      "contentVersion": 25,
+      "contentFingerprint": "7d927c686fcd98fca57237c1f94883d7c614f53872b0cde91b4851f0903e8a8b",
+      "contentGeneratedAt": "2026-09-25T20:54:23.490Z"
+    },
+    {
+      "slug": "jz-icon",
+      "componentSetName": "jz-icon",
+      "setNodeId": "593:6024",
+      "definition": "src/designSystem/components/jz-icon/design/definition.ts",
+      "designManifest": "src/designSystem/components/jz-icon/design/manifest.json",
+      "status": "ok",
+      "contentVersion": 7,
+      "contentFingerprint": "b8b82b9edcbf326ed4d08c6174c559df3505eb67eb06e0845f5112426b1d4715",
+      "contentGeneratedAt": "2026-09-23T16:19:57.784Z"
+    },
+    {
+      "slug": "jz-icon-button",
+      "componentSetName": "jz-icon-button",
+      "setNodeId": "8963:23139",
+      "definition": "src/designSystem/components/jz-icon-button/design/definition.ts",
+      "designManifest": "src/designSystem/components/jz-icon-button/design/manifest.json",
+      "status": "ok",
+      "contentVersion": 18,
+      "contentFingerprint": "dab2efedc047b39b2beffe24c1e4922a63a9323f4ec85e0acc8141153b6d5326",
+      "contentGeneratedAt": "2026-09-25T20:05:58.482Z"
+    },
+    {
+      "slug": "jz-input",
+      "componentSetName": "jz-input",
+      "setNodeId": "8975:3641",
+      "definition": "src/designSystem/components/jz-input/design/definition.ts",
+      "designManifest": "src/designSystem/components/jz-input/design/manifest.json",
+      "status": "ok",
+      "contentVersion": 32,
+      "contentFingerprint": "30bd50424b5be074244a0b24eed52faafea816ca1e1a751e3a5267269805b7cc",
+      "contentGeneratedAt": "2026-09-26T19:52:47.948Z"
+    },
+    {
+      "slug": "jz-project-card",
+      "componentSetName": "jz-project-card",
+      "setNodeId": "8959:21439",
+      "definition": "src/designSystem/components/jz-project-card/design/definition.ts",
+      "designManifest": "src/designSystem/components/jz-project-card/design/manifest.json",
+      "status": "ok",
+      "contentVersion": 35,
+      "contentFingerprint": "4acd9d01d54fe2844318ec129f2377a3fd6a3639b8e08f72b1ea4db615eca243",
+      "contentGeneratedAt": "2026-09-26T21:11:18.645Z"
+    },
+    {
+      "slug": "jz-tab",
+      "componentSetName": "jz-tab",
+      "setNodeId": "85:2250",
+      "definition": "src/designSystem/components/jz-tab/design/definition.ts",
+      "designManifest": "src/designSystem/components/jz-tab/design/manifest.json",
+      "status": "ok",
+      "contentVersion": 29,
+      "contentFingerprint": "fafdf5e101e6cb02b4f3e22dbbca19d4dc8bf89b4f25d2d38b25c123d4844aca",
+      "contentGeneratedAt": "2026-09-26T15:07:07.223Z"
+    },
+    {
+      "slug": "jz-tab-group",
+      "componentSetName": "jz-tab-group",
+      "setNodeId": "8974:21469",
+      "definition": "src/designSystem/components/jz-tab-group/design/definition.ts",
+      "designManifest": "src/designSystem/components/jz-tab-group/design/manifest.json",
+      "status": "ok",
+      "contentVersion": 30,
+      "contentFingerprint": "1a7a78cdcd51c8030358fb851c9b7250ce3f58a606f35aa32a3209ee0f766a9c",
+      "contentGeneratedAt": "2026-09-26T15:07:25.155Z"
+    },
+    {
+      "slug": "jz-tag",
+      "componentSetName": "jz-tag",
+      "setNodeId": "85:1880",
+      "definition": "src/designSystem/components/jz-tag/design/definition.ts",
+      "designManifest": "src/designSystem/components/jz-tag/design/manifest.json",
+      "status": "ok",
+      "contentVersion": 12,
+      "contentFingerprint": "acaced58b43d109bf3105d7b4cd34de187d0b65f02075b3658f01139831fcfed",
+      "contentGeneratedAt": "2026-09-23T21:32:13.726Z"
     }
   ]
 }

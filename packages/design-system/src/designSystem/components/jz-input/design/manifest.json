@@ -1,0 +1,71 @@
+{
+  "manifestVersion": 1,
+  "layout": "perVariant",
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt",
+  "component": {
+    "nodeId": "8975:3641",
+    "name": "jz-input",
+    "page": "🟠 jz-input",
+    "frame": "jz-input"
+  },
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "variantAxes": [],
+  "sharedVariablesById": {
+    "VariableID:1030:32892": {
+      "name": "background/control/default",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:111": {
+      "name": "radius/sm",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:3"
+    },
+    "VariableID:5:129": {
+      "name": "border/subtle",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    },
+    "VariableID:5:163": {
+      "name": "padding/sm",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:5:138": {
+      "name": "text/default",
+      "resolvedType": "COLOR",
+      "variableCollectionId": "VariableCollectionId:5:118"
+    }
+  },
+  "variantsMeta": {
+    "componentPropertyDefinitions": {
+      "value#8975:0": {
+        "type": "TEXT",
+        "defaultValue": "value"
+      }
+    }
+  },
+  "states": [
+    {
+      "stateId": "node_8975_3641",
+      "componentNodeId": "8975:3641",
+      "variantProperties": {},
+      "name": "jz-input",
+      "label": "(default)",
+      "files": {
+        "png": "snapshot/states/node_8975_3641/preview.png",
+        "json": "snapshot/states/node_8975_3641/snapshot.json",
+        "md": "snapshot/states/node_8975_3641/token-map.md"
+      }
+    }
+  ],
+  "definition": "definition.ts",
+  "propsTypes": "definition.props.gen.ts",
+  "slug": "jz-input",
+  "ds2Capture": {
+    "contentFingerprint": "30bd50424b5be074244a0b24eed52faafea816ca1e1a751e3a5267269805b7cc",
+    "capturedAt": "2026-09-26T19:52:47.948Z"
+  }
+}

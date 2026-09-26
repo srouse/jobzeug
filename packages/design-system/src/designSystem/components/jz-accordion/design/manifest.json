@@ -1,0 +1,51 @@
+{
+  "manifestVersion": 1,
+  "layout": "perVariant",
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt",
+  "component": {
+    "nodeId": "39:526",
+    "name": "jz-accordion",
+    "page": "🟠 jz-accordion",
+    "frame": "jz-accordion"
+  },
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "variantAxes": [],
+  "sharedVariablesById": {},
+  "variantsMeta": {
+    "componentPropertyDefinitions": {
+      "Slot#1533:33": {
+        "type": "SLOT",
+        "preferredValues": [
+          {
+            "type": "COMPONENT_SET",
+            "key": "b3d71a437ec81d630635f61bf2ffe9b07f7d0014"
+          }
+        ],
+        "description": "test"
+      }
+    }
+  },
+  "states": [
+    {
+      "stateId": "node_39_526",
+      "componentNodeId": "39:526",
+      "variantProperties": {},
+      "name": "jz-accordion",
+      "label": "(default)",
+      "files": {
+        "png": "snapshot/states/node_39_526/preview.png",
+        "json": "snapshot/states/node_39_526/snapshot.json",
+        "md": "snapshot/states/node_39_526/token-map.md"
+      }
+    }
+  ],
+  "definition": "definition.ts",
+  "propsTypes": "definition.props.gen.ts",
+  "slug": "jz-accordion",
+  "ds2Capture": {
+    "contentFingerprint": "ac7b398220d62279b8c9151f77bf2e37c0be077f00bc148beaf0379380ee6bba",
+    "capturedAt": "2026-09-24T20:30:03.008Z"
+  }
+}

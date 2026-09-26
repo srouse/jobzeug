@@ -1,0 +1,235 @@
+{
+  "manifestVersion": 1,
+  "layout": "perVariant",
+  "fileKey": "48XCsmDKWB6OqcsoDGteYt",
+  "component": {
+    "nodeId": "593:6024",
+    "name": "jz-icon",
+    "page": "🟢 jz-icon",
+    "frame": "jz-icon"
+  },
+  "exportScale": 2,
+  "maxDepth": 32,
+  "maxNodes": 2000,
+  "variantAxes": [
+    {
+      "property": "Size",
+      "values": [
+        "Medium",
+        "Small",
+        "Large"
+      ]
+    },
+    {
+      "property": "Color",
+      "values": [
+        "Default",
+        "Primary",
+        "Inverse"
+      ]
+    }
+  ],
+  "sharedVariablesById": {
+    "VariableID:523:2768": {
+      "name": "icon/lg",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:523:2769": {
+      "name": "icon/md",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    },
+    "VariableID:523:2770": {
+      "name": "icon/sm",
+      "resolvedType": "FLOAT",
+      "variableCollectionId": "VariableCollectionId:5:154"
+    }
+  },
+  "variantsMeta": {
+    "componentPropertyDefinitions": {
+      "icon#148:36": {
+        "type": "INSTANCE_SWAP",
+        "defaultValue": "1587:53302"
+      },
+      "Size": {
+        "type": "VARIANT",
+        "defaultValue": "Large",
+        "variantOptions": [
+          "Medium",
+          "Small",
+          "Large"
+        ]
+      },
+      "Color": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "Primary",
+          "Inverse"
+        ]
+      }
+    },
+    "variantGroupProperties": {
+      "Size": {
+        "values": [
+          "Medium",
+          "Small",
+          "Large"
+        ]
+      },
+      "Color": {
+        "values": [
+          "Default",
+          "Primary",
+          "Inverse"
+        ]
+      }
+    }
+  },
+  "states": [
+    {
+      "stateId": "Color--Default__Size--Large",
+      "componentNodeId": "593:6025",
+      "variantProperties": {
+        "Size": "Large",
+        "Color": "Default"
+      },
+      "name": "Size=Large, Color=Default",
+      "label": "Color=Default, Size=Large",
+      "files": {
+        "png": "snapshot/states/Color--Default__Size--Large/preview.png",
+        "json": "snapshot/states/Color--Default__Size--Large/snapshot.json",
+        "md": "snapshot/states/Color--Default__Size--Large/token-map.md"
+      }
+    },
+    {
+      "stateId": "Color--Default__Size--Medium",
+      "componentNodeId": "593:6029",
+      "variantProperties": {
+        "Size": "Medium",
+        "Color": "Default"
+      },
+      "name": "Size=Medium, Color=Default",
+      "label": "Color=Default, Size=Medium",
+      "files": {
+        "png": "snapshot/states/Color--Default__Size--Medium/preview.png",
+        "json": "snapshot/states/Color--Default__Size--Medium/snapshot.json",
+        "md": "snapshot/states/Color--Default__Size--Medium/token-map.md"
+      }
+    },
+    {
+      "stateId": "Color--Default__Size--Small",
+      "componentNodeId": "593:6033",
+      "variantProperties": {
+        "Size": "Small",
+        "Color": "Default"
+      },
+      "name": "Size=Small, Color=Default",
+      "label": "Color=Default, Size=Small",
+      "files": {
+        "png": "snapshot/states/Color--Default__Size--Small/preview.png",
+        "json": "snapshot/states/Color--Default__Size--Small/snapshot.json",
+        "md": "snapshot/states/Color--Default__Size--Small/token-map.md"
+      }
+    },
+    {
+      "stateId": "Color--Inverse__Size--Large",
+      "componentNodeId": "601:32629",
+      "variantProperties": {
+        "Size": "Large",
+        "Color": "Inverse"
+      },
+      "name": "Size=Large, Color=Inverse",
+      "label": "Color=Inverse, Size=Large",
+      "files": {
+        "png": "snapshot/states/Color--Inverse__Size--Large/preview.png",
+        "json": "snapshot/states/Color--Inverse__Size--Large/snapshot.json",
+        "md": "snapshot/states/Color--Inverse__Size--Large/token-map.md"
+      }
+    },
+    {
+      "stateId": "Color--Inverse__Size--Medium",
+      "componentNodeId": "601:32631",
+      "variantProperties": {
+        "Size": "Medium",
+        "Color": "Inverse"
+      },
+      "name": "Size=Medium, Color=Inverse",
+      "label": "Color=Inverse, Size=Medium",
+      "files": {
+        "png": "snapshot/states/Color--Inverse__Size--Medium/preview.png",
+        "json": "snapshot/states/Color--Inverse__Size--Medium/snapshot.json",
+        "md": "snapshot/states/Color--Inverse__Size--Medium/token-map.md"
+      }
+    },
+    {
+      "stateId": "Color--Inverse__Size--Small",
+      "componentNodeId": "601:32633",
+      "variantProperties": {
+        "Size": "Small",
+        "Color": "Inverse"
+      },
+      "name": "Size=Small, Color=Inverse",
+      "label": "Color=Inverse, Size=Small",
+      "files": {
+        "png": "snapshot/states/Color--Inverse__Size--Small/preview.png",
+        "json": "snapshot/states/Color--Inverse__Size--Small/snapshot.json",
+        "md": "snapshot/states/Color--Inverse__Size--Small/token-map.md"
+      }
+    },
+    {
+      "stateId": "Color--Primary__Size--Large",
+      "componentNodeId": "593:6027",
+      "variantProperties": {
+        "Size": "Large",
+        "Color": "Primary"
+      },
+      "name": "Size=Large, Color=Primary",
+      "label": "Color=Primary, Size=Large",
+      "files": {
+        "png": "snapshot/states/Color--Primary__Size--Large/preview.png",
+        "json": "snapshot/states/Color--Primary__Size--Large/snapshot.json",
+        "md": "snapshot/states/Color--Primary__Size--Large/token-map.md"
+      }
+    },
+    {
+      "stateId": "Color--Primary__Size--Medium",
+      "componentNodeId": "593:6031",
+      "variantProperties": {
+        "Size": "Medium",
+        "Color": "Primary"
+      },
+      "name": "Size=Medium, Color=Primary",
+      "label": "Color=Primary, Size=Medium",
+      "files": {
+        "png": "snapshot/states/Color--Primary__Size--Medium/preview.png",
+        "json": "snapshot/states/Color--Primary__Size--Medium/snapshot.json",
+        "md": "snapshot/states/Color--Primary__Size--Medium/token-map.md"
+      }
+    },
+    {
+      "stateId": "Color--Primary__Size--Small",
+      "componentNodeId": "593:6035",
+      "variantProperties": {
+        "Size": "Small",
+        "Color": "Primary"
+      },
+      "name": "Size=Small, Color=Primary",
+      "label": "Color=Primary, Size=Small",
+      "files": {
+        "png": "snapshot/states/Color--Primary__Size--Small/preview.png",
+        "json": "snapshot/states/Color--Primary__Size--Small/snapshot.json",
+        "md": "snapshot/states/Color--Primary__Size--Small/token-map.md"
+      }
+    }
+  ],
+  "definition": "definition.ts",
+  "propsTypes": "definition.props.gen.ts",
+  "slug": "jz-icon",
+  "ds2Capture": {
+    "contentFingerprint": "b8b82b9edcbf326ed4d08c6174c559df3505eb67eb06e0845f5112426b1d4715",
+    "capturedAt": "2026-09-23T16:19:57.784Z"
+  }
+}
