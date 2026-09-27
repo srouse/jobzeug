@@ -10,6 +10,7 @@ parent_project_id: null
 related_project_ids:
   - S019
   - S021
+  - S026
 role_links:
   - id: R005
     relationship: delivery
@@ -30,7 +31,7 @@ year_note: Estimated as 2022 near the midpoint of R005 (August 2020–June 2023)
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: 1.0.0
+  vocabulary_version: "1.1.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -128,6 +129,7 @@ Evidence: Scott's direct account; aligns with R005 resume claim (Contentful + br
 - Collaborators: **Design lead** designed the marketing components in Figma. Scott as **design technologist** created the (code) components and **set up the Figma file** the design lead worked in. Presented/persuaded **CMO** and **CIO** on the headless/Contentful path.
 - Customers / clients: None (Summit’s own public marketing site for **members** and **prospective members**).
 - Related: [S019 Summit application design system](S019%20-%20Summit%20application%20design%20system.md) — application DS first; this project is the **second** DS (marketing), with **synergy** between them. Do not merge.
+- Related: [S026 Summit page builder](S026%20-%20Summit%20page%20builder.md) — the Contentful app he describes for seeing, previewing, and editing page elements during this migration. Do not merge.
 - Public surface (Scott): still live at [summitcreditunion.com](https://www.summitcreditunion.com/) as of this account — site existence does not by itself prove every claim here.
 
 ## Resume summary

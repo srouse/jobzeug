@@ -29,7 +29,7 @@ year_note: Scott identifies the 2024 Partnership Tour; finer dates are intention
 delivery_stage: unknown
 annotation:
   status: reviewed
-  vocabulary_version: 1.0.0
+  vocabulary_version: "1.1.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review

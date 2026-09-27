@@ -27,7 +27,7 @@ Researched September 19, 2026. Company background is independent of Scott’s ex
 
 ## Projects
 
-No captured projects linked yet.
+- [S028 Startup design consulting](../projects/S028%20-%20Startup%20design%20consulting.md)
 
 ## Sources
 

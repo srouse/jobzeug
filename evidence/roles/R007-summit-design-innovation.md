@@ -25,6 +25,7 @@ None — role narrative is in LinkedIn description; linked Figma widgets under t
 
 ## Linked projects
 
+- [S024: Loan Visualizer (LOUI)](../projects/S024%20-%20Loan%20Visualizer%20%28LOUI%29.md) — Summit delivery; Scott led. Mortgage-only (fixed-rate and ARM) React interface plus a one-page sheet; tested with members; did not ship. LOUI stands for Loan Object UI.
 - [S011: Figma Design System widget (personal)](../projects/S011%20-%20Figma%20Design%20System%20widget.md) — **personal project** date-anchored to this first Summit tenure; **not** Summit delivery. Public Figma Community widget + figmadesignsystem.app.
 - [S012: Presentation Deck widget (personal)](../projects/S012%20-%20Presentation%20Deck%20widget.md) — **personal project** date-anchored to Summit timespan; **not** Summit delivery. Public Figma Community widget + presentationdeck.app.
 - [S013: Contentful Content Type widget (personal)](../projects/S013%20-%20Contentful%20Content%20Type%20widget.md) — **personal project** date-anchored to Summit timespan; **not** Summit or Contentful employment delivery. Public Figma/FigJam Community widget + contentfulcontenttype.app.

@@ -119,7 +119,7 @@ These are provisional leads from existing materials. Dates and scope require con
 | Design System Agent Kit | Contentful | Section of AI Demos case study | Not interviewed; standalone scope unconfirmed |
 | Customer-specific technical engagements | Contentful | Resume mentions SE partnerships | Specific examples needed |
 | Internal adoption tools and implementation practices | Contentful | Current-role resume description | Specific examples needed |
-| Enterprise design-system modernization | State Farm | [S004](roles/R004-state-farm-design-systems.md#state-farm-design-system-context) role context + [S005](projects/S005%20-%20State%20Farm%20tokens%20persuasion.md)–[S007](projects/S007%20-%20State%20Farm%20Lit%20engineering%20bridge.md) | Three independent projects; overarching narrative preserved in role context |
+| Enterprise design-system modernization | State Farm | [S004](roles/R004-state-farm-design-systems.md#state-farm-design-system-context) role context + [S005](projects/S005%20-%20State%20Farm%20tokens.md)–[S007](projects/S007%20-%20State%20Farm%20Lit%20engineering%20bridge.md) | Three independent projects; overarching narrative preserved in role context |
 | Figma token plugin | State Farm | [S006](projects/S006%20-%20State%20Farm%20Figma%20design%20system.md) | Captured with components, tokens, Google expert, designer mentoring |
 | Design system and content-platform migration | Summit Credit Union | Portfolio and resume | Not interviewed |
 | Rates Central | Summit Credit Union | Portfolio and resume | Not interviewed |

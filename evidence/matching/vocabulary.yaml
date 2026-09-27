@@ -1,15 +1,15 @@
 # Authoritative concept registry. Read engine.md and project-header-schema.md first.
 # Approval here covers vocabulary definitions only, never claims about Scott.
 schema_version: "1.0"
-vocabulary_version: 1.0.0
+vocabulary_version: 1.1.0
 title: Jobzeug project matching vocabulary
 status: approved
 created_at: 2026-09-26
 review:
-  reviewed_by: Codex
-  reviewed_at: 2026-09-26
-  scope: Agent-reviewed initial vocabulary definitions and mappings. Scott has not individually
-    reviewed these concepts. Project annotations are reviewed separately in project headers; this file does not approve them.
+  reviewed_by: Scott
+  reviewed_at: 2026-09-27
+  scope: 1.1.0 adds iOS, real estate, and hardware product design at Scott's request. Prior concepts
+    remain the 2026-09-26 Codex definition review. This file does not approve project claims.
 purpose: Shared controlled concepts for project evidence and incoming job requirements; no fixed
   employer, posting, or project ranking.
 categories:
@@ -2023,3 +2023,62 @@ concepts:
       reviewed_at: 2026-09-26
       scope: Definition, boundaries, source mapping, and vocabulary inclusion only; not approval of any
         project claim.
+  - id: local:ios
+    label: iOS development
+    definition: Building native Apple mobile interfaces, including Objective-C and Swift work.
+    category: tool
+    aliases:
+      - Objective-C
+      - Swift
+      - native iOS
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Require implementation in an Apple mobile app. Mentioning a device, or reviewing
+      someone else's iOS app, is not enough.
+    basis:
+      project_ids:
+        - S028
+        - S029
+        - S030
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-27
+      scope: Added in vocabulary 1.1.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:real-estate
+    label: Real estate marketplace
+    definition: Products or workflows for finding, showing, or transacting homes.
+    category: domain
+    aliases:
+      - real estate
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Domain context does not establish licensure, a commission result, or a closed sale.
+    basis:
+      project_ids:
+        - S029
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-27
+      scope: Added in vocabulary 1.1.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:hardware-product-design
+    label: Hardware product design
+    definition: Designing a physical device, or a simpler version of one, as distinct from an interface.
+    category: skill
+    aliases:
+      - device design
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: A design or a simpler version does not establish that the device was built or shipped.
+    basis:
+      project_ids:
+        - S029
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-27
+      scope: Added in vocabulary 1.1.0 at Scott's request. Definition only; not approval of a claim.

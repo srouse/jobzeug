@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S014
-title: Design tokens explained (Contentful blog)
+title: Design tokens explained (article)
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -30,7 +30,7 @@ year_note: 2024 publication year recorded for the May 16, 2024 article.
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: 1.0.0
+  vocabulary_version: "1.1.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -62,7 +62,7 @@ evidence:
       reviewed_at: "2026-09-26"
 concept_proposals: []
 ---
-# S014: Design tokens explained (Contentful blog)
+# S014: Design tokens explained (article)
 
 Captured: September 22, 2026
 Status: Initial capture from published article + Scott’s performance account; analytics not independently verified
@@ -75,7 +75,7 @@ Evidence: Artifact-supported (public article); Scott’s accounts for ranking/SE
 - Public artifact: https://www.contentful.com/blog/design-token-system/
 - Author index: https://www.contentful.com/blog/author/scott-rouse/
 - Customers / clients: None. Thought-leadership / enablement writing, not a named CU/CL engagement.
-- Related: State Farm token work [S005](S005%20-%20State%20Farm%20tokens%20persuasion.md) / [S006](S006%20-%20State%20Farm%20Figma%20design%20system.md) is earlier enterprise practice; this article is Contentful-published teaching, not State Farm delivery.
+- Related: State Farm token work [S005](S005%20-%20State%20Farm%20tokens.md) / [S006](S006%20-%20State%20Farm%20Figma%20design%20system.md) is earlier enterprise practice; this article is Contentful-published teaching, not State Farm delivery.
 
 ## Resume summary
 

@@ -19,9 +19,12 @@ import {
 } from "@/components/resume";
 import { AnswerStage, DesignModal, DesignSessionProvider } from "@/components/stage";
 import { JzButton, JzTab, JzTabGroup } from "@jobzeug/design-system/react";
+import {
+  normalizeRouteEntryId,
+  resumePath,
+  resumeRouteFromPathname,
+} from "./resume-route";
 import styles from "./resume.module.css";
-
-const ENTRY_ID_RE = /^[\w-]+$/;
 
 const MEDIUM_TABS: Array<{ id: EvidencePage; label: string }> = [
   { id: "resume", label: "Resume" },
@@ -78,22 +81,18 @@ function EvidenceTabBar({
   );
 }
 
-export function normalizeRouteEntryId(
-  raw: string | null | undefined,
-): string | null {
-  if (!raw) return null;
-  const trimmed = raw.trim();
-  return ENTRY_ID_RE.test(trimmed) ? trimmed : null;
-}
-
 /** Parse `/resume` or `/resume/{entryId}` from a pathname. */
 export function entryIdFromPathname(pathname: string): string | null {
-  const match = pathname.match(/^\/resume(?:\/([^/]+))?\/?$/);
-  if (!match) return null;
-  return normalizeRouteEntryId(match[1] ?? null);
+  return resumeRouteFromPathname(pathname).entryId;
 }
 
-function ResumePageBody() {
+function ResumePageBody({
+  projectId,
+  onProjectIdChange,
+}: {
+  projectId: string | null;
+  onProjectIdChange: (projectId: string | null) => void;
+}) {
   const { evidencePage, setEvidencePage } = useResumeHighlights();
   const [resume, setResume] = useState<ResumeViewModel | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -222,6 +221,8 @@ function ResumePageBody() {
                   resume={resume}
                   loading={loading}
                   error={error}
+                  projectId={projectId}
+                  onProjectIdChange={onProjectIdChange}
                   onOpenDesign={() => setDesignOpen(true)}
                 />
               </div>
@@ -246,7 +247,11 @@ function ResumePageBody() {
         </div>
       </div>
       <EvidenceConnectors />
-      <AnswerStage hidden={!stageVisible} resume={resume} />
+      <AnswerStage
+        hidden={!stageVisible}
+        resume={resume}
+        onViewProject={onProjectIdChange}
+      />
       <EvidenceTabBar
         className={styles.mobileTabBar}
         barRef={mobileTabBarRef}
@@ -271,17 +276,23 @@ function ResumePageBody() {
 }
 
 /**
- * Single client shell for `/resume` and `/resume/[entryId]`.
- * Entry id is owned in React state; URL updates via history.pushState so
- * Next does not remount this tree (no resume reload flash).
+ * Single client shell for `/resume`, `/resume/{entryId}`, and
+ * `/resume/{entryId}/project/{projectId}`.
+ * Ids live in React state. URL updates use history.pushState so Next does
+ * not remount this tree.
  */
 export function ResumeWorkspace({
   initialEntryId,
+  initialProjectId,
 }: {
   initialEntryId: string | null;
+  initialProjectId: string | null;
 }) {
   const [entryId, setEntryId] = useState<string | null>(() =>
     normalizeRouteEntryId(initialEntryId),
+  );
+  const [projectId, setProjectId] = useState<string | null>(() =>
+    normalizeRouteEntryId(initialProjectId),
   );
 
   useEffect(() => {
@@ -289,8 +300,14 @@ export function ResumeWorkspace({
   }, [initialEntryId]);
 
   useEffect(() => {
+    setProjectId(normalizeRouteEntryId(initialProjectId));
+  }, [initialProjectId]);
+
+  useEffect(() => {
     const onPopState = () => {
-      setEntryId(entryIdFromPathname(window.location.pathname));
+      const route = resumeRouteFromPathname(window.location.pathname);
+      setEntryId(route.entryId);
+      setProjectId(route.projectId);
     };
     window.addEventListener("popstate", onPopState);
     return () => window.removeEventListener("popstate", onPopState);
@@ -298,17 +315,30 @@ export function ResumeWorkspace({
 
   const navigateEntryId = useCallback((next: string | null) => {
     const resolved = normalizeRouteEntryId(next);
-    const url = resolved ? `/resume/${resolved}` : "/resume";
-    window.history.pushState(null, "", url);
+    window.history.pushState(null, "", resumePath(resolved, projectId));
     setEntryId(resolved);
-  }, []);
+  }, [projectId]);
+
+  const navigateProjectId = useCallback((next: string | null) => {
+    const resolved = normalizeRouteEntryId(next);
+    const url = resumePath(entryId, resolved);
+    if (!resolved) {
+      if (projectId) window.history.replaceState(null, "", url);
+    } else if (resolved !== projectId) {
+      window.history.pushState(null, "", url);
+    }
+    setProjectId(resolved);
+  }, [entryId, projectId]);
 
   return (
     <ResumeHighlightProvider>
       <JobPostingProvider entryId={entryId} navigateEntryId={navigateEntryId}>
         <ResumeChatProvider>
           <DesignSessionProvider>
-            <ResumePageBody />
+            <ResumePageBody
+              projectId={projectId}
+              onProjectIdChange={navigateProjectId}
+            />
           </DesignSessionProvider>
         </ResumeChatProvider>
       </JobPostingProvider>

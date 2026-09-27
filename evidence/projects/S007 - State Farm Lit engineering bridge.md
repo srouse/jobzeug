@@ -30,7 +30,7 @@ year_note: Estimated as 2023, the main calendar year of R004 (July 2023–Januar
 delivery_stage: unknown
 annotation:
   status: reviewed
-  vocabulary_version: 1.0.0
+  vocabulary_version: "1.1.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -76,7 +76,7 @@ Shared role context: [State Farm design system refresh](../roles/R004-state-farm
 
 - Role record: [R004](../roles/R004-state-farm-design-systems.md)
 - Employer: [C002 State Farm](../employers/C002-state-farm.md)
-- Collaborators: Design-system **development** team (Lit / web components); design-system **design** team as the other side of the bridge. Token/Figma craft detail in [S006](S006%20-%20State%20Farm%20Figma%20design%20system.md); executive buy-in in [S005](S005%20-%20State%20Farm%20tokens%20persuasion.md).
+- Collaborators: Design-system **development** team (Lit / web components); design-system **design** team as the other side of the bridge. Token/Figma craft detail in [S006](S006%20-%20State%20Farm%20Figma%20design%20system.md); executive buy-in in [S005](S005%20-%20State%20Farm%20tokens.md).
 
 ## Resume summary
 
@@ -142,3 +142,19 @@ Interview story for eng credibility and cross-functional bridge; resume bullet o
 ## Addition — September 20, 2026
 
 Split from S004 umbrella as engineering-enablement / bridge narrative.
+
+## Addition — September 27, 2026: legacy snippets and the later essay
+
+<a id="source-dibble-shadow-dom"></a>
+
+Scott pointed to Connor Dibble’s June 2026 essay, [From Snippets to Shadow DOM](https://connordibble.dev/writing/from-snippets-to-shadow-dom), consulted September 27, 2026, as a more detailed recounting of what they did at State Farm. Scott’s words: they **radically reinvented** the way design systems were made, and the previous system was **nasty jQuery HTML snippets**.
+
+The essay is Connor’s first-person account. He says his role was lead engineer for the design-system platform’s implementation, that he worked closely with XD and was not the designer, and that he was responsible for building the platform plus education and migration support. That role is not Scott’s S007 account. Scott’s record here remains Lit coaching and the design-to-development bridge.
+
+What the essay establishes about the system they were replacing, in Connor’s telling: a legacy library of jQuery, CSS, and HTML, delivered over a CDN, with component markup as HTML snippets on the docs site. Teams copied a snippet into their app and shared JavaScript hydrated it. Once pasted, teams edited the markup. The docs and production HTML drifted, library updates missed pages, and shipping a fix meant asking teams to re-paste by hand. The jQuery init and teardown also fought Angular and React lifecycles. Multiple forks had grown up. The essay’s example is a policy-number field wired with `DS.formField.init`.
+
+What the essay says replaced it, still in Connor’s voice: framework-agnostic web components and Shadow DOM, so markup teams used to copy now lives inside the component. SFDS is built on Lit. A policy-number field becomes `<sf-textfield label="Policy number"></sf-textfield>`. He also describes one token set across customer, internal, and agent-facing surfaces, and a TypeScript Figma plugin he says he built to sync Figma Variables into W3C design tokens in GitHub. That plugin claim is the same overlap already noted on [S006](S006%20-%20State%20Farm%20Figma%20design%20system.md) and [S005](S005%20-%20State%20Farm%20tokens.md): Scott says he created a plugin Connor later maintains; Connor’s essay says Connor built the Variables-to-tokens pipeline. The essay does not itemize Scott’s pieces.
+
+Counts and outcomes in the essay, including 100+ product teams, 1000+ engineers and designers, eighteen months to an initial production release, and measured story-velocity gains on six pilot teams, are Connor’s claims about the platform after Scott’s tenure. They are not Scott’s metrics. The essay does not mention inverse mode or the primitive and semantic template on S005.
+
+Kody J. Kasper’s September 22, 2026 LinkedIn recommendation, quoted on [S006](S006%20-%20State%20Farm%20Figma%20design%20system.md), says Scott helped push and ground the web components direction. Scott calls Kody the project leader. That sentence supports Scott’s bridge role here. It does not make Scott the lead engineer Connor describes for himself.

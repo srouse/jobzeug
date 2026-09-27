@@ -110,7 +110,7 @@ export async function POST(req: NextRequest) {
       sourceUrl: url,
       fullText,
       structured,
-      matching,
+      matching: { ...matching, catalog },
     });
 
     const view = await loadJobPostingByEntryId(entryId);

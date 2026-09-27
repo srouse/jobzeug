@@ -25,7 +25,7 @@ None — role narrative is in LinkedIn description; project-level detail lives o
 
 ## Linked projects
 
-No captured projects linked yet. Resume bullets are discovery leads, not completed project accounts.
+- [S028 Startup design consulting](../projects/S028%20-%20Startup%20design%20consulting.md) — catch-all for this tenure. He asked not to break out individual startups.
 
 ## Source references
 

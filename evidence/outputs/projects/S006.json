@@ -46,7 +46,7 @@
       "status": "reviewed",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.0.0"
+      "vocabulary_version": "1.1.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -74,7 +74,9 @@
         ],
         "limitations": [
           "Plugin versus widget terminology remains unresolved.",
-          "Production status and collaborator boundaries are not established."
+          "A September 22, 2026 LinkedIn recommendation from Kody J. Kasper, whom Scott calls the project leader, says Scott built the pipeline from Figma variables through a custom Figma plugin to JSON and then Style Dictionary. That is Kody's public account, not an inspection of the repository.",
+          "Scott guesses the original code was slowly migrated into today's system. He says he wrote the initial version and established the initial style. No diff has been inspected.",
+          "Connor Dibble's later pages describe a Figma Variables to W3C pipeline as Connor's work and do not itemize Scott's initial plugin."
         ],
         "public_disclosure": "needs_review",
         "review": {

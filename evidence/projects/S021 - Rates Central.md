@@ -10,6 +10,7 @@ parent_project_id: null
 related_project_ids:
   - S019
   - S020
+  - S024
 role_links:
   - id: R005
     relationship: delivery
@@ -30,7 +31,7 @@ year_note: Estimated as 2022 near the midpoint of R005 (August 2020–June 2023)
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: 1.0.0
+  vocabulary_version: "1.1.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -114,7 +115,7 @@ Evidence: Scott's direct account; aligns with R005 resume “Rates Central… de
 - Employer: [C003 Summit Credit Union](../employers/C003-summit-credit-union.md)
 - Collaborators: **Mortgage VPs** (and presumably others) **changed the rates** in Contentful. Scott frames creation as his work; **custom Contentful app** he thinks may have been his **first**.
 - Customers / clients: None (internal rate source). Downstream consumers included the **website** and a **PDF sent to car dealerships**, plus other endpoints (Scott: “all kinds of various endpoints”).
-- Related: [S020](S020%20-%20Summit%20marketing%20website%20rebuild.md) (Contentful platform / website as a consumer); [S019](S019%20-%20Summit%20application%20design%20system.md) (resume ties Rates Central to the design system — coupling still lightly specified). Do not merge.
+- Related: [S020](S020%20-%20Summit%20marketing%20website%20rebuild.md) (Contentful platform / website as a consumer); [S019](S019%20-%20Summit%20application%20design%20system.md) (resume ties Rates Central to the design system — coupling still lightly specified). [S024 Loan Visualizer (LOUI)](S024%20-%20Loan%20Visualizer%20%28LOUI%29.md) is the earlier design-innovation mortgage study Scott says this work depended on. Do not merge.
 
 ## Resume summary
 

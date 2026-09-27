@@ -27,7 +27,7 @@ None — role narrative is in LinkedIn description; project-level detail lives o
 
 - [S002: Bulk Editor](../projects/S002%20-%20Bulk%20Editor.md) — provisional role association; Scott described SE work; project dates unconfirmed.
 - [S003: DemAI](../projects/S003%20-%20DemAI.md) — provisional; SE AI demo platform; dates placed before late-2025 AI shift.
-- [S016: Technical debt Contentful blog](../projects/S016%20-%20Technical%20debt%20Contentful%20blog.md) — published June 2, 2025; marketer-facing Insights piece.
+- [S016: Hidden cost of technical debt (article)](../projects/S016%20-%20Technical%20debt%20Contentful%20blog.md) — published June 2, 2025; marketer-facing Insights piece.
 
 ## Source references
 

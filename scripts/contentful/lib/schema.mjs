@@ -4,6 +4,7 @@ import {
   matchingVocabularySchema,
 } from '../matching/project-schema.mjs';
 import {
+  matchGraphSchema,
   matchingRequirementSchema,
   matchingSnapshotSchema,
 } from '../matching/requirement-schema.mjs';
@@ -24,6 +25,11 @@ const awards = z.array(z.strictObject({ name: short, dateLabel: short.optional()
 const employerId = z.string().regex(/^C\d{3,}$/);
 const roleId = z.string().regex(/^R\d{3,}$/);
 const projectId = z.string().regex(/^S\d{3,}$/);
+const presentationId = z.string().regex(/^S\d{3,}-presentation$/);
+const assetId = z.string().regex(/^[A-Za-z0-9]+$/, 'Expected a Contentful asset id');
+const blurb = z.string().trim().min(1).max(280);
+const metricValue = z.string().trim().min(1).max(16);
+const metricLabel = z.string().trim().min(1).max(32);
 export const applicationId = z.string().regex(/^A\d{3,}$/);
 export const postingId = z.string().regex(/^JP[\w-]+$/);
 const lineSection = z.enum(['description', 'responsibility', 'required', 'preferred']);
@@ -38,6 +44,7 @@ const integer = (required = false) => field('Integer', z.number().int(), require
 const symbols = () => field('Array', unique(short), false, { items: { type: 'Symbol' } });
 const object = (schema, required = false) => field('Object', schema, required);
 const reference = (target, schema, required = false) => field('Link', schema, required, { target });
+const asset = (required = false) => field('Link', assetId, required, { asset: true });
 const references = (target, schema, required = false) => field('Array', required ? unique(schema).min(1) : unique(schema), required, { target });
 
 // One field catalog drives local validation, the CMA model, and payload mapping.
@@ -54,6 +61,12 @@ export const definitions = {
     evidenceId: symbol(true, projectId), employer: reference('employer', employerId, true),
     roles: references('role', roleId, true), name: symbol(true), summary: prose(),
     matchingMetadata: object(projectMatchingSchema),
+  } },
+  projectPresentation: { name: 'Project Presentation', displayField: 'evidenceId', fields: {
+    evidenceId: symbol(true, presentationId), project: reference('project', projectId, true),
+    blurb: field('Text', blurb, true), video: asset(true),
+    metricOneValue: symbol(true, metricValue), metricOneLabel: symbol(true, metricLabel),
+    metricTwoValue: symbol(true, metricValue), metricTwoLabel: symbol(true, metricLabel),
   } },
   matchingVocabulary: { name: 'Matching Vocabulary', displayField: 'name', fields: {
     evidenceId: symbol(true, z.string().regex(/^MV-\d+\.\d+\.\d+$/)),
@@ -91,12 +104,13 @@ export const definitions = {
     yearsExperienceMin: integer(), yearsExperienceNote: symbol(), travelNote: prose(), compensationNote: prose(),
     fullText: prose(true), lines: references('jobLine', short), tools: references('jobTool', short),
     matchingSnapshot: object(matchingSnapshotSchema),
+    matchGraph: object(matchGraphSchema),
   } },
 };
 export const typeId = kind => `jobzeug${kind[0].toUpperCase()}${kind.slice(1)}`;
 export const entryId = key => `jz-${key}`;
 /** Resume core plus the versioned vocabulary synced from evidence. */
-export const coreKinds = ['employer', 'role', 'matchingVocabulary', 'project'];
+export const coreKinds = ['employer', 'role', 'matchingVocabulary', 'project', 'projectPresentation'];
 export const outputDirectory = kind => kind === 'matchingVocabulary' ? 'matchingVocabularies' : `${kind}s`;
 /** Session job posting overlay — applied with core; not pushed from evidence/. */
 export const jobPostingKinds = ['jobLine', 'jobTool', 'jobPosting'];
@@ -127,7 +141,9 @@ export function contentTypes() {
     fields: Object.entries(definition.fields).map(([id, spec]) => {
       const result = { id, name: id, type: spec.type, required: spec.required, localized: false, validations: [] };
       if (spec.type === 'Symbol') result.validations = [{ size: { min: 1, max: 256 } }];
-      if (spec.target) {
+      if (spec.asset) {
+        result.linkType = 'Asset';
+      } else if (spec.target) {
         const link = { type: 'Link', linkType: 'Entry', validations: [{ linkContentType: [typeId(spec.target)] }] };
         if (spec.type === 'Array') {
           result.items = link;

@@ -1,0 +1,119 @@
+{
+  "evidenceId": "S026",
+  "employer": "C003",
+  "roles": [
+    "R005"
+  ],
+  "name": "Summit page builder",
+  "summary": "Built a Contentful App Framework page builder so Summit marketing could see every page, preview it, and jump to the elements on that page, before Contentful’s own live preview product existed.",
+  "matchingMetadata": {
+    "schema_version": "1.1",
+    "project_id": "S026",
+    "title": "Summit page builder",
+    "record_kind": "project",
+    "project_origin": "employment",
+    "ranking_eligible": true,
+    "exclusion_reason": null,
+    "parent_project_id": null,
+    "related_project_ids": [
+      "S020"
+    ],
+    "role_links": [
+      {
+        "id": "R005",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Scott placed this on the Summit Experience Designer role, during the Contentful migration he says he was leading."
+      }
+    ],
+    "employer_links": [
+      {
+        "id": "C003",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Summit Credit Union employment. Marketing is an internal team, not a customer or client."
+      }
+    ],
+    "customer_ids": [],
+    "client_ids": [],
+    "year": 2022,
+    "year_basis": "estimated",
+    "year_note": "Project calendar was not supplied. Estimated as 2022 inside R005 (August 2020–June 2023), the same estimate used for the marketing-site rebuild. Does not establish sequence among Summit projects.",
+    "delivery_stage": "production",
+    "annotation": {
+      "status": "reviewed",
+      "reviewed_by": "Scott",
+      "reviewed_at": "2026-09-27",
+      "vocabulary_version": "1.1.0"
+    },
+    "public_disclosure": "needs_review",
+    "evidence": [
+      {
+        "id": "S026-E001",
+        "statement": "Built a Contentful App Framework page builder so marketing could see pages, preview them, and jump to the elements on a page, before Contentful’s own live preview existed.",
+        "concept_ids": [
+          "local:contentful",
+          "local:front-end-development",
+          "local:interaction-design",
+          "local:headless-content-management",
+          "local:production-release"
+        ],
+        "ownership": "lead",
+        "scope": "single_team",
+        "delivery_stage": "production",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#source-account",
+            "locator": "Account summary — what the app did",
+            "supports": "He made the page-list, preview, and jump-to-elements interface on the Contentful App Framework and says it landed before Contentful live preview."
+          }
+        ],
+        "limitations": [
+          "The app has no name in this account, and it is not established as the Rates Central app.",
+          "No user count, duration, or time-saved figure is given.",
+          "Screenshots were not inspected."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S026-E002",
+        "statement": "While leading the Contentful migration, coordinated marketing, developers, and design, and helped a creative director with what they needed to centralize the design system.",
+        "concept_ids": [
+          "local:coordination",
+          "local:stakeholder-alignment",
+          "local:cross-functional-work",
+          "local:contentful"
+        ],
+        "ownership": "lead",
+        "scope": "multiple_teams",
+        "delivery_stage": "production",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#source-account",
+            "locator": "Account summary — migration coordination",
+            "supports": "He says he led the migration and coordinated marketing, developers, and design, and helped a creative director centralize the design system without being that director."
+          }
+        ],
+        "limitations": [
+          "Migration leadership is also part of S020. This claim is the coordination around this app, not a second migration.",
+          "Marketing access and training time were limited by schedule conflicts.",
+          "He was not the creative director. That person’s name is not in the account."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      }
+    ],
+    "concept_proposals": []
+  }
+}

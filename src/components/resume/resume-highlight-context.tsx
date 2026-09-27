@@ -18,6 +18,9 @@ import {
   type AskContextItem,
   type AskContextSource,
 } from "@/lib/resume-default-prompts";
+import type { LineFocus } from "@/lib/connection-targets";
+
+export type { LineFocus };
 
 export type ResumeDensity = "full" | "rolled";
 /**
@@ -45,10 +48,19 @@ type ResumeHighlightContextValue = {
    */
   pageBindingsVisible: boolean;
   setPageBindingsVisible: (next: boolean) => void;
-  /** Union of all turn citations — drives rollup (uncited → skeleton). */
+  /** Union of all turn citations. */
   highlightedIds: Set<string>;
-  /** Citations for the selected highlight section (selected / primary). */
+  /** Citations for the selected highlight section. Used when the line focus is the AI result. */
   focusedIds: Set<string>;
+  /**
+   * Who the connector lines follow. A project, a job line, or the AI result.
+   * Only one of those at a time.
+   */
+  lineFocus: LineFocus | null;
+  /** Select a project or job line. The same row again clears it. */
+  selectLine: (next: { kind: "project" | "jobLine"; id: string }) => void;
+  /** Hand the lines to the current AI result. */
+  focusAnswer: () => void;
   density: ResumeDensity;
   setDensity: (next: ResumeDensity) => void;
   /** Medium-layout page tab (resume vs job). Unused for visibility on wide. */
@@ -85,7 +97,28 @@ export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
   });
   const [askContextItems, setAskContextItems] = useState<AskContextItem[]>([]);
   const [pageBindingsVisible, setPageBindingsVisible] = useState(true);
+  const [lineFocus, setLineFocus] = useState<LineFocus | null>(null);
   const clusterIdRef = useRef<string | null>(null);
+
+  const selectLine = useCallback(
+    (next: { kind: "project" | "jobLine"; id: string }) => {
+      setLineFocus((current) => {
+        if (
+          current &&
+          current.kind === next.kind &&
+          current.id === next.id
+        ) {
+          return null;
+        }
+        return next;
+      });
+    },
+    [],
+  );
+
+  const focusAnswer = useCallback(() => {
+    setLineFocus({ kind: "answer" });
+  }, []);
 
   const clearAskContext = useCallback(() => {
     setAskContextItems([]);
@@ -127,6 +160,10 @@ export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
       setFocusedSectionId(firstSectionId(next));
       // New answer (or clear) → show page bindings again.
       setPageBindingsVisible(Boolean(next));
+      if (next) setLineFocus({ kind: "answer" });
+      else {
+        setLineFocus((current) => (current?.kind === "answer" ? null : current));
+      }
       return;
     }
 
@@ -144,6 +181,7 @@ export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
     setActiveClusterState(null);
     setFocusedSectionId(null);
     setPageBindingsVisible(true);
+    setLineFocus((current) => (current?.kind === "answer" ? null : current));
   }, []);
 
   const value = useMemo<ResumeHighlightContextValue>(() => {
@@ -176,6 +214,9 @@ export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
       setPageBindingsVisible,
       highlightedIds,
       focusedIds,
+      lineFocus,
+      selectLine,
+      focusAnswer,
       density,
       setDensity,
       evidencePage,
@@ -192,6 +233,9 @@ export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
     density,
     evidencePage,
     askContextItems,
+    lineFocus,
+    selectLine,
+    focusAnswer,
     setActiveCluster,
     clearActiveCluster,
     toggleAskContext,

@@ -28,6 +28,7 @@ None — role narrative is in LinkedIn description; project-level detail lives o
 - [S019: Summit application design system](../projects/S019%20-%20Summit%20application%20design%20system.md) — confirmed Experience Designer tenure; Stencil→Lit application DS, tokens, unnamed Figma plugins; internal consumers include branch teller UI.
 - [S020: Summit marketing website rebuild](../projects/S020%20-%20Summit%20marketing%20website%20rebuild.md) — headless Contentful rebuild of brand site; marketing design system #2; CMO/CIO persuasion.
 - [S021: Rates Central](../projects/S021%20-%20Rates%20Central.md) — Contentful-centralized rates + custom app / real-time preview; ~week→minutes rate changes (Scott).
+- [S026: Summit page builder](../projects/S026%20-%20Summit%20page%20builder.md) — Contentful App Framework page list, preview, and jump-to-elements for marketing during the migration. Separate from Rates Central unless he says otherwise.
 
 ## Source references
 

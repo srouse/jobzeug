@@ -1,14 +1,21 @@
 import { createClient, type PlainClientAPI } from "contentful-management";
+import { scorePostingAgainstCatalog } from "@/lib/matching/score";
 import {
+  matchGraphSchema,
   matchingRequirementSchema,
   matchingSnapshotSchema,
 } from "@/lib/matching/schema";
+import { contentfulEditorUrl } from "@/lib/contentful/editor-url";
 import type {
   JobPostingView,
   MatchingRequirement,
   MatchingSnapshot,
   StructuredJobPosting,
 } from "./schema";
+
+type MatchingCatalog = Parameters<
+  typeof scorePostingAgainstCatalog
+>[0]["catalog"];
 
 function typeId(kind: string) {
   return `jobzeug${kind[0]!.toUpperCase()}${kind.slice(1)}`;
@@ -118,6 +125,50 @@ function linkIds(value: unknown): string[] {
     .filter((id): id is string => Boolean(id));
 }
 
+function scoreMatchGraph(input: {
+  snapshot: MatchingSnapshot;
+  lines: Array<{
+    entryId: string;
+    section?: string;
+    theme?: string;
+    matchingRequirement?: MatchingRequirement;
+  }>;
+  catalog: MatchingCatalog;
+}) {
+  const scored = scorePostingAgainstCatalog({
+    posting: {
+      matchingSnapshot: input.snapshot,
+      lines: input.lines,
+    },
+    catalog: input.catalog,
+  });
+  const edges: Array<{
+    projectId: string;
+    lineEntryId: string;
+    points: number;
+  }> = [];
+  for (const project of scored.projects) {
+    for (const contribution of project.contributions) {
+      if (contribution.points <= 0) continue;
+      edges.push({
+        projectId: project.projectId,
+        lineEntryId: contribution.requirementId,
+        points: contribution.points,
+      });
+    }
+  }
+  edges.sort((a, b) =>
+    a.projectId === b.projectId
+      ? a.lineEntryId.localeCompare(b.lineEntryId)
+      : a.projectId.localeCompare(b.projectId),
+  );
+  return {
+    scoringVersion: scored.scoringVersion,
+    vocabularyVersion: input.snapshot.vocabularyVersion,
+    edges,
+  };
+}
+
 export async function publishJobPostingTree(input: {
   sourceUrl: string;
   fullText: string;
@@ -125,6 +176,7 @@ export async function publishJobPostingTree(input: {
   matching?: {
     lineRequirements: MatchingRequirement[];
     snapshot: MatchingSnapshot;
+    catalog: MatchingCatalog;
   };
 }): Promise<{ entryId: string; postingId: string }> {
   const { space, environment, token, locale } = requireCmaEnv();
@@ -205,6 +257,26 @@ export async function publishJobPostingTree(input: {
       locale,
       matchingSnapshotSchema.parse(input.matching.snapshot),
     );
+    fields.matchGraph = localized(
+      locale,
+      matchGraphSchema.parse(
+        scoreMatchGraph({
+          snapshot: input.matching.snapshot,
+          lines: input.structured.lines.map((line, index) => ({
+            entryId: lineIds[index]!,
+            section: line.section,
+            theme: line.theme,
+            matchingRequirement: lineRequirements[index]
+              ? matchingRequirementSchema.parse({
+                  ...lineRequirements[index],
+                  id: lineIds[index],
+                })
+              : undefined,
+          })),
+          catalog: input.matching.catalog,
+        }),
+      ),
+    );
   }
 
   // Drop undefined localized wrappers so CMA does not get { "en-US": undefined }
@@ -278,6 +350,7 @@ export async function loadJobPostingByEntryId(
         kind,
         theme,
         ...(matchingRequirement ? { matchingRequirement } : {}),
+        contentfulUrl: contentfulEditorUrl(id),
       });
     } catch {
       // skip missing child
@@ -320,6 +393,10 @@ export async function loadJobPostingByEntryId(
       : undefined
     : undefined;
 
+  const graphRaw = at("matchGraph");
+  const parsedGraph = graphRaw ? matchGraphSchema.safeParse(graphRaw) : null;
+  const matchGraph = parsedGraph?.success ? parsedGraph.data : undefined;
+
   return {
     entryId: entryIdValue,
     postingId: postingIdValue,
@@ -338,6 +415,7 @@ export async function loadJobPostingByEntryId(
     lines,
     tools,
     ...(matchingSnapshot ? { matchingSnapshot } : {}),
+    ...(matchGraph ? { matchGraph } : {}),
     entryRevisions: {
       jobzeugJobPosting: [
         {

@@ -1,11 +1,21 @@
 import policy from "../../../scripts/contentful/lib/evidence-policy.json";
 import type { CoreCatalog } from "./delivery";
 import { fetchCoreCatalog } from "./delivery";
+import { contentfulEditorUrl } from "./editor-url";
 
 export type ResumeProject = {
   evidenceId: string;
   name: string;
   summary?: string;
+  contentfulUrl?: string;
+  presentation?: {
+    blurb: string;
+    videoUrl: string;
+    metrics: [
+      { value: string; label: string },
+      { value: string; label: string },
+    ];
+  };
 };
 
 export type ResumeRole = {
@@ -17,6 +27,7 @@ export type ResumeRole = {
   summary?: string;
   highlights: string[];
   projects: ResumeProject[];
+  contentfulUrl?: string;
 };
 
 export type ResumeEmployerGroup = {
@@ -24,7 +35,13 @@ export type ResumeEmployerGroup = {
   name: string;
   descriptor?: string;
   roles: ResumeRole[];
+  contentfulUrl?: string;
 };
+
+/** Editor URL for a core evidence entry. Entry ids are `jz-{evidenceId}`. */
+export function contentfulAppEntryUrl(evidenceId: string): string | undefined {
+  return contentfulEditorUrl(`jz-${evidenceId}`);
+}
 
 export type ResumeViewModel = {
   name: string;
@@ -67,6 +84,8 @@ export function assembleResume(catalog: CoreCatalog): ResumeViewModel {
         evidenceId: project.evidenceId,
         name: project.name,
         summary: project.summary,
+        contentfulUrl: contentfulAppEntryUrl(project.evidenceId),
+        presentation: catalog.presentations.get(project.evidenceId),
       }))
       .sort((a, b) => a.name.localeCompare(b.name));
 
@@ -76,6 +95,7 @@ export function assembleResume(catalog: CoreCatalog): ResumeViewModel {
         evidenceId: employer.evidenceId,
         name: employer.name,
         descriptor: employer.descriptor,
+        contentfulUrl: contentfulAppEntryUrl(employer.evidenceId),
         roles: [],
       };
       byEmployer.set(employer.evidenceId, group);
@@ -89,6 +109,7 @@ export function assembleResume(catalog: CoreCatalog): ResumeViewModel {
       summary: role.summary,
       highlights: role.highlights ?? [],
       projects,
+      contentfulUrl: contentfulAppEntryUrl(role.evidenceId),
     });
   }
 

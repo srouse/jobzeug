@@ -7,7 +7,8 @@ project_origin: employment
 ranking_eligible: true
 exclusion_reason: null
 parent_project_id: null
-related_project_ids: []
+related_project_ids:
+  - S027
 role_links:
   - id: R006
     relationship: delivery
@@ -26,10 +27,10 @@ year_basis: estimated
 year_note: Estimated within R006 tenure (Nov 2019–Aug 2020); project-specific calendar not supplied.
 delivery_stage: prototype
 annotation:
-  status: draft
-  vocabulary_version: "1.0.0"
-  reviewed_by: null
-  reviewed_at: null
+  status: reviewed
+  vocabulary_version: "1.1.0"
+  reviewed_by: Scott
+  reviewed_at: "2026-09-27"
 public_disclosure: needs_review
 evidence:
   - id: S023-E001
@@ -57,9 +58,9 @@ evidence:
       - Do not map this claim to modern LLM/AI workflow concepts; the account is explicitly pre-LLM.
     public_disclosure: needs_review
     review:
-      status: proposed
-      reviewed_by: null
-      reviewed_at: null
+      status: approved
+      reviewed_by: Scott
+      reviewed_at: "2026-09-27"
   - id: S023-E002
     statement: Built the ListenAssist call-center prototype (React) that listened on the telephone line to
       agent–customer conversation and surfaced automatic answers drawn from the R&D custom ML database.
@@ -85,9 +86,9 @@ evidence:
       - Integration with the ML database is consumption only; no API or model authorship is claimed.
     public_disclosure: needs_review
     review:
-      status: proposed
-      reviewed_by: null
-      reviewed_at: null
+      status: approved
+      reviewed_by: Scott
+      reviewed_at: "2026-09-27"
   - id: S023-E003
     statement: Shadowed real call-center employees, then had them try ListenAssist in mimicked situations;
       was surprised they strongly disliked terse answers and needed paragraph-level conceptual context to
@@ -115,9 +116,9 @@ evidence:
         customer-facing sales/discovery work.
     public_disclosure: needs_review
     review:
-      status: proposed
-      reviewed_by: null
-      reviewed_at: null
+      status: approved
+      reviewed_by: Scott
+      reviewed_at: "2026-09-27"
 concept_proposals:
   - label: Pre-LLM machine learning productization
     category: skill
@@ -145,6 +146,7 @@ Evidence: Scott’s direct account, not yet supported by inspected artifacts
 - Employer: [C004 American Family Insurance](../employers/C004-american-family-insurance.md)
 - Collaborators: PhD computer scientists on R&D (owned the custom ML database; names unknown). Scott’s lane was React front-end / UX prototyping and field user research.
 - Customers / clients: None named.
+- Other half of the same job: [S027 Design System Guidance](S027%20-%20Design%20System%20Guidance.md). Do not merge.
 
 ## Resume summary
 

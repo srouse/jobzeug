@@ -25,7 +25,7 @@ None — role narrative is in LinkedIn description; project-level detail lives o
 
 ## Linked projects
 
-No captured projects linked yet. Resume bullets are discovery leads, not completed project accounts.
+- [S030 iPad launch and baseline usability](../projects/S030%20-%20iPad%20launch%20and%20baseline%20usability.md) — the whole StudyBlue experience. R016 and R017 are its phases, not extra jobs.
 
 ## Source references
 

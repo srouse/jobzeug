@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S009
-title: AI content and component binding
+title: AI binding research
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -30,7 +30,7 @@ year_note: Estimated from R001 (February 2026–present as of September 2026); p
 delivery_stage: prototype
 annotation:
   status: reviewed
-  vocabulary_version: 1.0.0
+  vocabulary_version: "1.1.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -85,10 +85,10 @@ evidence:
       reviewed_at: "2026-09-26"
 concept_proposals: []
 ---
-# S009: AI content and component binding
+# S009: AI binding research
 
 Captured: September 21, 2026
-Status: Working experimental capability; integration into Contentful for Figma pending safe metadata storage
+Status: Working title as of September 27, 2026. Innovation prototype. Learnings are real; he calls it a successful research project. Not integrated into Contentful for Figma; safe metadata storage is still unresolved.
 Evidence: Scott's direct account; no code, metadata samples, evaluation results, or presentation artifacts inspected
 
 ## Resume connection
@@ -101,11 +101,13 @@ Evidence: Scott's direct account; no code, metadata samples, evaluation results,
 
 ## Resume summary
 
-I researched AI-assisted content and component binding—semantic metadata and agent-assisted repair patterns that help map structured content to design properties—still exploratory and unshipped beyond Figma/Contentful storage.
+AI binding research, an innovation prototype: semantic metadata and repair patterns for mapping structured content to components. The learnings are real. It is not integrated into the shipped widget.
 
 ## Account summary
 
 <a id="source-account"></a>
+
+On September 27, 2026 he set the working title to **AI binding research**. He calls it an **innovation prototype**: the learnings are real, and he treats it as a successful research project. It remains a prototype, not an integration into the shipped widget.
 
 Faithful summary of Scott's September 21 account, not a quotation:
 

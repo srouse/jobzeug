@@ -29,7 +29,7 @@ year_note: Estimated from R001 (February 2026–present as of September 2026); p
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: 1.0.0
+  vocabulary_version: "1.1.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -193,7 +193,7 @@ Public Figma widget connecting live structured content to components; binding/da
 - Binding model: multi-property joins, dates, other transforms — list capabilities.
 - Security / PM / marketing path details; why outside product.
 - Usage numbers and any qualitative feedback despite low marketing.
-- Dedicated Experience Orchestration project for fair comparison.
+- Dedicated comparison stays on this record; the initiative is now [S025 Experience Orchestration (ExO)](S025%20-%20Experience%20Orchestration%20%28ExO%29.md).
 
 ## Candidate uses
 
@@ -205,6 +205,17 @@ Initial capture: SE-driven v1, content-status blueprint unlock, CIA production p
 
 ## Addition — September 21, 2026
 
-Scott described a separate AI binding exploration for the widget: [S009 AI content and component binding](S009%20-%20AI%20content%20and%20component%20binding.md). It uses semantic metadata from content entries and component examples to improve mappings and explore repair. Scott reports consistent experimental results, but this capability is **not yet integrated into the shipped widget**: safe metadata storage remains unresolved. See S009 for the full account.
+Scott described a separate AI binding exploration for the widget: [S009 AI binding research](S009%20-%20AI%20binding%20research.md). Working title. It uses semantic metadata from content entries and component examples to improve mappings and explore repair. He calls it a successful research project and an innovation prototype. It is **not yet integrated into the shipped widget**: safe metadata storage remains unresolved. See S009 for the full account.
 
 He presented that work during [S010 Berlin prototype exploration](S010%20-%20Berlin%20prototype%20exploration.md); the broader Berlin account is pending. The existing widget terminology is retained from his earlier explicit correction; his latest narration also called it a plugin.
+
+## Presentation
+
+Blurb: I built and shipped Contentful for Figma, a public widget that binds live Contentful fields to Figma components—including content-status “blueprint” outlines—and operationalized it through product marketing, PM, and security outside the core product.
+
+Video: 2rAtcKDtRArNx6ZwePxW29
+
+- value: 2–3 days
+  label: Initial v1
+- value: Public
+  label: Live Figma widget

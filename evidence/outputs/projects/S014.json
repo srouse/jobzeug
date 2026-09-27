@@ -4,12 +4,12 @@
   "roles": [
     "R003"
   ],
-  "name": "Design tokens explained (Contentful blog)",
+  "name": "Design tokens explained (article)",
   "summary": "I wrote Contentful’s public guide on layered design tokens—primitive, semantic, and component—using color as the worked example for distribution across Figma, code, and Studio.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S014",
-    "title": "Design tokens explained (Contentful blog)",
+    "title": "Design tokens explained (article)",
     "record_kind": "project",
     "project_origin": "employment",
     "ranking_eligible": true,
@@ -46,7 +46,7 @@
       "status": "reviewed",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.0.0"
+      "vocabulary_version": "1.1.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [

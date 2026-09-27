@@ -4,12 +4,12 @@
   "roles": [
     "R004"
   ],
-  "name": "State Farm tokens persuasion",
-  "summary": "I built the executive persuasion case—and landing deck—that got State Farm leadership to buy into design tokens as the foundation for the next-generation system.",
+  "name": "State Farm tokens",
+  "summary": "Persuaded State Farm to use design tokens and, with a Google teammate, created the initial primitive and semantic template for the next-generation system. He believes that model is mostly what they still use. Inverse mode was built in code as part of this work, then stepped back because it was more than the implementation team would maintain.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S005",
-    "title": "State Farm tokens persuasion",
+    "title": "State Farm tokens",
     "record_kind": "project",
     "project_origin": "employment",
     "ranking_eligible": true,
@@ -41,12 +41,12 @@
     "year": 2023,
     "year_basis": "estimated",
     "year_note": "Estimated as 2023, the main calendar year of R004 (July 2023–January/February 2024); exact project timing is not established.",
-    "delivery_stage": "unknown",
+    "delivery_stage": "mixed",
     "annotation": {
       "status": "reviewed",
-      "reviewed_by": "Codex",
-      "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.0.0"
+      "reviewed_by": "Scott",
+      "reviewed_at": "2026-09-27",
+      "vocabulary_version": "1.1.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -78,6 +78,74 @@
           "status": "approved",
           "reviewed_by": "Codex",
           "reviewed_at": "2026-09-26"
+        }
+      },
+      {
+        "id": "S005-E002",
+        "statement": "With a Google teammate, created the initial primitive and semantic token template for State Farm's next-generation design system, through many variations aimed at designer needs and later maintenance.",
+        "concept_ids": [
+          "local:design-token-engineering",
+          "local:design-system-development"
+        ],
+        "ownership": "contributor",
+        "scope": "organization",
+        "delivery_stage": "unknown",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e002",
+            "locator": "Addition September 27, 2026 — token template",
+            "supports": "He created the initial token template with a teammate from Google, including the first primitive and semantic layers."
+          }
+        ],
+        "limitations": [
+          "The Google teammate co-authored the variations. He is the design-system expert named on S006. His name is unknown.",
+          "He believes the tokens are probably mostly modeled the same way now and that it was a good solution. A public page shows a State Farm design system called SFDS still exists. It does not show that the primitive and semantic layers match this template, so product adoption is not tagged.",
+          "The Figma plugin and component craft stay on S006. This claim is the token model, not a token pipeline.",
+          "Many variations is uncounted."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S005-E003",
+        "statement": "Built an inverse-mode experiment in code, where a light-mode input on a dark background kept a light surface and turned its label white, then stepped it back after presenting it because the effort outweighed the value for the implementation team.",
+        "concept_ids": [
+          "local:design-token-engineering",
+          "local:prototyping",
+          "local:technical-prototype",
+          "local:front-end-development",
+          "local:interaction-design",
+          "local:decision-making",
+          "local:speaking"
+        ],
+        "ownership": "contributor",
+        "scope": "single_team",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e003",
+            "locator": "Addition September 27, 2026 — inverse mode",
+            "supports": "The inverse-mode behavior, the code solution, the presentation, and the decision to step it back."
+          }
+        ],
+        "limitations": [
+          "Inverse mode did not ship. It stays on this project as the overreach they dropped.",
+          "Language and framework were not named.",
+          "The implementation team's reaction is his account of the presentation, not a recorded vote.",
+          "The Material comparison is his judgment about Google's design system. He does not claim he worked on Material.",
+          "Value versus effort is qualitative."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
         }
       }
     ],

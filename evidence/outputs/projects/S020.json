@@ -17,7 +17,8 @@
     "parent_project_id": null,
     "related_project_ids": [
       "S019",
-      "S021"
+      "S021",
+      "S026"
     ],
     "role_links": [
       {
@@ -45,7 +46,7 @@
       "status": "reviewed",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.0.0"
+      "vocabulary_version": "1.1.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [

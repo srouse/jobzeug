@@ -1,0 +1,135 @@
+{
+  "evidenceId": "S030",
+  "employer": "C009",
+  "roles": [
+    "R012",
+    "R017",
+    "R016"
+  ],
+  "name": "iPad launch and baseline usability",
+  "summary": "Joined StudyBlue as an iOS developer without prior Objective-C, learned it quickly, and shipped a fully custom card flipper because Apple’s default components could not do that interaction. He also raised a usability floor — buttons that did not look like buttons — and got designers and developers talking.",
+  "matchingMetadata": {
+    "schema_version": "1.1",
+    "project_id": "S030",
+    "title": "iPad launch and baseline usability",
+    "record_kind": "project",
+    "project_origin": "employment",
+    "ranking_eligible": true,
+    "exclusion_reason": null,
+    "parent_project_id": null,
+    "related_project_ids": [],
+    "role_links": [
+      {
+        "id": "R012",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Resume aggregate for the whole StudyBlue tenure. This project is that entire experience. R016 and R017 are its two phases, not extra jobs."
+      },
+      {
+        "id": "R017",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "He started as an iOS developer. Source dates September 2011–April 2012."
+      },
+      {
+        "id": "R016",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Usability work and a more prominent voice. Source dates April 2012–November 2012."
+      }
+    ],
+    "employer_links": [
+      {
+        "id": "C009",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "StudyBlue employed him. No external customer or client is named."
+      }
+    ],
+    "customer_ids": [],
+    "client_ids": [],
+    "year": 2012,
+    "year_basis": "estimated",
+    "year_note": "The account does not date the work. 2012 sits inside the R012 tenure (September 2011–November 2012). The role record’s July 2012 iPad launch is a LinkedIn claim, not a date he stated here.",
+    "delivery_stage": "production",
+    "annotation": {
+      "status": "reviewed",
+      "reviewed_by": "Scott",
+      "reviewed_at": "2026-09-27",
+      "vocabulary_version": "1.1.0"
+    },
+    "public_disclosure": "needs_review",
+    "evidence": [
+      {
+        "id": "S030-E001",
+        "statement": "Learned Objective-C on the job and rewrote the card flipper as a fully custom control because Apple’s default components could not do that interaction. It shipped in the iPad app and he says people used it heavily.",
+        "concept_ids": [
+          "local:programming",
+          "local:front-end-development",
+          "local:interaction-design",
+          "local:production-release",
+          "local:product-adoption",
+          "local:ios"
+        ],
+        "ownership": "lead",
+        "scope": "external_audience",
+        "delivery_stage": "production",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#source-account",
+            "locator": "Account summary — iPad and the card flipper",
+            "supports": "Custom rewrite, ship, and heavy use. He had not written Objective-C before this job."
+          }
+        ],
+        "limitations": [
+          "“Used the hell out of it” is his characterization, not a measured usage figure.",
+          "“Some 5 million users” conflicts with the role record’s “nearly two million.” Neither is measured.",
+          "He was instrumental in the iPad release. Sole ownership of the whole app is not claimed."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S030-E002",
+        "statement": "Raised a usability floor with practical checks that did not require formal tests, including buttons that did not look like buttons, and got designers and developers talking, which he ties to some code efficiencies.",
+        "concept_ids": [
+          "local:interaction-design",
+          "local:visual-interface-design",
+          "local:persuasion",
+          "local:coordination",
+          "local:cross-functional-work",
+          "local:accessibility-principles"
+        ],
+        "ownership": "lead",
+        "scope": "organization",
+        "delivery_stage": "production",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#source-account",
+            "locator": "Account summary — baseline usability",
+            "supports": "Baseline affordance checks, the button example, designer–developer communication, and a more prominent voice. He says raising that floor was a huge improvement."
+          }
+        ],
+        "limitations": [
+          "These checks are not usability testing. No tasks, participants, or observations are described.",
+          "Accessibility here is his point that people were not thinking about it, plus recognizable controls. No audit or standard is claimed.",
+          "“I hadn’t influenced on everything” is ambiguous and is not read as ownership of every change.",
+          "Code efficiencies are unnamed."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      }
+    ],
+    "concept_proposals": []
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "evidenceId": "S025",
+  "employer": "C001",
+  "roles": [
+    "R001"
+  ],
+  "name": "Experience Orchestration (ExO)",
+  "summary": "Researching and prototyping to guide Contentful’s Experience Orchestration (ExO), the planned next generation of Studio. The two parts he names are Data Assemblies and a design-system assembly; both are required to compose a page. His prototypes include a data-assembly visualizer, design-system UI prototypes, and a separate interface on Contentful’s API that shows stateful components.",
+  "matchingMetadata": {
+    "schema_version": "1.1",
+    "project_id": "S025",
+    "title": "Experience Orchestration (ExO)",
+    "record_kind": "project",
+    "project_origin": "employment",
+    "ranking_eligible": true,
+    "exclusion_reason": null,
+    "parent_project_id": null,
+    "related_project_ids": [
+      "S001"
+    ],
+    "role_links": [
+      {
+        "id": "R001",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Scott placed this on his current Contentful role, Senior Product Architect (the latest role, listed first on the role index)."
+      }
+    ],
+    "employer_links": [
+      {
+        "id": "C001",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Contentful is building the product. Scott's account is research, feedback, and prototyping to guide it, not ownership of the product build."
+      }
+    ],
+    "customer_ids": [],
+    "client_ids": [],
+    "year": 2026,
+    "year_basis": "estimated",
+    "year_note": "Project calendar was not supplied. Estimated inside R001 (February 2026–present as of September 2026).",
+    "delivery_stage": "prototype",
+    "annotation": {
+      "status": "reviewed",
+      "reviewed_by": "Scott",
+      "reviewed_at": "2026-09-27",
+      "vocabulary_version": "1.1.0"
+    },
+    "public_disclosure": "needs_review",
+    "evidence": [
+      {
+        "id": "S025-E001",
+        "statement": "Researches and gives feedback, on his own, to guide how Contentful's Experience Orchestration matures. Contentful is building the product, including Data Assemblies. He says both Data Assemblies and a design-system assembly are required to compose a page or a drag-and-drop UI, and he gives a lot of feedback so the design-system side can align with other teams' design systems.",
+        "concept_ids": [
+          "local:systems-analysis",
+          "local:headless-content-management",
+          "local:developer-and-designer-tools"
+        ],
+        "ownership": "sole",
+        "scope": "organization",
+        "delivery_stage": "concept",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e001",
+            "locator": "Account summary — guiding role and the two parts",
+            "supports": "The guiding work is just him, Contentful is creating the product, both parts are required to execute a page, and feedback is concentrated on aligning the design-system assembly with other design systems."
+          }
+        ],
+        "limitations": [
+          "He does not claim the product implementation. Contentful is adding Data Assemblies.",
+          "No product decision is recorded, so product-direction-influence is not tagged.",
+          "Next.js is his example of how developers usually put API output into a UI, not a stack he claims for these prototypes.",
+          "Design-system feedback is in this claim. design-system-development is not tagged, because this is feedback rather than authorship of the product's design system.",
+          "Everyone's design systems is the alignment requirement he states, not a counted set of teams."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S025-E002",
+        "statement": "Prototyped a visualizer for data assemblies, and plans to spin that visualizer out as its own project later.",
+        "concept_ids": [
+          "local:prototyping",
+          "local:technical-prototype",
+          "local:headless-content-management"
+        ],
+        "ownership": "sole",
+        "scope": "individual",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e002",
+            "locator": "Account summary — data-assembly visualizer",
+            "supports": "He prototyped a visualizer for data assemblies and said he would spin it out later."
+          }
+        ],
+        "limitations": [
+          "The visualizer is not attached or inspected. Fidelity is not described.",
+          "It stays on this record until he opens a separate project.",
+          "Content-to-UI assembly is proposed, not an approved concept. Headless content management is the closest approved knowledge tag."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S025-E003",
+        "statement": "Prototyped several interfaces to explain the design-system side of Experience Orchestration.",
+        "concept_ids": [
+          "local:prototyping",
+          "local:technical-prototype",
+          "local:design-system-development"
+        ],
+        "ownership": "sole",
+        "scope": "unknown",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e003",
+            "locator": "Account summary — design-system prototypes",
+            "supports": "Several prototypes were made to explain or talk about the UI and design-system part."
+          }
+        ],
+        "limitations": [
+          "Count, fidelity, and audience are not given.",
+          "These explain the design-system assembly. They are not claimed as the product UI.",
+          "Design-side versus code-side contribution is not separated.",
+          "The account does not say whether these are the same objects as the earlier from-scratch builds."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S025-E004",
+        "statement": "Built the system from scratch several times before ExO, meaning the data-assembly and design-system sides he describes for this product.",
+        "concept_ids": [
+          "local:design-system-development",
+          "local:headless-content-management"
+        ],
+        "ownership": "sole",
+        "scope": "unknown",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e004",
+            "locator": "Account summary — builds before ExO",
+            "supports": "He says he built the system from scratch several times even before ExO."
+          }
+        ],
+        "limitations": [
+          "Those builds are not named. They may already be claimed on S001 or other records. This claim does not identify them.",
+          "Several is uncounted, and the dates before ExO are not given.",
+          "Shipping is not claimed. Fidelity is not described, so technical-prototype is not tagged."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S025-E005",
+        "statement": "Reproduced what Contentful's API does and built an entirely different interface on top of it to show how to use stateful components.",
+        "concept_ids": [
+          "local:api-integration",
+          "local:contentful",
+          "local:prototyping",
+          "local:technical-prototype",
+          "local:front-end-development",
+          "local:interaction-design"
+        ],
+        "ownership": "sole",
+        "scope": "individual",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e005",
+            "locator": "Account summary — API reproduction and stateful components",
+            "supports": "He reproduced their API and put a different interface on it that shows stateful components, which he calls one of his big themes."
+          }
+        ],
+        "limitations": [
+          "He reproduced API behavior in his own prototype. He does not claim he authored Contentful's API.",
+          "Language and framework were not named.",
+          "Specific states and flows are not itemized. Stateful components is his theme, and that narrower meaning is only a concept proposal.",
+          "The interface is not attached or inspected."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S025-E006",
+        "statement": "Made a series of PDFs, during the large prototypes, that visualize staple components and repeat why design properties are not a thing.",
+        "concept_ids": [
+          "local:technical-writing",
+          "local:technical-article"
+        ],
+        "ownership": "sole",
+        "scope": "unknown",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e006",
+            "locator": "Account summary — staple-component PDFs",
+            "supports": "PDFs in the middle of the prototypes visualize staple components and argue that design properties are not a thing."
+          }
+        ],
+        "limitations": [
+          "The PDFs are not attached. Public release is not claimed.",
+          "How many PDFs is not given.",
+          "The design-properties argument is his thesis in those PDFs, not a measured outcome.",
+          "design-system-development is not tagged. The PDFs argue about staple components and usage rules; they are not claimed as authorship of a design system."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S025-E007",
+        "statement": "Wrote many additional documents along the way. Count, titles, and topics are not recorded.",
+        "concept_ids": [
+          "local:technical-writing",
+          "local:technical-article"
+        ],
+        "ownership": "sole",
+        "scope": "unknown",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e007",
+            "locator": "Account summary — write-ups",
+            "supports": "He says he created an innumerable amount of write-ups and documents along the way."
+          }
+        ],
+        "limitations": [
+          "Innumerable is his wording, not a count.",
+          "Topics are not stated, so this does not establish a particular technical subject.",
+          "Files are not attached.",
+          "He listed these separately from the PDFs. Overlap between the two sets is not ruled out."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      }
+    ],
+    "concept_proposals": [
+      {
+        "label": "Content-to-UI assembly",
+        "category": "skill",
+        "definition": "Shaping structured content into the fields a UI component needs, in a layer between the CMS API and the rendered interface.",
+        "reason": "Data Assemblies and the visualizer are this middle step. content-modeling is defining types, and api-integration is connecting. Neither is the transformation. E001 and E002 describe it without an approved id."
+      },
+      {
+        "label": "Stateful component interfaces",
+        "category": "knowledge",
+        "definition": "Components whose behavior depends on retained interface state, and how to use that state in a UI.",
+        "reason": "E005 is an alternate interface made to show stateful components. interaction-design covers states only in general, and web-component-architecture was not claimed."
+      },
+      {
+        "label": "Product guidance",
+        "category": "work_activity",
+        "definition": "Research, feedback, and prototypes meant to steer a product while someone else builds it, without a recorded product decision.",
+        "reason": "product-direction-influence requires an affected decision. E001 is Scott's guiding role, not a recorded Contentful decision."
+      }
+    ]
+  }
+}

@@ -29,6 +29,8 @@ Researched September 19, 2026. Company background is independent of Scott’s ex
 - [S019: Summit application design system](../projects/S019%20-%20Summit%20application%20design%20system.md) — Summit delivery; [R005](../roles/R005-summit-experience-designer.md).
 - [S020: Summit marketing website rebuild](../projects/S020%20-%20Summit%20marketing%20website%20rebuild.md) — Summit delivery; [R005](../roles/R005-summit-experience-designer.md); related S019.
 - [S021: Rates Central](../projects/S021%20-%20Rates%20Central.md) — Summit delivery; [R005](../roles/R005-summit-experience-designer.md); related S020/S019.
+- [S026: Summit page builder](../projects/S026%20-%20Summit%20page%20builder.md) — Summit delivery; [R005](../roles/R005-summit-experience-designer.md); related S020.
+- [S024: Loan Visualizer (LOUI)](../projects/S024%20-%20Loan%20Visualizer%20%28LOUI%29.md) — Summit delivery; [R007](../roles/R007-summit-design-innovation.md); Scott says it underpins later [S021](../projects/S021%20-%20Rates%20Central.md).
 - [S011: Figma Design System widget (personal)](../projects/S011%20-%20Figma%20Design%20System%20widget.md) — **personal**, not Summit work; linked here only because Scott places timing in the first Summit tenure ([R007](../roles/R007-summit-design-innovation.md)).
 - [S012: Presentation Deck widget (personal)](../projects/S012%20-%20Presentation%20Deck%20widget.md) — **personal**, not Summit work; Summit timespan date anchor via [R007](../roles/R007-summit-design-innovation.md).
 - [S013: Contentful Content Type widget (personal)](../projects/S013%20-%20Contentful%20Content%20Type%20widget.md) — **personal**, not Summit work; Summit timespan date anchor via [R007](../roles/R007-summit-design-innovation.md).

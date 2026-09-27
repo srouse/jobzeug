@@ -32,10 +32,11 @@ async function omitRemovedFields(client, params, contentTypeId, existing, desire
   return client.contentType.publish({ ...params, contentTypeId }, omitted);
 }
 
-export async function applySchema({ dryRun = false, matchingOnly = false } = {}) {
+export async function applySchema({ dryRun = false, matchingOnly = false, only = null } = {}) {
   // jobLine/jobTool before jobPosting (parent links to children).
   const types = [...coreContentTypes(), ...jobPostingContentTypes()].filter(type =>
-    !matchingOnly || ['jobzeugMatchingVocabulary', 'jobzeugProject'].includes(type.id));
+    (only ? type.id === only : true) &&
+    (!matchingOnly || ['jobzeugMatchingVocabulary', 'jobzeugProject'].includes(type.id)));
   if (dryRun) {
     const { space, environment } = contentfulEnv({ required: false });
     return { space: space || '(unset)', environment: environment || '(unset)', planned: types.map(type => type.id) };
@@ -81,8 +82,10 @@ export async function applySchema({ dryRun = false, matchingOnly = false } = {})
 }
 
 const dryRun = process.argv.includes('--dry-run');
+const onlyArg = process.argv.find(arg => arg.startsWith('--only='));
+const only = onlyArg ? onlyArg.slice('--only='.length) : null;
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
-if (isMain) applySchema({ dryRun, matchingOnly: process.argv.includes('--matching-only') }).then(result => {
+if (isMain) applySchema({ dryRun, matchingOnly: process.argv.includes('--matching-only'), only }).then(result => {
   if (dryRun) {
     console.log(`Would apply ${result.planned.length} content types to ${result.space}/${result.environment}:`);
     for (const id of result.planned) console.log(`  ${id}`);

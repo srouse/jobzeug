@@ -1,0 +1,119 @@
+{
+  "evidenceId": "S028",
+  "employer": "C006",
+  "roles": [
+    "R009"
+  ],
+  "name": "Startup design consulting",
+  "summary": "Consulted with startups on how a business model could become an application and how to validate it before spending early time without market fit. Prototyped in HTML, React, and iOS, including full-resolution work, across dozens of companies that ranged from very successful to ones that never got funding.",
+  "matchingMetadata": {
+    "schema_version": "1.1",
+    "project_id": "S028",
+    "title": "Startup design consulting",
+    "record_kind": "project",
+    "project_origin": "employment",
+    "ranking_eligible": true,
+    "exclusion_reason": null,
+    "parent_project_id": null,
+    "related_project_ids": [
+      "S029"
+    ],
+    "role_links": [
+      {
+        "id": "R009",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Scott placed this on the Earthling UX/UI designer role, the tenure just after OpenHomes. One catch-all. Do not split it into individual startup projects unless he asks."
+      }
+    ],
+    "employer_links": [
+      {
+        "id": "C006",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Earthling Interactive employed him. The startups were the organizations he consulted. He did not name them, so they are not client records."
+      }
+    ],
+    "customer_ids": [],
+    "client_ids": [],
+    "year": 2016,
+    "year_basis": "estimated",
+    "year_note": "No single delivery year. The catch-all covers the R009 tenure (August 2014–August 2018). 2016 is a midpoint of that tenure, not a dated launch.",
+    "delivery_stage": "mixed",
+    "annotation": {
+      "status": "reviewed",
+      "reviewed_by": "Scott",
+      "reviewed_at": "2026-09-27",
+      "vocabulary_version": "1.1.0"
+    },
+    "public_disclosure": "needs_review",
+    "evidence": [
+      {
+        "id": "S028-E001",
+        "statement": "Consulted with startups on how a business model could become an application and how to validate it before early time was spent without market fit. He did not originate the idea.",
+        "concept_ids": [
+          "local:technical-discovery",
+          "local:interaction-design",
+          "local:cross-functional-work"
+        ],
+        "ownership": "contributor",
+        "scope": "external_audience",
+        "delivery_stage": "mixed",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#source-account",
+            "locator": "Account summary — what he was asked to do",
+            "supports": "Consulting on application fit and validation. The startups owned the idea."
+          }
+        ],
+        "limitations": [
+          "“Dozens and dozens” is his characterization, not a counted list.",
+          "Startups are unnamed by his request. No client records.",
+          "Healthcare, finance, and education are domains he named, not a single industry tag."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S028-E002",
+        "statement": "Prototyped those engagements in HTML, React, and iOS (Objective-C and Swift), including full-resolution work.",
+        "concept_ids": [
+          "local:prototyping",
+          "local:technical-prototype",
+          "local:html",
+          "local:react",
+          "local:front-end-development",
+          "local:visual-interface-design",
+          "local:ios"
+        ],
+        "ownership": "lead",
+        "scope": "external_audience",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#source-account",
+            "locator": "Account summary — how he prototyped",
+            "supports": "HTML, React, and iOS prototypes, including full resolution. He later confirmed React."
+          }
+        ],
+        "limitations": [
+          "Full resolution is his description of fidelity, not an inspected file.",
+          "Company valuations he mentioned are not measurements he made."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      }
+    ],
+    "concept_proposals": []
+  }
+}

@@ -24,7 +24,7 @@ Researched September 19, 2026. Company background is independent of Scott’s ex
 
 ## Projects
 
-No captured projects linked yet.
+- [S029 Launch of a new business](../projects/S029%20-%20Launch%20of%20a%20new%20business.md)
 
 ## Sources
 

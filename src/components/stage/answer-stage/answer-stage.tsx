@@ -12,6 +12,7 @@ import type { AnswerSection } from "@/lib/themed-answer";
 
 import { AnswerStageBody } from "./answer-stage-body";
 import { AnswerStageFooter } from "./answer-stage-footer";
+import { ConnectionHub } from "./connection-hub";
 import styles from "./answer-stage.module.css";
 import type { ResumeViewModel } from "@/lib/contentful/resume-model";
 
@@ -21,16 +22,19 @@ import type { ResumeViewModel } from "@/lib/contentful/resume-model";
 export function AnswerStage({
   hidden = false,
   resume = null,
+  onViewProject,
 }: {
   hidden?: boolean;
   /** Already-loaded resume — used to label cited projects (no extra fetch). */
   resume?: ResumeViewModel | null;
+  onViewProject: (projectId: string) => void;
 }) {
   const [input, setInput] = useState("");
   const {
     activeCluster,
     focusedSectionId,
     setFocusedSectionId,
+    focusAnswer,
     pageBindingsVisible,
     setPageBindingsVisible,
     askContextItems,
@@ -101,7 +105,9 @@ export function AnswerStage({
       inert={hidden || undefined}
     >
       <article className={styles.card} data-answer-stage-card>
-        <AnswerStageBody
+        <ConnectionHub resume={resume} onViewProject={onViewProject} />
+        <div className={styles.answer}>
+          <AnswerStageBody
           showLoading={showLoading}
           sessionLoading={sessionLoading}
           liveElapsedLabel={liveElapsedLabel}
@@ -120,11 +126,15 @@ export function AnswerStage({
             setPageBindingsVisible(!pageBindingsVisible)
           }
           onClear={handleClear}
-          onOpenSection={(id) => setFocusedSectionId(id || null)}
+          onOpenSection={(id) => {
+            const next = id || null;
+            setFocusedSectionId(next);
+            if (next) focusAnswer();
+          }}
           onPrompt={submitResumeQuestion}
         />
 
-        <AnswerStageFooter
+          <AnswerStageFooter
           showComposer={showComposer}
           askContextItems={askContextItems}
           onRemoveContext={removeAskContext}
@@ -133,7 +143,8 @@ export function AnswerStage({
           onResumeSubmit={handleResumeSubmit}
           canSubmitResume={canSubmitResume}
           busy={busy}
-        />
+          />
+        </div>
       </article>
     </div>
   );

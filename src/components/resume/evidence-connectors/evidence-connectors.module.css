@@ -15,7 +15,7 @@
 }
 
 .lineDimmed {
-  stroke: var(--jz-semantic-color-border-default, #e5e5e5);
+  stroke: var(--jz-semantic-color-border-subtle, #e5e5e5);
   stroke-width: 2px;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -27,6 +27,6 @@
 }
 
 .dotDimmed {
-  fill: var(--jz-semantic-color-border-default, #e5e5e5);
+  fill: var(--jz-semantic-color-border-subtle, #e5e5e5);
   stroke: none;
 }

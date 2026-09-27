@@ -26,7 +26,7 @@ Researched September 19, 2026. Company background is independent of Scott’s ex
 
 ## Projects
 
-No captured projects linked yet.
+- [S030 iPad launch and baseline usability](../projects/S030%20-%20iPad%20launch%20and%20baseline%20usability.md)
 
 ## Sources
 

@@ -262,6 +262,78 @@ async function compressProjects(matchingProjects) {
   return out;
 }
 
+const PLACEHOLDER = 'REPLACE';
+
+function parsePresentationMetrics(block) {
+  const metrics = [];
+  const lines = block.split('\n');
+  for (let i = 0; i < lines.length; i += 1) {
+    const valueMatch = lines[i].match(/^- value:\s*(.*)$/);
+    if (!valueMatch) continue;
+    const labelMatch = lines[i + 1]?.match(/^\s*label:\s*(.*)$/);
+    metrics.push({
+      value: valueMatch[1].trim(),
+      label: labelMatch ? labelMatch[1].trim() : '',
+    });
+    if (labelMatch) i += 1;
+  }
+  return metrics;
+}
+
+function isPresentationStub(blurb, video, metrics) {
+  const blank = (value) => !value || value === PLACEHOLDER;
+  return blank(video) || blank(blurb)
+    || metrics.some((metric) => blank(metric.value) || blank(metric.label));
+}
+
+/** Complete ## Presentation section, or null when the section is absent or still a stub. */
+export function presentationFromMarkdown(projectId, md) {
+  const block = section(md, 'Presentation');
+  if (!block) return null;
+  const blurb = block.match(/^Blurb:\s*(.*)$/m)?.[1]?.trim() ?? '';
+  const video = block.match(/^Video:\s*(.*)$/m)?.[1]?.trim() ?? '';
+  const metrics = parsePresentationMetrics(block);
+  if (isPresentationStub(blurb, video, metrics)) return null;
+  if (metrics.length !== 2) {
+    throw new Error(`Invalid presentation for ${projectId} (expected two metric pairs)`);
+  }
+  const fields = {
+    evidenceId: `${projectId}-presentation`,
+    project: projectId,
+    blurb,
+    video,
+    metricOneValue: metrics[0].value,
+    metricOneLabel: metrics[0].label,
+    metricTwoValue: metrics[1].value,
+    metricTwoLabel: metrics[1].label,
+  };
+  const parsed = schemas.projectPresentation.safeParse(fields);
+  if (!parsed.success) {
+    const detail = parsed.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join('; ');
+    throw new Error(`Invalid presentation for ${projectId} (${detail})`);
+  }
+  return parsed.data;
+}
+
+async function compressPresentations() {
+  const dir = path.join(root, 'evidence/outputs', outputDirectory('projectPresentation'));
+  await fs.mkdir(dir, { recursive: true });
+  const files = (await listMd('evidence/projects')).filter(name => /^S\d{3,}/.test(name));
+  const kept = new Set();
+  const out = [];
+  for (const filename of files) {
+    const id = filename.match(/^(S\d{3,})/)[1];
+    const fields = presentationFromMarkdown(id, await read(`evidence/projects/${filename}`));
+    if (!fields) continue;
+    kept.add(`${fields.evidenceId}.json`);
+    out.push(await writeOutput('projectPresentation', fields.evidenceId, fields));
+  }
+  for (const name of await fs.readdir(dir)) {
+    if (name.endsWith('.json') && !kept.has(name)) await fs.unlink(path.join(dir, name));
+  }
+  return out;
+}
+
 export async function compress(workspaceRoot = root) {
   if (workspaceRoot !== root) throw new Error('compress currently runs from repo root only');
   // Validate the entire matching graph before writing any output.
@@ -275,13 +347,14 @@ export async function compress(workspaceRoot = root) {
     vocabularyVersion: matching.registry.vocabulary_version, registry: matching.registry,
   });
   const projects = await compressProjects(matching.projects);
-  return { employers, roles, projects, matchingVocabulary };
+  const presentations = await compressPresentations();
+  return { employers, roles, projects, presentations, matchingVocabulary };
 }
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
-  compress().then(({ employers, roles, projects, matchingVocabulary }) => {
-    console.log(`Compressed ${employers.length} employers, ${roles.length} roles, ${projects.length} projects and vocabulary ${matchingVocabulary.vocabularyVersion} → evidence/outputs/`);
+  compress().then(({ employers, roles, projects, presentations, matchingVocabulary }) => {
+    console.log(`Compressed ${employers.length} employers, ${roles.length} roles, ${projects.length} projects, ${presentations.length} presentations and vocabulary ${matchingVocabulary.vocabularyVersion} → evidence/outputs/`);
   }).catch(error => {
     console.error(error.message || error);
     process.exitCode = 1;

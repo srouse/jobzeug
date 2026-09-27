@@ -38,6 +38,33 @@
   transition: width 320ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.hub {
+  flex: 0 1 auto;
+  max-height: 42%;
+  min-height: 0;
+  overflow: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+  padding: var(--jz-semantic-space-padding-lg, 1.5rem);
+  border-bottom: 1px solid var(--jz-semantic-color-border-subtle);
+}
+
+.hubActions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+}
+
+.answer {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 .body {
   flex: 1 1 auto;
   min-height: 0;

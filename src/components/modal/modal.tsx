@@ -7,7 +7,7 @@ import {
   type ReactNode,
 } from "react";
 import { createPortal } from "react-dom";
-import { JzButton, JzText } from "@jobzeug/design-system/react";
+import { JzIconButton, JzText } from "@jobzeug/design-system/react";
 import styles from "./modal.module.css";
 
 export function Modal({
@@ -16,12 +16,18 @@ export function Modal({
   title,
   children,
   footer,
+  wide = false,
+  fit = false,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   title: string;
   children: ReactNode;
   footer?: ReactNode;
+  /** Near-full dialog, still inset from the viewport. */
+  wide?: boolean;
+  /** Height follows the content, still capped by the viewport. */
+  fit?: boolean;
 }) {
   const titleId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -53,7 +59,11 @@ export function Modal({
       />
       <div
         ref={dialogRef}
-        className={styles.dialog}
+        className={[
+          styles.dialog,
+          wide ? styles.dialogWide : "",
+          fit ? styles.dialogFit : "",
+        ].filter(Boolean).join(" ")}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
@@ -63,19 +73,17 @@ export function Modal({
           <JzText
             id={titleId}
             level={2}
-            variant="title"
+            variant="heading2"
             label={title}
             className={styles.title}
           />
-          <JzButton
-            variant="secondary"
-            size="small"
+          <JzIconButton
             label="Close"
-            showIcon={false}
+            icon="X"
             onClick={() => onOpenChange(false)}
           />
         </header>
-        <div className={styles.body}>{children}</div>
+        <div className={fit ? `${styles.body} ${styles.bodyFit}` : styles.body}>{children}</div>
         {footer ? <div className={styles.footer}>{footer}</div> : null}
       </div>
     </div>,

@@ -62,6 +62,18 @@ Vercel installs with [`scripts/vercel-install.mjs`](scripts/vercel-install.mjs) 
 
 [`evidence/`](evidence/) is the canonical source for employers, roles, projects, customers, clients, and perspectives. It is mounted on `jobzeug-agent` as a **read-only** Mastra Workspace (`src/mastra/workspace.ts`) with BM25 search over `**/*.md`. The agent can list/read/grep/search those files; it cannot write them.
 
+### Evidence workflow
+
+Do these in order when a project should show up in the app and in matching.
+
+1. **Add project** (`/add-project`) — narrative, employer, and role links. Draft YAML only. No matching concepts.
+2. **Annotate project** (`/annotate-project`) — claims and approved `concept_ids` against vocabulary `1.1.0`. This is the assessment. Do it before compress if the project should score.
+3. **Compress to Contentful** (`/compress-to-contentful`) — `contentful:compress`, then `contentful:apply`, then `contentful:push`.
+
+`annotation.vocabulary_version` must be `1.1.0` or compress stops for the whole catalog. That pin is not the same as claim review. Empty `evidence` still publishes the resume summary and scores no concepts.
+
+Contentful tags (`fintech`, `enterprise`) are separate from matching `concept_ids`.
+
 Compressed payloads live under `evidence/outputs/` (Employer / Role / Project / Matching Vocabulary). Project payloads include structured matching headers. See [Compress matching](scripts/contentful/matching/README.md) for metadata-only updates and the Delivery API loader. Run `contentful:compress` after evidence edits, then `contentful:apply` / `contentful:push` to sync Contentful. Use `@compress-to-contentful` to run that flow from an agent.
 
 After large evidence edits, restart Next or Studio so the auto-index refreshes.

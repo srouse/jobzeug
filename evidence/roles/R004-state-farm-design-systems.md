@@ -25,7 +25,7 @@ None — role narrative is in LinkedIn description; project-level detail lives o
 
 ## Linked projects
 
-- [S005: State Farm tokens persuasion](../projects/S005%20-%20State%20Farm%20tokens%20persuasion.md)
+- [S005: State Farm tokens](../projects/S005%20-%20State%20Farm%20tokens.md)
 - [S006: State Farm Figma design system](../projects/S006%20-%20State%20Farm%20Figma%20design%20system.md)
 - [S007: State Farm Lit engineering bridge](../projects/S007%20-%20State%20Farm%20Lit%20engineering%20bridge.md)
 
@@ -86,7 +86,7 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 
 | ID | Narrative |
 |---|---|
-| [S005](../projects/S005%20-%20State%20Farm%20tokens%20persuasion.md) | Executive persuasion — decks and the slide that landed tokens |
+| [S005](../projects/S005%20-%20State%20Farm%20tokens.md) | Persuasion, plus the initial token template; inverse mode stepped back |
 | [S006](../projects/S006%20-%20State%20Farm%20Figma%20design%20system.md) | Figma design system — tokens, components, plugin, Google DS expert, systematic design mentoring |
 | [S007](../projects/S007%20-%20State%20Farm%20Lit%20engineering%20bridge.md) | Engineering enablement — Lit/web components and design↔dev bridge |
 
@@ -100,7 +100,7 @@ I led a short State Farm design-system refresh that tied executive token persuas
 
 At State Farm, design-system progress was blocked by politics, split org structure (DS design vs DS development), and weak brand-decision guidance. Scott’s short tenure combined three moves:
 
-1. **Persuade** senior management that tokens were necessary ([S005](../projects/S005%20-%20State%20Farm%20tokens%20persuasion.md)).
+1. **Persuade** senior management that tokens were necessary ([S005](../projects/S005%20-%20State%20Farm%20tokens.md)).
 2. **Build** the Figma-side system — tokens, components, repo-sync plugin — and raise systematic Figma practice with senior designers, including deep collaboration with a Google design-system expert ([S006](../projects/S006%20-%20State%20Farm%20Figma%20design%20system.md)).
 3. **Enable** the development team on Lit/web components and act as a trusted peer bridge so both sides had to deal in truth ([S007](../projects/S007%20-%20State%20Farm%20Lit%20engineering%20bridge.md)).
 

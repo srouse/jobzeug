@@ -1,0 +1,301 @@
+{
+  "evidenceId": "S024",
+  "employer": "C003",
+  "roles": [
+    "R007"
+  ],
+  "name": "Loan Visualizer (LOUI)",
+  "summary": "Led Loan Visualizer (LOUI), Summit’s mortgage visualizer: a React interface of custom charts plus a one-page sheet a loan officer could walk with a member. Tested with people, did not ship, and became the loan intuition behind later Summit work, including Rates Central.",
+  "matchingMetadata": {
+    "schema_version": "1.1",
+    "project_id": "S024",
+    "title": "Loan Visualizer (LOUI)",
+    "record_kind": "project",
+    "project_origin": "employment",
+    "ranking_eligible": true,
+    "exclusion_reason": null,
+    "parent_project_id": null,
+    "related_project_ids": [
+      "S021"
+    ],
+    "role_links": [
+      {
+        "id": "R007",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Scott placed this on the Summit design-innovation role (UX Designer & Web/Mobile Developer - Design Innovation), not the later Experience Designer tenure."
+      }
+    ],
+    "employer_links": [
+      {
+        "id": "C003",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Summit Credit Union employment. Members are users of the credit union, not a separate customer or client record."
+      }
+    ],
+    "customer_ids": [],
+    "client_ids": [],
+    "year": 2019,
+    "year_basis": "estimated",
+    "year_note": "Project calendar was not supplied. Estimated inside R007 (Aug 2018–Nov 2019); 2019 is a representative year within that tenure, not a reported start or end.",
+    "delivery_stage": "prototype",
+    "annotation": {
+      "status": "reviewed",
+      "reviewed_by": "Scott",
+      "reviewed_at": "2026-09-27",
+      "vocabulary_version": "1.1.0"
+    },
+    "public_disclosure": "needs_review",
+    "evidence": [
+      {
+        "id": "S024-E001",
+        "statement": "Led the client-side work and built the entire React and D3 interface of custom, mostly canvas-rendered charts for comparing fixed-rate and ARM mortgages. The interface did not ship.",
+        "concept_ids": [
+          "local:front-end-development",
+          "local:react",
+          "local:javascript",
+          "local:prototyping",
+          "local:technical-prototype",
+          "local:interaction-design",
+          "local:visual-interface-design",
+          "local:financial-services"
+        ],
+        "ownership": "lead",
+        "scope": "single_team",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e001",
+            "locator": "Account summary — interface",
+            "supports": "Scott built the whole interface in React with custom D3 charts for mortgage comparisons and says it did not ship."
+          }
+        ],
+        "limitations": [
+          "A backend developer, not Scott, supplied the interest-rate calculations the interface consumed.",
+          "D3.js is not in vocabulary 1.0.0; JavaScript is the closest approved tool tag.",
+          "Screenshots exist but were not inspected for this annotation.",
+          "No production release is claimed."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S024-E002",
+        "statement": "Made a one-page paper sheet a loan officer could walk with a member through one mortgage or a side-by-side comparison of two or three, covering payments, overall cost, and interest.",
+        "concept_ids": [
+          "local:interaction-design",
+          "local:visual-interface-design",
+          "local:prototyping",
+          "local:financial-services"
+        ],
+        "ownership": "lead",
+        "scope": "external_audience",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e002",
+            "locator": "Account summary — one-page sheet",
+            "supports": "The sheet fits on one page, captures major mortgage themes, and was meant for a loan officer sitting with a member, including side-by-side comparisons."
+          }
+        ],
+        "limitations": [
+          "Intended use by loan officers and members; ongoing use after the prototype is not claimed.",
+          "Auto loans and other payment products were out of scope."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S024-E003",
+        "statement": "Tested the prototypes with real people alongside a UX tester and reported surprise at interest totals, the effect of small decisions, and differences in risk aversion versus risk-taking.",
+        "concept_ids": [
+          "local:usability-testing",
+          "local:financial-services"
+        ],
+        "ownership": "lead",
+        "scope": "external_audience",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e003",
+            "locator": "Account summary — testing with real people",
+            "supports": "Testing with real people, a UX tester's involvement, and qualitative findings about surprise, small decisions, and risk posture."
+          }
+        ],
+        "limitations": [
+          "Tasks, participant count, and the UX tester's method are not recorded.",
+          "Incredible results is Scott's characterization, not a measured outcome.",
+          "User-research was not tagged; a systematic research method is not described."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S024-E004",
+        "statement": "Learned how fixed-rate and ARM mortgages work, including conversations with many mortgage VPs, as his first financial-services project at Summit.",
+        "concept_ids": [
+          "local:technical-discovery",
+          "local:financial-services"
+        ],
+        "ownership": "lead",
+        "scope": "organization",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e004",
+            "locator": "Account summary — learning loans and mortgage VPs",
+            "supports": "He studied how loans work without a finance background and talked with many mortgage VPs; scope stayed on fixed-rate and ARM mortgages."
+          }
+        ],
+        "limitations": [
+          "Which VPs, and what each conversation changed, are not recorded."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S024-E005",
+        "statement": "Presented LOUI himself in many situations.",
+        "concept_ids": [
+          "local:speaking"
+        ],
+        "ownership": "lead",
+        "scope": "unknown",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e005",
+            "locator": "Account summary — presenting",
+            "supports": "Scott presented the work himself in a lot of situations; other people also presented sometimes."
+          }
+        ],
+        "limitations": [
+          "Audiences and reception are not itemized."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S024-E006",
+        "statement": "The work surfaced a tradeoff about showing total interest payments, which staff found useful for members and also frightening, even when taking the mortgage was justified.",
+        "concept_ids": [
+          "local:decision-making",
+          "local:financial-services"
+        ],
+        "ownership": "lead",
+        "scope": "organization",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e006",
+            "locator": "Account summary — what they chose to show",
+            "supports": "Internal discomfort with showing overall interest, and the argument that the house can still be worth those payments."
+          }
+        ],
+        "limitations": [
+          "Discussions are described; a recorded decision to hide or show the figure is not.",
+          "Stakeholder-alignment was not tagged because agreement or adoption is not established."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S024-E007",
+        "statement": "Scott says this mortgage learning was the basis for later innovation-team work and for Rates Central, which he does not think he could have done without it.",
+        "concept_ids": [
+          "local:product-direction-influence",
+          "local:financial-services"
+        ],
+        "ownership": "lead",
+        "scope": "organization",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e007",
+            "locator": "Account summary — later work",
+            "supports": "His judgment that LOUI underpinned later innovation-team insight and S021 Rates Central."
+          }
+        ],
+        "limitations": [
+          "The causal link is his account, not a decision record.",
+          "Rates Central is a separate project; this claim does not describe that build."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S024-E008",
+        "statement": "Led a small cross-functional group in which a backend developer calculated interest so the interface matched Summit's rates, with a PM and a UX tester also involved.",
+        "concept_ids": [
+          "local:cross-functional-work",
+          "local:coordination"
+        ],
+        "ownership": "lead",
+        "scope": "single_team",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#evidence-e008",
+            "locator": "Resume connection — collaborators",
+            "supports": "Named roles of backend developer, PM, and UX tester, and that Scott led the client side while calculations aligned the interface to Summit interest rates."
+          }
+        ],
+        "limitations": [
+          "Names are not given. The PM's scope is not described.",
+          "Scott did not author the rate calculations."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      }
+    ],
+    "concept_proposals": [
+      {
+        "label": "D3.js",
+        "category": "tool",
+        "definition": "The D3.js library for custom data-driven charts, including canvas rendering.",
+        "reason": "Scott confirmed the mortgage charts were custom D3, mostly canvas-rendered. Vocabulary 1.0.0 has React and JavaScript but no D3 concept, so E001 can only tag JavaScript."
+      }
+    ]
+  }
+}

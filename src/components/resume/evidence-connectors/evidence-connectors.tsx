@@ -2,10 +2,12 @@
 
 import { useEffect, useLayoutEffect, useState } from "react";
 import { useJobPosting } from "@/components/job-posting";
+import type { ConnectionTarget } from "@/lib/connection-targets";
 import {
   LAYOUT_MEDIUM_MIN_PX,
   useResumeHighlights,
 } from "../resume-highlight-context";
+import { useActiveConnectionTarget } from "../use-connection-target";
 import styles from "./evidence-connectors.module.css";
 
 type ConnectorPath = {
@@ -176,11 +178,13 @@ type DraftPath = {
   endX: number;
   preferredEndY: number;
   fromLeft: boolean;
+  primary: boolean;
 };
 
-function measurePaths(focusedIds: Set<string>): ConnectorPath[] {
+function measurePaths(target: ConnectionTarget | null): ConnectorPath[] {
+  if (!target || target.ids.length === 0) return [];
   const card = document.querySelector<HTMLElement>("[data-answer-stage-card]");
-  if (!card || focusedIds.size === 0) return [];
+  if (!card) return [];
 
   const cardRect = card.getBoundingClientRect();
   if (cardRect.width <= 0 || cardRect.height <= 0) return [];
@@ -192,7 +196,8 @@ function measurePaths(focusedIds: Set<string>): ConnectorPath[] {
   const midX = window.innerWidth / 2;
   const drafts: DraftPath[] = [];
 
-  for (const id of focusedIds) {
+  for (const endpoint of target.ids) {
+    const id = endpoint.id;
     let el: HTMLElement | null = null;
     for (const root of roots) {
       el = root.querySelector<HTMLElement>(
@@ -219,6 +224,7 @@ function measurePaths(focusedIds: Set<string>): ConnectorPath[] {
       endX,
       preferredEndY,
       fromLeft,
+      primary: endpoint.strength === "primary",
     });
   }
 
@@ -255,22 +261,22 @@ function measurePaths(focusedIds: Set<string>): ConnectorPath[] {
       d: cubicHorizontal(draft.startX, draft.startY, draft.endX, endY),
       start: { x: draft.startX, y: draft.startY },
       end: { x: draft.endX, y: endY },
-      focused: true,
+      focused: draft.primary,
     };
   });
 }
 
 /**
- * SVG connectors from cited resume/job rows into the answer stage card.
- * Always row-edge → card-edge beziers (including when the row is scrolled
- * off-screen), so lines keep running toward the real citation.
+ * SVG connectors from evidence rows into the stage card edge.
+ * One focus at a time chooses the rows. The lines still meet the card the
+ * same way: row edge to card edge, kept clear of the footer.
  *
  * Measures only active evidence panes (both on wide; selected tab on medium).
- * Remeasures on cluster / density / evidence-page / job load / DOM mutations.
+ * Remeasures on focus / density / evidence-page / job load / DOM mutations.
  */
 export function EvidenceConnectors() {
-  const { focusedIds, activeCluster, density, evidencePage } =
-    useResumeHighlights();
+  const { density, evidencePage } = useResumeHighlights();
+  const target = useActiveConnectionTarget();
   const { data: jobPosting, loading: jobLoading, busy: jobBusy } =
     useJobPosting();
   const [paths, setPaths] = useState<ConnectorPath[]>([]);
@@ -285,7 +291,7 @@ export function EvidenceConnectors() {
   }, []);
 
   useLayoutEffect(() => {
-    if (!connectorsOn || !activeCluster || focusedIds.size === 0) {
+    if (!connectorsOn || !target) {
       setPaths([]);
       return;
     }
@@ -297,7 +303,7 @@ export function EvidenceConnectors() {
     const DENSITY_REMEASURE_MS = 450;
 
     const measure = () => {
-      setPaths(measurePaths(focusedIds));
+      setPaths(measurePaths(target));
     };
 
     const schedule = () => {
@@ -404,8 +410,7 @@ export function EvidenceConnectors() {
     };
   }, [
     connectorsOn,
-    activeCluster,
-    focusedIds,
+    target,
     density,
     evidencePage,
     // Rebind observers when the posting panel swaps loading ↔ BoundPanel.
@@ -414,7 +419,7 @@ export function EvidenceConnectors() {
     jobBusy,
   ]);
 
-  if (!connectorsOn || !activeCluster || paths.length === 0) return null;
+  if (!connectorsOn || paths.length === 0) return null;
 
   return (
     <svg
@@ -423,11 +428,17 @@ export function EvidenceConnectors() {
       height="100%"
       aria-hidden
     >
-      {paths.map((path) => (
+      {[...paths]
+        .sort((a, b) => Number(a.focused) - Number(b.focused))
+        .map((path) => (
         <g key={path.id}>
-          <path d={path.d} className={styles.line} fill="none" />
+          <path
+            d={path.d}
+            className={path.focused ? styles.line : styles.lineDimmed}
+            fill="none"
+          />
           <circle
-            className={styles.dot}
+            className={path.focused ? styles.dot : styles.dotDimmed}
             cx={path.start.x}
             cy={path.start.y}
             r={DOT_RADIUS}

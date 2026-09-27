@@ -251,6 +251,10 @@
   color: var(--jz-semantic-color-text-primary);
 }
 
+.projectBulletSecondary {
+  color: var(--jz-semantic-color-text-muted);
+}
+
 .projectBody {
   display: flex;
   flex-direction: column;
@@ -307,6 +311,7 @@
 }
 
 .content {
+  position: relative;
   transition:
     opacity 200ms ease-in-out,
     background-color 150ms ease;

@@ -653,3 +653,67 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 
 - Re-run the job posting that failed structure validation
 - Review job relevancy on a posting that barely maps into the vocabulary
+
+### [2026-09-27T11:46:02-0500]
+
+#### Summary
+
+- The stage now keeps one focus at a time, and match edges are saved on the job posting when it is ingested. The closed eye hides unlinked projects and job lines.
+
+#### Changes
+
+- Evidence / records: Blueprints presentation draft published; project files and matching outputs updated in the working tree
+- Skills / tooling: stub-project-presentation drafts a first pass and publishes that one entry
+- Other: connection hub above the AI stage; top four scores stay blue and the rest use the subtle border; View more and Contentful links moved into the hub; eyeball hides unlinked rows
+
+#### Decisions
+
+- A project, a job line, or an AI result is the only line driver at a time
+- Lines still meet the stage card edge
+- The four highest scores are blue; lower scores are gray
+- Unlinked rows stay visible until a focus exists and the eye is closed
+
+#### Plans cached
+
+- add_story_skill_2a282f5c.plan.md
+- brand_url_design_knobs_cc92b6b9.plan.md
+- comp-make_skill_429bbef5.plan.md
+- cumulative_relationship_scoring_d08863de.plan.md
+- customers_evidence_log_51450833.plan.md
+- employer_logo_prefetch_02387199.plan.md
+- evidence_contentful_compress_793daf55.plan.md
+- evidence_mastra_workspace_4e07deca.plan.md
+- finish_docked_toolbar_52ac2998.plan.md
+- full_job_post_context_e1b35bf3.plan.md
+- job_cite_chat-only_c7f1d253.plan.md
+- job_matching_services_910e861f.plan.md
+- job_relevancy_score_e9cdd39b.plan.md
+- jz-icon_phosphor_0589d485.plan.md
+- jztext_jzicon_migration_23ae0664.plan.md
+- kleio_image_index_628384b0.plan.md
+- montserrat_entry_css_f8261a2c.plan.md
+- next.js_mastra_scaffold_718b8d31.plan.md
+- one_role_per_project_ea3747a0.plan.md
+- persist_site_password_session_cc3eee20.plan.md
+- project_presentation_modal_5405980f.plan.md
+- resume_cite_highlights_ae4c6a1c.plan.md
+- resume_fit_score_4eb3f154.plan.md
+- resume_floating_chat_c02c45c0.plan.md
+- resume_spa_contentful_5d3d3333.plan.md
+- rip_specs_restore_lit_8e08794a.plan.md
+- robust_parallel_line_mapper_50922044.plan.md
+- session_checkpoint_skill_65575be3.plan.md
+- session_design_tokens_20a67a82.plan.md
+- session_job_posting_28aa6696.plan.md
+- site_password_gate_c3c92081.plan.md
+- specs_ds_import_3ed8c9e7.plan.md
+- stage_connection_split_d1e8d824.plan.md
+- stories_to_projects_rename_34704978.plan.md
+- themed_answer_accordion_32662583.plan.md
+- vercel_ds_prebuilt_e09f8557.plan.md
+- web_components_ds_b1737d33.plan.md
+- wire_local_ds2_cli_cc2d5484.plan.md
+
+#### Next
+
+- Reprocess a saved posting so matchGraph is stored and the hub lines use those edges

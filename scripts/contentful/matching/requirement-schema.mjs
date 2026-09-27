@@ -36,3 +36,16 @@ export const matchingSnapshotSchema = z.strictObject({
   status: z.enum(['provisional', 'ready']),
   concept_proposals: z.array(z.strictObject({ label: text, category, definition: text, reason: text })).default([]),
 });
+
+/** Saved project↔job-line hits. Row ids are the evidence ids the stage connects. */
+export const matchGraphEdgeSchema = z.strictObject({
+  projectId: z.string().regex(/^S\d{3,}$/),
+  lineEntryId: text,
+  points: z.number().positive(),
+});
+
+export const matchGraphSchema = z.strictObject({
+  scoringVersion: version,
+  vocabularyVersion: version,
+  edges: z.array(matchGraphEdgeSchema),
+});

@@ -28,10 +28,10 @@ year_note: Estimated from R001 (February 2026–present as of September 2026); p
   role.
 delivery_stage: unknown
 annotation:
-  status: needs_review
-  vocabulary_version: 1.0.0
-  reviewed_by: Codex
-  reviewed_at: "2026-09-26"
+  status: reviewed
+  vocabulary_version: "1.1.0"
+  reviewed_by: Scott
+  reviewed_at: "2026-09-27"
 public_disclosure: needs_review
 evidence:
   - id: S010-E001
@@ -69,7 +69,7 @@ Evidence: Scott's direct account; no event or presentation artifacts inspected
 
 - Employer: [C001 Contentful](../employers/C001-contentful.md)
 - Role record: Provisionally [R001 — Senior Product Architect](../roles/R001-contentful-senior-product-architect.md), based on its connection to the latest-role AI binding work. Confirm the Berlin event dates and role separately.
-- Related technical project: [S009 AI content and component binding](S009%20-%20AI%20content%20and%20component%20binding.md).
+- Related technical project: [S009 AI binding research](S009%20-%20AI%20binding%20research.md).
 - Related product: [S008 Contentful for Figma widget](S008%20-%20Contentful%20for%20Figma%20widget.md).
 - Customers / clients: None established in this account.
 

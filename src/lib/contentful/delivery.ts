@@ -31,10 +31,21 @@ export type NormalizedProject = {
   tags: string[];
 };
 
+export type ProjectPresentation = {
+  blurb: string;
+  videoUrl: string;
+  metrics: [
+    { value: string; label: string },
+    { value: string; label: string },
+  ];
+};
+
 export type CoreCatalog = {
   employers: Map<string, NormalizedEmployer>;
   roles: Map<string, NormalizedRole>;
   projects: Map<string, NormalizedProject>;
+  /** Keyed by the project evidence id. Incomplete entries are omitted. */
+  presentations: Map<string, ProjectPresentation>;
 };
 
 function requireDeliveryEnv() {
@@ -93,6 +104,21 @@ function asDateString(value: unknown): string | undefined {
   return undefined;
 }
 
+function assetFileUrl(value: unknown): string | undefined {
+  if (!value || typeof value !== "object") return undefined;
+  const file = (value as { fields?: { file?: { url?: unknown } } }).fields?.file;
+  const raw = typeof file?.url === "string" ? file.url.trim() : "";
+  if (!raw) return undefined;
+  return raw.startsWith("//") ? `https:${raw}` : raw;
+}
+
+function linkedAssetId(value: unknown): string | undefined {
+  if (!value || typeof value !== "object") return undefined;
+  const sys = (value as { sys?: { type?: string; linkType?: string; id?: string } }).sys;
+  if (sys?.type === "Link" && sys.linkType === "Asset" && sys.id) return sys.id;
+  return undefined;
+}
+
 function linkEvidenceId(value: unknown): string | undefined {
   if (!value || typeof value !== "object") return undefined;
   const entry = value as Entry;
@@ -110,10 +136,11 @@ export async function fetchCoreCatalog(): Promise<CoreCatalog> {
   const { locale } = requireDeliveryEnv();
   const query = { limit: 100, locale, include: 2 as const };
 
-  const [employerRes, roleRes, projectRes] = await Promise.all([
+  const [employerRes, roleRes, projectRes, presentationRes] = await Promise.all([
     client.getEntries({ ...query, content_type: "jobzeugEmployer" }),
     client.getEntries({ ...query, content_type: "jobzeugRole" }),
     client.getEntries({ ...query, content_type: "jobzeugProject" }),
+    client.getEntries({ ...query, content_type: "jobzeugProjectPresentation", include: 1 }),
   ]);
 
   const employers = new Map<string, NormalizedEmployer>();
@@ -176,5 +203,42 @@ export async function fetchCoreCatalog(): Promise<CoreCatalog> {
     });
   }
 
-  return { employers, roles, projects };
+  const presentations = new Map<string, ProjectPresentation>();
+  for (const entry of presentationRes.items) {
+    const fields = entry.fields as Record<string, unknown>;
+    const projectId = linkEvidenceId(fields.project);
+    const blurb = asString(fields.blurb);
+    const videoUrl =
+      assetFileUrl(fields.video) ??
+      assetFileUrl(
+        presentationRes.includes?.Asset?.find(
+          (asset) => asset.sys.id === linkedAssetId(fields.video),
+        ),
+      );
+    const metricOneValue = asString(fields.metricOneValue);
+    const metricOneLabel = asString(fields.metricOneLabel);
+    const metricTwoValue = asString(fields.metricTwoValue);
+    const metricTwoLabel = asString(fields.metricTwoLabel);
+    if (
+      !projectId ||
+      !blurb ||
+      !videoUrl ||
+      !metricOneValue ||
+      !metricOneLabel ||
+      !metricTwoValue ||
+      !metricTwoLabel
+    ) {
+      continue;
+    }
+    presentations.set(projectId, {
+      blurb,
+      videoUrl,
+      metrics: [
+        { value: metricOneValue, label: metricOneLabel },
+        { value: metricTwoValue, label: metricTwoLabel },
+      ],
+    });
+  }
+
+  return { employers, roles, projects, presentations };
 }

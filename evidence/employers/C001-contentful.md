@@ -28,14 +28,15 @@ Researched September 19, 2026. Company background is independent of Scott’s ex
 ## Projects
 
 - [S001 Blueprints](../projects/S001%20-%20Blueprints.md), provisionally R001.
+- [S025 Experience Orchestration (ExO)](../projects/S025%20-%20Experience%20Orchestration%20%28ExO%29.md), R001.
 - [S002 Bulk Editor](../projects/S002%20-%20Bulk%20Editor.md), provisionally R002 (SE / Solution Specialist).
 - [S003 DemAI](../projects/S003%20-%20DemAI.md), provisionally R002 (SE / Solution Specialist).
 - [S008 Contentful for Figma widget](../projects/S008%20-%20Contentful%20for%20Figma%20widget.md), R001 (v1 began in Solution Specialist/SE — prose on project only).
-- [S009 AI content and component binding](../projects/S009%20-%20AI%20content%20and%20component%20binding.md), R001.
+- [S009 AI binding research](../projects/S009%20-%20AI%20binding%20research.md), R001.
 - [S010 Berlin prototype exploration](../projects/S010%20-%20Berlin%20prototype%20exploration.md), provisionally R001.
-- [S014 Design tokens Contentful blog](../projects/S014%20-%20Design%20tokens%20Contentful%20blog.md), R003 (May 2024).
-- [S015 Understanding AI building blocks](../projects/S015%20-%20Understanding%20AI%20building%20blocks.md), R001 (Feb–Mar 2026 series).
-- [S016 Technical debt Contentful blog](../projects/S016%20-%20Technical%20debt%20Contentful%20blog.md), R002 (June 2025).
+- [S014 Design tokens explained (article)](../projects/S014%20-%20Design%20tokens%20Contentful%20blog.md), R003 (May 2024).
+- [S015 Understanding AI by its building blocks (article)](../projects/S015%20-%20Understanding%20AI%20building%20blocks.md), R001 (Feb–Mar 2026).
+- [S016 Hidden cost of technical debt (article)](../projects/S016%20-%20Technical%20debt%20Contentful%20blog.md), R002 (June 2025).
 - [S022 2024 Partnership Tour - AI design systems](../projects/S022%20-%202024%20Partnership%20Tour%20AI%20design%20systems.md), R003.
 ## Customers (via Contentful engagements)
 

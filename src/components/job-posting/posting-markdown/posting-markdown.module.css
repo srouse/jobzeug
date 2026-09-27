@@ -1,0 +1,92 @@
+.root {
+  overflow-wrap: anywhere;
+}
+
+.block,
+.heading {
+  display: block;
+}
+
+.root > * + * {
+  margin-top: var(--jz-semantic-space-gap-sm);
+}
+
+.root > * + .heading {
+  margin-top: var(--jz-semantic-space-gap-lg);
+}
+
+.root ul,
+.root ol {
+  margin: 0;
+  padding-left: var(--jz-semantic-space-padding-md);
+}
+
+.root ul {
+  list-style: disc;
+}
+
+.root ol {
+  list-style: decimal;
+}
+
+.root li + li {
+  margin-top: var(--jz-semantic-space-gap-2xs);
+}
+
+.root li ul,
+.root li ol {
+  margin-top: var(--jz-semantic-space-gap-2xs);
+}
+
+.root strong {
+  font-weight: var(--jz-semantic-type-body-strong-font-weight);
+}
+
+.link {
+  color: var(--jz-semantic-color-text-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--jz-semantic-color-border-default);
+  text-underline-offset: 2px;
+}
+
+.link:hover {
+  text-decoration-color: var(--jz-semantic-color-border-strong);
+}
+
+.quote {
+  margin: 0;
+  border-left: 2px solid var(--jz-semantic-color-border-default);
+  padding-left: var(--jz-semantic-space-padding-sm);
+}
+
+.root hr {
+  height: 0;
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--jz-semantic-color-border-default);
+}
+
+.root img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.root pre {
+  margin: 0;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+.root code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.9em;
+}
+
+.root > * + ul,
+.root > * + ol,
+.root > * + .quote,
+.root > * + pre,
+.root > * + hr {
+  margin-top: var(--jz-semantic-space-gap-sm);
+}

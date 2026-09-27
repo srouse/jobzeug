@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S016
-title: Hidden cost of technical debt (Contentful blog)
+title: Hidden cost of technical debt (article)
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -27,7 +27,7 @@ year_note: 2025 publication year recorded for the June 2, 2025 article.
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: 1.0.0
+  vocabulary_version: "1.1.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -59,7 +59,7 @@ evidence:
       reviewed_at: "2026-09-26"
 concept_proposals: []
 ---
-# S016: Hidden cost of technical debt (Contentful blog)
+# S016: Hidden cost of technical debt (article)
 
 Captured: September 22, 2026
 Status: Initial capture from published article

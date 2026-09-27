@@ -1,0 +1,10 @@
+{
+  "evidenceId": "S008-presentation",
+  "project": "S008",
+  "blurb": "I built and shipped Contentful for Figma, a public widget that binds live Contentful fields to Figma components—including content-status “blueprint” outlines—and operationalized it through product marketing, PM, and security outside the core product.",
+  "video": "2rAtcKDtRArNx6ZwePxW29",
+  "metricOneValue": "2–3 days",
+  "metricOneLabel": "Initial v1",
+  "metricTwoValue": "Public",
+  "metricTwoLabel": "Live Figma widget"
+}

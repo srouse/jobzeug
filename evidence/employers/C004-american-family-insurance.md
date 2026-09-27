@@ -29,6 +29,7 @@ Canonical employment for application materials: [R006](../roles/R006-american-fa
 ## Projects
 
 - [S023 AmFam R&D ListenAssist prototypes](../projects/S023%20-%20AmFam%20R%26D%20ListenAssist%20prototypes.md)
+- [S027 Design System Guidance](../projects/S027%20-%20Design%20System%20Guidance.md)
 
 ## Sources
 

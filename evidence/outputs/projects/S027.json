@@ -1,0 +1,89 @@
+{
+  "evidenceId": "S027",
+  "employer": "C004",
+  "roles": [
+    "R006"
+  ],
+  "name": "Design System Guidance",
+  "summary": "Guided an early cross-brand design-system effort: analyzed whether incoming software could become a reusable system, and led the first conversations among design technologists at the brands so they would not buy or assemble the wrong thing.",
+  "matchingMetadata": {
+    "schema_version": "1.1",
+    "project_id": "S027",
+    "title": "Design System Guidance",
+    "record_kind": "project",
+    "project_origin": "employment",
+    "ranking_eligible": true,
+    "exclusion_reason": null,
+    "parent_project_id": null,
+    "related_project_ids": [
+      "S023"
+    ],
+    "role_links": [
+      {
+        "id": "R006",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Scott placed this on the American Family Senior UX Designer / Developer role, as the other half of that job beside the R&D work."
+      }
+    ],
+    "employer_links": [
+      {
+        "id": "C004",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "The overarching company was also called American Family. An American Family brand under it sold insurance. Owned brands he named are that insurer, The General, HomeSite Insurance, and Main Street America. Not customers or clients."
+      }
+    ],
+    "customer_ids": [],
+    "client_ids": [],
+    "year": 2020,
+    "year_basis": "estimated",
+    "year_note": "Project calendar was not supplied. Estimated inside R006 (November 2019–August 2020). He says the project outlasted his tenure.",
+    "delivery_stage": "unknown",
+    "annotation": {
+      "status": "reviewed",
+      "reviewed_by": "Scott",
+      "reviewed_at": "2026-09-27",
+      "vocabulary_version": "1.1.0"
+    },
+    "public_disclosure": "needs_review",
+    "evidence": [
+      {
+        "id": "S027-E001",
+        "statement": "Analyzed whether software being brought in could become a reusable design system, and led the first conversations among design technologists at the owned brands so they would not buy or assemble the wrong thing.",
+        "concept_ids": [
+          "local:design-system-development",
+          "local:technology-selection",
+          "local:stakeholder-alignment",
+          "local:persuasion",
+          "local:cross-functional-work",
+          "local:financial-services"
+        ],
+        "ownership": "lead",
+        "scope": "multiple_teams",
+        "delivery_stage": "concept",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#source-account",
+            "locator": "Account summary — what he was asked to do",
+            "supports": "Software-fit analysis, initial cross-brand design-technologist conversations, and stories aimed at avoiding the wrong purchase or assembly."
+          }
+        ],
+        "limitations": [
+          "The effort outlasted his tenure. No shipped design system is claimed.",
+          "The General, HomeSite, and Main Street America are owned brands, not customers.",
+          "No conversation artifact was inspected.",
+          "“Technically how to get these things to work” is not a named architecture."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      }
+    ],
+    "concept_proposals": []
+  }
+}

@@ -17,4 +17,5 @@ export type {
   EvidencePage,
   AskContextItem,
   AskContextSource,
+  LineFocus,
 } from "./resume-highlight-context";

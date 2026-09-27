@@ -111,7 +111,13 @@ export function payload(record, locale) {
   return { fields: Object.fromEntries(Object.entries(record.fields).map(([name, value]) => {
     const spec = definitions[record.kind].fields[name];
     const link = key => ({ sys: { type: 'Link', linkType: 'Entry', id: entryId(key) } });
-    return [name, { [locale]: spec.target ? (Array.isArray(value) ? value.map(link) : link(value)) : value }];
+    const assetLink = id => ({ sys: { type: 'Link', linkType: 'Asset', id } });
+    const localized = spec.asset
+      ? assetLink(value)
+      : spec.target
+        ? (Array.isArray(value) ? value.map(link) : link(value))
+        : value;
+    return [name, { [locale]: localized }];
   })) };
 }
 export async function checkFreshness(root, bundle) {

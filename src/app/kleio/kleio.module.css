@@ -1,0 +1,108 @@
+.root {
+  height: 100dvh;
+  display: flex;
+  overflow: hidden;
+  background: var(--jz-semantic-color-background-canvas-default);
+  color: var(--jz-semantic-color-text-default);
+}
+
+.projects,
+.images {
+  flex: none;
+  overflow: auto;
+  border-right: 1px solid var(--jz-semantic-color-border-subtle, #e5e5e5);
+  background: var(--jz-semantic-color-background-surface-default);
+  padding: var(--jz-semantic-space-gap-md, 1rem);
+}
+
+.projects {
+  width: 26rem;
+}
+
+.images {
+  width: 22rem;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  padding: 0.35rem 0.4rem;
+  cursor: pointer;
+  border-radius: var(--jz-primitive-radius-sm, 4px);
+  color: inherit;
+}
+
+.item[aria-current="true"] {
+  background: transparent;
+}
+
+.empty {
+  --jz-semantic-color-text-muted: var(--jz-semantic-color-text-default-disabled);
+}
+
+.itemLabel {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.projectLabel {
+  display: block;
+  white-space: normal;
+}
+
+.stage {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--jz-semantic-space-gap-md, 1rem);
+  padding: var(--jz-semantic-space-gap-lg, 1.5rem);
+  background: var(--jz-semantic-color-background-canvas-subtle);
+}
+
+.image {
+  max-width: 100%;
+  max-height: calc(100dvh - 6rem);
+  object-fit: contain;
+}
+
+.frame {
+  width: 100%;
+  height: calc(100dvh - 6rem);
+  border: 0;
+  background: var(--jz-semantic-color-background-surface-default);
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  max-width: 100%;
+  text-align: center;
+}
+
+.missing {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--jz-semantic-space-gap-lg, 1.5rem);
+  background: var(--jz-semantic-color-background-canvas-default);
+}

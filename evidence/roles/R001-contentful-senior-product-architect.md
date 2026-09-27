@@ -26,11 +26,12 @@ None — role narrative is in LinkedIn description; project-level detail lives o
 ## Linked projects
 
 - [S001: Blueprints](../projects/S001%20-%20Blueprints.md) — Customer Insights and Adoption (CIA) team; Design System Squared / Figma-centric ~50 components; project calendar dates still unconfirmed.
+- [S025: Experience Orchestration (ExO)](../projects/S025%20-%20Experience%20Orchestration%20%28ExO%29.md) — research and prototyping to guide Contentful’s product; Data Assemblies and design-system assembly. Studio is a title on that record, not its own project.
 - [S008: Contentful for Figma widget](../projects/S008%20-%20Contentful%20for%20Figma%20widget.md) — canonical under CIA / Senior Product Architect; v1 began in Solution Specialist/SE work (historical prose on project record only).
 
-- [S009: AI content and component binding](../projects/S009%20-%20AI%20content%20and%20component%20binding.md) — latest-role exploration; not yet integrated into the widget.
+- [S009: AI binding research](../projects/S009%20-%20AI%20binding%20research.md) — working title; innovation prototype on the latest role; not yet integrated into the widget.
 - [S010: Berlin prototype exploration](../projects/S010%20-%20Berlin%20prototype%20exploration.md) — provisional role association; event dates and full account pending.
-- [S015: Understanding AI building blocks](../projects/S015%20-%20Understanding%20AI%20building%20blocks.md) — two-part Contentful Guides series (Feb–Mar 2026) with interactive prompt modules in Part 1.
+- [S015: Understanding AI by its building blocks (article)](../projects/S015%20-%20Understanding%20AI%20building%20blocks.md) — two-part Contentful Guides series (Feb–Mar 2026) with interactive prompt modules in Part 1.
 
 ## Source references
 

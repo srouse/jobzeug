@@ -9,6 +9,7 @@ exclusion_reason: null
 parent_project_id: null
 related_project_ids:
   - S008
+  - S025
 role_links:
   - id: R001
     relationship: delivery
@@ -29,7 +30,7 @@ year_note: Estimated from R001 (February 2026–present as of September 2026); p
 delivery_stage: unknown
 annotation:
   status: reviewed
-  vocabulary_version: 1.0.0
+  vocabulary_version: "1.1.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -122,7 +123,7 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 - Employer: [C001 Contentful](../employers/C001-contentful.md)
 - Collaborators: Coworkers on CIA started the repo/initiative (earlier capture named Rob and JD — still to reconcile with titles). A design-team contributor struggled initially; Scott mentored them for several weeks, then took over implementation under timeline pressure.
 - Customers / clients: Intended for prospects and customers as installable best-practice starter; no named CU/CL on this capture.
-- Related (future project): **Experience Orchestration** — Contentful major initiative (~year+); Scott says Blueprints became a centerpiece / highly influential there. Capture separately when told; do not invent that narrative here.
+- Related (captured): [S025 Experience Orchestration (ExO)](S025%20-%20Experience%20Orchestration%20%28ExO%29.md). This account’s research and prototyping are on that record. The centerpiece claim below stays here.
 - Perspective: [P002 Build deep to influence large initiatives](../perspectives/P002-build-deep-to-influence.md) — operating mode illustrated by this work.
 
 ## Resume summary
@@ -206,6 +207,17 @@ He also connected this into **Experience Orchestration** (to be detailed later),
 ## Candidate uses
 
 Strong portfolio/resume centerpiece for Figma-to-code, design-system enforcement, and Contentful-for-Figma evaluation — once artifacts are available. Pair with [P002](../perspectives/P002-build-deep-to-influence.md) for the “build deep to steer the larger program” narrative. Keep separate from DemAI.
+
+## Presentation
+
+Blurb: I took over Contentful’s Blueprints effort and built a ~50-component, Figma-centric design system with Design System Squared so Figma exports drive matching React components and tokens—battle-tested against real Contentful content.
+
+Video: 2rAtcKDtRArNx6ZwePxW29
+
+- value: ~50
+  label: Components
+- value: Figma-first
+  label: Approach
 
 ## Addition — September 20, 2026
 

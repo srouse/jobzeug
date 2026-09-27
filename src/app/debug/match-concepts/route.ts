@@ -239,12 +239,14 @@ export async function GET(req: NextRequest) {
     · ${escapeHtml(req?.mapping_status ?? "—")}
     · <strong>${hitCount}</strong> project hit(s) — click to focus</p>
   <p class="statement">${escapeHtml(line.text)}</p>
+  <div class="line-details">
   ${attrList([
     { label: "ownership", value: fmtList(ownership) },
     { label: "scope", value: fmtList(scope) },
     { label: "stage", value: fmtList(stage) },
   ])}
   ${renderConcepts(conceptIds)}
+  </div>
 </article>`;
       })
       .join("\n");
@@ -315,12 +317,38 @@ export async function GET(req: NextRequest) {
     aside, section {
       min-height: 0;
       height: 100vh;
-      overflow: auto;
-      padding: 12px 14px;
       box-sizing: border-box;
     }
-    aside { border-right: 1px solid #8884; }
+    aside {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-right: 1px solid #8884;
+    }
+    .aside-scroll {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+      padding: 12px 14px;
+    }
+    .aside-toolbar {
+      flex: 0 0 auto;
+      border-top: 1px solid #8884;
+      padding: 10px 14px;
+      background: Canvas;
+    }
+    section {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
     section + section { border-left: 1px solid #8884; }
+    .pane-scroll {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+      padding: 12px 14px;
+    }
     .fits { display: flex; flex-direction: column; gap: 12px; margin: 0 0 16px; }
     .fit { text-align: left; }
     .fit-label { font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: #666; }
@@ -330,15 +358,38 @@ export async function GET(req: NextRequest) {
     .throwaway { color: #b45309; font-weight: 600; margin: 0 0 8px; }
     .posting-meta { margin: 0 0 12px; word-break: break-word; }
     .ranking { margin: 8px 0 0; padding-left: 1.2rem; font-size: 12px; }
-    h1 { font-size: 16px; margin: 0 0 12px; }
+    h1 {
+      flex: 0 0 auto;
+      margin: 0;
+      padding: 12px 14px;
+      font-size: 22px;
+      border-bottom: 1px solid #8884;
+    }
+    .details-toggle { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; }
+    .claims, .line-details { display: none; }
+    body.show-details .claims,
+    body.show-details .line-details { display: block; }
     h2 { font-size: 13px; margin: 0 0 4px; word-break: break-all; }
     .card { border: 1px solid #8884; border-radius: 6px; padding: 10px 12px; margin: 0 0 10px; }
     .line-card, .project-card { cursor: pointer; }
     .line-card:hover, .line-card:focus, .project-card:hover, .project-card:focus { outline: 2px solid #2563eb; }
     .line-card.selected, .project-card.selected { border-color: #2563eb; background: color-mix(in srgb, #2563eb 8%, transparent); }
     .card.dimmed, .line-card.no-concepts { opacity: 0.28; }
-    .line-hit { display: none; margin: 0 0 8px; padding: 6px 8px; border-radius: 4px; background: #dbeafe; color: #1e3a8a; font-size: 12px; }
-    .line-hit.open { display: block; }
+    .line-hit { display: none; margin: 0 0 8px; padding: 8px 10px; border-radius: 4px; background: #dbeafe; color: #1e3a8a; font-size: 12px; }
+    .line-hit.open { display: flex; align-items: stretch; gap: 12px; }
+    .hit-score {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      font-size: 64px;
+      font-weight: 700;
+      line-height: 0.8;
+      letter-spacing: -0.04em;
+    }
+    .hit-detail { flex: 1; min-width: 0; }
+    .line-hit .statement { margin: 4px 0 0; }
+    .line-hit .meta-in { margin: 4px 0 0; opacity: 0.85; }
+    .project-card:has(.line-hit.open) > .meta { display: none; }
     @media (prefers-color-scheme: dark) {
       .line-hit { background: #1e3a8a; color: #bfdbfe; }
     }
@@ -348,7 +399,6 @@ export async function GET(req: NextRequest) {
     .attrs li { margin: 0 0 2px; }
     .attrs strong { margin-right: 0.35em; }
     .claim { border-top: 1px dashed #8884; margin-top: 8px; padding-top: 8px; }
-    body.line-selected .claims { display: none; }
     .claim-id { font-size: 12px; margin-bottom: 4px; }
     .concepts { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
     .concepts li { padding: 2px 6px; border-radius: 4px; background: #e5e7eb; color: #111; font-size: 12px; }
@@ -362,31 +412,44 @@ export async function GET(req: NextRequest) {
 </head>
 <body>
   <aside>
-    <div class="fits">
-      ${fitMarkup("Job post", fits.jobPostFit)}
-      ${fitMarkup("Resume", fits.resumeFit)}
-      ${fitMarkup("Relevancy", fits.jobRelevancy)}
+    <div class="aside-scroll">
+      <div class="fits">
+        ${fitMarkup("Job post", fits.jobPostFit)}
+        ${fitMarkup("Resume", fits.resumeFit)}
+        ${fitMarkup("Relevancy", fits.jobRelevancy)}
+      </div>
+      <div class="throwaway">THROWAWAY — scoring ${escapeHtml(scored.scoringVersion)}</div>
+      <div class="posting-meta">
+        ${escapeHtml(view.company)} — ${escapeHtml(view.title)}
+        <br><code>${escapeHtml(view.postingId)}</code>
+        <br><code>${escapeHtml(view.entryId)}</code>
+        <br>vocab <code>${escapeHtml(vocabVersion ?? "none")}</code>
+      </div>
+      <ol class="ranking">${rankingHtml || "<li class='empty'>No positive project totals yet</li>"}</ol>
     </div>
-    <div class="throwaway">THROWAWAY — scoring ${escapeHtml(scored.scoringVersion)}</div>
-    <div class="posting-meta">
-      ${escapeHtml(view.company)} — ${escapeHtml(view.title)}
-      <br><code>${escapeHtml(view.postingId)}</code>
-      <br><code>${escapeHtml(view.entryId)}</code>
-      <br>vocab <code>${escapeHtml(vocabVersion ?? "none")}</code>
+    <div class="aside-toolbar">
+      <label class="details-toggle"><input type="checkbox" id="show-details"> details</label>
     </div>
-    <ol class="ranking">${rankingHtml || "<li class='empty'>No positive project totals yet</li>"}</ol>
   </aside>
-  <section id="projects-pane">
-    <h1>Projects / claims (${projects.length}) — click one</h1>
-    ${projectHtml || "<p class='empty'>No projects</p>"}
+  <section>
+    <h1>Projects (${projects.length})</h1>
+    <div id="projects-pane" class="pane-scroll">
+      ${projectHtml || "<p class='empty'>No projects</p>"}
+    </div>
   </section>
-  <section id="lines-pane">
-    <h1>Job lines (${view.lines.length}) — click one</h1>
-    ${lineHtml || "<p class='empty'>No job lines</p>"}
+  <section>
+    <h1>Job lines (${view.lines.length})</h1>
+    <div id="lines-pane" class="pane-scroll">
+      ${lineHtml || "<p class='empty'>No job lines</p>"}
+    </div>
   </section>
   <script type="application/json" id="line-data">${JSON.stringify(linePayload).replace(/</g, "\\u003c")}</script>
   <script>
     (function () {
+      const showDetails = document.getElementById("show-details");
+      showDetails.addEventListener("change", () => {
+        document.body.classList.toggle("show-details", showDetails.checked);
+      });
       const data = JSON.parse(document.getElementById("line-data").textContent);
       const byId = Object.fromEntries(data.map((row) => [row.lineEntryId, row]));
       const pane = document.getElementById("projects-pane");
@@ -511,14 +574,18 @@ export async function GET(req: NextRequest) {
             hit.stageHit ? "stage" : null,
           ].filter(Boolean).join(" · ");
           const statement = (hit.statements && hit.statements[0]) ? hit.statements[0] : "";
+          const meta = el.querySelector(".meta");
           slot.hidden = false;
           slot.classList.add("open");
           slot.innerHTML =
-            "<strong>" + escapeText(hit.points) + " pts</strong> on this line" +
+            "<div class='hit-score'>" + escapeText(hit.points) + "</div>" +
+            "<div class='hit-detail'>" +
             "<div class='breakdown'>" + escapeText(axes) +
             (hit.overlapIds && hit.overlapIds.length ? " · " + escapeText(hit.overlapIds.join(", ")) : "") +
             "</div>" +
-            (statement ? "<div class='statement'>" + escapeText(statement) + "</div>" : "");
+            (statement ? "<div class='statement'>" + escapeText(statement) + "</div>" : "") +
+            (meta ? "<div class='meta-in'>" + escapeText(meta.textContent.trim()) + "</div>" : "") +
+            "</div>";
         });
         sortByLine(byProject);
       }
@@ -564,10 +631,11 @@ export async function GET(req: NextRequest) {
           slot.hidden = false;
           slot.classList.add("open");
           slot.innerHTML =
-            "<strong>" + escapeText(hit.points) + " pts</strong> on this project" +
+            "<div class='hit-score'>" + escapeText(hit.points) + "</div>" +
+            "<div class='hit-detail'>" +
             "<div class='breakdown'>" + escapeText(axes) +
             (hit.overlapIds && hit.overlapIds.length ? " · " + escapeText(hit.overlapIds.join(", ")) : "") +
-            "</div>";
+            "</div></div>";
         });
       }
 

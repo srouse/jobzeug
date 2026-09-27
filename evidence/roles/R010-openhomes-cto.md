@@ -25,7 +25,7 @@ None — role narrative is in LinkedIn description; project-level detail lives o
 
 ## Linked projects
 
-No captured projects linked yet. Resume bullets are discovery leads, not completed project accounts.
+- [S029 Launch of a new business](../projects/S029%20-%20Launch%20of%20a%20new%20business.md) — catch-all for the launch. Do not split it unless he asks.
 
 ## Source references
 

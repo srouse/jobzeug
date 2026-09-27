@@ -1,12 +1,15 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { JzButton, JzIcon, JzIconButton, JzInput, JzTag, JzText } from "@jobzeug/design-system/react";
 import type { JobPostingPanelData } from "@/lib/job-posting/schema";
 import { EvidencePageHeader } from "@/components/evidence-page-header";
 import { AttachGutterRow } from "@/components/attach-gutter-row";
 import { Modal } from "@/components/modal";
+import { PostingMarkdown } from "../posting-markdown/posting-markdown";
 import { useResumeChat, useResumeHighlights } from "@/components/resume";
+import { useActiveConnectionTarget } from "@/components/resume/use-connection-target";
+import type { ConnectionStrength } from "@/lib/connection-targets";
 import { useIdleScrollbar } from "@/lib/use-idle-scrollbar";
 import { useJobPosting } from "../job-posting-context";
 import styles from "./job-posting-panel.module.css";
@@ -29,16 +32,19 @@ function DetailsBody({
   data: JobPostingPanelData;
   onOpenFull: () => void;
 }) {
-  const {
-    highlightedIds,
-    focusedIds,
-    density,
-    askContextItems,
-    toggleAskContext,
-  } = useResumeHighlights();
+  const { askContextItems, toggleAskContext, lineFocus, selectLine, density } =
+    useResumeHighlights();
+  const connection = useActiveConnectionTarget();
+  const strengthById = useMemo(() => {
+    const map = new Map<string, ConnectionStrength>();
+    for (const endpoint of connection?.ids ?? []) {
+      map.set(endpoint.id, endpoint.strength);
+    }
+    return map;
+  }, [connection]);
+  const hideUnlinked = density === "rolled" && strengthById.size > 0;
   const { canAttachContext } = useResumeChat();
   const attachedIds = new Set(askContextItems.map((item) => item.id));
-  const rollActive = density === "rolled" && focusedIds.size > 0;
   const summaryId = `${data.entryId}-summary`;
   const summaryActivate = canAttachContext
     ? () =>
@@ -62,19 +68,8 @@ function DetailsBody({
   }
 
   return (
-    <div
-      className={
-        rollActive ? `${styles.details} ${styles.detailsRolled}` : styles.details
-      }
-    >
-      {/* Meta / notes / summary / full-posting → one skeleton when rolled. */}
-      <div
-        className={classNames(
-          styles.shell,
-          rollActive && styles.isSkeleton,
-        )}
-        data-skeleton={rollActive || undefined}
-      >
+    <div className={styles.details}>
+      <div className={styles.shell}>
         <div className={styles.inner}>
           <div className={styles.content}>
             {metaItems.length > 0 ? (
@@ -83,15 +78,20 @@ function DetailsBody({
                   <li key={item.label} className={styles.metaItem}>
                     <JzText
                       variant="overline"
+                      weight="300"
                       color="muted"
                       label={item.label}
                       className={styles.metaLabel}
                     />
                     <JzText
                       variant="label"
-                      label={item.value}
+                      weight="300"
+                      color="muted"
+                      title={item.value}
                       className={styles.metaValue}
-                    />
+                    >
+                      <span className={styles.metaValueText}>{item.value}</span>
+                    </JzText>
                   </li>
                 ))}
               </ul>
@@ -146,43 +146,38 @@ function DetailsBody({
             ) : null}
 
             <div className={styles.fullPostingRow}>
-              <JzButton
-                variant="secondary"
-                size="small"
+              <JzIconButton
                 label="Full posting"
-                showIcon={false}
+                icon="book-open-text"
+                title="Full posting"
                 onClick={onOpenFull}
               />
               {data.sourceUrl ? (
-                <a
-                  className={styles.sourceUrl}
-                  href={data.sourceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <JzButton
+                  variant="secondary"
+                  size="small"
+                  label="Posting"
+                  icon="ArrowSquareOut"
                   title={data.sourceUrl}
-                >
-                  {data.sourceUrl}
-                </a>
+                  onClick={() => {
+                    window.open(data.sourceUrl, "_blank", "noopener,noreferrer");
+                  }}
+                />
               ) : null}
             </div>
         </div>
       </div>
 
       {SECTION_ORDER.map(({ id, label }) => {
-        const lines = data.lines.filter((line) => line.section === id);
-        if (!lines.length) return null;
-        const sectionFocused = lines.some((line) =>
-          focusedIds.has(line.entryId),
+        const lines = data.lines.filter(
+          (line) =>
+            line.section === id &&
+            (!hideUnlinked || strengthById.has(line.entryId)),
         );
-        const sectionSkeleton = rollActive && !sectionFocused;
+        if (!lines.length) return null;
         return (
           <section key={id} className={styles.section}>
-            <div
-              className={classNames(
-                styles.shell,
-                sectionSkeleton && styles.isSkeleton,
-              )}
-            >
+            <div className={styles.shell}>
               <div className={styles.inner}>
                 <div
                   className={classNames(
@@ -191,9 +186,9 @@ function DetailsBody({
                   )}
                 >
                   <JzText
-                    level={3}
-                    variant="overline"
-                    color="muted"
+                    level={2}
+                    variant="heading2"
+                    weight="200"
                     label={label}
                     className={styles.sectionLabel}
                   />
@@ -202,51 +197,41 @@ function DetailsBody({
             </div>
             <ul className={styles.lines}>
               {lines.map((line) => {
-                const focused = focusedIds.has(line.entryId);
-                const skeleton = rollActive && !focused;
-                const attached = attachedIds.has(line.entryId);
-                const interactive = canAttachContext;
-                const onActivate = canAttachContext
-                  ? () =>
-                      toggleAskContext({
-                        id: line.entryId,
-                        source: "job",
-                        text: line.text,
-                      })
-                  : undefined;
+                const strength = strengthById.get(line.entryId) ?? null;
+                const selected =
+                  lineFocus?.kind === "jobLine" &&
+                  lineFocus.id === line.entryId;
                 return (
-                  <li
-                    key={line.entryId}
-                    className={classNames(
-                      styles.shell,
-                      skeleton && styles.isSkeleton,
-                    )}
-                    data-skeleton={skeleton || undefined}
-                  >
+                  <li key={line.entryId} className={styles.shell}>
                     <div className={styles.inner}>
                       <AttachGutterRow
-                        checked={attached}
-                        onToggle={
-                          interactive && !skeleton ? onActivate : undefined
+                        checked={selected}
+                        onToggle={() =>
+                          selectLine({ kind: "jobLine", id: line.entryId })
                         }
-                        label="Add line to question context"
+                        label="Select job line"
                         contentId={line.entryId}
                         contentClassName={classNames(
                           styles.content,
                           styles.line,
-                          focused && styles.lineCited,
+                          strength === "primary" && styles.lineCited,
+                          strength === "secondary" && styles.lineDimmed,
                         )}
                       >
                         <JzText
                           variant="caption"
-                          color={focused || attached ? "primary" : "muted"}
+                          color={strength === "primary" ? "primary" : "muted"}
                           label={line.theme}
                           className={styles.theme}
                         />
                         <JzText
                           variant="body-regular"
                           color={
-                            focused || attached ? "primary" : undefined
+                            strength === "primary"
+                              ? "primary"
+                              : strength === "secondary"
+                                ? "muted"
+                                : undefined
                           }
                           label={line.text}
                           className={styles.lineText}
@@ -264,9 +249,9 @@ function DetailsBody({
       <section className={styles.section}>
         <div className={styles.sectionLabelIndent}>
           <JzText
-            level={3}
-            variant="overline"
-            color="muted"
+            level={2}
+            variant="heading2"
+            weight="200"
             label="Tools"
             className={styles.sectionLabel}
           />
@@ -451,9 +436,15 @@ function BoundPanel({ data }: { data: JobPostingPanelData }) {
         <DetailsBody data={data} onOpenFull={() => setFullOpen(true)} />
       </div>
       <Modal open={fullOpen} onOpenChange={setFullOpen} title={modalTitle}>
-        <pre className={styles.fullText}>
-          {data.fullText?.trim() || "No full listing text available."}
-        </pre>
+        {data.fullText?.trim() ? (
+          <PostingMarkdown markdown={data.fullText} />
+        ) : (
+          <JzText
+            variant="body-default"
+            color="muted"
+            label="No full listing text available."
+          />
+        )}
       </Modal>
     </>
   );

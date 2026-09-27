@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { JzIcon, JzIconButton, JzText } from "@jobzeug/design-system/react";
 import type {
   ResumeEmployerGroup,
@@ -9,9 +9,14 @@ import type {
 } from "@/lib/contentful/resume-model";
 import { EvidencePageHeader } from "@/components/evidence-page-header";
 import { AttachGutterRow } from "@/components/attach-gutter-row";
+import { ProjectPresentationModal } from "../project-presentation/project-presentation";
 import { useIdleScrollbar } from "@/lib/use-idle-scrollbar";
-import { useResumeChat } from "../resume-chat-context";
-import { useResumeHighlights } from "../resume-highlight-context";
+import {
+  useResumeHighlights,
+  type LineFocus,
+} from "../resume-highlight-context";
+import { useActiveConnectionTarget } from "../use-connection-target";
+import type { ConnectionStrength } from "@/lib/connection-targets";
 import styles from "./resume-document.module.css";
 
 const DEFAULT_NAME = "Scott Rouse";
@@ -57,7 +62,7 @@ function CitedTitle({
   dimmed?: boolean;
   variant: string;
   level?: number;
-  weight?: "400" | "500" | "600" | "700";
+  weight?: "200" | "400" | "500" | "600" | "700";
   color?: string;
   label: string;
   className?: string;
@@ -80,21 +85,22 @@ function CitedTitle({
 function EvidenceShell({
   id,
   skeleton,
-  focused,
+  strength = null,
   headClass,
   interactive,
   pressed,
   onActivate,
+  activateLabel = "Select",
   children,
 }: {
   id: string;
   skeleton: boolean;
-  focused: boolean;
+  strength?: ConnectionStrength | null;
   headClass: string;
-  /** Ask-context attach. */
   interactive?: boolean;
   pressed?: boolean;
   onActivate?: () => void;
+  activateLabel?: string;
   children: ReactNode;
 }) {
   const canActivate = Boolean(interactive && onActivate && !skeleton);
@@ -107,12 +113,13 @@ function EvidenceShell({
         <AttachGutterRow
           checked={pressed}
           onToggle={canActivate ? onActivate : undefined}
-          label="Add to question context"
+          label={activateLabel}
           contentId={id}
           contentClassName={classNames(
             styles.content,
             headClass,
-            focused && styles.cited,
+            strength === "primary" && styles.cited,
+            strength === "secondary" && styles.dimmed,
           )}
         >
           {children}
@@ -122,30 +129,53 @@ function EvidenceShell({
   );
 }
 
+function presentedProject(
+  resume: ResumeViewModel | null,
+  projectId: string | null,
+): ResumeProject | null {
+  if (!resume || !projectId) return null;
+  for (const employer of resume.employers) {
+    for (const role of employer.roles) {
+      const match = role.projects.find(
+        (project) =>
+          project.presentation &&
+          (project.evidenceId === projectId ||
+            `jz-${project.evidenceId}` === projectId),
+      );
+      if (match) return match;
+    }
+  }
+  return null;
+}
+
 export function ResumeDocument({
   resume,
   loading = false,
   error = null,
+  projectId,
+  onProjectIdChange,
   onOpenDesign,
 }: {
   resume: ResumeViewModel | null;
   loading?: boolean;
   error?: string | null;
+  projectId: string | null;
+  onProjectIdChange: (projectId: string | null) => void;
   onOpenDesign?: () => void;
 }) {
-  const {
-    focusedIds,
-    density,
-    setDensity,
-    askContextItems,
-    toggleAskContext,
-  } = useResumeHighlights();
-  const { canAttachContext } = useResumeChat();
+  const { density, setDensity, lineFocus, selectLine } = useResumeHighlights();
+  const connection = useActiveConnectionTarget();
+  const strengthById = useMemo(() => {
+    const map = new Map<string, ConnectionStrength>();
+    for (const endpoint of connection?.ids ?? []) {
+      map.set(endpoint.id, endpoint.strength);
+    }
+    return map;
+  }, [connection]);
   const { ref: scrollRef, scrolling } = useIdleScrollbar();
   const [colorMode, setColorMode] = useState<ColorMode>("light");
+  const playing = presentedProject(resume, projectId);
   const name = resume?.name ?? DEFAULT_NAME;
-  const rollActive = density === "rolled" && focusedIds.size > 0;
-  const attachedIds = new Set(askContextItems.map((item) => item.id));
   const modeMeta =
     COLOR_MODES.find((mode) => mode.id === colorMode) ?? COLOR_MODES[0];
 
@@ -162,26 +192,13 @@ export function ResumeDocument({
     setColorMode(next.id);
   };
 
+  const linkedOnly = density === "rolled" && strengthById.size > 0;
   const toggleDensity = () => {
     setDensity(density === "rolled" ? "full" : "rolled");
   };
 
-  const evidenceActivate = (evidenceId: string, attach: () => void) => {
-    if (!canAttachContext) {
-      return {
-        interactive: false as const,
-        onActivate: undefined,
-        pressed: false,
-      };
-    }
-    return {
-      interactive: true as const,
-      onActivate: attach,
-      pressed: attachedIds.has(evidenceId),
-    };
-  };
-
   return (
+    <>
     <article className={styles.article}>
       <EvidencePageHeader
         actions={
@@ -195,11 +212,11 @@ export function ResumeDocument({
             <JzIconButton
               label={
                 density === "rolled"
-                  ? "Density: rolled up. Click for full."
-                  : "Density: full. Click to roll up."
+                  ? "Linked only. Click to show unlinked."
+                  : "Showing unlinked. Click to hide them."
               }
               icon={density === "rolled" ? "EyeClosed" : "Eye"}
-              title={density === "rolled" ? "Rolled up" : "Full"}
+              title={density === "rolled" ? "Linked only" : "Showing all"}
               aria-pressed={density === "rolled"}
               onClick={toggleDensity}
             />
@@ -254,25 +271,11 @@ export function ResumeDocument({
           />
         ) : resume ? (
           <div
-            className={classNames(
-              styles.stack,
-              rollActive && styles.stackRolled,
-            )}
+            className={styles.stack}
           >
             {resume.employers.map(
               (employer: ResumeEmployerGroup, employerIndex) => {
-                const employerFocused = focusedIds.has(employer.evidenceId);
-                const employerSkeleton = rollActive && !employerFocused;
-                const employerAttached = attachedIds.has(employer.evidenceId);
-                const employerActivate = evidenceActivate(
-                  employer.evidenceId,
-                  () =>
-                    toggleAskContext({
-                      id: employer.evidenceId,
-                      source: "resume",
-                      text: employer.name,
-                    }),
-                );
+                const employerStrength = strengthById.get(employer.evidenceId) ?? null;
 
                 return (
                   <section
@@ -285,40 +288,27 @@ export function ResumeDocument({
                   >
                     <EvidenceShell
                       id={employer.evidenceId}
-                      skeleton={employerSkeleton}
-                      focused={employerFocused}
+                      skeleton={false}
+                      strength={employerStrength}
                       headClass={styles.employerHead}
-                      interactive={employerActivate.interactive}
-                      pressed={employerActivate.pressed}
-                      onActivate={employerActivate.onActivate}
                     >
                       <div className={styles.employerTitleRow}>
                         <CitedTitle
-                          active={employerFocused}
+                          active={employerStrength === "primary"}
+                          dimmed={employerStrength === "secondary"}
                           level={2}
-                          variant="heading"
-                          weight="500"
+                          variant="heading2"
+                          weight="200"
                           label={employer.name}
                           className={styles.employerTitle}
-                          selected={employerAttached}
+                          selected={false}
                         />
                       </div>
                     </EvidenceShell>
 
                     <div className={styles.roles}>
                       {employer.roles.map((role, roleIndex) => {
-                        const roleFocused = focusedIds.has(role.roleId);
-                        const roleSkeleton = rollActive && !roleFocused;
-                        const roleAttached = attachedIds.has(role.roleId);
-                        const roleActivate = evidenceActivate(
-                          role.roleId,
-                          () =>
-                            toggleAskContext({
-                              id: role.roleId,
-                              source: "resume",
-                              text: role.title,
-                            }),
-                        );
+                        const roleStrength = strengthById.get(role.roleId) ?? null;
 
                         return (
                           <div
@@ -331,24 +321,26 @@ export function ResumeDocument({
                           >
                             <EvidenceShell
                               id={role.roleId}
-                              skeleton={roleSkeleton}
-                              focused={roleFocused}
+                              skeleton={false}
+                              strength={roleStrength}
                               headClass={styles.roleBlock}
-                              interactive={roleActivate.interactive}
-                              pressed={roleActivate.pressed}
-                              onActivate={roleActivate.onActivate}
                             >
                               <div className={styles.roleHead}>
                                 <CitedTitle
-                                  active={roleFocused}
+                                  active={roleStrength === "primary"}
+                                  dimmed={roleStrength === "secondary"}
                                   level={3}
                                   variant="heading3"
                                   label={role.title}
-                                  selected={roleAttached}
+                                  selected={false}
                                 />
                                 <JzText
                                   variant="caption"
-                                  color={roleFocused ? "primary" : "muted"}
+                                  color={
+                                    roleStrength === "primary"
+                                      ? "primary"
+                                      : "muted"
+                                  }
                                   label={role.dateLabel}
                                 />
                               </div>
@@ -356,11 +348,15 @@ export function ResumeDocument({
 
                             <ProjectLine
                               projects={role.projects}
-                              focusedIds={focusedIds}
-                              rollActive={rollActive}
-                              canAttachContext={canAttachContext}
-                              attachedIds={attachedIds}
-                              toggleAskContext={toggleAskContext}
+                              strengthById={strengthById}
+                              hideUnlinked={linkedOnly}
+                              lineFocus={lineFocus}
+                              onSelect={(project) =>
+                                selectLine({
+                                  kind: "project",
+                                  id: project.evidenceId,
+                                })
+                              }
                             />
                           </div>
                         );
@@ -374,54 +370,51 @@ export function ResumeDocument({
         ) : null}
       </div>
     </article>
+    <ProjectPresentationModal
+      project={playing}
+      onClose={() => onProjectIdChange(null)}
+    />
+    </>
   );
 }
 
 function ProjectLine({
   projects,
-  focusedIds,
-  rollActive,
-  canAttachContext,
-  attachedIds,
-  toggleAskContext,
+  strengthById,
+  hideUnlinked,
+  lineFocus,
+  onSelect,
 }: {
   projects: ResumeProject[];
-  focusedIds: Set<string>;
-  rollActive: boolean;
-  canAttachContext: boolean;
-  attachedIds: Set<string>;
-  toggleAskContext: ReturnType<
-    typeof useResumeHighlights
-  >["toggleAskContext"];
+  strengthById: Map<string, ConnectionStrength>;
+  hideUnlinked: boolean;
+  lineFocus: LineFocus | null;
+  onSelect: (project: ResumeProject) => void;
 }) {
-  if (projects.length === 0) return null;
+  const visible = hideUnlinked
+    ? projects.filter((project) => strengthById.has(project.evidenceId))
+    : projects;
+  if (visible.length === 0) return null;
 
   return (
     <div className={styles.projects}>
       <div className={styles.projectStack}>
-        {projects.map((project) => {
-          const focused = focusedIds.has(project.evidenceId);
-          const skeleton = rollActive && !focused;
-          const attached = attachedIds.has(project.evidenceId);
-          const interactive = canAttachContext;
-          const onActivate = canAttachContext
-            ? () =>
-                toggleAskContext({
-                  id: project.evidenceId,
-                  source: "resume",
-                  text: project.name,
-                })
-            : undefined;
+        {visible.map((project) => {
+          const strength = strengthById.get(project.evidenceId) ?? null;
+          const selected =
+            lineFocus?.kind === "project" &&
+            lineFocus.id === project.evidenceId;
           return (
             <EvidenceShell
               key={project.evidenceId}
               id={project.evidenceId}
-              skeleton={skeleton}
-              focused={focused}
+              skeleton={false}
+              strength={strength}
               headClass={styles.projectName}
-              interactive={interactive}
-              pressed={attached}
-              onActivate={onActivate}
+              interactive
+              pressed={selected}
+              onActivate={() => onSelect(project)}
+              activateLabel="Select project"
             >
               <div className={styles.projectBody}>
                 <div className={styles.projectTitleRow}>
@@ -433,16 +426,18 @@ function ProjectLine({
                     aria-hidden
                     className={classNames(
                       styles.projectBullet,
-                      focused && styles.projectBulletFocused,
+                      strength === "primary" && styles.projectBulletFocused,
+                      strength === "secondary" && styles.projectBulletSecondary,
                     )}
                   />
                   <CitedTitle
-                    active={focused}
+                    active={strength === "primary"}
+                    dimmed={strength === "secondary"}
                     level={4}
                     variant="label"
                     color="muted"
                     label={project.name}
-                    selected={attached}
+                    selected={selected}
                   />
                 </div>
               </div>

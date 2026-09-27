@@ -2,6 +2,7 @@ import { z } from "zod";
 import {
   matchingRequirementSchema,
   matchingSnapshotSchema,
+  type MatchGraph,
 } from "@/lib/matching/schema";
 
 const text = z.string().trim().min(1);
@@ -120,6 +121,7 @@ export type JobPostingView = {
     kind: z.infer<typeof jobLineKindSchema>;
     theme: string;
     matchingRequirement?: MatchingRequirement;
+    contentfulUrl?: string;
   }>;
   tools: Array<{
     entryId: string;
@@ -127,6 +129,8 @@ export type JobPostingView = {
     context: z.infer<typeof jobToolContextSchema>;
   }>;
   matchingSnapshot?: MatchingSnapshot;
+  /** Scored once at ingest. Missing on postings saved before this field existed. */
+  matchGraph?: MatchGraph;
   /** Present when loaded from CMA — Contentful sys revision stamps for Match audit. */
   entryRevisions?: {
     jobzeugJobPosting: EntryRevision[];
@@ -190,6 +194,6 @@ export type ChatJobPostingPayload = z.infer<typeof chatJobPostingPayloadSchema>;
 export function toChatJobPostingPayload(
   view: JobPostingView,
 ): ChatJobPostingPayload {
-  const { fullText: _fullText, ...rest } = view;
+  const { fullText: _fullText, matchGraph: _matchGraph, entryRevisions: _entryRevisions, ...rest } = view;
   return chatJobPostingPayloadSchema.parse(rest);
 }

@@ -1,0 +1,148 @@
+{
+  "evidenceId": "S029",
+  "employer": "C007",
+  "roles": [
+    "R010"
+  ],
+  "name": "Launch of a new business",
+  "summary": "Helped pitch and start OpenHomes inside a local incubator, then owned the product design and a live application: an iOS prototype, a working home-search website with weighted and location search, and a functioning lower-commission real estate agency. He also designed a simpler version of the door hardware; that work stalled for lack of resources.",
+  "matchingMetadata": {
+    "schema_version": "1.1",
+    "project_id": "S029",
+    "title": "Launch of a new business",
+    "record_kind": "project",
+    "project_origin": "employment",
+    "ranking_eligible": true,
+    "exclusion_reason": null,
+    "parent_project_id": null,
+    "related_project_ids": [
+      "S028"
+    ],
+    "role_links": [
+      {
+        "id": "R010",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "Scott placed this under OpenHomes. One catch-all for the launch. Do not split the pitch, prototype, website, agency setup, or hardware exploration unless he asks."
+      }
+    ],
+    "employer_links": [
+      {
+        "id": "C007",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "OpenHomes is the company he helped start. The incubator is gener8tor on the employer record; he called it Generator. It is not a customer or client."
+      }
+    ],
+    "customer_ids": [],
+    "client_ids": [],
+    "year": 2013,
+    "year_basis": "estimated",
+    "year_note": "The account does not date the work. 2013 is the gener8tor summer cohort year already on C007, inside the R010 tenure (June 2013–August 2014).",
+    "delivery_stage": "mixed",
+    "annotation": {
+      "status": "reviewed",
+      "reviewed_by": "Scott",
+      "reviewed_at": "2026-09-27",
+      "vocabulary_version": "1.1.0"
+    },
+    "public_disclosure": "needs_review",
+    "evidence": [
+      {
+        "id": "S029-E001",
+        "statement": "Took part in the incubator pitch and figured out how OpenHomes could operate as a regulated real estate agency, including how listing information got into the product.",
+        "concept_ids": [
+          "local:product-strategy",
+          "local:persuasion",
+          "local:technical-discovery",
+          "local:real-estate"
+        ],
+        "ownership": "contributor",
+        "scope": "organization",
+        "delivery_stage": "production",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#source-account",
+            "locator": "Account summary — starting the company and the idea",
+            "supports": "He was in the pitch, and he says he figured out the regulated agency path and how to get listing information in. They were a functioning agency the whole time."
+          }
+        ],
+        "limitations": [
+          "He does not want other people on the company recorded, so sole-founder ownership is not claimed.",
+          "3% versus 6% is his account, not a measured commission result.",
+          "Funding amount is not in this account. A separate employer citation of $180,000 is not this claim."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S029-E002",
+        "statement": "Designed and built a live home-search application, including an iOS feel-prototype and a working site with weighted search and location search.",
+        "concept_ids": [
+          "local:programming",
+          "local:interaction-design",
+          "local:visual-interface-design",
+          "local:prototyping",
+          "local:production-release",
+          "local:ios",
+          "local:real-estate"
+        ],
+        "ownership": "lead",
+        "scope": "external_audience",
+        "delivery_stage": "production",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#source-account",
+            "locator": "Account summary — what he built",
+            "supports": "iOS prototype, live search website, weighted search, location search, and his statement that everything was live and working. Design responsibility was fully his."
+          }
+        ],
+        "limitations": [
+          "“Live video” remains his unclear wording and is not a separate product claim.",
+          "Weighted and location search have no approved concept. This is not semantic search.",
+          "Artifacts exist and were deferred to presentation. They were not inspected."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S029-E003",
+        "statement": "Designed a simpler version of door-opening hardware. That work stalled because the resources to build the hardware never arrived.",
+        "concept_ids": [
+          "local:hardware-product-design"
+        ],
+        "ownership": "contributor",
+        "scope": "organization",
+        "delivery_stage": "concept",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#source-account",
+            "locator": "Account summary — hardware",
+            "supports": "He tried to design a simpler version. It did not ship."
+          }
+        ],
+        "limitations": [
+          "The simpler version is not described as built or shipped."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
+        }
+      }
+    ],
+    "concept_proposals": []
+  }
+}

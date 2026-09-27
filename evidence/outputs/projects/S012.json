@@ -42,10 +42,10 @@
     "year_note": "Year unresolved: provisional R007 calendar anchor is 2018–2019, while captured public widget version history is 2022–2023. Preserve the conflict rather than guessing a build year.",
     "delivery_stage": "production",
     "annotation": {
-      "status": "needs_review",
-      "reviewed_by": "Codex",
-      "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.0.0"
+      "status": "reviewed",
+      "reviewed_by": "Scott",
+      "reviewed_at": "2026-09-27",
+      "vocabulary_version": "1.1.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [

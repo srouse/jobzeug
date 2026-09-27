@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S015
-title: Understanding AI by its building blocks (Contentful series)
+title: Understanding AI by its building blocks (article)
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -26,10 +26,10 @@ year_basis: sourced
 year_note: 2026 publication year recorded for both parts (February 26 and March 5).
 delivery_stage: mixed
 annotation:
-  status: needs_review
-  vocabulary_version: 1.0.0
-  reviewed_by: Codex
-  reviewed_at: "2026-09-26"
+  status: reviewed
+  vocabulary_version: "1.1.0"
+  reviewed_by: Scott
+  reviewed_at: "2026-09-27"
 public_disclosure: needs_review
 evidence:
   - id: S015-E001
@@ -81,7 +81,7 @@ evidence:
       reviewed_at: "2026-09-26"
 concept_proposals: []
 ---
-# S015: Understanding AI by its building blocks (Contentful series)
+# S015: Understanding AI by its building blocks (article)
 
 Captured: September 22, 2026
 Status: Initial capture from published two-part series + Scott’s emphasis on the interactive application; live embeds partially failed during scrape
@@ -97,7 +97,7 @@ Evidence: Artifact-supported (public articles); Scott’s account that the inter
   - Author index: https://www.contentful.com/blog/author/scott-rouse/
 - Scott asked to **roll both parts into one project** even though they are two posts.
 - Customers / clients: None. Educational / thought-leadership series.
-- Related: Distinct from [S009 AI content and component binding](S009%20-%20AI%20content%20and%20component%20binding.md) (product research) and [S003 DemAI](S003%20-%20DemAI.md) (SE demo platform).
+- Related: Distinct from [S009 AI binding research](S009%20-%20AI%20binding%20research.md) (innovation prototype) and [S003 DemAI](S003%20-%20DemAI.md) (SE demo platform).
 
 ## Resume summary
 

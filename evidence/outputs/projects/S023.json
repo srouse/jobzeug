@@ -17,7 +17,9 @@
     "ranking_eligible": true,
     "exclusion_reason": null,
     "parent_project_id": null,
-    "related_project_ids": [],
+    "related_project_ids": [
+      "S027"
+    ],
     "role_links": [
       {
         "id": "R006",
@@ -41,10 +43,10 @@
     "year_note": "Estimated within R006 tenure (Nov 2019–Aug 2020); project-specific calendar not supplied.",
     "delivery_stage": "prototype",
     "annotation": {
-      "status": "draft",
-      "reviewed_by": null,
-      "reviewed_at": null,
-      "vocabulary_version": "1.0.0"
+      "status": "reviewed",
+      "reviewed_by": "Scott",
+      "reviewed_at": "2026-09-27",
+      "vocabulary_version": "1.1.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -77,9 +79,9 @@
         ],
         "public_disclosure": "needs_review",
         "review": {
-          "status": "proposed",
-          "reviewed_by": null,
-          "reviewed_at": null
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
         }
       },
       {
@@ -111,9 +113,9 @@
         ],
         "public_disclosure": "needs_review",
         "review": {
-          "status": "proposed",
-          "reviewed_by": null,
-          "reviewed_at": null
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
         }
       },
       {
@@ -144,9 +146,9 @@
         ],
         "public_disclosure": "needs_review",
         "review": {
-          "status": "proposed",
-          "reviewed_by": null,
-          "reviewed_at": null
+          "status": "approved",
+          "reviewed_by": "Scott",
+          "reviewed_at": "2026-09-27"
         }
       }
     ],

@@ -4,12 +4,12 @@
   "roles": [
     "R001"
   ],
-  "name": "AI content and component binding",
-  "summary": "I researched AI-assisted content and component binding—semantic metadata and agent-assisted repair patterns that help map structured content to design properties—still exploratory and unshipped beyond Figma/Contentful storage.",
+  "name": "AI binding research",
+  "summary": "AI binding research, an innovation prototype: semantic metadata and repair patterns for mapping structured content to components. The learnings are real. It is not integrated into the shipped widget.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S009",
-    "title": "AI content and component binding",
+    "title": "AI binding research",
     "record_kind": "project",
     "project_origin": "employment",
     "ranking_eligible": true,
@@ -45,7 +45,7 @@
       "status": "reviewed",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.0.0"
+      "vocabulary_version": "1.1.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
