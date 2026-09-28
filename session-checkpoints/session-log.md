@@ -745,3 +745,34 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 
 - Rescore and save so the home page reads a stored graph that matches the debug ranking
 - Job post percent still ignores how many projects hit a line
+
+### [2026-09-28T14:21:00-05:00]
+
+#### Summary
+
+- Published vocabulary 1.5.0 with the Contentful for Figma update, then moved the presentation link onto the project and put public URLs in the S014 and S008 summaries.
+
+#### Changes
+
+- Evidence / records: S008 security and help claims, vocabulary 1.5.0 pin, resume summaries with markdown links for the design-tokens article and the Figma widget help pages
+- Skills / tooling: compress keeps resume-summary links; stub presentation sets the project reference; presentations push before projects
+- Other: job-line focus reads as projects over the resume total; summary links use primary text; Next typecheck excludes Node test files
+
+#### Decisions
+
+- The project entry references its presentation; the presentation does not point back
+- A complete resume summary is copied with its markdown links, and those links render in the hub
+- Summary links use the primary text color
+- `*.test.ts` stays out of the Next build so Node `.ts` imports do not fail typecheck
+
+#### Plans cached
+
+- brief_voice_no_person_f8372480.plan.md
+- employer_resume_summaries_3ddbe84e.plan.md
+- project_presentation_reference_daee5218.plan.md
+- s009_evidence_tags_6e42c862.plan.md
+
+#### Next
+
+- Remap a posting so security-constrained integration and the knowledge tags can score
+- The S031 knowledge-management proposal still does not score

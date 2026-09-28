@@ -25,14 +25,14 @@
   --resume-header-height: 6rem;
   /* Minimum center gutter when columns are squeezed */
   --resume-lane-gutter: var(--jz-semantic-space-gap-lg, 1.5rem);
-  /* Fixed reading-width cap for both pages at every breakpoint (~10% under 32rem, then 40px tighter) */
-  --resume-column-max: calc(28.8rem - 40px);
+  /* Fixed reading-width cap for both pages at every breakpoint (~10% under 32rem, then 10px tighter) */
+  --resume-column-max: calc(28.8rem - 10px);
   /* Allow columns to flex ~100px under the cap before the center eats space */
   --resume-column-min: calc(var(--resume-column-max) - 100px);
   /* Horizontal padding inside the resume / job-posting page surfaces */
   --resume-page-pad-inline: 26px;
-  /* Gap between answer stage and each column edge (flush = 0) */
-  --answer-gap: 0px;
+  /* Gap between each page column and the answer stage */
+  --answer-gap: 20px;
   /* Vertical breathing room below headers / above toolbar (unused; stage is full-bleed) */
   --answer-inset: 0px;
 }

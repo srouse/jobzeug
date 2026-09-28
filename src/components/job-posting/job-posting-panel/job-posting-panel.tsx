@@ -10,7 +10,9 @@ import { PostingMarkdown } from "../posting-markdown/posting-markdown";
 import { useResumeHighlights } from "@/components/resume";
 import { useActiveConnectionTarget } from "@/components/resume/use-connection-target";
 import type { ConnectionStrength } from "@/lib/connection-targets";
+import { FitMeter } from "@/components/fit-meter/fit-meter";
 import { useIdleScrollbar } from "@/lib/use-idle-scrollbar";
+import { lineFitBars } from "@/lib/matching/home-coverage";
 import { useJobPosting, type BindStageName } from "../job-posting-context";
 import styles from "./job-posting-panel.module.css";
 
@@ -27,9 +29,11 @@ function classNames(...parts: Array<string | false | null | undefined>) {
 
 function DetailsBody({
   data,
+  resumeProjectIds,
   onOpenFull,
 }: {
   data: JobPostingPanelData;
+  resumeProjectIds: readonly string[];
   onOpenFull: () => void;
 }) {
   const { lineFocus, selectLine, density } = useResumeHighlights();
@@ -48,6 +52,15 @@ function DetailsBody({
     }
     return ids;
   }, [connection]);
+  const lineBars = useMemo(
+    () =>
+      lineFitBars(
+        data.lines.map((line) => line.entryId),
+        data.matchGraph?.edges ?? [],
+        resumeProjectIds,
+      ),
+    [data, resumeProjectIds],
+  );
   const hideUnselectedObjects =
     density === "rolled" &&
     lineFocus?.kind === "project" &&
@@ -210,32 +223,34 @@ function DetailsBody({
                           !selected && strength === "secondary" && styles.lineDimmed,
                         )}
                       >
-                        <JzText
-                          variant="caption"
-                          color={
-                            selected
-                              ? "secondary"
-                              : strength === "primary"
+                        <div className={styles.lineCopy}>
+                          <JzText
+                            variant="caption"
+                            color={
+                              selected || strength === "primary"
                                 ? "primary"
                                 : "muted"
-                          }
-                          label={line.theme}
-                          className={styles.theme}
-                        />
-                        <JzText
-                          variant="body-regular"
-                          color={
-                            selected
-                              ? "secondary"
-                              : strength === "primary"
+                            }
+                            label={line.theme}
+                            className={styles.theme}
+                          />
+                          <JzText
+                            variant="body-regular"
+                            color={
+                              selected || strength === "primary"
                                 ? "primary"
                                 : strength === "secondary"
                                   ? "muted"
                                   : undefined
-                          }
-                          label={line.text}
-                          className={styles.lineText}
-                        />
+                            }
+                            label={line.text}
+                            className={styles.lineText}
+                          />
+                          <FitMeter
+                            width={lineBars.get(line.entryId)?.width ?? 0}
+                            tone={lineBars.get(line.entryId)?.tone ?? null}
+                          />
+                        </div>
                       </AttachGutterRow>
                     </div>
                   </li>
@@ -260,14 +275,14 @@ function DetailsBody({
           {data.tools.map((tool) => (
             <li key={tool.entryId} className={styles.tool}>
               <JzTag
-                variant="primary"
+                variant="default"
                 label={`${tool.name} · ${tool.context}`}
               />
             </li>
           ))}
           <li className={styles.tool}>
             <JzTag
-              variant="primary"
+              variant="default"
               label={data.entryId}
               title={data.sourceUrl}
             />
@@ -430,7 +445,13 @@ function UnboundBindForm() {
   );
 }
 
-function BoundPanel({ data }: { data: JobPostingPanelData }) {
+function BoundPanel({
+  data,
+  resumeProjectIds,
+}: {
+  data: JobPostingPanelData;
+  resumeProjectIds: readonly string[];
+}) {
   const { busy, unbind } = useJobPosting();
   const { ref: scrollRef, scrolling } = useIdleScrollbar();
   const [fullOpen, setFullOpen] = useState(false);
@@ -480,7 +501,11 @@ function BoundPanel({ data }: { data: JobPostingPanelData }) {
         data-evidence-scroll
         data-scrolling={scrolling || undefined}
       >
-        <DetailsBody data={data} onOpenFull={() => setFullOpen(true)} />
+        <DetailsBody
+          data={data}
+          resumeProjectIds={resumeProjectIds}
+          onOpenFull={() => setFullOpen(true)}
+        />
       </div>
       <Modal open={fullOpen} onOpenChange={setFullOpen} title={modalTitle}>
         {data.fullText?.trim() ? (
@@ -521,13 +546,17 @@ function PanelChrome({ children }: { children: ReactNode }) {
 }
 
 /** Persistent right-column Job Posting sheet: unbound bind form, busy, or bound details. */
-export function JobPostingPanel() {
+export function JobPostingPanel({
+  resumeProjectIds = [],
+}: {
+  resumeProjectIds?: readonly string[];
+}) {
   const { data, busy, loading } = useJobPosting();
 
   return (
     <aside className={styles.panel} aria-label="Job posting">
       {data ? (
-        <BoundPanel data={data} />
+        <BoundPanel data={data} resumeProjectIds={resumeProjectIds} />
       ) : busy || loading ? (
         <PanelChrome>
           <LoadingState />

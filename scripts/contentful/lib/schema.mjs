@@ -59,11 +59,12 @@ export const definitions = {
   } },
   project: { name: 'Project', displayField: 'name', fields: {
     evidenceId: symbol(true, projectId), employer: reference('employer', employerId, true),
-    roles: references('role', roleId, true), name: symbol(true), summary: prose(),
+    roles: references('role', roleId, true), name: symbol(true), summary: prose(), url: symbol(false, url),
+    presentation: reference('projectPresentation', presentationId),
     matchingMetadata: object(projectMatchingSchema),
   } },
   projectPresentation: { name: 'Project Presentation', displayField: 'evidenceId', fields: {
-    evidenceId: symbol(true, presentationId), project: reference('project', projectId, true),
+    evidenceId: symbol(true, presentationId),
     blurb: field('Text', blurb, true), video: asset(true),
     metricOneValue: symbol(true, metricValue), metricOneLabel: symbol(true, metricLabel),
     metricTwoValue: symbol(true, metricValue), metricTwoLabel: symbol(true, metricLabel),
@@ -113,7 +114,7 @@ export const definitions = {
 export const typeId = kind => `jobzeug${kind[0].toUpperCase()}${kind.slice(1)}`;
 export const entryId = key => `jz-${key}`;
 /** Resume core plus the versioned vocabulary synced from evidence. */
-export const coreKinds = ['employer', 'role', 'matchingVocabulary', 'project', 'projectPresentation'];
+export const coreKinds = ['employer', 'role', 'matchingVocabulary', 'projectPresentation', 'project'];
 export const outputDirectory = kind => kind === 'matchingVocabulary' ? 'matchingVocabularies' : `${kind}s`;
 /** Session job posting overlay — applied with core; not pushed from evidence/. */
 export const jobPostingKinds = ['jobLine', 'jobTool', 'jobPosting', 'focusBrief'];

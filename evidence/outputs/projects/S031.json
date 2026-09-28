@@ -1,0 +1,141 @@
+{
+  "evidenceId": "S031",
+  "employer": "C001",
+  "roles": [
+    "R001"
+  ],
+  "name": "KMS demo",
+  "summary": "I built a proof of concept for running a knowledge-management system on Contentful: a data lake of raw material, processed into structured content a team can use. The recording is that path, from one import to an answer a person can still stop.",
+  "presentation": "S031-presentation",
+  "matchingMetadata": {
+    "schema_version": "1.1",
+    "project_id": "S031",
+    "title": "KMS demo",
+    "record_kind": "project",
+    "project_origin": "employment",
+    "ranking_eligible": true,
+    "exclusion_reason": null,
+    "parent_project_id": null,
+    "related_project_ids": [],
+    "role_links": [
+      {
+        "id": "R001",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "He said this belongs on his latest job. That record is Senior Product Architect, February 2026–present."
+      }
+    ],
+    "employer_links": [
+      {
+        "id": "C001",
+        "relationship": "delivery",
+        "status": "confirmed",
+        "note": "The demo is built in Contentful, during the Contentful tenure."
+      }
+    ],
+    "customer_ids": [],
+    "client_ids": [],
+    "year": 2026,
+    "year_basis": "estimated",
+    "year_note": "Estimated from R001 (February 2026–present as of September 2026). He did not give a project date.",
+    "delivery_stage": "prototype",
+    "annotation": {
+      "status": "draft",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "vocabulary_version": "1.5.0"
+    },
+    "public_disclosure": "needs_review",
+    "evidence": [
+      {
+        "id": "S031-E001",
+        "statement": "Built the knowledge-management proof of concept himself. Firecrawl lands raw material in Contentful as markdown, a Mastra agent structures it and holds back a weak result, and React drives the site and apps that answer from that content with semantic search.",
+        "concept_ids": [
+          "local:firecrawl",
+          "local:contentful",
+          "local:mastra",
+          "local:react",
+          "local:ai-workflow-engineering",
+          "local:ai-output-evaluation",
+          "local:content-modeling",
+          "local:semantic-search-integration",
+          "local:headless-content-management",
+          "local:prototyping",
+          "local:technical-prototype"
+        ],
+        "ownership": "sole",
+        "scope": "individual",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s031-account-handoff-2026-09-28.md",
+            "locator": "I built it all",
+            "supports": "He built the proof of concept. React drives it. He thinks it is probably a Next.js app, with a website, Contentful apps, and other endpoints."
+          },
+          {
+            "ref": "../sources/s031-kms-walkthrough-2026-09-28.md",
+            "locator": "0:00:16 and 0:07:26",
+            "supports": "The walkthrough has three parts. One import is processed into structured entries. A question then uses semantic search and returns an FAQ and a procedure."
+          },
+          {
+            "ref": "../sources/s031-kms-walkthrough-2026-09-28.md",
+            "locator": "0:05:06",
+            "supports": "He planted a bad FAQ so the assessment would fail and the workflow would pause for a person. Passing entries continue into translation without that stop."
+          }
+        ],
+        "limitations": [
+          "Next.js is his \"probably.\" No repository is in the workspace.",
+          "The walkthrough does not say Mastra or React. Those names are his account.",
+          "An unnamed Contentful partner was expected to build the agents out with clients. He will not name them. They did not build this demo.",
+          "The content model in the recording is intentionally small. Sample files are not a customer's corpus.",
+          "The failing FAQ was planted so the pause would show. That is not a measured benchmark."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S031-E002",
+        "statement": "The demo is the handoff. He has shown it to prospects and to other partners as a working picture of a knowledge-management system on Contentful.",
+        "concept_ids": [
+          "local:customer-demonstration",
+          "local:customer-facing-work"
+        ],
+        "ownership": "sole",
+        "scope": "external_audience",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s031-account-handoff-2026-09-28.md",
+            "locator": "The demo is the hand off",
+            "supports": "He says it has been used with prospects and other partners, and that it has clarified how Contentful can run this kind of system."
+          }
+        ],
+        "limitations": [
+          "No prospect or partner is named. No count of meetings.",
+          "His judgment that it is one of the best current examples, and that it influenced a lot of thought. No decision record is in the file.",
+          "He says it can still be built further. The client build belongs to the unnamed partner, not to this demo."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      }
+    ],
+    "concept_proposals": [
+      {
+        "label": "Knowledge-management system",
+        "category": "knowledge",
+        "definition": "Knowledge of collecting a large body of source material, structuring it, and making it usable. A data lake of raw material that is operationalized, as distinct from rebuilding a website.",
+        "reason": "S031 is that system. Approved concepts cover Firecrawl, Mastra, Contentful, and the prototype. None of them is the knowledge-management subject he says the project is for."
+      }
+    ]
+  }
+}

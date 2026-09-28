@@ -50,10 +50,11 @@ For each target project:
 3. **Extract claims** — One claim = one coherent action or result. Split materially different provenance or ownership. Preserve uncertainty in `limitations`. Use provenance `inferred` only for contextual leads; inferred claims never score as direct evidence.
 4. **Map concepts** — For each claim, choose the most specific **approved** IDs from the pinned `vocabulary.yaml`. Read each concept’s definition and `evidence_rule` before assigning. Do not invent IDs. Do not treat aliases, parent concepts, or INDEX themes as automatic tags. Empty `concept_ids` is valid while draft.
 5. **Propose gaps separately** — Missing meanings go in `concept_proposals` (`label`, `category`, `definition`, `reason`). Do not edit `vocabulary.yaml` in this skill unless Scott explicitly asks for a vocabulary revision (that is separate maintenance and a new version).
-6. **Source anchors** — Every claim needs resolvable `sources` (`ref`, `locator`, `supports`). Prefer stable HTML anchors in the body when adding new claims. Existence of an artifact does not prove every outcome.
+6. **Source anchors** — Every claim needs resolvable `sources` (`ref`, `locator`, `supports`). Cite the intact source file when one exists (`evidence/sources/…`), with a timestamp or other locator inside it. Claims belong in the focused project header. They are the matching layer, not a rewrite of what Scott said. If that telling is not already a file the project links to, stop and save it under **add-project**'s source-record rule before annotating. Do not reconstruct it from the summary. A later pass must be able to open the source from the project and change the claims.
 7. **Review state** — Default after an agent pass: project `annotation.status: draft` (or `needs_review` if reopening prior work); claim `review.status: proposed` with null reviewer/date. Set `approved` / project `reviewed` **only** when Scott explicitly confirms the annotation pass (record `reviewed_by` and ISO `reviewed_at`). Never fabricate Scott’s approval. Registry approval ≠ claim approval.
 8. **Validate locally** — Concept IDs exist and are approved in the pinned version; enums match the header schema; IDs and links agree with the body; no job weights or match scores in the header.
-9. **Report** — Per project: claims added/updated, concept IDs used, proposals, open limitations, review status. Remind: run **compress-to-contentful** when ready to publish (`matchingMetadata` + vocabulary). Do not run compress unless Scott asks.
+9. **Resume summary** — If the account now says something `## Resume summary` does not, rewrite that section to the **add-project** contract before finishing: two sentences, first person, under 280 characters, the employer line above Details. Claims stay the matching layer. The summary stays the employer line. Do not leave a label, a caveat, or third person in place of it.
+10. **Report** — Per project: claims added/updated, concept IDs used, proposals, open limitations, review status. Remind: run **compress-to-contentful** when ready to publish (`matchingMetadata` + vocabulary). Do not run compress unless Scott asks.
 
 ### Batch mode
 
@@ -62,6 +63,7 @@ When annotating multiple projects, finish one project’s header coherently befo
 ## Hard rules
 
 - Stay inside `evidence/` (project files + matching docs). Do not push Contentful from this skill.
+- Keep the project header focused. Claims cite the intact source file the project already links to, so the tagging can be redone from what Scott said. Do not treat the claims as the only copy of that telling.
 - Only approved vocabulary IDs in `concept_ids`. No fabricated local IDs.
 - Do not invent metrics, dates, AI/Figma retrofit, production outcomes, or customer clearance.
 - Do not add job-specific weights or match scores to headers.
@@ -73,6 +75,7 @@ When annotating multiple projects, finish one project’s header coherently befo
 ## Out of scope
 
 - Creating projects, employers, or roles (add-project)
+- Updating an existing project from a new telling, transcript, or video, including new vocabulary (update-project)
 - Compress, apply, or push to Contentful (compress-to-contentful)
 - Growing or versioning the vocabulary unless Scott explicitly requests it
 - Implementing or running the job↔project ranker

@@ -30,7 +30,7 @@ year_note: 2024 publication year recorded for the May 16, 2024 article.
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: "1.1.0"
+  vocabulary_version: "1.5.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -41,6 +41,8 @@ evidence:
     concept_ids:
       - local:technical-writing
       - local:technical-article
+      - local:design-system-fundamentals
+      - local:design-token-fundamentals
     ownership: sole
     scope: external_audience
     delivery_stage: production
@@ -60,6 +62,99 @@ evidence:
       status: approved
       reviewed_by: Codex
       reviewed_at: "2026-09-26"
+  - id: S014-E002
+    statement: Used the article to show tokens as the hub of distribution, then a simple semantic
+      grid, so a content company could grasp the idea without an elaborate naming scheme.
+    concept_ids:
+      - local:technical-writing
+      - local:technical-article
+      - local:design-system-fundamentals
+      - local:design-token-fundamentals
+    ownership: sole
+    scope: external_audience
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "../sources/s014-design-tokens-walkthrough-2026-09-28.md"
+        locator: "0:01:20 and 0:02:21"
+        supports: He says tokens are mechanically the hub, and that the last grid is what keeps people
+          from getting lost in elaborate naming.
+    limitations:
+      - The grid and the hub are his walkthrough of the published article, not a new system he shipped.
+      - The caption name for Contentful's own design system is unclear. His point is that it still does
+        not use semantic tokens, and that this is getting it into trouble. That judgment is his.
+    public_disclosure: needs_review
+    review:
+      status: proposed
+      reviewed_by: null
+      reviewed_at: null
+  - id: S014-E003
+    statement: The article has ranked in the top 10 of Contentful blog performance for a couple of
+      years. After the CEO read it, he made a video and presented it to the company.
+    concept_ids:
+      - local:technical-article
+    ownership: sole
+    scope: external_audience
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "../sources/s014-design-tokens-walkthrough-2026-09-28.md"
+        locator: "0:00:06 and 0:00:24"
+        supports: He says this article is over two years old, ranks in the top 10 on the Contentful
+          blog, and that the CEO made a company video about it because it resonated.
+    limitations:
+      - Top 10 and a first-page search for Design Tokens are his account. No analytics export or search
+        result is in the file.
+      - The CEO video is not an artifact in this workspace.
+    public_disclosure: needs_review
+    review:
+      status: proposed
+      reviewed_by: null
+      reviewed_at: null
+  - id: S014-E004
+    statement: Drafted the article from speech-to-text and used AI to clean it up quickly, early in his
+      use of that method, so the ideas stayed his. Professional editors then made one or two small updates.
+    concept_ids:
+      - local:ai-assisted-editing
+      - local:technical-writing
+    ownership: sole
+    scope: individual
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "../sources/s014-account-2026-09-28.md"
+        locator: "I also used AI to edit this"
+        supports: He dictated the article, used AI to clean the draft quickly, and says professional
+          editors made one or two small updates on a long piece.
+    limitations:
+      - No prompt, draft, or editor markup is in a source file. One or two updates is his count.
+      - Early and first experience are his placement in time, not a dated milestone.
+      - Another person helped talk through some ideas. He does not name them or say what they changed.
+        He says he carried the piece through.
+    public_disclosure: needs_review
+    review:
+      status: proposed
+      reviewed_by: null
+      reviewed_at: null
+  - id: S014-E005
+    statement: Drew the article's illustrations himself so the figures carry the explanation.
+    concept_ids:
+      - local:explanatory-illustration
+    ownership: sole
+    scope: individual
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "../sources/s014-account-2026-09-28.md"
+        locator: "the illustrations were all done by me"
+        supports: He says he made the illustrations, and that the visuals connect with the language.
+    limitations:
+      - The illustration files are not in this workspace. How good they are is his judgment.
+    public_disclosure: needs_review
+    review:
+      status: proposed
+      reviewed_by: null
+      reviewed_at: null
 concept_proposals: []
 ---
 # S014: Design tokens explained (article)
@@ -76,10 +171,12 @@ Evidence: Artifact-supported (public article); Scott’s accounts for ranking/SE
 - Author index: https://www.contentful.com/blog/author/scott-rouse/
 - Customers / clients: None. Thought-leadership / enablement writing, not a named CU/CL engagement.
 - Related: State Farm token work [S005](S005%20-%20State%20Farm%20tokens.md) / [S006](S006%20-%20State%20Farm%20Figma%20design%20system.md) is earlier enterprise practice; this article is Contentful-published teaching, not State Farm delivery.
+- Walkthrough transcript, kept separate: [S014 walkthrough, September 28, 2026](../sources/s014-design-tokens-walkthrough-2026-09-28.md). Open it for the spoken detail. Do not treat it as the project account.
+- September 28 account, kept separate: [S014 account, September 28, 2026](../sources/s014-account-2026-09-28.md). Open it for what he said about AI editing, the illustrations, and the professional edit.
 
 ## Resume summary
 
-I wrote Contentful’s public guide on layered design tokens—primitive, semantic, and component—using color as the worked example for distribution across Figma, code, and Studio.
+I wrote [Design Tokens Explained](https://www.contentful.com/blog/design-token-system/) for Contentful to make a complex design systems topic accessible to people across design, engineering, and content. Through clear visuals and a practical example built step by step, I show how tokens turn design decisions into a shared language teams can use. More than two years after publication, it ranked among Contentful’s top 10 blog posts by performance, and our CEO highlighted it in a company-wide video. It reflects a strength I bring to my work: understanding complex systems deeply enough to make them approachable and useful to others.
 
 ## Account summary
 
@@ -117,11 +214,6 @@ Article (concept):
 - Not a customer delivery project; no CU/CL.
 - Performance claims are Scott’s / resume claims pending analytics corroboration.
 
-## Potential relevance to Figma role
-
-- Public, durable teaching on **tokens ↔ Figma variables ↔ code exports** and Studio.
-- Positions tokens as the substrate AI will scale—aligns with Figma + design-system + AI narrative without inventing product ownership.
-
 ## Follow-up queue
 
 - Confirm Contentful analytics (rank among posts, traffic window) vs Google SERP claim.
@@ -137,5 +229,38 @@ Article (concept):
 - https://www.contentful.com/blog/design-token-system/ (scraped September 22, 2026)
 - https://www.contentful.com/blog/author/scott-rouse/
 - [Resume working copy](../sources/resume-working-copy.txt); [portfolio research](../sources/portfolio-research.md)
+
+## Presentation
+
+Blurb: I wrote and illustrated Contentful’s public guide on layered tokens, using AI to clean a speech-to-text draft so editors made one or two fixes. The recording is the semantic grid.
+
+Video: 2tn2GLHJ4gYwd3j2szwhl9
+
+- value: Top 10
+  label: Contentful blog performance
+- value: Semantic grid
+  label: Show what is missing too
+
+## Addition — September 28, 2026: walkthrough transcript
+
+Faithful summary of the spoken walkthrough. The full transcript, with timestamps, is [stored separately](../sources/s014-design-tokens-walkthrough-2026-09-28.md).
+
+He has written several design-token articles. This one is over two years old. He says it ranks in the top 10 for performance on the Contentful blog, and that a search for Design Tokens has a very good chance of showing it on the first page. The SEO result surprised him. The CEO read it and made a video that was presented to the company because it resonated. That video is not in this workspace.
+
+The goal was to distill tokens for a company that is about content, not a design-system company. He did not go deep on any one idea. He built the explanation across the article, starting with visuals for how tokens are distributed. His point is that tokens are mechanically the hub, and the rest can follow from that. Primitives are where the basic choices are pinned, including when to use stepping and when not to, and that returns to the distribution story.
+
+What he liked was the move into semantics, and why semantics rather than primitives. He says Contentful’s own design system still does not use semantics and is getting into trouble for it. The caption renders that system’s name unclearly. He thinks AI looks for semantic tokens and does not necessarily want primitives.
+
+The part he finds most interesting is the last grid. People build elaborate naming and grouping and then feel they will never know enough. The grid uses an x and a y axis, including interactive and emphasis, and it shows what is missing as well as what is there. He does not think you need a naming convention that stacks every combination. He thinks boiling it down, rather than digging into the machinery, is what made this article different, and why he is proud of it. He expects it to be his most successful article because it has held up for a couple of years. That ranking and that expectation are his judgment.
+
+## Addition — September 28, 2026: AI editing and illustrations
+
+Faithful summary of his [September 28 account](../sources/s014-account-2026-09-28.md). The source file keeps his words.
+
+He dictated the article and used AI to clean that speech-to-text draft quickly. He calls it an early, first experience of working this way. The point for him was keeping what he was coming up with original and well thought out, and seeing how AI could execute the cleanup. Professional editors then made one or two small updates. He says a long, robust article flew through that last phase. No draft or editor markup is saved here.
+
+He drew the illustrations. He treats that as part of explaining: visuals that connect with the language. The figure files are not in this workspace.
+
+Another person helped him talk through some of the ideas. He does not name them. He says the through-line was his: he had the idea, understood it, and carried it to publication.
 
 [Project index](INDEX.md) · [Role index](../roles/INDEX.md) · [Workspace guide](../README.md)

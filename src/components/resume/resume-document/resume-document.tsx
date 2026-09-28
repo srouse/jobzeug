@@ -2,6 +2,9 @@
 
 import { useMemo, type ReactNode } from "react";
 import { JzIcon, JzText } from "@jobzeug/design-system/react";
+import { useJobPosting } from "@/components/job-posting";
+import { FitMeter } from "@/components/fit-meter/fit-meter";
+import { projectFitBars, type FitBar } from "@/lib/matching/home-coverage";
 import type {
   ResumeEmployerGroup,
   ResumeProject,
@@ -9,6 +12,7 @@ import type {
 } from "@/lib/contentful/resume-model";
 import { EvidencePageHeader } from "@/components/evidence-page-header";
 import { AttachGutterRow } from "@/components/attach-gutter-row";
+import { CareerTimeline } from "../career-timeline/career-timeline";
 import { ProjectPresentationModal } from "../project-presentation/project-presentation";
 import { useIdleScrollbar } from "@/lib/use-idle-scrollbar";
 import {
@@ -35,6 +39,7 @@ function CitedTitle({
   label,
   className,
   selected,
+  children,
 }: {
   active: boolean;
   dimmed?: boolean;
@@ -42,9 +47,10 @@ function CitedTitle({
   level?: number;
   weight?: "200" | "400" | "500" | "600" | "700";
   color?: string;
-  label: string;
+  label?: string;
   className?: string;
   selected?: boolean;
+  children?: ReactNode;
 }) {
   return (
     <JzText
@@ -52,11 +58,13 @@ function CitedTitle({
       variant={variant}
       weight={weight}
       color={
-        selected ? "secondary" : active ? "primary" : dimmed ? "muted" : color
+        selected || active ? "primary" : dimmed ? "muted" : color
       }
       label={label}
       className={className}
-    />
+    >
+      {children}
+    </JzText>
   );
 }
 
@@ -142,6 +150,23 @@ export function ResumeDocument({
   onProjectIdChange: (projectId: string | null) => void;
 }) {
   const { density, lineFocus, selectLine } = useResumeHighlights();
+  const { data: posting } = useJobPosting();
+  const projectBars = useMemo(() => {
+    const ids: string[] = [];
+    if (resume) {
+      for (const employer of resume.employers) {
+        for (const role of employer.roles) {
+          for (const project of role.projects) {
+            ids.push(project.evidenceId);
+          }
+        }
+      }
+    }
+    const lineCount = (posting?.lines ?? []).filter(
+      (line) => line.matchingRequirement?.scope === "project",
+    ).length;
+    return projectFitBars(ids, posting?.matchGraph?.edges ?? [], lineCount);
+  }, [resume, posting]);
   const connection = useActiveConnectionTarget();
   const strengthById = useMemo(() => {
     const map = new Map<string, ConnectionStrength>();
@@ -156,6 +181,15 @@ export function ResumeDocument({
       if (endpoint.role === "reference") ids.add(endpoint.id);
     }
     return ids;
+  }, [connection]);
+  const selectedProjects = useMemo(() => {
+    const projects: Array<{ id: string; strength: "primary" | "secondary" }> = [];
+    for (const endpoint of connection?.ids ?? []) {
+      if (endpoint.role === "subject" || endpoint.role === "reference") {
+        projects.push({ id: endpoint.id, strength: endpoint.strength });
+      }
+    }
+    return projects;
   }, [connection]);
   const { ref: scrollRef, scrolling } = useIdleScrollbar();
   const playing = presentedProject(resume, projectId);
@@ -184,6 +218,10 @@ export function ResumeDocument({
         />
       </EvidencePageHeader>
 
+      <CareerTimeline
+        employers={resume?.employers}
+        selectedProjects={selectedProjects}
+      >
       <div
         ref={scrollRef}
         className={styles.docBody}
@@ -236,7 +274,7 @@ export function ResumeDocument({
                           active={employerStrength === "primary"}
                           dimmed={employerStrength === "secondary"}
                           level={2}
-                          variant="heading2"
+                          variant="heading3"
                           weight="200"
                           label={employer.name}
                           className={styles.employerTitle}
@@ -291,6 +329,7 @@ export function ResumeDocument({
                               referenceIds={referenceIds}
                               hideUnselectedObjects={hideUnselectedObjects}
                               lineFocus={lineFocus}
+                              projectBars={projectBars}
                               onSelect={(project) =>
                                 selectLine({
                                   kind: "project",
@@ -309,6 +348,7 @@ export function ResumeDocument({
           </div>
         ) : null}
       </div>
+      </CareerTimeline>
     </article>
     <ProjectPresentationModal
       project={playing}
@@ -324,6 +364,7 @@ function ProjectLine({
   referenceIds,
   hideUnselectedObjects,
   lineFocus,
+  projectBars,
   onSelect,
 }: {
   projects: ResumeProject[];
@@ -331,6 +372,7 @@ function ProjectLine({
   referenceIds: Set<string>;
   hideUnselectedObjects: boolean;
   lineFocus: LineFocus | null;
+  projectBars: Map<string, FitBar>;
   onSelect: (project: ResumeProject) => void;
 }) {
   const visible = hideUnselectedObjects
@@ -360,32 +402,33 @@ function ProjectLine({
             >
               <div className={styles.projectBody}>
                 <div className={styles.projectTitleRow}>
-                  <JzIcon
-                    icon="Circle"
-                    weight="fill"
-                    size="small"
-                    inheritColor
-                    aria-hidden
-                    className={classNames(
-                      styles.projectBullet,
-                      selected && styles.projectBulletSubject,
-                      !selected &&
-                        strength === "primary" &&
-                        styles.projectBulletFocused,
-                      !selected &&
-                        strength === "secondary" &&
-                        styles.projectBulletSecondary,
-                    )}
-                  />
-                  <CitedTitle
-                    active={strength === "primary"}
-                    dimmed={strength === "secondary"}
-                    level={4}
-                    variant="label"
-                    color="muted"
-                    label={project.name}
-                    selected={selected}
-                  />
+                  <span className={styles.projectTitle} title={project.name}>
+                    <CitedTitle
+                      active={strength === "primary"}
+                      dimmed={strength === "secondary"}
+                      level={4}
+                      variant="label"
+                      weight="400"
+                      color="muted"
+                      className={styles.projectNameText}
+                      selected={selected}
+                    >
+                      <span className={styles.projectNameClip}>{project.name}</span>
+                    </CitedTitle>
+                    <FitMeter
+                      width={projectBars.get(project.evidenceId)?.width ?? 0}
+                      tone={projectBars.get(project.evidenceId)?.tone ?? null}
+                    />
+                  </span>
+                  {project.presentation ? (
+                    <JzIcon
+                      icon="Check"
+                      weight="bold"
+                      size="small"
+                      title="Presentation"
+                      aria-label="Presentation"
+                    />
+                  ) : null}
                 </div>
               </div>
             </EvidenceShell>

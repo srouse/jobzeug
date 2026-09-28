@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ComponentPropsWithoutRef, type ReactNode } from "react";
+import Markdown from "react-markdown";
 import { JzButton, JzIcon, JzIconButton, JzText } from "@jobzeug/design-system/react";
 import { useJobPosting } from "@/components/job-posting";
 import { useResumeHighlights } from "@/components/resume";
@@ -12,15 +13,41 @@ import type {
 } from "@/lib/contentful/resume-model";
 import type { JobPostingPanelData } from "@/lib/job-posting/schema";
 import {
-  coveragePercent,
-  postingHitsResume,
-  resumeHitsPosting,
+  lineFitBars,
+  projectFitBars,
   topHomeProjects,
-  type HomeCoverage,
+  type FitBar,
   type HomeProject,
 } from "@/lib/matching/home-coverage";
 
 import styles from "./answer-stage.module.css";
+
+function SummaryCopy({ text }: { text: string }) {
+  return (
+    <Markdown
+      components={{
+        p: ({ children }: ComponentPropsWithoutRef<"p">) => (
+          <JzText variant="body-default">{children}</JzText>
+        ),
+        a: ({ href, children }: ComponentPropsWithoutRef<"a">) =>
+          href?.startsWith("https://") || href?.startsWith("http://") ? (
+            <a
+              className={styles.summaryLink}
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {children}
+            </a>
+          ) : (
+            <span>{children}</span>
+          ),
+      }}
+    >
+      {text}
+    </Markdown>
+  );
+}
 
 const SECTION_LABELS: Record<string, string> = {
   description: "Job description",
@@ -46,23 +73,22 @@ function resumeProjects(resume: ResumeViewModel | null): HomeProject[] {
 
 function FitBox({
   label,
-  coverage,
+  value,
+  total,
 }: {
   label: string;
-  coverage: HomeCoverage;
+  value: number;
+  total?: number;
 }) {
   return (
     <div className={styles.homeFit}>
       <JzText variant="overline" color="muted" label={label} />
-      <JzText
-        variant="display-large"
-        label={`${coveragePercent(coverage)}%`}
-      />
-      <JzText
-        variant="heading2"
-        color="muted"
-        label={`${coverage.score} of ${coverage.ceiling}`}
-      />
+      <div className={styles.homeFitValue}>
+        <JzText variant="display-large" label={String(value)} />
+        {total != null ? (
+          <JzText variant="caption" color="muted" label={`of ${total}`} />
+        ) : null}
+      </div>
     </div>
   );
 }
@@ -77,22 +103,31 @@ function HomeLanding({
   const { selectLine } = useResumeHighlights();
   const edges = posting.matchGraph?.edges ?? [];
   const projects = resumeProjects(resume);
+  const projectIds = projects.map((project) => project.id);
+  const projectLines = posting.lines.filter(
+    (line) => line.matchingRequirement?.scope === "project",
+  );
+  const greatProjects = [...projectFitBars(projectIds, edges, projectLines.length).values()]
+    .filter((bar) => bar.tone === "good").length;
+  const strongLines = [
+    ...lineFitBars(
+      projectLines.map((line) => line.entryId),
+      edges,
+      projectIds,
+    ).values(),
+  ].filter((bar) => bar.tone === "good" || bar.tone === "great").length;
   const top = topHomeProjects(projects, edges);
 
   return (
     <div className={styles.home}>
       <div className={styles.homeFits}>
-        <FitBox
-          label="Resume hits posting"
-          coverage={resumeHitsPosting(posting.lines, edges)}
-        />
-        <FitBox
-          label="Posting hits resume"
-          coverage={postingHitsResume(projects, edges)}
-        />
+        <FitBox label="Great projects" value={greatProjects} />
+        <FitBox label="Strong job lines" value={strongLines} total={projectLines.length} />
       </div>
       {top.length > 0 ? (
-        <ul className={styles.homeProjects}>
+        <div className={styles.homeExamples}>
+          <JzText variant="overline" color="muted" label="Strongest examples" />
+          <ul className={styles.homeProjects}>
           {top.map((project) => (
             <li key={project.projectId}>
               <button
@@ -111,7 +146,8 @@ function HomeLanding({
               </button>
             </li>
           ))}
-        </ul>
+          </ul>
+        </div>
       ) : null}
     </div>
   );
@@ -121,28 +157,80 @@ function HubHeader({
   label,
   contentfulUrl,
   contentfulLabel,
+  analysisUrl,
+  score,
+  employer,
+  projectTotal,
+  rowTotal,
 }: {
   label: string;
   contentfulUrl?: string | null;
   contentfulLabel: string;
+  analysisUrl?: string | null;
+  score?: FitBar;
+  employer?: string;
+  /** Resume project count. Present on a job-line focus. */
+  projectTotal?: number;
+  /** Project-scoped job line count. Present on a project focus. */
+  rowTotal?: number;
 }) {
+  const { clearLineFocus } = useResumeHighlights();
+  const rows = score?.rows ?? 0;
+  const tags = score?.tags ?? 0;
+  const tagLabel = Number.isInteger(tags) ? String(tags) : tags.toFixed(1);
+  const countLabel =
+    projectTotal != null
+      ? `${rows} / ${projectTotal} ${projectTotal === 1 ? "project" : "projects"}`
+      : rowTotal != null
+        ? `${rows} / ${rowTotal} ${rowTotal === 1 ? "row" : "rows"}`
+        : `${rows} ${rows === 1 ? "row" : "rows"}`;
+  const stats = `${countLabel} · ${tagLabel} ${tags === 1 ? "tag" : "tags"} · ${score?.percent ?? 0}% overall`;
   return (
-    <div className={styles.hubHeader}>
-      <JzText
-        level={1}
-        variant="heading"
-        label={label}
-        className={styles.hubTitle}
-      />
-      {contentfulUrl ? (
-        <JzIconButton
-          className={styles.hubLink}
-          label={contentfulLabel}
-          icon="ArrowSquareOut"
-          title="Contentful"
-          onClick={() => {
-            window.open(contentfulUrl, "jobzeug-contentful");
-          }}
+    <div className={styles.hubIntro}>
+      <div className={styles.hubHeader}>
+        <JzText
+          level={1}
+          variant="heading"
+          label={label}
+          className={styles.hubTitle}
+        />
+        <div className={styles.hubHeaderTools}>
+          {analysisUrl ? (
+            <JzIconButton
+              className={styles.hubLink}
+              label="Open match analysis"
+              icon="ChartBar"
+              title="Analysis"
+              onClick={() => {
+                window.open(analysisUrl, "jobzeug-debug");
+              }}
+            />
+          ) : null}
+          {contentfulUrl ? (
+            <JzIconButton
+              className={styles.hubLink}
+              label={contentfulLabel}
+              icon="ArrowSquareOut"
+              title="Contentful"
+              onClick={() => {
+                window.open(contentfulUrl, "jobzeug-contentful");
+              }}
+            />
+          ) : null}
+          <JzIconButton
+            className={styles.hubLink}
+            label="Home"
+            icon="X"
+            title="Home"
+            onClick={clearLineFocus}
+          />
+        </div>
+      </div>
+      {score ? (
+        <JzText
+          variant="caption"
+          color="muted"
+          label={employer ? `${employer} · ${stats}` : stats}
         />
       ) : null}
     </div>
@@ -153,13 +241,20 @@ function findProject(
   resume: ResumeViewModel | null,
   projectId: string,
 ): ResumeProject | null {
+  return findProjectContext(resume, projectId)?.project ?? null;
+}
+
+function findProjectContext(
+  resume: ResumeViewModel | null,
+  projectId: string,
+): { project: ResumeProject; employerName: string } | null {
   if (!resume) return null;
   for (const employer of resume.employers) {
     for (const role of employer.roles) {
       const match = role.projects.find(
         (project) => project.evidenceId === projectId,
       );
-      if (match) return match;
+      if (match) return { project: match, employerName: employer.name };
     }
   }
   return null;
@@ -175,16 +270,34 @@ function TopConnections({
   posting: JobPostingPanelData | null;
 }) {
   const connection = useActiveConnectionTarget();
-  const names = (connection?.ids ?? []).flatMap((endpoint) => {
-    if (endpoint.role !== "reference" || endpoint.strength !== "primary") {
-      return [];
+  const subjectId = connection?.ids.find((endpoint) => endpoint.role === "subject")?.id;
+  const edges = posting?.matchGraph?.edges ?? [];
+  const pointsOf = (id: string) => {
+    let best = 0;
+    for (const edge of edges) {
+      const match =
+        kind === "project"
+          ? edge.projectId === subjectId && edge.lineEntryId === id
+          : edge.lineEntryId === subjectId && edge.projectId === id;
+      if (match && edge.points > best) best = edge.points;
     }
-    const name =
-      kind === "project"
-        ? posting?.lines.find((line) => line.entryId === endpoint.id)?.theme
-        : findProject(resume, endpoint.id)?.name;
-    return name ? [{ id: endpoint.id, name }] : [];
-  });
+    return best;
+  };
+  const names = (connection?.ids ?? [])
+    .flatMap((endpoint) => {
+      if (endpoint.role !== "reference" || endpoint.strength !== "primary") {
+        return [];
+      }
+      const name =
+        kind === "project"
+          ? posting?.lines.find((line) => line.entryId === endpoint.id)?.theme
+          : findProject(resume, endpoint.id)?.name;
+      return name ? [{ id: endpoint.id, name }] : [];
+    })
+    .sort(
+      (a, b) => pointsOf(b.id) - pointsOf(a.id) || a.id.localeCompare(b.id),
+    )
+    .slice(0, 3);
 
   if (names.length === 0) return null;
 
@@ -271,7 +384,7 @@ function FocusBrief({
   const postingEntryId = posting?.entryId ?? "";
   const connectionKey = connections.map((item) => item.id).join("\n");
 
-  const run = async () => {
+  const run = async (refresh = false) => {
     if (running || !postingEntryId) return;
     setRunning(true);
     setFailed(false);
@@ -284,6 +397,7 @@ function FocusBrief({
           kind,
           subject,
           connections,
+          refresh,
         }),
       });
       if (!response.ok) throw new Error("Focus brief failed");
@@ -319,8 +433,18 @@ function FocusBrief({
 
   return (
     <div className={styles.connectionBlock}>
-      <JzText variant="overline" weight="300" color="muted" label="AI summary" />
-      {running && !paragraph ? (
+      <div className={styles.briefHeader}>
+        <JzText variant="overline" weight="300" color="muted" label="AI summary" />
+        <JzIconButton
+          className={styles.hubLink}
+          label="Rebuild AI summary"
+          icon="ArrowClockwise"
+          title="Rebuild"
+          disabled={running || !postingEntryId}
+          onClick={() => void run(true)}
+        />
+      </div>
+      {running ? (
         <div
           className={styles.briefLoading}
           role="status"
@@ -335,22 +459,25 @@ function FocusBrief({
             aria-hidden
           />
         </div>
-      ) : null}
-      {failed ? (
-        <JzText
-          variant="caption"
-          color="muted"
-          label="Could not write the brief."
-        />
-      ) : null}
-      <div
-        className={styles.briefReveal}
-        data-open={open ? "" : undefined}
-      >
-        <div className={styles.briefRevealInner}>
-          {paragraph ? <BriefCopy text={paragraph} /> : null}
-        </div>
-      </div>
+      ) : (
+        <>
+          {failed ? (
+            <JzText
+              variant="caption"
+              color="muted"
+              label="Could not write the brief."
+            />
+          ) : null}
+          <div
+            className={styles.briefReveal}
+            data-open={open ? "" : undefined}
+          >
+            <div className={styles.briefRevealInner}>
+              {paragraph ? <BriefCopy text={paragraph} /> : null}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
@@ -369,6 +496,31 @@ export function ConnectionHub({
   const { lineFocus } = useResumeHighlights();
   const { data } = useJobPosting();
   const posting = data ?? null;
+  const edges = posting?.matchGraph?.edges;
+  const projectIds = useMemo(
+    () => resumeProjects(resume).map((project) => project.id),
+    [resume],
+  );
+  const lineCount = useMemo(
+    () =>
+      (posting?.lines ?? []).filter(
+        (line) => line.matchingRequirement?.scope === "project",
+      ).length,
+    [posting],
+  );
+  const projectBars = useMemo(
+    () => projectFitBars(projectIds, edges ?? [], lineCount),
+    [projectIds, edges, lineCount],
+  );
+  const lineBars = useMemo(
+    () =>
+      lineFitBars(
+        (posting?.lines ?? []).map((line) => line.entryId),
+        edges ?? [],
+        projectIds,
+      ),
+    [posting, edges, projectIds],
+  );
   const { scrollProps } = useIdleScrollbar();
   const [briefs, setBriefs] = useState<Record<string, string>>({});
   const saveBrief = (kind: "project" | "jobLine", id: string, text: string) => {
@@ -377,23 +529,44 @@ export function ConnectionHub({
 
   let body: ReactNode;
   if (lineFocus?.kind === "project") {
-    const project = findProject(resume, lineFocus.id);
+    const focused = findProjectContext(resume, lineFocus.id);
+    const project = focused?.project ?? null;
     body = (
       <>
         <div className={styles.hubLead}>
           <HubHeader
             label={project?.name ?? "Project"}
+            employer={focused?.employerName}
+            analysisUrl={
+              posting?.entryId
+                ? `/debug/match-concepts?jobPostingEntryId=${encodeURIComponent(posting.entryId)}&projectId=${encodeURIComponent(project?.evidenceId ?? lineFocus.id)}`
+                : null
+            }
             contentfulUrl={project?.contentfulUrl}
             contentfulLabel={`Open ${project?.name ?? "project"} in Contentful`}
+            rowTotal={lineCount}
+            score={
+              edges
+                ? projectBars.get(project?.evidenceId ?? lineFocus.id)
+                : undefined
+            }
           />
-          {project?.summary ? (
-            <JzText variant="body-default" label={project.summary} />
+          {project?.summary ? <SummaryCopy text={project.summary} /> : null}
+          {project?.url && !project.summary?.includes(project.url) ? (
+            <a
+              className={styles.articleLink}
+              href={project.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <JzText variant="body-default" label="Read the article" />
+            </a>
           ) : null}
         </div>
         {project?.presentation ? (
           <div className={styles.hubActions}>
             <JzButton
-              label="Watch walkthrough"
+              label="Details"
               variant="secondary"
               size="small"
               showIcon={false}
@@ -432,8 +605,17 @@ export function ConnectionHub({
         <div className={styles.hubLead}>
           <HubHeader
             label={sectionLabel}
+            analysisUrl={
+              posting?.entryId
+                ? `/debug/match-concepts?jobPostingEntryId=${encodeURIComponent(posting.entryId)}&lineEntryId=${encodeURIComponent(line?.entryId ?? lineFocus.id)}`
+                : null
+            }
             contentfulUrl={line?.contentfulUrl}
             contentfulLabel="Open job line in Contentful"
+            projectTotal={projectIds.length}
+            score={
+              edges ? lineBars.get(line?.entryId ?? lineFocus.id) : undefined
+            }
           />
           {line?.text ? (
             <JzText variant="body-default" label={line.text} />

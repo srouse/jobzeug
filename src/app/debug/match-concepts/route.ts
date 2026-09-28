@@ -8,7 +8,10 @@ import { z } from "zod";
 
 import { loadJobPostingByEntryId, saveJobPostingMatchGraph } from "@/lib/job-posting";
 import { loadMatchingCatalog } from "@/lib/matching/catalog";
-import { computeFits, FULL_CONCEPTS_PER_LINE, type JobPostFit, type JobRelevancy, type ResumeFit } from "@/lib/matching/fit";
+import {
+  FIT_TAGS_PER_COUNTERPART,
+  absoluteFitShare,
+} from "@/lib/matching/home-coverage";
 import { CONCEPT_HIT_POINTS, scorePostingAgainstCatalog } from "@/lib/matching/score";
 import { SESSION_COOKIE, getSessionId } from "@/lib/site-auth";
 
@@ -25,17 +28,6 @@ function escapeHtml(value: unknown): string {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
-}
-
-function fitMarkup(
-  label: string,
-  fit: JobPostFit | ResumeFit | JobRelevancy | null,
-): string {
-  if (!fit) {
-    return `<div class="fit"><div class="fit-label">${escapeHtml(label)}</div><div class="fit-pct">—</div></div>`;
-  }
-  const pct = fit.ceiling > 0 ? Math.round((fit.score / fit.ceiling) * 100) : 0;
-  return `<div class="fit"><div class="fit-label">${escapeHtml(label)}</div><div class="fit-pct">${escapeHtml(pct)}%</div><div class="fit-ceiling">${escapeHtml(fit.score)} of ${escapeHtml(fit.ceiling)}</div></div>`;
 }
 
 function directionalFitMarkup(
@@ -120,6 +112,10 @@ export async function GET(req: NextRequest) {
 
   const raw = req.nextUrl.searchParams.get("jobPostingEntryId");
   const parsed = jobPostingEntryIdSchema.safeParse(raw ?? "");
+  const projectParam = req.nextUrl.searchParams.get("projectId")?.trim().replace(/^jz-/, "") ?? "";
+  const focusedProjectId = /^S\d+$/.test(projectParam) ? projectParam : "";
+  const lineParam = req.nextUrl.searchParams.get("lineEntryId")?.trim() ?? "";
+  const focusedLineId = /^[\w-]+$/.test(lineParam) ? lineParam : "";
   if (!parsed.success) {
     return htmlResponse(
       "<!doctype html><title>Missing jobPostingEntryId</title><p>Pass <code>?jobPostingEntryId=</code>.</p>",
@@ -142,8 +138,6 @@ export async function GET(req: NextRequest) {
       catalog,
       examplesPerLine: 40,
     });
-    const fits = computeFits({ posting: view, catalog });
-
     const vocabVersion =
       view.matchingSnapshot?.vocabularyVersion ??
       [...catalog.vocabularies.keys()][0];
@@ -280,142 +274,108 @@ export async function GET(req: NextRequest) {
       })
       .join("\n");
 
-    const formatAverage = (values: number[]) => {
-      if (!values.length) return "—";
-      const value = values.reduce((sum, n) => sum + n, 0) / values.length;
+    const formatCount = (value: number) => {
       const rounded = Math.round(value * 10) / 10;
       return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
     };
+    const tagCount = (points: readonly number[]) =>
+      points.reduce((sum, value) => sum + value, 0) / CONCEPT_HIT_POINTS;
+    const fitCeiling = (population: number) =>
+      population * (1 + FIT_TAGS_PER_COUNTERPART);
     const scoredById = new Map(
       scored.projects.map((project) => [project.projectId, project]),
     );
-    const rankedProjects = projects.map((project) => {
-      const scoredRow = scoredById.get(project.project_id);
-      const hits = (scoredRow?.contributions ?? []).filter((c) => c.points > 0);
-      const points = hits.map((c) => c.points);
-      const average = points.length
-        ? points.reduce((sum, value) => sum + value, 0) / points.length
-        : 0;
-      return {
-        project: {
-          projectId: project.project_id,
-          score: scoredRow?.score ?? 0,
-        },
-        points,
-        average,
-        lines: hits.length,
-      };
-    });
-    const bestAverage = Math.max(0, ...rankedProjects.map((row) => row.average));
-    const mostLines = Math.max(0, ...rankedProjects.map((row) => row.lines));
-    const withFinal = rankedProjects
-      .map((row) => ({
-        ...row,
-        final:
-          (bestAverage > 0 ? 0.6 * (row.average / bestAverage) : 0) +
-          (mostLines > 0 ? 0.4 * (row.lines / mostLines) : 0),
-      }))
-      .sort(
-        (a, b) =>
-          b.final - a.final ||
-          a.project.projectId.localeCompare(b.project.projectId),
-      );
-    const fullLine = FULL_CONCEPTS_PER_LINE * CONCEPT_HIT_POINTS;
-    const share = (value: number, ceiling: number) =>
-      ceiling > 0 ? Math.min(1, value / ceiling) : 0;
-    const blend = (depth: number, breadth: number) => 0.6 * depth + 0.4 * breadth;
     const postingLines = view.lines.filter(
       (line) => line.matchingRequirement?.scope === "project",
     );
-    const bestOnLine = (entryId: string) => {
-      const scoredLine = scored.jobLines.find((line) => line.lineEntryId === entryId);
-      const requirementId = scoredLine?.requirementId ?? entryId;
-      let best = 0;
-      for (const project of scored.projects) {
-        for (const contribution of project.contributions) {
-          if (contribution.requirementId === requirementId && contribution.points > best) {
-            best = contribution.points;
-          }
-        }
-      }
-      return Math.min(best, fullLine);
-    };
-    const jobPostFit = (() => {
-      if (postingLines.length === 0) return null;
-      const bestPoints = postingLines.map((line) => bestOnLine(line.entryId));
-      const attended = bestPoints.filter((points) => points > 0).length;
-      const mean = bestPoints.reduce((sum, points) => sum + points, 0) / bestPoints.length;
-      return {
-        pct: Math.round((mean / fullLine) * 100),
-        detail: `${formatAverage(bestPoints)} avg · ${attended} of ${postingLines.length}`,
-      };
-    })();
-    const resumeFit = (() => {
-      const resumeProjectCount = projects.length;
-      if (resumeProjectCount === 0) return null;
-      const depth =
-        rankedProjects.reduce((sum, row) => sum + row.average, 0) /
-        Math.max(1, rankedProjects.length);
-      const score = blend(
-        rankedProjects.length ? share(depth, fullLine) : 0,
-        share(rankedProjects.length, resumeProjectCount),
+    const projectCeiling = fitCeiling(postingLines.length);
+    const projectRows = projects
+      .map((project) => {
+        const scoredRow = scoredById.get(project.project_id);
+        const hits = (scoredRow?.contributions ?? []).filter((c) => c.points > 0);
+        const points = hits.map((c) => c.points);
+        const tags = tagCount(points);
+        const lines = hits.length;
+        const strong = hits.filter((hit) => hit.conceptHits >= 2).length;
+        return {
+          projectId: project.project_id,
+          tags,
+          lines,
+          strong,
+          share: absoluteFitShare(tags, lines, postingLines.length),
+        };
+      })
+      .sort(
+        (a, b) =>
+          b.share - a.share || a.projectId.localeCompare(b.projectId),
       );
-      const depthLabel = rankedProjects.length
-        ? formatAverage(rankedProjects.map((row) => row.average))
-        : "0";
-      return {
-        pct: Math.round(score * 100),
-        detail: `${depthLabel} avg · ${rankedProjects.length} of ${resumeProjectCount}`,
-      };
-    })();
-    const rankingHtml = withFinal
+    const bestProject = projectRows[0] ?? null;
+    const projectFit =
+      bestProject && postingLines.length > 0
+        ? {
+            pct: Math.round(bestProject.share * 100),
+            detail: `${formatCount(bestProject.tags + bestProject.lines)} of ${projectCeiling}`,
+          }
+        : null;
+    const rankingHtml = projectRows
       .map((row) => {
-        return `<tr data-project-id="${escapeHtml(row.project.projectId)}"><td><code>${escapeHtml(row.project.projectId)}</code></td><td>${escapeHtml(titleByProjectId.get(row.project.projectId) ?? "")}</td><td class="num">${escapeHtml((row.project.score ?? 0) / CONCEPT_HIT_POINTS)}</td><td class="num">${escapeHtml(formatAverage(row.points.map((points) => points / CONCEPT_HIT_POINTS)))}</td><td class="num">${escapeHtml(row.lines)}</td><td class="num">${escapeHtml(row.final.toFixed(2))}</td></tr>`;
+        return `<tr data-project-id="${escapeHtml(row.projectId)}"><td><code>${escapeHtml(row.projectId)}</code></td><td>${escapeHtml(titleByProjectId.get(row.projectId) ?? "")}</td><td class="num">${escapeHtml(formatCount(row.tags))}</td><td class="num">${escapeHtml(row.lines)}</td><td class="num" title="Lines with two or more tags">${escapeHtml(row.strong)}</td><td class="num">${escapeHtml(Math.round(row.share * 100))}%</td></tr>`;
       })
       .join("");
 
-    const lineHitPoints = (entryId: string) => {
+    const lineHits = (entryId: string) => {
       const scoredLine = scored.jobLines.find(
         (line) => line.lineEntryId === entryId,
       );
       const requirementId = scoredLine?.requirementId ?? entryId;
-      const points: number[] = [];
+      const hits: { points: number; conceptHits: number }[] = [];
       for (const project of scored.projects) {
         for (const contribution of project.contributions) {
           if (
             contribution.requirementId === requirementId &&
             contribution.points > 0
           ) {
-            points.push(contribution.points);
+            hits.push({
+              points: contribution.points,
+              conceptHits: contribution.conceptHits,
+            });
           }
         }
       }
-      return points;
+      return hits;
     };
-    const lineRows = rankedLines.map((line) => {
-      const points = lineHitPoints(line.entryId);
-      const average = points.length
-        ? points.reduce((sum, n) => sum + n, 0) / points.length
-        : 0;
-      return { line, points, average, projects: points.length };
-    });
-    const bestLineAverage = Math.max(0, ...lineRows.map((row) => row.average));
-    const mostProjects = Math.max(0, ...lineRows.map((row) => row.projects));
-    const lineRankingHtml = lineRows
-      .map((row) => ({
-        ...row,
-        final:
-          (bestLineAverage > 0 ? 0.6 * (row.average / bestLineAverage) : 0) +
-          (mostProjects > 0 ? 0.4 * (row.projects / mostProjects) : 0),
-      }))
+    const lineCeiling = fitCeiling(projects.length);
+    const rankedLineRows = rankedLines
+      .map((line) => {
+        const hits = lineHits(line.entryId);
+        const tags = tagCount(hits.map((hit) => hit.points));
+        const hitProjects = hits.length;
+        const strong = hits.filter((hit) => hit.conceptHits >= 2).length;
+        return {
+          line,
+          tags,
+          projects: hitProjects,
+          strong,
+          share: absoluteFitShare(tags, hitProjects, projects.length),
+        };
+      })
       .sort(
         (a, b) =>
-          b.final - a.final ||
+          b.share - a.share ||
           a.line.entryId.localeCompare(b.line.entryId),
-      )
+      );
+    const bestLine = rankedLineRows[0] ?? null;
+    const lineFit =
+      bestLine && projects.length > 0
+        ? {
+            pct: Math.round(bestLine.share * 100),
+            detail: `${formatCount(bestLine.tags + bestLine.projects)} of ${lineCeiling}`,
+          }
+        : null;
+    const lineRankingHtml = rankedLineRows
       .map((row) => {
         const number = row.line.entryId.match(/-line-(\d+)$/)?.[1] ?? row.line.entryId;
-        return `<tr data-line-id="${escapeHtml(row.line.entryId)}"><td><code>${escapeHtml(number)}</code></td><td class="clip" title="${escapeHtml(row.line.text)}">${escapeHtml(row.line.text)}</td><td class="num">${escapeHtml(lineScore(row.line.entryId) / CONCEPT_HIT_POINTS)}</td><td class="num">${escapeHtml(formatAverage(row.points.map((points) => points / CONCEPT_HIT_POINTS)))}</td><td class="num">${escapeHtml(row.projects)}</td><td class="num">${escapeHtml(row.final.toFixed(2))}</td></tr>`;
+        return `<tr data-line-id="${escapeHtml(row.line.entryId)}"><td><code>${escapeHtml(number)}</code></td><td class="clip" title="${escapeHtml(row.line.text)}">${escapeHtml(row.line.text)}</td><td class="num">${escapeHtml(formatCount(row.tags))}</td><td class="num">${escapeHtml(row.projects)}</td><td class="num" title="Projects with two or more tags">${escapeHtml(row.strong)}</td><td class="num">${escapeHtml(Math.round(row.share * 100))}%</td></tr>`;
       })
       .join("");
 
@@ -629,15 +589,14 @@ export async function GET(req: NextRequest) {
     .breakdown { font-size: 12px; opacity: 0.9; }
   </style>
 </head>
-<body>
+<body data-project-id="${escapeHtml(focusedProjectId)}" data-line-id="${escapeHtml(focusedLineId)}">
   <aside>
     <div class="aside-head">
       <p class="posting-company">${escapeHtml(view.company)}</p>
       <h2 class="posting-title">${escapeHtml(view.title)}</h2>
       <div class="fits">
-        ${directionalFitMarkup("Job post", jobPostFit)}
-        ${directionalFitMarkup("Resume", resumeFit)}
-        ${fitMarkup("Relevancy", fits.jobRelevancy)}
+        ${directionalFitMarkup("Project", projectFit)}
+        ${directionalFitMarkup("Line", lineFit)}
       </div>
     </div>
     <div class="aside-scroll">
@@ -648,7 +607,7 @@ export async function GET(req: NextRequest) {
         <br>vocab <code>${escapeHtml(vocabVersion ?? "none")}</code>
       </div>
       <table class="ranking" id="project-ranking">
-        <thead><tr><th>Id</th><th>Title</th><th>Tags</th><th>Average</th><th>Lines</th><th>Final</th></tr></thead>
+        <thead><tr><th>Id</th><th>Title</th><th>Tags</th><th>Lines</th><th title="Lines with two or more tags">2×+</th><th>Fit</th></tr></thead>
         <tbody>${rankingHtml || "<tr><td class='empty' colspan='6'>No positive project totals yet</td></tr>"}</tbody>
       </table>
       <table class="ranking lines" id="line-ranking">
@@ -656,11 +615,11 @@ export async function GET(req: NextRequest) {
           <col style="width: 3.2rem" />
           <col />
           <col style="width: 3.6rem" />
-          <col style="width: 4.2rem" />
           <col style="width: 4.6rem" />
+          <col style="width: 3.2rem" />
           <col style="width: 3.6rem" />
         </colgroup>
-        <thead><tr><th>Line</th><th>Description</th><th>Tags</th><th>Average</th><th>Projects</th><th>Final</th></tr></thead>
+        <thead><tr><th>Line</th><th>Description</th><th>Tags</th><th>Projects</th><th title="Projects with two or more tags">2×+</th><th>Fit</th></tr></thead>
         <tbody>${lineRankingHtml || "<tr><td class='empty' colspan='6'>No job lines</td></tr>"}</tbody>
       </table>
     </div>
@@ -941,6 +900,11 @@ export async function GET(req: NextRequest) {
           else select(id);
         });
       });
+
+      const initialLine = document.body.getAttribute("data-line-id");
+      const initialProject = document.body.getAttribute("data-project-id");
+      if (initialLine) select(initialLine);
+      else if (initialProject) selectProject(initialProject);
     })();
   </script>
 </body>

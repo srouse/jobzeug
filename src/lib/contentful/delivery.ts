@@ -28,6 +28,7 @@ export type NormalizedProject = {
   roleIds: string[];
   name: string;
   summary?: string;
+  url?: string;
   tags: string[];
 };
 
@@ -44,7 +45,7 @@ export type CoreCatalog = {
   employers: Map<string, NormalizedEmployer>;
   roles: Map<string, NormalizedRole>;
   projects: Map<string, NormalizedProject>;
-  /** Keyed by the project evidence id. Incomplete entries are omitted. */
+  /** Keyed by the project evidence id, only when that project links a complete presentation. */
   presentations: Map<string, ProjectPresentation>;
 };
 
@@ -182,31 +183,10 @@ export async function fetchCoreCatalog(): Promise<CoreCatalog> {
     });
   }
 
-  const projects = new Map<string, NormalizedProject>();
-  for (const entry of projectRes.items) {
-    const fields = entry.fields as Record<string, unknown>;
-    const evidenceId = asString(fields.evidenceId);
-    const employerId = linkEvidenceId(fields.employer);
-    const name = asString(fields.name);
-    const roleLinks = Array.isArray(fields.roles) ? fields.roles : [];
-    const roleIds = roleLinks
-      .map((role) => linkEvidenceId(role))
-      .filter((id): id is string => Boolean(id));
-    if (!evidenceId || !employerId || !name || !roleIds.length) continue;
-    projects.set(evidenceId, {
-      evidenceId,
-      employerId,
-      roleIds,
-      name,
-      summary: asString(fields.summary),
-      tags: entryTags(entry),
-    });
-  }
-
-  const presentations = new Map<string, ProjectPresentation>();
+  const presentationsById = new Map<string, ProjectPresentation>();
   for (const entry of presentationRes.items) {
     const fields = entry.fields as Record<string, unknown>;
-    const projectId = linkEvidenceId(fields.project);
+    const evidenceId = asString(fields.evidenceId);
     const blurb = asString(fields.blurb);
     const videoUrl =
       assetFileUrl(fields.video) ??
@@ -220,7 +200,7 @@ export async function fetchCoreCatalog(): Promise<CoreCatalog> {
     const metricTwoValue = asString(fields.metricTwoValue);
     const metricTwoLabel = asString(fields.metricTwoLabel);
     if (
-      !projectId ||
+      !evidenceId ||
       !blurb ||
       !videoUrl ||
       !metricOneValue ||
@@ -230,13 +210,41 @@ export async function fetchCoreCatalog(): Promise<CoreCatalog> {
     ) {
       continue;
     }
-    presentations.set(projectId, {
+    presentationsById.set(evidenceId, {
       blurb,
       videoUrl,
       metrics: [
         { value: metricOneValue, label: metricOneLabel },
         { value: metricTwoValue, label: metricTwoLabel },
       ],
+    });
+  }
+
+  const projects = new Map<string, NormalizedProject>();
+  const presentations = new Map<string, ProjectPresentation>();
+  for (const entry of projectRes.items) {
+    const fields = entry.fields as Record<string, unknown>;
+    const evidenceId = asString(fields.evidenceId);
+    const employerId = linkEvidenceId(fields.employer);
+    const name = asString(fields.name);
+    const roleLinks = Array.isArray(fields.roles) ? fields.roles : [];
+    const roleIds = roleLinks
+      .map((role) => linkEvidenceId(role))
+      .filter((id): id is string => Boolean(id));
+    if (!evidenceId || !employerId || !name || !roleIds.length) continue;
+    const presentationId = linkEvidenceId(fields.presentation);
+    const presentation = presentationId
+      ? presentationsById.get(presentationId)
+      : undefined;
+    if (presentation) presentations.set(evidenceId, presentation);
+    projects.set(evidenceId, {
+      evidenceId,
+      employerId,
+      roleIds,
+      name,
+      summary: asString(fields.summary),
+      url: asString(fields.url),
+      tags: entryTags(entry),
     });
   }
 

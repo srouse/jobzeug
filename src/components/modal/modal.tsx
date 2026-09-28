@@ -18,6 +18,7 @@ export function Modal({
   footer,
   wide = false,
   fit = false,
+  fill = false,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -28,6 +29,8 @@ export function Modal({
   wide?: boolean;
   /** Height follows the content, still capped by the viewport. */
   fit?: boolean;
+  /** Dialog hugs its content, up to the viewport. */
+  fill?: boolean;
 }) {
   const titleId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -63,6 +66,7 @@ export function Modal({
           styles.dialog,
           wide ? styles.dialogWide : "",
           fit ? styles.dialogFit : "",
+          fill ? styles.dialogFill : "",
         ].filter(Boolean).join(" ")}
         role="dialog"
         aria-modal="true"
@@ -83,7 +87,15 @@ export function Modal({
             onClick={() => onOpenChange(false)}
           />
         </header>
-        <div className={fit ? `${styles.body} ${styles.bodyFit}` : styles.body}>{children}</div>
+        <div
+          className={[
+            styles.body,
+            fit ? styles.bodyFit : "",
+            fill ? styles.bodyFill : "",
+          ].filter(Boolean).join(" ")}
+        >
+          {children}
+        </div>
         {footer ? <div className={styles.footer}>{footer}</div> : null}
       </div>
     </div>,

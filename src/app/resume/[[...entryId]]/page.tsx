@@ -11,7 +11,7 @@ export default async function ResumePage({
   return (
     <ResumeWorkspace
       initialEntryId={route.entryId}
-      initialProjectId={route.projectId}
+      initialFocus={route.focus}
     />
   );
 }

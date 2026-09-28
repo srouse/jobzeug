@@ -51,6 +51,17 @@
   min-height: auto;
 }
 
+.dialogFill {
+  width: fit-content;
+  max-width: calc(100vw - 2rem);
+  height: auto;
+  max-height: calc(100dvh - 2rem);
+}
+
+.bodyFill {
+  overflow: hidden;
+}
+
 .header {
   display: flex;
   flex-shrink: 0;

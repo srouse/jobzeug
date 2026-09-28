@@ -30,7 +30,7 @@ year_note: No single delivery year. The catch-all covers the R009 tenure (August
 delivery_stage: mixed
 annotation:
   status: reviewed
-  vocabulary_version: "1.1.0"
+  vocabulary_version: "1.5.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review
@@ -103,7 +103,7 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 
 ## Resume summary
 
-Consulted with startups on how a business model could become an application and how to validate it before spending early time without market fit. Prototyped in HTML, React, and iOS, including full-resolution work, across dozens of companies that ranged from very successful to ones that never got funding.
+I consulted with startups on how a business model becomes an application, and how to validate it before spending time without market fit. I prototyped in HTML, React, and iOS across dozens of companies, from ones that succeeded to ones that never got funding.
 
 ## Account summary
 

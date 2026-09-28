@@ -10,6 +10,14 @@ Local snapshots collected September 19, 2026. Original paths below are provenanc
 | [job-posting-notes.md](job-posting-notes.md) | `applications/Figma - Forward Deployed Engineer/Job posting notes.md` | Condensed historical notes only — full job listings are not stored under evidence/. |
 | [application-reference.md](application-reference.md) | `Application Copy and Paste.md` | Existing reusable application facts; claims require appropriate attribution. |
 | [resume-variant-roles.md](resume-variant-roles.md) | `tmp/build_resume_variants.py`, ROLES literal | Extracted role data; Jan 2026 end date for Solution Specialist differs from older text. |
+| [s008-account-2026-09-28.md](s008-account-2026-09-28.md) | September 28, 2026 session | Scott's words on building the Contentful for Figma widget, the security constraints, the session handoff, and the help content he wrote. Open from S008. |
+| [s008-contentful-for-figma-walkthrough-2026-09-28.md](s008-contentful-for-figma-walkthrough-2026-09-28.md) | `VIDEOS/ContentfulForFigma/CFW Intro (FINAL).srt` | Spoken transcript of the Contentful for Figma intro, exported September 28, 2026. Open from S008. |
+| [s009-account-2026-09-28.md](s009-account-2026-09-28.md) | September 28, 2026 session | Scott's words on solving the binding approach, sharing it inside the company, the metadata storage blocker, and building it with Mastra and OpenAI. Open from S009. |
+| [s014-design-tokens-walkthrough-2026-09-28.md](s014-design-tokens-walkthrough-2026-09-28.md) | `VIDEOS/TokensArticle/Design Tokens Explained for Content Teams.srt` | Spoken transcript of the S014 design-tokens article walkthrough, exported September 28, 2026. Open from S014. |
+| [s014-account-2026-09-28.md](s014-account-2026-09-28.md) | September 28, 2026 session | Scott's words on using AI to edit the tokens article from speech-to-text, drawing the illustrations, and a light professional edit. Open from S014. |
+| [s031-account-2026-09-28.md](s031-account-2026-09-28.md) | September 28, 2026 session | Scott's words naming the KMS demo, Firecrawl, Mastra, Contentful apps, and the video asset id. Open from S031. |
+| [s031-account-handoff-2026-09-28.md](s031-account-handoff-2026-09-28.md) | September 28, 2026 session | Scott's words that he built the demo, that an unnamed partner would build it out with clients, and that this is a knowledge-management workflow rather than DemAI. Open from S031. |
+| [s031-kms-walkthrough-2026-09-28.md](s031-kms-walkthrough-2026-09-28.md) | `VIDEOS/KMS/Building a Knowledge Management System with Contentful.srt` | Spoken transcript of the S031 knowledge-management demo, exported September 28, 2026. Open from S031. |
 
 See the [experience index](../roles/INDEX.md) and [workspace guide](../README.md). Live job postings are session-bound in the app, not archived here.
 

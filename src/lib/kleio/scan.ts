@@ -22,6 +22,8 @@ const SKIP_DIRS = new Set([
 export type KleioImage = {
   label: string;
   relativePath: string;
+  /** Absolute path on this machine. Shown under the image so the file can be opened locally. */
+  absolutePath: string;
   archive: KleioArchive;
 };
 
@@ -70,6 +72,7 @@ export async function collectSource(
       images.push({
         label: entry.name,
         relativePath: path.relative(root, abs),
+        absolutePath: abs,
         archive: source.archive ?? "kleio",
       });
     }

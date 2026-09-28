@@ -5,7 +5,7 @@
     "R005"
   ],
   "name": "Summit page builder",
-  "summary": "Built a Contentful App Framework page builder so Summit marketing could see every page, preview it, and jump to the elements on that page, before Contentful’s own live preview product existed.",
+  "summary": "I built a Contentful App Framework page builder so Summit marketing could see every page, preview it, and jump to the elements on that page. This was before Contentful's own live preview product existed.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S026",
@@ -44,7 +44,7 @@
       "status": "reviewed",
       "reviewed_by": "Scott",
       "reviewed_at": "2026-09-27",
-      "vocabulary_version": "1.1.0"
+      "vocabulary_version": "1.5.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [

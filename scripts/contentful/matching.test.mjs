@@ -12,7 +12,14 @@ const root = process.cwd();
 const inputs = await loadMatchingInputs(root);
 const projects = [...inputs.projects.values()].map(p => p.metadata);
 const projectEntry = metadata => ({ sys: { id: `jz-${metadata.project_id}`, revision: 1 }, fields: { evidenceId: metadata.project_id, matchingMetadata: metadata } });
-const vocabularyEntry = { sys: { id: 'jz-MV-1.0.0', revision: 1 }, fields: { evidenceId: 'MV-1.0.0', vocabularyVersion: '1.0.0', registry: inputs.registry } };
+const vocabularyEntry = {
+  sys: { id: `jz-MV-${inputs.registry.vocabulary_version}`, revision: 1 },
+  fields: {
+    evidenceId: `MV-${inputs.registry.vocabulary_version}`,
+    vocabularyVersion: inputs.registry.vocabulary_version,
+    registry: inputs.registry,
+  },
+};
 function mockClient(projectEntries, vocabularyEntries = [vocabularyEntry]) {
   const calls = [];
   return { calls, async getEntries(query) {
@@ -30,7 +37,7 @@ test('every compressed project round-trips its entire validated header through l
     assert.deepEqual(record.fields.matchingMetadata, inputs.projects.get(record.key).metadata);
     assert.deepEqual(payload(record, 'en-US').fields.matchingMetadata['en-US'], record.fields.matchingMetadata);
   }
-  const vocabulary = records.find(r => r.kind === 'matchingVocabulary');
+  const vocabulary = records.find(r => r.kind === 'matchingVocabulary' && r.fields.vocabularyVersion === inputs.registry.vocabulary_version);
   assert.deepEqual(vocabulary.fields.registry, inputs.registry);
   const type = contentTypes().find(t => t.id === 'jobzeugProject');
   assert.equal(type.fields.find(f => f.id === 'matchingMetadata').type, 'Object');

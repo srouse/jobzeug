@@ -67,10 +67,11 @@ Vercel installs with [`scripts/vercel-install.mjs`](scripts/vercel-install.mjs) 
 Do these in order when a project should show up in the app and in matching.
 
 1. **Add project** (`/add-project`) — narrative, employer, and role links. Draft YAML only. No matching concepts.
-2. **Annotate project** (`/annotate-project`) — claims and approved `concept_ids` against vocabulary `1.1.0`. This is the assessment. Do it before compress if the project should score.
-3. **Compress to Contentful** (`/compress-to-contentful`) — `contentful:compress`, then `contentful:apply`, then `contentful:push`.
+2. **Update project** (`/update-project`) — an existing project, when Scott brings a later telling, a transcript, or a video. Saves the source, rewrites the employer line, refreshes claims, attaches the video, and adds missing vocabulary. Do this instead of annotate when the account itself is changing.
+3. **Annotate project** (`/annotate-project`) — claims and approved `concept_ids` against the current vocabulary, when the account is already in the file. New meanings stay proposals unless he asked for a vocabulary change.
+4. **Compress to Contentful** (`/compress-to-contentful`) — `contentful:compress`, then `contentful:apply`, then `contentful:push`.
 
-`annotation.vocabulary_version` must be `1.1.0` or compress stops for the whole catalog. That pin is not the same as claim review. Empty `evidence` still publishes the resume summary and scores no concepts.
+`annotation.vocabulary_version` must be `1.5.0` or compress stops for the whole catalog. That pin is not the same as claim review. Empty `evidence` still publishes the resume summary and scores no concepts.
 
 Contentful tags (`fintech`, `enterprise`) are separate from matching `concept_ids`.
 

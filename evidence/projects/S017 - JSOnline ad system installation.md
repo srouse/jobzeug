@@ -28,7 +28,7 @@ year_note: Estimated as 2001 within R022 (2001–2002); a representative year, n
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: "1.1.0"
+  vocabulary_version: "1.5.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review

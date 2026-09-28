@@ -30,7 +30,7 @@ year_note: Project calendar was not supplied. Estimated inside R007 (Aug 2018–
 delivery_stage: prototype
 annotation:
   status: reviewed
-  vocabulary_version: "1.1.0"
+  vocabulary_version: "1.5.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review
@@ -252,7 +252,7 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 
 ## Resume summary
 
-Led Loan Visualizer (LOUI), Summit’s mortgage visualizer: a React interface of custom charts plus a one-page sheet a loan officer could walk with a member. Tested with people, did not ship, and became the loan intuition behind later Summit work, including Rates Central.
+I led Loan Visualizer, Summit's mortgage tool: custom React charts plus a one-page sheet a loan officer could walk with a member. We tested it with people, it did not ship, and that loan intuition carried into later work, including Rates Central.
 
 ## Account summary
 

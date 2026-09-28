@@ -30,7 +30,7 @@ year_note: Estimated as 2022 near the midpoint of R005 (August 2020–June 2023)
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: "1.1.0"
+  vocabulary_version: "1.5.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -40,6 +40,7 @@ evidence:
       Stencil and subsequently porting it to Lit.
     concept_ids:
       - local:design-system-development
+      - local:design-system-fundamentals
       - local:component-library
       - local:design-token-engineering
       - local:web-component-architecture

@@ -59,6 +59,8 @@ type ResumeHighlightContextValue = {
   lineFocus: LineFocus | null;
   /** Select a project or job line. The same row again clears it. */
   selectLine: (next: { kind: "project" | "jobLine"; id: string }) => void;
+  /** Set the stage subject exactly. Used when the URL changes. */
+  applyLineFocus: (next: LineFocus | null) => void;
   /** Return the stage to the home landing. */
   clearLineFocus: () => void;
   /** Hand the lines to the current AI result. */
@@ -83,7 +85,22 @@ function firstSectionId(cluster: EvidenceCluster | null): string | null {
   return cluster?.sections?.[0]?.id ?? null;
 }
 
-export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
+function sameLineFocus(a: LineFocus | null, b: LineFocus | null): boolean {
+  if (a === b) return true;
+  if (!a || !b) return false;
+  if (a.kind === "answer" || b.kind === "answer") {
+    return a.kind === "answer" && b.kind === "answer";
+  }
+  return a.kind === b.kind && a.id === b.id;
+}
+
+export function ResumeHighlightProvider({
+  children,
+  initialLineFocus = null,
+}: {
+  children: ReactNode;
+  initialLineFocus?: LineFocus | null;
+}) {
   const [activeCluster, setActiveClusterState] =
     useState<EvidenceCluster | null>(null);
   const [focusedSectionId, setFocusedSectionId] = useState<string | null>(null);
@@ -99,7 +116,7 @@ export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
   });
   const [askContextItems, setAskContextItems] = useState<AskContextItem[]>([]);
   const [pageBindingsVisible, setPageBindingsVisible] = useState(true);
-  const [lineFocus, setLineFocus] = useState<LineFocus | null>(null);
+  const [lineFocus, setLineFocus] = useState<LineFocus | null>(initialLineFocus);
   const clusterIdRef = useRef<string | null>(null);
 
   const selectLine = useCallback(
@@ -117,6 +134,10 @@ export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
     },
     [],
   );
+
+  const applyLineFocus = useCallback((next: LineFocus | null) => {
+    setLineFocus((current) => (sameLineFocus(current, next) ? current : next));
+  }, []);
 
   const clearLineFocus = useCallback(() => {
     setLineFocus(null);
@@ -222,6 +243,7 @@ export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
       focusedIds,
       lineFocus,
       selectLine,
+      applyLineFocus,
       clearLineFocus,
       focusAnswer,
       density,
@@ -242,6 +264,7 @@ export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
     askContextItems,
     lineFocus,
     selectLine,
+    applyLineFocus,
     clearLineFocus,
     focusAnswer,
     setActiveCluster,

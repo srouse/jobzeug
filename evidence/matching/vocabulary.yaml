@@ -1,15 +1,15 @@
 # Authoritative concept registry. Read engine.md and project-header-schema.md first.
 # Approval here covers vocabulary definitions only, never claims about Scott.
 schema_version: "1.0"
-vocabulary_version: 1.1.0
+vocabulary_version: 1.5.0
 title: Jobzeug project matching vocabulary
 status: approved
 created_at: 2026-09-26
 review:
   reviewed_by: Scott
-  reviewed_at: 2026-09-27
-  scope: 1.1.0 adds iOS, real estate, and hardware product design at Scott's request. Prior concepts
-    remain the 2026-09-26 Codex definition review. This file does not approve project claims.
+  reviewed_at: 2026-09-28
+  scope: 1.5.0 adds security-constrained integration at Scott's request while updating S008.
+    Prior concepts remain the 1.4.0 review. This file does not approve project claims.
 purpose: Shared controlled concepts for project evidence and incoming job requirements; no fixed
   employer, posting, or project ranking.
 categories:
@@ -2082,3 +2082,181 @@ concepts:
       reviewed_by: Scott
       reviewed_at: 2026-09-27
       scope: Added in vocabulary 1.1.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:example-derived-content-fit
+    label: Example-derived content fit
+    definition: Estimating the everyday size or shape of content from real entries and component
+      instances, as distinct from a declared maximum or a field name.
+    category: skill
+    aliases: []
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Require a size or shape taken from examples in use. A field maximum, a name, or a
+      meaning description is not this concept.
+    basis:
+      project_ids:
+        - S009
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-28
+      scope: Added in vocabulary 1.2.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:binding-repair
+    label: Binding repair
+    definition: Updating content-to-component mappings after one side changes, using stored metadata
+      instead of deriving every binding again.
+    category: work_activity
+    aliases: []
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Require an update to existing mappings after a change. Recomputing a binding from
+      scratch, or expecting a repair without a logged one, is not this activity.
+    basis:
+      project_ids:
+        - S009
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-28
+      scope: Added in vocabulary 1.2.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:content-component-binding
+    label: Content-to-component binding
+    definition: Mapping structured content fields onto component properties when the names differ.
+    category: skill
+    aliases: []
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Require a mapping between two structures whose names do not already match. Using a
+      field that already has the same name is not this skill.
+    basis:
+      project_ids:
+        - S009
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-28
+      scope: Added in vocabulary 1.2.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:openai
+    label: OpenAI
+    definition: The OpenAI API used to run model calls.
+    category: tool
+    aliases: []
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Distinguish use of the API from authorship of OpenAI. A general mention of LLMs is
+      not this tool.
+    basis:
+      project_ids:
+        - S009
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-28
+      scope: Added in vocabulary 1.2.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:ai-assisted-editing
+    label: AI-assisted editing
+    definition: Using a model to revise a draft, including speech-to-text, while the author keeps the
+      ideas and checks the result.
+    category: skill
+    aliases: []
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Require the author's ideas and a check of the result. Prompting a cleanup is not an
+      agent workflow, and it is not authorship of the model.
+    basis:
+      project_ids:
+        - S014
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-28
+      scope: Added in vocabulary 1.3.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:explanatory-illustration
+    label: Explanatory illustration
+    definition: Drawing figures that carry a technical explanation, as distinct from laying out an interface.
+    category: skill
+    aliases: []
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Require the figures as the author's. A stock image or someone else's diagram is not
+      this skill.
+    basis:
+      project_ids:
+        - S014
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-28
+      scope: Added in vocabulary 1.3.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:design-system-fundamentals
+    label: Design-system fundamentals
+    definition: Knowledge of how a design system is structured, including foundations, components,
+      usage rules, and how decisions stay consistent across design and code.
+    category: knowledge
+    aliases:
+      - design systems
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Teaching or explaining can establish this knowledge. Building a system can too.
+      The tag does not establish that he shipped one.
+    basis:
+      project_ids:
+        - S001
+        - S005
+        - S006
+        - S011
+        - S014
+        - S019
+        - S027
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-28
+      scope: Added in vocabulary 1.4.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:design-token-fundamentals
+    label: Design-token fundamentals
+    definition: Knowledge of named design decisions layered as primitive, semantic, and component
+      tokens, and how those decisions distribute across tools.
+    category: knowledge
+    aliases:
+      - design tokens
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: A published explanation of the model counts, as does creating the layers. It does
+      not count as implementing a token pipeline.
+    basis:
+      project_ids:
+        - S005
+        - S006
+        - S014
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-28
+      scope: Added in vocabulary 1.4.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:security-constrained-integration
+    label: Security-constrained integration
+    definition: Placing data and a sign-in session so a tool can reach a secured system when the
+      obvious path fails a security review.
+    category: skill
+    aliases: []
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Require the constraint and the workaround a security review accepted. A normal
+      login or API call is not this skill.
+    basis:
+      project_ids:
+        - S008
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-28
+      scope: Added in vocabulary 1.5.0 at Scott's request. Definition only; not approval of a claim.

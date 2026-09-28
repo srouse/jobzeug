@@ -155,6 +155,12 @@ export function KleioBrowser({
                 color={image.archive === "work" ? "primary" : "muted"}
                 label={image.archive === "work" ? `workProjects · ${image.label}` : image.label}
               />
+              <JzText
+                variant="caption"
+                color="muted"
+                label={image.absolutePath}
+                className={styles.path}
+              />
             </div>
           </>
         ) : (

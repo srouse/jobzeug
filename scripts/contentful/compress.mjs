@@ -161,12 +161,18 @@ function stripMarkdown(text) {
  * Prefer ## Resume summary (1–2 sentences written for the resume).
  * Fallback: first usable paragraph of ## Account summary…, skipping capture-meta lines.
  */
+function publicArtifactUrl(md) {
+  const connection = section(md, 'Resume connection') || '';
+  const match = connection.match(/^- Public artifact:\s*(https?:\/\/\S+)/m);
+  return match?.[1];
+}
+
 function projectAccountSummary(md, maxChars = 420) {
   const resumeBlock = section(md, 'Resume summary');
   if (resumeBlock) {
     const prose = proseBlock(resumeBlock.replace(/^-\s+.+$/gm, '').trim());
-    const brief = stripMarkdown(prose.split(/\n\s*\n/)[0] || '');
-    if (brief) return brief.slice(0, maxChars).trim() || undefined;
+    const brief = (prose.split(/\n\s*\n/)[0] || '').replace(/\s+/g, ' ').trim();
+    if (brief) return brief.slice(0, 1200).trim() || undefined;
   }
 
   const start = md.search(/^## Account summary\b.*$/m);
@@ -240,7 +246,7 @@ async function compressRoles(nameIndex) {
   return out;
 }
 
-async function compressProjects(matchingProjects) {
+async function compressProjects(matchingProjects, presentedIds) {
   const files = (await listMd('evidence/projects')).filter(name => /^S\d{3,}/.test(name));
   const out = [];
   for (const filename of files) {
@@ -254,9 +260,11 @@ async function compressProjects(matchingProjects) {
     if (!employer) throw new Error(`Missing employer for ${id}`);
     if (!roles.length) throw new Error(`Missing roles for ${id}`);
     const summary = projectAccountSummary(md);
+    const url = publicArtifactUrl(md);
+    const presentation = presentedIds.has(id) ? `${id}-presentation` : undefined;
     const tags = parseTags(md, 'project', id, employer);
     out.push(await writeOutput('project', id, compact({
-      evidenceId: id, employer, roles, name, summary, matchingMetadata,
+      evidenceId: id, employer, roles, name, summary, url, presentation, matchingMetadata,
     }), tags));
   }
   return out;
@@ -299,7 +307,6 @@ export function presentationFromMarkdown(projectId, md) {
   }
   const fields = {
     evidenceId: `${projectId}-presentation`,
-    project: projectId,
     blurb,
     video,
     metricOneValue: metrics[0].value,
@@ -346,8 +353,9 @@ export async function compress(workspaceRoot = root) {
     evidenceId: `MV-${matching.registry.vocabulary_version}`, name: matching.registry.title,
     vocabularyVersion: matching.registry.vocabulary_version, registry: matching.registry,
   });
-  const projects = await compressProjects(matching.projects);
   const presentations = await compressPresentations();
+  const presentedIds = new Set(presentations.map((item) => item.evidenceId.replace(/-presentation$/, '')));
+  const projects = await compressProjects(matching.projects, presentedIds);
   return { employers, roles, projects, presentations, matchingVocabulary };
 }
 

@@ -32,6 +32,7 @@ None — role narrative is in LinkedIn description; project-level detail lives o
 - [S009: AI binding research](../projects/S009%20-%20AI%20binding%20research.md) — working title; innovation prototype on the latest role; not yet integrated into the widget.
 - [S010: Berlin prototype exploration](../projects/S010%20-%20Berlin%20prototype%20exploration.md) — provisional role association; event dates and full account pending.
 - [S015: Understanding AI by its building blocks (article)](../projects/S015%20-%20Understanding%20AI%20building%20blocks.md) — two-part Contentful Guides series (Feb–Mar 2026) with interactive prompt modules in Part 1.
+- [S031: KMS demo](../projects/S031%20-%20KMS%20demo.md) — knowledge-management proof of concept he built; the handoff for an unnamed partner to take to clients. Not DemAI.
 
 ## Source references
 

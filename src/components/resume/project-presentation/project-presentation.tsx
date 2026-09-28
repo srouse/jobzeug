@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { JzText } from "@jobzeug/design-system/react";
 import { Modal } from "@/components/modal";
 import type { ResumeProject } from "@/lib/contentful/resume-model";
 import styles from "./project-presentation.module.css";
@@ -34,30 +33,17 @@ export function ProjectPresentationModal({
       open={open}
       onOpenChange={(next) => { if (!next) onClose(); }}
       title={project.name}
-      wide
       fit
+      fill
     >
-      <div className={styles.stage}>
-        <div className={styles.copy}>
-          <JzText variant="body-default" label={presentation.blurb} className={styles.blurb} />
-          <div className={styles.metrics}>
-            {presentation.metrics.map((metric, index) => (
-              <div key={`${metric.label}-${index}`} className={styles.metric}>
-                <JzText level={3} variant="title" label={metric.value} />
-                <JzText variant="overline" color="muted" label={metric.label} />
-              </div>
-            ))}
-          </div>
-        </div>
-        <video
-          ref={videoRef}
-          className={styles.video}
-          src={presentation.videoUrl}
-          controls
-          autoPlay
-          playsInline
-        />
-      </div>
+      <video
+        ref={videoRef}
+        className={styles.video}
+        src={presentation.videoUrl}
+        controls
+        autoPlay
+        playsInline
+      />
     </Modal>
   );
 }

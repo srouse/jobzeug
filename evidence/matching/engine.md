@@ -33,7 +33,7 @@ O*NET also describes abilities, work styles, interests, education, and experienc
 
 ## Controlled vocabulary contract
 
-The versioned registry is [vocabulary.yaml](vocabulary.yaml). Version 1.1.0 is the 1.0.0 registry plus iOS, real estate, and hardware product design. Version 1.0.0 contained agent-reviewed definitions informed by the project collection and three representative postings, with verified mappings to O*NET 31.0 where appropriate. Vocabulary approval concerns the definitions, not Scott's proficiency or approval of project claims. Concepts can represent incoming requirements even when no current project supplies evidence. Every active concept must have:
+The versioned registry is [vocabulary.yaml](vocabulary.yaml). Version 1.5.0 adds security-constrained integration. Version 1.4.0 adds design-system fundamentals and design-token fundamentals. Version 1.3.0 adds AI-assisted editing and explanatory illustration. Version 1.2.0 adds example-derived content fit, binding repair, content-to-component binding, and OpenAI. Version 1.1.0 is the 1.0.0 registry plus iOS, real estate, and hardware product design. Version 1.0.0 contained agent-reviewed definitions informed by the project collection and three representative postings, with verified mappings to O*NET 31.0 where appropriate. Vocabulary approval concerns the definitions, not Scott's proficiency or approval of project claims. Concepts can represent incoming requirements even when no current project supplies evidence. Every active concept must have:
 
 - `id`: stable identifier; use `local:<slug>` for local concepts.
 - `label`, `definition`, and `category`: one canonical meaning and category.

@@ -45,7 +45,7 @@
       "status": "reviewed",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.1.0"
+      "vocabulary_version": "1.5.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -54,6 +54,7 @@
         "statement": "Created an application design system with web components and tokens, initially using Stencil and subsequently porting it to Lit.",
         "concept_ids": [
           "local:design-system-development",
+          "local:design-system-fundamentals",
           "local:component-library",
           "local:design-token-engineering",
           "local:web-component-architecture",

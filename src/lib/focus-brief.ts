@@ -19,6 +19,7 @@ export const focusBriefRequestSchema = z.object({
     text: z.string().default(""),
   }),
   connections: z.array(connectionSchema).max(4),
+  refresh: z.boolean().optional(),
 });
 
 /** Stable Contentful entry id for one focus. Stays inside the 64-character limit. */
@@ -130,5 +131,5 @@ ${connections}
 Preloaded project files:
 ${records}
 
-${shape} Use only the matches listed above. Bold every project name and every job-line name with **markdown**. Three or four sentences. Do not use third person.`;
+${shape} Use only the matches listed above. Bold every project name and every job-line name with **markdown**. Three or four sentences. No first person, no third person, and no name. The sentences are about the project and the job lines only.`;
 }

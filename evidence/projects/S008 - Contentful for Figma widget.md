@@ -29,7 +29,7 @@ year_note: Estimated from R001 (February 2026–present as of September 2026); p
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: "1.1.0"
+  vocabulary_version: "1.5.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -78,7 +78,7 @@ evidence:
         supports: Took the widget through product marketing, PM involvement, security work, and release as a
           public capability.
     limitations:
-      - Release is Scott’s account; security tasks and checks are not described.
+      - Release is Scott’s account. The September 28 account describes the security work on S008-E005.
       - Usage was low; public release does not establish strong adoption.
     public_disclosure: needs_review
     review:
@@ -109,6 +109,104 @@ evidence:
       status: approved
       reviewed_by: Codex
       reviewed_at: "2026-09-26"
+  - id: S008-E004
+    statement: The shipped widget maps Contentful fields onto Figma component properties when the
+      names differ, then previews a real entry on the canvas.
+    concept_ids:
+      - local:content-component-binding
+      - local:example-derived-content-fit
+      - local:figma
+      - local:contentful
+    ownership: sole
+    scope: external_audience
+    delivery_stage: production
+    provenance: existing_material
+    sources:
+      - ref: "../sources/s008-contentful-for-figma-walkthrough-2026-09-28.md"
+        locator: "0:01:34 and 0:02:38"
+        supports: A component variable named intro receives a blog post title. A background image
+          is filled from a referenced MediaWrapper entry. A modifier turns the logo off because
+          blog posts do not have one.
+      - ref: "../sources/s008-contentful-for-figma-walkthrough-2026-09-28.md"
+        locator: "0:03:42 and 0:04:35"
+        supports: A visual unit test beside the component applies a real entry. The title looks
+          short, so the type may be too small, and he wants that judgment before developer handoff.
+      - ref: "https://www.contentful.com/help/apps/contentful-for-figma/"
+        locator: Create bindings and explore entries
+        supports: The published help page describes mapping fields to Figma properties, including
+          transforms, then attaching entries to preview real content.
+    limitations:
+      - The help pages are the public documentation. His account says he wrote them. The pages
+        themselves do not name an author.
+      - Caption text drops a word at the line about loading entries into the design.
+    public_disclosure: needs_review
+    review:
+      status: proposed
+      reviewed_by: null
+      reviewed_at: null
+  - id: S008-E005
+    statement: Built the production widget himself because other developers were busy. Security
+      requirements forced more than one place for data, and a one-time code carries the Contentful
+      session into Figma because the two cannot share a login.
+    concept_ids:
+      - local:security-constrained-integration
+      - local:programming
+      - local:figma-extension
+      - local:figma
+      - local:contentful
+      - local:stakeholder-alignment
+    ownership: sole
+    scope: multiple_teams
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "../sources/s008-account-2026-09-28.md"
+        locator: "I actually built out the entire thing"
+        supports: He built it because other developers were busy. Data had to live in more than one
+          place to get security sign-off. The OAuth page and Figma cannot share a session, so a
+          copy-paste transfer was what security accepted.
+      - ref: "../sources/s008-contentful-for-figma-walkthrough-2026-09-28.md"
+        locator: "0:00:36"
+        supports: Sign-in opens a browser, runs Contentful OAuth, and hands back a transfer code
+          that is pasted into Figma. The session then follows that person's Contentful permissions.
+    limitations:
+      - Other developers being busy, and the number of months, are his account.
+      - He does not name the security reviewers or list every place data is stored.
+      - He says he built most of it, and also the entire thing. The earlier account still has a PM
+        and product marketing on the release path.
+    public_disclosure: needs_review
+    review:
+      status: proposed
+      reviewed_by: null
+      reviewed_at: null
+  - id: S008-E006
+    statement: Wrote the public help documentation and the intro video, and worked with product
+      marketing so they were published. A blog post to make the widget more visible is not out yet.
+    concept_ids:
+      - local:technical-writing
+      - local:technical-article
+      - local:coordination
+    ownership: sole
+    scope: external_audience
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "../sources/s008-account-2026-09-28.md"
+        locator: "I created the video plus the other documentation"
+        supports: He created the video and the documentation, coordinated with product marketing on
+          placement, and is still writing a blog post for a wider audience.
+      - ref: "https://www.contentful.com/help/apps/contentful-for-figma/"
+        locator: Contentful for Figma help
+        supports: The help center publishes the widget overview, concepts, and the field-mapping page.
+    limitations:
+      - The blog post is not published. Wider visibility is the intent, not a result.
+      - The help pages do not name him as author.
+      - How large a part of Contentful's Figma approach this becomes is his hope.
+    public_disclosure: needs_review
+    review:
+      status: proposed
+      reviewed_by: null
+      reviewed_at: null
 concept_proposals: []
 ---
 # S008: Contentful for Figma widget
@@ -125,10 +223,13 @@ Evidence: Scott's direct account; resume also claims this widget — still not i
 - Collaborators: Requesting SE(s); **two or three prospects** involved early (names TBD — prospects deferred, do not create CU/CL yet). Later: **PM** via product marketing path; **security** sign-off. Sitting **outside core product**.
 - Perspective: Strong [P002](../perspectives/P002-build-deep-to-influence.md) example — walk ahead, then operationalize.
 - **Naming collision:** In-widget “blueprint” (wireframe outline showing content status) is **not** [S001 Blueprints](S001%20-%20Blueprints.md) the CIA installable repo/design system.
+- September 28 account, kept separate: [S008 account](../sources/s008-account-2026-09-28.md).
+- Intro transcript, kept separate: [S008 walkthrough](../sources/s008-contentful-for-figma-walkthrough-2026-09-28.md).
+- Public help he says he wrote: [overview](https://www.contentful.com/help/apps/contentful-for-figma/), [concepts](https://www.contentful.com/help/apps/contentful-for-figma/concepts/), [field mapping](https://www.contentful.com/help/apps/contentful-for-figma/map-figma-properties-to-contentful-field-types/).
 
 ## Resume summary
 
-I built and shipped Contentful for Figma, a public widget that binds live Contentful fields to Figma components—including content-status “blueprint” outlines—and operationalized it through product marketing, PM, and security outside the core product.
+I built [Contentful for Figma](https://www.contentful.com/help/apps/contentful-for-figma/), a public widget that signs in with a one-time code because Figma cannot share the Contentful login, then binds live fields onto components. The [concepts](https://www.contentful.com/help/apps/contentful-for-figma/concepts/) and [field mapping](https://www.contentful.com/help/apps/contentful-for-figma/map-figma-properties-to-contentful-field-types/) pages are the public docs. The recording is that path, from sign-in to real content on the canvas.
 
 ## Account summary
 
@@ -181,10 +282,6 @@ Technically he demonstrated **data assembly through binding** — connecting con
 - PM + security + product marketing: production gatekeepers.
 - Experience Orchestration: separate initiative; comparison is Scott’s assessment, not a measured bake-off unless later evidenced.
 
-## Potential relevance to Figma role
-
-Public Figma widget connecting live structured content to components; binding/data assembly; design-time preview of content status; path from field prototype to secured production outside the main product org; influence on a larger platform effort (Experience Orchestration) by being ahead.
-
 ## Follow-up queue
 
 - Initial SE and 2–3 prospect names (prospects → note only until closed/cleared).
@@ -211,7 +308,7 @@ He presented that work during [S010 Berlin prototype exploration](S010%20-%20Ber
 
 ## Presentation
 
-Blurb: I built and shipped Contentful for Figma, a public widget that binds live Contentful fields to Figma components—including content-status “blueprint” outlines—and operationalized it through product marketing, PM, and security outside the core product.
+Blurb: I built Contentful for Figma, a public widget that signs in with a one-time code, then binds live fields onto components. The recording is that path, from sign-in to real content on the canvas.
 
 Video: 2rAtcKDtRArNx6ZwePxW29
 
@@ -219,3 +316,15 @@ Video: 2rAtcKDtRArNx6ZwePxW29
   label: Initial v1
 - value: Public
   label: Live Figma widget
+
+## Addition — September 28, 2026: security, sign-in, and the public help
+
+Faithful summary of his [September 28 account](../sources/s008-account-2026-09-28.md), the [intro transcript](../sources/s008-contentful-for-figma-walkthrough-2026-09-28.md), and the help pages he pointed at. The source files keep his words. The help pages are published; they do not name an author.
+
+He built most of the production widget, and he also says he built the entire thing, because other developers were busy. Data security was stringent. He had to find more than one place to put data and get security to sign off. The Contentful OAuth page and Figma cannot share a session, so sign-in opens a browser, returns a one-time transfer code, and that code is pasted into the widget. The intro shows that step. Security accepted it.
+
+He wrote the intro video and the help documentation, and worked with product marketing so they were published in the right place. The pages are the [overview](https://www.contentful.com/help/apps/contentful-for-figma/), [concepts](https://www.contentful.com/help/apps/contentful-for-figma/concepts/), and [field mapping](https://www.contentful.com/help/apps/contentful-for-figma/map-figma-properties-to-contentful-field-types/). A blog post to make the widget more visible is still being written. He calls the work a number of months, public-facing, and hopefully a large part of how Contentful approaches Figma. That last part is his hope.
+
+The intro is the binding, not the security story. Drop the widget, sign in, connect one space and environment. An alias lets the environment change without breaking the file. A content map lists what can receive content. A blog post title is bound to a variable named intro. An editorial thumbnail comes through a referenced MediaWrapper entry into a background image. A modifier turns the logo off because blog posts do not have logos. A visual unit test beside the component applies a real entry so the design can be judged before developer handoff. Real content in the recording makes the title look short.
+
+[Project index](INDEX.md) · [Role index](../roles/INDEX.md) · [Workspace guide](../README.md)

@@ -5,7 +5,7 @@
     "R004"
   ],
   "name": "State Farm tokens",
-  "summary": "Persuaded State Farm to use design tokens and, with a Google teammate, created the initial primitive and semantic template for the next-generation system. He believes that model is mostly what they still use. Inverse mode was built in code as part of this work, then stepped back because it was more than the implementation team would maintain.",
+  "summary": "I persuaded State Farm to use design tokens and, with a Google teammate, created the primitive and semantic template I believe they mostly still use. Inverse mode was part of this work, then stepped back because it was more than the team would maintain.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S005",
@@ -46,7 +46,7 @@
       "status": "reviewed",
       "reviewed_by": "Scott",
       "reviewed_at": "2026-09-27",
-      "vocabulary_version": "1.1.0"
+      "vocabulary_version": "1.5.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -85,7 +85,9 @@
         "statement": "With a Google teammate, created the initial primitive and semantic token template for State Farm's next-generation design system, through many variations aimed at designer needs and later maintenance.",
         "concept_ids": [
           "local:design-token-engineering",
-          "local:design-system-development"
+          "local:design-token-fundamentals",
+          "local:design-system-development",
+          "local:design-system-fundamentals"
         ],
         "ownership": "contributor",
         "scope": "organization",

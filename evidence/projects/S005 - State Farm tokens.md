@@ -31,7 +31,7 @@ year_note: Estimated as 2023, the main calendar year of R004 (July 2023–Januar
 delivery_stage: mixed
 annotation:
   status: reviewed
-  vocabulary_version: "1.1.0"
+  vocabulary_version: "1.5.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review
@@ -66,7 +66,9 @@ evidence:
       later maintenance.
     concept_ids:
       - local:design-token-engineering
+      - local:design-token-fundamentals
       - local:design-system-development
+      - local:design-system-fundamentals
     ownership: contributor
     scope: organization
     delivery_stage: unknown
@@ -142,7 +144,7 @@ Shared role context: [State Farm design system refresh](../roles/R004-state-farm
 
 ## Resume summary
 
-Persuaded State Farm to use design tokens and, with a Google teammate, created the initial primitive and semantic template for the next-generation system. He believes that model is mostly what they still use. Inverse mode was built in code as part of this work, then stepped back because it was more than the implementation team would maintain.
+I persuaded State Farm to use design tokens and, with a Google teammate, created the primitive and semantic template I believe they mostly still use. Inverse mode was part of this work, then stepped back because it was more than the team would maintain.
 
 ## Account summary
 

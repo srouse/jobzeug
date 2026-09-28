@@ -29,7 +29,7 @@ year_note: "Year unresolved: provisional R007 calendar anchor is 2018–2019, wh
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: "1.1.0"
+  vocabulary_version: "1.5.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review
@@ -41,6 +41,7 @@ evidence:
       - local:figma-extension
       - local:figma
       - local:design-system-development
+      - local:design-system-fundamentals
       - local:developer-and-designer-tools
     ownership: contributor
     scope: external_audience

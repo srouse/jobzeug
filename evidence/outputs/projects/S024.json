@@ -5,7 +5,7 @@
     "R007"
   ],
   "name": "Loan Visualizer (LOUI)",
-  "summary": "Led Loan Visualizer (LOUI), Summit’s mortgage visualizer: a React interface of custom charts plus a one-page sheet a loan officer could walk with a member. Tested with people, did not ship, and became the loan intuition behind later Summit work, including Rates Central.",
+  "summary": "I led Loan Visualizer, Summit's mortgage tool: custom React charts plus a one-page sheet a loan officer could walk with a member. We tested it with people, it did not ship, and that loan intuition carried into later work, including Rates Central.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S024",
@@ -44,7 +44,7 @@
       "status": "reviewed",
       "reviewed_by": "Scott",
       "reviewed_at": "2026-09-27",
-      "vocabulary_version": "1.1.0"
+      "vocabulary_version": "1.5.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [

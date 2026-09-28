@@ -29,7 +29,7 @@ year_note: Estimated as 2025 within R002 (February 2025–early 2026, with confl
 delivery_stage: mixed
 annotation:
   status: reviewed
-  vocabulary_version: "1.1.0"
+  vocabulary_version: "1.5.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: restricted

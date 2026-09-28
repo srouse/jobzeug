@@ -14,6 +14,7 @@ type ConnectorPath = {
   id: string;
   d: string;
   start: { x: number; y: number };
+  end: { x: number; y: number };
   focused: boolean;
   subject: boolean;
   opacity?: number;
@@ -140,6 +141,7 @@ function blendPaths(
           id,
           d: formatCubic(geom),
           start: { x: geom.x0, y: geom.y0 },
+          end: { x: geom.x1, y: geom.y1 },
           focused: dst.focused,
           subject: false,
           opacity: 1,
@@ -400,6 +402,7 @@ function measurePaths(target: ConnectionTarget | null): ConnectorPath[] {
       id: draft.id,
       d: cubicHorizontal(draft.startX, draft.startY, draft.endX, endY),
       start: { x: draft.startX, y: draft.startY },
+      end: { x: draft.endX, y: endY },
       focused: draft.primary,
       subject: draft.subject,
     };
@@ -650,8 +653,8 @@ export function EvidenceConnectors() {
                   ? styles.dot
                   : styles.dotDimmed
             }
-            cx={path.start.x}
-            cy={path.start.y}
+            cx={path.subject ? path.end.x : path.start.x}
+            cy={path.subject ? path.end.y : path.start.y}
             r={DOT_RADIUS}
           />
         </g>

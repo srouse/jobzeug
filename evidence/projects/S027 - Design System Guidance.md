@@ -31,7 +31,7 @@ year_note: Project calendar was not supplied. Estimated inside R006 (November 20
 delivery_stage: unknown
 annotation:
   status: reviewed
-  vocabulary_version: "1.1.0"
+  vocabulary_version: "1.5.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review
@@ -42,6 +42,7 @@ evidence:
       buy or assemble the wrong thing.
     concept_ids:
       - local:design-system-development
+      - local:design-system-fundamentals
       - local:technology-selection
       - local:stakeholder-alignment
       - local:persuasion
@@ -83,7 +84,7 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 
 ## Resume summary
 
-Guided an early cross-brand design-system effort: analyzed whether incoming software could become a reusable system, and led the first conversations among design technologists at the brands so they would not buy or assemble the wrong thing.
+I guided an early cross-brand design-system effort, analyzing whether incoming software could become a reusable system. I led the first conversations among design technologists at the brands so they would not buy or assemble the wrong thing.
 
 ## Account summary
 

@@ -75,11 +75,11 @@ After the markdown is saved, read it back with `presentationFromMarkdown` from `
 - It returns null while any field is blank or `REPLACE`. Do not publish. Say which field blocked it.
 - When it returns fields, write only `evidence/outputs/projectPresentations/<evidenceId>.json` with that object. Do not delete other files in that directory.
 
-Then upsert and publish only `jz-<evidenceId>` (`jobzeugProjectPresentation`) with `upsertEntry` from `scripts/contentful/push.mjs`. Pass one record: `{ key: evidenceId, kind: 'projectPresentation', fields, tags: [] }`. Use `requireContentfulEnv` and a Contentful management client. Do not call `pushCore`, `loadCoreOutputs`, or `ensureTags`.
+Then upsert and publish `jz-<evidenceId>` (`jobzeugProjectPresentation`) with `upsertEntry` from `scripts/contentful/push.mjs`. Pass one record: `{ key: evidenceId, kind: 'projectPresentation', fields, tags: [] }`. The presentation entry does not reference the project.
+
+The project entry `jz-<S00x>` must already exist. After the presentation is published, set that project's `presentation` field to a link to `jz-<evidenceId>` and publish the project. Keep every other project field. If `evidence/outputs/projects/<S00x>.json` exists, add `"presentation": "<S00x>-presentation"` there too. Do not call `pushCore`, `loadCoreOutputs`, or `ensureTags`. Do not create the project.
 
 If `.env` is missing `CONTENTFUL_SPACE_ID`, `CONTENTFUL_ENVIRONMENT`, or `CONTENTFUL_MANAGEMENT_TOKEN`, stop and say so. Do not claim the entry was published.
-
-The linked project entry `jz-<S00x>` must already exist. This step does not create or update the project.
 
 ## Reply
 
@@ -88,4 +88,4 @@ After writing, tell Scott:
 - The blurb, in a sentence, and where it came from
 - Each metric and the line in the file that supports it
 - Which pairs stayed `REPLACE`, and why
-- Whether `jz-<S00x>-presentation` was published, and the space/environment, or why it was not
+- Whether `jz-<S00x>-presentation` was published, whether `jz-<S00x>` now references it, and the space/environment, or why it was not

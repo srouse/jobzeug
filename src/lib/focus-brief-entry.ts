@@ -60,6 +60,33 @@ export async function readFocusBrief(entryId: string): Promise<string | null> {
 }
 
 /**
+ * Write the paragraph onto the existing brief and publish it.
+ * Creates the entry when none exists yet.
+ */
+export async function replaceFocusBrief(
+  entryId: string,
+  paragraph: string,
+): Promise<string> {
+  const { space, environment, token, locale } = requireCmaEnv();
+  const client = clientFor(token);
+  const params = { spaceId: space, environmentId: environment };
+  const entryParams = { ...params, entryId };
+  const fields = { paragraph: { [locale]: paragraph } };
+  try {
+    const existing = await client.entry.get(entryParams);
+    const updated = await client.entry.update(entryParams, {
+      ...existing,
+      fields: { ...existing.fields, ...fields },
+    });
+    await client.entry.publish(entryParams, updated);
+    return paragraph;
+  } catch (error) {
+    if (!isStatus(error, 404, "NotFound")) throw error;
+    return createFocusBrief(entryId, paragraph);
+  }
+}
+
+/**
  * Create and publish the brief. A 409 means another request created it;
  * return that paragraph.
  */

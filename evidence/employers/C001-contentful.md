@@ -36,6 +36,7 @@ Researched September 19, 2026. Company background is independent of Scott’s ex
 - [S010 Berlin prototype exploration](../projects/S010%20-%20Berlin%20prototype%20exploration.md), provisionally R001.
 - [S014 Design tokens explained (article)](../projects/S014%20-%20Design%20tokens%20Contentful%20blog.md), R003 (May 2024).
 - [S015 Understanding AI by its building blocks (article)](../projects/S015%20-%20Understanding%20AI%20building%20blocks.md), R001 (Feb–Mar 2026).
+- [S031 KMS demo](../projects/S031%20-%20KMS%20demo.md), R001.
 - [S016 Hidden cost of technical debt (article)](../projects/S016%20-%20Technical%20debt%20Contentful%20blog.md), R002 (June 2025).
 - [S022 2024 Partnership Tour - AI design systems](../projects/S022%20-%202024%20Partnership%20Tour%20AI%20design%20systems.md), R003.
 ## Customers (via Contentful engagements)

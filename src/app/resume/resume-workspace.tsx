@@ -1,11 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type Ref } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type Ref } from "react";
 import type { ResumeViewModel } from "@/lib/contentful/resume-model";
 import {
   JobPostingPanel,
   JobPostingProvider,
 } from "@/components/job-posting";
+import type { LineFocus } from "@/lib/connection-targets";
 import {
   EvidenceConnectors,
   LAYOUT_MEDIUM_MIN_PX,
@@ -23,6 +24,7 @@ import {
   normalizeRouteEntryId,
   resumePath,
   resumeRouteFromPathname,
+  type ResumeFocus,
 } from "./resume-route";
 import styles from "./resume.module.css";
 
@@ -86,21 +88,69 @@ export function entryIdFromPathname(pathname: string): string | null {
   return resumeRouteFromPathname(pathname).entryId;
 }
 
-function ResumePageBody({
-  projectId,
-  onProjectIdChange,
+function lineFromRoute(focus: ResumeFocus | null): LineFocus | null {
+  return focus ? { kind: focus.kind, id: focus.id } : null;
+}
+
+function routeFromLine(focus: LineFocus | null): ResumeFocus | null {
+  if (!focus || focus.kind === "answer") return null;
+  return { kind: focus.kind, id: focus.id };
+}
+
+/**
+ * Stage subject and the address stay the same value.
+ * Route changes (load, Back, a new posting) apply onto line focus without
+ * writing history. Clicks push a new entry.
+ */
+function FocusRouteSync({
+  entryId,
+  routeFocus,
+  onRouteFocus,
 }: {
-  projectId: string | null;
-  onProjectIdChange: (projectId: string | null) => void;
+  entryId: string | null;
+  routeFocus: ResumeFocus | null;
+  onRouteFocus: (focus: ResumeFocus | null) => void;
 }) {
+  const { lineFocus, applyLineFocus } = useResumeHighlights();
+  const entryIdRef = useRef(entryId);
+  entryIdRef.current = entryId;
+
+  useEffect(() => {
+    applyLineFocus(lineFromRoute(routeFocus));
+  }, [routeFocus, applyLineFocus]);
+
+  useEffect(() => {
+    if (lineFocus?.kind === "answer") return;
+    const next = routeFromLine(lineFocus);
+    const url = resumePath(entryIdRef.current, next);
+    if (url === window.location.pathname) return;
+    window.history.pushState(null, "", url);
+    onRouteFocus(next);
+  }, [lineFocus, onRouteFocus]);
+
+  return null;
+}
+
+function ResumePageBody() {
   const { evidencePage, setEvidencePage } = useResumeHighlights();
   const [resume, setResume] = useState<ResumeViewModel | null>(null);
+  const resumeProjectIds = useMemo(() => {
+    if (!resume) return [];
+    const ids: string[] = [];
+    for (const employer of resume.employers) {
+      for (const role of employer.roles) {
+        for (const project of role.projects) ids.push(project.evidenceId);
+      }
+    }
+    return ids;
+  }, [resume]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [chatOpen, setChatOpen] = useState(false);
   /** Chat button and dock. Off until that entry comes back. */
   const showResumeChat = false;
   const [designOpen, setDesignOpen] = useState(false);
+  const [walkthroughId, setWalkthroughId] = useState<string | null>(null);
   const [wide, setWide] = useState(true);
   const [mobile, setMobile] = useState(false);
   const rootRef = useRef<HTMLElement>(null);
@@ -223,8 +273,8 @@ function ResumePageBody({
                   resume={resume}
                   loading={loading}
                   error={error}
-                  projectId={projectId}
-                  onProjectIdChange={onProjectIdChange}
+                  projectId={walkthroughId}
+                  onProjectIdChange={setWalkthroughId}
                 />
               </div>
               <div
@@ -234,7 +284,7 @@ function ResumePageBody({
                 hidden={!jobActive ? true : undefined}
                 inert={!jobActive ? true : undefined}
               >
-                <JobPostingPanel />
+                <JobPostingPanel resumeProjectIds={resumeProjectIds} />
               </div>
             </div>
             <EvidenceTabBar
@@ -251,7 +301,7 @@ function ResumePageBody({
       <AnswerStage
         hidden={!stageVisible}
         resume={resume}
-        onViewProject={onProjectIdChange}
+        onViewProject={setWalkthroughId}
         onOpenDesign={() => setDesignOpen(true)}
       />
       <EvidenceTabBar
@@ -282,38 +332,43 @@ function ResumePageBody({
 }
 
 /**
- * Single client shell for `/resume`, `/resume/{entryId}`, and
- * `/resume/{entryId}/project/{projectId}`.
+ * Single client shell for `/resume`, `/resume/{entryId}`,
+ * `/resume/{entryId}/project/{projectId}`, and
+ * `/resume/{entryId}/job-line/{lineId}`.
  * Ids live in React state. URL updates use history.pushState so Next does
  * not remount this tree.
  */
 export function ResumeWorkspace({
   initialEntryId,
-  initialProjectId,
+  initialFocus,
 }: {
   initialEntryId: string | null;
-  initialProjectId: string | null;
+  initialFocus: ResumeFocus | null;
 }) {
   const [entryId, setEntryId] = useState<string | null>(() =>
     normalizeRouteEntryId(initialEntryId),
   );
-  const [projectId, setProjectId] = useState<string | null>(() =>
-    normalizeRouteEntryId(initialProjectId),
-  );
+  const [focus, setFocus] = useState<ResumeFocus | null>(initialFocus);
 
   useEffect(() => {
     setEntryId(normalizeRouteEntryId(initialEntryId));
   }, [initialEntryId]);
 
+  const initialFocusKind = initialFocus?.kind ?? "";
+  const initialFocusId = initialFocus?.id ?? "";
   useEffect(() => {
-    setProjectId(normalizeRouteEntryId(initialProjectId));
-  }, [initialProjectId]);
+    setFocus(
+      initialFocusKind === "project" || initialFocusKind === "jobLine"
+        ? { kind: initialFocusKind, id: initialFocusId }
+        : null,
+    );
+  }, [initialFocusKind, initialFocusId]);
 
   useEffect(() => {
     const onPopState = () => {
       const route = resumeRouteFromPathname(window.location.pathname);
       setEntryId(route.entryId);
-      setProjectId(route.projectId);
+      setFocus(route.focus);
     };
     window.addEventListener("popstate", onPopState);
     return () => window.removeEventListener("popstate", onPopState);
@@ -321,30 +376,22 @@ export function ResumeWorkspace({
 
   const navigateEntryId = useCallback((next: string | null) => {
     const resolved = normalizeRouteEntryId(next);
-    window.history.pushState(null, "", resumePath(resolved, projectId));
+    window.history.pushState(null, "", resumePath(resolved, null));
     setEntryId(resolved);
-  }, [projectId]);
-
-  const navigateProjectId = useCallback((next: string | null) => {
-    const resolved = normalizeRouteEntryId(next);
-    const url = resumePath(entryId, resolved);
-    if (!resolved) {
-      if (projectId) window.history.replaceState(null, "", url);
-    } else if (resolved !== projectId) {
-      window.history.pushState(null, "", url);
-    }
-    setProjectId(resolved);
-  }, [entryId, projectId]);
+    setFocus(null);
+  }, []);
 
   return (
-    <ResumeHighlightProvider>
+    <ResumeHighlightProvider initialLineFocus={lineFromRoute(initialFocus)}>
+      <FocusRouteSync
+        entryId={entryId}
+        routeFocus={focus}
+        onRouteFocus={setFocus}
+      />
       <JobPostingProvider entryId={entryId} navigateEntryId={navigateEntryId}>
         <ResumeChatProvider>
           <DesignSessionProvider>
-            <ResumePageBody
-              projectId={projectId}
-              onProjectIdChange={navigateProjectId}
-            />
+            <ResumePageBody />
           </DesignSessionProvider>
         </ResumeChatProvider>
       </JobPostingProvider>

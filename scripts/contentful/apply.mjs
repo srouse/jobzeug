@@ -23,7 +23,7 @@ async function omitRemovedFields(client, params, contentTypeId, existing, desire
   );
   if (toOmit.length === 0) return existing;
   const fields = existing.fields.map((field) =>
-    desiredFieldIds.has(field.id) ? field : { ...field, omitted: true },
+    desiredFieldIds.has(field.id) ? field : { ...field, required: false, omitted: true },
   );
   const omitted = await client.contentType.update(
     { ...params, contentTypeId },

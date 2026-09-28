@@ -5,7 +5,7 @@
     "R010"
   ],
   "name": "Launch of a new business",
-  "summary": "Helped pitch and start OpenHomes inside a local incubator, then owned the product design and a live application: an iOS prototype, a working home-search website with weighted and location search, and a functioning lower-commission real estate agency. He also designed a simpler version of the door hardware; that work stalled for lack of resources.",
+  "summary": "I helped pitch and start OpenHomes inside a local incubator, then owned an iOS prototype, a home-search site, and a lower-commission agency. I also designed a simpler door-hardware version, which stalled for lack of resources.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S029",
@@ -44,7 +44,7 @@
       "status": "reviewed",
       "reviewed_by": "Scott",
       "reviewed_at": "2026-09-27",
-      "vocabulary_version": "1.1.0"
+      "vocabulary_version": "1.5.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [

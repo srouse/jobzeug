@@ -30,7 +30,7 @@ year_note: The account does not date the work. 2013 is the gener8tor summer coho
 delivery_stage: mixed
 annotation:
   status: reviewed
-  vocabulary_version: "1.1.0"
+  vocabulary_version: "1.5.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review
@@ -127,7 +127,7 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 
 ## Resume summary
 
-Helped pitch and start OpenHomes inside a local incubator, then owned the product design and a live application: an iOS prototype, a working home-search website with weighted and location search, and a functioning lower-commission real estate agency. He also designed a simpler version of the door hardware; that work stalled for lack of resources.
+I helped pitch and start OpenHomes inside a local incubator, then owned an iOS prototype, a home-search site, and a lower-commission agency. I also designed a simpler door-hardware version, which stalled for lack of resources.
 
 ## Account summary
 

@@ -30,7 +30,7 @@ year_note: Project calendar was not supplied. Estimated inside R001 (February 20
 delivery_stage: prototype
 annotation:
   status: reviewed
-  vocabulary_version: "1.1.0"
+  vocabulary_version: "1.5.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review
@@ -259,7 +259,7 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 
 ## Resume summary
 
-Researching and prototyping to guide Contentful’s Experience Orchestration (ExO), the planned next generation of Studio. The two parts he names are Data Assemblies and a design-system assembly; both are required to compose a page. His prototypes include a data-assembly visualizer, design-system UI prototypes, and a separate interface on Contentful’s API that shows stateful components.
+I researched and prototyped Contentful's Experience Orchestration so a page can be composed from Data Assemblies and a design-system assembly. The prototypes include a data-assembly visualizer, design-system UI, and a stateful interface on the API.
 
 ## Account summary
 

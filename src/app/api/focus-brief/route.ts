@@ -1,7 +1,11 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-import { createFocusBrief, readFocusBrief } from "@/lib/focus-brief-entry";
+import {
+  createFocusBrief,
+  readFocusBrief,
+  replaceFocusBrief,
+} from "@/lib/focus-brief-entry";
 import {
   capBriefSentences,
   focusBriefEntryId,
@@ -20,9 +24,12 @@ const pending = new Map<string, Promise<string>>();
 async function writeBrief(
   briefId: string,
   input: FocusBriefRequest,
+  refresh: boolean,
 ): Promise<string> {
-  const cached = await readFocusBrief(briefId);
-  if (cached) return cached;
+  if (!refresh) {
+    const cached = await readFocusBrief(briefId);
+    if (cached) return cached;
+  }
 
   await ensureEvidenceWorkspace();
   const files = await loadProjectEvidence(input);
@@ -34,19 +41,27 @@ async function writeBrief(
     (result as { object?: unknown }).object ??
       (result as { structuredOutput?: unknown }).structuredOutput,
   );
-  return createFocusBrief(briefId, capBriefSentences(written.paragraph));
+  const paragraph = capBriefSentences(written.paragraph);
+  return refresh
+    ? replaceFocusBrief(briefId, paragraph)
+    : createFocusBrief(briefId, paragraph);
 }
 
-function resolveBrief(input: FocusBriefRequest): Promise<string> {
+function resolveBrief(
+  input: FocusBriefRequest,
+  refresh: boolean,
+): Promise<string> {
   const briefId = focusBriefEntryId(
     input.postingEntryId,
     input.kind,
     input.subject.id,
   );
-  const current = pending.get(briefId);
-  if (current) return current;
-  const work = writeBrief(briefId, input).finally(() => {
-    pending.delete(briefId);
+  if (!refresh) {
+    const current = pending.get(briefId);
+    if (current) return current;
+  }
+  const work = writeBrief(briefId, input, refresh).finally(() => {
+    if (pending.get(briefId) === work) pending.delete(briefId);
   });
   pending.set(briefId, work);
   return work;
@@ -72,7 +87,10 @@ export async function POST(request: Request) {
   }
 
   try {
-    const paragraph = await resolveBrief(parsed.data);
+    const paragraph = await resolveBrief(
+      parsed.data,
+      parsed.data.refresh === true,
+    );
     return NextResponse.json({ paragraph });
   } catch (error) {
     console.error("[focus-brief]", error);

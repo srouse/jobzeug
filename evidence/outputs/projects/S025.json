@@ -5,7 +5,7 @@
     "R001"
   ],
   "name": "Experience Orchestration (ExO)",
-  "summary": "Researching and prototyping to guide Contentful’s Experience Orchestration (ExO), the planned next generation of Studio. The two parts he names are Data Assemblies and a design-system assembly; both are required to compose a page. His prototypes include a data-assembly visualizer, design-system UI prototypes, and a separate interface on Contentful’s API that shows stateful components.",
+  "summary": "I researched and prototyped Contentful's Experience Orchestration so a page can be composed from Data Assemblies and a design-system assembly. The prototypes include a data-assembly visualizer, design-system UI, and a stateful interface on the API.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S025",
@@ -44,7 +44,7 @@
       "status": "reviewed",
       "reviewed_by": "Scott",
       "reviewed_at": "2026-09-27",
-      "vocabulary_version": "1.1.0"
+      "vocabulary_version": "1.5.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [

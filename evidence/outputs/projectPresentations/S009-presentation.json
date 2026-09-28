@@ -1,0 +1,9 @@
+{
+  "evidenceId": "S009-presentation",
+  "blurb": "I isolated AI binding into its own prototype and added semantic metadata on content and components so mappings stay consistent, including repair when one side changes. It is not in the shipped widget.",
+  "video": "765cv4GCgMRSzVd8QCmUHW",
+  "metricOneValue": "Prototype",
+  "metricOneLabel": "Not in the widget",
+  "metricTwoValue": "Both sides",
+  "metricTwoLabel": "Content and components"
+}

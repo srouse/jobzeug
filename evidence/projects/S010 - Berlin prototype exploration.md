@@ -29,7 +29,7 @@ year_note: Estimated from R001 (February 2026–present as of September 2026); p
 delivery_stage: unknown
 annotation:
   status: reviewed
-  vocabulary_version: "1.1.0"
+  vocabulary_version: "1.5.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review

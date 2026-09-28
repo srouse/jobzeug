@@ -5,7 +5,8 @@
     "R001"
   ],
   "name": "AI binding research",
-  "summary": "AI binding research, an innovation prototype: semantic metadata and repair patterns for mapping structured content to components. The learnings are real. It is not integrated into the shipped widget.",
+  "summary": "I built an agent that maps Contentful fields onto Figma components when the names don’t match, using real entries to judge size and intent. A name-only pass failed, and it still isn’t in the widget.",
+  "presentation": "S009-presentation",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S009",
@@ -45,7 +46,7 @@
       "status": "reviewed",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.1.0"
+      "vocabulary_version": "1.5.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -107,6 +108,312 @@
           "status": "approved",
           "reviewed_by": "Codex",
           "reviewed_at": "2026-09-26"
+        }
+      },
+      {
+        "id": "S009-E003",
+        "statement": "Derived a natural content size from widget-populated component instances and Contentful entries, about 100 characters for a card, because names and field maximums were not enough for a predictable bio versus short-bio choice.",
+        "concept_ids": [
+          "local:semantic-metadata-design",
+          "local:example-derived-content-fit",
+          "local:ai-workflow-engineering",
+          "local:ai-output-evaluation",
+          "local:figma",
+          "local:contentful",
+          "local:troubleshooting"
+        ],
+        "ownership": "sole",
+        "scope": "individual",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s009-ai-binding-walkthrough-2026-09-28.md",
+            "locator": "0:01:23 and 0:02:12",
+            "supports": "He used populated instances and Contentful entries to estimate natural size, including about 100 characters for a card, after name-only binding failed."
+          }
+        ],
+        "limitations": [
+          "About 100 characters and “nine times out of ten” are his walkthrough impressions, not a measured sample or success rate.",
+          "The metadata representation and which entries he sampled are not in the transcript."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S009-E004",
+        "statement": "Added intent on both sides so a case-study preview maps to challenge rather than outcome, matching the choice he made every time he populated those cards in the widget.",
+        "concept_ids": [
+          "local:semantic-metadata-design",
+          "local:decision-making",
+          "local:ai-workflow-engineering",
+          "local:figma"
+        ],
+        "ownership": "sole",
+        "scope": "individual",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s009-ai-binding-walkthrough-2026-09-28.md",
+            "locator": "0:02:40",
+            "supports": "Length could not separate challenge from outcome; he chose challenge for previews and asked the agent to describe what each field is for."
+          }
+        ],
+        "limitations": [
+          "“Every time” is his recollection of his own Figma population, not an exported history.",
+          "Intent metadata is described in speech, not as a schema."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S009-E005",
+        "statement": "Had the agent read raw JSON on content entries and propose bindings from patterns it saw repeatedly, including telephone numbers stored in those fields.",
+        "concept_ids": [
+          "local:ai-workflow-engineering",
+          "local:ai-output-evaluation",
+          "local:contentful"
+        ],
+        "ownership": "sole",
+        "scope": "individual",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s009-ai-binding-walkthrough-2026-09-28.md",
+            "locator": "0:03:49",
+            "supports": "After intent was added, the agent inspected entry JSON and suggested bindings he had not asked for, such as telephone numbers."
+          }
+        ],
+        "limitations": [
+          "No entry, field name, or count is given. Telephone numbers are his example of an unexpected suggestion, not a claim that this is a good content model.",
+          "“Very predictable” remains a qualitative self-assessment."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S009-E006",
+        "statement": "Diagnosed why name-to-title and bio-versus-short-bio stayed unpredictable. The names were too thin for the model to make a stable choice.",
+        "concept_ids": [
+          "local:troubleshooting",
+          "local:critical-thinking",
+          "local:ai-system-fundamentals",
+          "local:ai-output-evaluation"
+        ],
+        "ownership": "sole",
+        "scope": "individual",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s009-ai-binding-walkthrough-2026-09-28.md",
+            "locator": "0:00:39 through 0:01:23",
+            "supports": "He expected name and title, or bio and short bio, to be obvious, and the bindings stayed unreliable because the inputs were too thin."
+          }
+        ],
+        "limitations": [
+          "The failure is his diagnosis from the walkthrough, not a logged evaluation."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S009-E009",
+        "statement": "Stated that a content entry and a component are separate structures whose names do not match, so the fields have to be mapped, such as a person's name onto a card title.",
+        "concept_ids": [
+          "local:content-component-binding",
+          "local:headless-content-management",
+          "local:contentful",
+          "local:figma",
+          "local:systems-analysis"
+        ],
+        "ownership": "sole",
+        "scope": "individual",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s009-ai-binding-walkthrough-2026-09-28.md",
+            "locator": "0:00:15 through 0:00:38",
+            "supports": "The widget needed a way to connect content to a component when the names differ, such as a person's name and a card title."
+          }
+        ],
+        "limitations": [
+          "This states the mapping problem. It does not show the widget shipping that mapping."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S009-E010",
+        "statement": "Solved the binding approach himself. The research reached a working approach for mapping content onto components.",
+        "concept_ids": [
+          "local:content-component-binding",
+          "local:troubleshooting",
+          "local:ai-workflow-engineering",
+          "local:critical-thinking"
+        ],
+        "ownership": "sole",
+        "scope": "individual",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s009-account-2026-09-28.md",
+            "locator": "yes, solve it",
+            "supports": "He says one of the big things he did with this research was solve it."
+          }
+        ],
+        "limitations": [
+          "Solved is his judgment. There is no benchmark, and the approach is not shipped."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S009-E011",
+        "statement": "Programmed the binding agent himself with Mastra, OpenAI, and LLMs.",
+        "concept_ids": [
+          "local:programming",
+          "local:ai-workflow-engineering",
+          "local:mastra",
+          "local:openai",
+          "local:ai-system-fundamentals"
+        ],
+        "ownership": "sole",
+        "scope": "individual",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s009-account-2026-09-28.md",
+            "locator": "I use Mastra to do this, OpenAI, LLMs",
+            "supports": "He says he used Mastra, OpenAI, and LLMs, and that the programming was his."
+          }
+        ],
+        "limitations": [
+          "Model names beyond OpenAI, and the code, are not in a source file yet."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S009-E012",
+        "statement": "Shared the research inside the company many times. Other people took it and ran with it.",
+        "concept_ids": [
+          "local:speaking",
+          "local:cross-functional-work"
+        ],
+        "ownership": "sole",
+        "scope": "individual",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s009-account-2026-09-28.md",
+            "locator": "shared that with many times other people",
+            "supports": "He says he shared the research many times and other people inside the company took it and ran with it."
+          }
+        ],
+        "limitations": [
+          "No names, dates, or artifacts of what those people shipped."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S009-E007",
+        "statement": "Could not ship the binding work because there was no acceptable place to store the metadata. The widget-only path was too narrow. He turned the research into actionable items for larger conversations about storing metadata, content types, and components, and still intends to bring it into the Contentful for Figma widget after that larger problem is solved.",
+        "concept_ids": [
+          "local:semantic-metadata-design",
+          "local:binding-repair",
+          "local:systems-analysis",
+          "local:content-modeling",
+          "local:decision-making"
+        ],
+        "ownership": "sole",
+        "scope": "individual",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s009-account-2026-09-28.md",
+            "locator": "I didn't have any place to store that metadata",
+            "supports": "He could not execute the work without a place to store the metadata, turned the research into items for larger conversations, and plans to bring it into the widget after that storage problem is solved."
+          }
+        ],
+        "limitations": [
+          "Good and bad storage places are his judgment. The agreements are not inspected.",
+          "The widget integration is a plan, not a result.",
+          "Healing after either side changes stays the expected consequence from the walkthrough at 0:04:23, not a logged repair."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S009-E008",
+        "statement": "The binding work remains an unshipped prototype.",
+        "concept_ids": [
+          "local:prototyping",
+          "local:technical-prototype"
+        ],
+        "ownership": "sole",
+        "scope": "individual",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s009-account-2026-09-28.md",
+            "locator": "I am going to roll this into my contentful for Figma widget",
+            "supports": "He has not executed the ship. Bringing it into the widget is still ahead of him."
+          }
+        ],
+        "limitations": [
+          "Unshipped is his account of the current boundary, not a release record."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
         }
       }
     ],

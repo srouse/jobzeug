@@ -1,58 +1,14 @@
-.stage {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
-  gap: var(--jz-semantic-space-gap-lg, 1.5rem);
-  align-items: start;
-}
-
-.copy {
-  display: flex;
-  flex-direction: column;
-  gap: var(--jz-semantic-space-gap-md, 1rem);
-  min-width: 0;
-  min-height: 0;
-  overflow: auto;
-}
-
 .video {
   display: block;
-  align-self: start;
-  width: 100%;
-  max-width: 100%;
+  width: min(
+    calc(100vw - 5rem),
+    calc((100dvh - 11rem) * 2880 / 1864)
+  );
   height: auto;
-  aspect-ratio: 4 / 3;
-  min-width: 0;
-  object-fit: cover;
-  object-position: center top;
+  max-height: calc(100dvh - 11rem);
+  aspect-ratio: 2880 / 1864;
+  object-fit: contain;
+  object-position: center;
   background: var(--jz-primitive-color-black);
   border-radius: var(--jz-primitive-radius-sm, 0.25rem);
-}
-
-.blurb {
-  display: block;
-  margin: 0;
-}
-
-.metrics {
-  display: flex;
-  flex-direction: column;
-  gap: var(--jz-semantic-space-gap-sm, 0.5rem);
-  flex-shrink: 0;
-}
-
-.metric {
-  display: flex;
-  flex-direction: column;
-  gap: var(--jz-semantic-space-gap-2xs, 0.125rem);
-  min-width: 0;
-  padding: var(--jz-semantic-space-padding-sm, 0.75rem);
-  background: var(--jz-semantic-color-background-surface-default);
-  border: 1px solid var(--jz-semantic-color-border-subtle);
-  border-radius: var(--jz-primitive-radius-sm, 0.25rem);
-}
-
-@media (max-width: 48rem) {
-  .stage {
-    grid-template-columns: 1fr;
-  }
 }

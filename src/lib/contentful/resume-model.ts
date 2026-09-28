@@ -7,6 +7,7 @@ export type ResumeProject = {
   evidenceId: string;
   name: string;
   summary?: string;
+  url?: string;
   contentfulUrl?: string;
   presentation?: {
     blurb: string;
@@ -84,6 +85,7 @@ export function assembleResume(catalog: CoreCatalog): ResumeViewModel {
         evidenceId: project.evidenceId,
         name: project.name,
         summary: project.summary,
+        url: project.url,
         contentfulUrl: contentfulAppEntryUrl(project.evidenceId),
         presentation: catalog.presentations.get(project.evidenceId),
       }))

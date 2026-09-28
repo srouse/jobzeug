@@ -1,0 +1,20 @@
+.meter {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  height: 2px;
+  margin-top: 2px;
+  pointer-events: none;
+}
+
+.meter[data-tone="ok"] {
+  background: var(--jz-semantic-color-dataviz-ok);
+}
+
+.meter[data-tone="good"] {
+  background: var(--jz-semantic-color-dataviz-good);
+}
+
+.meter[data-tone="great"] {
+  background: var(--jz-semantic-color-dataviz-great);
+}

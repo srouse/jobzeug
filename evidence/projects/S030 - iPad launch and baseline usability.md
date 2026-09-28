@@ -36,7 +36,7 @@ year_note: The account does not date the work. 2012 sits inside the R012 tenure 
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: "1.1.0"
+  vocabulary_version: "1.5.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review
@@ -117,7 +117,7 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 
 ## Resume summary
 
-Joined StudyBlue as an iOS developer without prior Objective-C, learned it quickly, and shipped a fully custom card flipper because Apple’s default components could not do that interaction. He also raised a usability floor — buttons that did not look like buttons — and got designers and developers talking.
+I joined StudyBlue without prior Objective-C, learned it quickly, and shipped a custom card flipper Apple's components could not do. I also raised a usability floor — buttons that did not look like buttons — and got designers and developers talking.
 
 ## Account summary
 
