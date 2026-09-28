@@ -7,11 +7,11 @@ import { EvidencePageHeader } from "@/components/evidence-page-header";
 import { AttachGutterRow } from "@/components/attach-gutter-row";
 import { Modal } from "@/components/modal";
 import { PostingMarkdown } from "../posting-markdown/posting-markdown";
-import { useResumeChat, useResumeHighlights } from "@/components/resume";
+import { useResumeHighlights } from "@/components/resume";
 import { useActiveConnectionTarget } from "@/components/resume/use-connection-target";
 import type { ConnectionStrength } from "@/lib/connection-targets";
 import { useIdleScrollbar } from "@/lib/use-idle-scrollbar";
-import { useJobPosting } from "../job-posting-context";
+import { useJobPosting, type BindStageName } from "../job-posting-context";
 import styles from "./job-posting-panel.module.css";
 
 const SECTION_ORDER = [
@@ -32,8 +32,7 @@ function DetailsBody({
   data: JobPostingPanelData;
   onOpenFull: () => void;
 }) {
-  const { askContextItems, toggleAskContext, lineFocus, selectLine, density } =
-    useResumeHighlights();
+  const { lineFocus, selectLine, density } = useResumeHighlights();
   const connection = useActiveConnectionTarget();
   const strengthById = useMemo(() => {
     const map = new Map<string, ConnectionStrength>();
@@ -42,18 +41,17 @@ function DetailsBody({
     }
     return map;
   }, [connection]);
-  const hideUnlinked = density === "rolled" && strengthById.size > 0;
-  const { canAttachContext } = useResumeChat();
-  const attachedIds = new Set(askContextItems.map((item) => item.id));
-  const summaryId = `${data.entryId}-summary`;
-  const summaryActivate = canAttachContext
-    ? () =>
-        toggleAskContext({
-          id: summaryId,
-          source: "job",
-          text: data.summary ?? "",
-        })
-    : undefined;
+  const referenceIds = useMemo(() => {
+    const ids = new Set<string>();
+    for (const endpoint of connection?.ids ?? []) {
+      if (endpoint.role === "reference") ids.add(endpoint.id);
+    }
+    return ids;
+  }, [connection]);
+  const hideUnselectedObjects =
+    density === "rolled" &&
+    lineFocus?.kind === "project" &&
+    referenceIds.size > 0;
   const metaItems: Array<{ label: string; value: string }> = [];
   if (data.location) metaItems.push({ label: "Location", value: data.location });
   if (data.seniority) metaItems.push({ label: "Seniority", value: data.seniority });
@@ -130,19 +128,11 @@ function DetailsBody({
           </div>
 
             {data.summary ? (
-              <AttachGutterRow
-                checked={attachedIds.has(summaryId)}
-                onToggle={summaryActivate}
-                label="Add summary to question context"
-                contentId={summaryId}
-                contentClassName={styles.summary}
-              >
-                <JzText
-                  variant="body-default"
-                  label={data.summary}
-                  color={attachedIds.has(summaryId) ? "primary" : undefined}
-                />
-              </AttachGutterRow>
+              <JzText
+                variant="body-default"
+                label={data.summary}
+                className={styles.summary}
+              />
             ) : null}
 
             <div className={styles.fullPostingRow}>
@@ -172,7 +162,7 @@ function DetailsBody({
         const lines = data.lines.filter(
           (line) =>
             line.section === id &&
-            (!hideUnlinked || strengthById.has(line.entryId)),
+            (!hideUnselectedObjects || referenceIds.has(line.entryId)),
         );
         if (!lines.length) return null;
         return (
@@ -206,6 +196,7 @@ function DetailsBody({
                     <div className={styles.inner}>
                       <AttachGutterRow
                         checked={selected}
+                        washed={selected || strength != null}
                         onToggle={() =>
                           selectLine({ kind: "jobLine", id: line.entryId })
                         }
@@ -214,24 +205,33 @@ function DetailsBody({
                         contentClassName={classNames(
                           styles.content,
                           styles.line,
-                          strength === "primary" && styles.lineCited,
-                          strength === "secondary" && styles.lineDimmed,
+                          selected && styles.lineSubject,
+                          !selected && strength === "primary" && styles.lineCited,
+                          !selected && strength === "secondary" && styles.lineDimmed,
                         )}
                       >
                         <JzText
                           variant="caption"
-                          color={strength === "primary" ? "primary" : "muted"}
+                          color={
+                            selected
+                              ? "secondary"
+                              : strength === "primary"
+                                ? "primary"
+                                : "muted"
+                          }
                           label={line.theme}
                           className={styles.theme}
                         />
                         <JzText
                           variant="body-regular"
                           color={
-                            strength === "primary"
-                              ? "primary"
-                              : strength === "secondary"
-                                ? "muted"
-                                : undefined
+                            selected
+                              ? "secondary"
+                              : strength === "primary"
+                                ? "primary"
+                                : strength === "secondary"
+                                  ? "muted"
+                                  : undefined
                           }
                           label={line.text}
                           className={styles.lineText}
@@ -278,17 +278,64 @@ function DetailsBody({
   );
 }
 
+const BIND_STAGE_LABEL: Record<BindStageName, string> = {
+  scraping: "Scraping",
+  structuring: "Structuring",
+  matching: "Matching",
+  saving: "Saving",
+};
+
+function formatStageSeconds(ms: number): string {
+  return `${(ms / 1000).toFixed(1)}s`;
+}
+
 function LoadingState() {
+  const { bindStages } = useJobPosting();
   return (
     <div className={styles.loading} role="status" aria-live="polite">
-      <JzIcon
-        icon="CircleNotch"
-        weight="regular"
-        size="small"
-        spin
-        aria-hidden
-      />
-      <JzText variant="caption" color="muted" label="Loading job posting" />
+      {bindStages.length === 0 ? (
+        <>
+          <JzIcon
+            icon="CircleNotch"
+            weight="regular"
+            size="small"
+            spin
+            aria-hidden
+          />
+          <JzText variant="caption" color="muted" label="Loading job posting" />
+        </>
+      ) : (
+        <ul className={styles.stageList}>
+          {bindStages.map((stage) => {
+            const name = BIND_STAGE_LABEL[stage.stage];
+            const done = stage.status === "done";
+            return (
+              <li key={stage.stage} className={styles.stageRow}>
+                <span className={styles.stageMark}>
+                  {done ? null : (
+                    <JzIcon
+                      icon="CircleNotch"
+                      weight="regular"
+                      size="small"
+                      spin
+                      aria-hidden
+                    />
+                  )}
+                </span>
+                <JzText
+                  variant="caption"
+                  color="muted"
+                  label={
+                    done
+                      ? `${name} done${stage.ms != null ? ` · ${formatStageSeconds(stage.ms)}` : ""}`
+                      : name
+                  }
+                />
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 }
@@ -420,7 +467,7 @@ function BoundPanel({ data }: { data: JobPostingPanelData }) {
         />
         <JzText
           level={2}
-          variant="title"
+          variant="heading"
           title={data.title}
           className={styles.title}
         >
@@ -460,12 +507,6 @@ function PanelChrome({ children }: { children: ReactNode }) {
           color="muted"
           label="Job posting"
           className={styles.eyebrow}
-        />
-        <JzText
-          level={2}
-          variant="title"
-          label="No posting bound"
-          className={styles.title}
         />
       </EvidencePageHeader>
       <div

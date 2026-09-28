@@ -717,3 +717,31 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 #### Next
 
 - Reprocess a saved posting so matchGraph is stored and the hub lines use those edges
+
+### [2026-09-27T19:38:18-0500]
+
+#### Summary
+
+- Debug scoring ranks by a mix of average tag strength and how many lines or projects are hit, and the project table lists every catalog project, including zeros. Home uses that same mix for the top three.
+
+#### Changes
+
+- Evidence / records: matching engine notes still describe an axis bonus; the scoring constant is 0
+- Skills / tooling: none
+- Other: debug tables (tags, average, lines, final), directional job-post and resume percents, rescore-and-save, home top three by the final mix, row hover outline, focus brief
+
+#### Decisions
+
+- Ownership, scope, and delivery stage add 0 points so tags lead
+- Final is 60% average against the best average on the posting plus 40% coverage against the most lines or projects
+- Job post percent is how well the resume attends to each project-scoped line, with the best hit capped at a full line of 30
+- The first column includes every catalog project, including score 0
+
+#### Plans cached
+
+- focus_brief_paragraph_0a636a69.plan.md
+
+#### Next
+
+- Rescore and save so the home page reads a stored graph that matches the debug ranking
+- Job post percent still ignores how many projects hit a line

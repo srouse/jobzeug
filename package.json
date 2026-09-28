@@ -19,7 +19,7 @@
     "contentful:compress": "node scripts/contentful/compress.mjs",
     "contentful:apply": "node scripts/contentful/apply.mjs",
     "contentful:push": "node scripts/contentful/push.mjs",
-    "test:matching": "node --test scripts/contentful/matching.test.mjs && tsx --test scripts/matching/score.test.mjs scripts/matching/fit.test.mjs scripts/matching/map-line-gate.test.mjs scripts/matching/connection-targets.test.mjs scripts/job-posting/structure-schema.test.mjs"
+    "test:matching": "node --test scripts/contentful/matching.test.mjs && tsx --test scripts/matching/score.test.mjs scripts/matching/fit.test.mjs scripts/matching/home-coverage.test.mjs scripts/matching/map-line-gate.test.mjs scripts/matching/connection-targets.test.mjs scripts/job-posting/structure-schema.test.mjs"
   },
   "dependencies": {
     "@ai-sdk/react": "^4.0.110",

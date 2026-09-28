@@ -7,7 +7,7 @@
 @property --resume-page-pad-inline {
   syntax: "<length>";
   inherits: true;
-  initial-value: 40px;
+  initial-value: 26px;
 }
 
 .root {
@@ -25,12 +25,12 @@
   --resume-header-height: 6rem;
   /* Minimum center gutter when columns are squeezed */
   --resume-lane-gutter: var(--jz-semantic-space-gap-lg, 1.5rem);
-  /* Fixed reading-width cap for both pages at every breakpoint (~10% under 32rem) */
-  --resume-column-max: 28.8rem;
+  /* Fixed reading-width cap for both pages at every breakpoint (~10% under 32rem, then 40px tighter) */
+  --resume-column-max: calc(28.8rem - 40px);
   /* Allow columns to flex ~100px under the cap before the center eats space */
   --resume-column-min: calc(var(--resume-column-max) - 100px);
   /* Horizontal padding inside the resume / job-posting page surfaces */
-  --resume-page-pad-inline: 40px;
+  --resume-page-pad-inline: 26px;
   /* Gap between answer stage and each column edge (flush = 0) */
   --answer-gap: 0px;
   /* Vertical breathing room below headers / above toolbar (unused; stage is full-bleed) */
@@ -68,10 +68,10 @@
 }
 
 /*
- * Wide (≥1400): leftRail / paneHost use display:contents so resume + job
+ * Wide (≥1300): leftRail / paneHost use display:contents so resume + job
  * become direct grid children in columns 1 and 3.
  */
-@media (min-width: 1400px) {
+@media (min-width: 1300px) {
   .innerBound {
     padding-inline: 0;
     display: grid;
@@ -114,9 +114,9 @@
 }
 
 /*
- * Medium (900–1399): stacked pages in a left rail + free lane for stage.
+ * Medium (900–1299): stacked pages in a left rail + free lane for stage.
  */
-@media (min-width: 900px) and (max-width: 1399px) {
+@media (min-width: 900px) and (max-width: 1299px) {
   .innerBound {
     padding-inline: 0;
     display: grid;
@@ -159,6 +159,7 @@
 
   .pageTabs {
     display: block;
+    border-top-color: var(--jz-semantic-color-border-subtle);
   }
 }
 

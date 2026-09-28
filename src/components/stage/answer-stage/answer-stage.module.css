@@ -15,20 +15,20 @@
   display: flex;
   flex-direction: column;
   min-height: 0;
-  /*
-   * Fill the center gutter flush to the resume / job-posting page edges.
-   */
-  width: calc(
-    max(
-      0px,
+  /* 20px clear of each page edge. */
+  width: max(
+    0px,
+    calc(
       max(
         var(--resume-lane-gutter, 1.5rem),
-        100vw - 2 * var(--resume-column-max, 28.8rem)
-      )
+        100vw - 2 * var(--resume-column-max, calc(28.8rem - 40px))
+      ) - 40px
     )
   );
   height: 100%;
   max-height: 100%;
+  max-width: 900px;
+  position: relative;
   overflow: hidden;
   box-sizing: border-box;
   border-radius: 0;
@@ -38,17 +38,120 @@
   transition: width 320ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.stageTools {
+  position: absolute;
+  z-index: 1;
+  bottom: var(--jz-semantic-space-padding-lg, 1.5rem);
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--jz-semantic-space-gap-xs, 0.25rem);
+  pointer-events: none;
+}
+
+.stageTools > * {
+  pointer-events: auto;
+}
+
+.card[data-answer-off] .hub {
+  flex: 1 1 0;
+  border-bottom: none;
+}
+
 .hub {
-  flex: 0 1 auto;
-  max-height: 42%;
+  flex: 3 1 0;
   min-height: 0;
   overflow: auto;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
-  padding: var(--jz-semantic-space-padding-lg, 1.5rem);
+  justify-content: safe center;
+  gap: var(--jz-semantic-space-gap-md, 1rem);
+  padding-top: var(--jz-semantic-space-padding-lg, 1.5rem);
+  padding-bottom: 6.5rem;
+  padding-inline: var(--jz-semantic-space-padding-lg, 1.5rem);
   border-bottom: 1px solid var(--jz-semantic-color-border-subtle);
+}
+
+.home {
+  width: 100%;
+  max-width: 600px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--jz-semantic-space-gap-md, 1rem);
+}
+
+.homeFits {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.homeFit {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--jz-semantic-space-gap-2xs, 0.25rem);
+  padding-inline: var(--jz-semantic-space-padding-md, 1rem);
+}
+
+.homeFit + .homeFit {
+  border-left: 1px solid var(--jz-semantic-color-border-subtle);
+}
+
+.homeProjects {
+  display: flex;
+  flex-direction: column;
+  gap: var(--jz-semantic-space-gap-xs, 0.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.homeProject {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.hubLead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+}
+
+.hubHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+}
+
+.hubTitle {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.hubLink {
+  flex: 0 0 auto;
 }
 
 .hubActions {
@@ -58,8 +161,57 @@
   gap: var(--jz-semantic-space-gap-sm, 0.75rem);
 }
 
+.connectionBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--jz-semantic-space-gap-xs, 0.5rem);
+}
+
+.briefLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 4.5rem;
+  width: 100%;
+}
+
+.briefReveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 320ms ease;
+}
+
+.briefReveal[data-open] {
+  grid-template-rows: 1fr;
+}
+
+.briefRevealInner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .briefReveal {
+    transition: none;
+  }
+}
+
+.connections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--jz-semantic-space-gap-2xs, 0.25rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.connectionName {
+  display: block;
+  margin: 0;
+}
+
 .answer {
-  flex: 1 1 auto;
+  flex: 1 1 0;
   min-height: 0;
   display: flex;
   flex-direction: column;
@@ -76,25 +228,33 @@
   padding: var(--jz-semantic-space-padding-xl, 2rem)
     var(--jz-semantic-space-padding-lg, 1.5rem);
   background: var(--jz-semantic-color-background-surface-default, #ffffff);
+}
+
+.body,
+.hub {
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
 }
 
-.body::-webkit-scrollbar {
+.body::-webkit-scrollbar,
+.hub::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
 
-.body::-webkit-scrollbar-track {
+.body::-webkit-scrollbar-track,
+.hub::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.body::-webkit-scrollbar-thumb {
+.body::-webkit-scrollbar-thumb,
+.hub::-webkit-scrollbar-thumb {
   background-color: transparent;
   border-radius: var(--jz-primitive-radius-full, 999px);
 }
 
-.body[data-scrolling] {
+.body[data-scrolling],
+.hub[data-scrolling] {
   scrollbar-color: color-mix(
       in srgb,
       var(--jz-semantic-color-text-muted, #737373) 22%,
@@ -103,7 +263,8 @@
     transparent;
 }
 
-.body[data-scrolling]::-webkit-scrollbar-thumb {
+.body[data-scrolling]::-webkit-scrollbar-thumb,
+.hub[data-scrolling]::-webkit-scrollbar-thumb {
   background-color: color-mix(
     in srgb,
     var(--jz-semantic-color-text-muted, #737373) 22%,
@@ -111,7 +272,8 @@
   );
 }
 
-.body[data-scrolling]::-webkit-scrollbar-thumb:hover {
+.body[data-scrolling]::-webkit-scrollbar-thumb:hover,
+.hub[data-scrolling]::-webkit-scrollbar-thumb:hover {
   background-color: color-mix(
     in srgb,
     var(--jz-semantic-color-text-muted, #737373) 36%,
@@ -230,13 +392,14 @@
 }
 
 @media (min-width: 900px) {
+  .hub,
+  .body,
+  .composerBar {
+    padding-inline: 100px;
+  }
+
   .body {
-    padding: var(--jz-semantic-space-padding-2xl, 3rem)
-      clamp(
-        var(--jz-semantic-space-padding-xl, 2rem),
-        6vw,
-        4.5rem
-      );
+    padding-block: var(--jz-semantic-space-padding-2xl, 3rem);
   }
 
   .stack {
@@ -244,16 +407,16 @@
   }
 }
 
-@media (min-width: 900px) and (max-width: 1399px) {
+@media (min-width: 900px) and (max-width: 1299px) {
   /* Sit in the free lane beside the left evidence rail. */
   .stage {
-    left: min(var(--resume-column-max, 28.8rem), 50vw);
+    left: min(var(--resume-column-max, calc(28.8rem - 40px)), 50vw);
     right: 0;
-    justify-content: stretch;
+    justify-content: flex-end;
   }
 
   .card {
-    width: 100%;
+    width: calc(100% - 20px);
   }
 }
 

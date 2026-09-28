@@ -14,17 +14,97 @@ import type { JobPostingPanelData } from "@/lib/job-posting/schema";
 
 type BindInput = { url: string } | { entryId: string };
 
+export type BindStageName = "scraping" | "structuring" | "matching" | "saving";
+
+export type BindStage = {
+  stage: BindStageName;
+  status: "working" | "done";
+  ms?: number;
+};
+
 type JobPostingContextValue = {
   data: JobPostingPanelData | null;
   loading: boolean;
   busy: boolean;
   error: string | null;
+  bindStages: BindStage[];
   refresh: () => Promise<void>;
   bind: (input: BindInput) => Promise<void>;
   unbind: () => Promise<void>;
 };
 
 const JobPostingContext = createContext<JobPostingContextValue | null>(null);
+
+const BIND_STAGE_NAMES = new Set<BindStageName>([
+  "scraping",
+  "structuring",
+  "matching",
+  "saving",
+]);
+
+function isBindStageName(value: unknown): value is BindStageName {
+  return typeof value === "string" && BIND_STAGE_NAMES.has(value as BindStageName);
+}
+
+/** Read the bind response line by line. Stage lines update the list; the last line is the posting. */
+async function readBindStream(
+  res: Response,
+  onStage: (update: (current: BindStage[]) => BindStage[]) => void,
+): Promise<unknown> {
+  const reader = res.body?.getReader();
+  if (!reader) throw new Error("Bind returned an empty response");
+  const decoder = new TextDecoder();
+  let buffer = "";
+  let posting: unknown = null;
+
+  const take = (line: string) => {
+    if (!line.trim()) return;
+    const event = JSON.parse(line) as {
+      stage?: unknown;
+      status?: unknown;
+      ms?: unknown;
+      error?: unknown;
+      posting?: unknown;
+    };
+    if (typeof event.error === "string" && event.error) {
+      throw new Error(event.error);
+    }
+    if (event.status === "result") {
+      posting = event.posting;
+      return;
+    }
+    if (!isBindStageName(event.stage)) return;
+    if (event.status !== "working" && event.status !== "done") return;
+    const row: BindStage = {
+      stage: event.stage,
+      status: event.status,
+      ...(typeof event.ms === "number" ? { ms: event.ms } : {}),
+    };
+    onStage((current) => {
+      const index = current.findIndex((item) => item.stage === row.stage);
+      if (index === -1) return [...current, row];
+      const next = current.slice();
+      next[index] = row;
+      return next;
+    });
+  };
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      buffer += decoder.decode(value, { stream: !done });
+      const lines = buffer.split("\n");
+      buffer = lines.pop() ?? "";
+      for (const line of lines) take(line);
+      if (done) break;
+    }
+    if (buffer.trim()) take(buffer);
+  } finally {
+    reader.releaseLock();
+  }
+  if (posting == null) throw new Error("Bind finished without a posting");
+  return posting;
+}
 
 function parsePanelPayload(raw: unknown): JobPostingPanelData | null {
   if (!raw || typeof raw !== "object") return null;
@@ -63,6 +143,7 @@ export function JobPostingProvider({
   const [data, setData] = useState<JobPostingPanelData | null>(null);
   const [loading, setLoading] = useState(Boolean(entryId));
   const [busy, setBusy] = useState(false);
+  const [bindStages, setBindStages] = useState<BindStage[]>([]);
   const [error, setError] = useState<string | null>(null);
   const dataRef = useRef<JobPostingPanelData | null>(null);
   dataRef.current = data;
@@ -131,6 +212,7 @@ export function JobPostingProvider({
 
       const previous = dataRef.current;
       setBusy(true);
+      setBindStages([]);
       setError(null);
       setData(null);
       try {
@@ -139,17 +221,18 @@ export function JobPostingProvider({
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ url }),
         });
-        const body = await res.json();
         if (!res.ok) {
-          throw new Error(
-            (body as { error?: string }).error ?? `Bind failed (${res.status})`,
-          );
+          const body = (await res.json()) as { error?: string };
+          throw new Error(body.error ?? `Bind failed (${res.status})`);
         }
-        const panel = parsePanelPayload(body);
+        const posting = await readBindStream(res, setBindStages);
+        const panel = parsePanelPayload(posting);
         const publishedId =
           panel?.entryId ??
-          (typeof (body as { entryId?: unknown }).entryId === "string"
-            ? (body as { entryId: string }).entryId
+          (posting &&
+          typeof posting === "object" &&
+          typeof (posting as { entryId?: unknown }).entryId === "string"
+            ? (posting as { entryId: string }).entryId
             : null);
         if (!publishedId) {
           throw new Error("Bind succeeded without an entry id");
@@ -162,6 +245,7 @@ export function JobPostingProvider({
         throw err;
       } finally {
         setBusy(false);
+        setBindStages([]);
       }
     },
     [navigateEntryId],
@@ -179,11 +263,12 @@ export function JobPostingProvider({
       loading,
       busy,
       error,
+      bindStages,
       refresh,
       bind,
       unbind,
     }),
-    [data, loading, busy, error, refresh, bind, unbind],
+    [data, loading, busy, error, bindStages, refresh, bind, unbind],
   );
 
   return (

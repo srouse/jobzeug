@@ -7,8 +7,34 @@
   overflow: visible;
 }
 
+.line,
+.lineDimmed {
+  transition: stroke 700ms ease-in-out;
+}
+
+.dot,
+.dotDimmed {
+  transition: fill 700ms ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line,
+  .lineDimmed,
+  .dot,
+  .dotDimmed {
+    transition: none;
+  }
+}
+
 .line {
   stroke: var(--jz-semantic-color-border-brand-strong, #2563eb);
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.lineSubject {
+  stroke: var(--jz-semantic-color-brand-secondary);
   stroke-width: 2px;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -23,6 +49,11 @@
 
 .dot {
   fill: var(--jz-semantic-color-border-brand-strong, #2563eb);
+  stroke: none;
+}
+
+.dotSubject {
+  fill: var(--jz-semantic-color-brand-secondary);
   stroke: none;
 }
 

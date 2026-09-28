@@ -106,6 +106,9 @@ export const definitions = {
     matchingSnapshot: object(matchingSnapshotSchema),
     matchGraph: object(matchGraphSchema),
   } },
+  focusBrief: { name: 'Focus Brief', displayField: 'paragraph', fields: {
+    paragraph: prose(true),
+  } },
 };
 export const typeId = kind => `jobzeug${kind[0].toUpperCase()}${kind.slice(1)}`;
 export const entryId = key => `jz-${key}`;
@@ -113,7 +116,7 @@ export const entryId = key => `jz-${key}`;
 export const coreKinds = ['employer', 'role', 'matchingVocabulary', 'project', 'projectPresentation'];
 export const outputDirectory = kind => kind === 'matchingVocabulary' ? 'matchingVocabularies' : `${kind}s`;
 /** Session job posting overlay — applied with core; not pushed from evidence/. */
-export const jobPostingKinds = ['jobLine', 'jobTool', 'jobPosting'];
+export const jobPostingKinds = ['jobLine', 'jobTool', 'jobPosting', 'focusBrief'];
 export const schemas = Object.fromEntries(Object.entries(definitions).map(([kind, definition]) => [kind,
   z.strictObject(Object.fromEntries(
     Object.entries(definition.fields)

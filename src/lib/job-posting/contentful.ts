@@ -1,4 +1,5 @@
 import { createClient, type PlainClientAPI } from "contentful-management";
+import { loadMatchingCatalog } from "@/lib/matching/catalog";
 import { scorePostingAgainstCatalog } from "@/lib/matching/score";
 import {
   matchGraphSchema,
@@ -293,6 +294,32 @@ export async function publishJobPostingTree(input: {
   );
 
   return { entryId: parentEntryId, postingId };
+}
+
+/** Rescore one posting from the published catalog and write `matchGraph` back. */
+export async function saveJobPostingMatchGraph(entryIdValue: string) {
+  const view = await loadJobPostingByEntryId(entryIdValue);
+  if (!view) throw new Error("Job posting not found");
+  if (!view.matchingSnapshot) {
+    throw new Error("Posting has no matching snapshot");
+  }
+  const graph = matchGraphSchema.parse(
+    scoreMatchGraph({
+      snapshot: view.matchingSnapshot,
+      lines: view.lines,
+      catalog: await loadMatchingCatalog(),
+    }),
+  );
+  const { space, environment, token, locale } = requireCmaEnv();
+  const client = getPlainClient(token);
+  await upsertAndPublish(
+    client,
+    { spaceId: space, environmentId: environment },
+    typeId("jobPosting"),
+    entryIdValue,
+    { matchGraph: localized(locale, graph) },
+  );
+  return graph;
 }
 
 export async function loadJobPostingByEntryId(

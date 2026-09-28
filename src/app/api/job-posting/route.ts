@@ -82,6 +82,19 @@ export async function GET(req: NextRequest) {
   }
 }
 
+const BIND_STAGES = ["scraping", "structuring", "matching", "saving"] as const;
+
+function ingestErrorStatus(message: string): number {
+  if (message.includes("FIRECRAWL") || message.includes("Firecrawl")) return 502;
+  if (
+    message.includes("Missing Contentful") ||
+    message.includes("matching vocabulary")
+  ) {
+    return 503;
+  }
+  return 500;
+}
+
 /** Scrape → structure → map requirements → Contentful (forward-only; no legacy remap). */
 export async function POST(req: NextRequest) {
   const session = await requireSiteSession();
@@ -95,50 +108,84 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid url" }, { status: 400 });
   }
 
-  try {
-    const fullText = await scrapeJobListingMarkdown(url);
-    const structured = await structureJobPosting({ sourceUrl: url, fullText });
+  const encoder = new TextEncoder();
+  const stream = new ReadableStream({
+    async start(controller) {
+      const write = (value: unknown) => {
+        controller.enqueue(encoder.encode(`${JSON.stringify(value)}\n`));
+      };
+      const stage = async <T>(name: (typeof BIND_STAGES)[number], work: () => Promise<T>) => {
+        write({ stage: name, status: "working" });
+        const started = performance.now();
+        try {
+          const result = await work();
+          write({
+            stage: name,
+            status: "done",
+            ms: Math.round(performance.now() - started),
+          });
+          return result;
+        } catch (error) {
+          const message =
+            error instanceof Error ? error.message : "Job posting ingest failed";
+          write({ error: message, status: ingestErrorStatus(message) });
+          throw error;
+        }
+      };
 
-    const catalog = await loadMatchingCatalog();
-    const vocabulary = pickApprovedVocabulary(catalog.vocabularies);
-    const matching = await mapJobPostingRequirements({
-      structured,
-      vocabulary,
-    });
-
-    const { entryId, postingId } = await publishJobPostingTree({
-      sourceUrl: url,
-      fullText,
-      structured,
-      matching: { ...matching, catalog },
-    });
-
-    const view = await loadJobPostingByEntryId(entryId);
-    return NextResponse.json(
-      view
-        ? { bound: true, ...toJobPostingPanelData(view) }
-        : {
-            bound: true,
-            entryId,
-            postingId,
+      try {
+        const fullText = await stage("scraping", () =>
+          scrapeJobListingMarkdown(url),
+        );
+        const structured = await stage("structuring", () =>
+          structureJobPosting({ sourceUrl: url, fullText }),
+        );
+        const matching = await stage("matching", async () => {
+          const catalog = await loadMatchingCatalog();
+          const vocabulary = pickApprovedVocabulary(catalog.vocabularies);
+          const mapped = await mapJobPostingRequirements({
+            structured,
+            vocabulary,
+          });
+          return { ...mapped, catalog };
+        });
+        const posting = await stage("saving", async () => {
+          const { entryId, postingId } = await publishJobPostingTree({
             sourceUrl: url,
-            company: structured.company,
-            title: structured.title,
             fullText,
-            lines: [],
-            tools: [],
-            matchingSnapshot: matching.snapshot,
-          },
-    );
-  } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Job posting ingest failed";
-    const status = message.includes("FIRECRAWL") || message.includes("Firecrawl")
-      ? 502
-      : message.includes("Missing Contentful") ||
-          message.includes("matching vocabulary")
-        ? 503
-        : 500;
-    return NextResponse.json({ error: message }, { status });
-  }
+            structured,
+            matching,
+          });
+          const view = await loadJobPostingByEntryId(entryId);
+          return view
+            ? { bound: true, ...toJobPostingPanelData(view) }
+            : {
+                bound: true,
+                entryId,
+                postingId,
+                sourceUrl: url,
+                company: structured.company,
+                title: structured.title,
+                fullText,
+                lines: [],
+                tools: [],
+                matchingSnapshot: matching.snapshot,
+              };
+        });
+        write({ status: "result", posting });
+      } catch {
+        // The failing stage already wrote the error line.
+      } finally {
+        controller.close();
+      }
+    },
+  });
+
+  return new Response(stream, {
+    headers: {
+      "Content-Type": "application/x-ndjson; charset=utf-8",
+      "Cache-Control": "no-cache, no-transform",
+      "X-Accel-Buffering": "no",
+    },
+  });
 }

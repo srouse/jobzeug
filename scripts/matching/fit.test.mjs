@@ -52,9 +52,9 @@ test('job post fit is zero with no overlap and never exceeds the ceiling', () =>
     { points: CONCEPT_HIT_POINTS, projectIds: ['S1'] },
     { points: AXIS_HIT_POINTS, projectIds: ['S2'] },
   ]);
-  assert.equal(split.bestProjectPoints, AXIS_HIT_POINTS);
-  assert.equal(split.sharedPoints, CONCEPT_HIT_POINTS / 2);
-  assert.equal(split.score, AXIS_HIT_POINTS + CONCEPT_HIT_POINTS / 2);
+  assert.equal(split.bestProjectPoints, CONCEPT_HIT_POINTS);
+  assert.equal(split.sharedPoints, Math.floor(AXIS_HIT_POINTS / 2));
+  assert.equal(split.score, CONCEPT_HIT_POINTS + Math.floor(AXIS_HIT_POINTS / 2));
   assert.ok(split.score < split.ceiling);
 });
 

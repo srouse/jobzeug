@@ -98,6 +98,8 @@ function ResumePageBody({
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [chatOpen, setChatOpen] = useState(false);
+  /** Chat button and dock. Off until that entry comes back. */
+  const showResumeChat = false;
   const [designOpen, setDesignOpen] = useState(false);
   const [wide, setWide] = useState(true);
   const [mobile, setMobile] = useState(false);
@@ -223,7 +225,6 @@ function ResumePageBody({
                   error={error}
                   projectId={projectId}
                   onProjectIdChange={onProjectIdChange}
-                  onOpenDesign={() => setDesignOpen(true)}
                 />
               </div>
               <div
@@ -251,6 +252,7 @@ function ResumePageBody({
         hidden={!stageVisible}
         resume={resume}
         onViewProject={onProjectIdChange}
+        onOpenDesign={() => setDesignOpen(true)}
       />
       <EvidenceTabBar
         className={styles.mobileTabBar}
@@ -261,16 +263,20 @@ function ResumePageBody({
         onSelect={selectPage}
       />
       <DesignModal open={designOpen} onOpenChange={setDesignOpen} />
-      <JzButton
-        variant={chatOpen ? "secondary" : "primary"}
-        size="small"
-        label={chatOpen ? "Close chat" : "Chat"}
-        showIcon={false}
-        className={styles.chatFab}
-        onClick={() => setChatOpen((value) => !value)}
-        aria-pressed={chatOpen}
-      />
-      <ResumeChatDock open={chatOpen} onOpenChange={setChatOpen} />
+      {showResumeChat ? (
+        <>
+          <JzButton
+            variant={chatOpen ? "secondary" : "primary"}
+            size="small"
+            label={chatOpen ? "Close chat" : "Chat"}
+            showIcon={false}
+            className={styles.chatFab}
+            onClick={() => setChatOpen((value) => !value)}
+            aria-pressed={chatOpen}
+          />
+          <ResumeChatDock open={chatOpen} onOpenChange={setChatOpen} />
+        </>
+      ) : null}
     </main>
   );
 }

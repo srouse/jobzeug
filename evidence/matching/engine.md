@@ -92,9 +92,9 @@ Scoring is **additive** (engine v2). Constraints never veto a concept overlap; t
 | Hit | Points | Rule |
 |---|---|---|
 | Exact concept overlap | +10 each | Shared approved vocabulary id between the job line (`concept_ids` / tool ids) and a claim |
-| Ownership align | +12 | Job line lists a real `constraints.ownership` value and the claim’s ownership is that value |
-| Scope align | +12 | Same for `constraints.scope` |
-| Delivery stage align | +12 | Same for `constraints.delivery_stage` |
+| Ownership align | +2 | Job line lists a real `constraints.ownership` value and the claim’s ownership is that value |
+| Scope align | +2 | Same for `constraints.scope` |
+| Delivery stage align | +2 | Same for `constraints.delivery_stage` |
 | Empty or placeholder axis | 0 | Empty lists, and values `unknown`, `null`, or blank, are ignored — not a filter and not a hit |
 
 Broader/narrower hierarchy, aliases, and keyword similarity do **not** add points in v2. Inferred claims never score. For each project×line, keep the **best claim** (highest points). Do not sum multiple claims for the same line. Do not combine evidence across different projects for individual project scores.
@@ -105,13 +105,13 @@ Unmapped / empty-concept lines contribute zero and appear in `unmappedJobLineEnt
 
 Sort on unrounded score descending, then project ID ascending for reproducible ties. Do not add hidden employer prestige, recency, evidence length, tag count, or general project importance bonuses.
 
-Example: two lines each with one exact concept hit and no constraint bonuses → score `20`. One line with two concept overlaps plus matching ownership → score `20 + 12 = 32`. These totals are relative relationship strength for one posting; do not compare them as universal project quality across postings.
+Example: two lines each with one exact concept hit and no constraint bonuses → score `20`. One line with two concept overlaps plus matching ownership → score `20 + 2 = 22`. These totals are relative relationship strength for one posting; do not compare them as universal project quality across postings.
 
 ## Job post fit, resume fit, and job relevancy
 
 These three numbers are separate from `score(project)`. They do not change project ranking.
 
-**Job post fit** asks how much of the posting the resume covers. A box is one concept on a project-scoped line (10) or one set ownership, scope, or stage axis on that line (12). The ceiling is every box at full value, which is one project that hits all of them. Boxes the strongest project checks count in full. Boxes only other projects check count at half. The total never exceeds the ceiling.
+**Job post fit** asks how much of the posting the resume covers. A box is one concept on a project-scoped line (10) or one set ownership, scope, or stage axis on that line (2). The ceiling is every box at full value, which is one project that hits all of them. Boxes the strongest project checks count in full. Boxes only other projects check count at half. The total never exceeds the ceiling.
 
 **Resume fit** asks how much of the resume the posting lands on. A box is one concept on one scorable claim (10). Repeating that concept on another claim adds another box, so more projects in this kind of work raise the score. The ceiling is every claim concept on the resume. A box counts in full when any project-scoped line lists that concept. A posting with no shared concepts scores 0 against the same ceiling.
 

@@ -7,6 +7,7 @@ import { jobPostingStructurerAgent } from "./agents/job-posting-structurer";
 import { jobPostingRequirementMapperAgent } from "./agents/job-posting-requirement-mapper";
 import { jobzeugThemeOutlineAgent } from "./agents/jobzeug-theme-outline";
 import { jobzeugThemeWriterAgent } from "./agents/jobzeug-theme-writer";
+import { jobzeugFocusBriefAgent } from "./agents/jobzeug-focus-brief";
 import { mapJobPostingLinesWorkflow } from "./workflows/map-job-posting-lines";
 import { storage } from "./storage";
 import { ensureEvidenceWorkspace } from "./workspace";
@@ -23,6 +24,7 @@ export const mastra = new Mastra({
     jobPostingRequirementMapperAgent,
     jobzeugThemeOutlineAgent,
     jobzeugThemeWriterAgent,
+    jobzeugFocusBriefAgent,
   },
   workflows: {
     mapJobPostingLinesWorkflow,

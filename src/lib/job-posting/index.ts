@@ -10,6 +10,7 @@ export {
 } from "./map-requirements";
 export {
   publishJobPostingTree,
+  saveJobPostingMatchGraph,
   loadJobPostingByEntryId,
   formatJobPostingContext,
 } from "./contentful";

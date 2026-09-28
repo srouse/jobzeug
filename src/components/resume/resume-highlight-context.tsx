@@ -31,7 +31,7 @@ export type EvidencePage = "resume" | "job" | "stage";
 export type { AskContextItem, AskContextSource };
 
 /** Wide three-column layout at/above this width. */
-export const LAYOUT_WIDE_MIN_PX = 1400;
+export const LAYOUT_WIDE_MIN_PX = 1300;
 /** Medium left-rail + stage; below this is mobile with three-way tabs. */
 export const LAYOUT_MEDIUM_MIN_PX = 900;
 
@@ -59,6 +59,8 @@ type ResumeHighlightContextValue = {
   lineFocus: LineFocus | null;
   /** Select a project or job line. The same row again clears it. */
   selectLine: (next: { kind: "project" | "jobLine"; id: string }) => void;
+  /** Return the stage to the home landing. */
+  clearLineFocus: () => void;
   /** Hand the lines to the current AI result. */
   focusAnswer: () => void;
   density: ResumeDensity;
@@ -85,7 +87,7 @@ export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
   const [activeCluster, setActiveClusterState] =
     useState<EvidenceCluster | null>(null);
   const [focusedSectionId, setFocusedSectionId] = useState<string | null>(null);
-  const [density, setDensity] = useState<ResumeDensity>("rolled");
+  const [density, setDensity] = useState<ResumeDensity>("full");
   const [evidencePage, setEvidencePage] = useState<EvidencePage>(() => {
     if (
       typeof window !== "undefined" &&
@@ -115,6 +117,10 @@ export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
     },
     [],
   );
+
+  const clearLineFocus = useCallback(() => {
+    setLineFocus(null);
+  }, []);
 
   const focusAnswer = useCallback(() => {
     setLineFocus({ kind: "answer" });
@@ -216,6 +222,7 @@ export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
       focusedIds,
       lineFocus,
       selectLine,
+      clearLineFocus,
       focusAnswer,
       density,
       setDensity,
@@ -235,6 +242,7 @@ export function ResumeHighlightProvider({ children }: { children: ReactNode }) {
     askContextItems,
     lineFocus,
     selectLine,
+    clearLineFocus,
     focusAnswer,
     setActiveCluster,
     clearActiveCluster,

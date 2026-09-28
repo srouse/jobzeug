@@ -21,13 +21,13 @@ test("a project focus keeps its four highest job lines blue", () => {
     {
       hub: "selection",
       ids: [
-        { id: "S001", strength: "primary" },
-        { id: "jz-line-1", strength: "primary" },
-        { id: "jz-line-2", strength: "primary" },
-        { id: "jz-line-3", strength: "primary" },
-        { id: "jz-line-4", strength: "primary" },
-        { id: "jz-line-5", strength: "secondary" },
-        { id: "jz-line-6", strength: "secondary" },
+        { id: "S001", role: "subject", strength: "primary" },
+        { id: "jz-line-1", role: "reference", strength: "primary" },
+        { id: "jz-line-2", role: "reference", strength: "primary" },
+        { id: "jz-line-3", role: "reference", strength: "primary" },
+        { id: "jz-line-4", role: "reference", strength: "primary" },
+        { id: "jz-line-5", role: "reference", strength: "secondary" },
+        { id: "jz-line-6", role: "reference", strength: "secondary" },
       ],
     },
   );
@@ -44,12 +44,12 @@ test("a job-line focus keeps its four highest projects blue", () => {
     {
       hub: "selection",
       ids: [
-        { id: "jz-line-1", strength: "primary" },
-        { id: "S001", strength: "primary" },
-        { id: "S002", strength: "primary" },
-        { id: "S003", strength: "primary" },
-        { id: "S004", strength: "primary" },
-        { id: "S005", strength: "secondary" },
+        { id: "jz-line-1", role: "subject", strength: "primary" },
+        { id: "S001", role: "reference", strength: "primary" },
+        { id: "S002", role: "reference", strength: "primary" },
+        { id: "S003", role: "reference", strength: "primary" },
+        { id: "S004", role: "reference", strength: "primary" },
+        { id: "S005", role: "reference", strength: "secondary" },
       ],
     },
   );
@@ -61,8 +61,8 @@ test("an AI result is the only driver, and it meets the answer card", () => {
     {
       hub: "answer",
       ids: [
-        { id: "S003", strength: "primary" },
-        { id: "jz-line-2", strength: "primary" },
+        { id: "S003", role: "reference", strength: "primary" },
+        { id: "jz-line-2", role: "reference", strength: "primary" },
       ],
     },
   );
@@ -75,6 +75,50 @@ test("hiding answer bindings draws nothing while an AI result is focused", () =>
   );
 });
 
+test("a focus draws at most ten lines and drops the lowest scores", () => {
+  const many = [
+    { projectId: "S001", lineEntryId: "jz-low", points: 1 },
+    ...Array.from({ length: 10 }, (_, index) => ({
+      projectId: "S001",
+      lineEntryId: `jz-mid-${index + 1}`,
+      points: 20 + index,
+    })),
+    { projectId: "S001", lineEntryId: "jz-high", points: 90 },
+  ];
+  const target = activeConnectionTarget(
+    { kind: "project", id: "S001" },
+    many,
+    [],
+    true,
+  );
+  assert.equal(target.ids.length, 10);
+  assert.equal(target.ids[0].role, "subject");
+  assert.equal(
+    target.ids.some((endpoint) => endpoint.id === "jz-high"),
+    true,
+  );
+  assert.equal(
+    target.ids.some((endpoint) => endpoint.id === "jz-low"),
+    false,
+  );
+  assert.equal(
+    target.ids.some((endpoint) => endpoint.id === "jz-mid-1"),
+    false,
+  );
+});
+
+test("an AI result stops after ten citations", () => {
+  const citations = Array.from({ length: 12 }, (_, index) => `S${index + 1}`);
+  const target = activeConnectionTarget(
+    { kind: "answer" },
+    [],
+    citations,
+    true,
+  );
+  assert.equal(target.ids.length, 10);
+  assert.equal(target.ids.at(-1).id, "S10");
+});
+
 test("a posting with no saved edges still connects the clicked row", () => {
   assert.deepEqual(
     activeConnectionTarget(
@@ -83,6 +127,9 @@ test("a posting with no saved edges still connects the clicked row", () => {
       [],
       true,
     ),
-    { hub: "selection", ids: [{ id: "jz-line-9", strength: "primary" }] },
+    {
+      hub: "selection",
+      ids: [{ id: "jz-line-9", role: "subject", strength: "primary" }],
+    },
   );
 });

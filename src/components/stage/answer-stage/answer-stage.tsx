@@ -13,8 +13,12 @@ import type { AnswerSection } from "@/lib/themed-answer";
 import { AnswerStageBody } from "./answer-stage-body";
 import { AnswerStageFooter } from "./answer-stage-footer";
 import { ConnectionHub } from "./connection-hub";
+import { StageTools } from "./stage-tools";
 import styles from "./answer-stage.module.css";
 import type { ResumeViewModel } from "@/lib/contentful/resume-model";
+
+/** Question, answer, and composer. Off until that area comes back. */
+const SHOW_STAGE_ANSWER = false;
 
 /**
  * Fixed center stage: body (question + answer) and optional pre-ask composer.
@@ -23,11 +27,13 @@ export function AnswerStage({
   hidden = false,
   resume = null,
   onViewProject,
+  onOpenDesign,
 }: {
   hidden?: boolean;
   /** Already-loaded resume — used to label cited projects (no extra fetch). */
   resume?: ResumeViewModel | null;
   onViewProject: (projectId: string) => void;
+  onOpenDesign?: () => void;
 }) {
   const [input, setInput] = useState("");
   const {
@@ -104,8 +110,14 @@ export function AnswerStage({
       hidden={hidden || undefined}
       inert={hidden || undefined}
     >
-      <article className={styles.card} data-answer-stage-card>
+      <article
+        className={styles.card}
+        data-answer-stage-card
+        data-answer-off={SHOW_STAGE_ANSWER ? undefined : ""}
+      >
+        <StageTools onOpenDesign={onOpenDesign} />
         <ConnectionHub resume={resume} onViewProject={onViewProject} />
+        {SHOW_STAGE_ANSWER ? (
         <div className={styles.answer}>
           <AnswerStageBody
           showLoading={showLoading}
@@ -145,6 +157,7 @@ export function AnswerStage({
           busy={busy}
           />
         </div>
+        ) : null}
       </article>
     </div>
   );

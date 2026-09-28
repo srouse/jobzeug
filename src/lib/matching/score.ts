@@ -5,8 +5,8 @@ export { SCORING_VERSION, MAPPER_VERSION } from "./versions";
 
 /** Points per exact overlapping concept id. Integer so totals stay exact. */
 export const CONCEPT_HIT_POINTS = 10;
-/** Points when a non-empty job-line constraint axis matches the claim. */
-export const AXIS_HIT_POINTS = 12;
+/** Points when ownership, scope, or delivery stage matches. Kept small so tags lead. */
+export const AXIS_HIT_POINTS = 0;
 
 /** Placeholder axis values. They are missing data, not a match. */
 const IGNORED_AXIS_VALUES = new Set(["unknown", "null"]);

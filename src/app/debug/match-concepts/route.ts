@@ -6,10 +6,10 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
-import { loadJobPostingByEntryId } from "@/lib/job-posting";
+import { loadJobPostingByEntryId, saveJobPostingMatchGraph } from "@/lib/job-posting";
 import { loadMatchingCatalog } from "@/lib/matching/catalog";
-import { computeFits, type JobPostFit, type JobRelevancy, type ResumeFit } from "@/lib/matching/fit";
-import { scorePostingAgainstCatalog } from "@/lib/matching/score";
+import { computeFits, FULL_CONCEPTS_PER_LINE, type JobPostFit, type JobRelevancy, type ResumeFit } from "@/lib/matching/fit";
+import { CONCEPT_HIT_POINTS, scorePostingAgainstCatalog } from "@/lib/matching/score";
 import { SESSION_COOKIE, getSessionId } from "@/lib/site-auth";
 
 const jobPostingEntryIdSchema = z
@@ -32,10 +32,20 @@ function fitMarkup(
   fit: JobPostFit | ResumeFit | JobRelevancy | null,
 ): string {
   if (!fit) {
-    return `<div class="fit"><div class="fit-label">${escapeHtml(label)}</div><div class="fit-score">—</div></div>`;
+    return `<div class="fit"><div class="fit-label">${escapeHtml(label)}</div><div class="fit-pct">—</div></div>`;
   }
   const pct = fit.ceiling > 0 ? Math.round((fit.score / fit.ceiling) * 100) : 0;
-  return `<div class="fit"><div class="fit-label">${escapeHtml(label)}</div><div class="fit-score">${escapeHtml(fit.score)} <span class="fit-pct">${escapeHtml(pct)}%</span></div><div class="fit-ceiling">of ${escapeHtml(fit.ceiling)}</div></div>`;
+  return `<div class="fit"><div class="fit-label">${escapeHtml(label)}</div><div class="fit-pct">${escapeHtml(pct)}%</div><div class="fit-ceiling">${escapeHtml(fit.score)} of ${escapeHtml(fit.ceiling)}</div></div>`;
+}
+
+function directionalFitMarkup(
+  label: string,
+  fit: { pct: number; detail: string } | null,
+): string {
+  if (!fit) {
+    return `<div class="fit"><div class="fit-label">${escapeHtml(label)}</div><div class="fit-pct">—</div></div>`;
+  }
+  return `<div class="fit"><div class="fit-label">${escapeHtml(label)}</div><div class="fit-pct">${escapeHtml(fit.pct)}%</div><div class="fit-ceiling">${escapeHtml(fit.detail)}</div></div>`;
 }
 
 function htmlResponse(body: string, status = 200) {
@@ -68,9 +78,6 @@ type DemoClaim = {
   id: string;
   statement?: string;
   concept_ids?: string[];
-  ownership?: string;
-  scope?: string;
-  delivery_stage?: string;
   provenance?: string;
   review?: { status?: string };
 };
@@ -84,17 +91,27 @@ function claimIsScorable(claim: DemoClaim) {
   );
 }
 
-function fmtList(values: string[]): string {
-  return values.length ? values.join(", ") : "—";
-}
+export async function POST(req: NextRequest) {
+  const session = await requireSiteSession();
+  if ("error" in session) return session.error;
 
-function attrList(rows: Array<{ label: string; value: string }>): string {
-  return `<ul class="attrs">${rows
-    .map(
-      (row) =>
-        `<li><strong>${escapeHtml(row.label)}</strong> ${escapeHtml(row.value)}</li>`,
-    )
-    .join("")}</ul>`;
+  const raw = req.nextUrl.searchParams.get("jobPostingEntryId");
+  const parsed = jobPostingEntryIdSchema.safeParse(raw ?? "");
+  if (!parsed.success) {
+    return NextResponse.json({ error: "jobPostingEntryId is required" }, { status: 400 });
+  }
+
+  try {
+    const graph = await saveJobPostingMatchGraph(parsed.data);
+    return NextResponse.json({
+      ok: true,
+      scoringVersion: graph.scoringVersion,
+      edges: graph.edges.length,
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Failed to save match graph";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }
 
 export async function GET(req: NextRequest) {
@@ -152,9 +169,34 @@ export async function GET(req: NextRequest) {
     }
 
     const pendingSet = new Set(catalog.pendingProjectIds ?? []);
-    const projects = [...catalog.projects.values()].sort((a, b) =>
-      a.project_id.localeCompare(b.project_id),
+    const scoreByProjectId = new Map(
+      scored.projects.map((project) => [project.projectId, project.score]),
     );
+    const projects = [...catalog.projects.values()].sort((a, b) => {
+      const aScore = scoreByProjectId.get(a.project_id);
+      const bScore = scoreByProjectId.get(b.project_id);
+      if (aScore == null && bScore == null) {
+        return a.project_id.localeCompare(b.project_id);
+      }
+      if (aScore == null) return 1;
+      if (bScore == null) return -1;
+      if (bScore !== aScore) return bScore - aScore;
+      return a.project_id.localeCompare(b.project_id);
+    });
+    const lineScore = (entryId: string) => {
+      const scoredLine = scored.jobLines.find(
+        (line) => line.lineEntryId === entryId,
+      );
+      return (scoredLine?.matchSummaries ?? []).reduce(
+        (sum, summary) => sum + summary.points,
+        0,
+      );
+    };
+    const rankedLines = [...view.lines].sort((a, b) => {
+      const diff = lineScore(b.entryId) - lineScore(a.entryId);
+      if (diff !== 0) return diff;
+      return a.entryId.localeCompare(b.entryId);
+    });
 
     const renderConcepts = (ids: string[]) => {
       if (!ids.length) return `<p class="empty">No concepts</p>`;
@@ -194,11 +236,6 @@ export async function GET(req: NextRequest) {
                 return `<div class="claim" data-claim-id="${escapeHtml(claim.id)}">
   <div class="claim-id"><code>${escapeHtml(claim.id)}</code> · ${escapeHtml(claim.review?.status ?? "?")}</div>
   <p class="statement">${escapeHtml(claim.statement ?? "")}</p>
-  ${attrList([
-    { label: "ownership", value: String(claim.ownership ?? "—") },
-    { label: "scope", value: String(claim.scope ?? "—") },
-    { label: "stage", value: String(claim.delivery_stage ?? "—") },
-  ])}
   ${renderConcepts(conceptIds)}
 </div>`;
               })
@@ -214,7 +251,7 @@ export async function GET(req: NextRequest) {
       })
       .join("\n");
 
-    const lineHtml = view.lines
+    const lineHtml = rankedLines
       .map((line) => {
         const req = line.matchingRequirement;
         const conceptIds = [
@@ -223,9 +260,6 @@ export async function GET(req: NextRequest) {
             ...(req?.constraints?.tool_concept_ids ?? []),
           ]),
         ].sort();
-        const ownership = req?.constraints?.ownership ?? [];
-        const scope = req?.constraints?.scope ?? [];
-        const stage = req?.constraints?.delivery_stage ?? [];
         const scoredLine = scored.jobLines.find(
           (j) => j.lineEntryId === line.entryId,
         );
@@ -240,24 +274,149 @@ export async function GET(req: NextRequest) {
     · <strong>${hitCount}</strong> project hit(s) — click to focus</p>
   <p class="statement">${escapeHtml(line.text)}</p>
   <div class="line-details">
-  ${attrList([
-    { label: "ownership", value: fmtList(ownership) },
-    { label: "scope", value: fmtList(scope) },
-    { label: "stage", value: fmtList(stage) },
-  ])}
   ${renderConcepts(conceptIds)}
   </div>
 </article>`;
       })
       .join("\n");
 
-    const rankingHtml = scored.projects
-      .filter((p) => p.score != null && p.score > 0)
-      .slice(0, 12)
-      .map(
-        (p) =>
-          `<li><code>${escapeHtml(p.projectId)}</code> ${escapeHtml(titleByProjectId.get(p.projectId) ?? "")} — <strong>${escapeHtml(p.score)}</strong></li>`,
+    const formatAverage = (values: number[]) => {
+      if (!values.length) return "—";
+      const value = values.reduce((sum, n) => sum + n, 0) / values.length;
+      const rounded = Math.round(value * 10) / 10;
+      return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
+    };
+    const scoredById = new Map(
+      scored.projects.map((project) => [project.projectId, project]),
+    );
+    const rankedProjects = projects.map((project) => {
+      const scoredRow = scoredById.get(project.project_id);
+      const hits = (scoredRow?.contributions ?? []).filter((c) => c.points > 0);
+      const points = hits.map((c) => c.points);
+      const average = points.length
+        ? points.reduce((sum, value) => sum + value, 0) / points.length
+        : 0;
+      return {
+        project: {
+          projectId: project.project_id,
+          score: scoredRow?.score ?? 0,
+        },
+        points,
+        average,
+        lines: hits.length,
+      };
+    });
+    const bestAverage = Math.max(0, ...rankedProjects.map((row) => row.average));
+    const mostLines = Math.max(0, ...rankedProjects.map((row) => row.lines));
+    const withFinal = rankedProjects
+      .map((row) => ({
+        ...row,
+        final:
+          (bestAverage > 0 ? 0.6 * (row.average / bestAverage) : 0) +
+          (mostLines > 0 ? 0.4 * (row.lines / mostLines) : 0),
+      }))
+      .sort(
+        (a, b) =>
+          b.final - a.final ||
+          a.project.projectId.localeCompare(b.project.projectId),
+      );
+    const fullLine = FULL_CONCEPTS_PER_LINE * CONCEPT_HIT_POINTS;
+    const share = (value: number, ceiling: number) =>
+      ceiling > 0 ? Math.min(1, value / ceiling) : 0;
+    const blend = (depth: number, breadth: number) => 0.6 * depth + 0.4 * breadth;
+    const postingLines = view.lines.filter(
+      (line) => line.matchingRequirement?.scope === "project",
+    );
+    const bestOnLine = (entryId: string) => {
+      const scoredLine = scored.jobLines.find((line) => line.lineEntryId === entryId);
+      const requirementId = scoredLine?.requirementId ?? entryId;
+      let best = 0;
+      for (const project of scored.projects) {
+        for (const contribution of project.contributions) {
+          if (contribution.requirementId === requirementId && contribution.points > best) {
+            best = contribution.points;
+          }
+        }
+      }
+      return Math.min(best, fullLine);
+    };
+    const jobPostFit = (() => {
+      if (postingLines.length === 0) return null;
+      const bestPoints = postingLines.map((line) => bestOnLine(line.entryId));
+      const attended = bestPoints.filter((points) => points > 0).length;
+      const mean = bestPoints.reduce((sum, points) => sum + points, 0) / bestPoints.length;
+      return {
+        pct: Math.round((mean / fullLine) * 100),
+        detail: `${formatAverage(bestPoints)} avg · ${attended} of ${postingLines.length}`,
+      };
+    })();
+    const resumeFit = (() => {
+      const resumeProjectCount = projects.length;
+      if (resumeProjectCount === 0) return null;
+      const depth =
+        rankedProjects.reduce((sum, row) => sum + row.average, 0) /
+        Math.max(1, rankedProjects.length);
+      const score = blend(
+        rankedProjects.length ? share(depth, fullLine) : 0,
+        share(rankedProjects.length, resumeProjectCount),
+      );
+      const depthLabel = rankedProjects.length
+        ? formatAverage(rankedProjects.map((row) => row.average))
+        : "0";
+      return {
+        pct: Math.round(score * 100),
+        detail: `${depthLabel} avg · ${rankedProjects.length} of ${resumeProjectCount}`,
+      };
+    })();
+    const rankingHtml = withFinal
+      .map((row) => {
+        return `<tr data-project-id="${escapeHtml(row.project.projectId)}"><td><code>${escapeHtml(row.project.projectId)}</code></td><td>${escapeHtml(titleByProjectId.get(row.project.projectId) ?? "")}</td><td class="num">${escapeHtml((row.project.score ?? 0) / CONCEPT_HIT_POINTS)}</td><td class="num">${escapeHtml(formatAverage(row.points.map((points) => points / CONCEPT_HIT_POINTS)))}</td><td class="num">${escapeHtml(row.lines)}</td><td class="num">${escapeHtml(row.final.toFixed(2))}</td></tr>`;
+      })
+      .join("");
+
+    const lineHitPoints = (entryId: string) => {
+      const scoredLine = scored.jobLines.find(
+        (line) => line.lineEntryId === entryId,
+      );
+      const requirementId = scoredLine?.requirementId ?? entryId;
+      const points: number[] = [];
+      for (const project of scored.projects) {
+        for (const contribution of project.contributions) {
+          if (
+            contribution.requirementId === requirementId &&
+            contribution.points > 0
+          ) {
+            points.push(contribution.points);
+          }
+        }
+      }
+      return points;
+    };
+    const lineRows = rankedLines.map((line) => {
+      const points = lineHitPoints(line.entryId);
+      const average = points.length
+        ? points.reduce((sum, n) => sum + n, 0) / points.length
+        : 0;
+      return { line, points, average, projects: points.length };
+    });
+    const bestLineAverage = Math.max(0, ...lineRows.map((row) => row.average));
+    const mostProjects = Math.max(0, ...lineRows.map((row) => row.projects));
+    const lineRankingHtml = lineRows
+      .map((row) => ({
+        ...row,
+        final:
+          (bestLineAverage > 0 ? 0.6 * (row.average / bestLineAverage) : 0) +
+          (mostProjects > 0 ? 0.4 * (row.projects / mostProjects) : 0),
+      }))
+      .sort(
+        (a, b) =>
+          b.final - a.final ||
+          a.line.entryId.localeCompare(b.line.entryId),
       )
+      .map((row) => {
+        const number = row.line.entryId.match(/-line-(\d+)$/)?.[1] ?? row.line.entryId;
+        return `<tr data-line-id="${escapeHtml(row.line.entryId)}"><td><code>${escapeHtml(number)}</code></td><td class="clip" title="${escapeHtml(row.line.text)}">${escapeHtml(row.line.text)}</td><td class="num">${escapeHtml(lineScore(row.line.entryId) / CONCEPT_HIT_POINTS)}</td><td class="num">${escapeHtml(formatAverage(row.points.map((points) => points / CONCEPT_HIT_POINTS)))}</td><td class="num">${escapeHtml(row.projects)}</td><td class="num">${escapeHtml(row.final.toFixed(2))}</td></tr>`;
+      })
       .join("");
 
     const linePayload = scored.jobLines.map((line) => {
@@ -302,7 +461,7 @@ export async function GET(req: NextRequest) {
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>THROWAWAY — ${escapeHtml(view.postingId)}</title>
+  <title>${escapeHtml(view.postingId)}</title>
   <style>
     :root { color-scheme: light dark; }
     html, body { height: 100%; }
@@ -310,7 +469,7 @@ export async function GET(req: NextRequest) {
       margin: 0;
       font: 14px/1.4 system-ui, sans-serif;
       display: grid;
-      grid-template-columns: 440px minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-columns: 540px minmax(0, 1fr) minmax(0, 1fr);
       height: 100vh;
       overflow: hidden;
     }
@@ -333,6 +492,10 @@ export async function GET(req: NextRequest) {
     }
     .aside-toolbar {
       flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
       border-top: 1px solid #8884;
       padding: 10px 14px;
       background: Canvas;
@@ -349,15 +512,73 @@ export async function GET(req: NextRequest) {
       overflow: auto;
       padding: 12px 14px;
     }
-    .fits { display: flex; flex-direction: column; gap: 12px; margin: 0 0 16px; }
-    .fit { text-align: left; }
+    .aside-head {
+      flex: 0 0 auto;
+      padding: 12px 14px 10px;
+      background: Canvas;
+      border-bottom: 1px solid #d4d4d4;
+    }
+    .posting-company {
+      margin: 0;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #666;
+    }
+    .posting-title {
+      margin: 2px 0 12px;
+      font-size: 16px;
+      font-weight: 650;
+      line-height: 1.25;
+      word-break: normal;
+    }
+    .fits { display: flex; margin: 0; }
+    .fit { flex: 1; min-width: 0; text-align: center; padding: 0 8px; }
+    .fit + .fit { border-left: 1px solid #d4d4d4; }
     .fit-label { font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: #666; }
-    .fit-score { font-size: 28px; font-weight: 700; line-height: 1.1; }
-    .fit-pct { font-size: 16px; font-weight: 600; color: #666; }
+    .fit-pct { font-size: 28px; font-weight: 700; line-height: 1.1; }
     .fit-ceiling { font-size: 12px; color: #666; }
     .throwaway { color: #b45309; font-weight: 600; margin: 0 0 8px; }
-    .posting-meta { margin: 0 0 12px; word-break: break-word; }
-    .ranking { margin: 8px 0 0; padding-left: 1.2rem; font-size: 12px; }
+    .posting-meta { margin: 0 0 12px; word-break: break-word; font-size: 12px; color: #666; }
+    .ranking {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 0;
+      font-size: 12px;
+    }
+    .ranking + .ranking { margin-top: 20px; }
+    .ranking th,
+    .ranking td {
+      border: 1px solid #d4d4d4;
+      padding: 4px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    .ranking th {
+      font-weight: 600;
+      color: #666;
+      font-size: 11px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .ranking .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .ranking tbody tr[data-project-id],
+    .ranking tbody tr[data-line-id] { cursor: pointer; }
+    .ranking tbody tr[data-project-id]:hover td,
+    .ranking tbody tr[data-line-id]:hover td { background: color-mix(in srgb, #2563eb 6%, transparent); }
+    .ranking tbody tr.selected td { background: color-mix(in srgb, #2563eb 14%, transparent); }
+    .ranking.lines { table-layout: fixed; }
+    .ranking.lines .clip {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    @media (prefers-color-scheme: dark) {
+      .aside-head,
+      .fit + .fit,
+      .ranking th,
+      .ranking td { border-color: #3f3f46; }
+    }
     h1 {
       flex: 0 0 auto;
       margin: 0;
@@ -366,6 +587,7 @@ export async function GET(req: NextRequest) {
       border-bottom: 1px solid #8884;
     }
     .details-toggle { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; }
+    #rescore { font: inherit; font-size: 14px; }
     .claims, .line-details { display: none; }
     body.show-details .claims,
     body.show-details .line-details { display: block; }
@@ -395,9 +617,6 @@ export async function GET(req: NextRequest) {
     }
     .meta { margin: 0 0 6px; color: #666; font-size: 12px; }
     .statement { margin: 0 0 6px; }
-    .attrs { list-style: none; padding: 0; margin: 0 0 8px; font-size: 12px; }
-    .attrs li { margin: 0 0 2px; }
-    .attrs strong { margin-right: 0.35em; }
     .claim { border-top: 1px dashed #8884; margin-top: 8px; padding-top: 8px; }
     .claim-id { font-size: 12px; margin-bottom: 4px; }
     .concepts { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
@@ -412,23 +631,42 @@ export async function GET(req: NextRequest) {
 </head>
 <body>
   <aside>
-    <div class="aside-scroll">
+    <div class="aside-head">
+      <p class="posting-company">${escapeHtml(view.company)}</p>
+      <h2 class="posting-title">${escapeHtml(view.title)}</h2>
       <div class="fits">
-        ${fitMarkup("Job post", fits.jobPostFit)}
-        ${fitMarkup("Resume", fits.resumeFit)}
+        ${directionalFitMarkup("Job post", jobPostFit)}
+        ${directionalFitMarkup("Resume", resumeFit)}
         ${fitMarkup("Relevancy", fits.jobRelevancy)}
       </div>
-      <div class="throwaway">THROWAWAY — scoring ${escapeHtml(scored.scoringVersion)}</div>
+    </div>
+    <div class="aside-scroll">
+      <div class="throwaway">scoring ${escapeHtml(scored.scoringVersion)}</div>
       <div class="posting-meta">
-        ${escapeHtml(view.company)} — ${escapeHtml(view.title)}
-        <br><code>${escapeHtml(view.postingId)}</code>
+        <code>${escapeHtml(view.postingId)}</code>
         <br><code>${escapeHtml(view.entryId)}</code>
         <br>vocab <code>${escapeHtml(vocabVersion ?? "none")}</code>
       </div>
-      <ol class="ranking">${rankingHtml || "<li class='empty'>No positive project totals yet</li>"}</ol>
+      <table class="ranking" id="project-ranking">
+        <thead><tr><th>Id</th><th>Title</th><th>Tags</th><th>Average</th><th>Lines</th><th>Final</th></tr></thead>
+        <tbody>${rankingHtml || "<tr><td class='empty' colspan='6'>No positive project totals yet</td></tr>"}</tbody>
+      </table>
+      <table class="ranking lines" id="line-ranking">
+        <colgroup>
+          <col style="width: 3.2rem" />
+          <col />
+          <col style="width: 3.6rem" />
+          <col style="width: 4.2rem" />
+          <col style="width: 4.6rem" />
+          <col style="width: 3.6rem" />
+        </colgroup>
+        <thead><tr><th>Line</th><th>Description</th><th>Tags</th><th>Average</th><th>Projects</th><th>Final</th></tr></thead>
+        <tbody>${lineRankingHtml || "<tr><td class='empty' colspan='6'>No job lines</td></tr>"}</tbody>
+      </table>
     </div>
     <div class="aside-toolbar">
       <label class="details-toggle"><input type="checkbox" id="show-details"> details</label>
+      <button type="button" id="rescore">Rescore and save</button>
     </div>
   </aside>
   <section>
@@ -450,12 +688,29 @@ export async function GET(req: NextRequest) {
       showDetails.addEventListener("change", () => {
         document.body.classList.toggle("show-details", showDetails.checked);
       });
+      const rescore = document.getElementById("rescore");
+      rescore.addEventListener("click", async () => {
+        rescore.disabled = true;
+        rescore.textContent = "Saving…";
+        try {
+          const response = await fetch(location.pathname + location.search, { method: "POST" });
+          const body = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(body.error || "Save failed");
+          location.reload();
+        } catch (error) {
+          rescore.disabled = false;
+          rescore.textContent = "Rescore and save";
+          alert(error && error.message ? error.message : "Save failed");
+        }
+      });
       const data = JSON.parse(document.getElementById("line-data").textContent);
       const byId = Object.fromEntries(data.map((row) => [row.lineEntryId, row]));
       const pane = document.getElementById("projects-pane");
       const linesPane = document.getElementById("lines-pane");
-      const projectCards = [...document.querySelectorAll("[data-project-id]")];
-      const lineCards = [...document.querySelectorAll(".line-card")];
+      const projectCards = [...document.querySelectorAll("#projects-pane [data-project-id]")];
+      const lineCards = [...document.querySelectorAll("#lines-pane .line-card")];
+      const projectRows = [...document.querySelectorAll("#project-ranking tbody tr[data-project-id]")];
+      const lineRows = [...document.querySelectorAll("#line-ranking tbody tr[data-line-id]")];
       const originalProjects = [...projectCards];
       const originalLines = [...lineCards];
       const originalClaims = new Map(
@@ -540,6 +795,8 @@ export async function GET(req: NextRequest) {
           }
         });
         lineCards.forEach((el) => el.classList.remove("selected"));
+        projectRows.forEach((row) => row.classList.remove("selected"));
+        lineRows.forEach((row) => row.classList.remove("selected"));
         restoreOrder();
         clearProjectFocus();
       }
@@ -552,6 +809,11 @@ export async function GET(req: NextRequest) {
         lineCards.forEach((el) => {
           el.classList.toggle("selected", el.getAttribute("data-line-id") === lineId);
         });
+        lineRows.forEach((row) => {
+          row.classList.toggle("selected", row.getAttribute("data-line-id") === lineId);
+        });
+        const lineCard = lineCards.find((el) => el.getAttribute("data-line-id") === lineId);
+        if (lineCard) lineCard.scrollIntoView({ block: "nearest" });
         const hits = row.hits || [];
         const byProject = Object.fromEntries(hits.map((h) => [h.projectId, h]));
         const hitIds = new Set(hits.map((h) => h.projectId));
@@ -567,18 +829,13 @@ export async function GET(req: NextRequest) {
             slot.innerHTML = "";
             return;
           }
-          const axes = [
-            hit.conceptHits + " concept(s)",
-            hit.ownershipHit ? "ownership" : null,
-            hit.scopeHit ? "scope" : null,
-            hit.stageHit ? "stage" : null,
-          ].filter(Boolean).join(" · ");
+          const axes = hit.conceptHits + " tag(s)";
           const statement = (hit.statements && hit.statements[0]) ? hit.statements[0] : "";
           const meta = el.querySelector(".meta");
           slot.hidden = false;
           slot.classList.add("open");
           slot.innerHTML =
-            "<div class='hit-score'>" + escapeText(hit.points) + "</div>" +
+            "<div class='hit-score'>" + escapeText(hit.conceptHits) + "</div>" +
             "<div class='hit-detail'>" +
             "<div class='breakdown'>" + escapeText(axes) +
             (hit.overlapIds && hit.overlapIds.length ? " · " + escapeText(hit.overlapIds.join(", ")) : "") +
@@ -588,6 +845,7 @@ export async function GET(req: NextRequest) {
             "</div>";
         });
         sortByLine(byProject);
+        pane.scrollTop = 0;
       }
 
       function selectProject(projectId) {
@@ -595,6 +853,11 @@ export async function GET(req: NextRequest) {
         projectCards.forEach((el) => {
           el.classList.toggle("selected", el.getAttribute("data-project-id") === projectId);
         });
+        projectRows.forEach((row) => {
+          row.classList.toggle("selected", row.getAttribute("data-project-id") === projectId);
+        });
+        const projectCard = projectCards.find((el) => el.getAttribute("data-project-id") === projectId);
+        if (projectCard) projectCard.scrollIntoView({ block: "nearest" });
         const hitByLine = {};
         for (const row of data) {
           const hit = (row.hits || []).find((h) => h.projectId === projectId);
@@ -622,21 +885,17 @@ export async function GET(req: NextRequest) {
             slot.innerHTML = "";
             return;
           }
-          const axes = [
-            hit.conceptHits + " concept(s)",
-            hit.ownershipHit ? "ownership" : null,
-            hit.scopeHit ? "scope" : null,
-            hit.stageHit ? "stage" : null,
-          ].filter(Boolean).join(" · ");
+          const axes = hit.conceptHits + " tag(s)";
           slot.hidden = false;
           slot.classList.add("open");
           slot.innerHTML =
-            "<div class='hit-score'>" + escapeText(hit.points) + "</div>" +
+            "<div class='hit-score'>" + escapeText(hit.conceptHits) + "</div>" +
             "<div class='hit-detail'>" +
             "<div class='breakdown'>" + escapeText(axes) +
             (hit.overlapIds && hit.overlapIds.length ? " · " + escapeText(hit.overlapIds.join(", ")) : "") +
             "</div></div>";
         });
+        linesPane.scrollTop = 0;
       }
 
       lineCards.forEach((el) => {
@@ -664,6 +923,22 @@ export async function GET(req: NextRequest) {
             event.preventDefault();
             el.click();
           }
+        });
+      });
+
+      projectRows.forEach((row) => {
+        row.addEventListener("click", () => {
+          const id = row.getAttribute("data-project-id");
+          if (row.classList.contains("selected")) clear();
+          else selectProject(id);
+        });
+      });
+
+      lineRows.forEach((row) => {
+        row.addEventListener("click", () => {
+          const id = row.getAttribute("data-line-id");
+          if (row.classList.contains("selected")) clear();
+          else select(id);
         });
       });
     })();

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useJobPosting } from "@/components/job-posting";
 import type { ConnectionTarget } from "@/lib/connection-targets";
 import {
@@ -14,9 +14,147 @@ type ConnectorPath = {
   id: string;
   d: string;
   start: { x: number; y: number };
-  end: { x: number; y: number };
   focused: boolean;
+  subject: boolean;
+  opacity?: number;
 };
+
+/** Shared with the row wash so a click reads as one motion. */
+const MORPH_MS = 700;
+
+type Cubic = {
+  x0: number;
+  y0: number;
+  c1x: number;
+  c1y: number;
+  c2x: number;
+  c2y: number;
+  x1: number;
+  y1: number;
+};
+
+function easeInOut(t: number): number {
+  return t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
+}
+
+function parseCubic(d: string): Cubic | null {
+  const nums = d.match(/-?\d+(?:\.\d+)?/g)?.map(Number);
+  if (!nums || nums.length < 8) return null;
+  const [x0, y0, c1x, c1y, c2x, c2y, x1, y1] = nums;
+  if (
+    x0 == null ||
+    y0 == null ||
+    c1x == null ||
+    c1y == null ||
+    c2x == null ||
+    c2y == null ||
+    x1 == null ||
+    y1 == null
+  ) {
+    return null;
+  }
+  return { x0, y0, c1x, c1y, c2x, c2y, x1, y1 };
+}
+
+function formatCubic(cubic: Cubic): string {
+  return `M ${cubic.x0} ${cubic.y0} C ${cubic.c1x} ${cubic.c1y}, ${cubic.c2x} ${cubic.c2y}, ${cubic.x1} ${cubic.y1}`;
+}
+
+function lerpCubic(from: Cubic, to: Cubic, t: number): Cubic {
+  const mix = (a: number, b: number) => a + (b - a) * t;
+  return {
+    x0: mix(from.x0, to.x0),
+    y0: mix(from.y0, to.y0),
+    c1x: mix(from.c1x, to.c1x),
+    c1y: mix(from.c1y, to.c1y),
+    c2x: mix(from.c2x, to.c2x),
+    c2y: mix(from.c2y, to.c2y),
+    x1: mix(from.x1, to.x1),
+    y1: mix(from.y1, to.y1),
+  };
+}
+
+function pathSide(path: ConnectorPath): "l" | "r" {
+  const cubic = parseCubic(path.d);
+  if (!cubic) return "l";
+  return cubic.x0 <= cubic.x1 ? "l" : "r";
+}
+
+function rankObjects(paths: ConnectorPath[]): ConnectorPath[] {
+  const out: ConnectorPath[] = [];
+  for (const side of ["l", "r"] as const) {
+    const ranked = paths
+      .filter((path) => !path.subject && pathSide(path) === side)
+      .sort((a, b) => a.start.y - b.start.y);
+    ranked.forEach((path, index) => {
+      out.push({ ...path, id: `${side}-${index}` });
+    });
+  }
+  return out;
+}
+
+/** Subject keeps a fixed key so it never slides with the object lines. */
+function withStableIds(paths: ConnectorPath[]): ConnectorPath[] {
+  const subject = paths.find((path) => path.subject);
+  return [
+    ...(subject ? [{ ...subject, id: "subject", opacity: 1 }] : []),
+    ...rankObjects(paths),
+  ];
+}
+
+/** Slide direct-object curves. The subject line is already at its destination. */
+function blendPaths(
+  from: ConnectorPath[],
+  to: ConnectorPath[],
+  t: number,
+): ConnectorPath[] {
+  const eased = easeInOut(t);
+  const fromSubject = from.find((path) => path.subject);
+  const toSubject = to.find((path) => path.subject);
+  const fromSubjectSide = fromSubject ? pathSide(fromSubject) : null;
+  const toSubjectSide = toSubject ? pathSide(toSubject) : null;
+  const out: ConnectorPath[] = [];
+  for (const side of ["l", "r"] as const) {
+    // A page that just became the subject drops its blue lines immediately.
+    if (toSubjectSide === side && fromSubjectSide !== side) continue;
+    const source = from
+      .filter((path) => !path.subject && pathSide(path) === side)
+      .sort((a, b) => a.start.y - b.start.y);
+    const dest = to
+      .filter((path) => !path.subject && pathSide(path) === side)
+      .sort((a, b) => a.start.y - b.start.y);
+    const count = Math.max(source.length, dest.length);
+    for (let index = 0; index < count; index++) {
+      const src = source[index];
+      const dst = dest[index];
+      const id = `${side}-${index}`;
+      if (src && dst) {
+        const fromCubic = parseCubic(src.d);
+        const toCubic = parseCubic(dst.d);
+        const geom =
+          fromCubic && toCubic
+            ? lerpCubic(fromCubic, toCubic, eased)
+            : (toCubic ?? fromCubic);
+        if (!geom) continue;
+        out.push({
+          id,
+          d: formatCubic(geom),
+          start: { x: geom.x0, y: geom.y0 },
+          focused: dst.focused,
+          subject: false,
+          opacity: 1,
+        });
+      } else if (dst) {
+        out.push({ ...dst, id, subject: false, opacity: eased });
+      } else if (src && 1 - eased > 0.02) {
+        out.push({ ...src, id, subject: false, opacity: 1 - eased });
+      }
+    }
+  }
+  const subject = to.find((path) => path.subject);
+  if (subject) out.push({ ...subject, id: "subject", opacity: 1 });
+  return out;
+}
 
 const DOT_RADIUS = 4;
 /** Keep card-side attachments clear of rounded corners. */
@@ -179,6 +317,7 @@ type DraftPath = {
   preferredEndY: number;
   fromLeft: boolean;
   primary: boolean;
+  subject: boolean;
 };
 
 function measurePaths(target: ConnectionTarget | null): ConnectorPath[] {
@@ -224,7 +363,8 @@ function measurePaths(target: ConnectionTarget | null): ConnectorPath[] {
       endX,
       preferredEndY,
       fromLeft,
-      primary: endpoint.strength === "primary",
+      primary: endpoint.role !== "subject" && endpoint.strength === "primary",
+      subject: endpoint.role === "subject",
     });
   }
 
@@ -260,8 +400,8 @@ function measurePaths(target: ConnectionTarget | null): ConnectorPath[] {
       id: draft.id,
       d: cubicHorizontal(draft.startX, draft.startY, draft.endX, endY),
       start: { x: draft.startX, y: draft.startY },
-      end: { x: draft.endX, y: endY },
       focused: draft.primary,
+      subject: draft.subject,
     };
   });
 }
@@ -280,6 +420,8 @@ export function EvidenceConnectors() {
   const { data: jobPosting, loading: jobLoading, busy: jobBusy } =
     useJobPosting();
   const [paths, setPaths] = useState<ConnectorPath[]>([]);
+  const pathsRef = useRef(paths);
+  pathsRef.current = paths;
   const [connectorsOn, setConnectorsOn] = useState(false);
 
   useEffect(() => {
@@ -300,21 +442,71 @@ export function EvidenceConnectors() {
     let secondFrame = 0;
     let densityLoop = 0;
     let densityDeadline = 0;
+    let morphFrame = 0;
+    let morphing = false;
     const DENSITY_REMEASURE_MS = 450;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
-    const measure = () => {
-      setPaths(measurePaths(target));
+    const commit = (next: ConnectorPath[]) => {
+      const stable = withStableIds(next);
+      pathsRef.current = stable;
+      setPaths(stable);
     };
 
-    const schedule = () => {
+    const measure = () => {
+      if (morphing) return;
+      commit(measurePaths(target));
+    };
+
+    const stopMorph = () => {
+      morphing = false;
+      if (morphFrame) {
+        window.cancelAnimationFrame(morphFrame);
+        morphFrame = 0;
+      }
+    };
+
+    const startMorph = () => {
+      const from = pathsRef.current;
+      if (reduceMotion || from.length === 0) {
+        commit(measurePaths(target));
+        return;
+      }
+      stopMorph();
+      morphing = true;
+      const started = performance.now();
+      const tick = (now: number) => {
+        const dest = measurePaths(target);
+        const t = Math.min(1, (now - started) / MORPH_MS);
+        const blended = blendPaths(from, dest, t);
+        pathsRef.current = blended;
+        setPaths(blended);
+        if (t < 1) {
+          morphFrame = window.requestAnimationFrame(tick);
+          return;
+        }
+        morphing = false;
+        morphFrame = 0;
+        commit(dest);
+      };
+      morphFrame = window.requestAnimationFrame(tick);
+    };
+
+    const schedule = (snap: boolean) => {
       if (frame) return;
       frame = window.requestAnimationFrame(() => {
         frame = 0;
+        if (snap) stopMorph();
+        else if (morphing) return;
         measure();
         // Second frame: BoundPanel / resume rows may still be laying out.
         if (secondFrame) window.cancelAnimationFrame(secondFrame);
         secondFrame = window.requestAnimationFrame(() => {
           secondFrame = 0;
+          if (snap) stopMorph();
+          else if (morphing) return;
           measure();
         });
       });
@@ -335,19 +527,21 @@ export function EvidenceConnectors() {
       densityLoop = window.requestAnimationFrame(tickDensity);
     };
 
-    schedule();
+    startMorph();
     startDensityLoop();
 
+    const snapToRows = () => schedule(true);
+    const followLayout = () => schedule(false);
     const scrollRoots = activeScrollRoots();
     for (const root of scrollRoots) {
-      root.addEventListener("scroll", schedule, { passive: true });
+      root.addEventListener("scroll", snapToRows, { passive: true });
     }
-    window.addEventListener("resize", schedule);
+    window.addEventListener("resize", snapToRows);
 
     const card = document.querySelector("[data-answer-stage-card]");
     const resizeObserver =
       typeof ResizeObserver !== "undefined"
-        ? new ResizeObserver(schedule)
+        ? new ResizeObserver(followLayout)
         : null;
     if (resizeObserver) {
       if (card) resizeObserver.observe(card);
@@ -364,7 +558,7 @@ export function EvidenceConnectors() {
                   record.attributeName === "data-evidence-id" ||
                   record.attributeName === "data-evidence-pane-active"
                 ) {
-                  schedule();
+                  followLayout();
                   return;
                 }
                 continue;
@@ -378,7 +572,7 @@ export function EvidenceConnectors() {
                     "[data-evidence-id], [data-evidence-scroll]",
                   )
                 ) {
-                  schedule();
+                  followLayout();
                   return;
                 }
               }
@@ -401,10 +595,11 @@ export function EvidenceConnectors() {
       if (frame) window.cancelAnimationFrame(frame);
       if (secondFrame) window.cancelAnimationFrame(secondFrame);
       if (densityLoop) window.cancelAnimationFrame(densityLoop);
+      if (morphFrame) window.cancelAnimationFrame(morphFrame);
       for (const root of scrollRoots) {
-        root.removeEventListener("scroll", schedule);
+        root.removeEventListener("scroll", snapToRows);
       }
-      window.removeEventListener("resize", schedule);
+      window.removeEventListener("resize", snapToRows);
       resizeObserver?.disconnect();
       mutationObserver?.disconnect();
     };
@@ -429,16 +624,32 @@ export function EvidenceConnectors() {
       aria-hidden
     >
       {[...paths]
-        .sort((a, b) => Number(a.focused) - Number(b.focused))
+        .sort(
+          (a, b) =>
+            Number(a.focused) + Number(a.subject) * 2 -
+            (Number(b.focused) + Number(b.subject) * 2),
+        )
         .map((path) => (
-        <g key={path.id}>
+        <g key={path.id} opacity={path.opacity ?? 1}>
           <path
             d={path.d}
-            className={path.focused ? styles.line : styles.lineDimmed}
+            className={
+              path.subject
+                ? styles.lineSubject
+                : path.focused
+                  ? styles.line
+                  : styles.lineDimmed
+            }
             fill="none"
           />
           <circle
-            className={path.focused ? styles.dot : styles.dotDimmed}
+            className={
+              path.subject
+                ? styles.dotSubject
+                : path.focused
+                  ? styles.dot
+                  : styles.dotDimmed
+            }
             cx={path.start.x}
             cy={path.start.y}
             r={DOT_RADIUS}

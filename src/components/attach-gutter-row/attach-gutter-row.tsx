@@ -13,6 +13,7 @@ function classNames(...parts: Array<string | false | null | undefined>) {
  */
 export function AttachGutterRow({
   checked = false,
+  washed = false,
   onToggle,
   label = "Add to question context",
   contentId,
@@ -20,6 +21,7 @@ export function AttachGutterRow({
   children,
 }: {
   checked?: boolean;
+  washed?: boolean;
   onToggle?: () => void;
   label?: string;
   contentId?: string;
@@ -53,6 +55,7 @@ export function AttachGutterRow({
       tabIndex={0}
       aria-label={label}
       aria-pressed={checked}
+      data-wash={washed ? "" : undefined}
       onClick={onToggle}
       onKeyDown={(event) => {
         if (event.key === "Enter" || event.key === " ") {

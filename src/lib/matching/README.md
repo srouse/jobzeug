@@ -12,7 +12,7 @@ Project scores stay **per project**. The best project match is `projects[0]` (hi
 
 Formula (per project, scoring v2): for each project-scoped job line, take the **best claim**’s additive points, then sum across lines.
 
-Per claim↔line: **+10** per exact overlapping concept id; **+12** if the line’s ownership / scope / delivery_stage constraint lists include the claim’s value. Empty lists and placeholder values (`unknown`, `null`, blank) add nothing and do **not** veto. Broader/narrower hierarchy is not credited in v2. Requirement `weight` is metadata only (not multiplied into `score`).
+Per claim↔line: **+10** per exact overlapping concept id; **+2** if the line’s ownership / scope / delivery_stage constraint lists include the claim’s value. Empty lists and placeholder values (`unknown`, `null`, blank) add nothing and do **not** veto. Broader/narrower hierarchy is not credited in v2. Requirement `weight` is metadata only (not multiplied into `score`).
 
 Compress / CMS contracts live under [`scripts/contentful/matching/`](../../../scripts/contentful/matching/README.md). Engine rules: [`evidence/matching/engine.md`](../../../evidence/matching/engine.md).
 

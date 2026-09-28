@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { JzIcon, JzIconButton, JzText } from "@jobzeug/design-system/react";
+import { useMemo, type ReactNode } from "react";
+import { JzIcon, JzText } from "@jobzeug/design-system/react";
 import type {
   ResumeEmployerGroup,
   ResumeProject,
@@ -20,28 +20,6 @@ import type { ConnectionStrength } from "@/lib/connection-targets";
 import styles from "./resume-document.module.css";
 
 const DEFAULT_NAME = "Scott Rouse";
-
-type ColorMode = "light" | "dark" | "subtle" | "emphasized";
-
-const COLOR_MODES: {
-  id: ColorMode;
-  label: string;
-  icon: string;
-}[] = [
-  { id: "light", label: "Light", icon: "Sun" },
-  { id: "dark", label: "Dark", icon: "Moon" },
-  { id: "subtle", label: "Subtle", icon: "DropHalf" },
-  { id: "emphasized", label: "Emphasized", icon: "Lightning" },
-];
-
-function applyBodyColorMode(mode: ColorMode) {
-  if (typeof document === "undefined") return;
-  if (mode === "light") {
-    document.body.removeAttribute("data-mode");
-  } else {
-    document.body.setAttribute("data-mode", mode);
-  }
-}
 
 function classNames(...parts: Array<string | false | null | undefined>) {
   return parts.filter(Boolean).join(" ") || undefined;
@@ -74,7 +52,7 @@ function CitedTitle({
       variant={variant}
       weight={weight}
       color={
-        selected || active ? "primary" : dimmed ? "muted" : color
+        selected ? "secondary" : active ? "primary" : dimmed ? "muted" : color
       }
       label={label}
       className={className}
@@ -112,14 +90,16 @@ function EvidenceShell({
       <div className={styles.inner}>
         <AttachGutterRow
           checked={pressed}
+          washed={Boolean(pressed || strength)}
           onToggle={canActivate ? onActivate : undefined}
           label={activateLabel}
           contentId={id}
           contentClassName={classNames(
             styles.content,
             headClass,
-            strength === "primary" && styles.cited,
-            strength === "secondary" && styles.dimmed,
+            pressed && styles.subject,
+            !pressed && strength === "primary" && styles.cited,
+            !pressed && strength === "secondary" && styles.dimmed,
           )}
         >
           {children}
@@ -154,16 +134,14 @@ export function ResumeDocument({
   error = null,
   projectId,
   onProjectIdChange,
-  onOpenDesign,
 }: {
   resume: ResumeViewModel | null;
   loading?: boolean;
   error?: string | null;
   projectId: string | null;
   onProjectIdChange: (projectId: string | null) => void;
-  onOpenDesign?: () => void;
 }) {
-  const { density, setDensity, lineFocus, selectLine } = useResumeHighlights();
+  const { density, lineFocus, selectLine } = useResumeHighlights();
   const connection = useActiveConnectionTarget();
   const strengthById = useMemo(() => {
     const map = new Map<string, ConnectionStrength>();
@@ -172,65 +150,26 @@ export function ResumeDocument({
     }
     return map;
   }, [connection]);
+  const referenceIds = useMemo(() => {
+    const ids = new Set<string>();
+    for (const endpoint of connection?.ids ?? []) {
+      if (endpoint.role === "reference") ids.add(endpoint.id);
+    }
+    return ids;
+  }, [connection]);
   const { ref: scrollRef, scrolling } = useIdleScrollbar();
-  const [colorMode, setColorMode] = useState<ColorMode>("light");
   const playing = presentedProject(resume, projectId);
   const name = resume?.name ?? DEFAULT_NAME;
-  const modeMeta =
-    COLOR_MODES.find((mode) => mode.id === colorMode) ?? COLOR_MODES[0];
 
-  useEffect(() => {
-    applyBodyColorMode(colorMode);
-    return () => {
-      document.body.removeAttribute("data-mode");
-    };
-  }, [colorMode]);
-
-  const cycleColorMode = () => {
-    const index = COLOR_MODES.findIndex((mode) => mode.id === colorMode);
-    const next = COLOR_MODES[(index + 1) % COLOR_MODES.length];
-    setColorMode(next.id);
-  };
-
-  const linkedOnly = density === "rolled" && strengthById.size > 0;
-  const toggleDensity = () => {
-    setDensity(density === "rolled" ? "full" : "rolled");
-  };
+  const hideUnselectedObjects =
+    density === "rolled" &&
+    lineFocus?.kind === "jobLine" &&
+    referenceIds.size > 0;
 
   return (
     <>
     <article className={styles.article}>
-      <EvidencePageHeader
-        actions={
-          <>
-            <JzIconButton
-              label={`Color mode: ${modeMeta.label}. Click to cycle.`}
-              icon={modeMeta.icon}
-              title={`Mode: ${modeMeta.label}`}
-              onClick={cycleColorMode}
-            />
-            <JzIconButton
-              label={
-                density === "rolled"
-                  ? "Linked only. Click to show unlinked."
-                  : "Showing unlinked. Click to hide them."
-              }
-              icon={density === "rolled" ? "EyeClosed" : "Eye"}
-              title={density === "rolled" ? "Linked only" : "Showing all"}
-              aria-pressed={density === "rolled"}
-              onClick={toggleDensity}
-            />
-            {onOpenDesign ? (
-              <JzIconButton
-                label="Open design"
-                icon="Palette"
-                title="Design"
-                onClick={onOpenDesign}
-              />
-            ) : null}
-          </>
-        }
-      >
+      <EvidencePageHeader>
         <JzText
           variant="overline"
           color="muted"
@@ -239,7 +178,7 @@ export function ResumeDocument({
         />
         <JzText
           level={1}
-          variant="title"
+          variant="heading"
           label={name}
           className={styles.name}
         />
@@ -349,7 +288,8 @@ export function ResumeDocument({
                             <ProjectLine
                               projects={role.projects}
                               strengthById={strengthById}
-                              hideUnlinked={linkedOnly}
+                              referenceIds={referenceIds}
+                              hideUnselectedObjects={hideUnselectedObjects}
                               lineFocus={lineFocus}
                               onSelect={(project) =>
                                 selectLine({
@@ -381,18 +321,20 @@ export function ResumeDocument({
 function ProjectLine({
   projects,
   strengthById,
-  hideUnlinked,
+  referenceIds,
+  hideUnselectedObjects,
   lineFocus,
   onSelect,
 }: {
   projects: ResumeProject[];
   strengthById: Map<string, ConnectionStrength>;
-  hideUnlinked: boolean;
+  referenceIds: Set<string>;
+  hideUnselectedObjects: boolean;
   lineFocus: LineFocus | null;
   onSelect: (project: ResumeProject) => void;
 }) {
-  const visible = hideUnlinked
-    ? projects.filter((project) => strengthById.has(project.evidenceId))
+  const visible = hideUnselectedObjects
+    ? projects.filter((project) => referenceIds.has(project.evidenceId))
     : projects;
   if (visible.length === 0) return null;
 
@@ -426,8 +368,13 @@ function ProjectLine({
                     aria-hidden
                     className={classNames(
                       styles.projectBullet,
-                      strength === "primary" && styles.projectBulletFocused,
-                      strength === "secondary" && styles.projectBulletSecondary,
+                      selected && styles.projectBulletSubject,
+                      !selected &&
+                        strength === "primary" &&
+                        styles.projectBulletFocused,
+                      !selected &&
+                        strength === "secondary" &&
+                        styles.projectBulletSecondary,
                     )}
                   />
                   <CitedTitle

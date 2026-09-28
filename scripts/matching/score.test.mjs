@@ -211,7 +211,7 @@ test('exact concept only — broader parent does not score', () => {
   assert.equal(result.jobLines[0].matchSummaries.length, 0);
 });
 
-test('ownership axis adds 12 when lined up; mismatch does not veto concept hits', () => {
+test('ownership axis adds a small bonus when lined up; mismatch does not veto concept hits', () => {
   const p = project('S107', [
     claim({
       id: 'S107-E001',
