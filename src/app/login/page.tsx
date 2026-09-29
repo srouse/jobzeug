@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
+
 import { LoginPageClient } from "./login-page-client";
+
+export const metadata: Metadata = {
+  title: "Log in",
+};
 
 type LoginPageProps = {
   searchParams: Promise<{ error?: string; next?: string }>;

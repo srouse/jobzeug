@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S028
-title: Startup design consulting
+title: Startup Design Consulting
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -88,7 +88,7 @@ evidence:
       reviewed_at: "2026-09-27"
 concept_proposals: []
 ---
-# S028: Startup design consulting
+# S028: Startup Design Consulting
 
 Captured: September 27, 2026
 Status: Catch-all account; individual startups not broken out
@@ -98,7 +98,7 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 
 - Role record: [R009 — UX/UI Designer & Web/Mobile Developer](../roles/R009-earthling-designer-developer.md). Scott said to put this on the Earthling Interactive UX/UI designer role. Source dates: August 2014–August 2018. He says this was just after OpenHomes, and one of the first full-time design titles he had.
 - Employer: [C006 Earthling Interactive](../employers/C006-earthling-interactive.md).
-- Related: [S029 Launch of a new business](S029%20-%20Launch%20of%20a%20new%20business.md) is the OpenHomes catch-all just before this tenure. Separate employment. Do not merge them.
+- Related: [S029 Launch of a New Business](S029%20-%20Launch%20of%20a%20new%20business.md) is the OpenHomes catch-all just before this tenure. Separate employment. Do not merge them.
 - Customers / clients: none. He consulted for startups and later said not to put any names on this project at this point.
 
 ## Resume summary

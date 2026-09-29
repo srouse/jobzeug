@@ -4,12 +4,12 @@
   "roles": [
     "R010"
   ],
-  "name": "Launch of a new business",
+  "name": "Launch of a New Business",
   "summary": "I helped pitch and start OpenHomes inside a local incubator, then owned an iOS prototype, a home-search site, and a lower-commission agency. I also designed a simpler door-hardware version, which stalled for lack of resources.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S029",
-    "title": "Launch of a new business",
+    "title": "Launch of a New Business",
     "record_kind": "project",
     "project_origin": "employment",
     "ranking_eligible": true,

@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S002
-title: Bulk Editor
+title: Contentful Bulk Edit App
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -11,8 +11,8 @@ related_project_ids: []
 role_links:
   - id: R002
     relationship: delivery
-    status: provisional
-    note: Preserved provisional association from the project record.
+    status: confirmed
+    note: The September 28, 2026 recording names this work as done while he was a solution specialist.
 employer_links:
   - id: C001
     relationship: delivery
@@ -30,8 +30,8 @@ delivery_stage: mixed
 annotation:
   status: reviewed
   vocabulary_version: "1.5.0"
-  reviewed_by: Codex
-  reviewed_at: "2026-09-26"
+  reviewed_by: Scott
+  reviewed_at: "2026-09-28"
 public_disclosure: restricted
 evidence:
   - id: S002-E001
@@ -105,11 +105,13 @@ evidence:
       - Intermediate version was built by the ecosystem team; boundaries of original versus
         rewritten code remain unclear.
       - Production status is self-reported.
+      - The September 28 recording shows the store app and says he contributed the shared-reference
+        filter directly. That may be this object-filtering work. S002-E005 carries that recording.
     public_disclosure: restricted
     review:
-      status: approved
-      reviewed_by: Codex
-      reviewed_at: "2026-09-26"
+      status: needs_review
+      reviewed_by: null
+      reviewed_at: null
   - id: S002-E004
     statement: Reports that both sales associated with his prototype presentations closed.
     concept_ids:
@@ -130,9 +132,87 @@ evidence:
       status: approved
       reviewed_by: Codex
       reviewed_at: "2026-09-26"
-concept_proposals: []
+  - id: S002-E005
+    statement: Shows the App Store Bulk Edit grid, where a direct edit updates more than one
+      entry at once, and says he contributed the filter for entries that share a reference.
+    concept_ids:
+      - local:interaction-design
+      - local:front-end-development
+      - local:programming
+      - local:contentful
+    ownership: contributor
+    scope: multiple_teams
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "../sources/s002-bulk-edit-walkthrough-2026-09-28.md"
+        locator: "0:01:30 and 0:01:48"
+        supports: A direct edit updates more than one entry at once. Filtering by the same
+          reference was difficult to implement, and he says he contributed to it directly.
+    limitations:
+      - The recording shows the store app. He says it is not far from his first build. The
+        earlier account still has the ecosystem team building a version between those.
+      - The reference-filter contribution is his statement. The code was not inspected.
+      - The apartment-price example is a hypothetical in the recording, not a named customer.
+    public_disclosure: needs_review
+    review:
+      status: proposed
+      reviewed_by: null
+      reviewed_at: null
+  - id: S002-E006
+    statement: About a month after the first build, added an AI field on the right that found
+      entries to change together, and says that pitch closed a second deal.
+    concept_ids:
+      - local:interaction-design
+      - local:contentful
+      - local:customer-demonstration
+    ownership: contributor
+    scope: external_audience
+    delivery_stage: prototype
+    provenance: self_report
+    sources:
+      - ref: "../sources/s002-bulk-edit-walkthrough-2026-09-28.md"
+        locator: "0:02:04 and 0:02:19"
+        supports: About a month later he added an AI field on the right and used it to find
+          entries, including a product rename, before the app was in the store.
+    limitations:
+      - The recording does not show the AI field. It does not name a model or say semantic search.
+      - The closed second deal is his account. It does not establish that he closed every
+        solution-specialist sale.
+    public_disclosure: needs_review
+    review:
+      status: proposed
+      reviewed_by: null
+      reviewed_at: null
+  - id: S002-E007
+    statement: Helped guide Bulk Edit into the Contentful App Store.
+    concept_ids:
+      - local:production-release
+      - local:coordination
+    ownership: contributor
+    scope: multiple_teams
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "../sources/s002-bulk-edit-walkthrough-2026-09-28.md"
+        locator: "0:02:46"
+        supports: He says he helped guide Bulk Edit into the app store.
+    limitations:
+      - Guiding it in is his account. The recording does not name who else published it.
+      - He calls it the most popular app in the store. No ranking source is in the file.
+    public_disclosure: needs_review
+    review:
+      status: proposed
+      reviewed_by: null
+      reviewed_at: null
+concept_proposals:
+  - label: Bulk content editing
+    category: work_activity
+    definition: Changing many structured content entries together from one surface.
+    reason: The account and the September 28 recording are about editing many Contentful entries
+      at once. Interaction design covers the grid. No approved concept covers the bulk operation.
 ---
-# S002: Bulk Editor
+# S002: Contentful Bulk Edit App
 
 Captured: September 20, 2026
 Status: Expanded account; images promised; strong outcome claims still account-only pending artifacts
@@ -140,16 +220,28 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 
 ## Resume connection
 
-- Role record: [R002 — Solution Specialist](../roles/R002-contentful-solution-specialist.md), provisional association. Scott described the work as done as an SE at Contentful; mapped to Solution Specialist pending title confirmation.
+- Role record: [R002 — Solution Specialist](../roles/R002-contentful-solution-specialist.md). The September 28 recording says he built this as a solution specialist. Earlier notes also called the period SE work.
 - Employer: [C001 Contentful](../employers/C001-contentful.md)
 - Role: SE / Solution Specialist period (source dates unresolved across Jan 2026 / Feb 2026 / Present).
 - Project dates: Not yet provided. Do not infer from role dates.
 - Collaborators: Contentful ecosystem team (handoff recipients who built a crude version Scott later cleaned up). Names and titles unknown.
 - Customers: [CU001 Tri Pointe Homes](../customers/CU001-tri-pointe-homes.md) (V1); [CU002 Trek](../customers/CU002-trek.md) (V2). Scott reports both related sales closed. **Public disclosure not cleared** — do not use these names in application copy until cleared.
+- Walkthrough transcript, kept separate: [S002 walkthrough, September 28, 2026](../sources/s002-bulk-edit-walkthrough-2026-09-28.md). Open it for the spoken detail. Do not treat it as the project account.
 
 ## Resume summary
 
-I designed and built a customer-facing prototype for bulk content operations in Contentful, combining a bulk editing UI with AI chat and semantic search before handing the work into the broader ecosystem.
+This is Bulk Edit, the most popular app in the Contentful Marketplace. I originally built it as a Solution Specialist to win a specific prospect, and it ultimately helped close two deals. I then helped bring it into production and launch it in the marketplace.
+
+## Presentation
+
+Blurb: This is Bulk Edit, the most popular app in the Contentful Marketplace. I originally built it as a Solution Specialist to win a specific prospect, and it ultimately helped close two deals. I then helped bring it into production and launch it in the marketplace.
+
+Video: 2mgK8Si7GF8ma5u59RzTxX
+
+- value: Couple of days
+  label: Workable prototype
+- value: App Store
+  label: Guided the public app
 
 ## Account summary
 
@@ -205,16 +297,6 @@ Stack, APIs, AI model/provider, preview implementation, and how ARR is attribute
 - Named customers: Tri Pointe Homes (CU001), Trek (CU002); disclosure not cleared for public copy.
 - Public Marketplace vs internal app naming not yet stated.
 
-## Potential relevance to Figma role
-
-- Fast path from customer friction to a credible prototype under time pressure.
-- Direct customer presentation that closed deals (Scott’s account).
-- Field prototype → ecosystem handoff → return to harden and finish customer-requested capability.
-- AI + semantic search in an editing workflow with change-impact vision.
-- Production adoption and reuse as a Contentful app (strength of claim pending artifacts).
-
-These are relevance assessments. Popularity and ARR are not yet artifact-supported.
-
 ## Follow-up queue
 
 - Confirm exact role title (SE vs Solution Specialist) and project dates; keep R002 provisional until confirmed.
@@ -235,3 +317,7 @@ Scott expanded V1 vs V2 UI/behavior, semantic-search rename demo, ecosystem hand
 ## Addition — September 20, 2026 (customers)
 
 Scott named the two closed-sale audiences: Tri Pointe Homes (V1) and Trek (V2). Linked to [CU001](../customers/CU001-tri-pointe-homes.md) and [CU002](../customers/CU002-trek.md) with researched org records; disclosure not cleared.
+
+## Addition — September 28, 2026
+
+The [walkthrough](../sources/s002-bulk-edit-walkthrough-2026-09-28.md) is him on the App Store app. He calls the role solution specialist and the request a way to change many entries at once, closer to Excel than Contentful’s default list. A couple of days produced a workable build. He says the store version is not far from that first build. On screen, a direct edit updates two entries together, and he says he contributed the filter for entries that share a reference. About a month later, before the store release, he added an AI field on the right and says that pitch closed a second deal. The recording does not show that field and does not say semantic search. He says he helped guide the app into the store and that it is the most popular app there. That popularity line, and the line that he closed every solution-specialist sale, stay his account. Customer names stay off the recording.

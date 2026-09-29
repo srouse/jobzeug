@@ -147,19 +147,6 @@
   gap: var(--jz-semantic-space-gap-sm, 0.75rem);
 }
 
-.summaryLink {
-  color: var(--jz-semantic-color-text-primary);
-  text-decoration: underline;
-  text-underline-offset: 0.15em;
-}
-
-.articleLink {
-  width: fit-content;
-  color: var(--jz-semantic-color-text-secondary);
-  text-decoration: underline;
-  text-underline-offset: 0.15em;
-}
-
 .hubIntro {
   display: flex;
   flex-direction: column;
@@ -248,11 +235,6 @@
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.connectionName {
-  display: block;
-  margin: 0;
 }
 
 .answer {

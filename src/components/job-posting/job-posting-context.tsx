@@ -206,6 +206,7 @@ export function JobPostingProvider({
 
       if (nextEntryId) {
         setError(null);
+        setLoading(true);
         navigateEntryId(nextEntryId);
         return;
       }

@@ -6,12 +6,12 @@
     "R014",
     "R015"
   ],
-  "name": "AmFam R&D ListenAssist prototypes",
+  "name": "AmFam R&D ListenAssist Prototypes",
   "summary": "I built ListenAssist—a React prototype that listened to live AmFam call-center calls and pulled pre-LLM ML answers from R&D’s custom database—and learned by shadowing agents that terse answers fail; they need conceptual context to explain.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S023",
-    "title": "AmFam R&D ListenAssist prototypes",
+    "title": "AmFam R&D ListenAssist Prototypes",
     "record_kind": "project",
     "project_origin": "employment",
     "ranking_eligible": true,

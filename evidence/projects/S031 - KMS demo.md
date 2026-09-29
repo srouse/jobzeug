@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S031
-title: KMS demo
+title: Knowledge Management System (KMS)
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -114,7 +114,7 @@ concept_proposals:
     reason: S031 is that system. Approved concepts cover Firecrawl, Mastra, Contentful, and the
       prototype. None of them is the knowledge-management subject he says the project is for.
 ---
-# S031: KMS demo
+# S031: Knowledge Management System (KMS)
 
 Captured: September 28, 2026
 Status: Scott’s account, the walkthrough, and his September 28 account of the handoff. Claims are proposed.
@@ -125,7 +125,7 @@ Evidence: His accounts and the spoken walkthrough. No code or app listing is in 
 - Role record: [R001 — Senior Product Architect](../roles/R001-contentful-senior-product-architect.md) at [C001 Contentful](../employers/C001-contentful.md). He said this goes on his latest job. That is the present role.
 - Employer: [C001 Contentful](../employers/C001-contentful.md)
 - Customers / clients: None named. Prospects and other partners saw the demo. He will not name the Contentful partner. The plant-technician and outage-management files in the walkthrough are sample documents, not customers.
-- Not [S003 DemAI](S003%20-%20DemAI.md). DemAI reproduces a website inside Contentful. This one is a knowledge-management workflow.
+- Not [S003 AI Driven Demos - DemAI](S003%20-%20DemAI.md). DemAI reproduces a website inside Contentful. This one is a knowledge-management workflow.
 - September 28 account, kept separate: [S031 account](../sources/s031-account-2026-09-28.md).
 - Handoff account, kept separate: [S031 handoff](../sources/s031-account-handoff-2026-09-28.md).
 - Walkthrough transcript, kept separate: [S031 walkthrough](../sources/s031-kms-walkthrough-2026-09-28.md). Caption errors stay in that file. It hears Firecrawl as “Firecall,” Contentful as “Contempla,” and the sample as “Plat technician.”

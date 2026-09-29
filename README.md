@@ -47,6 +47,8 @@ The Next app is gated by a shared password (`/login`). After login, an httpOnly 
 - `/login` — site password gate
 - `/` — Jobzeug shell (placeholder for the dynamic surface)
 - `/resume` — SPA resume assembled from Contentful Delivery (employers / roles / projects)
+- `/jobs` — published job postings, each linking to its resume and analytics
+- `/analytics` — match view for one posting (`?jobPostingEntryId=`)
 - `/chat` — smoke-test chat against `jobzeug-agent` (Postgres-backed memory)
 - `/api/resume` — JSON resume view model from Contentful CDA
 - `/api/chat` — streaming chat API (`handleChatStream`)

@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S026
-title: Summit page builder
+title: Summit Page Builder
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -91,7 +91,7 @@ evidence:
       reviewed_at: "2026-09-27"
 concept_proposals: []
 ---
-# S026: Summit page builder
+# S026: Summit Page Builder
 
 Captured: September 27, 2026
 Status: Initial account; no product name given
@@ -101,7 +101,7 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 
 - Role record: [R005 — Experience Designer](../roles/R005-summit-experience-designer.md). Scott said to put this on the Summit Credit Union Experience Designer role. Source dates: August 2020–June 2023. Project-specific months were not given.
 - Employer: [C003 Summit Credit Union](../employers/C003-summit-credit-union.md)
-- Related: [S020 Summit marketing website rebuild](S020%20-%20Summit%20marketing%20website%20rebuild.md). He says he was leading the migration to Contentful and the website was being made at the same time as this app. Do not merge the app into that rebuild record.
+- Related: [S020 Summit Marketing Website Rebuild](S020%20-%20Summit%20marketing%20website%20rebuild.md). He says he was leading the migration to Contentful and the website was being made at the same time as this app. Do not merge the app into that rebuild record.
 - Not the same account as [S021 Rates Central](S021%20-%20Rates%20Central.md). That record has its own custom app and live preview. This capture does not say they are one app.
 - Customers / clients: none named. Marketing is an internal Summit team.
 

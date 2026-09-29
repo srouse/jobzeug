@@ -1,6 +1,6 @@
 # Contentful for Figma intro
 
-Spoken transcript exported September 28, 2026 from `VIDEOS/ContentfulForFigma/CFW Intro (FINAL).srt`. Related project: [S008 Contentful for Figma widget](../projects/S008%20-%20Contentful%20for%20Figma%20widget.md).
+Spoken transcript exported September 28, 2026 from `VIDEOS/ContentfulForFigma/CFW Intro (FINAL).srt`. Related project: [S008 Contentful for Figma Widget](../projects/S008%20-%20Contentful%20for%20Figma%20widget.md).
 
 The words below are the export. Repeats, false starts, and caption errors are kept.
 

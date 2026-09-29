@@ -36,7 +36,7 @@ Potential relevance: customer discovery and technical partnership, engineering t
 - An example of navigating organizational disagreement, ownership or incentives to deliver a working result.
 - An engagement that could conclude successfully: what remained usable, who owned it, and what learning was reused.
 
-[Blueprints](../projects/S001%20-%20Blueprints.md) is a possible supporting example for connected workflows and AI-assisted implementation; also supports [P002](P002-build-deep-to-influence.md). Direct customer discovery, deployment, handoff and outcomes remain unconfirmed.
+[Blueprints AI Design System](../projects/S001%20-%20Blueprints.md) is a possible supporting example for connected workflows and AI-assisted implementation; also supports [P002](P002-build-deep-to-influence.md). Direct customer discovery, deployment, handoff and outcomes remain unconfirmed.
 
 ## Open questions and transcription cautions
 

@@ -239,6 +239,61 @@ function barsFromRows(
   return bars;
 }
 
+/**
+ * The two header percents on the analytics page.
+ * Project is the strongest project against the project-scoped lines.
+ * Line is the strongest line against the full project catalog.
+ */
+export function bestDirectionalFits({
+  projectScopedLineCount,
+  catalogProjectCount,
+  lineCount,
+  projects,
+}: {
+  projectScopedLineCount: number;
+  catalogProjectCount: number;
+  lineCount: number;
+  projects: readonly {
+    contributions: readonly { requirementId: string; points: number }[];
+  }[];
+}): { project: number | null; line: number | null } {
+  const project =
+    projectScopedLineCount > 0 && catalogProjectCount > 0
+      ? Math.round(
+          Math.max(
+            0,
+            ...projects.map((row) => {
+              const hits = row.contributions.filter((hit) => hit.points > 0);
+              const tags =
+                hits.reduce((sum, hit) => sum + hit.points, 0) /
+                CONCEPT_HIT_POINTS;
+              return absoluteFitShare(tags, hits.length, projectScopedLineCount);
+            }),
+          ) * 100,
+        )
+      : null;
+
+  const byLine = new Map<string, number[]>();
+  for (const row of projects) {
+    for (const hit of row.contributions) {
+      if (hit.points <= 0) continue;
+      const points = byLine.get(hit.requirementId) ?? [];
+      points.push(hit.points);
+      byLine.set(hit.requirementId, points);
+    }
+  }
+  const lineShares = [...byLine.values()].map((points) => {
+    const tags = points.reduce((sum, value) => sum + value, 0) / CONCEPT_HIT_POINTS;
+    return absoluteFitShare(tags, points.length, catalogProjectCount);
+  });
+  const line =
+    catalogProjectCount > 0 && lineCount > 0
+      ? Math.round((lineShares.length ? Math.max(...lineShares) : 0) * 100)
+      : null;
+
+  return { project, line };
+}
+
 /** Bar for every resume project, against the posting's project-scoped line count. */
 export function projectFitBars(
   projectIds: readonly string[],

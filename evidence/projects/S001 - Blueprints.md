@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S001
-title: Blueprints
+title: Blueprints AI Design System
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -112,8 +112,7 @@ evidence:
       reviewed_at: "2026-09-26"
 concept_proposals: []
 ---
-# S001: Blueprints
-
+# S001: Blueprints AI Design System
 Captured: September 18, 2026
 Status: Expanded account September 20, 2026; artifacts and Experience Orchestration follow-up still pending
 Evidence: Scott's direct account, not yet supported by inspected artifacts

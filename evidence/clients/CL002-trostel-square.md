@@ -38,7 +38,7 @@ Usage note: Do not cite modern rent, unit count, or management company as outcom
 
 ## Linked projects
 
-- [S018 Journal Interactive advertiser studio](../projects/S018%20-%20Journal%20Interactive%20advertiser%20studio.md) — named among advertiser / local-business client sites (September 25, 2026). What shipped in 2001–2002 still TBD.
+- [S018 Journal Interactive Advertiser Studio](../projects/S018%20-%20Journal%20Interactive%20advertiser%20studio.md) — named among advertiser / local-business client sites (September 25, 2026). What shipped in 2001–2002 still TBD.
 
 ## Scott’s account notes
 

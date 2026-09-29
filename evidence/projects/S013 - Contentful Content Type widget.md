@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S013
-title: Contentful Content Type widget (personal)
+title: Contentful Content Type Widget (personal)
 record_kind: project
 project_origin: personal
 ranking_eligible: true
@@ -86,7 +86,7 @@ evidence:
       reviewed_at: "2026-09-26"
 concept_proposals: []
 ---
-# S013: Contentful Content Type widget (personal)
+# S013: Contentful Content Type Widget (personal)
 
 Captured: September 22, 2026
 Status: Initial capture from Scott’s account plus public site / Figma Community page scrape

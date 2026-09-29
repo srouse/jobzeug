@@ -4,12 +4,12 @@
   "roles": [
     "R005"
   ],
-  "name": "Summit application design system",
+  "name": "Summit Design System",
   "summary": "I built Summit’s application design system—web components and tokens on Stencil, later Lit—so teams could ship custom internal apps instead of fighting off-the-shelf UI tooling.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S019",
-    "title": "Summit application design system",
+    "title": "Summit Design System",
     "record_kind": "project",
     "project_origin": "employment",
     "ranking_eligible": true,

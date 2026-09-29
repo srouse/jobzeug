@@ -60,12 +60,12 @@ export const skippedKleioFolders = [
 export const kleioProjects: KleioProject[] = [
   {
     id: "S001",
-    title: "Blueprints",
+    title: "Blueprints AI Design System",
     sources: [{ dir: "2026-04-14-blueprints-docs" }],
   },
   {
     id: "S002",
-    title: "Bulk Editor",
+    title: "Contentful Bulk Edit App",
     sources: [
       { dir: "2025-06-22 - CTF AI Editor Designs" },
       { dir: "2025-10-06 Entry Flattener" },
@@ -75,7 +75,7 @@ export const kleioProjects: KleioProject[] = [
   },
   {
     id: "S003",
-    title: "DemAI",
+    title: "AI Driven Demos - DemAI",
     sources: [
       { dir: "2025-03-03 AI Demos" },
       { dir: "2025-03-09-DemAI" },
@@ -93,7 +93,7 @@ export const kleioProjects: KleioProject[] = [
   },
   {
     id: "S005",
-    title: "State Farm tokens",
+    title: "State Farm Tokens",
     sources: [
       { dir: "2023-10-28-Affirm/v4/source" },
       { dir: "2023-10-02-SF-StakeholderWorksheet" },
@@ -101,7 +101,7 @@ export const kleioProjects: KleioProject[] = [
   },
   {
     id: "S006",
-    title: "State Farm Figma design system",
+    title: "State Farm Figma Design System",
     sources: [
       { dir: "2023-10-04-SFFigmaOrg" },
       { dir: "2023-11-08-SFDesignTokensPlugin" },
@@ -110,12 +110,12 @@ export const kleioProjects: KleioProject[] = [
   },
   {
     id: "S007",
-    title: "State Farm Lit engineering bridge",
+    title: "State Farm Lit Engineering Bridge",
     sources: [{ dir: "2023-08-17-SF-Containment" }],
   },
   {
     id: "S008",
-    title: "Contentful for Figma widget",
+    title: "Contentful for Figma Widget",
     sources: [
       { dir: "2024-05-21-FigmaCTFStudioTokensPlugin" },
       { dir: "2024-05-21-FigmaToStudio" },
@@ -131,7 +131,7 @@ export const kleioProjects: KleioProject[] = [
   },
   {
     id: "S009",
-    title: "AI binding research",
+    title: "AI Component Binding",
     sources: [
       { dir: "2024-04-10-ContentBinding" },
       { dir: "2025-10-29 Hackathon Upslope" },
@@ -140,16 +140,16 @@ export const kleioProjects: KleioProject[] = [
     ],
   },
   { id: "S010", title: "Berlin prototype exploration", sources: [] },
-  { id: "S011", title: "Figma Design System widget", sources: [] },
-  { id: "S012", title: "Presentation Deck widget", sources: [] },
+  { id: "S011", title: "Figma Design System Widget (personal)", sources: [] },
+  { id: "S012", title: "Presentation Deck Widget (personal)", sources: [] },
   {
     id: "S013",
-    title: "Contentful Content Type widget",
+    title: "Contentful Content Type Widget (personal)",
     sources: [{ dir: "2022-08-08-Figma-Contentful-Content-Modeler" }],
   },
   {
     id: "S014",
-    title: "Design tokens explained (article)",
+    title: "Design Tokens Explained (article)",
     sources: [
       { dir: "2024-05-06-DesignTokenArticle" },
       { dir: "2024-05-15-ArticlePoster" },
@@ -157,13 +157,12 @@ export const kleioProjects: KleioProject[] = [
       { dir: "2024-06-08-Keyboards", match: /^Design System/ },
     ],
   },
-  { id: "S015", title: "Understanding AI by its building blocks (article)", sources: [] },
-  { id: "S016", title: "Hidden cost of technical debt (article)", sources: [] },
-  { id: "S017", title: "JSOnline ad system installation", sources: [] },
-  { id: "S018", title: "Journal Interactive advertiser studio", sources: [] },
+  { id: "S015", title: "Understanding AI (article)", sources: [] },
+  { id: "S017", title: "JSOnline Ad System Installation", sources: [] },
+  { id: "S018", title: "Journal Interactive Advertiser Studio", sources: [] },
   {
     id: "S019",
-    title: "Summit application design system",
+    title: "Summit Design System",
     sources: [
       { dir: "2019-03-00-SCU-UUX/v00-01" },
       { dir: "2019-08-28-SCU-CarTransferExperience" },
@@ -172,7 +171,7 @@ export const kleioProjects: KleioProject[] = [
   },
   {
     id: "S020",
-    title: "Summit marketing website rebuild",
+    title: "Summit Marketing Website Rebuild",
     sources: [
       { dir: "2022-06-20-scu-content-platform" },
       { dir: "TODO/SCUWebsite_export/2022-06-20-presentation" },
@@ -188,7 +187,7 @@ export const kleioProjects: KleioProject[] = [
   },
   {
     id: "S022",
-    title: "2024 Partnership Tour - AI design systems",
+    title: "2024 Partnership Tour - AI Design Systems",
     sources: [
       { dir: "2024-10-09 - 2024PartnerTour/v2" },
       {
@@ -197,7 +196,7 @@ export const kleioProjects: KleioProject[] = [
       },
     ],
   },
-  { id: "S023", title: "AmFam R&D ListenAssist prototypes", sources: [] },
+  { id: "S023", title: "AmFam R&D ListenAssist Prototypes", sources: [] },
   {
     id: "S024",
     title: "Loan Visualizer (LOUI)",
@@ -215,7 +214,7 @@ export const kleioProjects: KleioProject[] = [
   },
   {
     id: "S025",
-    title: "Experience Orchestration (ExO)",
+    title: "Experience Orchestration Research",
     sources: [
       // Contentful View Creator is the pre-ExO name. Narrate these as the early experiment, not as ExO.
       { dir: "2023-09-16-CTFL-WEBC-UI/_final", match: /View Creator/ },

@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S029
-title: Launch of a new business
+title: Launch of a New Business
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -112,7 +112,7 @@ evidence:
       reviewed_at: "2026-09-27"
 concept_proposals: []
 ---
-# S029: Launch of a new business
+# S029: Launch of a New Business
 
 Captured: September 27, 2026
 Status: Catch-all account; he does not want this talked through deeply. Same-day addition: the product and the agency were live; hardware stalled; artifacts wait for presentation.
@@ -123,7 +123,7 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 - Role record: [R010 — CTO, Designer & Web/Mobile Developer](../roles/R010-openhomes-cto.md). Source dates: June 2013–August 2014. Scott said to put this underneath OpenHomes.
 - Employer: [C007 OpenHomes](../employers/C007-openhomes.md).
 - Customers / clients: none. He named Generator, a local entrepreneurial incubator. The employer record already identifies that program as **gener8tor** (summer 2013 cohort). It is not a buyer or a hired client, so no CU/CL record.
-- Related: [S028 Startup design consulting](S028%20-%20Startup%20design%20consulting.md) is the Earthling catch-all he places just after OpenHomes. Separate employment. Do not merge them.
+- Related: [S028 Startup Design Consulting](S028%20-%20Startup%20design%20consulting.md) is the Earthling catch-all he places just after OpenHomes. Separate employment. Do not merge them.
 
 ## Resume summary
 

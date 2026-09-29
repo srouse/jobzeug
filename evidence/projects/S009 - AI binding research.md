@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S009
-title: AI binding research
+title: AI Component Binding
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -9,7 +9,6 @@ exclusion_reason: null
 parent_project_id: null
 related_project_ids:
   - S008
-  - S010
 role_links:
   - id: R001
     relationship: delivery
@@ -332,8 +331,7 @@ evidence:
       reviewed_at: null
 concept_proposals: []
 ---
-# S009: AI binding research
-
+# S009: AI Component Binding
 Captured: September 21, 2026
 Status: Working title as of September 27, 2026. Innovation prototype. Learnings are real; he calls it a successful research project. Not integrated into Contentful for Figma; safe metadata storage is still unresolved. September 28, 2026 walkthrough transcript adds natural size, intent, and entry inspection; it does not show code or a stored metadata sample.
 Evidence: Scott's direct account, plus his spoken walkthrough transcript. No code, metadata samples, or evaluation results inspected.
@@ -342,15 +340,15 @@ Evidence: Scott's direct account, plus his spoken walkthrough transcript. No cod
 
 - Role record: [R001 — Senior Product Architect](../roles/R001-contentful-senior-product-architect.md). Scott places this work in his latest Contentful role; exact project dates pending.
 - Employer: [C001 Contentful](../employers/C001-contentful.md)
-- Parent / intended integration: [S008 Contentful for Figma widget](S008%20-%20Contentful%20for%20Figma%20widget.md). This is a bounded AI exploration supporting that product, not evidence that its AI capabilities are already shipped.
-- Related presentation / prototype context: [S010 Berlin prototype exploration](S010%20-%20Berlin%20prototype%20exploration.md). Scott says he presented this binding work there; the broader Berlin project remains to be narrated.
+- Parent / intended integration: [S008 Contentful for Figma Widget](S008%20-%20Contentful%20for%20Figma%20widget.md). This is a bounded AI exploration supporting that product, not evidence that its AI capabilities are already shipped.
+- Related presentation / prototype context: [Berlin, on Experience Orchestration Research](S025%20-%20Experience%20Orchestration%20%28ExO%29.md#berlin). Scott says he presented this binding work there. Berlin is no longer its own project.
 - Walkthrough transcript, kept separate so this record stays the summary: [S009 walkthrough, September 28, 2026](../sources/s009-ai-binding-walkthrough-2026-09-28.md). Open it for the spoken detail. Do not treat it as the project account.
 - September 28 account, kept separate: [S009 account, September 28, 2026](../sources/s009-account-2026-09-28.md). Open it for what he said about solving the approach, sharing it inside the company, the storage blocker, and building it with Mastra and OpenAI.
 - Customers / clients: None named. Contentful is the employer and platform; Figma is the design platform, not a newly established customer or client engagement.
 
 ## Resume summary
 
-I built an agent that maps Contentful fields onto Figma components when the names don’t match, using real entries to judge size and intent. A name-only pass failed, and it still isn’t in the widget.
+I built AI Binding, a working agent prototype for the Contentful for Figma widget, to help people connect content to Figma components faster. Through extensive experimentation and many iterations, I solved a difficult matching problem and demonstrated the solution to a broad audience within Contentful. The work also revealed opportunities to improve the metadata describing content and components, laying the groundwork for more reliable automation.
 
 ## Account summary
 
@@ -372,7 +370,7 @@ With richer context on both sides, Scott reports highly consistent binding resul
 
 The exploration raised a broader product question: this semantic metadata could be valuable as durable information in an AI-first content repository, rather than only as temporary context for a binding task. Scott believes Contentful itself should have a place for it. The work stalled at integration because he has not resolved an appropriate, safe place to store the information. He intends to include it in a future Contentful for Figma iteration after solving that problem; this is a plan, not a shipped result.
 
-Scott presented this work successfully, in his assessment, during the Berlin event. Presentation reception and the separate end-of-week presentation are recorded in S010 so the technical experiment and event account remain distinct.
+Scott presented this work successfully, in his assessment, during the Berlin event. Presentation reception and the separate end-of-week presentation are recorded on [Experience Orchestration Research](S025%20-%20Experience%20Orchestration%20%28ExO%29.md#berlin) so the technical experiment and the event account remain distinct.
 
 ## Useful original wording
 
@@ -444,7 +442,7 @@ He is contributing to a conversation about enabling this metadata, and reports t
 
 ### Personal ownership
 
-Scott explicitly states that he did the research behind the scenes, developed the solution described here, and put together the presentation himself: “I did the whole thing.” Audience size and reported feedback are captured in [S010](S010%20-%20Berlin%20prototype%20exploration.md). This clarification supersedes the earlier uncertainty about who owned the research and presentation, without assigning ownership of other participants' work to Scott.
+Scott explicitly states that he did the research behind the scenes, developed the solution described here, and put together the presentation himself: “I did the whole thing.” Audience size and reported feedback are captured in [the Berlin section of Experience Orchestration Research](S025%20-%20Experience%20Orchestration%20%28ExO%29.md#berlin). This clarification supersedes the earlier uncertainty about who owned the research and presentation, without assigning ownership of other participants' work to Scott.
 
 ## Presentation
 

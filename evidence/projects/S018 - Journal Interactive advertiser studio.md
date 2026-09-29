@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S018
-title: Journal Interactive advertiser studio
+title: Journal Interactive Advertiser Studio
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -84,7 +84,7 @@ evidence:
       reviewed_at: "2026-09-26"
 concept_proposals: []
 ---
-# S018: Journal Interactive advertiser studio
+# S018: Journal Interactive Advertiser Studio
 
 Captured: September 25, 2026
 Status: Expanded Scott account (Art Museum ownership + Trostel Square identified)

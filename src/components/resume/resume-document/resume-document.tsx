@@ -422,11 +422,11 @@ function ProjectLine({
                   </span>
                   {project.presentation ? (
                     <JzIcon
-                      icon="Check"
-                      weight="bold"
+                      icon="VideoCamera"
+                      weight="regular"
                       size="small"
-                      title="Presentation"
-                      aria-label="Presentation"
+                      title="Video"
+                      aria-label="Video"
                     />
                   ) : null}
                 </div>

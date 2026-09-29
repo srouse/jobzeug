@@ -132,6 +132,34 @@ function linkEvidenceId(value: unknown): string | undefined {
   return undefined;
 }
 
+export type JobPostingListItem = {
+  entryId: string;
+  company: string;
+  title: string;
+};
+
+/** Published postings only: id, company, and title. Newest first. */
+export async function listJobPostings(): Promise<JobPostingListItem[]> {
+  const client = getDeliveryClient();
+  const { locale } = requireDeliveryEnv();
+  const res = await client.getEntries({
+    content_type: "jobzeugJobPosting",
+    locale,
+    limit: 100,
+    order: ["-sys.updatedAt"],
+    select: ["sys.id", "fields.company", "fields.title"],
+  });
+  const items: JobPostingListItem[] = [];
+  for (const entry of res.items) {
+    const fields = entry.fields as Record<string, unknown>;
+    const company = asString(fields.company);
+    const title = asString(fields.title);
+    if (!company || !title) continue;
+    items.push({ entryId: entry.sys.id, company, title });
+  }
+  return items;
+}
+
 export async function fetchCoreCatalog(): Promise<CoreCatalog> {
   const client = getDeliveryClient();
   const { locale } = requireDeliveryEnv();

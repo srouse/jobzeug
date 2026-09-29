@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S011
-title: Figma Design System widget (personal)
+title: Figma Design System Widget (personal)
 record_kind: project
 project_origin: personal
 ranking_eligible: true
@@ -90,7 +90,7 @@ evidence:
       reviewed_at: "2026-09-26"
 concept_proposals: []
 ---
-# S011: Figma Design System widget (personal)
+# S011: Figma Design System Widget (personal)
 
 Captured: September 22, 2026
 Status: Initial capture from Scott’s account plus public site / Figma Community page scrape

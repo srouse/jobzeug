@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S022
-title: 2024 Partnership Tour - AI design systems
+title: 2024 Partnership Tour - AI Design Systems
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -62,7 +62,7 @@ evidence:
       reviewed_at: "2026-09-26"
 concept_proposals: []
 ---
-# S022: 2024 Partnership Tour - AI design systems
+# S022: 2024 Partnership Tour - AI Design Systems
 
 Captured: September 25, 2026
 Status: Expanded Scott account September 25, 2026; aligns with R003 resume claim (design systems and AI during 2024 Partnership Tour)

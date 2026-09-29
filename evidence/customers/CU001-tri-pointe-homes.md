@@ -42,7 +42,7 @@ Usage note: Scale and acquisition facts are independent of Scott’s Bulk Editor
 
 ## Linked projects
 
-- [S002 Bulk Editor](../projects/S002%20-%20Bulk%20Editor.md) — V1 presentation audience; Scott reports the related sale closed.
+- [S002 Contentful Bulk Edit App](../projects/S002%20-%20Bulk%20Editor.md) — V1 presentation audience; Scott reports the related sale closed.
 
 ## Scott’s account notes
 

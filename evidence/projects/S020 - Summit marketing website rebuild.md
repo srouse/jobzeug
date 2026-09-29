@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S020
-title: Summit marketing website rebuild
+title: Summit Marketing Website Rebuild
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -116,7 +116,7 @@ evidence:
       reviewed_at: "2026-09-26"
 concept_proposals: []
 ---
-# S020: Summit marketing website rebuild
+# S020: Summit Marketing Website Rebuild
 
 Captured: September 25, 2026
 Status: Expanded Scott account September 25, 2026; project calendar dates not needed / not provided
@@ -128,8 +128,8 @@ Evidence: Scott's direct account; aligns with R005 resume claim (Contentful + br
 - Employer: [C003 Summit Credit Union](../employers/C003-summit-credit-union.md)
 - Collaborators: **Design lead** designed the marketing components in Figma. Scott as **design technologist** created the (code) components and **set up the Figma file** the design lead worked in. Presented/persuaded **CMO** and **CIO** on the headless/Contentful path.
 - Customers / clients: None (Summit’s own public marketing site for **members** and **prospective members**).
-- Related: [S019 Summit application design system](S019%20-%20Summit%20application%20design%20system.md) — application DS first; this project is the **second** DS (marketing), with **synergy** between them. Do not merge.
-- Related: [S026 Summit page builder](S026%20-%20Summit%20page%20builder.md) — the Contentful app he describes for seeing, previewing, and editing page elements during this migration. Do not merge.
+- Related: [S019 Summit Design System](S019%20-%20Summit%20application%20design%20system.md) — application DS first; this project is the **second** DS (marketing), with **synergy** between them. Do not merge.
+- Related: [S026 Summit Page Builder](S026%20-%20Summit%20page%20builder.md) — the Contentful app he describes for seeing, previewing, and editing page elements during this migration. Do not merge.
 - Public surface (Scott): still live at [summitcreditunion.com](https://www.summitcreditunion.com/) as of this account — site existence does not by itself prove every claim here.
 
 ## Resume summary

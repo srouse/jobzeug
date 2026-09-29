@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S027
-title: Design System Guidance
+title: AmFam Design System Guidance
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -69,7 +69,7 @@ evidence:
       reviewed_at: "2026-09-27"
 concept_proposals: []
 ---
-# S027: Design System Guidance
+# S027: AmFam Design System Guidance
 
 Captured: September 27, 2026
 Status: Initial account; owned brands named
@@ -79,7 +79,7 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 
 - Role record: [R006 — Senior UX Designer / Developer](../roles/R006-american-family-ux-designer-developer.md). Scott said to put this on the American Family Senior UX Designer / Developer role. Source dates: November 2019–August 2020. He says the project outlasted that tenure.
 - Employer: [C004 American Family Insurance](../employers/C004-american-family-insurance.md). He says the overarching company was also called American Family, and that an American Family brand under it sold the insurance. Owned brands he named: that American Family insurer, The General, HomeSite Insurance, and Main Street America. Each had its own brand.
-- Other half of the same job: [S023 AmFam R&D ListenAssist prototypes](S023%20-%20AmFam%20R%26D%20ListenAssist%20prototypes.md). Do not merge.
+- Other half of the same job: [S023 AmFam R&D ListenAssist Prototypes](S023%20-%20AmFam%20R%26D%20ListenAssist%20prototypes.md). Do not merge.
 - Customers / clients: none. The General, HomeSite, and Main Street America are owned brands of the employer, not buyers or clients.
 
 ## Resume summary

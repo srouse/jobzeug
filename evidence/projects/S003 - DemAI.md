@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S003
-title: DemAI
+title: AI Driven Demos - DemAI
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -82,8 +82,7 @@ evidence:
       reviewed_at: "2026-09-26"
 concept_proposals: []
 ---
-# S003: DemAI
-
+# S003: AI Driven Demos - DemAI
 Captured: September 20, 2026
 Status: Expanded account; artifacts and measured outcomes still pending
 Evidence: Scott's direct account, not yet supported by inspected artifacts. Portfolio materials mention DemAI separately — treat those as source leads, not verified by this account.
@@ -124,7 +123,7 @@ Natural language remained available, but the guided / one-button path mattered: 
 
 **Adoption (Scott’s account):** The idea was daily SE use. In practice, the **majority** of use was **ad hoc content-model creation**. Scott used it on **every SE project he created**. He still sees it as a highly reproducible way to get a structured content model — in some ways easier than standing up a full Cursor environment. It was a way to **guide people who lack content-modeling expertise** while still letting the AI “flex,” rather than relying on loose chat alone.
 
-**Explicitly separate:** Scott states DemAI has **nothing to do with** the Design System Agent Kit or [S001 Blueprints](S001%20-%20Blueprints.md). Do not merge or treat as the same accomplishment.
+**Explicitly separate:** Scott states DemAI has **nothing to do with** the Design System Agent Kit or [S001 Blueprints AI Design System](S001%20-%20Blueprints.md). Do not merge or treat as the same accomplishment.
 
 **Name:** DemAI — “Demo” and “AI” combined; also linked by Scott to Hebrew *demai* (suspect / cautious / “doubtfully tithed produce”). Etymology is Scott’s account; not independently verified here.
 

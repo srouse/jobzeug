@@ -25,9 +25,9 @@ Researched September 19, 2026. Company background is independent of Scott’s ex
 ## Projects
 
 - [State Farm design-system role context](../roles/R004-state-farm-design-systems.md#state-farm-design-system-context)
-- [S005 State Farm tokens](../projects/S005%20-%20State%20Farm%20tokens.md)
-- [S006 State Farm Figma design system](../projects/S006%20-%20State%20Farm%20Figma%20design%20system.md)
-- [S007 State Farm Lit engineering bridge](../projects/S007%20-%20State%20Farm%20Lit%20engineering%20bridge.md)
+- [S005 State Farm Tokens](../projects/S005%20-%20State%20Farm%20tokens.md)
+- [S006 State Farm Figma Design System](../projects/S006%20-%20State%20Farm%20Figma%20design%20system.md)
+- [S007 State Farm Lit Engineering Bridge](../projects/S007%20-%20State%20Farm%20Lit%20engineering%20bridge.md)
 
 ## Sources
 

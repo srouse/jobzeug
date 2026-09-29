@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S008
-title: Contentful for Figma widget
+title: Contentful for Figma Widget
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -209,8 +209,7 @@ evidence:
       reviewed_at: null
 concept_proposals: []
 ---
-# S008: Contentful for Figma widget
-
+# S008: Contentful for Figma Widget
 Captured: September 20, 2026
 Status: Initial account; prospect names and adoption metrics pending
 Evidence: Scott's direct account; resume also claims this widget — still not independently artifact-verified here. Prefer **widget** (Scott’s correction); earlier materials sometimes say plugin.
@@ -222,7 +221,7 @@ Evidence: Scott's direct account; resume also claims this widget — still not i
 - Project dates: v1 in **two or three days** (SE request). Production operationalization over the **last two or three months** (Scott’s account, relative to capture date September 20, 2026). Exact calendar months TBD.
 - Collaborators: Requesting SE(s); **two or three prospects** involved early (names TBD — prospects deferred, do not create CU/CL yet). Later: **PM** via product marketing path; **security** sign-off. Sitting **outside core product**.
 - Perspective: Strong [P002](../perspectives/P002-build-deep-to-influence.md) example — walk ahead, then operationalize.
-- **Naming collision:** In-widget “blueprint” (wireframe outline showing content status) is **not** [S001 Blueprints](S001%20-%20Blueprints.md) the CIA installable repo/design system.
+- **Naming collision:** In-widget “blueprint” (wireframe outline showing content status) is **not** [S001 Blueprints AI Design System](S001%20-%20Blueprints.md) the CIA installable repo/design system.
 - September 28 account, kept separate: [S008 account](../sources/s008-account-2026-09-28.md).
 - Intro transcript, kept separate: [S008 walkthrough](../sources/s008-contentful-for-figma-walkthrough-2026-09-28.md).
 - Public help he says he wrote: [overview](https://www.contentful.com/help/apps/contentful-for-figma/), [concepts](https://www.contentful.com/help/apps/contentful-for-figma/concepts/), [field mapping](https://www.contentful.com/help/apps/contentful-for-figma/map-figma-properties-to-contentful-field-types/).
@@ -302,9 +301,9 @@ Initial capture: SE-driven v1, content-status blueprint unlock, CIA production p
 
 ## Addition — September 21, 2026
 
-Scott described a separate AI binding exploration for the widget: [S009 AI binding research](S009%20-%20AI%20binding%20research.md). Working title. It uses semantic metadata from content entries and component examples to improve mappings and explore repair. He calls it a successful research project and an innovation prototype. It is **not yet integrated into the shipped widget**: safe metadata storage remains unresolved. See S009 for the full account.
+Scott described a separate AI binding exploration for the widget: [S009 AI Component Binding](S009%20-%20AI%20binding%20research.md). Working title. It uses semantic metadata from content entries and component examples to improve mappings and explore repair. He calls it a successful research project and an innovation prototype. It is **not yet integrated into the shipped widget**: safe metadata storage remains unresolved. See S009 for the full account.
 
-He presented that work during [S010 Berlin prototype exploration](S010%20-%20Berlin%20prototype%20exploration.md); the broader Berlin account is pending. The existing widget terminology is retained from his earlier explicit correction; his latest narration also called it a plugin.
+He presented that work during the Berlin event, now part of [Experience Orchestration Research](S025%20-%20Experience%20Orchestration%20%28ExO%29.md#berlin). The existing widget terminology is retained from his earlier explicit correction; his latest narration also called it a plugin.
 
 ## Presentation
 

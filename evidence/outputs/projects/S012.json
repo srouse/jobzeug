@@ -4,12 +4,12 @@
   "roles": [
     "R007"
   ],
-  "name": "Presentation Deck widget (personal)",
+  "name": "Presentation Deck Widget (personal)",
   "summary": "I built a personal Figma Community presentation-deck widget with synced metadata, layouts, TOC, and PDF export—independent of Summit employment delivery.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S012",
-    "title": "Presentation Deck widget (personal)",
+    "title": "Presentation Deck Widget (personal)",
     "record_kind": "project",
     "project_origin": "personal",
     "ranking_eligible": true,

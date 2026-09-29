@@ -1,0 +1,48 @@
+.root {
+  min-height: 100dvh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: safe center;
+  justify-content: safe center;
+  padding: var(--jz-semantic-space-padding-lg, 1.5rem);
+  background: var(--jz-semantic-color-background-canvas-default);
+  color: var(--jz-semantic-color-text-default);
+}
+
+.list {
+  list-style: none;
+  margin: var(--jz-semantic-space-gap-lg, 1.5rem) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--jz-semantic-space-gap-md, 1rem);
+  width: min(52rem, 100%);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+  padding-bottom: var(--jz-semantic-space-gap-md, 1rem);
+  border-bottom: 1px solid var(--jz-semantic-color-border-subtle);
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.links {
+  display: flex;
+  gap: var(--jz-semantic-space-gap-md, 1rem);
+}
+
+.links a {
+  color: var(--jz-semantic-color-text-primary);
+  text-decoration: none;
+}

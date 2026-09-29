@@ -304,7 +304,7 @@ function formatStageSeconds(ms: number): string {
   return `${(ms / 1000).toFixed(1)}s`;
 }
 
-function LoadingState() {
+export function LoadingState() {
   const { bindStages } = useJobPosting();
   return (
     <div className={styles.loading} role="status" aria-live="polite">
@@ -355,7 +355,7 @@ function LoadingState() {
   );
 }
 
-function UnboundBindForm() {
+export function UnboundBindForm() {
   const { busy, error, bind } = useJobPosting();
   const [url, setUrl] = useState("");
   const [entryId, setEntryId] = useState("");

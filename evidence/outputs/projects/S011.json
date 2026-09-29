@@ -4,12 +4,12 @@
   "roles": [
     "R007"
   ],
-  "name": "Figma Design System widget (personal)",
+  "name": "Figma Design System Widget (personal)",
   "summary": "I built a personal Figma Community design-system widget (tokens, ADA, fonts, npm deploy) that helps teams operationalize design systems in Figma—independent of Summit employment delivery.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S011",
-    "title": "Figma Design System widget (personal)",
+    "title": "Figma Design System Widget (personal)",
     "record_kind": "project",
     "project_origin": "personal",
     "ranking_eligible": true,

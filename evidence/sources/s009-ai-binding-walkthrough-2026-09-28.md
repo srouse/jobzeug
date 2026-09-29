@@ -1,6 +1,6 @@
 # AI Binding Agent Research for Contentful Widgets
 
-Spoken transcript exported September 28, 2026 from `VIDEOS/BindingAI/AI Binding Agent Research for Contentful Widgets.srt`. Related project: [S009 AI binding research](../projects/S009%20-%20AI%20binding%20research.md).
+Spoken transcript exported September 28, 2026 from `VIDEOS/BindingAI/AI Binding Agent Research for Contentful Widgets.srt`. Related project: [S009 AI Component Binding](../projects/S009%20-%20AI%20binding%20research.md).
 
 The words below are the export. Repeats, false starts, and caption breaks are kept.
 

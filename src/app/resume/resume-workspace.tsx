@@ -5,6 +5,9 @@ import type { ResumeViewModel } from "@/lib/contentful/resume-model";
 import {
   JobPostingPanel,
   JobPostingProvider,
+  LoadingState,
+  UnboundBindForm,
+  useJobPosting,
 } from "@/components/job-posting";
 import type { LineFocus } from "@/lib/connection-targets";
 import {
@@ -19,7 +22,7 @@ import {
   type EvidencePage,
 } from "@/components/resume";
 import { AnswerStage, DesignModal, DesignSessionProvider } from "@/components/stage";
-import { JzButton, JzTab, JzTabGroup } from "@jobzeug/design-system/react";
+import { JzButton, JzTab, JzTabGroup, JzText } from "@jobzeug/design-system/react";
 import {
   normalizeRouteEntryId,
   resumePath,
@@ -131,8 +134,22 @@ function FocusRouteSync({
   return null;
 }
 
+function ResumeCover({ resumeLoading }: { resumeLoading: boolean }) {
+  const { data, busy, loading: postingLoading } = useJobPosting();
+  const working = busy || postingLoading || (Boolean(data) && resumeLoading);
+  return (
+    <div className={styles.cover}>
+      <div className={styles.coverInner}>
+        <JzText level={1} variant="heading" label="Scott Rouse" />
+        {working ? <LoadingState /> : <UnboundBindForm />}
+      </div>
+    </div>
+  );
+}
+
 function ResumePageBody() {
   const { evidencePage, setEvidencePage } = useResumeHighlights();
+  const { data: posting } = useJobPosting();
   const [resume, setResume] = useState<ResumeViewModel | null>(null);
   const resumeProjectIds = useMemo(() => {
     if (!resume) return [];
@@ -247,6 +264,7 @@ function ResumePageBody() {
   const selectPage = (page: EvidencePage) => {
     setEvidencePage(page);
   };
+  const covered = !posting || loading;
 
   return (
     <main
@@ -254,6 +272,11 @@ function ResumePageBody() {
       className={styles.root}
       data-mobile-view={mobile ? evidencePage : undefined}
     >
+      <div
+        className={styles.shell}
+        inert={covered ? true : undefined}
+        aria-hidden={covered || undefined}
+      >
       <div className={styles.workspace}>
         <div className={`${styles.inner} ${styles.innerBound}`}>
           <div
@@ -327,6 +350,8 @@ function ResumePageBody() {
           <ResumeChatDock open={chatOpen} onOpenChange={setChatOpen} />
         </>
       ) : null}
+      </div>
+      {covered ? <ResumeCover resumeLoading={loading} /> : null}
     </main>
   );
 }

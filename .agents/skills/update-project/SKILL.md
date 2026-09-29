@@ -61,7 +61,7 @@ Adjust that project's themes cell in `evidence/projects/INDEX.md` so a posting a
 
 `## Resume summary` is what an employer reads above the Details button. Compress only copies it.
 
-Two sentences, first person, under 280 characters. Voice is Scott's Contentful articles (S014, S015, S016): a concrete thing he did, the mechanism in plain words.
+Two sentences, first person, under 280 characters. Voice is Scott's Contentful articles (S014, S015): a concrete thing he did, the mechanism in plain words.
 
 - Sentence one: what he did, specific enough that a stranger understands the work.
 - Sentence two: the sharp result or limit. When the project has a video, that sentence is the reason to open it. Do not say "click" or "watch."

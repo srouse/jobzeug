@@ -23,8 +23,8 @@ None — role narrative is in LinkedIn description; project-level detail lives o
 
 ## Linked projects
 
-- [S017: JSOnline ad system installation](../projects/S017%20-%20JSOnline%20ad%20system%20installation.md) — third-party ad system on JSOnline; Flash detect; image/HTML fallbacks; site-wide mapping (Scott account September 25, 2026). **Not** the interactive games-within-ads work (separate project TBD).
-- [S018: Journal Interactive advertiser studio](../projects/S018%20-%20Journal%20Interactive%20advertiser%20studio.md) — client websites / interactive pieces for JSOnline advertisers; Water Street Flash map; Art Museum redesign involvement; early client contact + design (September 25, 2026).
+- [S017: JSOnline Ad System Installation](../projects/S017%20-%20JSOnline%20ad%20system%20installation.md) — third-party ad system on JSOnline; Flash detect; image/HTML fallbacks; site-wide mapping (Scott account September 25, 2026). **Not** the interactive games-within-ads work (separate project TBD).
+- [S018: Journal Interactive Advertiser Studio](../projects/S018%20-%20Journal%20Interactive%20advertiser%20studio.md) — client websites / interactive pieces for JSOnline advertisers; Water Street Flash map; Art Museum redesign involvement; early client contact + design (September 25, 2026).
 
 ## Open questions
 

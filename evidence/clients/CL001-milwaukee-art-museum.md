@@ -39,7 +39,7 @@ Usage note: Museum fame and architecture awards are **not** Scott’s accomplish
 
 ## Linked projects
 
-- [S018 Journal Interactive advertiser studio](../projects/S018%20-%20Journal%20Interactive%20advertiser%20studio.md) — Scott: implementation team + design-process influence on MAM site; **did not design** it (September 25, 2026).
+- [S018 Journal Interactive Advertiser Studio](../projects/S018%20-%20Journal%20Interactive%20advertiser%20studio.md) — Scott: implementation team + design-process influence on MAM site; **did not design** it (September 25, 2026).
 
 ## Scott’s account notes
 

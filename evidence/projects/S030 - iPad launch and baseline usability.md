@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S030
-title: iPad launch and baseline usability
+title: iPad Launch and Baseline Usability
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -102,7 +102,7 @@ evidence:
       reviewed_at: "2026-09-27"
 concept_proposals: []
 ---
-# S030: iPad launch and baseline usability
+# S030: iPad Launch and Baseline Usability
 
 Captured: September 27, 2026
 Status: Catch-all for the whole StudyBlue experience. Same-day addition: the custom card flipper shipped and was heavily used; baseline checks were practical floor-raising fixes; the company later failed financially.

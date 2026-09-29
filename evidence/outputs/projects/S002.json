@@ -4,12 +4,13 @@
   "roles": [
     "R002"
   ],
-  "name": "Bulk Editor",
-  "summary": "I designed and built a customer-facing prototype for bulk content operations in Contentful, combining a bulk editing UI with AI chat and semantic search before handing the work into the broader ecosystem.",
+  "name": "Contentful Bulk Edit App",
+  "summary": "This is Bulk Edit, the most popular app in the Contentful Marketplace. I originally built it as a Solution Specialist to win a specific prospect, and it ultimately helped close two deals. I then helped bring it into production and launch it in the marketplace.",
+  "presentation": "S002-presentation",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S002",
-    "title": "Bulk Editor",
+    "title": "Contentful Bulk Edit App",
     "record_kind": "project",
     "project_origin": "employment",
     "ranking_eligible": true,
@@ -20,8 +21,8 @@
       {
         "id": "R002",
         "relationship": "delivery",
-        "status": "provisional",
-        "note": "Preserved provisional association from the project record."
+        "status": "confirmed",
+        "note": "The September 28, 2026 recording names this work as done while he was a solution specialist."
       }
     ],
     "employer_links": [
@@ -43,8 +44,8 @@
     "delivery_stage": "mixed",
     "annotation": {
       "status": "reviewed",
-      "reviewed_by": "Codex",
-      "reviewed_at": "2026-09-26",
+      "reviewed_by": "Scott",
+      "reviewed_at": "2026-09-28",
       "vocabulary_version": "1.5.0"
     },
     "public_disclosure": "restricted",
@@ -133,13 +134,14 @@
         ],
         "limitations": [
           "Intermediate version was built by the ecosystem team; boundaries of original versus rewritten code remain unclear.",
-          "Production status is self-reported."
+          "Production status is self-reported.",
+          "The September 28 recording shows the store app and says he contributed the shared-reference filter directly. That may be this object-filtering work. S002-E005 carries that recording."
         ],
         "public_disclosure": "restricted",
         "review": {
-          "status": "approved",
-          "reviewed_by": "Codex",
-          "reviewed_at": "2026-09-26"
+          "status": "needs_review",
+          "reviewed_by": null,
+          "reviewed_at": null
         }
       },
       {
@@ -169,8 +171,106 @@
           "reviewed_by": "Codex",
           "reviewed_at": "2026-09-26"
         }
+      },
+      {
+        "id": "S002-E005",
+        "statement": "Shows the App Store Bulk Edit grid, where a direct edit updates more than one entry at once, and says he contributed the filter for entries that share a reference.",
+        "concept_ids": [
+          "local:interaction-design",
+          "local:front-end-development",
+          "local:programming",
+          "local:contentful"
+        ],
+        "ownership": "contributor",
+        "scope": "multiple_teams",
+        "delivery_stage": "production",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s002-bulk-edit-walkthrough-2026-09-28.md",
+            "locator": "0:01:30 and 0:01:48",
+            "supports": "A direct edit updates more than one entry at once. Filtering by the same reference was difficult to implement, and he says he contributed to it directly."
+          }
+        ],
+        "limitations": [
+          "The recording shows the store app. He says it is not far from his first build. The earlier account still has the ecosystem team building a version between those.",
+          "The reference-filter contribution is his statement. The code was not inspected.",
+          "The apartment-price example is a hypothetical in the recording, not a named customer."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S002-E006",
+        "statement": "About a month after the first build, added an AI field on the right that found entries to change together, and says that pitch closed a second deal.",
+        "concept_ids": [
+          "local:interaction-design",
+          "local:contentful",
+          "local:customer-demonstration"
+        ],
+        "ownership": "contributor",
+        "scope": "external_audience",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s002-bulk-edit-walkthrough-2026-09-28.md",
+            "locator": "0:02:04 and 0:02:19",
+            "supports": "About a month later he added an AI field on the right and used it to find entries, including a product rename, before the app was in the store."
+          }
+        ],
+        "limitations": [
+          "The recording does not show the AI field. It does not name a model or say semantic search.",
+          "The closed second deal is his account. It does not establish that he closed every solution-specialist sale."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S002-E007",
+        "statement": "Helped guide Bulk Edit into the Contentful App Store.",
+        "concept_ids": [
+          "local:production-release",
+          "local:coordination"
+        ],
+        "ownership": "contributor",
+        "scope": "multiple_teams",
+        "delivery_stage": "production",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s002-bulk-edit-walkthrough-2026-09-28.md",
+            "locator": "0:02:46",
+            "supports": "He says he helped guide Bulk Edit into the app store."
+          }
+        ],
+        "limitations": [
+          "Guiding it in is his account. The recording does not name who else published it.",
+          "He calls it the most popular app in the store. No ranking source is in the file."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
       }
     ],
-    "concept_proposals": []
+    "concept_proposals": [
+      {
+        "label": "Bulk content editing",
+        "category": "work_activity",
+        "definition": "Changing many structured content entries together from one surface.",
+        "reason": "The account and the September 28 recording are about editing many Contentful entries at once. Interaction design covers the grid. No approved concept covers the bulk operation."
+      }
+    ]
   }
 }

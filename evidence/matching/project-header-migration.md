@@ -16,28 +16,28 @@ No blanket public clearance was inferred. S002 and S018 remain restricted becaus
 
 | Project | Year | Annotation | Claims | Remaining boundary |
 |---|---|---|---:|---|
-| [S001: Blueprints](../projects/S001%20-%20Blueprints.md) | 2026 (estimate) | reviewed | 3 | Production/release state and customer adoption still unknown; React was agent-generated. |
-| [S002: Bulk Editor](../projects/S002%20-%20Bulk%20Editor.md) | 2025 (estimate) | reviewed | 4 | Role title provisional; code-handoff boundary and ARR attribution unresolved; customer names restricted. |
-| [S003: DemAI](../projects/S003%20-%20DemAI.md) | 2025 | reviewed | 2 | R002 title provisional; production status, agent/code boundaries, and 68% speed claim unresolved. |
+| [S001: Blueprints AI Design System](../projects/S001%20-%20Blueprints.md) | 2026 (estimate) | reviewed | 3 | Production/release state and customer adoption still unknown; React was agent-generated. |
+| [S002: Contentful Bulk Edit App](../projects/S002%20-%20Bulk%20Editor.md) | 2025 (estimate) | reviewed | 4 | Role title provisional; code-handoff boundary and ARR attribution unresolved; customer names restricted. |
+| [S003: AI Driven Demos - DemAI](../projects/S003%20-%20DemAI.md) | 2025 | reviewed | 2 | R002 title provisional; production status, agent/code boundaries, and 68% speed claim unresolved. |
 | [S004: State Farm design system refresh (umbrella)](../roles/R004-state-farm-design-systems.md#state-farm-design-system-context) | 2023 (estimate) | reviewed | 0 | Umbrella excluded from ranking; child claims remain on S005–S007. |
-| [S005: State Farm tokens](../projects/S005%20-%20State%20Farm%20tokens.md) | 2023 (estimate) | needs_review | 3 | E001 persuasion remains approved. E002 template and E003 inverse mode are proposed. |
-| [S006: State Farm Figma design system](../projects/S006%20-%20State%20Farm%20Figma%20design%20system.md) | 2023 (estimate) | reviewed | 2 | Plugin/widget type, release stage, and collaborator boundaries remain open. |
-| [S007: State Farm Lit engineering bridge](../projects/S007%20-%20State%20Farm%20Lit%20engineering%20bridge.md) | 2023 (estimate) | reviewed | 1 | Coaching is documented; personal Lit implementation is not established. |
-| [S008: Contentful for Figma widget](../projects/S008%20-%20Contentful%20for%20Figma%20widget.md) | 2026 (estimate) | reviewed | 3 | Public release is self-reported; low usage preserved; exact security tasks unspecified. |
-| [S009: AI binding research](../projects/S009%20-%20AI%20binding%20research.md) | 2026 (estimate) | reviewed | 2 | Working title. Sole research ownership explicit; innovation prototype, learnings real, evaluation qualitative, not in the shipped widget. |
-| [S010: Berlin prototype exploration](../projects/S010%20-%20Berlin%20prototype%20exploration.md) | 2026 (estimate) | needs_review | 1 | Event year/role and independent prototype scope need discussion. |
-| [S011: Figma Design System widget (personal)](../projects/S011%20-%20Figma%20Design%20System%20widget.md) | Unknown | needs_review | 2 | Personal-work attribution clear; year conflicts with provisional R007 calendar placement. |
-| [S012: Presentation Deck widget (personal)](../projects/S012%20-%20Presentation%20Deck%20widget.md) | Unknown | needs_review | 2 | Personal-work attribution clear; year conflicts with provisional R007 calendar placement. |
-| [S013: Contentful Content Type widget (personal)](../projects/S013%20-%20Contentful%20Content%20Type%20widget.md) | Unknown | needs_review | 2 | Personal-work attribution clear; year conflicts with provisional R007 calendar placement. |
-| [S014: Design tokens explained (article)](../projects/S014%20-%20Design%20tokens%20Contentful%20blog.md) | 2024 | reviewed | 1 | Published authorship captured; top-five/top-ten and search-rank claims not promoted. |
-| [S015: Understanding AI by its building blocks (article)](../projects/S015%20-%20Understanding%20AI%20building%20blocks.md) | 2026 | needs_review | 2 | Writing authorship clear; interactive-module implementation ownership unresolved. |
-| [S016: Hidden cost of technical debt (article)](../projects/S016%20-%20Technical%20debt%20Contentful%20blog.md) | 2025 | reviewed | 1 | Published authorship captured; customer anecdotes are not implementation evidence. |
-| [S017: JSOnline ad system installation](../projects/S017%20-%20JSOnline%20ad%20system%20installation.md) | 2001 (estimate) | reviewed | 2 | Installation and delivery supported by account; vendor/PHP details not inferred. |
-| [S018: Journal Interactive advertiser studio](../projects/S018%20-%20Journal%20Interactive%20advertiser%20studio.md) | 2001 (estimate) | reviewed | 2 | Map design/build distinct from Art Museum implementation; client names restricted. |
-| [S019: Summit application design system](../projects/S019%20-%20Summit%20application%20design%20system.md) | 2022 (estimate) | reviewed | 3 | Initial system and migration supported; team size and port timing remain open. |
-| [S020: Summit marketing website rebuild](../projects/S020%20-%20Summit%20marketing%20website%20rebuild.md) | 2022 (estimate) | reviewed | 3 | Scott’s implementation separated from visual-design lead; performance qualitative. |
+| [S005: State Farm Tokens](../projects/S005%20-%20State%20Farm%20tokens.md) | 2023 (estimate) | needs_review | 3 | E001 persuasion remains approved. E002 template and E003 inverse mode are proposed. |
+| [S006: State Farm Figma Design System](../projects/S006%20-%20State%20Farm%20Figma%20design%20system.md) | 2023 (estimate) | reviewed | 2 | Plugin/widget type, release stage, and collaborator boundaries remain open. |
+| [S007: State Farm Lit Engineering Bridge](../projects/S007%20-%20State%20Farm%20Lit%20engineering%20bridge.md) | 2023 (estimate) | reviewed | 1 | Coaching is documented; personal Lit implementation is not established. |
+| [S008: Contentful for Figma Widget](../projects/S008%20-%20Contentful%20for%20Figma%20widget.md) | 2026 (estimate) | reviewed | 3 | Public release is self-reported; low usage preserved; exact security tasks unspecified. |
+| [S009: AI Component Binding](../projects/S009%20-%20AI%20binding%20research.md) | 2026 (estimate) | reviewed | 2 | Working title. Sole research ownership explicit; innovation prototype, learnings real, evaluation qualitative, not in the shipped widget. |
+| S010 (retired) | 2026 (estimate) | — | — | Account moved to [Experience Orchestration Research](../projects/S025%20-%20Experience%20Orchestration%20%28ExO%29.md#berlin). Do not reuse the id. |
+| [S011: Figma Design System Widget (personal)](../projects/S011%20-%20Figma%20Design%20System%20widget.md) | Unknown | needs_review | 2 | Personal-work attribution clear; year conflicts with provisional R007 calendar placement. |
+| [S012: Presentation Deck Widget (personal)](../projects/S012%20-%20Presentation%20Deck%20widget.md) | Unknown | needs_review | 2 | Personal-work attribution clear; year conflicts with provisional R007 calendar placement. |
+| [S013: Contentful Content Type Widget (personal)](../projects/S013%20-%20Contentful%20Content%20Type%20widget.md) | Unknown | needs_review | 2 | Personal-work attribution clear; year conflicts with provisional R007 calendar placement. |
+| [S014: Design Tokens Explained (article)](../projects/S014%20-%20Design%20tokens%20Contentful%20blog.md) | 2024 | reviewed | 1 | Published authorship captured; top-five/top-ten and search-rank claims not promoted. |
+| [S015: Understanding AI (article)](../projects/S015%20-%20Understanding%20AI%20building%20blocks.md) | 2026 | needs_review | 2 | Writing authorship clear; interactive-module implementation ownership unresolved. |
+| S016 (retired) | 2025 | — | — | Removed from the resume on 2026-09-28. See [retired S016](../projects/INDEX.md#retired-s016). Do not reuse the id. |
+| [S017: JSOnline Ad System Installation](../projects/S017%20-%20JSOnline%20ad%20system%20installation.md) | 2001 (estimate) | reviewed | 2 | Installation and delivery supported by account; vendor/PHP details not inferred. |
+| [S018: Journal Interactive Advertiser Studio](../projects/S018%20-%20Journal%20Interactive%20advertiser%20studio.md) | 2001 (estimate) | reviewed | 2 | Map design/build distinct from Art Museum implementation; client names restricted. |
+| [S019: Summit Design System](../projects/S019%20-%20Summit%20application%20design%20system.md) | 2022 (estimate) | reviewed | 3 | Initial system and migration supported; team size and port timing remain open. |
+| [S020: Summit Marketing Website Rebuild](../projects/S020%20-%20Summit%20marketing%20website%20rebuild.md) | 2022 (estimate) | reviewed | 3 | Scott’s implementation separated from visual-design lead; performance qualitative. |
 | [S021: Rates Central](../projects/S021%20-%20Rates%20Central.md) | 2022 (estimate) | reviewed | 3 | Contentful app supported; team boundary and measurement/validation details open. |
-| [S022: 2024 Partnership Tour - AI design systems](../projects/S022%20-%202024%20Partnership%20Tour%20AI%20design%20systems.md) | 2024 | reviewed | 1 | Tour year explicit; exploratory talk does not establish a shipped AI product. |
+| [S022: 2024 Partnership Tour - AI Design Systems](../projects/S022%20-%202024%20Partnership%20Tour%20AI%20design%20systems.md) | 2024 | reviewed | 1 | Tour year explicit; exploratory talk does not establish a shipped AI product. |
 
 ## Questions to discuss first
 
@@ -49,11 +49,13 @@ These questions affect attribution or the useful shape of a project. Exact month
 
 The records provisionally attach them to R007, but captured public version history is in 2022–2023. Version dates do not establish initial build dates, and the existing role link is not firm enough to resolve the difference. All three years remain null, with provisional calendar_anchor links. Their personal origin and separation from employer delivery remain explicit. Do not reassign them automatically to R005 or Contentful.
 
-### Berlin exploration — S010
+### Berlin exploration — retired S010
+
+The account now lives in [Experience Orchestration Research](../projects/S025%20-%20Experience%20Orchestration%20%28ExO%29.md#berlin). Do not reuse S010.
 
 **Question:** What did the Berlin prototype itself do beyond the binding research already captured in S009, and roughly which year/role was this?
 
-A tentative 2026 estimate follows provisional R001, not an established event date. The header records only Scott’s preparation and delivery of the presentation. It does not repeat S009’s research as a second technical accomplishment or assign another participant’s work to Scott. Event name and scope are more useful than exact dates.
+A tentative 2026 estimate follows provisional R001, not an established event date. The moved account records Scott’s preparation and delivery of the presentation, and his September 28, 2026 framing that Berlin was him socializing the Experience Orchestration research. It does not repeat S009’s research as a second technical accomplishment or assign another participant’s work to Scott. Event name and scope are more useful than exact dates.
 
 ### Interactive AI series — S015
 

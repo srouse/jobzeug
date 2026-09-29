@@ -4,12 +4,12 @@
   "roles": [
     "R005"
   ],
-  "name": "Summit page builder",
+  "name": "Summit Page Builder",
   "summary": "I built a Contentful App Framework page builder so Summit marketing could see every page, preview it, and jump to the elements on that page. This was before Contentful's own live preview product existed.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S026",
-    "title": "Summit page builder",
+    "title": "Summit Page Builder",
     "record_kind": "project",
     "project_origin": "employment",
     "ranking_eligible": true,

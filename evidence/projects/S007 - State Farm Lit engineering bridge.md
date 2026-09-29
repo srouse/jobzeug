@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S007
-title: State Farm Lit engineering bridge
+title: State Farm Lit Engineering Bridge
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -65,8 +65,7 @@ evidence:
       reviewed_at: "2026-09-26"
 concept_proposals: []
 ---
-# S007: State Farm Lit engineering bridge
-
+# S007: State Farm Lit Engineering Bridge
 Captured: September 20, 2026
 Status: Initial account; artifacts pending
 Evidence: Scott's direct account, not yet supported by inspected artifacts

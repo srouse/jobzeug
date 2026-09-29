@@ -4,12 +4,12 @@
   "roles": [
     "R022"
   ],
-  "name": "JSOnline ad system installation",
+  "name": "JSOnline Ad System Installation",
   "summary": "I installed and integrated a third-party ad system across JSOnline—Flash detection, image/HTML fallbacks, and site-wide section mapping—so rich media ads could serve in production.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S017",
-    "title": "JSOnline ad system installation",
+    "title": "JSOnline Ad System Installation",
     "record_kind": "project",
     "project_origin": "employment",
     "ranking_eligible": true,

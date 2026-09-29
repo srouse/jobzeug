@@ -4,12 +4,12 @@
   "roles": [
     "R006"
   ],
-  "name": "Design System Guidance",
+  "name": "AmFam Design System Guidance",
   "summary": "I guided an early cross-brand design-system effort, analyzing whether incoming software could become a reusable system. I led the first conversations among design technologists at the brands so they would not buy or assemble the wrong thing.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S027",
-    "title": "Design System Guidance",
+    "title": "AmFam Design System Guidance",
     "record_kind": "project",
     "project_origin": "employment",
     "ranking_eligible": true,

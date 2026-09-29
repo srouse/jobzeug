@@ -25,8 +25,8 @@ None — role narrative is in LinkedIn description; project-level detail lives o
 
 ## Linked projects
 
-- [S023 AmFam R&D ListenAssist prototypes](../projects/S023%20-%20AmFam%20R%26D%20ListenAssist%20prototypes.md) — React ListenAssist + shadowing user tests (expanded account).
-- [S027 Design System Guidance](../projects/S027%20-%20Design%20System%20Guidance.md) — the other half of the job: software-fit analysis and the first cross-brand design-system conversations. Outlasted the tenure.
+- [S023 AmFam R&D ListenAssist Prototypes](../projects/S023%20-%20AmFam%20R%26D%20ListenAssist%20prototypes.md) — React ListenAssist + shadowing user tests (expanded account).
+- [S027 AmFam Design System Guidance](../projects/S027%20-%20Design%20System%20Guidance.md) — the other half of the job: software-fit analysis and the first cross-brand design-system conversations. Outlasted the tenure.
 
 ## Source references
 

@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S019
-title: Summit application design system
+title: Summit Design System
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -110,7 +110,7 @@ evidence:
       reviewed_at: "2026-09-26"
 concept_proposals: []
 ---
-# S019: Summit application design system
+# S019: Summit Design System
 
 Captured: September 25, 2026
 Status: Expanded Scott account September 25, 2026; exact months and system name still open
@@ -122,7 +122,7 @@ Evidence: Scott's direct account; aligns with R005 resume/LinkedIn StencilJS/Lit
 - Employer: [C003 Summit Credit Union](../employers/C003-summit-credit-union.md)
 - Collaborators: Not named. Org context: Summit, like many credit unions, **third-parties most services**; initiative to **centralize APIs** and build **custom applications**. Prior UI approach used an **off-the-shelf** system that was hard to use.
 - Customers / clients: None named. Consuming apps were **internal**; one named example is a **branch teller interface** (disclosure: internal financial tooling — treat carefully in public copy).
-- Related: [S011](S011%20-%20Figma%20Design%20System%20widget.md) is a **personal** Figma Community widget date-anchored to Summit — **not** this Summit delivery. Do not merge. **Figma plugins:** Scott says **no specifics** — leave unnamed; do not invent plugin list. Sibling Summit delivery: [S020 Summit marketing website rebuild](S020%20-%20Summit%20marketing%20website%20rebuild.md) (marketing DS #2 + headless site).
+- Related: [S011](S011%20-%20Figma%20Design%20System%20widget.md) is a **personal** Figma Community widget date-anchored to Summit — **not** this Summit delivery. Do not merge. **Figma plugins:** Scott says **no specifics** — leave unnamed; do not invent plugin list. Sibling Summit delivery: [S020 Summit Marketing Website Rebuild](S020%20-%20Summit%20marketing%20website%20rebuild.md) (marketing DS #2 + headless site).
 
 ## Resume summary
 

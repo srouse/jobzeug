@@ -4,12 +4,12 @@
   "roles": [
     "R002"
   ],
-  "name": "DemAI",
+  "name": "AI Driven Demos - DemAI",
   "summary": "I built DemAI, an SE demo platform that turns crawled sites and design-system abstractions into one-button, agent-driven Contentful demos with a top-down content model.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S003",
-    "title": "DemAI",
+    "title": "AI Driven Demos - DemAI",
     "record_kind": "project",
     "project_origin": "employment",
     "ranking_eligible": true,

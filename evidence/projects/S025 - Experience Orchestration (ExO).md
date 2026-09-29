@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S025
-title: Experience Orchestration (ExO)
+title: Experience Orchestration Research
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -222,6 +222,30 @@ evidence:
       status: approved
       reviewed_by: Scott
       reviewed_at: "2026-09-27"
+  - id: S025-E008
+    statement: Used a Berlin event to socialize this research and work with people on it, including a
+      presentation to about two dozen people in a hackathon-like setting.
+    concept_ids:
+      - local:speaking
+    ownership: sole
+    scope: unknown
+    delivery_stage: unknown
+    provenance: self_report
+    sources:
+      - ref: "#berlin"
+        locator: Berlin — socializing the research
+        supports: September 28, 2026 he placed Berlin inside this project as communicating the
+          research and working with people. The September 21 account is the event detail.
+    limitations:
+      - Event name and dates are still unknown.
+      - Reception is his recollection, not an independent assessment.
+      - The September 21 account says the talk presented the separate S009 binding research.
+      - He will round out the rest of the Berlin story later.
+    public_disclosure: needs_review
+    review:
+      status: proposed
+      reviewed_by: null
+      reviewed_at: null
 concept_proposals:
   - label: Content-to-UI assembly
     category: skill
@@ -243,7 +267,7 @@ concept_proposals:
     reason: product-direction-influence requires an affected decision. E001 is Scott's guiding role,
       not a recorded Contentful decision.
 ---
-# S025: Experience Orchestration (ExO)
+# S025: Experience Orchestration Research
 
 Captured: September 27, 2026
 Status: Account expanded September 27, 2026; Studio and the data-assembly visualizer are still not separate projects
@@ -253,9 +277,10 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 
 - Role record: [R001 — Senior Product Architect](../roles/R001-contentful-senior-product-architect.md). Scott said to put this on the role he has right now, the one at the top of the role list. Source dates: February 2026–present. Project-specific months were not given.
 - Employer: [C001 Contentful](../employers/C001-contentful.md)
-- Earlier notes on [S001 Blueprints](S001%20-%20Blueprints.md) and [S008](S008%20-%20Contentful%20for%20Figma%20widget.md) already use **Experience Orchestration**. That is the technical name. Acronym **ExO** (the X is generally not capitalized). A first telling said “Orchestrator”; this correction supersedes that. Do not copy the Blueprints "centerpiece" claim into this file.
+- Earlier notes on [S001 Blueprints AI Design System](S001%20-%20Blueprints.md) and [S008](S008%20-%20Contentful%20for%20Figma%20widget.md) already use **Experience Orchestration**. That is the technical name. Acronym **ExO** (the X is generally not capitalized). A first telling said “Orchestrator”; this correction supersedes that. Do not copy the Blueprints "centerpiece" claim into this file.
 - **Studio** is a title only. He says ExO is ultimately the second generation of a product called Studio, which he also gave feedback on, and that Studio is a much larger project not yet in this workspace. Do not open a Studio project from this account.
 - Customers / clients: none named.
+- Berlin is one part of this story, not its own project. The account is [below](#berlin). Retired project id S010. Do not reuse that id.
 
 ## Resume summary
 
@@ -333,3 +358,39 @@ Two big pieces of product functionality, in his account. A later clarification t
 ## Candidate uses
 
 Interview account of guiding a headless-CMS product that needs both a content-to-UI assembly layer and a design-system assembly before a page can be composed. Do not claim he shipped ExO or Studio. The visualizer, PDFs, and API-reproduction interface are his prototypes on this record, not separate projects and not attached files.
+
+## Berlin — socializing the research
+
+<a id="berlin"></a>
+
+September 28, 2026: Scott placed the Berlin trip inside this project. It was a big part of communicating this research and working with people. The rest of that telling will be rounded out later. This section keeps the September 21 account so that earlier detail is not dropped. Do not open a separate Berlin project. Retired id S010.
+
+Faithful summary of Scott's September 21 account, not a quotation:
+
+Scott describes a Berlin trip involving a prototype in a hackathon-like environment. The broader prototype, event name, participants, dates, and deliverables have not yet been narrated.
+
+He says he presented the AI binding exploration documented in [S009](S009%20-%20AI%20binding%20research.md) at the beginning of the week, with a successful reception in his assessment. Someone else presented their version at the end of the event. Scott considered that version incomplete and says his earlier presentation was not acknowledged. This is his account of the sequence and attribution concern; the other person's identity, intent, independent contribution, and relationship to Scott's implementation are not established. Do not infer copying or intent.
+
+He considers the event an important part of his exploration across AI, design systems, and Contentful. The technical binding outcome stays on S009. Do not count that outcome twice.
+
+Useful original wording:
+
+> “essentially a prototype within a hackathon type of environment”
+
+> “a really important part of my story and exploration of AI, design systems, and Contentful”
+
+Sequence he described:
+
+1. He presents the AI binding work at the beginning of the Berlin week.
+2. Prototype work takes place in a hackathon-like setting; details pending.
+3. Another participant presents their version at the end, according to him.
+
+He says he conducted the research behind the scenes and prepared the entire presentation himself. He describes an audience of **a couple dozen people**. Audience members told him that **two or three other people were thinking about this problem**, but had not solved it or reached the point he had. This is his recollection of qualitative audience feedback, not an independently verified comparison.
+
+> “I did all of this research behind the scenes”
+
+> “I did everything.”
+
+<a id="evidence-e008"></a>
+
+The September 28 framing is the claim: Berlin is him socializing this research and working with people. Event name, dates, and the rest of the story are still open.

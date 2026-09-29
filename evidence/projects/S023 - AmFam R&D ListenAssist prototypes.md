@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S023
-title: AmFam R&D ListenAssist prototypes
+title: AmFam R&D ListenAssist Prototypes
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -133,7 +133,7 @@ concept_proposals:
     reason: ListenAssist is a conversation-aligned agent assist; no approved deliverable covers
       operator-assist products beyond generic technical-prototype.
 ---
-# S023: AmFam R&D ListenAssist prototypes
+# S023: AmFam R&D ListenAssist Prototypes
 
 Captured: September 26, 2026  
 Updated: September 26, 2026 (annotate-project draft pass — concept maps, anchors, schema review status)  
@@ -146,7 +146,7 @@ Evidence: Scott’s direct account, not yet supported by inspected artifacts
 - Employer: [C004 American Family Insurance](../employers/C004-american-family-insurance.md)
 - Collaborators: PhD computer scientists on R&D (owned the custom ML database; names unknown). Scott’s lane was React front-end / UX prototyping and field user research.
 - Customers / clients: None named.
-- Other half of the same job: [S027 Design System Guidance](S027%20-%20Design%20System%20Guidance.md). Do not merge.
+- Other half of the same job: [S027 AmFam Design System Guidance](S027%20-%20Design%20System%20Guidance.md). Do not merge.
 
 ## Resume summary
 

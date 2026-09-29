@@ -776,3 +776,33 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 
 - Remap a posting so security-constrained integration and the knowledge tags can score
 - The S031 knowledge-management proposal still does not score
+
+### [2026-09-28T19:02:47-05:00]
+
+#### Summary
+
+- Resume titles are title case, Berlin is part of Experience Orchestration Research, and the technical-debt article is off the resume. The resume stays covered until a job posting is loaded.
+
+#### Changes
+
+- Evidence / records: project titles retitled and published; S010 folded into S025 and archived; S016 archived; Bulk Edit walkthrough and Contentful Bulk Edit App title; AI Component Binding and Knowledge Management System (KMS) names
+- Skills / tooling: resume-summary voice models are S014 and S015
+- Other: resume cover, video-camera mark on projects with a presentation, paused focus brief, top job items center the matching line
+
+#### Decisions
+
+- Berlin is one part of Experience Orchestration Research, and S010 is not reused
+- The technical-debt article is retired, and S016 is not reused
+- Display names come from the project heading; filenames stay so existing links keep working
+- The Details button stays the video control
+
+#### Plans cached
+
+- jobs_list_and_analytics_4c50e070.plan.md
+- merge_berlin_into_exo_a760592d.plan.md
+
+#### Next
+
+- Round out the Berlin account on Experience Orchestration Research; S025-E008 is still proposed
+- The S031 knowledge-management proposal still does not score
+- The focus brief stays paused

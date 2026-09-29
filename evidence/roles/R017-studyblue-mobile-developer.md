@@ -17,7 +17,7 @@ No description displayed for this individual position.
 
 ## Linked projects
 
-- [S030 iPad launch and baseline usability](../projects/S030%20-%20iPad%20launch%20and%20baseline%20usability.md) — same project as R012 and R016. This phase is the iOS start and the iPad work.
+- [S030 iPad Launch and Baseline Usability](../projects/S030%20-%20iPad%20launch%20and%20baseline%20usability.md) — same project as R012 and R016. This phase is the iOS start and the iPad work.
 
 ## Open questions
 

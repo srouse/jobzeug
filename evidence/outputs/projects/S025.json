@@ -4,12 +4,12 @@
   "roles": [
     "R001"
   ],
-  "name": "Experience Orchestration (ExO)",
+  "name": "Experience Orchestration Research",
   "summary": "I researched and prototyped Contentful's Experience Orchestration so a page can be composed from Data Assemblies and a design-system assembly. The prototypes include a data-assembly visualizer, design-system UI, and a stateful interface on the API.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S025",
-    "title": "Experience Orchestration (ExO)",
+    "title": "Experience Orchestration Research",
     "record_kind": "project",
     "project_origin": "employment",
     "ranking_eligible": true,
@@ -269,6 +269,36 @@
           "status": "approved",
           "reviewed_by": "Scott",
           "reviewed_at": "2026-09-27"
+        }
+      },
+      {
+        "id": "S025-E008",
+        "statement": "Used a Berlin event to socialize this research and work with people on it, including a presentation to about two dozen people in a hackathon-like setting.",
+        "concept_ids": [
+          "local:speaking"
+        ],
+        "ownership": "sole",
+        "scope": "unknown",
+        "delivery_stage": "unknown",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "#berlin",
+            "locator": "Berlin — socializing the research",
+            "supports": "September 28, 2026 he placed Berlin inside this project as communicating the research and working with people. The September 21 account is the event detail."
+          }
+        ],
+        "limitations": [
+          "Event name and dates are still unknown.",
+          "Reception is his recollection, not an independent assessment.",
+          "The September 21 account says the talk presented the separate S009 binding research.",
+          "He will round out the rest of the Berlin story later."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
         }
       }
     ],

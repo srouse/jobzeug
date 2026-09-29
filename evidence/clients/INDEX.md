@@ -8,8 +8,8 @@ Prospects (not-yet-closed) are deferred — do not create CL records for them.
 
 | Client | ID | Engaged via | Linked projects | Public disclosure |
 |---|---|---|---|---|
-| [Milwaukee Art Museum](CL001-milwaukee-art-museum.md) | CL001 | [C014](../employers/C014-milwaukee-journal-sentinel.md) / [R022](../roles/R022-journal-sentinel-web-developer.md) | [S018 Journal Interactive advertiser studio](../projects/S018%20-%20Journal%20Interactive%20advertiser%20studio.md) | Not cleared |
-| [Trostel Square](CL002-trostel-square.md) | CL002 | [C014](../employers/C014-milwaukee-journal-sentinel.md) / [R022](../roles/R022-journal-sentinel-web-developer.md) | [S018 Journal Interactive advertiser studio](../projects/S018%20-%20Journal%20Interactive%20advertiser%20studio.md) | Not cleared |
+| [Milwaukee Art Museum](CL001-milwaukee-art-museum.md) | CL001 | [C014](../employers/C014-milwaukee-journal-sentinel.md) / [R022](../roles/R022-journal-sentinel-web-developer.md) | [S018 Journal Interactive Advertiser Studio](../projects/S018%20-%20Journal%20Interactive%20advertiser%20studio.md) | Not cleared |
+| [Trostel Square](CL002-trostel-square.md) | CL002 | [C014](../employers/C014-milwaukee-journal-sentinel.md) / [R022](../roles/R022-journal-sentinel-web-developer.md) | [S018 Journal Interactive Advertiser Studio](../projects/S018%20-%20Journal%20Interactive%20advertiser%20studio.md) | Not cleared |
 
 ## Research and record template (next CL)
 

@@ -27,8 +27,8 @@ Researched September 22, 2026. Company background is independent of Scott’s ex
 
 ## Projects
 
-- [S017: JSOnline ad system installation](../projects/S017%20-%20JSOnline%20ad%20system%20installation.md)
-- [S018: Journal Interactive advertiser studio](../projects/S018%20-%20Journal%20Interactive%20advertiser%20studio.md)
+- [S017: JSOnline Ad System Installation](../projects/S017%20-%20JSOnline%20ad%20system%20installation.md)
+- [S018: Journal Interactive Advertiser Studio](../projects/S018%20-%20Journal%20Interactive%20advertiser%20studio.md)
 
 ## Sources
 

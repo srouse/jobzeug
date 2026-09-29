@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S017
-title: JSOnline ad system installation
+title: JSOnline Ad System Installation
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -84,7 +84,7 @@ evidence:
       reviewed_at: "2026-09-26"
 concept_proposals: []
 ---
-# S017: JSOnline ad system installation
+# S017: JSOnline Ad System Installation
 
 Captured: September 25, 2026
 Status: Expanded Scott account (fallbacks clarified; vendor name and months not needed for the story)

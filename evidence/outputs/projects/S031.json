@@ -4,13 +4,13 @@
   "roles": [
     "R001"
   ],
-  "name": "KMS demo",
+  "name": "Knowledge Management System (KMS)",
   "summary": "I built a proof of concept for running a knowledge-management system on Contentful: a data lake of raw material, processed into structured content a team can use. The recording is that path, from one import to an answer a person can still stop.",
   "presentation": "S031-presentation",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S031",
-    "title": "KMS demo",
+    "title": "Knowledge Management System (KMS)",
     "record_kind": "project",
     "project_origin": "employment",
     "ranking_eligible": true,

@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S015
-title: Understanding AI by its building blocks (article)
+title: Understanding AI (article)
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -81,7 +81,7 @@ evidence:
       reviewed_at: "2026-09-26"
 concept_proposals: []
 ---
-# S015: Understanding AI by its building blocks (article)
+# S015: Understanding AI (article)
 
 Captured: September 22, 2026
 Status: Initial capture from published two-part series + Scott’s emphasis on the interactive application; live embeds partially failed during scrape
@@ -97,7 +97,7 @@ Evidence: Artifact-supported (public articles); Scott’s account that the inter
   - Author index: https://www.contentful.com/blog/author/scott-rouse/
 - Scott asked to **roll both parts into one project** even though they are two posts.
 - Customers / clients: None. Educational / thought-leadership series.
-- Related: Distinct from [S009 AI binding research](S009%20-%20AI%20binding%20research.md) (innovation prototype) and [S003 DemAI](S003%20-%20DemAI.md) (SE demo platform).
+- Related: Distinct from [S009 AI Component Binding](S009%20-%20AI%20binding%20research.md) (innovation prototype) and [S003 AI Driven Demos - DemAI](S003%20-%20DemAI.md) (SE demo platform).
 
 ## Resume summary
 

@@ -4,12 +4,12 @@
   "roles": [
     "R007"
   ],
-  "name": "Contentful Content Type widget (personal)",
+  "name": "Contentful Content Type Widget (personal)",
   "summary": "I built a personal Figma/FigJam widget for proposing and loading Contentful content types with entry examples—independent of Summit or Contentful employment delivery.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S013",
-    "title": "Contentful Content Type widget (personal)",
+    "title": "Contentful Content Type Widget (personal)",
     "record_kind": "project",
     "project_origin": "personal",
     "ranking_eligible": true,

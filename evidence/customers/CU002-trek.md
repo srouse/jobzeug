@@ -42,7 +42,7 @@ Usage note: Prefer Trek-owned sources. Third-party revenue or headcount figures 
 
 ## Linked projects
 
-- [S002 Bulk Editor](../projects/S002%20-%20Bulk%20Editor.md) — V2 presentation audience (AI chat + semantic search demo); Scott reports the related sale closed.
+- [S002 Contentful Bulk Edit App](../projects/S002%20-%20Bulk%20Editor.md) — V2 presentation audience (AI chat + semantic search demo); Scott reports the related sale closed.
 
 ## Scott’s account notes
 

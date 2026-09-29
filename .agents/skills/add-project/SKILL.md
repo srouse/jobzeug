@@ -88,7 +88,7 @@ If the raw telling was never saved and only a summary remains, say that. Do not 
 
 `## Resume summary` is the line a prospective employer reads when they open the project, directly above the Details button that plays the video. Compress copies it. Compress does not write it.
 
-Write it in the same turn as the project file. Two sentences, first person, under 280 characters. Voice is Scott's Contentful articles: a concrete thing he did, the mechanism in plain words. Models already in the repo: S014, S015, S016.
+Write it in the same turn as the project file. Two sentences, first person, under 280 characters. Voice is Scott's Contentful articles: a concrete thing he did, the mechanism in plain words. Models already in the repo: S014, S015.
 
 - Sentence one: what he did, specific enough that a stranger understands the work.
 - Sentence two: the sharp result or limit. When the project has a video, that sentence is the reason to open it. Do not say "click" or "watch."

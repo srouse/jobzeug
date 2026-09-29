@@ -14,7 +14,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Jobzeug",
+  title: {
+    default: "Jobzeug",
+    template: "%s · Jobzeug",
+  },
   description:
     "Evidence workspace and Mastra agent surface for the Figma Forward Deployed Engineer application.",
 };

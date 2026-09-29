@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S005
-title: State Farm tokens
+title: State Farm Tokens
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -128,8 +128,7 @@ evidence:
       reviewed_at: "2026-09-27"
 concept_proposals: []
 ---
-# S005: State Farm tokens
-
+# S005: State Farm Tokens
 Captured: September 20, 2026
 Status: Expanded September 27, 2026. Two parts: persuading State Farm to use tokens, and creating the initial token template. Inverse mode was explored and stepped back.
 Evidence: Scott's direct account, not yet supported by inspected artifacts

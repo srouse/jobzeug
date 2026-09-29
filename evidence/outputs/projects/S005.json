@@ -4,12 +4,12 @@
   "roles": [
     "R004"
   ],
-  "name": "State Farm tokens",
+  "name": "State Farm Tokens",
   "summary": "I persuaded State Farm to use design tokens and, with a Google teammate, created the primitive and semantic template I believe they mostly still use. Inverse mode was part of this work, then stepped back because it was more than the team would maintain.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S005",
-    "title": "State Farm tokens",
+    "title": "State Farm Tokens",
     "record_kind": "project",
     "project_origin": "employment",
     "ranking_eligible": true,

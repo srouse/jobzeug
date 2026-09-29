@@ -10,6 +10,35 @@
   initial-value: 26px;
 }
 
+.cover {
+  position: fixed;
+  inset: 0;
+  z-index: var(--jz-semantic-layer-modal, 50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: var(--jz-semantic-space-padding-lg, 1.5rem);
+  background: var(--jz-semantic-color-background-canvas-subtle);
+  color: var(--jz-semantic-color-text-default);
+}
+
+.coverInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: min(28rem, 100%);
+  gap: var(--jz-semantic-space-gap-md, 1rem);
+}
+
+.shell {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 .root {
   height: 100dvh;
   max-height: 100dvh;

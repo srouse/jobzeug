@@ -31,14 +31,9 @@ function SummaryCopy({ text }: { text: string }) {
         ),
         a: ({ href, children }: ComponentPropsWithoutRef<"a">) =>
           href?.startsWith("https://") || href?.startsWith("http://") ? (
-            <a
-              className={styles.summaryLink}
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <JzText href={href} target="_blank" variant="body-default">
               {children}
-            </a>
+            </JzText>
           ) : (
             <span>{children}</span>
           ),
@@ -260,6 +255,27 @@ function findProjectContext(
   return null;
 }
 
+/** Center a job line in the posting column. Returns false when that row is not laid out yet. */
+function centerJobLine(id: string): boolean {
+  const pane = document.querySelector<HTMLElement>('[data-evidence-pane="job"]');
+  const node = pane?.querySelector<HTMLElement>(
+    `[data-evidence-id="${CSS.escape(id)}"]`,
+  );
+  const root = node?.closest<HTMLElement>("[data-evidence-scroll]");
+  if (!node || !root || node.getBoundingClientRect().height === 0) return false;
+  const rootRect = root.getBoundingClientRect();
+  const nodeRect = node.getBoundingClientRect();
+  const top =
+    root.scrollTop +
+    (nodeRect.top - rootRect.top) -
+    (root.clientHeight - nodeRect.height) / 2;
+  const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ? "auto"
+    : "smooth";
+  root.scrollTo({ top: Math.max(0, top), behavior });
+  return true;
+}
+
 function TopConnections({
   kind,
   resume,
@@ -269,6 +285,7 @@ function TopConnections({
   resume: ResumeViewModel | null;
   posting: JobPostingPanelData | null;
 }) {
+  const { setEvidencePage } = useResumeHighlights();
   const connection = useActiveConnectionTarget();
   const subjectId = connection?.ids.find((endpoint) => endpoint.role === "subject")?.id;
   const edges = posting?.matchGraph?.edges ?? [];
@@ -309,11 +326,26 @@ function TopConnections({
       <ul className={styles.connections}>
         {names.map((item) => (
           <li key={item.id}>
-            <JzText
-              variant="body-default"
-              label={item.name}
-              className={styles.connectionName}
-            />
+            {kind === "project" ? (
+              <JzText
+                interactive
+                variant="body-default"
+                label={item.name}
+                onClick={() => {
+                  const pane = document.querySelector<HTMLElement>(
+                    '[data-evidence-pane="job"]',
+                  );
+                  if (pane?.hidden) setEvidencePage("job");
+                  const attempt = (left: number) => {
+                    if (centerJobLine(item.id) || left <= 0) return;
+                    requestAnimationFrame(() => attempt(left - 1));
+                  };
+                  requestAnimationFrame(() => attempt(2));
+                }}
+              />
+            ) : (
+              <JzText variant="body-default" label={item.name} />
+            )}
           </li>
         ))}
       </ul>
@@ -339,6 +371,9 @@ function BriefCopy({ text }: { text: string }) {
     </JzText>
   );
 }
+
+/** The brief stays in the app. Flip this to show it and let a focus load it again. */
+const FOCUS_BRIEF_PAUSED: boolean = true;
 
 function FocusBrief({
   kind,
@@ -412,7 +447,7 @@ function FocusBrief({
   };
 
   useEffect(() => {
-    if (paragraph || !postingEntryId) return;
+    if (FOCUS_BRIEF_PAUSED || paragraph || !postingEntryId) return;
     void run();
     // The focused row loads its brief once. connectionKey reruns only if the matches change before a paragraph exists.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -430,6 +465,8 @@ function FocusBrief({
     const frame = requestAnimationFrame(() => setOpen(true));
     return () => cancelAnimationFrame(frame);
   }, [paragraph]);
+
+  if (FOCUS_BRIEF_PAUSED) return null;
 
   return (
     <div className={styles.connectionBlock}>
@@ -539,7 +576,7 @@ export function ConnectionHub({
             employer={focused?.employerName}
             analysisUrl={
               posting?.entryId
-                ? `/debug/match-concepts?jobPostingEntryId=${encodeURIComponent(posting.entryId)}&projectId=${encodeURIComponent(project?.evidenceId ?? lineFocus.id)}`
+                ? `/analytics?jobPostingEntryId=${encodeURIComponent(posting.entryId)}&projectId=${encodeURIComponent(project?.evidenceId ?? lineFocus.id)}`
                 : null
             }
             contentfulUrl={project?.contentfulUrl}
@@ -553,14 +590,12 @@ export function ConnectionHub({
           />
           {project?.summary ? <SummaryCopy text={project.summary} /> : null}
           {project?.url && !project.summary?.includes(project.url) ? (
-            <a
-              className={styles.articleLink}
+            <JzText
+              variant="body-default"
               href={project.url}
               target="_blank"
-              rel="noreferrer"
-            >
-              <JzText variant="body-default" label="Read the article" />
-            </a>
+              label="Read the article"
+            />
           ) : null}
         </div>
         {project?.presentation ? (
@@ -607,7 +642,7 @@ export function ConnectionHub({
             label={sectionLabel}
             analysisUrl={
               posting?.entryId
-                ? `/debug/match-concepts?jobPostingEntryId=${encodeURIComponent(posting.entryId)}&lineEntryId=${encodeURIComponent(line?.entryId ?? lineFocus.id)}`
+                ? `/analytics?jobPostingEntryId=${encodeURIComponent(posting.entryId)}&lineEntryId=${encodeURIComponent(line?.entryId ?? lineFocus.id)}`
                 : null
             }
             contentfulUrl={line?.contentfulUrl}

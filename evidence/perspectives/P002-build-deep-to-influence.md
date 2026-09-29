@@ -65,11 +65,11 @@ Potential relevance: engineering, reusable tooling, product judgment, design-to-
 
 ## Supporting evidence to develop
 
-- [S001 Blueprints](../projects/S001%20-%20Blueprints.md) — deep Figma/design-system build influencing Experience Orchestration ([S025](../projects/S025%20-%20Experience%20Orchestration%20%28ExO%29.md)).
-- [S002 Bulk Editor](../projects/S002%20-%20Bulk%20Editor.md) — fast prototype that shaped a production app path.
-- [S003 DemAI](../projects/S003%20-%20DemAI.md) — deep SE tooling that guided non-experts through content modeling.
+- [S001 Blueprints AI Design System](../projects/S001%20-%20Blueprints.md) — deep Figma/design-system build influencing Experience Orchestration ([S025](../projects/S025%20-%20Experience%20Orchestration%20%28ExO%29.md)).
+- [S002 Contentful Bulk Edit App](../projects/S002%20-%20Bulk%20Editor.md) — fast prototype that shaped a production app path.
+- [S003 AI Driven Demos - DemAI](../projects/S003%20-%20DemAI.md) — deep SE tooling that guided non-experts through content modeling.
 - **State Farm cluster (strong template match):** [State Farm role context](../roles/R004-state-farm-design-systems.md#state-farm-design-system-context) plus [S007](../projects/S007%20-%20State%20Farm%20Lit%20engineering%20bridge.md).
-- [S008 Contentful for Figma widget](../projects/S008%20-%20Contentful%20for%20Figma%20widget.md) — SE v1 in days → CIA production in months; binding ahead of Experience Orchestration; public live.
+- [S008 Contentful for Figma Widget](../projects/S008%20-%20Contentful%20for%20Figma%20widget.md) — SE v1 in days → CIA production in months; binding ahead of Experience Orchestration; public live.
 - Additional examples (Summit, etc.) still to capture.
 - [S025 Experience Orchestration (ExO)](../projects/S025%20-%20Experience%20Orchestration%20%28ExO%29.md) — compare fairly to S008; Blueprints “centerpiece” claim stays on S001.
 

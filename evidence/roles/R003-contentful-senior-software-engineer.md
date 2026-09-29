@@ -25,8 +25,8 @@ None — role narrative is in LinkedIn description; project-level detail lives o
 
 ## Linked projects
 
-- [S014: Design tokens explained (article)](../projects/S014%20-%20Design%20tokens%20Contentful%20blog.md) — published May 16, 2024; layered token system guide; Scott reports sustained top-10 performance / Google visibility.
-- [S022: 2024 Partnership Tour - AI design systems](../projects/S022%20-%202024%20Partnership%20Tour%20AI%20design%20systems.md) — Chicago, Brooklyn, Toronto; AI×DS exploratory partner talks; soft precursor to later Contentful product (Scott).
+- [S014: Design Tokens Explained (article)](../projects/S014%20-%20Design%20tokens%20Contentful%20blog.md) — published May 16, 2024; layered token system guide; Scott reports sustained top-10 performance / Google visibility.
+- [S022: 2024 Partnership Tour - AI Design Systems](../projects/S022%20-%202024%20Partnership%20Tour%20AI%20design%20systems.md) — Chicago, Brooklyn, Toronto; AI×DS exploratory partner talks; soft precursor to later Contentful product (Scott).
 
 ## Source references
 

@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
+
 import { resumeRouteFromSegments } from "../resume-route";
 import { ResumeWorkspace } from "../resume-workspace";
+
+export const metadata: Metadata = {
+  title: "Resume",
+};
 
 export default async function ResumePage({
   params,

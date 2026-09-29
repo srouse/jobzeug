@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S014
-title: Design tokens explained (article)
+title: Design Tokens Explained (article)
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -157,7 +157,7 @@ evidence:
       reviewed_at: null
 concept_proposals: []
 ---
-# S014: Design tokens explained (article)
+# S014: Design Tokens Explained (article)
 
 Captured: September 22, 2026
 Status: Initial capture from published article + Scott’s performance account; analytics not independently verified

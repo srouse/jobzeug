@@ -25,6 +25,9 @@ export function HomeClient({ showKleio }: { showKleio: boolean }) {
           <Link href="/resume" className={styles.primary}>
             <JzText variant="label" label="Open resume" />
           </Link>
+          <Link href="/jobs" className={styles.secondary}>
+            <JzText variant="label" color="inverse" label="Job postings" />
+          </Link>
           <Link href="/chat" className={styles.secondary}>
             <JzText variant="label" color="inverse" label="Open agent chat" />
           </Link>

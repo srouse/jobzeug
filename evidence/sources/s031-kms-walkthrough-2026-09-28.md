@@ -1,6 +1,6 @@
 # Building a Knowledge Management System with Contentful
 
-Spoken transcript exported September 28, 2026 from `VIDEOS/KMS/Building a Knowledge Management System with Contentful.srt`. Related project: [S031 KMS demo](../projects/S031%20-%20KMS%20demo.md).
+Spoken transcript exported September 28, 2026 from `VIDEOS/KMS/Building a Knowledge Management System with Contentful.srt`. Related project: [S031 Knowledge Management System (KMS)](../projects/S031%20-%20KMS%20demo.md).
 
 The words below are the export. Repeats, false starts, and caption errors are kept.
 

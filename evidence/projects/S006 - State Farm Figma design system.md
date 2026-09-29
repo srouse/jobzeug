@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S006
-title: State Farm Figma design system
+title: State Farm Figma Design System
 record_kind: project
 project_origin: employment
 ranking_eligible: true
@@ -98,8 +98,7 @@ evidence:
       reviewed_at: "2026-09-26"
 concept_proposals: []
 ---
-# S006: State Farm Figma design system
-
+# S006: State Farm Figma Design System
 Captured: September 20, 2026
 Status: Initial account; artifacts pending
 Evidence: Scott's direct account, not yet supported by inspected artifacts

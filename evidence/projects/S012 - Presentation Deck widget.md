@@ -1,7 +1,7 @@
 ---
 schema_version: "1.1"
 project_id: S012
-title: Presentation Deck widget (personal)
+title: Presentation Deck Widget (personal)
 record_kind: project
 project_origin: personal
 ranking_eligible: true
@@ -82,7 +82,7 @@ evidence:
       reviewed_at: "2026-09-26"
 concept_proposals: []
 ---
-# S012: Presentation Deck widget (personal)
+# S012: Presentation Deck Widget (personal)
 
 Captured: September 22, 2026
 Status: Initial capture from Scott’s account plus public site / Figma Community page scrape
@@ -92,7 +92,7 @@ Evidence: Scott’s direct account (personal project); public product copy and C
 
 - Role record: Provisionally [R007 — UX Designer & Web/Mobile Developer - Design Innovation](../roles/R007-summit-design-innovation.md) at [C003 Summit Credit Union](../employers/C003-summit-credit-union.md) **for calendar placement only**. Scott places this under the Summit timespan and states it is **definitely a personal project** — **not** Summit delivery. Do not attribute Presentation Deck outcomes to Summit employment or to any CU/CL.
 - Employer: [C003 Summit Credit Union](../employers/C003-summit-credit-union.md) — tenure anchor only; project is personal.
-- Related personal Figma Community work in the same era: [S011 Figma Design System widget](S011%20-%20Figma%20Design%20System%20widget.md) (also personal / R007-anchored).
+- Related personal Figma Community work in the same era: [S011 Figma Design System Widget](S011%20-%20Figma%20Design%20System%20widget.md) (also personal / R007-anchored).
 - Customers / clients: None. Public Figma Community distribution.
 - Public artifacts:
   - Production / docs site: https://presentationdeck.app/
