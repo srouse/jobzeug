@@ -1,11 +1,22 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { CONCEPT_HIT_POINTS } from "../../src/lib/matching/score.ts";
 import {
+  PREFERRED_STRONG_TAGS,
+  REQUIRED_STRONG_OVER,
+  STRONG_CONNECTION_OVER,
+  STRONG_LINE_ITEMS,
+  coverageLineIds,
   coveragePercent,
+  lineExampleCoverage,
   lineFitBars,
   postingHitsResume,
   projectFitBars,
+  projectLineHits,
   resumeHitsPosting,
+  strongExampleIds,
+  strongExampleProjects,
+  strongTagProjects,
   topHomeProjects,
 } from "../../src/lib/matching/home-coverage.ts";
 
@@ -146,6 +157,187 @@ test("fit bars keep a project's own share when a stronger project is off the res
   );
   assert.equal(bars.get("S001")?.width, 1);
   assert.equal(bars.get("S001")?.tone, "great");
+});
+
+test("coverage line ids keep project scope and fold responsibilities into required", () => {
+  const ids = coverageLineIds([
+    {
+      entryId: "desc",
+      section: "description",
+      matchingRequirement: { scope: "project" },
+    },
+    {
+      entryId: "req",
+      section: "required",
+      matchingRequirement: { scope: "project" },
+    },
+    {
+      entryId: "duty",
+      section: "responsibility",
+      matchingRequirement: { scope: "project" },
+    },
+    {
+      entryId: "pref",
+      section: "preferred",
+      matchingRequirement: { scope: "project" },
+    },
+    {
+      entryId: "degree",
+      section: "required",
+      matchingRequirement: { scope: "candidate" },
+    },
+    { entryId: "plain", section: "required" },
+  ]);
+  assert.deepEqual(ids.all, ["desc", "req", "duty", "pref"]);
+  assert.deepEqual(ids.required, ["desc", "req", "duty"]);
+  assert.deepEqual(ids.preferred, ["pref"]);
+});
+
+test("line example coverage counts lines a resume project actually hits", () => {
+  assert.deepEqual(
+    lineExampleCoverage(
+      ["a", "b", "c"],
+      [
+        { projectId: "S001", lineEntryId: "a", points: 10 },
+        { projectId: "S099", lineEntryId: "b", points: 10 },
+        { projectId: "S001", lineEntryId: "c", points: 0 },
+      ],
+      ["S001"],
+    ),
+    { covered: 1, total: 3, percent: 33 },
+  );
+  assert.deepEqual(lineExampleCoverage([], [], ["S001"]), {
+    covered: 0,
+    total: 0,
+    percent: 0,
+  });
+});
+
+test("a strong example is one deep line connection or STRONG_LINE_ITEMS lines", () => {
+  const shallow = STRONG_CONNECTION_OVER * CONCEPT_HIT_POINTS;
+  const deep = (STRONG_CONNECTION_OVER + 1) * CONCEPT_HIT_POINTS;
+  const shortOfLines = Array.from(
+    { length: Math.max(0, STRONG_LINE_ITEMS - 1) },
+    (_, index) => ({
+      projectId: "S001",
+      lineEntryId: `short-${index}`,
+      points: shallow,
+    }),
+  );
+  const enoughLines = Array.from({ length: STRONG_LINE_ITEMS }, (_, index) => ({
+    projectId: "S026",
+    lineEntryId: `wide-${index}`,
+    points: shallow,
+  }));
+  const edges = [
+    ...shortOfLines,
+    ...enoughLines,
+    { projectId: "S008", lineEntryId: "deep", points: deep },
+  ];
+  assert.equal(strongExampleProjects(["S001", "S008", "S026"], edges), 2);
+});
+
+test("a project strong only on preferred lines is not strong in required", () => {
+  const shallow = Math.max(STRONG_CONNECTION_OVER, 1) * CONCEPT_HIT_POINTS;
+  const deep = (STRONG_CONNECTION_OVER + 1) * CONCEPT_HIT_POINTS;
+  const preferredWide = Array.from({ length: STRONG_LINE_ITEMS }, (_, index) => ({
+    projectId: "S026",
+    lineEntryId: `pref-${index}`,
+    points: shallow,
+  }));
+  const edges = [
+    ...preferredWide,
+    { projectId: "S026", lineEntryId: "req-shallow", points: shallow },
+    { projectId: "S008", lineEntryId: "pref-deep", points: deep },
+  ];
+  const projects = ["S008", "S026"];
+  const required = ["req-shallow"];
+  const preferred = [
+    ...preferredWide.map((edge) => edge.lineEntryId),
+    "pref-deep",
+  ];
+  assert.equal(strongExampleIds(projects, edges).has("S026"), true);
+  assert.equal(strongExampleIds(projects, edges).has("S008"), true);
+  if (STRONG_LINE_ITEMS > 1) {
+    assert.equal(strongExampleIds(projects, edges, required).has("S026"), false);
+  }
+  assert.equal(strongExampleIds(projects, edges, required).has("S008"), false);
+  assert.equal(strongExampleIds(projects, edges, preferred).has("S026"), true);
+  assert.equal(strongExampleIds(projects, edges, preferred).has("S008"), true);
+  assert.ok(
+    strongExampleProjects(projects, edges, required) <=
+      strongExampleProjects(projects, edges),
+  );
+});
+
+test("required strong projects need more tags than REQUIRED_STRONG_OVER", () => {
+  const projects = ["S001", "S008", "S026"];
+  const atCutoff = {
+    projectId: "S001",
+    lineEntryId: "a",
+    points: REQUIRED_STRONG_OVER * CONCEPT_HIT_POINTS,
+  };
+  const pastCutoff = {
+    projectId: "S008",
+    lineEntryId: "a",
+    points: (REQUIRED_STRONG_OVER + 1) * CONCEPT_HIT_POINTS,
+  };
+  assert.equal(strongTagProjects(projects, [atCutoff, pastCutoff]), 1);
+
+  const edges = [
+    {
+      projectId: "S001",
+      lineEntryId: "pref",
+      points: (REQUIRED_STRONG_OVER + 1) * CONCEPT_HIT_POINTS,
+    },
+    {
+      projectId: "S008",
+      lineEntryId: "req",
+      points: REQUIRED_STRONG_OVER * CONCEPT_HIT_POINTS,
+    },
+    {
+      projectId: "S008",
+      lineEntryId: "req-2",
+      points: CONCEPT_HIT_POINTS,
+    },
+  ];
+  assert.equal(strongTagProjects(projects, edges, ["req", "req-2"]), 1);
+  assert.equal(strongTagProjects(projects, edges), 2);
+});
+
+test("preferred strong projects need at least PREFERRED_STRONG_TAGS", () => {
+  const projects = ["S001", "S008"];
+  const preferredLines = ["pref"];
+  const edges = [
+    {
+      projectId: "S001",
+      lineEntryId: "pref",
+      points: (PREFERRED_STRONG_TAGS - 1) * CONCEPT_HIT_POINTS,
+    },
+    {
+      projectId: "S008",
+      lineEntryId: "pref",
+      points: PREFERRED_STRONG_TAGS * CONCEPT_HIT_POINTS,
+    },
+  ];
+  assert.equal(
+    strongTagProjects(projects, edges, preferredLines, {
+      atLeast: PREFERRED_STRONG_TAGS,
+    }),
+    1,
+  );
+  assert.equal(strongTagProjects(projects, edges, preferredLines), 0);
+});
+
+test("project line hits count distinct lines in the bucket", () => {
+  const edges = [
+    { projectId: "S001", lineEntryId: "r1", points: 10 },
+    { projectId: "S001", lineEntryId: "r1", points: 10 },
+    { projectId: "S001", lineEntryId: "r2", points: 10 },
+    { projectId: "S001", lineEntryId: "p1", points: 10 },
+  ];
+  assert.equal(projectLineHits("S001", edges, ["r1", "r2"]), 2);
+  assert.equal(projectLineHits("S001", edges, ["p1"]), 1);
 });
 
 test("job line fit bars use the resume project ceiling and ignore outside projects", () => {

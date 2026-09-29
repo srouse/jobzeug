@@ -38,6 +38,30 @@ export const FIT_TAGS_PER_COUNTERPART = 1;
 /** A perfect resume is every project at about this share of the posting. */
 export const PERFECT_MATCH_SHARE = 0.7;
 
+/**
+ * Required strong projects need more concept tags than this, summed across
+ * their required lines. Equal to the cutoff does not count.
+ */
+export const REQUIRED_STRONG_OVER = 2;
+
+/**
+ * One way to be a strong example: a single line connection with more concept
+ * tags than this. Tags on separate lines do not add together for this path.
+ */
+export const STRONG_CONNECTION_OVER = 1;
+
+/**
+ * The other way to be a strong example: at least this many distinct line
+ * connections, even when each one is a single tag.
+ */
+export const STRONG_LINE_ITEMS = 4;
+
+/**
+ * Preferred strong projects need at least this many concept tags on
+ * preferred lines. Landing on this number counts.
+ */
+export const PREFERRED_STRONG_TAGS = 2;
+
 function uniqueIds(ids: readonly string[]) {
   return [...new Set(ids)];
 }
@@ -170,6 +194,176 @@ export function topHomeProjects(
 export function coveragePercent(coverage: HomeCoverage): number {
   if (coverage.ceiling <= 0) return 0;
   return Math.round((coverage.score / coverage.ceiling) * 100);
+}
+
+export type CoverageLine = {
+  entryId: string;
+  section?: string;
+  matchingRequirement?: { scope?: string };
+};
+
+export type LineExampleCoverage = {
+  covered: number;
+  total: number;
+  percent: number;
+};
+
+const REQUIRED_SECTIONS = new Set([
+  "description",
+  "responsibility",
+  "required",
+]);
+
+/**
+ * Headline lines are project-scoped. Required is the description, the
+ * responsibilities, and the required lines. Preferred is preferred only.
+ */
+export function coverageLineIds(lines: readonly CoverageLine[]) {
+  const projectLines = lines.filter(
+    (line) => line.matchingRequirement?.scope === "project",
+  );
+  return {
+    all: uniqueIds(projectLines.map((line) => line.entryId)),
+    required: uniqueIds(
+      projectLines
+        .filter(
+          (line) => line.section != null && REQUIRED_SECTIONS.has(line.section),
+        )
+        .map((line) => line.entryId),
+    ),
+    preferred: uniqueIds(
+      projectLines
+        .filter((line) => line.section === "preferred")
+        .map((line) => line.entryId),
+    ),
+  };
+}
+
+/** Lines with at least one positive edge to a resume project. */
+export function lineExampleCoverage(
+  lineIds: readonly string[],
+  edges: readonly HomeEdge[],
+  projectIds: readonly string[],
+): LineExampleCoverage {
+  const ids = uniqueIds(lineIds);
+  const allowedLines = new Set(ids);
+  const allowedProjects = new Set(projectIds);
+  const coveredIds = new Set<string>();
+  for (const edge of edges) {
+    if (edge.points <= 0) continue;
+    if (!allowedProjects.has(edge.projectId)) continue;
+    if (!allowedLines.has(edge.lineEntryId)) continue;
+    coveredIds.add(edge.lineEntryId);
+  }
+  const total = ids.length;
+  const covered = coveredIds.size;
+  return {
+    covered,
+    total,
+    percent: total === 0 ? 0 : Math.round((covered / total) * 100),
+  };
+}
+
+function pointsByProject(
+  projectIds: readonly string[],
+  edges: readonly HomeEdge[],
+  lineIds?: readonly string[],
+) {
+  const ids = new Set(projectIds);
+  const allowedLines = lineIds ? new Set(lineIds) : null;
+  const points = new Map<string, number>();
+  for (const edge of edges) {
+    if (edge.points <= 0 || !ids.has(edge.projectId)) continue;
+    if (allowedLines && !allowedLines.has(edge.lineEntryId)) continue;
+    points.set(
+      edge.projectId,
+      (points.get(edge.projectId) ?? 0) + edge.points,
+    );
+  }
+  return points;
+}
+
+export type StrongTagRule = {
+  /** Count a project when its tags are greater than this. */
+  over?: number;
+  /** Count a project when its tags are at least this. */
+  atLeast?: number;
+};
+
+/**
+ * The one strong-example rule. A project qualifies when one line connection
+ * has more than {@link STRONG_CONNECTION_OVER} tags, or it connects to at
+ * least {@link STRONG_LINE_ITEMS} lines in this pot.
+ * Pass line ids to judge only that bucket. Lines outside the pot do not count,
+ * so a project that is strong only on preferred lines is not strong in required.
+ */
+export function strongExampleIds(
+  projectIds: readonly string[],
+  edges: readonly HomeEdge[],
+  lineIds?: readonly string[],
+): Set<string> {
+  const ids = new Set(projectIds);
+  const allowedLines = lineIds ? new Set(lineIds) : null;
+  const linesByProject = new Map<string, Set<string>>();
+  const strong = new Set<string>();
+  for (const edge of edges) {
+    if (edge.points <= 0 || !ids.has(edge.projectId)) continue;
+    if (allowedLines && !allowedLines.has(edge.lineEntryId)) continue;
+    const lines = linesByProject.get(edge.projectId) ?? new Set<string>();
+    lines.add(edge.lineEntryId);
+    linesByProject.set(edge.projectId, lines);
+    if (edge.points / CONCEPT_HIT_POINTS > STRONG_CONNECTION_OVER) {
+      strong.add(edge.projectId);
+    }
+  }
+  for (const [projectId, lines] of linesByProject) {
+    if (lines.size >= STRONG_LINE_ITEMS) strong.add(projectId);
+  }
+  return strong;
+}
+
+/** How many projects that rule marks strong in this pot. */
+export function strongExampleProjects(
+  projectIds: readonly string[],
+  edges: readonly HomeEdge[],
+  lineIds?: readonly string[],
+): number {
+  return strongExampleIds(projectIds, edges, lineIds).size;
+}
+
+/** Projects whose concept tags meet the rule. Defaults to more than {@link REQUIRED_STRONG_OVER}. */
+export function strongTagProjects(
+  projectIds: readonly string[],
+  edges: readonly HomeEdge[],
+  lineIds?: readonly string[],
+  rule: StrongTagRule = { over: REQUIRED_STRONG_OVER },
+): number {
+  const atLeast = rule.atLeast;
+  const qualifies =
+    atLeast != null
+      ? (tags: number) => tags >= atLeast
+      : (tags: number) => tags > (rule.over ?? REQUIRED_STRONG_OVER);
+  let count = 0;
+  for (const points of pointsByProject(projectIds, edges, lineIds).values()) {
+    if (qualifies(points / CONCEPT_HIT_POINTS)) count += 1;
+  }
+  return count;
+}
+
+/** Distinct lines in the set that this project hits. */
+export function projectLineHits(
+  projectId: string,
+  edges: readonly HomeEdge[],
+  lineIds: readonly string[],
+): number {
+  const allowedLines = new Set(lineIds);
+  const hit = new Set<string>();
+  for (const edge of edges) {
+    if (edge.projectId !== projectId || edge.points <= 0) continue;
+    if (!allowedLines.has(edge.lineEntryId)) continue;
+    hit.add(edge.lineEntryId);
+  }
+  return hit.size;
 }
 
 /** Through 33% of the score: gray. */

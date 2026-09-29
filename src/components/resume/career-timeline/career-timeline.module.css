@@ -30,15 +30,81 @@
   gap: var(--jz-semantic-space-gap-2xs, 0.25rem);
   overflow: hidden;
   padding-block: calc(var(--jz-semantic-space-padding-md, 1rem) + 0.75rem);
+  cursor: pointer;
+  user-select: none;
+  touch-action: none;
   border-right: 1px solid var(--jz-semantic-color-border-subtle);
   background: var(--jz-semantic-color-background-surface-default);
 }
 
-.track {
+.column[data-dragging],
+.column[data-dragging] .hit {
+  cursor: grabbing;
+}
+
+.marker,
+.hit {
+  transition:
+    top 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    height 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.column[data-dragging] .marker,
+.column[data-dragging] .hit {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marker,
+  .hit {
+    transition: none;
+  }
+}
+
+.span {
+  --timeline-window-min: 32px;
   position: relative;
   flex: 1;
   min-height: 0;
+  width: 100%;
+  container-type: inline-size;
+}
+
+.marker {
+  position: absolute;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: var(--timeline-window-min);
+  background: var(
+    --jz-semantic-color-background-surface-brand-primary-subtle,
+    #eff6ff
+  );
+  pointer-events: none;
+}
+
+.hit {
+  position: absolute;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  height: var(--timeline-window-min);
+  background: transparent;
+  cursor: grab;
+  touch-action: none;
+}
+
+.span:has(.hit:hover) .marker,
+.column[data-dragging] .marker {
+  background: var(--jz-semantic-color-background-surface-brand-primary, #dbeafe);
+}
+
+.track {
+  position: relative;
+  z-index: 1;
+  height: 100%;
   width: var(--timeline-track);
+  margin-inline: auto;
   background: var(--jz-semantic-color-border-subtle);
 }
 
@@ -52,8 +118,16 @@
   position: absolute;
   left: 50%;
   z-index: 4;
-  padding: 2px 4px;
-  background: var(--jz-semantic-color-background-surface-default);
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100cqw;
+  padding-block: 2px;
+  background: color-mix(
+    in srgb,
+    var(--jz-semantic-color-background-surface-default) 50%,
+    transparent
+  );
   transform: translate(-50%, -50%);
   white-space: nowrap;
   text-align: center;

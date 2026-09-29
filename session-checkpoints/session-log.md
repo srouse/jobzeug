@@ -806,3 +806,32 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 - Round out the Berlin account on Experience Orchestration Research; S025-E008 is still proposed
 - The S031 knowledge-management proposal still does not score
 - The focus brief stays paused
+
+### [2026-09-29T11:06:09-05:00]
+
+#### Summary
+
+- Mapped every Contentful call to Delivery or Management and listed the published reads that can move to Delivery. Those reads are not switched yet.
+
+#### Changes
+
+- Evidence / records: none
+- Skills / tooling: none
+- Other: CDA versus CMA assessment and game plan; timeline scroll window, home coverage, and hub updates included in this check-in
+
+#### Decisions
+
+- Published posting reads can use one Delivery request with include=2
+- Writes, and the read immediately after a bind, stay on the Management API
+- The design-system package and Contentful import error logs stay unstaged
+
+#### Plans cached
+
+- cda_versus_cma_5d934ffc.plan.md
+
+#### Next
+
+- Add the Delivery posting loader and point the published reads at it
+- Round out the Berlin account on Experience Orchestration Research; S025-E008 is still proposed
+- The S031 knowledge-management proposal still does not score
+- The focus brief stays paused

@@ -13,8 +13,12 @@ import type {
 } from "@/lib/contentful/resume-model";
 import type { JobPostingPanelData } from "@/lib/job-posting/schema";
 import {
+  coverageLineIds,
+  lineExampleCoverage,
   lineFitBars,
   projectFitBars,
+  projectLineHits,
+  strongExampleProjects,
   topHomeProjects,
   type FitBar,
   type HomeProject,
@@ -66,23 +70,50 @@ function resumeProjects(resume: ResumeViewModel | null): HomeProject[] {
   return projects;
 }
 
-function FitBox({
-  label,
+function HomeStat({
   value,
-  total,
+  detail,
+  title,
+  prominent,
 }: {
-  label: string;
-  value: number;
-  total?: number;
+  value: string;
+  detail: string;
+  title?: string;
+  prominent?: boolean;
 }) {
   return (
-    <div className={styles.homeFit}>
-      <JzText variant="overline" color="muted" label={label} />
-      <div className={styles.homeFitValue}>
-        <JzText variant="display-large" label={String(value)} />
-        {total != null ? (
-          <JzText variant="caption" color="muted" label={`of ${total}`} />
-        ) : null}
+    <div className={styles.homeStat}>
+      {title ? (
+        <JzText variant="overline" color="muted" label={title} />
+      ) : null}
+      <JzText
+        variant={prominent ? "display-large" : "title"}
+        label={value}
+      />
+      <JzText variant="caption" color="muted" label={detail} />
+    </div>
+  );
+}
+
+function CoveragePair({
+  label,
+  percent,
+  covered,
+  total,
+  strong,
+}: {
+  label: string;
+  percent: number;
+  covered: number;
+  total: number;
+  strong: number;
+}) {
+  return (
+    <div className={styles.homeColumn}>
+      <JzText variant="overline" color="muted" label={label.toUpperCase()} />
+      <div className={styles.homePair}>
+        <HomeStat value={`${percent}%`} detail={`${covered} / ${total}`} />
+        <HomeStat value={String(strong)} detail="Strong" />
       </div>
     </div>
   );
@@ -99,48 +130,90 @@ function HomeLanding({
   const edges = posting.matchGraph?.edges ?? [];
   const projects = resumeProjects(resume);
   const projectIds = projects.map((project) => project.id);
-  const projectLines = posting.lines.filter(
-    (line) => line.matchingRequirement?.scope === "project",
+  const lines = coverageLineIds(posting.lines);
+  const headline = lineExampleCoverage(lines.all, edges, projectIds);
+  const required = lineExampleCoverage(lines.required, edges, projectIds);
+  const preferred = lineExampleCoverage(lines.preferred, edges, projectIds);
+  const strongExamples = strongExampleProjects(projectIds, edges);
+  const strongRequired = strongExampleProjects(
+    projectIds,
+    edges,
+    lines.required,
   );
-  const greatProjects = [...projectFitBars(projectIds, edges, projectLines.length).values()]
-    .filter((bar) => bar.tone === "good").length;
-  const strongLines = [
-    ...lineFitBars(
-      projectLines.map((line) => line.entryId),
-      edges,
-      projectIds,
-    ).values(),
-  ].filter((bar) => bar.tone === "good" || bar.tone === "great").length;
+  const strongPreferred = strongExampleProjects(
+    projectIds,
+    edges,
+    lines.preferred,
+  );
   const top = topHomeProjects(projects, edges);
 
   return (
     <div className={styles.home}>
-      <div className={styles.homeFits}>
-        <FitBox label="Great projects" value={greatProjects} />
-        <FitBox label="Strong job lines" value={strongLines} total={projectLines.length} />
+      <div className={styles.homeSplit}>
+        <HomeStat
+          prominent
+          title="COVERAGE"
+          value={`${headline.percent}%`}
+          detail={`${headline.covered} / ${headline.total}`}
+        />
+        <HomeStat
+          prominent
+          title="STRONG EXAMPLES"
+          value={String(strongExamples)}
+          detail={`${strongExamples} out of ${projects.length}`}
+        />
+      </div>
+      <div className={`${styles.homeBuckets} ${styles.homeBand}`}>
+        <CoveragePair
+          label="Required"
+          percent={required.percent}
+          covered={required.covered}
+          total={required.total}
+          strong={strongRequired}
+        />
+        <CoveragePair
+          label="Preferred"
+          percent={preferred.percent}
+          covered={preferred.covered}
+          total={preferred.total}
+          strong={strongPreferred}
+        />
       </div>
       {top.length > 0 ? (
-        <div className={styles.homeExamples}>
-          <JzText variant="overline" color="muted" label="Strongest examples" />
+        <div className={`${styles.homeExamples} ${styles.homeBand}`}>
+          <JzText variant="overline" color="muted" label="TOP PROJECTS" />
           <ul className={styles.homeProjects}>
-          {top.map((project) => (
-            <li key={project.projectId}>
-              <button
-                type="button"
-                className={styles.homeProject}
-                onClick={() =>
-                  selectLine({ kind: "project", id: project.projectId })
-                }
-              >
-                <JzText variant="body-default" label={project.name} />
-                <JzText
-                  variant="body-default"
-                  color="muted"
-                  label={String(project.points)}
-                />
-              </button>
-            </li>
-          ))}
+            {top.map((project) => (
+              <li key={project.projectId}>
+                <button
+                  type="button"
+                  className={styles.homeProject}
+                  onClick={() =>
+                    selectLine({ kind: "project", id: project.projectId })
+                  }
+                >
+                  <JzText
+                    variant="body-default"
+                    label={project.name}
+                    className={styles.homeProjectName}
+                  />
+                  <span className={styles.homeProjectStats}>
+                    <JzText
+                      variant="label-sm"
+                      weight="300"
+                      color="tertiary"
+                      label={`${projectLineHits(project.projectId, edges, lines.required)} Required`}
+                    />
+                    <JzText
+                      variant="label-sm"
+                      weight="300"
+                      color="tertiary"
+                      label={`${projectLineHits(project.projectId, edges, lines.preferred)} Preferred`}
+                    />
+                  </span>
+                </button>
+              </li>
+            ))}
           </ul>
         </div>
       ) : null}
