@@ -31,7 +31,7 @@ year_note: Project calendar was not supplied. Estimated inside R006 (November 20
 delivery_stage: unknown
 annotation:
   status: reviewed
-  vocabulary_version: "1.5.0"
+  vocabulary_version: "1.7.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review
@@ -48,6 +48,7 @@ evidence:
       - local:persuasion
       - local:cross-functional-work
       - local:financial-services
+      - local:senior-ux-designer-developer
     ownership: lead
     scope: multiple_teams
     delivery_stage: concept

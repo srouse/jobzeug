@@ -44,7 +44,7 @@
       "status": "reviewed",
       "reviewed_by": "Scott",
       "reviewed_at": "2026-09-27",
-      "vocabulary_version": "1.5.0"
+      "vocabulary_version": "1.7.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -54,7 +54,8 @@
         "concept_ids": [
           "local:technical-discovery",
           "local:interaction-design",
-          "local:cross-functional-work"
+          "local:cross-functional-work",
+          "local:ux-ui-designer-web-mobile-developer"
         ],
         "ownership": "contributor",
         "scope": "external_audience",
@@ -89,7 +90,8 @@
           "local:react",
           "local:front-end-development",
           "local:visual-interface-design",
-          "local:ios"
+          "local:ios",
+          "local:ux-ui-designer-web-mobile-developer"
         ],
         "ownership": "lead",
         "scope": "external_audience",

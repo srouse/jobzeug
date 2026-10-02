@@ -1,5 +1,7 @@
 /* One step above the header layer; still below modal (chat dock and dialogs). */
 .stage {
+  --present-ms: 900ms;
+  --present-ease: cubic-bezier(0.45, 0, 0.55, 1);
   pointer-events: none;
   position: fixed;
   inset: 0;
@@ -8,6 +10,11 @@
   align-items: stretch;
   justify-content: center;
   box-sizing: border-box;
+  transition:
+    top 320ms cubic-bezier(0.4, 0, 0.2, 1),
+    right 320ms cubic-bezier(0.4, 0, 0.2, 1),
+    bottom 320ms cubic-bezier(0.4, 0, 0.2, 1),
+    left 320ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card {
@@ -35,10 +42,15 @@
   transition: width 320ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.jobToggle {
+  display: none;
+  transition: opacity var(--present-ms, 900ms) var(--present-ease, cubic-bezier(0.45, 0, 0.55, 1));
+}
+
 .stageTools {
   position: absolute;
   z-index: 1;
-  bottom: var(--jz-semantic-space-padding-lg, 1.5rem);
+  bottom: 0;
   left: 0;
   right: 0;
   display: flex;
@@ -46,11 +58,157 @@
   align-items: center;
   justify-content: center;
   gap: var(--jz-semantic-space-gap-xs, 0.25rem);
+  padding-top: 30px;
+  padding-bottom: var(--jz-semantic-space-padding-lg, 1.5rem);
   pointer-events: none;
+  transition: opacity var(--present-ms, 900ms) var(--present-ease, cubic-bezier(0.45, 0, 0.55, 1));
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--jz-semantic-color-background-surface-default, #ffffff) 30px
+  );
 }
 
 .stageTools > * {
   pointer-events: auto;
+}
+
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  pointer-events: none;
+  opacity: 0;
+  background: color-mix(
+    in srgb,
+    var(--jz-semantic-color-text-default, #171717) 45%,
+    transparent
+  );
+  transition: opacity var(--present-ms) var(--present-ease);
+}
+
+/* Wide and medium: the same stage grows over the side pages. */
+@media (min-width: 900px) {
+  .stage[data-presenting] .scrim {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .stage[data-presenting],
+  .stage[data-ease] {
+    transition:
+      top var(--present-ms) var(--present-ease),
+      right var(--present-ms) var(--present-ease),
+      bottom var(--present-ms) var(--present-ease),
+      left var(--present-ms) var(--present-ease);
+  }
+
+  .stage[data-presenting] {
+    top: 0;
+    right: 40px;
+    bottom: 0;
+    left: 40px;
+    z-index: calc(var(--jz-semantic-layer-header, 10) + 3);
+  }
+
+  .stage[data-presenting] .card,
+  .stage[data-ease] .card {
+    width: 100%;
+    max-width: none;
+    z-index: 1;
+    transition: none;
+  }
+}
+
+.stage[data-presenting] .hub::before,
+.stage[data-presenting] .hub::after {
+  flex-grow: 0;
+}
+
+.stage[data-presenting] .hub {
+  padding-inline: var(--jz-semantic-space-padding-lg, 1.5rem);
+  padding-bottom: var(--jz-semantic-space-padding-lg, 1.5rem);
+}
+
+.stage[data-presenting] .hubColumn {
+  max-width: 2400px;
+}
+
+.stage[data-presenting] .jobToggle,
+.stage[data-presenting] .stageTools,
+.stage[data-presenting] .stageTools > *,
+.stage[data-presenting] .jobToggle > * {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.projectCopy,
+.projectVideo {
+  display: grid;
+  grid-template-rows: 1fr;
+  min-height: 0;
+  opacity: 1;
+  transition:
+    grid-template-rows var(--present-ms) var(--present-ease),
+    opacity var(--present-ms) var(--present-ease);
+}
+
+.projectCopy[data-hidden] {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.projectVideo {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.projectVideo[data-open] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.projectCopyInner,
+.projectVideoInner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.projectCopyInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--jz-semantic-space-gap-md, 1rem);
+}
+
+.projectVideoInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--jz-semantic-space-gap-md, 1rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage,
+  .stage[data-presenting],
+  .stage[data-ease],
+  .scrim,
+  .hub,
+  .hub::before,
+  .hub::after,
+  .hubColumn,
+  .projectCopy,
+  .projectVideo,
+  .jobToggle,
+  .stageTools {
+    transition: none;
+  }
 }
 
 .card[data-answer-off] .hub {
@@ -65,12 +223,38 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: safe center;
-  gap: var(--jz-semantic-space-gap-md, 1rem);
+  justify-content: flex-start;
+  gap: 0;
+  scrollbar-gutter: stable;
   padding-top: var(--jz-semantic-space-padding-lg, 1.5rem);
+  /* Clears the tools pinned to the bottom of the stage. */
   padding-bottom: 6.5rem;
   padding-inline: var(--jz-semantic-space-padding-lg, 1.5rem);
   border-bottom: 1px solid var(--jz-semantic-color-border-subtle);
+  transition:
+    padding-inline var(--present-ms, 900ms) var(--present-ease, cubic-bezier(0.45, 0, 0.55, 1)),
+    padding-bottom var(--present-ms, 900ms) var(--present-ease, cubic-bezier(0.45, 0, 0.55, 1));
+}
+
+/* Center a short column. These shrink away as it grows, so overflow does not snap it. */
+.hub::before,
+.hub::after {
+  content: "";
+  flex: 1 0 0;
+  min-height: 0;
+  transition: flex-grow var(--present-ms, 900ms) var(--present-ease, cubic-bezier(0.45, 0, 0.55, 1));
+}
+
+/* Reading column. The stage shell can run wider; this stays put. */
+.hubColumn {
+  width: 100%;
+  max-width: 600px;
+  margin-inline: auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--jz-semantic-space-gap-md, 1rem);
+  transition: max-width var(--present-ms, 900ms) var(--present-ease, cubic-bezier(0.45, 0, 0.55, 1));
 }
 
 .home {
@@ -81,43 +265,10 @@
   flex-direction: column;
 }
 
-.homeSplit {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-}
-
-.homeSplit > .homeStat,
-.homeSplit > .homeColumn {
-  flex: 1 1 0;
-  min-width: 0;
-}
-
-.homeSplit > .homeStat + .homeStat,
-.homeSplit > .homeColumn + .homeColumn {
-  border-left: 1px solid var(--jz-semantic-color-border-subtle);
-}
-
 .homeBand {
   border-top: 1px solid var(--jz-semantic-color-border-subtle);
   margin-top: var(--jz-semantic-space-gap-md, 1rem);
   padding-top: var(--jz-semantic-space-padding-md, 1rem);
-}
-
-.homeBuckets {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: stretch;
-}
-
-.homeBuckets > .homeColumn + .homeColumn {
-  border-left: 1px solid var(--jz-semantic-color-border-subtle);
-}
-
-.homeBuckets > .homeColumn {
-  min-width: 0;
-  height: 100%;
-  box-sizing: border-box;
 }
 
 .homeStat {
@@ -156,55 +307,6 @@
   border-left: 1px solid var(--jz-semantic-color-border-subtle);
 }
 
-.homeExamples {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
-}
-
-.homeProjects {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.homeProjects > li + li {
-  border-top: 1px solid var(--jz-semantic-color-border-subtle);
-}
-
-.homeProject {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
-  width: 100%;
-  margin: 0;
-  padding-block: var(--jz-semantic-space-padding-sm, 0.75rem);
-  border: 0;
-  background: transparent;
-  color: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-
-.homeProjectName {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-.homeProjectStats {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  flex: 0 0 auto;
-  text-align: right;
-}
-
 .hubLead {
   display: flex;
   flex-direction: column;
@@ -226,6 +328,14 @@
 }
 
 .hubTitle {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.hubTitleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--jz-semantic-space-gap-xs, 0.25rem);
   flex: 1 1 auto;
   min-width: 0;
 }
@@ -290,15 +400,6 @@
   .briefReveal {
     transition: none;
   }
-}
-
-.connections {
-  display: flex;
-  flex-direction: column;
-  gap: var(--jz-semantic-space-gap-2xs, 0.25rem);
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
 .answer {
@@ -499,18 +600,53 @@
 }
 
 @media (min-width: 1300px) {
-  /* 20px of canvas between the stage and each page column. */
+  /*
+   * Left edge stays put. Only the right edge moves, covering or revealing
+   * the job posting that remains in place underneath.
+   */
   .stage {
+    justify-content: flex-start;
     left: calc(
       var(--resume-column-max, calc(28.8rem - 10px)) + var(--answer-gap, 20px)
     );
     right: calc(
       var(--resume-column-max, calc(28.8rem - 10px)) + var(--answer-gap, 20px)
     );
+    transition:
+      top 320ms cubic-bezier(0.4, 0, 0.2, 1),
+      right 320ms cubic-bezier(0.4, 0, 0.2, 1),
+      bottom 320ms cubic-bezier(0.4, 0, 0.2, 1),
+      left 320ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .stage[data-job-closed] {
+    right: 0;
   }
 
   .card {
     width: 100%;
+    max-width: none;
+    /* Follow the stage edge. A separate width tween fights the slide. */
+    transition: none;
+  }
+
+  .jobToggle {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    top: var(--jz-semantic-space-padding-sm, 0.75rem);
+    right: var(--jz-semantic-space-padding-sm, 0.75rem);
+  }
+
+  /* Rail sits on the right, matching the job posting column. */
+  .jobToggle > * {
+    transform: scaleX(-1);
+  }
+}
+
+@media (min-width: 1300px) and (prefers-reduced-motion: reduce) {
+  .stage {
+    transition: none;
   }
 }
 
@@ -527,6 +663,13 @@
 
   .card {
     width: 100%;
+    max-width: none;
+    /* Follow the stage edge. A separate width cap snaps, then the edge eases. */
+    transition: none;
+  }
+
+  .stage[data-presenting] {
+    right: 0;
   }
 }
 

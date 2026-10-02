@@ -44,7 +44,7 @@
       "status": "reviewed",
       "reviewed_by": "Scott",
       "reviewed_at": "2026-09-27",
-      "vocabulary_version": "1.5.0"
+      "vocabulary_version": "1.7.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -56,7 +56,8 @@
           "local:front-end-development",
           "local:interaction-design",
           "local:headless-content-management",
-          "local:production-release"
+          "local:production-release",
+          "local:experience-designer"
         ],
         "ownership": "lead",
         "scope": "single_team",
@@ -88,7 +89,8 @@
           "local:coordination",
           "local:stakeholder-alignment",
           "local:cross-functional-work",
-          "local:contentful"
+          "local:contentful",
+          "local:experience-designer"
         ],
         "ownership": "lead",
         "scope": "multiple_teams",

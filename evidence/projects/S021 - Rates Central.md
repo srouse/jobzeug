@@ -31,7 +31,7 @@ year_note: Estimated as 2022 near the midpoint of R005 (August 2020–June 2023)
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: "1.5.0"
+  vocabulary_version: "1.7.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -44,6 +44,7 @@ evidence:
       - local:contentful
       - local:interaction-design
       - local:financial-services
+      - local:experience-designer
     ownership: contributor
     scope: organization
     delivery_stage: production
@@ -66,6 +67,7 @@ evidence:
     concept_ids:
       - local:headless-content-management
       - local:systems-analysis
+      - local:experience-designer
     ownership: contributor
     scope: organization
     delivery_stage: production
@@ -86,6 +88,7 @@ evidence:
     statement: Reports reducing rate-update turnaround from about a week to five or ten minutes.
     concept_ids:
       - local:workflow-time-reduction
+      - local:experience-designer
     ownership: contributor
     scope: organization
     delivery_stage: production

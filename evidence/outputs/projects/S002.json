@@ -5,7 +5,7 @@
     "R002"
   ],
   "name": "Contentful Bulk Edit App",
-  "summary": "This is Bulk Edit, the most popular app in the Contentful Marketplace. I originally built it as a Solution Specialist to win a specific prospect, and it ultimately helped close two deals. I then helped bring it into production and launch it in the marketplace.",
+  "summary": "Bulk Edit started as a prototype I built in a day or two to solve a specific prospect need: editing large amounts of structured content as easily as working in a spreadsheet. I demonstrated it to two prospects, and we closed both deals. It grew into a Contentful product, and I stayed with it from that first customer idea through design, development, and into the marketplace, where it is now the most popular app. I also extended it with the AI-guided interface I developed for DemAI, applying that same approach to large-scale content changes.",
   "presentation": "S002-presentation",
   "matchingMetadata": {
     "schema_version": "1.1",
@@ -16,13 +16,15 @@
     "ranking_eligible": true,
     "exclusion_reason": null,
     "parent_project_id": null,
-    "related_project_ids": [],
+    "related_project_ids": [
+      "S003"
+    ],
     "role_links": [
       {
         "id": "R002",
         "relationship": "delivery",
         "status": "confirmed",
-        "note": "The September 28, 2026 recording names this work as done while he was a solution specialist."
+        "note": "The September 28 recording and the September 29 transcript name this work as done while he was a solutions specialist."
       }
     ],
     "employer_links": [
@@ -46,7 +48,7 @@
       "status": "reviewed",
       "reviewed_by": "Scott",
       "reviewed_at": "2026-09-28",
-      "vocabulary_version": "1.5.0"
+      "vocabulary_version": "1.7.0"
     },
     "public_disclosure": "restricted",
     "evidence": [
@@ -60,7 +62,8 @@
           "local:customer-demonstration",
           "local:customer-facing-work",
           "local:contentful",
-          "local:deadline-pressure"
+          "local:deadline-pressure",
+          "local:solution-specialist"
         ],
         "ownership": "contributor",
         "scope": "external_audience",
@@ -90,7 +93,8 @@
         "concept_ids": [
           "local:semantic-search-integration",
           "local:interaction-design",
-          "local:contentful"
+          "local:contentful",
+          "local:solution-specialist"
         ],
         "ownership": "contributor",
         "scope": "external_audience",
@@ -119,7 +123,8 @@
         "concept_ids": [
           "local:troubleshooting",
           "local:programming",
-          "local:production-release"
+          "local:production-release",
+          "local:solution-specialist"
         ],
         "ownership": "contributor",
         "scope": "multiple_teams",
@@ -148,7 +153,8 @@
         "id": "S002-E004",
         "statement": "Reports that both sales associated with his prototype presentations closed.",
         "concept_ids": [
-          "local:sales-contribution"
+          "local:sales-contribution",
+          "local:solution-specialist"
         ],
         "ownership": "contributor",
         "scope": "external_audience",
@@ -179,7 +185,8 @@
           "local:interaction-design",
           "local:front-end-development",
           "local:programming",
-          "local:contentful"
+          "local:contentful",
+          "local:solution-specialist"
         ],
         "ownership": "contributor",
         "scope": "multiple_teams",
@@ -210,7 +217,8 @@
         "concept_ids": [
           "local:interaction-design",
           "local:contentful",
-          "local:customer-demonstration"
+          "local:customer-demonstration",
+          "local:solution-specialist"
         ],
         "ownership": "contributor",
         "scope": "external_audience",
@@ -239,7 +247,8 @@
         "statement": "Helped guide Bulk Edit into the Contentful App Store.",
         "concept_ids": [
           "local:production-release",
-          "local:coordination"
+          "local:coordination",
+          "local:solution-specialist"
         ],
         "ownership": "contributor",
         "scope": "multiple_teams",
@@ -262,15 +271,79 @@
           "reviewed_by": null,
           "reviewed_at": null
         }
+      },
+      {
+        "id": "S002-E008",
+        "statement": "Built a day-or-two prototype so a condo prospect could find dozens of entries that share an attribute, such as square footage, and set one value, such as price, across them.",
+        "concept_ids": [
+          "local:bulk-content-editing",
+          "local:prototyping",
+          "local:technical-prototype",
+          "local:interaction-design",
+          "local:contentful",
+          "local:customer-facing-work",
+          "local:solution-specialist"
+        ],
+        "ownership": "sole",
+        "scope": "individual",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s002-bulk-edit-how-i-built-2026-09-29.md",
+            "locator": "0:00:08 and 0:00:26",
+            "supports": "He says he built the prototype in a day or two, as a solutions specialist, for a prospect selling condos who needed Excel-like updates across many entries."
+          }
+        ],
+        "limitations": [
+          "This recording does not name the prospect. An earlier account names a customer that is not cleared for public use.",
+          "His \"day or two\" timing has no build log in the file."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S002-E009",
+        "statement": "For the second prospect, embedded the DemAI interface in his own Bulk Edit build, not the marketplace app, and wrote a few AI functions that find entries and propose edits a person can accept or decline, one entry at a time or across the set.",
+        "concept_ids": [
+          "local:bulk-content-editing",
+          "local:ai-workflow-engineering",
+          "local:ai-edit-approval",
+          "local:prototyping",
+          "local:technical-prototype",
+          "local:interaction-design",
+          "local:customer-demonstration",
+          "local:contentful",
+          "local:solution-specialist"
+        ],
+        "ownership": "sole",
+        "scope": "individual",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s002-bulk-edit-how-i-built-2026-09-29.md",
+            "locator": "0:00:42, 0:01:20, 0:01:38, 0:02:18, and 0:03:40",
+            "supports": "He embeds the DemAI interface, creates two or three AI functions, shows accept or decline on a Fuel-to-Fire rename, and says references work too."
+          }
+        ],
+        "limitations": [
+          "The caption says Demi, DIMI, and Falk edit. The project on file for that interface is DemAI. The code was not inspected.",
+          "The prompt says \"track fuel.\" He does not say semantic search, and he does not name a model. An earlier account names a customer that is not cleared for public use.",
+          "He says this build is not the marketplace app, and that at scale it has to work differently. He declines one proposed edit in the demo."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
       }
     ],
-    "concept_proposals": [
-      {
-        "label": "Bulk content editing",
-        "category": "work_activity",
-        "definition": "Changing many structured content entries together from one surface.",
-        "reason": "The account and the September 28 recording are about editing many Contentful entries at once. Interaction design covers the grid. No approved concept covers the bulk operation."
-      }
-    ]
+    "concept_proposals": []
   }
 }

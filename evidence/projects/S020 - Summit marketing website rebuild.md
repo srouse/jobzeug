@@ -31,7 +31,7 @@ year_note: Estimated as 2022 near the midpoint of R005 (August 2020–June 2023)
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: "1.5.0"
+  vocabulary_version: "1.7.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -45,6 +45,7 @@ evidence:
       - local:decision-making
       - local:headless-content-management
       - local:stakeholder-alignment
+      - local:experience-designer
     ownership: lead
     scope: organization
     delivery_stage: production
@@ -73,6 +74,7 @@ evidence:
       - local:contentful
       - local:platform-migration
       - local:cross-functional-work
+      - local:experience-designer
     ownership: contributor
     scope: multiple_teams
     delivery_stage: production
@@ -96,6 +98,7 @@ evidence:
     concept_ids:
       - local:component-consolidation
       - local:web-performance-improvement
+      - local:experience-designer
     ownership: contributor
     scope: organization
     delivery_stage: production

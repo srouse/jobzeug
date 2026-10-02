@@ -30,7 +30,7 @@ year_note: No single delivery year. The catch-all covers the R009 tenure (August
 delivery_stage: mixed
 annotation:
   status: reviewed
-  vocabulary_version: "1.5.0"
+  vocabulary_version: "1.7.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review
@@ -42,6 +42,7 @@ evidence:
       - local:technical-discovery
       - local:interaction-design
       - local:cross-functional-work
+      - local:ux-ui-designer-web-mobile-developer
     ownership: contributor
     scope: external_audience
     delivery_stage: mixed
@@ -70,6 +71,7 @@ evidence:
       - local:front-end-development
       - local:visual-interface-design
       - local:ios
+      - local:ux-ui-designer-web-mobile-developer
     ownership: lead
     scope: external_audience
     delivery_stage: prototype

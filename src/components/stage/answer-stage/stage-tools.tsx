@@ -28,7 +28,14 @@ function applyBodyColorMode(mode: ColorMode) {
 }
 
 export function StageTools({ onOpenDesign }: { onOpenDesign?: () => void }) {
-  const { density, setDensity, lineFocus, clearLineFocus } = useResumeHighlights();
+  const {
+    density,
+    setDensity,
+    lineFocus,
+    clearLineFocus,
+    fitBarsVisible,
+    setFitBarsVisible,
+  } = useResumeHighlights();
   const [colorMode, setColorMode] = useState<ColorMode>("light");
   const modeMeta =
     COLOR_MODES.find((mode) => mode.id === colorMode) ?? COLOR_MODES[0];
@@ -86,6 +93,13 @@ export function StageTools({ onOpenDesign }: { onOpenDesign?: () => void }) {
           onClick={onOpenDesign}
         />
       ) : null}
+      <JzIconButton
+        label={fitBarsVisible ? "Hide score bars" : "Show score bars"}
+        icon="ChartBar"
+        title={fitBarsVisible ? "Hide score bars" : "Show score bars"}
+        aria-pressed={fitBarsVisible}
+        onClick={() => setFitBarsVisible(!fitBarsVisible)}
+      />
     </div>
   );
 }

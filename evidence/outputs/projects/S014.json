@@ -48,7 +48,7 @@
       "status": "reviewed",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.5.0"
+      "vocabulary_version": "1.7.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -59,7 +59,8 @@
           "local:technical-writing",
           "local:technical-article",
           "local:design-system-fundamentals",
-          "local:design-token-fundamentals"
+          "local:design-token-fundamentals",
+          "local:senior-software-engineer"
         ],
         "ownership": "sole",
         "scope": "external_audience",
@@ -91,7 +92,8 @@
           "local:technical-writing",
           "local:technical-article",
           "local:design-system-fundamentals",
-          "local:design-token-fundamentals"
+          "local:design-token-fundamentals",
+          "local:senior-software-engineer"
         ],
         "ownership": "sole",
         "scope": "external_audience",
@@ -119,7 +121,8 @@
         "id": "S014-E003",
         "statement": "The article has ranked in the top 10 of Contentful blog performance for a couple of years. After the CEO read it, he made a video and presented it to the company.",
         "concept_ids": [
-          "local:technical-article"
+          "local:technical-article",
+          "local:senior-software-engineer"
         ],
         "ownership": "sole",
         "scope": "external_audience",
@@ -148,7 +151,8 @@
         "statement": "Drafted the article from speech-to-text and used AI to clean it up quickly, early in his use of that method, so the ideas stayed his. Professional editors then made one or two small updates.",
         "concept_ids": [
           "local:ai-assisted-editing",
-          "local:technical-writing"
+          "local:technical-writing",
+          "local:senior-software-engineer"
         ],
         "ownership": "sole",
         "scope": "individual",
@@ -177,7 +181,8 @@
         "id": "S014-E005",
         "statement": "Drew the article's illustrations himself so the figures carry the explanation.",
         "concept_ids": [
-          "local:explanatory-illustration"
+          "local:explanatory-illustration",
+          "local:senior-software-engineer"
         ],
         "ownership": "sole",
         "scope": "individual",

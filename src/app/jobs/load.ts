@@ -1,12 +1,13 @@
+import { contentfulEditorUrl } from "@/lib/contentful/editor-url";
 import { listJobPostings, type JobPostingListItem } from "@/lib/contentful/delivery";
-import { loadJobPostingByEntryId } from "@/lib/job-posting/contentful";
+import { loadPublishedJobPostings } from "@/lib/job-posting/published";
 import { loadMatchingCatalog } from "@/lib/matching/catalog";
-import { bestDirectionalFits } from "@/lib/matching/home-coverage";
 import { scorePostingAgainstCatalog } from "@/lib/matching/score";
 
 export type JobListRow = JobPostingListItem & {
-  projectFit: number | null;
-  lineFit: number | null;
+  /** Age-adjusted point total. Same number as the analytics Total. */
+  total: number | null;
+  contentfulUrl?: string;
 };
 
 export async function loadJobList(): Promise<JobListRow[]> {
@@ -14,25 +15,18 @@ export async function loadJobList(): Promise<JobListRow[]> {
     listJobPostings(),
     loadMatchingCatalog(),
   ]);
-  const catalogProjectCount = catalog.projects.size;
 
+  const views = await loadPublishedJobPostings(postings.map((posting) => posting.entryId));
   return Promise.all(
     postings.map(async (posting) => {
+      const contentfulUrl = contentfulEditorUrl(posting.entryId);
       try {
-        const view = await loadJobPostingByEntryId(posting.entryId);
-        if (!view) return { ...posting, projectFit: null, lineFit: null };
+        const view = views.get(posting.entryId);
+        if (!view) return { ...posting, total: null, contentfulUrl };
         const scored = scorePostingAgainstCatalog({ posting: view, catalog });
-        const fits = bestDirectionalFits({
-          projectScopedLineCount: view.lines.filter(
-            (line) => line.matchingRequirement?.scope === "project",
-          ).length,
-          catalogProjectCount,
-          lineCount: view.lines.length,
-          projects: scored.projects,
-        });
-        return { ...posting, projectFit: fits.project, lineFit: fits.line };
+        return { ...posting, total: scored.ageAdjustedTotal, contentfulUrl };
       } catch {
-        return { ...posting, projectFit: null, lineFit: null };
+        return { ...posting, total: null, contentfulUrl };
       }
     }),
   );

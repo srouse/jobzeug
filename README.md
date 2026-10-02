@@ -73,7 +73,7 @@ Do these in order when a project should show up in the app and in matching.
 3. **Annotate project** (`/annotate-project`) — claims and approved `concept_ids` against the current vocabulary, when the account is already in the file. New meanings stay proposals unless he asked for a vocabulary change.
 4. **Compress to Contentful** (`/compress-to-contentful`) — `contentful:compress`, then `contentful:apply`, then `contentful:push`.
 
-`annotation.vocabulary_version` must be `1.5.0` or compress stops for the whole catalog. That pin is not the same as claim review. Empty `evidence` still publishes the resume summary and scores no concepts.
+`annotation.vocabulary_version` must be `1.6.0` or compress stops for the whole catalog. That pin is not the same as claim review. Empty `evidence` still publishes the resume summary and scores no concepts.
 
 Contentful tags (`fintech`, `enterprise`) are separate from matching `concept_ids`.
 

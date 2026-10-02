@@ -3,19 +3,40 @@
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
-  border-radius: var(--jz-primitive-radius-sm, 0.25rem);
+  border-radius: 0;
 }
 
 .attachable {
   cursor: pointer;
+  position: relative;
 }
 
-.attachable:hover:not([aria-pressed="true"]) {
-  outline: 1px solid var(--jz-semantic-color-border-subtle, #e5e5e5);
-  outline-offset: -1px;
+.attachable::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  pointer-events: none;
+  background: var(--jz-semantic-color-border-default, #a3a3a3);
+  opacity: 0;
+  transition: opacity 220ms ease-out;
 }
 
-.attachable:hover[aria-pressed="true"] {
-  outline: 1px solid var(--jz-semantic-color-border-subtle, #e5e5e5);
-  outline-offset: -1px;
+.attachable[data-edge="right"]::after {
+  right: 0;
+}
+
+.attachable[data-edge="left"]::after {
+  left: 0;
+}
+
+.attachable:hover:not([aria-pressed="true"])::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .attachable::after {
+    transition: none;
+  }
 }

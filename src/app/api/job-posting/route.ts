@@ -4,7 +4,10 @@ import { z } from "zod";
 
 import { loadMatchingCatalog } from "@/lib/matching/catalog";
 import {
+  deleteJobPostingTree,
+  JobPostingDeleteError,
   loadJobPostingByEntryId,
+  loadPublishedJobPosting,
   mapJobPostingRequirements,
   publishJobPostingTree,
   scrapeJobListingMarkdown,
@@ -23,6 +26,10 @@ const entryIdSchema = z
 
 const postBodySchema = z.object({
   url: z.url(),
+});
+
+const deleteBodySchema = z.object({
+  entryId: entryIdSchema,
 });
 
 async function requireSiteSession(): Promise<
@@ -64,7 +71,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const view = await loadJobPostingByEntryId(parsed.data);
+    const view = await loadPublishedJobPosting(parsed.data);
     if (!view) {
       return NextResponse.json(
         { error: "Job posting not found" },
@@ -93,6 +100,33 @@ function ingestErrorStatus(message: string): number {
     return 503;
   }
   return 500;
+}
+
+/** Unpublish and delete a job posting plus the lines and tools it links. */
+export async function DELETE(req: NextRequest) {
+  const session = await requireSiteSession();
+  if ("error" in session) return session.error;
+
+  let entryId: string;
+  try {
+    const body = deleteBodySchema.parse(await req.json());
+    entryId = body.entryId;
+  } catch {
+    return NextResponse.json({ error: "Invalid entryId" }, { status: 400 });
+  }
+
+  try {
+    const deleted = await deleteJobPostingTree(entryId);
+    return NextResponse.json(deleted);
+  } catch (error) {
+    if (error instanceof JobPostingDeleteError) {
+      return NextResponse.json({ error: error.message }, { status: error.status });
+    }
+    const message =
+      error instanceof Error ? error.message : "Failed to delete job posting";
+    const status = message.includes("Missing Contentful") ? 503 : 500;
+    return NextResponse.json({ error: message }, { status });
+  }
 }
 
 /** Scrape → structure → map requirements → Contentful (forward-only; no legacy remap). */

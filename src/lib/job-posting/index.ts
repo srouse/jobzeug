@@ -10,10 +10,16 @@ export {
 } from "./map-requirements";
 export {
   publishJobPostingTree,
+  deleteJobPostingTree,
+  JobPostingDeleteError,
   saveJobPostingMatchGraph,
   loadJobPostingByEntryId,
   formatJobPostingContext,
 } from "./contentful";
+export {
+  loadPublishedJobPosting,
+  loadPublishedJobPostings,
+} from "./published";
 export {
   toJobPostingPanelData,
   toChatJobPostingPayload,

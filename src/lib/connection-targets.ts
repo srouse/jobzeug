@@ -1,8 +1,14 @@
+import { recencyWeight } from "./matching/recency";
+
 export type MatchEdge = {
   projectId: string;
   lineEntryId: string;
   points: number;
 };
+
+export type ProjectYears = Readonly<
+  Record<string, number | null | undefined>
+>;
 
 export const EMPTY_MATCH_EDGES: MatchEdge[] = [];
 
@@ -38,6 +44,13 @@ const CONNECTION_CAP = 10;
 
 function unique(ids: string[]): string[] {
   return [...new Set(ids)];
+}
+
+/** Age weight for a project id. A missing year stays at full weight. */
+function projectWeight(projectId: string, projectYears?: ProjectYears): number {
+  const year =
+    projectYears?.[projectId] ?? projectYears?.[projectId.replace(/^jz-/, "")];
+  return recencyWeight(year);
 }
 
 function selectionEndpoints(
@@ -79,6 +92,7 @@ function selectionEndpoints(
 export function selectionIds(
   focus: { kind: "project" | "jobLine"; id: string },
   edges: readonly MatchEdge[],
+  projectYears?: ProjectYears,
 ): ConnectionEndpoint[] {
   if (focus.kind === "project") {
     const lines = edges
@@ -88,7 +102,10 @@ export function selectionIds(
   }
   const projects = edges
     .filter((edge) => edge.lineEntryId === focus.id && edge.points > 0)
-    .map((edge) => ({ id: edge.projectId, points: edge.points }));
+    .map((edge) => ({
+      id: edge.projectId,
+      points: edge.points * projectWeight(edge.projectId, projectYears),
+    }));
   return selectionEndpoints(focus.id, projects);
 }
 
@@ -101,6 +118,7 @@ export function activeConnectionTarget(
   edges: readonly MatchEdge[],
   answerIds: Iterable<string>,
   showAnswer: boolean,
+  projectYears?: ProjectYears,
 ): ConnectionTarget | null {
   if (!focus) return null;
   if (focus.kind === "answer") {
@@ -113,5 +131,5 @@ export function activeConnectionTarget(
     if (ids.length === 0) return null;
     return { hub: "answer", ids };
   }
-  return { hub: "selection", ids: selectionIds(focus, edges) };
+  return { hub: "selection", ids: selectionIds(focus, edges, projectYears) };
 }

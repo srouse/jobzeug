@@ -5,20 +5,13 @@
   box-shadow: var(--jz-primitive-effect-elevation-low);
   min-height: 0;
   height: 100%;
-  max-height: min(70dvh, 100%);
+  max-height: 100%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   font-size: 1em;
   transition: font-size 320ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-@media (min-width: 900px) {
-  .panel {
-    max-height: 100%;
-  }
-}
-
 
 .bindForm {
   display: flex;
@@ -288,6 +281,7 @@
 
 .line {
   margin: 0;
+  border-radius: 0;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -298,12 +292,16 @@
   padding-inline: var(--jz-semantic-space-padding-sm, 0.75rem);
 }
 
+.line[data-fit-bars="off"] {
+  padding-bottom: var(--jz-semantic-space-padding-2xs, 0.25rem);
+}
+
 .lineSubject {
   background: var(
     --jz-semantic-color-background-surface-brand-primary-subtle,
     #eff6ff
   );
-  border-radius: var(--jz-primitive-radius-sm, 0.25rem);
+  box-shadow: inset -2px 0 0 var(--jz-semantic-color-brand-primary);
 }
 
 .lineCited {
@@ -311,12 +309,29 @@
     --jz-semantic-color-background-surface-brand-primary-subtle,
     #eff6ff
   );
-  border-radius: var(--jz-primitive-radius-sm, 0.25rem);
+  box-shadow: inset -2px 0 0
+    var(--jz-semantic-color-border-brand-strong, #2563eb);
 }
 
 .lineDimmed {
   background: var(--jz-semantic-color-background-control-subtle, #f5f5f5);
-  border-radius: var(--jz-primitive-radius-sm, 0.25rem);
+  box-shadow: inset -1px 0 0 var(--jz-semantic-color-border-default);
+}
+
+/* Wide layout puts the job column on the right, so the connector meets the left edge. */
+@media (min-width: 1300px) {
+  .lineSubject {
+    box-shadow: inset 2px 0 0 var(--jz-semantic-color-brand-primary);
+  }
+
+  .lineCited {
+    box-shadow: inset 2px 0 0
+      var(--jz-semantic-color-border-brand-strong, #2563eb);
+  }
+
+  .lineDimmed {
+    box-shadow: inset 1px 0 0 var(--jz-semantic-color-border-default);
+  }
 }
 
 .lineCopy {
@@ -355,6 +370,7 @@
 /* Smooth rollup: grid 1fr ↔ 0fr with residual skeleton bar */
 .shell {
   display: grid;
+  border-radius: 0;
   grid-template-rows: 1fr;
   transition:
     grid-template-rows 400ms ease-in-out,
@@ -372,11 +388,11 @@
 
 .inner {
   overflow: hidden;
+  border-radius: 0;
   min-height: 0;
   transition:
     min-height 400ms ease-in-out,
     background-color 400ms ease-in-out;
-  border-radius: var(--jz-primitive-radius-sm, 0.25rem);
 }
 
 .shell.isSkeleton .inner {
@@ -389,11 +405,13 @@
   transition: opacity 200ms ease-in-out;
 }
 
+.content.lineSubject,
 .content.lineCited,
 .content.lineDimmed {
   transition:
     opacity 200ms ease-in-out,
-    background-color 700ms ease-in-out;
+    background-color 180ms ease-out,
+    box-shadow 180ms ease-out;
 }
 
 .shell.isSkeleton .content {

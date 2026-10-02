@@ -7,6 +7,7 @@ type VocabularyConcept = {
   label: string;
   aliases?: string[];
   status: string;
+  category?: string;
 };
 
 type VocabularyLike = {
@@ -86,4 +87,54 @@ export function prepareRequirementForScoring(
     },
     vocabulary,
   );
+}
+
+/** Highest approved registry. Role tags live here even when a posting is pinned older. */
+export function newestApprovedVocabulary<T extends { status: string }>(
+  vocabularies: Map<string, T> | undefined,
+): T | undefined {
+  if (!vocabularies) return undefined;
+  const approved = [...vocabularies.entries()].filter(
+    ([, vocabulary]) => vocabulary.status === "approved",
+  );
+  approved.sort(([a], [b]) =>
+    b.localeCompare(a, undefined, { numeric: true }),
+  );
+  return approved[0]?.[1];
+}
+
+/**
+ * Add role concepts when the line names a resume title, even if other tags are
+ * already set. Candidate-only lines stay untouched. Does not drop IDs that the
+ * posting's pinned vocabulary does not know.
+ */
+export function appendRoleConceptHits(
+  requirement: MatchingRequirement,
+  vocabulary: VocabularyLike,
+  { section, theme }: { section?: string; theme?: string } = {},
+): MatchingRequirement {
+  if (requirement.scope === "candidate") return requirement;
+  const haystack = normalizeMatchText(
+    [
+      requirement.source_text || "",
+      requirement.normalized_statement || "",
+      section || "",
+      String(theme || "").replace(/[-_]+/g, " "),
+    ].join(" "),
+  );
+  const hits: string[] = [];
+  for (const concept of vocabulary.concepts || []) {
+    if (concept.status !== "approved" || concept.category !== "role") continue;
+    if (conceptMatchesText(haystack, concept)) hits.push(concept.id);
+  }
+  if (!hits.length) return requirement;
+  const concept_ids = [...new Set([...(requirement.concept_ids || []), ...hits])];
+  return {
+    ...requirement,
+    concept_ids,
+    mapping_status:
+      requirement.mapping_status === "unmapped"
+        ? "proposed"
+        : requirement.mapping_status,
+  };
 }

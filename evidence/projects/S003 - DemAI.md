@@ -27,7 +27,7 @@ year_note: Scott places the project from early 2025 through early 2026; 2025 is 
 delivery_stage: mixed
 annotation:
   status: reviewed
-  vocabulary_version: "1.5.0"
+  vocabulary_version: "1.7.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -41,6 +41,7 @@ evidence:
       - local:firecrawl
       - local:mastra
       - local:contentful
+      - local:solution-specialist
     ownership: contributor
     scope: unknown
     delivery_stage: mixed
@@ -63,6 +64,7 @@ evidence:
       content-model creation.
     concept_ids:
       - local:product-adoption
+      - local:solution-specialist
     ownership: contributor
     scope: unknown
     delivery_stage: mixed

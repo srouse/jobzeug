@@ -30,7 +30,7 @@ year_note: Project calendar was not supplied. Estimated as 2022 inside R005 (Aug
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: "1.5.0"
+  vocabulary_version: "1.7.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review
@@ -44,6 +44,7 @@ evidence:
       - local:interaction-design
       - local:headless-content-management
       - local:production-release
+      - local:experience-designer
     ownership: lead
     scope: single_team
     delivery_stage: production
@@ -70,6 +71,7 @@ evidence:
       - local:stakeholder-alignment
       - local:cross-functional-work
       - local:contentful
+      - local:experience-designer
     ownership: lead
     scope: multiple_teams
     delivery_stage: production

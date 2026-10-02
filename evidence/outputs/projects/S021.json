@@ -46,7 +46,7 @@
       "status": "reviewed",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.5.0"
+      "vocabulary_version": "1.7.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -57,7 +57,8 @@
           "local:content-modeling",
           "local:contentful",
           "local:interaction-design",
-          "local:financial-services"
+          "local:financial-services",
+          "local:experience-designer"
         ],
         "ownership": "contributor",
         "scope": "organization",
@@ -85,7 +86,8 @@
         "statement": "Used the Contentful build workflow to distribute centrally managed rates to the website, dealership PDFs, and other endpoints.",
         "concept_ids": [
           "local:headless-content-management",
-          "local:systems-analysis"
+          "local:systems-analysis",
+          "local:experience-designer"
         ],
         "ownership": "contributor",
         "scope": "organization",
@@ -112,7 +114,8 @@
         "id": "S021-E003",
         "statement": "Reports reducing rate-update turnaround from about a week to five or ten minutes.",
         "concept_ids": [
-          "local:workflow-time-reduction"
+          "local:workflow-time-reduction",
+          "local:experience-designer"
         ],
         "ownership": "contributor",
         "scope": "organization",

@@ -30,7 +30,7 @@ year_note: Estimated from R001 (February 2026–present as of September 2026); p
 delivery_stage: unknown
 annotation:
   status: reviewed
-  vocabulary_version: "1.5.0"
+  vocabulary_version: "1.7.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -45,6 +45,7 @@ evidence:
       - local:figma
       - local:contentful
       - local:design-token-engineering
+      - local:senior-product-architect
     ownership: contributor
     scope: single_team
     delivery_stage: unknown
@@ -71,6 +72,7 @@ evidence:
       - local:design-token-pipeline
       - local:ai-workflow-engineering
       - local:react
+      - local:senior-product-architect
     ownership: contributor
     scope: unknown
     delivery_stage: unknown
@@ -94,6 +96,7 @@ evidence:
     concept_ids:
       - local:mentoring
       - local:deadline-pressure
+      - local:senior-product-architect
     ownership: contributor
     scope: single_team
     delivery_stage: unknown

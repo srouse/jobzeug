@@ -6,7 +6,7 @@ export const conceptIdSchema = z.string().regex(/^local:[a-z0-9-]+$/);
 const conceptId = conceptIdSchema;
 const version = z.string().regex(/^\d+\.\d+\.\d+$/);
 const unique = schema => z.array(schema).refine(a => new Set(a).size === a.length, 'Duplicate values');
-const category = z.enum(['skill', 'knowledge', 'work_activity', 'work_context', 'tool', 'domain', 'deliverable', 'outcome']);
+const category = z.enum(['skill', 'knowledge', 'work_activity', 'work_context', 'tool', 'domain', 'deliverable', 'outcome', 'role']);
 const stage = z.enum(['concept', 'prototype', 'pilot', 'production', 'mixed', 'unknown']);
 const disclosure = z.enum(['cleared', 'restricted', 'needs_review']);
 const ownership = z.enum(['sole', 'lead', 'contributor', 'team_unspecified', 'unknown']);
@@ -56,7 +56,7 @@ const vocabularyReview = z.strictObject({ reviewed_by: text, reviewed_at: z.iso.
 export const matchingVocabularySchema = z.strictObject({
   schema_version: z.literal('1.0'), vocabulary_version: version, title: text,
   status: z.enum(['proposed', 'approved', 'deprecated']), created_at: z.iso.date(), review: vocabularyReview, purpose: text,
-  categories: z.record(category, text),
+  categories: z.partialRecord(category, text),
   external_source: z.strictObject({
     system: text, release: text, file: text, url: z.url(), sha256: z.string().regex(/^[a-f0-9]{64}$/),
     retrieved_at: z.iso.date(), license_url: z.url(), license_details_url: z.url(), attribution: text, modifications: text,

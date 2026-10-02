@@ -29,7 +29,7 @@ year_note: Estimated from R001 (February 2026–present as of September 2026); p
 delivery_stage: prototype
 annotation:
   status: reviewed
-  vocabulary_version: "1.5.0"
+  vocabulary_version: "1.7.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -41,6 +41,7 @@ evidence:
       - local:semantic-metadata-design
       - local:systems-analysis
       - local:content-modeling
+      - local:senior-product-architect
     ownership: sole
     scope: individual
     delivery_stage: prototype
@@ -65,6 +66,7 @@ evidence:
       - local:ai-workflow-engineering
       - local:ai-output-evaluation
       - local:critical-thinking
+      - local:senior-product-architect
     ownership: sole
     scope: individual
     delivery_stage: prototype
@@ -94,6 +96,7 @@ evidence:
       - local:figma
       - local:contentful
       - local:troubleshooting
+      - local:senior-product-architect
     ownership: sole
     scope: individual
     delivery_stage: prototype
@@ -120,6 +123,7 @@ evidence:
       - local:decision-making
       - local:ai-workflow-engineering
       - local:figma
+      - local:senior-product-architect
     ownership: sole
     scope: individual
     delivery_stage: prototype
@@ -144,6 +148,7 @@ evidence:
       - local:ai-workflow-engineering
       - local:ai-output-evaluation
       - local:contentful
+      - local:senior-product-architect
     ownership: sole
     scope: individual
     delivery_stage: prototype
@@ -170,6 +175,7 @@ evidence:
       - local:critical-thinking
       - local:ai-system-fundamentals
       - local:ai-output-evaluation
+      - local:senior-product-architect
     ownership: sole
     scope: individual
     delivery_stage: prototype
@@ -195,6 +201,7 @@ evidence:
       - local:contentful
       - local:figma
       - local:systems-analysis
+      - local:senior-product-architect
     ownership: sole
     scope: individual
     delivery_stage: prototype
@@ -219,6 +226,7 @@ evidence:
       - local:troubleshooting
       - local:ai-workflow-engineering
       - local:critical-thinking
+      - local:senior-product-architect
     ownership: sole
     scope: individual
     delivery_stage: prototype
@@ -242,6 +250,7 @@ evidence:
       - local:mastra
       - local:openai
       - local:ai-system-fundamentals
+      - local:senior-product-architect
     ownership: sole
     scope: individual
     delivery_stage: prototype
@@ -262,6 +271,7 @@ evidence:
     concept_ids:
       - local:speaking
       - local:cross-functional-work
+      - local:senior-product-architect
     ownership: sole
     scope: individual
     delivery_stage: prototype
@@ -289,6 +299,7 @@ evidence:
       - local:systems-analysis
       - local:content-modeling
       - local:decision-making
+      - local:senior-product-architect
     ownership: sole
     scope: individual
     delivery_stage: prototype
@@ -314,6 +325,7 @@ evidence:
     concept_ids:
       - local:prototyping
       - local:technical-prototype
+      - local:senior-product-architect
     ownership: sole
     scope: individual
     delivery_stage: prototype

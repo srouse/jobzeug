@@ -31,7 +31,7 @@ year_note: Estimated as 2023, the main calendar year of R004 (July 2023–Januar
 delivery_stage: mixed
 annotation:
   status: reviewed
-  vocabulary_version: "1.5.0"
+  vocabulary_version: "1.7.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review
@@ -43,6 +43,7 @@ evidence:
       - local:persuasion
       - local:speaking
       - local:stakeholder-alignment
+      - local:ux-generalist-design-systems
     ownership: contributor
     scope: organization
     delivery_stage: unknown
@@ -69,6 +70,7 @@ evidence:
       - local:design-token-fundamentals
       - local:design-system-development
       - local:design-system-fundamentals
+      - local:ux-generalist-design-systems
     ownership: contributor
     scope: organization
     delivery_stage: unknown
@@ -105,6 +107,7 @@ evidence:
       - local:interaction-design
       - local:decision-making
       - local:speaking
+      - local:ux-generalist-design-systems
     ownership: contributor
     scope: single_team
     delivery_stage: prototype

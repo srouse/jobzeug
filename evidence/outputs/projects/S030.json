@@ -56,7 +56,7 @@
       "status": "reviewed",
       "reviewed_by": "Scott",
       "reviewed_at": "2026-09-27",
-      "vocabulary_version": "1.5.0"
+      "vocabulary_version": "1.7.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -69,7 +69,8 @@
           "local:interaction-design",
           "local:production-release",
           "local:product-adoption",
-          "local:ios"
+          "local:ios",
+          "local:head-of-usability-mobile-developer"
         ],
         "ownership": "lead",
         "scope": "external_audience",
@@ -103,7 +104,8 @@
           "local:persuasion",
           "local:coordination",
           "local:cross-functional-work",
-          "local:accessibility-principles"
+          "local:accessibility-principles",
+          "local:head-of-usability-mobile-developer"
         ],
         "ownership": "lead",
         "scope": "organization",

@@ -23,6 +23,7 @@ import {
 } from "@/components/resume";
 import { AnswerStage, DesignModal, DesignSessionProvider } from "@/components/stage";
 import { JzButton, JzTab, JzTabGroup, JzText } from "@jobzeug/design-system/react";
+import { sameProjectId } from "@/components/resume/project-presentation/project-presentation";
 import {
   normalizeRouteEntryId,
   resumePath,
@@ -104,15 +105,18 @@ function routeFromLine(focus: LineFocus | null): ResumeFocus | null {
  * Stage subject and the address stay the same value.
  * Route changes (load, Back, a new posting) apply onto line focus without
  * writing history. Clicks push a new entry.
+ * `/details` stays on the path only while that same project is focused.
  */
 function FocusRouteSync({
   entryId,
   routeFocus,
   onRouteFocus,
+  onDetails,
 }: {
   entryId: string | null;
   routeFocus: ResumeFocus | null;
   onRouteFocus: (focus: ResumeFocus | null) => void;
+  onDetails: (details: boolean) => void;
 }) {
   const { lineFocus, applyLineFocus } = useResumeHighlights();
   const entryIdRef = useRef(entryId);
@@ -125,11 +129,19 @@ function FocusRouteSync({
   useEffect(() => {
     if (lineFocus?.kind === "answer") return;
     const next = routeFromLine(lineFocus);
-    const url = resumePath(entryIdRef.current, next);
-    if (url === window.location.pathname) return;
-    window.history.pushState(null, "", url);
-    onRouteFocus(next);
-  }, [lineFocus, onRouteFocus]);
+    const current = resumeRouteFromPathname(window.location.pathname);
+    const keepDetails =
+      current.details &&
+      next?.kind === "project" &&
+      current.focus?.kind === "project" &&
+      sameProjectId(next.id, current.focus.id);
+    const url = resumePath(entryIdRef.current, next, keepDetails);
+    if (url !== window.location.pathname) {
+      window.history.pushState(null, "", url);
+      onRouteFocus(next);
+    }
+    if (current.details && !keepDetails) onDetails(false);
+  }, [lineFocus, onRouteFocus, onDetails]);
 
   return null;
 }
@@ -147,8 +159,17 @@ function ResumeCover({ resumeLoading }: { resumeLoading: boolean }) {
   );
 }
 
-function ResumePageBody() {
-  const { evidencePage, setEvidencePage } = useResumeHighlights();
+function ResumePageBody({
+  presentationId,
+  onOpenPresentation,
+  onClosePresentation,
+}: {
+  presentationId: string | null;
+  onOpenPresentation: (projectId: string) => void;
+  onClosePresentation: () => void;
+}) {
+  const { evidencePage, setEvidencePage, jobPostingOpen } =
+    useResumeHighlights();
   const { data: posting } = useJobPosting();
   const [resume, setResume] = useState<ResumeViewModel | null>(null);
   const resumeProjectIds = useMemo(() => {
@@ -167,7 +188,6 @@ function ResumePageBody() {
   /** Chat button and dock. Off until that entry comes back. */
   const showResumeChat = false;
   const [designOpen, setDesignOpen] = useState(false);
-  const [walkthroughId, setWalkthroughId] = useState<string | null>(null);
   const [wide, setWide] = useState(true);
   const [mobile, setMobile] = useState(false);
   const rootRef = useRef<HTMLElement>(null);
@@ -256,8 +276,17 @@ function ResumePageBody() {
     }
   }, [mobile, evidencePage, setEvidencePage]);
 
+  // The narrow layout has no room to grow over the pages. The video stays in the Answer tab.
+  useEffect(() => {
+    if (!mobile || !presentationId) return;
+    setEvidencePage("stage");
+  }, [mobile, presentationId, setEvidencePage]);
+
   const resumeActive = wide || evidencePage === "resume";
-  const jobActive = wide || evidencePage === "job";
+  /* Wide collapse keeps the column painted so the stage can cover it. */
+  const jobCollapsed = wide && !jobPostingOpen;
+  const jobActive = !jobCollapsed && (wide || evidencePage === "job");
+  const jobPainted = jobCollapsed || jobActive;
   const stageVisible = !mobile || evidencePage === "stage";
   const pagesVisible = !mobile || evidencePage !== "stage";
 
@@ -296,16 +325,15 @@ function ResumePageBody() {
                   resume={resume}
                   loading={loading}
                   error={error}
-                  projectId={walkthroughId}
-                  onProjectIdChange={setWalkthroughId}
                 />
               </div>
               <div
                 className={`${styles.pagePane} ${styles.pagePaneJob}`}
                 data-evidence-pane="job"
                 data-evidence-pane-active={jobActive ? "" : undefined}
-                hidden={!jobActive ? true : undefined}
+                hidden={!jobPainted ? true : undefined}
                 inert={!jobActive ? true : undefined}
+                aria-hidden={jobCollapsed || undefined}
               >
                 <JobPostingPanel resumeProjectIds={resumeProjectIds} />
               </div>
@@ -320,11 +348,13 @@ function ResumePageBody() {
           </div>
         </div>
       </div>
-      <EvidenceConnectors />
+      <EvidenceConnectors suspended={presentationId != null} />
       <AnswerStage
         hidden={!stageVisible}
         resume={resume}
-        onViewProject={setWalkthroughId}
+        presentationId={presentationId}
+        onClosePresentation={onClosePresentation}
+        onViewProject={onOpenPresentation}
         onOpenDesign={() => setDesignOpen(true)}
       />
       <EvidenceTabBar
@@ -358,22 +388,25 @@ function ResumePageBody() {
 
 /**
  * Single client shell for `/resume`, `/resume/{entryId}`,
- * `/resume/{entryId}/project/{projectId}`, and
- * `/resume/{entryId}/job-line/{lineId}`.
+ * `/resume/{entryId}/project/{projectId}`, `/resume/{entryId}/project/{projectId}/details`,
+ * and `/resume/{entryId}/job-line/{lineId}`.
  * Ids live in React state. URL updates use history.pushState so Next does
  * not remount this tree.
  */
 export function ResumeWorkspace({
   initialEntryId,
   initialFocus,
+  initialDetails = false,
 }: {
   initialEntryId: string | null;
   initialFocus: ResumeFocus | null;
+  initialDetails?: boolean;
 }) {
   const [entryId, setEntryId] = useState<string | null>(() =>
     normalizeRouteEntryId(initialEntryId),
   );
   const [focus, setFocus] = useState<ResumeFocus | null>(initialFocus);
+  const [details, setDetails] = useState(initialDetails);
 
   useEffect(() => {
     setEntryId(normalizeRouteEntryId(initialEntryId));
@@ -390,10 +423,15 @@ export function ResumeWorkspace({
   }, [initialFocusKind, initialFocusId]);
 
   useEffect(() => {
+    setDetails(initialDetails);
+  }, [initialDetails]);
+
+  useEffect(() => {
     const onPopState = () => {
       const route = resumeRouteFromPathname(window.location.pathname);
       setEntryId(route.entryId);
       setFocus(route.focus);
+      setDetails(route.details);
     };
     window.addEventListener("popstate", onPopState);
     return () => window.removeEventListener("popstate", onPopState);
@@ -404,7 +442,42 @@ export function ResumeWorkspace({
     window.history.pushState(null, "", resumePath(resolved, null));
     setEntryId(resolved);
     setFocus(null);
+    setDetails(false);
   }, []);
+
+  const openPresentation = useCallback(
+    (projectId: string) => {
+      const id = normalizeRouteEntryId(projectId);
+      if (!id) return;
+      const nextFocus: ResumeFocus =
+        focus?.kind === "project" && sameProjectId(focus.id, id)
+          ? focus
+          : { kind: "project", id };
+      const url = resumePath(entryId, nextFocus, true);
+      if (url !== window.location.pathname) {
+        window.history.pushState({ jobzeug: "details" }, "", url);
+      }
+      setFocus(nextFocus);
+      setDetails(true);
+    },
+    [entryId, focus],
+  );
+
+  const closePresentation = useCallback(() => {
+    const state = window.history.state as { jobzeug?: string } | null;
+    if (state?.jobzeug === "details") {
+      window.history.back();
+      return;
+    }
+    const url = resumePath(entryId, focus, false);
+    if (url !== window.location.pathname) {
+      window.history.replaceState(null, "", url);
+    }
+    setDetails(false);
+  }, [entryId, focus]);
+
+  const presentationId =
+    details && focus?.kind === "project" ? focus.id : null;
 
   return (
     <ResumeHighlightProvider initialLineFocus={lineFromRoute(initialFocus)}>
@@ -412,11 +485,16 @@ export function ResumeWorkspace({
         entryId={entryId}
         routeFocus={focus}
         onRouteFocus={setFocus}
+        onDetails={setDetails}
       />
       <JobPostingProvider entryId={entryId} navigateEntryId={navigateEntryId}>
         <ResumeChatProvider>
           <DesignSessionProvider>
-            <ResumePageBody />
+            <ResumePageBody
+              presentationId={presentationId}
+              onOpenPresentation={openPresentation}
+              onClosePresentation={closePresentation}
+            />
           </DesignSessionProvider>
         </ResumeChatProvider>
       </JobPostingProvider>

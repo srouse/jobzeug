@@ -126,14 +126,20 @@ function contentYAtOffset(anchors: readonly TimeAnchor[], offset: number): numbe
   return anchors[anchors.length - 1].y;
 }
 
-/** Most recent true time among rows that actually intersect the viewport. */
-function earliestVisibleOffset(
+/**
+ * True timeline offsets of rows on screen.
+ * `earliest` is any real intersection (the top of the thumb already tracks this).
+ * `latest` ignores a sliver at the fold so a project that is still off screen
+ * cannot pull its dot into the thumb.
+ */
+function visibleOffsets(
   scroller: HTMLElement,
   offsets: ReadonlyMap<string, number>,
-): number | null {
+): { earliest: number; latest: number } | null {
   const viewTop = scroller.getBoundingClientRect().top;
   const viewBottom = viewTop + scroller.clientHeight;
   let earliest: number | null = null;
+  let latest: number | null = null;
   const seen = new Set<string>();
   for (const node of scroller.querySelectorAll<HTMLElement>("[data-evidence-id]")) {
     const id = node.dataset.evidenceId;
@@ -142,12 +148,17 @@ function earliestVisibleOffset(
     if (offset == null) continue;
     const rect = node.getBoundingClientRect();
     if (rect.height <= 0) continue;
-    if (rect.bottom <= viewTop + 1 || rect.top >= viewBottom - 1) continue;
+    const overlap =
+      Math.min(rect.bottom, viewBottom - 1) - Math.max(rect.top, viewTop + 1);
+    if (overlap <= 0) continue;
     seen.add(id);
     const time = clamp01(offset);
     if (earliest == null || time < earliest) earliest = time;
+    const onScreen = overlap >= Math.min(12, rect.height * 0.5);
+    if (onScreen && (latest == null || time > latest)) latest = time;
   }
-  return earliest;
+  if (earliest == null) return null;
+  return { earliest, latest: latest ?? earliest };
 }
 
 function visibleWindow(
@@ -162,9 +173,13 @@ function visibleWindow(
   const bottomY = atEnd
     ? scroller.scrollHeight
     : scroller.scrollTop + scroller.clientHeight;
-  const bottom = offsetAtContentY(anchors, bottomY);
-  const earliest = earliestVisibleOffset(scroller, offsets);
-  const top = earliest == null ? edgeTop : Math.min(edgeTop, earliest);
+  const edgeBottom = offsetAtContentY(anchors, bottomY);
+  const visible = visibleOffsets(scroller, offsets);
+  const top = visible == null ? edgeTop : Math.min(edgeTop, visible.earliest);
+  // The scroll edge interpolates toward the next row before that row is on
+  // screen, which pulls the next project dot into the thumb. Hold the bottom
+  // on the oldest row that is actually visible.
+  const bottom = visible == null || atEnd ? edgeBottom : visible.latest;
   return { top, span: Math.max(0, bottom - top) };
 }
 
@@ -328,11 +343,14 @@ function YearLabel({
 export function CareerTimeline({
   employers,
   selectedProjects = [],
+  open = true,
   children,
 }: {
   employers?: readonly CareerTimelineEmployer[];
   /** Projects in the current selection, with highlight strength. */
   selectedProjects?: readonly CareerTimelineSelection[];
+  /** When false, the column collapses. The page stays put. */
+  open?: boolean;
   children: ReactNode;
 }) {
   const pageRef = useRef<HTMLDivElement>(null);
@@ -454,7 +472,10 @@ export function CareerTimeline({
       <aside
         ref={columnRef}
         className={styles.column}
+        data-closed={open ? undefined : ""}
         aria-label="Career timeline"
+        aria-hidden={open ? undefined : true}
+        inert={open ? undefined : true}
         onPointerDown={onTrackPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}

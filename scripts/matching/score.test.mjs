@@ -23,7 +23,7 @@ const vocabulary = matchingVocabularySchema.parse({
   purpose: 'unit tests',
   categories: {
     skill: 's', knowledge: 'k', work_activity: 'wa', work_context: 'wc',
-    tool: 't', domain: 'd', deliverable: 'del', outcome: 'o',
+    tool: 't', domain: 'd', deliverable: 'del', outcome: 'o', role: 'r',
   },
   external_source: {
     system: 'O*NET', release: '31.0', file: 'x.json',
@@ -155,6 +155,7 @@ test('legacy posting without snapshot returns not_mapped', () => {
   assert.equal(result.mapped, false);
   assert.equal(result.status, 'not_mapped');
   assert.equal(result.projects.length, 0);
+  assert.equal(result.ageAdjustedTotal, 0);
 });
 
 test('two concept hits across lines sum to 2 points', () => {
@@ -181,6 +182,32 @@ test('two concept hits across lines sum to 2 points', () => {
   assert.equal(result.projects.length, 1);
   assert.equal(result.projects[0].score, 2 * CONCEPT_HIT_POINTS);
   assert.equal(result.projects[0].contributions.length, 2);
+});
+
+test('age-adjusted total sums every project after recency', () => {
+  const year = new Date().getUTCFullYear();
+  const recent = project('S200', [
+    claim({ id: 'S200-E001', statement: 'React', concept_ids: ['local:react'] }),
+  ], { year });
+  const older = project('S201', [
+    claim({ id: 'S201-E001', statement: 'React', concept_ids: ['local:react'] }),
+    claim({ id: 'S201-E002', statement: 'Proto', concept_ids: ['local:prototyping'] }),
+  ], { year: year - 13 });
+  const posting = {
+    matchingSnapshot: {
+      vocabularyVersion: '1.0.0',
+      mapperVersion: '1.0.0',
+      sourceHash: 'b'.repeat(64),
+      status: 'ready',
+      concept_proposals: [],
+    },
+    lines: [
+      { entryId: 'jz-JP1-line-1', matchingRequirement: requirement({ id: 'jz-JP1-line-1', concept_ids: ['local:react'], weight: 3, priority: 'core' }) },
+      { entryId: 'jz-JP1-line-2', matchingRequirement: requirement({ id: 'jz-JP1-line-2', concept_ids: ['local:prototyping'], weight: 3, priority: 'core' }) },
+    ],
+  };
+  const result = scorePostingAgainstCatalog({ posting, catalog: catalog([recent, older]) });
+  assert.equal(result.ageAdjustedTotal, 10 + 20 * 0.5);
 });
 
 test('exact concept only — broader parent does not score', () => {
@@ -463,4 +490,143 @@ test('sanitizeMatchingRequirement drops unknown concept ids', () => {
     mapping_status: 'proposed',
   }, vocabulary);
   assert.deepEqual(cleaned.concept_ids, ['local:react']);
+});
+
+function roleConcept(partial) {
+  return {
+    id: partial.id,
+    label: partial.label,
+    definition: partial.definition,
+    category: 'role',
+    aliases: partial.aliases ?? [],
+    status: 'approved',
+    broader_ids: [],
+    external_mappings: [],
+    evidence_rule: 'role title only',
+    basis: { project_ids: [], requirement_source_ids: [] },
+    review: { reviewed_by: 'test', reviewed_at: '2026-09-29', scope: 'def' },
+  };
+}
+
+test('role aliases score on a posting pinned to an older vocabulary', () => {
+  const newer = matchingVocabularySchema.parse({
+    ...vocabulary,
+    vocabulary_version: '1.6.0',
+    concepts: [
+      ...vocabulary.concepts,
+      roleConcept({
+        id: 'local:solution-specialist',
+        label: 'Solution Specialist',
+        definition: 'Resume role',
+        aliases: ['solution engineer', 'solutions engineer'],
+      }),
+      roleConcept({
+        id: 'local:senior-product-architect',
+        label: 'Senior Product Architect',
+        definition: 'Post-sales role',
+        aliases: ['product architect', 'post-sales'],
+      }),
+    ],
+  });
+  const p = project('S002', [
+    claim({
+      id: 'S002-E001',
+      statement: 'Solution specialist work',
+      concept_ids: ['local:solution-specialist', 'local:senior-product-architect'],
+    }),
+  ]);
+  const posting = {
+    matchingSnapshot: {
+      vocabularyVersion: '1.0.0',
+      mapperVersion: '1.0.0',
+      sourceHash: 'b'.repeat(64),
+      status: 'ready',
+      concept_proposals: [],
+    },
+    lines: [
+      {
+        entryId: 'jz-JP1-line-1',
+        section: 'responsibility',
+        matchingRequirement: requirement({
+          id: 'jz-JP1-line-1',
+          source_text: 'Solution engineer, post-sales',
+          normalized_statement: 'Solution engineer, post-sales',
+          concept_ids: ['local:react'],
+          mapping_status: 'proposed',
+        }),
+      },
+      {
+        entryId: 'jz-JP1-line-2',
+        section: 'required',
+        matchingRequirement: requirement({
+          id: 'jz-JP1-line-2',
+          source_text: 'Bachelor degree required',
+          normalized_statement: 'Bachelor degree required',
+          scope: 'candidate',
+          concept_ids: [],
+          mapping_status: 'unmapped',
+        }),
+      },
+    ],
+  };
+  const result = scorePostingAgainstCatalog({
+    posting,
+    catalog: {
+      projects: new Map([[p.project_id, p]]),
+      vocabularies: new Map([
+        ['1.0.0', vocabulary],
+        ['1.6.0', newer],
+      ]),
+      pendingProjectIds: [],
+      excludedProjectIds: [],
+      entryRevisions: {},
+    },
+  });
+  const scored = result.projects.find(row => row.projectId === 'S002');
+  assert.equal(scored.score, CONCEPT_HIT_POINTS * 2);
+  assert.deepEqual(scored.contributions[0].overlapIds, [
+    'local:solution-specialist',
+    'local:senior-product-architect',
+  ]);
+  assert.equal(result.jobLines[1].skipped, 'candidate_scope');
+});
+
+test('a newer project outranks an older one with more raw points', () => {
+  const recent = project('S002', [
+    claim({ id: 'S002-E001', statement: 'React', concept_ids: ['local:react'] }),
+  ], { year: 2026 });
+  const old = project('S017', [
+    claim({
+      id: 'S017-E001',
+      statement: 'React prototype',
+      concept_ids: ['local:react', 'local:prototyping'],
+    }),
+  ], { year: 1990 });
+  const posting = {
+    matchingSnapshot: {
+      vocabularyVersion: '1.0.0',
+      mapperVersion: '1.0.0',
+      sourceHash: 'c'.repeat(64),
+      status: 'ready',
+      concept_proposals: [],
+    },
+    lines: [
+      {
+        entryId: 'jz-JP1-line-1',
+        matchingRequirement: requirement({
+          id: 'jz-JP1-line-1',
+          concept_ids: ['local:react', 'local:prototyping'],
+        }),
+      },
+    ],
+  };
+  const result = scorePostingAgainstCatalog({
+    posting,
+    catalog: catalog([old, recent]),
+  });
+  assert.deepEqual(result.projects.map(row => row.projectId), ['S002', 'S017']);
+  assert.equal(result.projects.find(row => row.projectId === 'S002').score, CONCEPT_HIT_POINTS);
+  assert.equal(result.projects.find(row => row.projectId === 'S017').score, 2 * CONCEPT_HIT_POINTS);
+  assert.equal(result.jobLines[0].matchSummaries[0].projectId, 'S002');
+  assert.equal(result.jobLines[0].matchSummaries[0].points, CONCEPT_HIT_POINTS);
 });

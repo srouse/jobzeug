@@ -3,6 +3,7 @@
  * A perfect side is every item at {@link PERFECT_MATCH_SHARE} of its counterpart.
  */
 
+import { recencyWeight } from "./recency";
 import { CONCEPT_HIT_POINTS } from "./score";
 
 export type HomeCoverage = {
@@ -30,6 +31,21 @@ export type HomeTopProject = {
   projectId: string;
   name: string;
   points: number;
+  /** Tags plus lines hit, before age. */
+  score: number;
+  /** `score` times recency. This is what orders the list. */
+  ranked: number;
+};
+
+export type HomeTopLine = {
+  lineId: string;
+  name: string;
+  points: number;
+};
+
+export type HomeLineName = {
+  entryId: string;
+  name: string;
 };
 
 /** Each possible counterpart can contribute one hit and this many tags. */
@@ -156,11 +172,12 @@ export function absoluteFitShare(
   return (tags + hits) / ceiling;
 }
 
-/** Top projects by equal weight: tags plus lines hit. */
+/** Top projects by equal weight: tags plus lines hit, then age. */
 export function topHomeProjects(
   projects: readonly HomeProject[],
   edges: readonly HomeEdge[],
   limit = 3,
+  projectYears?: Readonly<Record<string, number | null | undefined>>,
 ): HomeTopProject[] {
   const names = new Map(projects.map((project) => [project.id, project.name]));
   const hitsByProject = new Map<string, number[]>();
@@ -173,20 +190,63 @@ export function topHomeProjects(
   const rows = [...hitsByProject.entries()].map(([projectId, hits]) => {
     const points = hits.reduce((sum, value) => sum + value, 0);
     const tags = points / CONCEPT_HIT_POINTS;
+    const score = tags + hits.length;
     return {
       projectId,
       points,
-      score: tags + hits.length,
+      score,
+      ranked: score * recencyWeight(projectYears?.[projectId]),
     };
   });
   return rows
     .sort(
-      (a, b) => b.score - a.score || a.projectId.localeCompare(b.projectId),
+      (a, b) => b.ranked - a.ranked || a.projectId.localeCompare(b.projectId),
     )
     .slice(0, limit)
     .map((row) => ({
       projectId: row.projectId,
       name: names.get(row.projectId) ?? row.projectId,
+      points: row.points,
+      score: row.score,
+      ranked: row.ranked,
+    }));
+}
+
+/**
+ * Top job lines by the sum of each hitting project's age-adjusted points.
+ * Only the named lines count, and only against the given projects.
+ */
+export function topHomeLines(
+  lines: readonly HomeLineName[],
+  edges: readonly HomeEdge[],
+  projectIds: readonly string[],
+  limit = 3,
+  projectYears?: Readonly<Record<string, number | null | undefined>>,
+): HomeTopLine[] {
+  const names = new Map(lines.map((line) => [line.entryId, line.name]));
+  const allowedProjects = new Set(projectIds);
+  const hitsByLine = new Map<string, Array<{ projectId: string; points: number }>>();
+  for (const edge of edges) {
+    if (edge.points <= 0 || !names.has(edge.lineEntryId)) continue;
+    if (!allowedProjects.has(edge.projectId)) continue;
+    const hits = hitsByLine.get(edge.lineEntryId) ?? [];
+    hits.push({ projectId: edge.projectId, points: edge.points });
+    hitsByLine.set(edge.lineEntryId, hits);
+  }
+  const rows = [...hitsByLine.entries()].map(([lineId, hits]) => {
+    const points = hits.reduce((sum, hit) => sum + hit.points, 0);
+    const ranked = hits.reduce(
+      (sum, hit) => sum + hit.points * recencyWeight(projectYears?.[hit.projectId]),
+      0,
+    );
+    return { lineId, points, ranked };
+  });
+  return rows
+    .sort((a, b) => b.ranked - a.ranked || a.lineId.localeCompare(b.lineId))
+    .slice(0, limit)
+    .map((row) => ({
+      lineId: row.lineId,
+      name: names.get(row.lineId) ?? row.lineId,
       points: row.points,
     }));
 }
@@ -431,61 +491,6 @@ function barsFromRows(
     });
   }
   return bars;
-}
-
-/**
- * The two header percents on the analytics page.
- * Project is the strongest project against the project-scoped lines.
- * Line is the strongest line against the full project catalog.
- */
-export function bestDirectionalFits({
-  projectScopedLineCount,
-  catalogProjectCount,
-  lineCount,
-  projects,
-}: {
-  projectScopedLineCount: number;
-  catalogProjectCount: number;
-  lineCount: number;
-  projects: readonly {
-    contributions: readonly { requirementId: string; points: number }[];
-  }[];
-}): { project: number | null; line: number | null } {
-  const project =
-    projectScopedLineCount > 0 && catalogProjectCount > 0
-      ? Math.round(
-          Math.max(
-            0,
-            ...projects.map((row) => {
-              const hits = row.contributions.filter((hit) => hit.points > 0);
-              const tags =
-                hits.reduce((sum, hit) => sum + hit.points, 0) /
-                CONCEPT_HIT_POINTS;
-              return absoluteFitShare(tags, hits.length, projectScopedLineCount);
-            }),
-          ) * 100,
-        )
-      : null;
-
-  const byLine = new Map<string, number[]>();
-  for (const row of projects) {
-    for (const hit of row.contributions) {
-      if (hit.points <= 0) continue;
-      const points = byLine.get(hit.requirementId) ?? [];
-      points.push(hit.points);
-      byLine.set(hit.requirementId, points);
-    }
-  }
-  const lineShares = [...byLine.values()].map((points) => {
-    const tags = points.reduce((sum, value) => sum + value, 0) / CONCEPT_HIT_POINTS;
-    return absoluteFitShare(tags, points.length, catalogProjectCount);
-  });
-  const line =
-    catalogProjectCount > 0 && lineCount > 0
-      ? Math.round((lineShares.length ? Math.max(...lineShares) : 0) * 100)
-      : null;
-
-  return { project, line };
 }
 
 /** Bar for every resume project, against the posting's project-scoped line count. */

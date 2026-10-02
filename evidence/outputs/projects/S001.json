@@ -46,7 +46,7 @@
       "status": "reviewed",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.5.0"
+      "vocabulary_version": "1.7.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -59,7 +59,8 @@
           "local:component-library",
           "local:figma",
           "local:contentful",
-          "local:design-token-engineering"
+          "local:design-token-engineering",
+          "local:senior-product-architect"
         ],
         "ownership": "contributor",
         "scope": "single_team",
@@ -90,7 +91,8 @@
           "local:command-line-tool",
           "local:design-token-pipeline",
           "local:ai-workflow-engineering",
-          "local:react"
+          "local:react",
+          "local:senior-product-architect"
         ],
         "ownership": "contributor",
         "scope": "unknown",
@@ -119,7 +121,8 @@
         "statement": "Mentored a designer for several weeks, then took over the work when the timeline could not accommodate the original pace.",
         "concept_ids": [
           "local:mentoring",
-          "local:deadline-pressure"
+          "local:deadline-pressure",
+          "local:senior-product-architect"
         ],
         "ownership": "contributor",
         "scope": "single_team",

@@ -46,7 +46,7 @@
       "status": "reviewed",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.5.0"
+      "vocabulary_version": "1.7.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -60,7 +60,8 @@
           "local:figma",
           "local:contentful",
           "local:interaction-design",
-          "local:deadline-pressure"
+          "local:deadline-pressure",
+          "local:senior-product-architect"
         ],
         "ownership": "contributor",
         "scope": "unknown",
@@ -89,7 +90,8 @@
         "concept_ids": [
           "local:production-release",
           "local:coordination",
-          "local:cross-functional-work"
+          "local:cross-functional-work",
+          "local:senior-product-architect"
         ],
         "ownership": "lead",
         "scope": "multiple_teams",
@@ -120,7 +122,8 @@
           "local:api-integration",
           "local:interaction-design",
           "local:contentful",
-          "local:figma"
+          "local:figma",
+          "local:senior-product-architect"
         ],
         "ownership": "contributor",
         "scope": "unknown",
@@ -150,7 +153,8 @@
           "local:content-component-binding",
           "local:example-derived-content-fit",
           "local:figma",
-          "local:contentful"
+          "local:contentful",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "external_audience",
@@ -193,7 +197,8 @@
           "local:figma-extension",
           "local:figma",
           "local:contentful",
-          "local:stakeholder-alignment"
+          "local:stakeholder-alignment",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "multiple_teams",
@@ -229,7 +234,8 @@
         "concept_ids": [
           "local:technical-writing",
           "local:technical-article",
-          "local:coordination"
+          "local:coordination",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "external_audience",

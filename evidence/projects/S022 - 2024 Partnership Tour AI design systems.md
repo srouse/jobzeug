@@ -29,7 +29,7 @@ year_note: Scott identifies the 2024 Partnership Tour; finer dates are intention
 delivery_stage: unknown
 annotation:
   status: reviewed
-  vocabulary_version: "1.5.0"
+  vocabulary_version: "1.7.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -41,6 +41,7 @@ evidence:
       - local:public-technical-presentation
       - local:speaking
       - local:ai-system-fundamentals
+      - local:senior-software-engineer
     ownership: contributor
     scope: external_audience
     delivery_stage: unknown

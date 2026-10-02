@@ -36,7 +36,7 @@ year_note: The account does not date the work. 2012 sits inside the R012 tenure 
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: "1.5.0"
+  vocabulary_version: "1.7.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review
@@ -52,6 +52,7 @@ evidence:
       - local:production-release
       - local:product-adoption
       - local:ios
+      - local:head-of-usability-mobile-developer
     ownership: lead
     scope: external_audience
     delivery_stage: production
@@ -80,6 +81,7 @@ evidence:
       - local:coordination
       - local:cross-functional-work
       - local:accessibility-principles
+      - local:head-of-usability-mobile-developer
     ownership: lead
     scope: organization
     delivery_stage: production

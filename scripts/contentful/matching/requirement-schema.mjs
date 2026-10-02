@@ -48,4 +48,8 @@ export const matchGraphSchema = z.strictObject({
   scoringVersion: version,
   vocabularyVersion: version,
   edges: z.array(matchGraphEdgeSchema),
+  projectYears: z.record(
+    z.string().regex(/^S\d{3,}$/),
+    z.number().int().min(1000).max(9999).nullable(),
+  ).optional(),
 });

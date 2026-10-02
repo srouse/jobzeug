@@ -46,7 +46,7 @@
       "status": "reviewed",
       "reviewed_by": "Scott",
       "reviewed_at": "2026-09-27",
-      "vocabulary_version": "1.5.0"
+      "vocabulary_version": "1.7.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -59,7 +59,8 @@
           "local:front-end-development",
           "local:react",
           "local:financial-services",
-          "local:cross-functional-work"
+          "local:cross-functional-work",
+          "local:senior-ux-designer-developer"
         ],
         "ownership": "contributor",
         "scope": "single_team",
@@ -93,7 +94,8 @@
           "local:front-end-development",
           "local:react",
           "local:interaction-design",
-          "local:financial-services"
+          "local:financial-services",
+          "local:senior-ux-designer-developer"
         ],
         "ownership": "contributor",
         "scope": "single_team",
@@ -126,7 +128,8 @@
           "local:usability-testing",
           "local:interaction-design",
           "local:critical-thinking",
-          "local:financial-services"
+          "local:financial-services",
+          "local:senior-ux-designer-developer"
         ],
         "ownership": "contributor",
         "scope": "single_team",

@@ -1,8 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+import { JzIconButton } from "@jobzeug/design-system/react";
 import { useResumeChat, useResumeHighlights } from "@/components/resume";
+import {
+  presentedProject,
+  sameProjectId,
+} from "@/components/resume/project-presentation/project-presentation";
 import { formatRunMetricsLabel } from "@/lib/evidence-citations";
 import {
   RESUME_CONTEXT_ONLY_PROMPT,
@@ -26,12 +31,17 @@ const SHOW_STAGE_ANSWER = false;
 export function AnswerStage({
   hidden = false,
   resume = null,
+  presentationId = null,
+  onClosePresentation,
   onViewProject,
   onOpenDesign,
 }: {
   hidden?: boolean;
   /** Already-loaded resume — used to label cited projects (no extra fetch). */
   resume?: ResumeViewModel | null;
+  /** Project whose walkthrough video is open. Null is the text stage. */
+  presentationId?: string | null;
+  onClosePresentation?: () => void;
   onViewProject: (projectId: string) => void;
   onOpenDesign?: () => void;
 }) {
@@ -45,7 +55,36 @@ export function AnswerStage({
     setPageBindingsVisible,
     askContextItems,
     removeAskContext,
+    jobPostingOpen,
+    setJobPostingOpen,
+    lineFocus,
   } = useResumeHighlights();
+  const presentation = presentedProject(resume, presentationId ?? null);
+  const presenting = Boolean(
+    presentation &&
+      onClosePresentation &&
+      lineFocus?.kind === "project" &&
+      sameProjectId(lineFocus.id, presentation.evidenceId),
+  );
+  const [ease, setEase] = useState(presenting);
+
+  useEffect(() => {
+    if (!presenting || !onClosePresentation) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClosePresentation();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [presenting, onClosePresentation]);
+
+  useEffect(() => {
+    if (presenting) {
+      setEase(true);
+      return;
+    }
+    const timeout = window.setTimeout(() => setEase(false), 900);
+    return () => window.clearTimeout(timeout);
+  }, [presenting]);
   const {
     ask,
     isLoading,
@@ -109,14 +148,40 @@ export function AnswerStage({
       aria-live="polite"
       hidden={hidden || undefined}
       inert={hidden || undefined}
+      data-job-closed={jobPostingOpen ? undefined : ""}
+      data-presenting={presenting ? "" : undefined}
+      data-ease={ease ? "" : undefined}
     >
+      <button
+        type="button"
+        className={styles.scrim}
+        aria-label="Close video"
+        aria-hidden={presenting ? undefined : true}
+        inert={presenting ? undefined : true}
+        tabIndex={presenting ? 0 : -1}
+        onClick={onClosePresentation}
+      />
       <article
         className={styles.card}
         data-answer-stage-card
         data-answer-off={SHOW_STAGE_ANSWER ? undefined : ""}
       >
+        <div className={styles.jobToggle}>
+          <JzIconButton
+            label={jobPostingOpen ? "Hide job posting" : "Show job posting"}
+            icon="SidebarSimple"
+            title={jobPostingOpen ? "Hide job posting" : "Show job posting"}
+            aria-pressed={jobPostingOpen}
+            onClick={() => setJobPostingOpen(!jobPostingOpen)}
+          />
+        </div>
         <StageTools onOpenDesign={onOpenDesign} />
-        <ConnectionHub resume={resume} onViewProject={onViewProject} />
+        <ConnectionHub
+          resume={resume}
+          onViewProject={onViewProject}
+          presentationId={presenting ? presentationId : null}
+          onClosePresentation={onClosePresentation}
+        />
         {SHOW_STAGE_ANSWER ? (
         <div className={styles.answer}>
           <AnswerStageBody

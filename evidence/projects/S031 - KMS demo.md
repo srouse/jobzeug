@@ -28,7 +28,7 @@ year_note: Estimated from R001 (February 2026–present as of September 2026). H
 delivery_stage: prototype
 annotation:
   status: draft
-  vocabulary_version: "1.5.0"
+  vocabulary_version: "1.7.0"
   reviewed_by: null
   reviewed_at: null
 public_disclosure: needs_review
@@ -49,6 +49,7 @@ evidence:
       - local:headless-content-management
       - local:prototyping
       - local:technical-prototype
+      - local:senior-product-architect
     ownership: sole
     scope: individual
     delivery_stage: prototype
@@ -85,6 +86,7 @@ evidence:
     concept_ids:
       - local:customer-demonstration
       - local:customer-facing-work
+      - local:senior-product-architect
     ownership: sole
     scope: external_audience
     delivery_stage: prototype

@@ -18,6 +18,7 @@ export default async function ResumePage({
     <ResumeWorkspace
       initialEntryId={route.entryId}
       initialFocus={route.focus}
+      initialDetails={route.details}
     />
   );
 }

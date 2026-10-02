@@ -18,6 +18,8 @@ export function AttachGutterRow({
   label = "Add to question context",
   contentId,
   contentClassName,
+  fitBarsOff = false,
+  edge = "right",
   children,
 }: {
   checked?: boolean;
@@ -26,6 +28,9 @@ export function AttachGutterRow({
   label?: string;
   contentId?: string;
   contentClassName?: string;
+  fitBarsOff?: boolean;
+  /** Hover rule sits on this side. Resume rows use the right; job lines use the left. */
+  edge?: "left" | "right";
   children: ReactNode;
 }) {
   const attachable = Boolean(onToggle);
@@ -35,6 +40,7 @@ export function AttachGutterRow({
       <div
         id={contentId}
         data-evidence-id={contentId}
+        data-fit-bars={fitBarsOff ? "off" : undefined}
         className={contentClassName}
       >
         {children}
@@ -46,6 +52,7 @@ export function AttachGutterRow({
     <div
       id={contentId}
       data-evidence-id={contentId}
+      data-fit-bars={fitBarsOff ? "off" : undefined}
       className={classNames(
         styles.row,
         styles.attachable,
@@ -55,6 +62,7 @@ export function AttachGutterRow({
       tabIndex={0}
       aria-label={label}
       aria-pressed={checked}
+      data-edge={edge}
       data-wash={washed ? "" : undefined}
       onClick={onToggle}
       onKeyDown={(event) => {

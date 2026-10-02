@@ -46,7 +46,7 @@
       "status": "reviewed",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.5.0"
+      "vocabulary_version": "1.7.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -58,7 +58,8 @@
           "local:persuasion",
           "local:decision-making",
           "local:headless-content-management",
-          "local:stakeholder-alignment"
+          "local:stakeholder-alignment",
+          "local:experience-designer"
         ],
         "ownership": "lead",
         "scope": "organization",
@@ -92,7 +93,8 @@
           "local:figma",
           "local:contentful",
           "local:platform-migration",
-          "local:cross-functional-work"
+          "local:cross-functional-work",
+          "local:experience-designer"
         ],
         "ownership": "contributor",
         "scope": "multiple_teams",
@@ -120,7 +122,8 @@
         "statement": "Reports reducing more than 100 largely duplicative components to a couple dozen and substantially improving website performance.",
         "concept_ids": [
           "local:component-consolidation",
-          "local:web-performance-improvement"
+          "local:web-performance-improvement",
+          "local:experience-designer"
         ],
         "ownership": "contributor",
         "scope": "organization",

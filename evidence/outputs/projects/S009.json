@@ -45,7 +45,7 @@
       "status": "reviewed",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.5.0"
+      "vocabulary_version": "1.7.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -55,7 +55,8 @@
         "concept_ids": [
           "local:semantic-metadata-design",
           "local:systems-analysis",
-          "local:content-modeling"
+          "local:content-modeling",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "individual",
@@ -85,7 +86,8 @@
         "concept_ids": [
           "local:ai-workflow-engineering",
           "local:ai-output-evaluation",
-          "local:critical-thinking"
+          "local:critical-thinking",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "individual",
@@ -119,7 +121,8 @@
           "local:ai-output-evaluation",
           "local:figma",
           "local:contentful",
-          "local:troubleshooting"
+          "local:troubleshooting",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "individual",
@@ -150,7 +153,8 @@
           "local:semantic-metadata-design",
           "local:decision-making",
           "local:ai-workflow-engineering",
-          "local:figma"
+          "local:figma",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "individual",
@@ -180,7 +184,8 @@
         "concept_ids": [
           "local:ai-workflow-engineering",
           "local:ai-output-evaluation",
-          "local:contentful"
+          "local:contentful",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "individual",
@@ -211,7 +216,8 @@
           "local:troubleshooting",
           "local:critical-thinking",
           "local:ai-system-fundamentals",
-          "local:ai-output-evaluation"
+          "local:ai-output-evaluation",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "individual",
@@ -242,7 +248,8 @@
           "local:headless-content-management",
           "local:contentful",
           "local:figma",
-          "local:systems-analysis"
+          "local:systems-analysis",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "individual",
@@ -272,7 +279,8 @@
           "local:content-component-binding",
           "local:troubleshooting",
           "local:ai-workflow-engineering",
-          "local:critical-thinking"
+          "local:critical-thinking",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "individual",
@@ -303,7 +311,8 @@
           "local:ai-workflow-engineering",
           "local:mastra",
           "local:openai",
-          "local:ai-system-fundamentals"
+          "local:ai-system-fundamentals",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "individual",
@@ -331,7 +340,8 @@
         "statement": "Shared the research inside the company many times. Other people took it and ran with it.",
         "concept_ids": [
           "local:speaking",
-          "local:cross-functional-work"
+          "local:cross-functional-work",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "individual",
@@ -362,7 +372,8 @@
           "local:binding-repair",
           "local:systems-analysis",
           "local:content-modeling",
-          "local:decision-making"
+          "local:decision-making",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "individual",
@@ -392,7 +403,8 @@
         "statement": "The binding work remains an unshipped prototype.",
         "concept_ids": [
           "local:prototyping",
-          "local:technical-prototype"
+          "local:technical-prototype",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "individual",

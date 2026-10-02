@@ -1,4 +1,8 @@
-import { prepareRequirementForScoring } from "./prepare";
+import {
+  appendRoleConceptHits,
+  newestApprovedVocabulary,
+  prepareRequirementForScoring,
+} from "./prepare";
 import type { MatchingRequirement } from "./schema";
 import {
   AXIS_HIT_POINTS,
@@ -194,12 +198,15 @@ export function computeFits({
     );
   }
 
+  const roleVocabulary =
+    newestApprovedVocabulary(catalog.vocabularies) ?? vocabulary;
   const lines = posting.lines.map((line) => {
     if (!line.matchingRequirement) return line;
-    const prepared = prepareRequirementForScoring(
-      line.matchingRequirement,
-      vocabulary,
-      { section: line.section, theme: line.theme },
+    const context = { section: line.section, theme: line.theme };
+    const prepared = appendRoleConceptHits(
+      prepareRequirementForScoring(line.matchingRequirement, vocabulary, context),
+      roleVocabulary,
+      context,
     );
     return { ...line, matchingRequirement: prepared };
   });

@@ -20,7 +20,7 @@ type ConnectorPath = {
   opacity?: number;
 };
 
-/** Shared with the row wash so a click reads as one motion. */
+/** Line morph. Row wash is faster so the selection reads immediately. */
 const MORPH_MS = 700;
 
 type Cubic = {
@@ -158,7 +158,6 @@ function blendPaths(
   return out;
 }
 
-const DOT_RADIUS = 4;
 /** Keep card-side attachments clear of rounded corners. */
 const CARD_EDGE_PAD = 20;
 /** Extra clearance below page headers so lines stay visible under the divider. */
@@ -166,9 +165,9 @@ const PAGE_HEADER_CLEARANCE = 20;
 /** Inset above the stage footer so dots clear the footer border. */
 const FOOTER_ATTACH_INSET = 2;
 /** Stage-side attach band height, centered on the card. */
-const STAGE_ATTACH_BAND_MAX = 200;
+const STAGE_ATTACH_BAND_MAX = 400;
 /** Minimum vertical gap between stage attach points (no shared Y). */
-const STAGE_ATTACH_GAP = 4;
+const STAGE_ATTACH_GAP = 6 ;
 /**
  * Minimum horizontal pull for the stage-side cubic handle so lines leave
  * the card edge more straight before bending toward the citation.
@@ -417,8 +416,8 @@ function measurePaths(target: ConnectionTarget | null): ConnectorPath[] {
  * Measures only active evidence panes (both on wide; selected tab on medium).
  * Remeasures on focus / density / evidence-page / job load / DOM mutations.
  */
-export function EvidenceConnectors() {
-  const { density, evidencePage } = useResumeHighlights();
+export function EvidenceConnectors({ suspended = false }: { suspended?: boolean }) {
+  const { density, evidencePage, jobPostingOpen } = useResumeHighlights();
   const target = useActiveConnectionTarget();
   const { data: jobPosting, loading: jobLoading, busy: jobBusy } =
     useJobPosting();
@@ -426,6 +425,13 @@ export function EvidenceConnectors() {
   const pathsRef = useRef(paths);
   pathsRef.current = paths;
   const [connectorsOn, setConnectorsOn] = useState(false);
+  const jobOpenSeen = useRef(jobPostingOpen);
+  /** Hide lines for the stage slide. Measuring them each frame is what stutters. */
+  const holdLines = useRef(false);
+  if (jobOpenSeen.current !== jobPostingOpen) {
+    jobOpenSeen.current = jobPostingOpen;
+    holdLines.current = true;
+  }
 
   useEffect(() => {
     const mq = window.matchMedia(`(min-width: ${LAYOUT_MEDIUM_MIN_PX}px)`);
@@ -436,7 +442,7 @@ export function EvidenceConnectors() {
   }, []);
 
   useLayoutEffect(() => {
-    if (!connectorsOn || !target) {
+    if (suspended || !connectorsOn || !target) {
       setPaths([]);
       return;
     }
@@ -530,94 +536,143 @@ export function EvidenceConnectors() {
       densityLoop = window.requestAnimationFrame(tickDensity);
     };
 
-    startMorph();
-    startDensityLoop();
-
     const snapToRows = () => schedule(true);
     const followLayout = () => schedule(false);
-    const scrollRoots = activeScrollRoots();
-    for (const root of scrollRoots) {
-      root.addEventListener("scroll", snapToRows, { passive: true });
-    }
-    window.addEventListener("resize", snapToRows);
+    let scrollRoots: HTMLElement[] = [];
+    let resizeObserver: ResizeObserver | null = null;
+    let mutationObserver: MutationObserver | null = null;
+    let released = false;
+    let fallback = 0;
+    const stage = document.querySelector("[data-answer-stage-card]")
+      ?.parentElement;
+    const slideMs = 400;
 
-    const card = document.querySelector("[data-answer-stage-card]");
-    const resizeObserver =
-      typeof ResizeObserver !== "undefined"
-        ? new ResizeObserver(followLayout)
-        : null;
-    if (resizeObserver) {
-      if (card) resizeObserver.observe(card);
-      for (const root of scrollRoots) resizeObserver.observe(root);
-    }
-
-    // Citation nodes often mount after job-posting / resume fetch — remasure then.
-    const mutationObserver =
-      typeof MutationObserver !== "undefined"
-        ? new MutationObserver((records) => {
-            for (const record of records) {
-              if (record.type === "attributes") {
-                if (
-                  record.attributeName === "data-evidence-id" ||
-                  record.attributeName === "data-evidence-pane-active"
-                ) {
-                  followLayout();
-                  return;
-                }
-                continue;
-              }
-              for (const node of record.addedNodes) {
-                if (!(node instanceof Element)) continue;
-                if (
-                  node.hasAttribute("data-evidence-id") ||
-                  node.hasAttribute("data-evidence-scroll") ||
-                  node.querySelector(
-                    "[data-evidence-id], [data-evidence-scroll]",
-                  )
-                ) {
-                  followLayout();
-                  return;
-                }
-              }
-            }
-          })
-        : null;
-    if (mutationObserver) {
-      mutationObserver.observe(document.body, {
-        subtree: true,
-        childList: true,
-        attributes: true,
-        attributeFilter: [
-          "data-evidence-id",
-          "data-evidence-pane-active",
-        ],
-      });
-    }
-
-    return () => {
+    const unbind = () => {
       if (frame) window.cancelAnimationFrame(frame);
       if (secondFrame) window.cancelAnimationFrame(secondFrame);
       if (densityLoop) window.cancelAnimationFrame(densityLoop);
       if (morphFrame) window.cancelAnimationFrame(morphFrame);
+      frame = 0;
+      secondFrame = 0;
+      densityLoop = 0;
+      morphFrame = 0;
       for (const root of scrollRoots) {
         root.removeEventListener("scroll", snapToRows);
       }
       window.removeEventListener("resize", snapToRows);
       resizeObserver?.disconnect();
       mutationObserver?.disconnect();
+      resizeObserver = null;
+      mutationObserver = null;
+    };
+
+    const onSlideEnd = (event: TransitionEvent) => {
+      if (event.target !== stage || event.propertyName !== "right") return;
+      bind(true);
+    };
+
+    const bind = (settle: boolean) => {
+      if (released) return;
+      released = true;
+      holdLines.current = false;
+      window.clearTimeout(fallback);
+      stage?.removeEventListener("transitionend", onSlideEnd);
+      if (settle) {
+        commit(measurePaths(target));
+      } else {
+        startMorph();
+        startDensityLoop();
+      }
+
+      scrollRoots = activeScrollRoots();
+      for (const root of scrollRoots) {
+        root.addEventListener("scroll", snapToRows, { passive: true });
+      }
+      window.addEventListener("resize", snapToRows);
+
+      const card = document.querySelector("[data-answer-stage-card]");
+      resizeObserver =
+        typeof ResizeObserver !== "undefined"
+          ? new ResizeObserver(followLayout)
+          : null;
+      if (resizeObserver) {
+        if (card) resizeObserver.observe(card);
+        for (const root of scrollRoots) resizeObserver.observe(root);
+      }
+
+      // Citation nodes often mount after job-posting / resume fetch — remasure then.
+      mutationObserver =
+        typeof MutationObserver !== "undefined"
+          ? new MutationObserver((records) => {
+              for (const record of records) {
+                if (record.type === "attributes") {
+                  if (
+                    record.attributeName === "data-evidence-id" ||
+                    record.attributeName === "data-evidence-pane-active"
+                  ) {
+                    followLayout();
+                    return;
+                  }
+                  continue;
+                }
+                for (const node of record.addedNodes) {
+                  if (!(node instanceof Element)) continue;
+                  if (
+                    node.hasAttribute("data-evidence-id") ||
+                    node.hasAttribute("data-evidence-scroll") ||
+                    node.querySelector(
+                      "[data-evidence-id], [data-evidence-scroll]",
+                    )
+                  ) {
+                    followLayout();
+                    return;
+                  }
+                }
+              }
+            })
+          : null;
+      if (mutationObserver) {
+        mutationObserver.observe(document.body, {
+          subtree: true,
+          childList: true,
+          attributes: true,
+          attributeFilter: [
+            "data-evidence-id",
+            "data-evidence-pane-active",
+          ],
+        });
+      }
+    };
+
+    // The stage edge is moving. Drawing lines against it each frame stutters.
+    if (holdLines.current && stage && !reduceMotion) {
+      pathsRef.current = [];
+      setPaths([]);
+      stage.addEventListener("transitionend", onSlideEnd);
+      fallback = window.setTimeout(() => bind(true), slideMs);
+    } else {
+      bind(false);
+    }
+
+    return () => {
+      window.clearTimeout(fallback);
+      stage?.removeEventListener("transitionend", onSlideEnd);
+      unbind();
     };
   }, [
     connectorsOn,
     target,
     density,
     evidencePage,
+    jobPostingOpen,
     // Rebind observers when the posting panel swaps loading ↔ BoundPanel.
     jobPosting?.entryId,
     jobLoading,
     jobBusy,
+    suspended,
   ]);
 
-  if (!connectorsOn || paths.length === 0) return null;
+  if (suspended || !connectorsOn || paths.length === 0) return null;
 
   return (
     <svg
@@ -644,18 +699,6 @@ export function EvidenceConnectors() {
                   : styles.lineDimmed
             }
             fill="none"
-          />
-          <circle
-            className={
-              path.subject
-                ? styles.dotSubject
-                : path.focused
-                  ? styles.dot
-                  : styles.dotDimmed
-            }
-            cx={path.subject ? path.end.x : path.start.x}
-            cy={path.subject ? path.end.y : path.start.y}
-            r={DOT_RADIUS}
           />
         </g>
       ))}

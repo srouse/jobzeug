@@ -28,6 +28,7 @@ const conceptProposalSchema = z.object({
     "domain",
     "deliverable",
     "outcome",
+    "role",
   ]),
   definition: z.string().min(1),
   reason: z.string().min(1),

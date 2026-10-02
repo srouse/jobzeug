@@ -1,5 +1,7 @@
 import { createClient, type PlainClientAPI } from "contentful-management";
 
+import { getDeliveryClient } from "@/lib/contentful/delivery";
+
 const CONTENT_TYPE_ID = "jobzeugFocusBrief";
 
 function requireCmaEnv() {
@@ -32,9 +34,12 @@ function isStatus(error: unknown, status: number, name: string): boolean {
 
 function paragraphFrom(entry: { fields?: unknown }, locale: string): string | null {
   const fields = entry.fields as
-    | Record<string, Record<string, unknown>>
+    | Record<string, Record<string, unknown> | unknown>
     | undefined;
-  const value = fields?.paragraph?.[locale] ?? fields?.paragraph?.["en-US"];
+  const raw = fields?.paragraph;
+  if (typeof raw === "string" && raw.trim()) return raw.trim();
+  const localized = raw as Record<string, unknown> | undefined;
+  const value = localized?.[locale] ?? localized?.["en-US"];
   return typeof value === "string" && value.trim() ? value.trim() : null;
 }
 
@@ -42,16 +47,12 @@ function clientFor(token: string): PlainClientAPI {
   return createClient({ accessToken: token }, { type: "plain" });
 }
 
-/** CMA get by entry id. A 404 returns null. */
+/** Published brief from Delivery. A missing entry returns null. */
 export async function readFocusBrief(entryId: string): Promise<string | null> {
-  const { space, environment, token, locale } = requireCmaEnv();
-  const client = clientFor(token);
+  const locale = process.env.CONTENTFUL_LOCALE?.trim() || "en-US";
+  const client = getDeliveryClient();
   try {
-    const entry = await client.entry.get({
-      spaceId: space,
-      environmentId: environment,
-      entryId,
-    });
+    const entry = await client.getEntry(entryId, { locale });
     return paragraphFrom(entry, locale);
   } catch (error) {
     if (isStatus(error, 404, "NotFound")) return null;

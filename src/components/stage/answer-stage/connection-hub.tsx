@@ -12,6 +12,7 @@ import type {
   ResumeViewModel,
 } from "@/lib/contentful/resume-model";
 import type { JobPostingPanelData } from "@/lib/job-posting/schema";
+import { recencyWeight } from "@/lib/matching/recency";
 import {
   coverageLineIds,
   lineExampleCoverage,
@@ -19,10 +20,18 @@ import {
   projectFitBars,
   projectLineHits,
   strongExampleProjects,
+  topHomeLines,
   topHomeProjects,
   type FitBar,
+  type HomeEdge,
   type HomeProject,
 } from "@/lib/matching/home-coverage";
+import { TopJobLines } from "../top-job-lines";
+import { TopProjects, type TopProjectItem } from "../top-projects";
+import {
+  ProjectVideo,
+  sameProjectId,
+} from "@/components/resume/project-presentation/project-presentation";
 
 import styles from "./answer-stage.module.css";
 
@@ -70,6 +79,26 @@ function resumeProjects(resume: ResumeViewModel | null): HomeProject[] {
   return projects;
 }
 
+function topProjectItems(
+  projects: ReadonlyArray<{
+    id: string;
+    name: string;
+    score?: number;
+    weighted?: number;
+  }>,
+  edges: readonly HomeEdge[],
+  lines: { required: readonly string[]; preferred: readonly string[] },
+): TopProjectItem[] {
+  return projects.map((project) => ({
+    id: project.id,
+    name: project.name,
+    required: projectLineHits(project.id, edges, lines.required),
+    preferred: projectLineHits(project.id, edges, lines.preferred),
+    score: project.score,
+    weighted: project.weighted,
+  }));
+}
+
 function HomeStat({
   value,
   detail,
@@ -112,8 +141,12 @@ function CoveragePair({
     <div className={styles.homeColumn}>
       <JzText variant="overline" color="muted" label={label.toUpperCase()} />
       <div className={styles.homePair}>
-        <HomeStat value={`${percent}%`} detail={`${covered} / ${total}`} />
-        <HomeStat value={String(strong)} detail="Strong" />
+        <HomeStat
+          prominent
+          value={`${percent}%`}
+          detail={`${covered} / ${total}`}
+        />
+        <HomeStat prominent value={String(strong)} detail="Strong examples" />
       </div>
     </div>
   );
@@ -131,10 +164,8 @@ function HomeLanding({
   const projects = resumeProjects(resume);
   const projectIds = projects.map((project) => project.id);
   const lines = coverageLineIds(posting.lines);
-  const headline = lineExampleCoverage(lines.all, edges, projectIds);
   const required = lineExampleCoverage(lines.required, edges, projectIds);
   const preferred = lineExampleCoverage(lines.preferred, edges, projectIds);
-  const strongExamples = strongExampleProjects(projectIds, edges);
   const strongRequired = strongExampleProjects(
     projectIds,
     edges,
@@ -145,32 +176,40 @@ function HomeLanding({
     edges,
     lines.preferred,
   );
-  const top = topHomeProjects(projects, edges);
+  const top = topHomeProjects(
+    projects,
+    edges,
+    3,
+    posting.matchGraph?.projectYears,
+  );
+  const projectLineIds = new Set(lines.all);
+  const topLines = topHomeLines(
+    posting.lines.flatMap((line) =>
+      projectLineIds.has(line.entryId)
+        ? [{ entryId: line.entryId, name: line.theme }]
+        : [],
+    ),
+    edges,
+    projectIds,
+    3,
+    posting.matchGraph?.projectYears,
+  );
+  const topLineBars = lineFitBars(
+    topLines.map((line) => line.lineId),
+    edges,
+    projectIds,
+  );
 
   return (
     <div className={styles.home}>
-      <div className={styles.homeSplit}>
-        <HomeStat
-          prominent
-          title="COVERAGE"
-          value={`${headline.percent}%`}
-          detail={`${headline.covered} / ${headline.total}`}
-        />
-        <HomeStat
-          prominent
-          title="STRONG EXAMPLES"
-          value={String(strongExamples)}
-          detail={`${strongExamples} out of ${projects.length}`}
-        />
-      </div>
-      <div className={`${styles.homeBuckets} ${styles.homeBand}`}>
-        <CoveragePair
-          label="Required"
-          percent={required.percent}
-          covered={required.covered}
-          total={required.total}
-          strong={strongRequired}
-        />
+      <CoveragePair
+        label="Required"
+        percent={required.percent}
+        covered={required.covered}
+        total={required.total}
+        strong={strongRequired}
+      />
+      <div className={styles.homeBand}>
         <CoveragePair
           label="Preferred"
           percent={preferred.percent}
@@ -180,41 +219,36 @@ function HomeLanding({
         />
       </div>
       {top.length > 0 ? (
-        <div className={`${styles.homeExamples} ${styles.homeBand}`}>
-          <JzText variant="overline" color="muted" label="TOP PROJECTS" />
-          <ul className={styles.homeProjects}>
-            {top.map((project) => (
-              <li key={project.projectId}>
-                <button
-                  type="button"
-                  className={styles.homeProject}
-                  onClick={() =>
-                    selectLine({ kind: "project", id: project.projectId })
-                  }
-                >
-                  <JzText
-                    variant="body-default"
-                    label={project.name}
-                    className={styles.homeProjectName}
-                  />
-                  <span className={styles.homeProjectStats}>
-                    <JzText
-                      variant="label-sm"
-                      weight="300"
-                      color="tertiary"
-                      label={`${projectLineHits(project.projectId, edges, lines.required)} Required`}
-                    />
-                    <JzText
-                      variant="label-sm"
-                      weight="300"
-                      color="tertiary"
-                      label={`${projectLineHits(project.projectId, edges, lines.preferred)} Preferred`}
-                    />
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
+        <div className={styles.homeBand}>
+          <TopProjects
+            projects={topProjectItems(
+              top.map((project) => ({
+                id: project.projectId,
+                name: project.name,
+                score: project.score,
+                weighted: project.ranked,
+              })),
+              edges,
+              lines,
+            )}
+            onSelect={(id) => selectLine({ kind: "project", id })}
+          />
+        </div>
+      ) : null}
+      {topLines.length > 0 ? (
+        <div className={styles.homeBand}>
+          <TopJobLines
+            lines={topLines.map((line) => {
+              const bar = topLineBars.get(line.lineId);
+              return {
+                id: line.lineId,
+                name: line.name,
+                projects: bar?.rows ?? 0,
+                tags: bar?.tags ?? 0,
+              };
+            })}
+            onSelect={(id) => selectLine({ kind: "jobLine", id })}
+          />
         </div>
       ) : null}
     </div>
@@ -230,6 +264,7 @@ function HubHeader({
   employer,
   projectTotal,
   rowTotal,
+  onBack,
 }: {
   label: string;
   contentfulUrl?: string | null;
@@ -241,6 +276,7 @@ function HubHeader({
   projectTotal?: number;
   /** Project-scoped job line count. Present on a project focus. */
   rowTotal?: number;
+  onBack?: () => void;
 }) {
   const { clearLineFocus } = useResumeHighlights();
   const rows = score?.rows ?? 0;
@@ -256,12 +292,14 @@ function HubHeader({
   return (
     <div className={styles.hubIntro}>
       <div className={styles.hubHeader}>
-        <JzText
-          level={1}
-          variant="heading"
-          label={label}
-          className={styles.hubTitle}
-        />
+        <div className={styles.hubTitleRow}>
+          <JzText
+            level={1}
+            variant="heading"
+            label={label}
+            className={styles.hubTitle}
+          />
+        </div>
         <div className={styles.hubHeaderTools}>
           {analysisUrl ? (
             <JzIconButton
@@ -287,10 +325,10 @@ function HubHeader({
           ) : null}
           <JzIconButton
             className={styles.hubLink}
-            label="Home"
+            label={onBack ? "Done" : "Home"}
             icon="X"
-            title="Home"
-            onClick={clearLineFocus}
+            title={onBack ? "Done" : "Home"}
+            onClick={onBack ?? clearLineFocus}
           />
         </div>
       </div>
@@ -312,6 +350,40 @@ function findProject(
   return findProjectContext(resume, projectId)?.project ?? null;
 }
 
+/** Every resume project with a hit on this job line. */
+function projectsOnLine(
+  resume: ResumeViewModel | null,
+  edges: readonly HomeEdge[],
+  lineId: string | undefined,
+) {
+  if (!lineId) return [];
+  const ids = new Set<string>();
+  for (const edge of edges) {
+    if (edge.lineEntryId === lineId && edge.points > 0) ids.add(edge.projectId);
+  }
+  return [...ids].flatMap((id) => {
+    const name = findProject(resume, id)?.name;
+    return name ? [{ id, name }] : [];
+  });
+}
+
+/** Every job line with a hit on this resume project. */
+function linesOnProject(
+  posting: JobPostingPanelData | null,
+  edges: readonly HomeEdge[],
+  projectId: string | undefined,
+) {
+  if (!projectId || !posting) return [];
+  const ids = new Set<string>();
+  for (const edge of edges) {
+    if (edge.projectId === projectId && edge.points > 0) ids.add(edge.lineEntryId);
+  }
+  return [...ids].flatMap((id) => {
+    const name = posting.lines.find((line) => line.entryId === id)?.theme;
+    return name ? [{ id, name }] : [];
+  });
+}
+
 function findProjectContext(
   resume: ResumeViewModel | null,
   projectId: string,
@@ -328,9 +400,11 @@ function findProjectContext(
   return null;
 }
 
-/** Center a job line in the posting column. Returns false when that row is not laid out yet. */
-function centerJobLine(id: string): boolean {
-  const pane = document.querySelector<HTMLElement>('[data-evidence-pane="job"]');
+/** Center a row in a side column. Returns false when that row is not laid out yet. */
+function centerEvidence(paneName: "resume" | "job", id: string): boolean {
+  const pane = document.querySelector<HTMLElement>(
+    `[data-evidence-pane="${paneName}"]`,
+  );
   const node = pane?.querySelector<HTMLElement>(
     `[data-evidence-id="${CSS.escape(id)}"]`,
   );
@@ -349,6 +423,23 @@ function centerJobLine(id: string): boolean {
   return true;
 }
 
+/** Show the column if it is hidden, then center the row once it has layout. */
+function revealAndCenter(
+  paneName: "resume" | "job",
+  id: string,
+  showPage: () => void,
+) {
+  const pane = document.querySelector<HTMLElement>(
+    `[data-evidence-pane="${paneName}"]`,
+  );
+  if (pane?.hidden) showPage();
+  const attempt = (left: number) => {
+    if (centerEvidence(paneName, id) || left <= 0) return;
+    requestAnimationFrame(() => attempt(left - 1));
+  };
+  requestAnimationFrame(() => attempt(2));
+}
+
 function TopConnections({
   kind,
   resume,
@@ -362,6 +453,8 @@ function TopConnections({
   const connection = useActiveConnectionTarget();
   const subjectId = connection?.ids.find((endpoint) => endpoint.role === "subject")?.id;
   const edges = posting?.matchGraph?.edges ?? [];
+  const years = posting?.matchGraph?.projectYears;
+  const yearOf = (id: string) => years?.[id] ?? years?.[id.replace(/^jz-/, "")];
   const pointsOf = (id: string) => {
     let best = 0;
     for (const edge of edges) {
@@ -373,56 +466,62 @@ function TopConnections({
     }
     return best;
   };
-  const names = (connection?.ids ?? [])
-    .flatMap((endpoint) => {
-      if (endpoint.role !== "reference" || endpoint.strength !== "primary") {
-        return [];
-      }
-      const name =
-        kind === "project"
-          ? posting?.lines.find((line) => line.entryId === endpoint.id)?.theme
-          : findProject(resume, endpoint.id)?.name;
-      return name ? [{ id: endpoint.id, name }] : [];
-    })
-    .sort(
-      (a, b) => pointsOf(b.id) - pointsOf(a.id) || a.id.localeCompare(b.id),
-    )
-    .slice(0, 3);
+  const rankOf = (id: string) =>
+    kind === "jobLine"
+      ? pointsOf(id) * recencyWeight(yearOf(id))
+      : pointsOf(id) * recencyWeight(yearOf(subjectId ?? ""));
+  const byRank = (a: { id: string }, b: { id: string }) =>
+    rankOf(b.id) - rankOf(a.id) || a.id.localeCompare(b.id);
 
-  if (names.length === 0) return null;
+  if (kind === "jobLine") {
+    const ordered = projectsOnLine(resume, edges, subjectId).sort(byRank);
+    if (ordered.length === 0) return null;
+    return (
+      <TopProjects
+        key={subjectId}
+        previewCount={Math.min(3, ordered.length)}
+        projects={topProjectItems(
+          ordered.map((item) => ({
+            ...item,
+            score: pointsOf(item.id),
+            weighted: rankOf(item.id),
+          })),
+          edges,
+          coverageLineIds(posting?.lines ?? []),
+        )}
+        onSelect={(id) =>
+          revealAndCenter("resume", id, () => setEvidencePage("resume"))
+        }
+      />
+    );
+  }
 
-  const heading = kind === "project" ? "Top job items" : "Top projects";
+  const ordered = linesOnProject(posting, edges, subjectId).sort(byRank);
+  if (ordered.length === 0) return null;
+
+  const bars = lineFitBars(
+    ordered.map((item) => item.id),
+    edges,
+    resumeProjects(resume).map((project) => project.id),
+  );
 
   return (
-    <div className={styles.connectionBlock}>
-      <JzText variant="overline" weight="300" color="muted" label={heading} />
-      <ul className={styles.connections}>
-        {names.map((item) => (
-          <li key={item.id}>
-            {kind === "project" ? (
-              <JzText
-                interactive
-                variant="body-default"
-                label={item.name}
-                onClick={() => {
-                  const pane = document.querySelector<HTMLElement>(
-                    '[data-evidence-pane="job"]',
-                  );
-                  if (pane?.hidden) setEvidencePage("job");
-                  const attempt = (left: number) => {
-                    if (centerJobLine(item.id) || left <= 0) return;
-                    requestAnimationFrame(() => attempt(left - 1));
-                  };
-                  requestAnimationFrame(() => attempt(2));
-                }}
-              />
-            ) : (
-              <JzText variant="body-default" label={item.name} />
-            )}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <TopJobLines
+      key={subjectId}
+      previewCount={Math.min(3, ordered.length)}
+      lines={ordered.map((item) => {
+        const bar = bars.get(item.id);
+        return {
+          id: item.id,
+          name: item.name,
+          projects: bar?.rows ?? 0,
+          tags: bar?.tags ?? 0,
+        };
+      })}
+      onSelect={(id) =>
+        revealAndCenter("job", id, () => setEvidencePage("job"))
+      }
+    />
   );
 }
 
@@ -447,6 +546,46 @@ function BriefCopy({ text }: { text: string }) {
 
 /** The brief stays in the app. Flip this to show it and let a focus load it again. */
 const FOCUS_BRIEF_PAUSED: boolean = true;
+
+const PRESENT_MS = 900;
+
+function ProjectVideoReveal({
+  open,
+  project,
+  onClose,
+}: {
+  open: boolean;
+  project: ResumeProject;
+  onClose: () => void;
+}) {
+  const [mounted, setMounted] = useState(open);
+  if (open && !mounted) setMounted(true);
+
+  useEffect(() => {
+    if (open) return;
+    const timeout = window.setTimeout(() => setMounted(false), PRESENT_MS);
+    return () => window.clearTimeout(timeout);
+  }, [open]);
+
+  return (
+    <div className={styles.projectVideo} data-open={open ? "" : undefined}>
+      <div className={styles.projectVideoInner}>
+        {mounted ? (
+          <>
+            <ProjectVideo project={project} active={open} />
+            <JzButton
+              label="DONE"
+              variant="inverse"
+              size="small"
+              showIcon={false}
+              onClick={onClose}
+            />
+          </>
+        ) : null}
+      </div>
+    </div>
+  );
+}
 
 function FocusBrief({
   kind,
@@ -599,9 +738,13 @@ function FocusBrief({
 export function ConnectionHub({
   resume,
   onViewProject,
+  presentationId = null,
+  onClosePresentation,
 }: {
   resume: ResumeViewModel | null;
   onViewProject: (projectId: string) => void;
+  presentationId?: string | null;
+  onClosePresentation?: () => void;
 }) {
   const { lineFocus } = useResumeHighlights();
   const { data } = useJobPosting();
@@ -641,66 +784,89 @@ export function ConnectionHub({
   if (lineFocus?.kind === "project") {
     const focused = findProjectContext(resume, lineFocus.id);
     const project = focused?.project ?? null;
+    const showingVideo = Boolean(
+      project?.presentation &&
+        presentationId &&
+        onClosePresentation &&
+        sameProjectId(project.evidenceId, presentationId),
+    );
+    const header = (
+      <HubHeader
+        label={project?.name ?? "Project"}
+        employer={focused?.employerName}
+        analysisUrl={
+          posting?.entryId
+            ? `/analytics?jobPostingEntryId=${encodeURIComponent(posting.entryId)}&projectId=${encodeURIComponent(project?.evidenceId ?? lineFocus.id)}`
+            : null
+        }
+        contentfulUrl={project?.contentfulUrl}
+        contentfulLabel={`Open ${project?.name ?? "project"} in Contentful`}
+        rowTotal={lineCount}
+        score={
+          edges
+            ? projectBars.get(project?.evidenceId ?? lineFocus.id)
+            : undefined
+        }
+        onBack={showingVideo ? onClosePresentation : undefined}
+      />
+    );
     body = (
       <>
-        <div className={styles.hubLead}>
-          <HubHeader
-            label={project?.name ?? "Project"}
-            employer={focused?.employerName}
-            analysisUrl={
-              posting?.entryId
-                ? `/analytics?jobPostingEntryId=${encodeURIComponent(posting.entryId)}&projectId=${encodeURIComponent(project?.evidenceId ?? lineFocus.id)}`
-                : null
-            }
-            contentfulUrl={project?.contentfulUrl}
-            contentfulLabel={`Open ${project?.name ?? "project"} in Contentful`}
-            rowTotal={lineCount}
-            score={
-              edges
-                ? projectBars.get(project?.evidenceId ?? lineFocus.id)
-                : undefined
-            }
-          />
-          {project?.summary ? <SummaryCopy text={project.summary} /> : null}
-          {project?.url && !project.summary?.includes(project.url) ? (
-            <JzText
-              variant="body-default"
-              href={project.url}
-              target="_blank"
-              label="Read the article"
-            />
-          ) : null}
-        </div>
-        {project?.presentation ? (
-          <div className={styles.hubActions}>
-            <JzButton
-              label="Details"
-              variant="secondary"
-              size="small"
-              showIcon={false}
-              onClick={() => onViewProject(project.evidenceId)}
+        <div className={styles.hubLead}>{header}</div>
+        <div
+          className={styles.projectCopy}
+          data-hidden={showingVideo ? "" : undefined}
+          inert={showingVideo ? true : undefined}
+        >
+          <div className={styles.projectCopyInner}>
+            {project?.summary ? <SummaryCopy text={project.summary} /> : null}
+            {project?.url && !project.summary?.includes(project.url) ? (
+              <JzText
+                variant="body-default"
+                href={project.url}
+                target="_blank"
+                label="Read the article"
+              />
+            ) : null}
+            {project?.presentation ? (
+              <div className={styles.hubActions}>
+                <JzButton
+                  label="Details"
+                  variant="secondary"
+                  size="small"
+                  showIcon={false}
+                  onClick={() => onViewProject(project.evidenceId)}
+                />
+              </div>
+            ) : null}
+            <TopConnections kind="project" resume={resume} posting={posting} />
+            <FocusBrief
+              key={lineFocus.id}
+              kind="project"
+              subject={{
+                id: project?.evidenceId ?? lineFocus.id,
+                title: project?.name ?? "Project",
+                text: project?.summary ?? "",
+              }}
+              resume={resume}
+              posting={posting}
+              paragraph={
+                briefs[briefKey("project", project?.evidenceId ?? lineFocus.id)] ??
+                null
+              }
+              onParagraph={(text) =>
+                saveBrief("project", project?.evidenceId ?? lineFocus.id, text)
+              }
             />
           </div>
+        </div>
+        {project?.presentation && onClosePresentation ? (
+          <ProjectVideoReveal
+            open={showingVideo}
+            project={project}
+            onClose={onClosePresentation}
+          />
         ) : null}
-        <TopConnections kind="project" resume={resume} posting={posting} />
-        <FocusBrief
-          key={lineFocus.id}
-          kind="project"
-          subject={{
-            id: project?.evidenceId ?? lineFocus.id,
-            title: project?.name ?? "Project",
-            text: project?.summary ?? "",
-          }}
-          resume={resume}
-          posting={posting}
-          paragraph={
-            briefs[briefKey("project", project?.evidenceId ?? lineFocus.id)] ??
-            null
-          }
-          onParagraph={(text) =>
-            saveBrief("project", project?.evidenceId ?? lineFocus.id, text)
-          }
-        />
       </>
     );
   } else if (lineFocus?.kind === "jobLine") {
@@ -757,7 +923,7 @@ export function ConnectionHub({
 
   return (
     <div className={styles.hub} {...scrollProps}>
-      {body}
+      <div className={styles.hubColumn}>{body}</div>
     </div>
   );
 }

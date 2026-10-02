@@ -26,14 +26,15 @@ Use the following category identifiers for the controlled vocabulary. The first 
 | domain | Local extension: product, industry, or audience context | Enterprise SaaS, financial services, developer tools |
 | deliverable | Local extension: produced artifact or system | Component library, design-token pipeline, technical demo |
 | outcome | Local extension: observed result category | Adoption, reduced processing time, improved accessibility |
+| role | Resume title, or the job a line is hiring for | Solution specialist, senior product architect |
 
-Ownership, scope, delivery stage, project year, provenance, and disclosure are structured qualifiers on evidence, not interchangeable skill tags. Project timing uses one representative year; a clearly labeled estimate from linked role tenure is allowed under the header schema. It is not a scoring bonus or a basis for inferring duration. Methods can be represented as skills or work activities according to their definition; do not create duplicate concepts in both categories merely to increase matches.
+Ownership, scope, delivery stage, project year, provenance, and disclosure are structured qualifiers on evidence, not interchangeable skill tags. Project timing uses one representative year; a clearly labeled estimate from linked role tenure is allowed under the header schema. The year does not add points and is not a basis for inferring duration. Rank order multiplies the raw score by a recency weight, described under scoring. Methods can be represented as skills or work activities according to their definition; do not create duplicate concepts in both categories merely to increase matches.
 
 O*NET also describes abilities, work styles, interests, education, and experience. Do not infer personality, innate abilities, or interests from project descriptions. Candidate-level qualifications such as degrees, licenses, location, and total years of experience belong in a separate requirements report and do not enter project scores.
 
 ## Controlled vocabulary contract
 
-The versioned registry is [vocabulary.yaml](vocabulary.yaml). Version 1.5.0 adds security-constrained integration. Version 1.4.0 adds design-system fundamentals and design-token fundamentals. Version 1.3.0 adds AI-assisted editing and explanatory illustration. Version 1.2.0 adds example-derived content fit, binding repair, content-to-component binding, and OpenAI. Version 1.1.0 is the 1.0.0 registry plus iOS, real estate, and hardware product design. Version 1.0.0 contained agent-reviewed definitions informed by the project collection and three representative postings, with verified mappings to O*NET 31.0 where appropriate. Vocabulary approval concerns the definitions, not Scott's proficiency or approval of project claims. Concepts can represent incoming requirements even when no current project supplies evidence. Every active concept must have:
+The versioned registry is [vocabulary.yaml](vocabulary.yaml). Version 1.7.0 adds bulk content editing and AI edit approval. Version 1.6.0 adds resume role titles and omits CTO. Version 1.5.0 adds security-constrained integration. Version 1.4.0 adds design-system fundamentals and design-token fundamentals. Version 1.3.0 adds AI-assisted editing and explanatory illustration. Version 1.2.0 adds example-derived content fit, binding repair, content-to-component binding, and OpenAI. Version 1.1.0 is the 1.0.0 registry plus iOS, real estate, and hardware product design. Version 1.0.0 contained agent-reviewed definitions informed by the project collection and three representative postings, with verified mappings to O*NET 31.0 where appropriate. Vocabulary approval concerns the definitions, not Scott's proficiency or approval of project claims. Concepts can represent incoming requirements even when no current project supplies evidence. Every active concept must have:
 
 - `id`: stable identifier; use `local:<slug>` for local concepts.
 - `label`, `definition`, and `category`: one canonical meaning and category.
@@ -99,11 +100,13 @@ Scoring is **additive** (engine v2). Constraints never veto a concept overlap; t
 
 Broader/narrower hierarchy, aliases, and keyword similarity do **not** add points in v2. Inferred claims never score. For each project×line, keep the **best claim** (highest points). Do not sum multiple claims for the same line. Do not combine evidence across different projects for individual project scores.
 
-`score(project) = sum over project-scoped job lines of bestClaimPoints(project, line)`
+`score(project)` stays the raw sum over project-scoped job lines of bestClaimPoints(project, line). Coverage, strong-example counts, and displayed hit counts use that raw score.
 
 Unmapped / empty-concept lines contribute zero and appear in `unmappedJobLineEntryIds`. Requirement `weight` is retained as metadata and is **not** multiplied into the score. If mappings are unfinished, label the ranking provisional. If no project-level requirements exist, return `score: null` and explain that there is nothing to rank against.
 
-Sort on unrounded score descending, then project ID ascending for reproducible ties. Do not add hidden employer prestige, recency, evidence length, tag count, or general project importance bonuses.
+Rank order multiplies the raw score by a recency weight. Projects at most five years old keep weight 1. Older work decays as `exp(-ln(2) * ((age - 5) / 8) ^ 2)`, so a decade-old project is still competitive and a twenty-year-old project rarely leads. A missing year keeps weight 1. The knobs are `RECENCY_FULL_YEARS`, `RECENCY_HALF_LIFE_YEARS`, and `RECENCY_CURVE` in `src/lib/matching/recency.ts`. Stored contribution points are not multiplied.
+
+Sort on raw score times that weight, descending, then project ID ascending for reproducible ties. Do not add hidden employer prestige, evidence length, tag count, or general project importance bonuses.
 
 Example: two lines each with one exact concept hit and no constraint bonuses → score `20`. One line with two concept overlaps plus matching ownership → score `20 + 2 = 22`. These totals are relative relationship strength for one posting; do not compare them as universal project quality across postings.
 

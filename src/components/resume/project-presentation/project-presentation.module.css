@@ -1,6 +1,7 @@
 .video {
   display: block;
   width: min(
+    100%,
     calc(100vw - 5rem),
     calc((100dvh - 11rem) * 2880 / 1864)
   );
@@ -10,5 +11,6 @@
   object-fit: contain;
   object-position: center;
   background: var(--jz-primitive-color-black);
-  border-radius: var(--jz-primitive-radius-sm, 0.25rem);
+  border-radius: var(--jz-primitive-radius-lg, 0.75rem);
+  overflow: hidden;
 }

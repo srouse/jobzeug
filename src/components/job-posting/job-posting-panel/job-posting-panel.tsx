@@ -36,7 +36,7 @@ function DetailsBody({
   resumeProjectIds: readonly string[];
   onOpenFull: () => void;
 }) {
-  const { lineFocus, selectLine, density } = useResumeHighlights();
+  const { lineFocus, selectLine, density, fitBarsVisible } = useResumeHighlights();
   const connection = useActiveConnectionTarget();
   const strengthById = useMemo(() => {
     const map = new Map<string, ConnectionStrength>();
@@ -214,7 +214,9 @@ function DetailsBody({
                           selectLine({ kind: "jobLine", id: line.entryId })
                         }
                         label="Select job line"
+                        edge="left"
                         contentId={line.entryId}
+                        fitBarsOff={!fitBarsVisible}
                         contentClassName={classNames(
                           styles.content,
                           styles.line,
@@ -226,30 +228,21 @@ function DetailsBody({
                         <div className={styles.lineCopy}>
                           <JzText
                             variant="caption"
-                            color={
-                              selected || strength === "primary"
-                                ? "primary"
-                                : "muted"
-                            }
+                            color="muted"
                             label={line.theme}
                             className={styles.theme}
                           />
                           <JzText
                             variant="body-regular"
-                            color={
-                              selected || strength === "primary"
-                                ? "primary"
-                                : strength === "secondary"
-                                  ? "muted"
-                                  : undefined
-                            }
                             label={line.text}
                             className={styles.lineText}
                           />
-                          <FitMeter
-                            width={lineBars.get(line.entryId)?.width ?? 0}
-                            tone={lineBars.get(line.entryId)?.tone ?? null}
-                          />
+                          {fitBarsVisible ? (
+                            <FitMeter
+                              width={lineBars.get(line.entryId)?.width ?? 0}
+                              tone={lineBars.get(line.entryId)?.tone ?? null}
+                            />
+                          ) : null}
                         </div>
                       </AttachGutterRow>
                     </div>

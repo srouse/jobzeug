@@ -43,7 +43,7 @@
       "status": "draft",
       "reviewed_by": null,
       "reviewed_at": null,
-      "vocabulary_version": "1.5.0"
+      "vocabulary_version": "1.7.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -61,7 +61,8 @@
           "local:semantic-search-integration",
           "local:headless-content-management",
           "local:prototyping",
-          "local:technical-prototype"
+          "local:technical-prototype",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "individual",
@@ -103,7 +104,8 @@
         "statement": "The demo is the handoff. He has shown it to prospects and to other partners as a working picture of a knowledge-management system on Contentful.",
         "concept_ids": [
           "local:customer-demonstration",
-          "local:customer-facing-work"
+          "local:customer-facing-work",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "external_audience",

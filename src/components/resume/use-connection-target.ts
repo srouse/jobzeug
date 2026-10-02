@@ -13,10 +13,17 @@ export function useActiveConnectionTarget() {
   const { lineFocus, focusedIds, pageBindingsVisible } = useResumeHighlights();
   const { data } = useJobPosting();
   const edges = data?.matchGraph?.edges ?? EMPTY_MATCH_EDGES;
+  const projectYears = data?.matchGraph?.projectYears;
 
   return useMemo(
     () =>
-      activeConnectionTarget(lineFocus, edges, focusedIds, pageBindingsVisible),
-    [lineFocus, edges, focusedIds, pageBindingsVisible],
+      activeConnectionTarget(
+        lineFocus,
+        edges,
+        focusedIds,
+        pageBindingsVisible,
+        projectYears,
+      ),
+    [lineFocus, edges, focusedIds, pageBindingsVisible, projectYears],
   );
 }

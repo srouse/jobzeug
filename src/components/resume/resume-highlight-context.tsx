@@ -67,6 +67,15 @@ type ResumeHighlightContextValue = {
   focusAnswer: () => void;
   density: ResumeDensity;
   setDensity: (next: ResumeDensity) => void;
+  /** Score bars under projects and job lines. Off until the stage toggle. */
+  fitBarsVisible: boolean;
+  setFitBarsVisible: (next: boolean) => void;
+  /** Career timeline column in the resume. On until the stage toggle. */
+  timelineVisible: boolean;
+  setTimelineVisible: (next: boolean) => void;
+  /** Right-hand job posting column. Off lets the stage run flush to the right. */
+  jobPostingOpen: boolean;
+  setJobPostingOpen: (next: boolean) => void;
   /** Medium-layout page tab (resume vs job). Unused for visibility on wide. */
   evidencePage: EvidencePage;
   setEvidencePage: (next: EvidencePage) => void;
@@ -105,6 +114,9 @@ export function ResumeHighlightProvider({
     useState<EvidenceCluster | null>(null);
   const [focusedSectionId, setFocusedSectionId] = useState<string | null>(null);
   const [density, setDensity] = useState<ResumeDensity>("full");
+  const [fitBarsVisible, setFitBarsVisible] = useState(false);
+  const [timelineVisible, setTimelineVisible] = useState(true);
+  const [jobPostingOpen, setJobPostingOpen] = useState(true);
   const [evidencePage, setEvidencePage] = useState<EvidencePage>(() => {
     if (
       typeof window !== "undefined" &&
@@ -248,6 +260,12 @@ export function ResumeHighlightProvider({
       focusAnswer,
       density,
       setDensity,
+      fitBarsVisible,
+      setFitBarsVisible,
+      timelineVisible,
+      setTimelineVisible,
+      jobPostingOpen,
+      setJobPostingOpen,
       evidencePage,
       setEvidencePage,
       askContextItems,
@@ -260,6 +278,9 @@ export function ResumeHighlightProvider({
     focusedSectionId,
     pageBindingsVisible,
     density,
+    fitBarsVisible,
+    timelineVisible,
+    jobPostingOpen,
     evidencePage,
     askContextItems,
     lineFocus,

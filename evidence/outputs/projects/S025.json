@@ -44,7 +44,7 @@
       "status": "reviewed",
       "reviewed_by": "Scott",
       "reviewed_at": "2026-09-27",
-      "vocabulary_version": "1.5.0"
+      "vocabulary_version": "1.7.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -54,7 +54,8 @@
         "concept_ids": [
           "local:systems-analysis",
           "local:headless-content-management",
-          "local:developer-and-designer-tools"
+          "local:developer-and-designer-tools",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "organization",
@@ -87,7 +88,8 @@
         "concept_ids": [
           "local:prototyping",
           "local:technical-prototype",
-          "local:headless-content-management"
+          "local:headless-content-management",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "individual",
@@ -118,7 +120,8 @@
         "concept_ids": [
           "local:prototyping",
           "local:technical-prototype",
-          "local:design-system-development"
+          "local:design-system-development",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "unknown",
@@ -149,7 +152,8 @@
         "statement": "Built the system from scratch several times before ExO, meaning the data-assembly and design-system sides he describes for this product.",
         "concept_ids": [
           "local:design-system-development",
-          "local:headless-content-management"
+          "local:headless-content-management",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "unknown",
@@ -183,7 +187,8 @@
           "local:prototyping",
           "local:technical-prototype",
           "local:front-end-development",
-          "local:interaction-design"
+          "local:interaction-design",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "individual",
@@ -214,7 +219,8 @@
         "statement": "Made a series of PDFs, during the large prototypes, that visualize staple components and repeat why design properties are not a thing.",
         "concept_ids": [
           "local:technical-writing",
-          "local:technical-article"
+          "local:technical-article",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "unknown",
@@ -245,7 +251,8 @@
         "statement": "Wrote many additional documents along the way. Count, titles, and topics are not recorded.",
         "concept_ids": [
           "local:technical-writing",
-          "local:technical-article"
+          "local:technical-article",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "unknown",
@@ -275,7 +282,8 @@
         "id": "S025-E008",
         "statement": "Used a Berlin event to socialize this research and work with people on it, including a presentation to about two dozen people in a hackathon-like setting.",
         "concept_ids": [
-          "local:speaking"
+          "local:speaking",
+          "local:senior-product-architect"
         ],
         "ownership": "sole",
         "scope": "unknown",

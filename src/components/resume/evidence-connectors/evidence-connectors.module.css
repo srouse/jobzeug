@@ -12,16 +12,9 @@
   transition: stroke 700ms ease-in-out;
 }
 
-.dot,
-.dotDimmed {
-  transition: fill 700ms ease-in-out;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .line,
-  .lineDimmed,
-  .dot,
-  .dotDimmed {
+  .lineDimmed {
     transition: none;
   }
 }
@@ -42,22 +35,7 @@
 
 .lineDimmed {
   stroke: var(--jz-semantic-color-border-default);
-  stroke-width: 2px;
+  stroke-width: 1px;
   stroke-linecap: round;
   stroke-linejoin: round;
-}
-
-.dot {
-  fill: var(--jz-semantic-color-border-brand-strong, #2563eb);
-  stroke: none;
-}
-
-.dotSubject {
-  fill: var(--jz-semantic-color-brand-primary);
-  stroke: none;
-}
-
-.dotDimmed {
-  fill: var(--jz-semantic-color-border-default);
-  stroke: none;
 }

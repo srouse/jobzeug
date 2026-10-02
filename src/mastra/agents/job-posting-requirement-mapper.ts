@@ -20,7 +20,8 @@ Input is a single job line. Return exactly one matchingRequirement object for th
 - priority: required section → core; preferred → preferred; responsibility → supporting unless the text is clearly a must-have; description → supporting or preferred.
 - priority_basis: { kind: "explicit"|"inferred", rationale }.
 - weight: core 3, supporting 2, preferred 1 unless you record an override rationale in priority_basis.
-- concept_ids: only IDs from the approved concept list. Attach EVERY clearly supported concept (skill, tool, deliverable, domain)—typically 1–4 when the vocab fits, not just one "best" tag. Prefer tagging when vocabulary clearly fits. Empty concept_ids is OK when nothing fits.
+- concept_ids: only IDs from the approved concept list. Attach EVERY clearly supported concept (skill, tool, deliverable, domain, role)—typically 1–4 when the vocab fits, not just one "best" tag. Prefer tagging when vocabulary clearly fits. Empty concept_ids is OK when nothing fits.
+- Role concepts name the job the line is hiring for, a title or function such as solution engineer or post-sales. Attach the matching role concept when the line names that role, in addition to activity and tool tags.
 - constraints: optional ownership/scope/delivery_stage arrays, tool_concept_ids for named tools that appear in the vocabulary, note nullable.
 - mapping_status: "proposed" when at least one concept_id or tool_concept_id is set; "unmapped" when none fit.
 - scope rules: craft, design systems, UX/IA, dashboards, developer tooling, responsibilities, and preferred skills that projects can evidence → "project" (even in the required section). Never use "candidate" for those.

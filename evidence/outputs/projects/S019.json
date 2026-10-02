@@ -45,7 +45,7 @@
       "status": "reviewed",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.5.0"
+      "vocabulary_version": "1.7.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -61,7 +61,8 @@
           "local:stencil",
           "local:lit",
           "local:platform-migration",
-          "local:financial-services"
+          "local:financial-services",
+          "local:experience-designer"
         ],
         "ownership": "contributor",
         "scope": "unknown",
@@ -90,7 +91,8 @@
         "statement": "Built Figma extensions to support the design-to-system process.",
         "concept_ids": [
           "local:figma-extension",
-          "local:figma"
+          "local:figma",
+          "local:experience-designer"
         ],
         "ownership": "contributor",
         "scope": "unknown",
@@ -117,7 +119,8 @@
         "id": "S019-E003",
         "statement": "Reports that teams used the system within two or three months and that it remained in use for internal applications.",
         "concept_ids": [
-          "local:product-adoption"
+          "local:product-adoption",
+          "local:experience-designer"
         ],
         "ownership": "contributor",
         "scope": "organization",

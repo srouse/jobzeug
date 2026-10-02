@@ -42,7 +42,7 @@
       "status": "reviewed",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.5.0"
+      "vocabulary_version": "1.7.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -54,7 +54,8 @@
           "local:content-modeling",
           "local:firecrawl",
           "local:mastra",
-          "local:contentful"
+          "local:contentful",
+          "local:solution-specialist"
         ],
         "ownership": "contributor",
         "scope": "unknown",
@@ -82,7 +83,8 @@
         "id": "S003-E002",
         "statement": "Reports using DemAI across his SE projects, with broader usage concentrating on ad hoc content-model creation.",
         "concept_ids": [
-          "local:product-adoption"
+          "local:product-adoption",
+          "local:solution-specialist"
         ],
         "ownership": "contributor",
         "scope": "unknown",

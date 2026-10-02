@@ -1,15 +1,15 @@
 # Authoritative concept registry. Read engine.md and project-header-schema.md first.
 # Approval here covers vocabulary definitions only, never claims about Scott.
 schema_version: "1.0"
-vocabulary_version: 1.5.0
+vocabulary_version: 1.7.0
 title: Jobzeug project matching vocabulary
 status: approved
 created_at: 2026-09-26
 review:
   reviewed_by: Scott
-  reviewed_at: 2026-09-28
-  scope: 1.5.0 adds security-constrained integration at Scott's request while updating S008.
-    Prior concepts remain the 1.4.0 review. This file does not approve project claims.
+  reviewed_at: 2026-09-29
+  scope: 1.7.0 adds bulk content editing and AI edit approval at Scott's request while updating
+    S002. Prior concepts remain the 1.6.0 review. This file does not approve project claims.
 purpose: Shared controlled concepts for project evidence and incoming job requirements; no fixed
   employer, posting, or project ranking.
 categories:
@@ -21,6 +21,7 @@ categories:
   domain: Local extension describing the product, industry, or audience setting.
   deliverable: Local extension describing an artifact or system produced.
   outcome: Local extension describing an observed result, requiring separate evidence.
+  role: A resume title, or the job a posting line is hiring for.
 external_source:
   system: O*NET
   release: "31.0"
@@ -2260,3 +2261,248 @@ concepts:
       reviewed_by: Scott
       reviewed_at: 2026-09-28
       scope: Added in vocabulary 1.5.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:senior-product-architect
+    label: Senior Product Architect
+    definition: The resume role leading internal tools and practices for post-sales delivery and
+      customer adoption.
+    category: role
+    aliases:
+      - product architect
+      - post-sales
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Assign when the work was delivered in this resume role. The title does not establish
+      a sales methodology, quota ownership, or a customer outcome.
+    basis:
+      project_ids:
+        - S001
+        - S008
+        - S009
+        - S015
+        - S025
+        - S031
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-29
+      scope: Added in vocabulary 1.6.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:solution-specialist
+    label: Solution Specialist
+    definition: The resume role that partners with solution engineers on demos and proofs of concept.
+    category: role
+    aliases:
+      - solution engineer
+      - solutions engineer
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Assign when the work was delivered in this resume role. Partnering with solution
+      engineers is the resume wording this title covers. It does not establish a sales methodology,
+      quota ownership, or a customer outcome.
+    basis:
+      project_ids:
+        - S002
+        - S003
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-29
+      scope: Added in vocabulary 1.6.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:senior-software-engineer
+    label: Senior Software Engineer
+    definition: The resume role building demos, technical narratives, and published writing.
+    category: role
+    aliases:
+      - software engineer
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Assign when the work was delivered in this resume role. The title does not establish
+      a sales methodology, quota ownership, or a customer outcome.
+    basis:
+      project_ids:
+        - S014
+        - S022
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-29
+      scope: Added in vocabulary 1.6.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:ux-generalist-design-systems
+    label: Sr. UX Generalist, Design Systems
+    definition: The resume role modernizing an enterprise design system through tokens, components,
+      and adoption.
+    category: role
+    aliases: []
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Assign when the work was delivered in this resume role. The title does not establish
+      a sales methodology, quota ownership, or a customer outcome.
+    basis:
+      project_ids:
+        - S005
+        - S006
+        - S007
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-29
+      scope: Added in vocabulary 1.6.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:experience-designer
+    label: Experience Designer
+    definition: The resume role designing and building a design system and content platform.
+    category: role
+    aliases: []
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Assign when the work was delivered in this resume role. The title does not establish
+      a sales methodology, quota ownership, or a customer outcome.
+    basis:
+      project_ids:
+        - S019
+        - S020
+        - S021
+        - S026
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-29
+      scope: Added in vocabulary 1.6.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:senior-ux-designer-developer
+    label: Senior UX Designer/Developer
+    definition: The resume role combining senior UX design and development.
+    category: role
+    aliases:
+      - UX designer
+      - UX developer
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Assign when the work was delivered in this resume role. The title does not establish
+      a sales methodology, quota ownership, or a customer outcome.
+    basis:
+      project_ids:
+        - S023
+        - S027
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-29
+      scope: Added in vocabulary 1.6.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:ux-designer-web-mobile-developer
+    label: UX Designer and Web/Mobile Developer
+    definition: The resume role defining UX and prototyping web and mobile product concepts.
+    category: role
+    aliases: []
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Assign when the work was delivered in this resume role. The title does not establish
+      a sales methodology, quota ownership, or a customer outcome.
+    basis:
+      project_ids:
+        - S024
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-29
+      scope: Added in vocabulary 1.6.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:ux-ui-designer-web-mobile-developer
+    label: UX/UI Designer and Web/Mobile Developer
+    definition: The resume role designing and prototyping web and mobile products for clients.
+    category: role
+    aliases: []
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Assign when the work was delivered in this resume role. The title does not establish
+      a sales methodology, quota ownership, or a customer outcome.
+    basis:
+      project_ids:
+        - S028
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-29
+      scope: Added in vocabulary 1.6.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:lead-software-developer-ui-designer
+    label: Lead Software Developer and UI Designer
+    definition: The resume role leading software development and UI design.
+    category: role
+    aliases: []
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Assign when the work was delivered in this resume role. The title does not establish
+      a sales methodology, quota ownership, or a customer outcome. No project is linked yet, so this
+      concept can tag a job line without a resume overlap.
+    basis:
+      project_ids: []
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-29
+      scope: Added in vocabulary 1.6.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:head-of-usability-mobile-developer
+    label: Head of Usability / Mobile Developer
+    definition: The resume role leading usability and mobile product work.
+    category: role
+    aliases:
+      - head of usability
+      - mobile developer
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Assign when the work was delivered in this resume role. The title does not establish
+      a sales methodology, quota ownership, or a customer outcome.
+    basis:
+      project_ids:
+        - S030
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-29
+      scope: Added in vocabulary 1.6.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:bulk-content-editing
+    label: Bulk content editing
+    definition: Changing many structured content entries together from one surface.
+    category: work_activity
+    aliases:
+      - bulk edit
+      - bulk editing
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Require the many-entry operation. Designing a grid, or editing one entry, is not
+      this. It does not establish who published the app or that a sale closed.
+    basis:
+      project_ids:
+        - S002
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-29
+      scope: Added in vocabulary 1.7.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:ai-edit-approval
+    label: AI edit approval
+    definition: A person accepts or declines model-proposed changes to structured content before they
+      are kept, one entry at a time or across a set.
+    category: work_activity
+    aliases:
+      - accept or decline AI edits
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Require the accept-or-decline step. Building the model call, or glancing at an
+      output, is not this. It does not establish a measured evaluation or that the change was published.
+    basis:
+      project_ids:
+        - S002
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-09-29
+      scope: Added in vocabulary 1.7.0 at Scott's request. Definition only; not approval of a claim.

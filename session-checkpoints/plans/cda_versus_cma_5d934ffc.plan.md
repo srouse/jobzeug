@@ -4,25 +4,25 @@ overview: Record where Jobzeug calls the Content Delivery API and the Content Ma
 todos:
   - id: cda-posting-loader
     content: Add a Delivery loader that fetches one published posting plus its lines and tools with include=2.
-    status: pending
+    status: completed
   - id: resume-get
     content: Point GET /api/job-posting at the Delivery loader.
-    status: pending
+    status: completed
   - id: analytics-get
     content: Point the Analysis page read at the Delivery loader.
-    status: pending
+    status: completed
   - id: jobs-list
     content: Load every posting on /jobs through Delivery, batched with sys.id[in] and include=2.
-    status: pending
+    status: completed
   - id: match-get
     content: Point GET /api/job-posting/match at the Delivery loader.
-    status: pending
+    status: completed
   - id: save-graph-read
     content: Read the posting with Delivery inside saveJobPostingMatchGraph; leave the update and publish on Management.
-    status: pending
+    status: completed
   - id: focus-brief-read
     content: Read a published focus brief with Delivery; leave create, update, and publish on Management.
-    status: pending
+    status: completed
 isProject: false
 ---
 

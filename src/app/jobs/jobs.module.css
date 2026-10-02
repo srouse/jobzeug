@@ -14,35 +14,80 @@
   list-style: none;
   margin: var(--jz-semantic-space-gap-lg, 1.5rem) 0 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--jz-semantic-space-gap-md, 1rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content max-content;
+  column-gap: var(--jz-semantic-space-gap-lg, 1.5rem);
+  row-gap: var(--jz-semantic-space-gap-md, 1rem);
   width: min(52rem, 100%);
 }
 
 .row {
-  display: flex;
-  flex-wrap: wrap;
+  position: relative;
+  z-index: 0;
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+  column-gap: var(--jz-semantic-space-gap-lg, 1.5rem);
   padding-bottom: var(--jz-semantic-space-gap-md, 1rem);
   border-bottom: 1px solid var(--jz-semantic-color-border-subtle);
+}
+
+.rowLink {
+  display: grid;
+  grid-column: 1 / 3;
+  grid-template-columns: subgrid;
+  align-items: center;
+  column-gap: inherit;
+  color: inherit;
+  text-decoration: none;
+}
+
+.identity:hover,
+.rowLink:focus-visible .identity {
+  --jz-semantic-color-text-default: var(--jz-semantic-color-text-primary);
+  --jz-semantic-color-text-muted: var(--jz-semantic-color-text-primary);
+}
+
+.rowLink::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-self: end;
+  justify-content: flex-end;
+  font-variant-numeric: tabular-nums;
 }
 
 .identity {
   display: flex;
   flex-direction: column;
-  gap: 0.125rem;
+  justify-content: center;
+  align-self: center;
+  gap: 0;
   min-width: 0;
 }
 
+.identity > :last-child {
+  margin-top: -0.2rem;
+}
+
 .links {
+  position: relative;
+  z-index: 1;
   display: flex;
+  align-items: center;
+  align-self: center;
+  justify-self: end;
   gap: var(--jz-semantic-space-gap-md, 1rem);
 }
 
-.links a {
-  color: var(--jz-semantic-color-text-primary);
-  text-decoration: none;
+.error {
+  grid-column: 1 / -1;
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, type ReactNode } from "react";
-import { JzIcon, JzText } from "@jobzeug/design-system/react";
+import { JzIcon, JzIconButton, JzText } from "@jobzeug/design-system/react";
 import { useJobPosting } from "@/components/job-posting";
 import { FitMeter } from "@/components/fit-meter/fit-meter";
 import { projectFitBars, type FitBar } from "@/lib/matching/home-coverage";
@@ -13,7 +13,7 @@ import type {
 import { EvidencePageHeader } from "@/components/evidence-page-header";
 import { AttachGutterRow } from "@/components/attach-gutter-row";
 import { CareerTimeline } from "../career-timeline/career-timeline";
-import { ProjectPresentationModal } from "../project-presentation/project-presentation";
+import { CAREER_TIMELINE_ENABLED } from "../career-timeline/enabled";
 import { useIdleScrollbar } from "@/lib/use-idle-scrollbar";
 import {
   useResumeHighlights,
@@ -30,26 +30,20 @@ function classNames(...parts: Array<string | false | null | undefined>) {
 }
 
 function CitedTitle({
-  active,
-  dimmed = false,
   variant,
   level = 0,
   weight,
   color,
   label,
   className,
-  selected,
   children,
 }: {
-  active: boolean;
-  dimmed?: boolean;
   variant: string;
   level?: number;
   weight?: "200" | "400" | "500" | "600" | "700";
   color?: string;
   label?: string;
   className?: string;
-  selected?: boolean;
   children?: ReactNode;
 }) {
   return (
@@ -57,9 +51,7 @@ function CitedTitle({
       level={level}
       variant={variant}
       weight={weight}
-      color={
-        selected || active ? "primary" : dimmed ? "muted" : color
-      }
+      color={color}
       label={label}
       className={className}
     >
@@ -77,6 +69,7 @@ function EvidenceShell({
   pressed,
   onActivate,
   activateLabel = "Select",
+  fitBarsOff = false,
   children,
 }: {
   id: string;
@@ -87,6 +80,7 @@ function EvidenceShell({
   pressed?: boolean;
   onActivate?: () => void;
   activateLabel?: string;
+  fitBarsOff?: boolean;
   children: ReactNode;
 }) {
   const canActivate = Boolean(interactive && onActivate && !skeleton);
@@ -102,6 +96,7 @@ function EvidenceShell({
           onToggle={canActivate ? onActivate : undefined}
           label={activateLabel}
           contentId={id}
+          fitBarsOff={fitBarsOff}
           contentClassName={classNames(
             styles.content,
             headClass,
@@ -117,39 +112,23 @@ function EvidenceShell({
   );
 }
 
-function presentedProject(
-  resume: ResumeViewModel | null,
-  projectId: string | null,
-): ResumeProject | null {
-  if (!resume || !projectId) return null;
-  for (const employer of resume.employers) {
-    for (const role of employer.roles) {
-      const match = role.projects.find(
-        (project) =>
-          project.presentation &&
-          (project.evidenceId === projectId ||
-            `jz-${project.evidenceId}` === projectId),
-      );
-      if (match) return match;
-    }
-  }
-  return null;
-}
-
 export function ResumeDocument({
   resume,
   loading = false,
   error = null,
-  projectId,
-  onProjectIdChange,
 }: {
   resume: ResumeViewModel | null;
   loading?: boolean;
   error?: string | null;
-  projectId: string | null;
-  onProjectIdChange: (projectId: string | null) => void;
 }) {
-  const { density, lineFocus, selectLine } = useResumeHighlights();
+  const {
+    density,
+    lineFocus,
+    selectLine,
+    fitBarsVisible,
+    timelineVisible,
+    setTimelineVisible,
+  } = useResumeHighlights();
   const { data: posting } = useJobPosting();
   const projectBars = useMemo(() => {
     const ids: string[] = [];
@@ -192,7 +171,6 @@ export function ResumeDocument({
     return projects;
   }, [connection]);
   const { ref: scrollRef, scrolling } = useIdleScrollbar();
-  const playing = presentedProject(resume, projectId);
   const name = resume?.name ?? DEFAULT_NAME;
 
   const hideUnselectedObjects =
@@ -201,9 +179,22 @@ export function ResumeDocument({
     referenceIds.size > 0;
 
   return (
-    <>
     <article className={styles.article}>
-      <EvidencePageHeader>
+      <EvidencePageHeader
+        actions={
+          CAREER_TIMELINE_ENABLED ? (
+            <JzIconButton
+              label={
+                timelineVisible ? "Hide career timeline" : "Show career timeline"
+              }
+              icon="Clock"
+              title={timelineVisible ? "Hide timeline" : "Show timeline"}
+              aria-pressed={timelineVisible}
+              onClick={() => setTimelineVisible(!timelineVisible)}
+            />
+          ) : null
+        }
+      >
         <JzText
           variant="overline"
           color="muted"
@@ -221,6 +212,7 @@ export function ResumeDocument({
       <CareerTimeline
         employers={resume?.employers}
         selectedProjects={selectedProjects}
+        open={timelineVisible}
       >
       <div
         ref={scrollRef}
@@ -271,14 +263,11 @@ export function ResumeDocument({
                     >
                       <div className={styles.employerTitleRow}>
                         <CitedTitle
-                          active={employerStrength === "primary"}
-                          dimmed={employerStrength === "secondary"}
                           level={2}
                           variant="heading3"
                           weight="200"
                           label={employer.name}
                           className={styles.employerTitle}
-                          selected={false}
                         />
                       </div>
                     </EvidenceShell>
@@ -304,20 +293,13 @@ export function ResumeDocument({
                             >
                               <div className={styles.roleHead}>
                                 <CitedTitle
-                                  active={roleStrength === "primary"}
-                                  dimmed={roleStrength === "secondary"}
                                   level={3}
                                   variant="heading3"
                                   label={role.title}
-                                  selected={false}
                                 />
                                 <JzText
                                   variant="caption"
-                                  color={
-                                    roleStrength === "primary"
-                                      ? "primary"
-                                      : "muted"
-                                  }
+                                  color="muted"
                                   label={role.dateLabel}
                                 />
                               </div>
@@ -330,6 +312,7 @@ export function ResumeDocument({
                               hideUnselectedObjects={hideUnselectedObjects}
                               lineFocus={lineFocus}
                               projectBars={projectBars}
+                              fitBarsVisible={fitBarsVisible}
                               onSelect={(project) =>
                                 selectLine({
                                   kind: "project",
@@ -350,11 +333,6 @@ export function ResumeDocument({
       </div>
       </CareerTimeline>
     </article>
-    <ProjectPresentationModal
-      project={playing}
-      onClose={() => onProjectIdChange(null)}
-    />
-    </>
   );
 }
 
@@ -365,6 +343,7 @@ function ProjectLine({
   hideUnselectedObjects,
   lineFocus,
   projectBars,
+  fitBarsVisible,
   onSelect,
 }: {
   projects: ResumeProject[];
@@ -373,6 +352,7 @@ function ProjectLine({
   hideUnselectedObjects: boolean;
   lineFocus: LineFocus | null;
   projectBars: Map<string, FitBar>;
+  fitBarsVisible: boolean;
   onSelect: (project: ResumeProject) => void;
 }) {
   const visible = hideUnselectedObjects
@@ -397,37 +377,38 @@ function ProjectLine({
               headClass={styles.projectName}
               interactive
               pressed={selected}
+              fitBarsOff={!fitBarsVisible}
               onActivate={() => onSelect(project)}
               activateLabel="Select project"
             >
               <div className={styles.projectBody}>
-                <div className={styles.projectTitleRow}>
-                  <span className={styles.projectTitle} title={project.name}>
+                <div className={styles.projectTitle}>
+                  <span className={styles.projectNameLine}>
+                    <span className={styles.projectMark} aria-hidden />
                     <CitedTitle
-                      active={strength === "primary"}
-                      dimmed={strength === "secondary"}
                       level={4}
                       variant="label"
                       weight="400"
                       color="muted"
                       className={styles.projectNameText}
-                      selected={selected}
                     >
                       <span className={styles.projectNameClip}>{project.name}</span>
                     </CitedTitle>
-                    <FitMeter
-                      width={projectBars.get(project.evidenceId)?.width ?? 0}
-                      tone={projectBars.get(project.evidenceId)?.tone ?? null}
-                    />
+                    {project.presentation ? (
+                      <span
+                        className={styles.videoMark}
+                        role="img"
+                        aria-label="Video"
+                      />
+                    ) : null}
                   </span>
-                  {project.presentation ? (
-                    <JzIcon
-                      icon="VideoCamera"
-                      weight="regular"
-                      size="small"
-                      title="Video"
-                      aria-label="Video"
-                    />
+                  {fitBarsVisible ? (
+                    <span className={styles.projectMeter}>
+                      <FitMeter
+                        width={projectBars.get(project.evidenceId)?.width ?? 0}
+                        tone={projectBars.get(project.evidenceId)?.tone ?? null}
+                      />
+                    </span>
                   ) : null}
                 </div>
               </div>

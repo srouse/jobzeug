@@ -45,7 +45,7 @@
       "status": "reviewed",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.5.0"
+      "vocabulary_version": "1.7.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -59,7 +59,8 @@
           "local:lit",
           "local:coordination",
           "local:cross-functional-work",
-          "local:stakeholder-alignment"
+          "local:stakeholder-alignment",
+          "local:ux-generalist-design-systems"
         ],
         "ownership": "contributor",
         "scope": "multiple_teams",

@@ -28,7 +28,7 @@ year_note: Estimated within R006 tenure (Nov 2019–Aug 2020); project-specific 
 delivery_stage: prototype
 annotation:
   status: reviewed
-  vocabulary_version: "1.5.0"
+  vocabulary_version: "1.7.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review
@@ -43,6 +43,7 @@ evidence:
       - local:react
       - local:financial-services
       - local:cross-functional-work
+      - local:senior-ux-designer-developer
     ownership: contributor
     scope: single_team
     delivery_stage: prototype
@@ -71,6 +72,7 @@ evidence:
       - local:react
       - local:interaction-design
       - local:financial-services
+      - local:senior-ux-designer-developer
     ownership: contributor
     scope: single_team
     delivery_stage: prototype
@@ -99,6 +101,7 @@ evidence:
       - local:interaction-design
       - local:critical-thinking
       - local:financial-services
+      - local:senior-ux-designer-developer
     ownership: contributor
     scope: single_team
     delivery_stage: prototype

@@ -27,7 +27,7 @@ year_note: 2026 publication year recorded for both parts (February 26 and March 
 delivery_stage: mixed
 annotation:
   status: reviewed
-  vocabulary_version: "1.5.0"
+  vocabulary_version: "1.7.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review
@@ -39,6 +39,7 @@ evidence:
       - local:technical-writing
       - local:technical-article
       - local:ai-system-fundamentals
+      - local:senior-product-architect
     ownership: sole
     scope: external_audience
     delivery_stage: production
@@ -61,6 +62,7 @@ evidence:
       model-call inputs changes behavior.
     concept_ids:
       - local:interactive-learning-material
+      - local:senior-product-architect
     ownership: unknown
     scope: external_audience
     delivery_stage: unknown

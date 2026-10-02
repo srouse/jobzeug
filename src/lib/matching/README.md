@@ -21,6 +21,7 @@ Compress / CMS contracts live under [`scripts/contentful/matching/`](../../../sc
 | File | Role |
 |---|---|
 | `catalog.ts` | Load published projects + vocabulary from Contentful |
+| `recency.ts` | Age weight for rank order. Raw points stay unchanged |
 | `score.ts` | `scorePostingAgainstCatalog` — per-project relationship points |
 | `fit.ts` | `jobPostFit`, `resumeFit`, and `jobRelevancy` — separate from project ranking |
 | `prepare.ts` | Score-time fixes for weak maps (not written back to CMS) |
@@ -77,7 +78,7 @@ Object keyed by Contentful content type id. Each key is an array of `{ entryId, 
 | `projectId` | string | e.g. `S001` |
 | `score` | number \| null | **Total relationship points** vs this posting. `null` if pending or nothing project-scoped to score |
 
-Sorted by `score` descending. **Top of the list = most relationship hits.**
+Sorted by raw `score` times recency weight, descending, then project ID. **Top of the list leads with recent relationship strength.** `score` itself stays the unweighted point total. A missing project year keeps full weight.
 
 ### `projects[].contributions[]`
 

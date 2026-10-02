@@ -1,4 +1,9 @@
-import { prepareRequirementForScoring } from "./prepare";
+import {
+  appendRoleConceptHits,
+  newestApprovedVocabulary,
+  prepareRequirementForScoring,
+} from "./prepare";
+import { recencyWeight } from "./recency";
 import { SCORING_VERSION } from "./versions";
 
 export { SCORING_VERSION, MAPPER_VERSION } from "./versions";
@@ -19,6 +24,24 @@ function isIgnoredAxisValue(value: string | undefined | null): boolean {
   if (value == null) return true;
   const key = value.trim().toLowerCase();
   return key.length === 0 || IGNORED_AXIS_VALUES.has(key);
+}
+
+/** Sum of each project's points after its recency weight. Same number as the analytics Total. */
+function ageAdjustedTotal(
+  projects: ReadonlyArray<{
+    projectId: string;
+    contributions: ReadonlyArray<{ points: number }>;
+  }>,
+  recencyByProject: ReadonlyMap<string, number>,
+) {
+  const total = projects.reduce((sum, row) => {
+    const raw = row.contributions.reduce(
+      (points, hit) => (hit.points > 0 ? points + hit.points : points),
+      0,
+    );
+    return sum + raw * (recencyByProject.get(row.projectId) ?? 1);
+  }, 0);
+  return Math.round(total);
 }
 
 type MatchingRequirement = {
@@ -65,6 +88,7 @@ type Claim = {
 type Project = {
   project_id: string;
   ranking_eligible: boolean;
+  year?: number | null;
   evidence?: Claim[];
   annotation?: { status?: string };
 };
@@ -75,6 +99,7 @@ type Concept = {
   status?: string;
   label?: string;
   aliases?: string[];
+  category?: string;
 };
 
 type Vocabulary = {
@@ -282,6 +307,7 @@ export function scorePostingAgainstCatalog({
       pendingProjectIds: catalog?.pendingProjectIds ?? [],
       excludedProjectIds: catalog?.excludedProjectIds ?? [],
       entryRevisions: catalog?.entryRevisions ?? {},
+      ageAdjustedTotal: 0,
       message:
         "Posting has no matching snapshot (legacy ingest). Re-scrape to map.",
     };
@@ -294,17 +320,24 @@ export function scorePostingAgainstCatalog({
     throw new Error(`Missing approved vocabulary ${vocabularyVersion}`);
   }
 
+  const roleVocabulary =
+    newestApprovedVocabulary(catalog.vocabularies) ?? vocabulary;
   const preparedLines = posting.lines.map((line) => {
     if (!line.matchingRequirement) return line;
-    const prepared = prepareRequirementForScoring(
-      line.matchingRequirement as Parameters<
-        typeof prepareRequirementForScoring
-      >[0],
-      vocabulary as Parameters<typeof prepareRequirementForScoring>[1],
-      {
-        section: line.section,
-        theme: line.theme,
-      },
+    const context = {
+      section: line.section,
+      theme: line.theme,
+    };
+    const prepared = appendRoleConceptHits(
+      prepareRequirementForScoring(
+        line.matchingRequirement as Parameters<
+          typeof prepareRequirementForScoring
+        >[0],
+        vocabulary as Parameters<typeof prepareRequirementForScoring>[1],
+        context,
+      ),
+      roleVocabulary as Parameters<typeof prepareRequirementForScoring>[1],
+      context,
     );
     return { ...line, matchingRequirement: prepared };
   });
@@ -331,6 +364,14 @@ export function scorePostingAgainstCatalog({
   const eligibleProjects = [...catalog.projects.values()].filter(
     (p) => p.ranking_eligible && !excludedSet.has(p.project_id),
   );
+  const recencyByProject = new Map(
+    eligibleProjects.map((project) => [
+      project.project_id,
+      recencyWeight(project.year),
+    ]),
+  );
+  const rankedPoints = (projectId: string, points: number) =>
+    points * (recencyByProject.get(projectId) ?? 1);
 
   const jobLines: Array<{
     lineEntryId: string;
@@ -413,10 +454,13 @@ export function scorePostingAgainstCatalog({
       }
     }
 
-    summaries.sort(
-      (a, b) =>
-        b.points - a.points || a.projectId.localeCompare(b.projectId),
-    );
+    summaries.sort((a, b) => {
+      const ranked =
+        rankedPoints(b.projectId, b.points) -
+        rankedPoints(a.projectId, a.points);
+      if (ranked !== 0) return ranked;
+      return a.projectId.localeCompare(b.projectId);
+    });
     jobLines.push({
       lineEntryId: line.entryId,
       requirementId: req.id,
@@ -452,6 +496,7 @@ export function scorePostingAgainstCatalog({
       pendingProjectIds: [...pendingSet],
       excludedProjectIds: [...excludedSet],
       entryRevisions: catalog.entryRevisions ?? {},
+      ageAdjustedTotal: 0,
       message: "No project-scoped requirements to rank against",
     };
   }
@@ -480,7 +525,9 @@ export function scorePostingAgainstCatalog({
         return a.projectId.localeCompare(b.projectId);
       if (a.score == null) return 1;
       if (b.score == null) return -1;
-      if (b.score !== a.score) return b.score - a.score;
+      const ranked =
+        rankedPoints(b.projectId, b.score) - rankedPoints(a.projectId, a.score);
+      if (ranked !== 0) return ranked;
       return a.projectId.localeCompare(b.projectId);
     });
 
@@ -495,5 +542,6 @@ export function scorePostingAgainstCatalog({
     pendingProjectIds: [...pendingSet],
     excludedProjectIds: [...excludedSet],
     entryRevisions: catalog.entryRevisions ?? {},
+    ageAdjustedTotal: ageAdjustedTotal(projects, recencyByProject),
   };
 }

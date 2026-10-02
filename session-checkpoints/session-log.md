@@ -835,3 +835,34 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 - Round out the Berlin account on Experience Orchestration Research; S025-E008 is still proposed
 - The S031 knowledge-management proposal still does not score
 - The focus brief stays paused
+
+### [2026-10-02T17:20:33-05:00]
+
+#### Summary
+
+- Project Details opens the walkthrough in the stage instead of a modal, and the address ends in `/details`. The same stage eases open and closed.
+
+#### Changes
+
+- Evidence / records: vocabulary and project outputs already in the working tree, including MV-1.6.0 and MV-1.7.0
+- Skills / tooling: none
+- Other: stage video layout and route; job posting fills the narrow column; analytics page, jobs list, and recency scoring included in this check-in
+
+#### Decisions
+
+- The video stays on the same stage. Closing it returns to the project text; the header X does that first, then closes the project
+- Top and bottom stay flush. At the mid-size breakpoint the stage stays flush right, and the card keeps filling the stage through the close
+- Below 900px the video stays in the Answer tab and does not cover the screen
+- The design-system package and Contentful import error logs stay unstaged
+
+#### Plans cached
+
+- analytics_design_alignment_f1802b5b.plan.md
+- cda_versus_cma_5d934ffc.plan.md
+- delete_job_postings_bb53a413.plan.md
+- project_age_decay_fef60e42.plan.md
+- resume_role_tags_7617b9e9.plan.md
+
+#### Next
+
+- None pending from this session

@@ -30,7 +30,7 @@ year_note: Project calendar was not supplied. Estimated inside R007 (Aug 2018–
 delivery_stage: prototype
 annotation:
   status: reviewed
-  vocabulary_version: "1.5.0"
+  vocabulary_version: "1.7.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review
@@ -47,6 +47,7 @@ evidence:
       - local:interaction-design
       - local:visual-interface-design
       - local:financial-services
+      - local:ux-designer-web-mobile-developer
     ownership: lead
     scope: single_team
     delivery_stage: prototype
@@ -74,6 +75,7 @@ evidence:
       - local:visual-interface-design
       - local:prototyping
       - local:financial-services
+      - local:ux-designer-web-mobile-developer
     ownership: lead
     scope: external_audience
     delivery_stage: prototype
@@ -97,6 +99,7 @@ evidence:
     concept_ids:
       - local:usability-testing
       - local:financial-services
+      - local:ux-designer-web-mobile-developer
     ownership: lead
     scope: external_audience
     delivery_stage: prototype
@@ -121,6 +124,7 @@ evidence:
     concept_ids:
       - local:technical-discovery
       - local:financial-services
+      - local:ux-designer-web-mobile-developer
     ownership: lead
     scope: organization
     delivery_stage: prototype
@@ -141,6 +145,7 @@ evidence:
     statement: Presented LOUI himself in many situations.
     concept_ids:
       - local:speaking
+      - local:ux-designer-web-mobile-developer
     ownership: lead
     scope: unknown
     delivery_stage: prototype
@@ -163,6 +168,7 @@ evidence:
     concept_ids:
       - local:decision-making
       - local:financial-services
+      - local:ux-designer-web-mobile-developer
     ownership: lead
     scope: organization
     delivery_stage: prototype
@@ -186,6 +192,7 @@ evidence:
     concept_ids:
       - local:product-direction-influence
       - local:financial-services
+      - local:ux-designer-web-mobile-developer
     ownership: lead
     scope: organization
     delivery_stage: prototype
@@ -208,6 +215,7 @@ evidence:
     concept_ids:
       - local:cross-functional-work
       - local:coordination
+      - local:ux-designer-web-mobile-developer
     ownership: lead
     scope: single_team
     delivery_stage: prototype

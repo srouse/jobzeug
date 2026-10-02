@@ -55,6 +55,29 @@ test("a job-line focus keeps its four highest projects blue", () => {
   );
 });
 
+test("a job-line focus ranks projects by age-adjusted points", () => {
+  assert.deepEqual(
+    activeConnectionTarget(
+      { kind: "jobLine", id: "jz-line-1" },
+      edges,
+      [],
+      true,
+      { S001: 1990, S002: 2026, S003: 2025, S004: 2024, S005: 2023 },
+    ),
+    {
+      hub: "selection",
+      ids: [
+        { id: "jz-line-1", role: "subject", strength: "primary" },
+        { id: "S001", role: "reference", strength: "secondary" },
+        { id: "S002", role: "reference", strength: "primary" },
+        { id: "S003", role: "reference", strength: "primary" },
+        { id: "S004", role: "reference", strength: "primary" },
+        { id: "S005", role: "reference", strength: "primary" },
+      ],
+    },
+  );
+});
+
 test("an AI result is the only driver, and it meets the answer card", () => {
   assert.deepEqual(
     activeConnectionTarget({ kind: "answer" }, edges, ["S003", "jz-line-2"], true),

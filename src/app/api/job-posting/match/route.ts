@@ -4,7 +4,7 @@ import { z } from "zod";
 
 import { loadMatchingCatalog } from "@/lib/matching/catalog";
 import { computeFits } from "@/lib/matching/fit";
-import { loadJobPostingByEntryId } from "@/lib/job-posting";
+import { loadPublishedJobPosting } from "@/lib/job-posting";
 import { scorePostingAgainstCatalog } from "@/lib/matching/score";
 import { SESSION_COOKIE, getSessionId } from "@/lib/site-auth";
 
@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const view = await loadJobPostingByEntryId(parsed.data);
+    const view = await loadPublishedJobPosting(parsed.data);
     if (!view) {
       return NextResponse.json(
         { error: "Job posting not found" },

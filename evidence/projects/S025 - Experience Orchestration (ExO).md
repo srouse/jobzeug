@@ -30,7 +30,7 @@ year_note: Project calendar was not supplied. Estimated inside R001 (February 20
 delivery_stage: prototype
 annotation:
   status: reviewed
-  vocabulary_version: "1.5.0"
+  vocabulary_version: "1.7.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review
@@ -45,6 +45,7 @@ evidence:
       - local:systems-analysis
       - local:headless-content-management
       - local:developer-and-designer-tools
+      - local:senior-product-architect
     ownership: sole
     scope: organization
     delivery_stage: concept
@@ -75,6 +76,7 @@ evidence:
       - local:prototyping
       - local:technical-prototype
       - local:headless-content-management
+      - local:senior-product-architect
     ownership: sole
     scope: individual
     delivery_stage: prototype
@@ -100,6 +102,7 @@ evidence:
       - local:prototyping
       - local:technical-prototype
       - local:design-system-development
+      - local:senior-product-architect
     ownership: sole
     scope: unknown
     delivery_stage: prototype
@@ -124,6 +127,7 @@ evidence:
     concept_ids:
       - local:design-system-development
       - local:headless-content-management
+      - local:senior-product-architect
     ownership: sole
     scope: unknown
     delivery_stage: prototype
@@ -152,6 +156,7 @@ evidence:
       - local:technical-prototype
       - local:front-end-development
       - local:interaction-design
+      - local:senior-product-architect
     ownership: sole
     scope: individual
     delivery_stage: prototype
@@ -178,6 +183,7 @@ evidence:
     concept_ids:
       - local:technical-writing
       - local:technical-article
+      - local:senior-product-architect
     ownership: sole
     scope: unknown
     delivery_stage: prototype
@@ -204,6 +210,7 @@ evidence:
     concept_ids:
       - local:technical-writing
       - local:technical-article
+      - local:senior-product-architect
     ownership: sole
     scope: unknown
     delivery_stage: prototype
@@ -227,6 +234,7 @@ evidence:
       presentation to about two dozen people in a hackathon-like setting.
     concept_ids:
       - local:speaking
+      - local:senior-product-architect
     ownership: sole
     scope: unknown
     delivery_stage: unknown

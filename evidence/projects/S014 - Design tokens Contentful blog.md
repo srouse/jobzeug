@@ -30,7 +30,7 @@ year_note: 2024 publication year recorded for the May 16, 2024 article.
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: "1.5.0"
+  vocabulary_version: "1.7.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -43,6 +43,7 @@ evidence:
       - local:technical-article
       - local:design-system-fundamentals
       - local:design-token-fundamentals
+      - local:senior-software-engineer
     ownership: sole
     scope: external_audience
     delivery_stage: production
@@ -70,6 +71,7 @@ evidence:
       - local:technical-article
       - local:design-system-fundamentals
       - local:design-token-fundamentals
+      - local:senior-software-engineer
     ownership: sole
     scope: external_audience
     delivery_stage: production
@@ -93,6 +95,7 @@ evidence:
       years. After the CEO read it, he made a video and presented it to the company.
     concept_ids:
       - local:technical-article
+      - local:senior-software-engineer
     ownership: sole
     scope: external_audience
     delivery_stage: production
@@ -117,6 +120,7 @@ evidence:
     concept_ids:
       - local:ai-assisted-editing
       - local:technical-writing
+      - local:senior-software-engineer
     ownership: sole
     scope: individual
     delivery_stage: production
@@ -140,6 +144,7 @@ evidence:
     statement: Drew the article's illustrations himself so the figures carry the explanation.
     concept_ids:
       - local:explanatory-illustration
+      - local:senior-software-engineer
     ownership: sole
     scope: individual
     delivery_stage: production

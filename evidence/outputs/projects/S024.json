@@ -44,7 +44,7 @@
       "status": "reviewed",
       "reviewed_by": "Scott",
       "reviewed_at": "2026-09-27",
-      "vocabulary_version": "1.5.0"
+      "vocabulary_version": "1.7.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -59,7 +59,8 @@
           "local:technical-prototype",
           "local:interaction-design",
           "local:visual-interface-design",
-          "local:financial-services"
+          "local:financial-services",
+          "local:ux-designer-web-mobile-developer"
         ],
         "ownership": "lead",
         "scope": "single_team",
@@ -92,7 +93,8 @@
           "local:interaction-design",
           "local:visual-interface-design",
           "local:prototyping",
-          "local:financial-services"
+          "local:financial-services",
+          "local:ux-designer-web-mobile-developer"
         ],
         "ownership": "lead",
         "scope": "external_audience",
@@ -121,7 +123,8 @@
         "statement": "Tested the prototypes with real people alongside a UX tester and reported surprise at interest totals, the effect of small decisions, and differences in risk aversion versus risk-taking.",
         "concept_ids": [
           "local:usability-testing",
-          "local:financial-services"
+          "local:financial-services",
+          "local:ux-designer-web-mobile-developer"
         ],
         "ownership": "lead",
         "scope": "external_audience",
@@ -151,7 +154,8 @@
         "statement": "Learned how fixed-rate and ARM mortgages work, including conversations with many mortgage VPs, as his first financial-services project at Summit.",
         "concept_ids": [
           "local:technical-discovery",
-          "local:financial-services"
+          "local:financial-services",
+          "local:ux-designer-web-mobile-developer"
         ],
         "ownership": "lead",
         "scope": "organization",
@@ -178,7 +182,8 @@
         "id": "S024-E005",
         "statement": "Presented LOUI himself in many situations.",
         "concept_ids": [
-          "local:speaking"
+          "local:speaking",
+          "local:ux-designer-web-mobile-developer"
         ],
         "ownership": "lead",
         "scope": "unknown",
@@ -206,7 +211,8 @@
         "statement": "The work surfaced a tradeoff about showing total interest payments, which staff found useful for members and also frightening, even when taking the mortgage was justified.",
         "concept_ids": [
           "local:decision-making",
-          "local:financial-services"
+          "local:financial-services",
+          "local:ux-designer-web-mobile-developer"
         ],
         "ownership": "lead",
         "scope": "organization",
@@ -235,7 +241,8 @@
         "statement": "Scott says this mortgage learning was the basis for later innovation-team work and for Rates Central, which he does not think he could have done without it.",
         "concept_ids": [
           "local:product-direction-influence",
-          "local:financial-services"
+          "local:financial-services",
+          "local:ux-designer-web-mobile-developer"
         ],
         "ownership": "lead",
         "scope": "organization",
@@ -264,7 +271,8 @@
         "statement": "Led a small cross-functional group in which a backend developer calculated interest so the interface matched Summit's rates, with a PM and a UX tester also involved.",
         "concept_ids": [
           "local:cross-functional-work",
-          "local:coordination"
+          "local:coordination",
+          "local:ux-designer-web-mobile-developer"
         ],
         "ownership": "lead",
         "scope": "single_team",

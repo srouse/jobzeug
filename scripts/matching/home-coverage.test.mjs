@@ -17,6 +17,7 @@ import {
   strongExampleIds,
   strongExampleProjects,
   strongTagProjects,
+  topHomeLines,
   topHomeProjects,
 } from "../../src/lib/matching/home-coverage.ts";
 
@@ -88,6 +89,32 @@ test("top projects rank a wider equal-tag match above a shorter deeper one", () 
   );
 });
 
+test("an older higher-scoring project ranks below a recent one", () => {
+  const top = topHomeProjects(
+    [
+      { id: "S002", name: "Bulk Editor" },
+      { id: "S017", name: "JSOnline ad system" },
+    ],
+    [
+      { projectId: "S002", lineEntryId: "line-1", points: 10 },
+      { projectId: "S017", lineEntryId: "line-1", points: 20 },
+      { projectId: "S017", lineEntryId: "line-2", points: 20 },
+      { projectId: "S017", lineEntryId: "line-3", points: 20 },
+      { projectId: "S017", lineEntryId: "line-4", points: 20 },
+    ],
+    3,
+    { S002: 2026, S017: 1990 },
+  );
+  assert.deepEqual(
+    top.map((project) => project.projectId),
+    ["S002", "S017"],
+  );
+  const older = top.find((project) => project.projectId === "S017");
+  assert.equal(older?.points, 80);
+  assert.equal(older?.score, 12);
+  assert.ok(older != null && older.ranked < older.score);
+});
+
 test("top projects sum stored points and keep the highest three", () => {
   const top = topHomeProjects(projects, [
     { projectId: "S001", lineEntryId: "line-1", points: 10 },
@@ -103,6 +130,59 @@ test("top projects sum stored points and keep the highest three", () => {
   assert.equal(top[0]?.points, 22);
   assert.equal(top[1]?.name, "Contentful for Figma widget");
   assert.equal(top.find((project) => project.projectId === "S099")?.name, undefined);
+});
+
+test("top job lines rank by age-adjusted point totals", () => {
+  const top = topHomeLines(
+    [
+      { entryId: "line-old", name: "Legacy" },
+      { entryId: "line-new", name: "Current" },
+    ],
+    [
+      { projectId: "S001", lineEntryId: "line-old", points: 40 },
+      { projectId: "S002", lineEntryId: "line-new", points: 20 },
+    ],
+    ["S001", "S002"],
+    3,
+    { S001: 1990, S002: 2026 },
+  );
+  assert.deepEqual(
+    top.map((line) => line.lineId),
+    ["line-new", "line-old"],
+  );
+  assert.equal(top[0]?.points, 20);
+  assert.equal(top[1]?.points, 40);
+});
+
+test("top job lines keep the highest three against resume projects only", () => {
+  const named = [
+    { entryId: "line-1", name: "Systems" },
+    { entryId: "line-2", name: "Content" },
+    { entryId: "line-3", name: "Tokens" },
+    { entryId: "line-4", name: "Research" },
+  ];
+  const resumeIds = ["S001", "S008", "S026"];
+  const top = topHomeLines(
+    named,
+    [
+      { projectId: "S001", lineEntryId: "line-1", points: 10 },
+      { projectId: "S008", lineEntryId: "line-1", points: 12 },
+      { projectId: "S001", lineEntryId: "line-2", points: 30 },
+      { projectId: "S026", lineEntryId: "line-3", points: 8 },
+      { projectId: "S001", lineEntryId: "line-4", points: 4 },
+      { projectId: "S099", lineEntryId: "line-4", points: 40 },
+      { projectId: "S001", lineEntryId: "line-degree", points: 50 },
+    ],
+    resumeIds,
+  );
+  assert.deepEqual(
+    top.map((line) => line.lineId),
+    ["line-2", "line-1", "line-3"],
+  );
+  assert.equal(top[0]?.points, 30);
+  assert.equal(top[1]?.name, "Systems");
+  assert.equal(top.find((line) => line.lineId === "line-degree"), undefined);
+  assert.equal(top.find((line) => line.lineId === "line-4"), undefined);
 });
 
 test("fit bars render the absolute share and color by third", () => {

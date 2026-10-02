@@ -29,7 +29,7 @@ year_note: Estimated from R001 (February 2026–present as of September 2026); p
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: "1.5.0"
+  vocabulary_version: "1.7.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -45,6 +45,7 @@ evidence:
       - local:contentful
       - local:interaction-design
       - local:deadline-pressure
+      - local:senior-product-architect
     ownership: contributor
     scope: unknown
     delivery_stage: prototype
@@ -68,6 +69,7 @@ evidence:
       - local:production-release
       - local:coordination
       - local:cross-functional-work
+      - local:senior-product-architect
     ownership: lead
     scope: multiple_teams
     delivery_stage: production
@@ -93,6 +95,7 @@ evidence:
       - local:interaction-design
       - local:contentful
       - local:figma
+      - local:senior-product-architect
     ownership: contributor
     scope: unknown
     delivery_stage: production
@@ -117,6 +120,7 @@ evidence:
       - local:example-derived-content-fit
       - local:figma
       - local:contentful
+      - local:senior-product-architect
     ownership: sole
     scope: external_audience
     delivery_stage: production
@@ -155,6 +159,7 @@ evidence:
       - local:figma
       - local:contentful
       - local:stakeholder-alignment
+      - local:senior-product-architect
     ownership: sole
     scope: multiple_teams
     delivery_stage: production
@@ -186,6 +191,7 @@ evidence:
       - local:technical-writing
       - local:technical-article
       - local:coordination
+      - local:senior-product-architect
     ownership: sole
     scope: external_audience
     delivery_stage: production

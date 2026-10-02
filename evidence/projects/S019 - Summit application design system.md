@@ -30,7 +30,7 @@ year_note: Estimated as 2022 near the midpoint of R005 (August 2020–June 2023)
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: "1.5.0"
+  vocabulary_version: "1.7.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -48,6 +48,7 @@ evidence:
       - local:lit
       - local:platform-migration
       - local:financial-services
+      - local:experience-designer
     ownership: contributor
     scope: unknown
     delivery_stage: production
@@ -70,6 +71,7 @@ evidence:
     concept_ids:
       - local:figma-extension
       - local:figma
+      - local:experience-designer
     ownership: contributor
     scope: unknown
     delivery_stage: unknown
@@ -91,6 +93,7 @@ evidence:
       for internal applications.
     concept_ids:
       - local:product-adoption
+      - local:experience-designer
     ownership: contributor
     scope: organization
     delivery_stage: production

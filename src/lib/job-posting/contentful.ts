@@ -7,6 +7,7 @@ import {
   matchingSnapshotSchema,
 } from "@/lib/matching/schema";
 import { contentfulEditorUrl } from "@/lib/contentful/editor-url";
+import { loadPublishedJobPosting } from "./published";
 import type {
   JobPostingView,
   MatchingRequirement,
@@ -163,10 +164,17 @@ function scoreMatchGraph(input: {
       ? a.lineEntryId.localeCompare(b.lineEntryId)
       : a.projectId.localeCompare(b.projectId),
   );
+  const projectYears: Record<string, number | null> = {};
+  for (const project of input.catalog.projects.values()) {
+    if (project.year === null || typeof project.year === "number") {
+      projectYears[project.project_id] = project.year;
+    }
+  }
   return {
     scoringVersion: scored.scoringVersion,
     vocabularyVersion: input.snapshot.vocabularyVersion,
     edges,
+    ...(Object.keys(projectYears).length > 0 ? { projectYears } : {}),
   };
 }
 
@@ -296,9 +304,156 @@ export async function publishJobPostingTree(input: {
   return { entryId: parentEntryId, postingId };
 }
 
+export class JobPostingDeleteError extends Error {
+  readonly status: number;
+
+  constructor(message: string, status: number) {
+    super(message);
+    this.name = "JobPostingDeleteError";
+    this.status = status;
+  }
+}
+
+function entryContentType(entry: {
+  sys: { contentType?: { sys?: { id?: string } } };
+}): string | undefined {
+  return entry.sys.contentType?.sys?.id;
+}
+
+async function removeEntry(
+  client: PlainClientAPI,
+  params: { spaceId: string; environmentId: string },
+  entry: {
+    sys: {
+      id: string;
+      publishedVersion?: number;
+      archivedVersion?: number;
+    };
+  },
+) {
+  const entryParams = { ...params, entryId: entry.sys.id };
+  let publishedVersion = entry.sys.publishedVersion;
+  if (entry.sys.archivedVersion != null) {
+    const unarchived = await client.entry.unarchive(entryParams);
+    publishedVersion = unarchived.sys.publishedVersion;
+  }
+  if (publishedVersion != null) {
+    try {
+      await client.entry.unpublish(entryParams);
+    } catch (error) {
+      if (!isNotFound(error)) throw error;
+    }
+  }
+  try {
+    await client.entry.delete(entryParams);
+  } catch (error) {
+    if (!isNotFound(error)) throw error;
+  }
+}
+
+/**
+ * Unpublish and delete a job posting, then the job lines and job tools it links.
+ * Stops before any delete when a child is linked from another entry.
+ */
+export async function deleteJobPostingTree(entryIdValue: string): Promise<{
+  entryId: string;
+  lines: string[];
+  tools: string[];
+}> {
+  const { space, environment, token, locale } = requireCmaEnv();
+  const client = getPlainClient(token);
+  const params = { spaceId: space, environmentId: environment };
+  const postingType = typeId("jobPosting");
+  const lineType = typeId("jobLine");
+  const toolType = typeId("jobTool");
+
+  let entry;
+  try {
+    entry = await client.entry.get({ ...params, entryId: entryIdValue });
+  } catch (error) {
+    if (isNotFound(error)) {
+      throw new JobPostingDeleteError("Job posting not found", 404);
+    }
+    throw error;
+  }
+  if (entryContentType(entry) !== postingType) {
+    throw new JobPostingDeleteError("Entry is not a job posting", 400);
+  }
+
+  const fields = entry.fields as Record<string, Record<string, unknown>>;
+  const at = (name: string) => fields[name]?.[locale] ?? fields[name]?.["en-US"];
+  const lineIds = [...new Set(linkIds(at("lines")))];
+  const toolIds = [...new Set(linkIds(at("tools")))];
+  const children = [
+    ...lineIds.map((id) => ({ id, expected: lineType })),
+    ...toolIds.map((id) => ({ id, expected: toolType })),
+  ];
+
+  const present = new Set<string>();
+  for (const child of children) {
+    let childEntry;
+    try {
+      childEntry = await client.entry.get({ ...params, entryId: child.id });
+    } catch (error) {
+      if (isNotFound(error)) continue;
+      throw error;
+    }
+    const actual = entryContentType(childEntry);
+    if (actual !== child.expected) {
+      throw new JobPostingDeleteError(
+        `${child.id} is ${actual ?? "unknown"}, expected ${child.expected}.`,
+        400,
+      );
+    }
+    const refs = await client.entry.getMany({
+      ...params,
+      query: { links_to_entry: child.id, limit: 100 },
+    });
+    const otherIds = refs.items
+      .map((item) => item.sys.id)
+      .filter((id) => id !== entryIdValue);
+    if (otherIds.length > 0 || refs.total > 1) {
+      const who = otherIds.length > 0 ? otherIds.join(", ") : "another entry";
+      throw new JobPostingDeleteError(
+        `${child.id} is also referenced by ${who}.`,
+        409,
+      );
+    }
+    present.add(child.id);
+  }
+
+  await removeEntry(client, params, entry);
+
+  const deletedLines: string[] = [];
+  const deletedTools: string[] = [];
+  for (const child of children) {
+    if (!present.has(child.id)) continue;
+    try {
+      const childEntry = await client.entry.get({
+        ...params,
+        entryId: child.id,
+      });
+      if (entryContentType(childEntry) !== child.expected) {
+        throw new JobPostingDeleteError(
+          `${child.id} is not a ${child.expected}.`,
+          400,
+        );
+      }
+      await removeEntry(client, params, childEntry);
+    } catch (error) {
+      if (error instanceof JobPostingDeleteError) throw error;
+      if (!isNotFound(error)) throw error;
+    }
+    if (child.expected === lineType) deletedLines.push(child.id);
+    else deletedTools.push(child.id);
+  }
+
+  return { entryId: entryIdValue, lines: deletedLines, tools: deletedTools };
+}
+
 /** Rescore one posting from the published catalog and write `matchGraph` back. */
 export async function saveJobPostingMatchGraph(entryIdValue: string) {
-  const view = await loadJobPostingByEntryId(entryIdValue);
+  const view = await loadPublishedJobPosting(entryIdValue);
   if (!view) throw new Error("Job posting not found");
   if (!view.matchingSnapshot) {
     throw new Error("Posting has no matching snapshot");
