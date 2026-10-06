@@ -1,7 +1,3 @@
-/** Registered on the Contentful OAuth app. Local dev serves this over HTTPS. */
-export const CONTENTFUL_OAUTH_REDIRECT_URI =
-  "https://localhost:3000/api/contentful/oauth/callback";
-
 export const CONTENTFUL_OAUTH_COOKIE = "jobzeug_contentful";
 export const CONTENTFUL_OAUTH_STATE_COOKIE = "jobzeug_contentful_state";
 
@@ -11,6 +7,7 @@ const STATE_MAX_AGE_SECONDS = 60 * 10;
 export type ContentfulOAuthConfig = {
   clientId: string;
   clientSecret: string;
+  redirectUri: string;
   spaceId: string;
   environmentId: string;
   locale: string;
@@ -33,14 +30,23 @@ export type ContentfulAccess =
 export function contentfulOAuthConfig(): ContentfulOAuthConfig | null {
   const clientId = process.env.CONTENTFUL_OAUTH_CLIENT_ID?.trim();
   const clientSecret = process.env.CONTENTFUL_OAUTH_CLIENT_SECRET?.trim();
+  const redirectUri = process.env.CONTENTFUL_OAUTH_REDIRECT_URI?.trim();
   const spaceId = process.env.CONTENTFUL_SPACE_ID?.trim();
   const environmentId = process.env.CONTENTFUL_ENVIRONMENT?.trim();
-  if (!clientId || !clientSecret || !spaceId || !environmentId || !process.env.SESSION_SECRET) {
+  if (
+    !clientId ||
+    !clientSecret ||
+    !redirectUri ||
+    !spaceId ||
+    !environmentId ||
+    !process.env.SESSION_SECRET
+  ) {
     return null;
   }
   return {
     clientId,
     clientSecret,
+    redirectUri,
     spaceId,
     environmentId,
     locale: process.env.CONTENTFUL_LOCALE?.trim() || "en-US",
@@ -65,11 +71,11 @@ export function contentfulStateCookieOptions() {
   return contentfulCookieOptions(STATE_MAX_AGE_SECONDS);
 }
 
-export function authorizeUrl(clientId: string, state: string): string {
+export function authorizeUrl(clientId: string, redirectUri: string, state: string): string {
   const url = new URL("https://be.contentful.com/oauth/authorize");
   url.searchParams.set("response_type", "code");
   url.searchParams.set("client_id", clientId);
-  url.searchParams.set("redirect_uri", CONTENTFUL_OAUTH_REDIRECT_URI);
+  url.searchParams.set("redirect_uri", redirectUri);
   url.searchParams.set("scope", "content_management_manage");
   url.searchParams.set("state", state);
   return url.toString();
@@ -84,7 +90,7 @@ export async function exchangeAuthorizationCode(
     code,
     client_id: config.clientId,
     client_secret: config.clientSecret,
-    redirect_uri: CONTENTFUL_OAUTH_REDIRECT_URI,
+    redirect_uri: config.redirectUri,
   });
   const response = await fetch("https://be.contentful.com/oauth/token", {
     method: "POST",

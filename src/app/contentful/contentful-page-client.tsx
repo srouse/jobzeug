@@ -5,7 +5,8 @@ import { JzButton, JzText } from "@jobzeug/design-system/react";
 import styles from "./contentful.module.css";
 
 const ERRORS: Record<string, string> = {
-  config: "CONTENTFUL_OAUTH_CLIENT_ID and CONTENTFUL_OAUTH_CLIENT_SECRET are not configured.",
+  config:
+    "CONTENTFUL_OAUTH_CLIENT_ID, CONTENTFUL_OAUTH_CLIENT_SECRET, and CONTENTFUL_OAUTH_REDIRECT_URI are not configured.",
   state: "The login attempt expired. Try again.",
   denied: "Contentful did not grant access.",
   token: "Contentful did not return a token.",

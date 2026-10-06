@@ -923,17 +923,17 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 
 - None pending from this session
 
-### [2026-10-06T18:08:54-05:00]
+### [2026-10-06T18:23:51-05:00]
 
 #### Summary
 
-- Resume 2 can edit a project presentation in place: the blurb, both metrics, and the video. Matching then failed because published S001 cites vocabulary 1.10.0, which was not in Contentful; that vocabulary is now published.
+- Resume 2 can edit a project presentation in place, vocabulary 1.10.0 is published for S001, and the Contentful OAuth callback is now an environment value so the production app receives its own redirect URI.
 
 #### Changes
 
 - Evidence / records: published `jz-MV-1.10.0` to Contentful (already approved in the repo; no evidence file edits)
 - Skills / tooling: none
-- Other: Contentful OAuth and presentation write API; presentation editor; metric Symbol cap of 256; video create-or-replace; proxy body limit 90MB; editor border aligned with the project title
+- Other: Contentful OAuth and presentation write API; presentation editor; metric Symbol cap of 256; video create-or-replace; proxy body limit 90MB; editor border aligned with the project title; `CONTENTFUL_OAUTH_REDIRECT_URI` sent on authorize and token exchange; design-system light weights and link text committed in `96cbd0a`
 
 #### Decisions
 
@@ -942,7 +942,8 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 - Next's proxy was keeping only the first 10MB, which broke multipart parsing. The limit is 90MB so an 80MB video plus the form wrapper fits
 - The editor border sits on the text edge. Extra inline room lets the shadow paint past that edge
 - S001 was the only published project on 1.10.0, and its concepts are approved in that vocabulary. Published the vocabulary entry only; other projects stay on 1.9.0
-- The design-system package, debug logs, Contentful import error logs, and the German amount-words PDF stay unstaged
+- The OAuth redirect URI comes from `CONTENTFUL_OAUTH_REDIRECT_URI` and must match the URI registered on the OAuth app. A hardcoded localhost callback was sending the production client to the development app
+- Design-system changes ship with the app. Debug logs stay untracked
 
 #### Plans cached
 
@@ -950,4 +951,4 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 
 #### Next
 
-- None pending from this session
+- Set `CONTENTFUL_OAUTH_REDIRECT_URI` to the redirect URI registered on the production OAuth app and restart the dev server
