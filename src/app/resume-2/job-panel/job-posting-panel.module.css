@@ -1,0 +1,447 @@
+.panel {
+  position: relative;
+  background: var(--jz-semantic-color-background-surface-default, #ffffff);
+  padding: 0;
+  box-shadow: var(--jz-primitive-effect-elevation-low);
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-size: 1em;
+  transition: font-size 320ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bindForm {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+  max-width: 28rem;
+}
+
+.bindLead {
+  display: block;
+  margin: 0;
+}
+
+.bindRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--jz-semantic-space-gap-xs, 0.5rem);
+}
+
+.urlInput {
+  min-width: 0;
+  flex: 1 1 12rem;
+}
+
+.bindError {
+  display: block;
+  margin: 0;
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: var(--jz-semantic-space-padding-md, 1rem)
+    var(--resume-page-pad-inline, 40px)
+    var(--jz-semantic-space-padding-lg, 1.5rem);
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+@media (min-width: 640px) {
+  .body {
+    padding-block: var(--jz-semantic-space-padding-md, 1rem)
+      var(--jz-semantic-space-padding-xl, 1.75rem);
+    padding-inline: var(--resume-page-pad-inline, 40px);
+  }
+}
+
+.body::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.body::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: var(--jz-primitive-radius-full, 999px);
+}
+
+.body[data-scrolling] {
+  scrollbar-color: color-mix(
+      in srgb,
+      var(--jz-semantic-color-text-muted, #737373) 22%,
+      transparent
+    )
+    transparent;
+}
+
+.body[data-scrolling]::-webkit-scrollbar-thumb {
+  background-color: color-mix(
+    in srgb,
+    var(--jz-semantic-color-text-muted, #737373) 22%,
+    transparent
+  );
+}
+
+.body[data-scrolling]::-webkit-scrollbar-thumb:hover {
+  background-color: color-mix(
+    in srgb,
+    var(--jz-semantic-color-text-muted, #737373) 36%,
+    transparent
+  );
+}
+
+.eyebrow {
+  display: block;
+  margin: 0 0 var(--jz-semantic-space-gap-2xs, 0.25rem);
+}
+
+.loading {
+  flex: 1;
+  min-height: 12rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--jz-semantic-space-gap-xs, 0.5rem);
+}
+
+.stageList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--jz-semantic-space-gap-xs, 0.5rem);
+}
+
+.stageRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--jz-semantic-space-gap-xs, 0.5rem);
+}
+
+.stageMark {
+  width: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.title {
+  display: block;
+  margin: 0;
+  overflow: hidden;
+}
+
+.titleText {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+}
+
+.meta:has(> :nth-child(2))::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: var(--jz-semantic-color-border-subtle, #e5e5e5);
+  transform: translateX(-0.5px);
+}
+
+.metaItem {
+  margin: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--jz-semantic-space-gap-2xs, 0.25rem);
+  box-sizing: border-box;
+  padding-inline: var(--jz-semantic-space-padding-sm, 0.75rem);
+}
+
+.metaLabel {
+  display: block;
+}
+
+.metaValue {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.metaValueText {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.notes {
+  margin: var(--jz-semantic-space-gap-sm, 0.85rem) 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--jz-semantic-space-gap-2xs, 0.35rem);
+  box-sizing: border-box;
+  padding-inline: var(--jz-semantic-space-padding-sm, 0.75rem);
+}
+
+.note {
+  display: block;
+}
+
+.summary {
+  display: block;
+  margin: var(--jz-semantic-space-gap-md, 1rem) 0 0;
+  box-sizing: border-box;
+  padding-block: var(--jz-semantic-space-padding-2xs, 0.25rem);
+  padding-inline: var(--jz-semantic-space-padding-sm, 0.75rem);
+}
+
+.fullPostingRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+  margin: var(--jz-semantic-space-gap-sm, 0.75rem) 0 0;
+  padding-inline: var(--jz-semantic-space-padding-sm, 0.75rem);
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.section {
+  margin: var(--jz-semantic-space-gap-lg, 1.35rem) 0 0;
+  min-width: 0;
+  max-width: 100%;
+  transition: margin-top 400ms ease-in-out;
+}
+
+.sectionLabelIndent {
+  margin: 0 0 var(--jz-semantic-space-gap-xs, 0.55rem);
+  padding-inline: var(--jz-semantic-space-padding-sm, 0.75rem);
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  transition: margin-bottom 400ms ease-in-out;
+}
+
+.sectionLabel {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  border-bottom: 1px solid var(--jz-semantic-color-border-default, #d4d4d4);
+  padding-bottom: var(--jz-semantic-space-padding-2xs, 0.35rem);
+  box-sizing: border-box;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.lines {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+  transition: gap 400ms ease-in-out;
+}
+
+.line {
+  margin: 0;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: var(--jz-semantic-space-padding-2xs, 0.25rem);
+  padding-bottom: calc(var(--jz-semantic-space-padding-xs, 0.5rem) + 6px);
+  padding-inline: var(--jz-semantic-space-padding-sm, 0.75rem);
+}
+
+.line[data-fit-bars="off"] {
+  padding-bottom: var(--jz-semantic-space-padding-2xs, 0.25rem);
+}
+
+.lineSubject {
+  background: var(
+    --jz-semantic-color-background-surface-brand-primary-subtle,
+    #eff6ff
+  );
+  box-shadow: inset -2px 0 0 var(--jz-semantic-color-brand-primary);
+}
+
+.lineCited {
+  background: var(
+    --jz-semantic-color-background-surface-brand-primary-subtle,
+    #eff6ff
+  );
+  box-shadow: inset -2px 0 0
+    var(--jz-semantic-color-border-brand-strong, #2563eb);
+}
+
+.lineDimmed {
+  background: var(--jz-semantic-color-background-control-subtle, #f5f5f5);
+  box-shadow: inset -1px 0 0 var(--jz-semantic-color-border-default);
+}
+
+/* Wide layout puts the job column on the right, so the connector meets the left edge. */
+@media (min-width: 1300px) {
+  .lineSubject {
+    box-shadow: inset 2px 0 0 var(--jz-semantic-color-brand-primary);
+  }
+
+  .lineCited {
+    box-shadow: inset 2px 0 0
+      var(--jz-semantic-color-border-brand-strong, #2563eb);
+  }
+
+  .lineDimmed {
+    box-shadow: inset 1px 0 0 var(--jz-semantic-color-border-default);
+  }
+}
+
+.lineCopy {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.theme,
+.lineText {
+  display: block;
+}
+
+.lineText {
+  margin-top: calc(var(--jz-semantic-space-gap-xs, 4px) * -1);
+}
+
+.tools {
+  margin: var(--jz-semantic-space-gap-sm, 0.75rem) 0 0;
+  padding: 0;
+  padding-inline: var(--jz-semantic-space-padding-sm, 0.75rem);
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+  box-sizing: border-box;
+}
+
+.tool {
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  min-width: 0;
+}
+
+/* Smooth rollup: grid 1fr ↔ 0fr with residual skeleton bar */
+.shell {
+  display: grid;
+  border-radius: 0;
+  grid-template-rows: 1fr;
+  transition:
+    grid-template-rows 400ms ease-in-out,
+    margin-block 400ms ease-in-out;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.shell.isSkeleton {
+  grid-template-rows: 0fr;
+}
+
+.inner {
+  overflow: hidden;
+  border-radius: 0;
+  min-height: 0;
+  transition:
+    min-height 400ms ease-in-out,
+    background-color 400ms ease-in-out;
+}
+
+.shell.isSkeleton .inner {
+  min-height: 4px;
+  background: var(--jz-semantic-color-background-control-subtle, #f5f5f5);
+}
+
+.content {
+  position: relative;
+  transition: opacity 200ms ease-in-out;
+}
+
+.content.lineSubject,
+.content.lineCited,
+.content.lineDimmed {
+  transition:
+    opacity 200ms ease-in-out,
+    background-color 180ms ease-out,
+    box-shadow 180ms ease-out;
+}
+
+.shell.isSkeleton .content {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Rolled: flatten evidence section/line gaps; every shell shares one rhythm */
+.detailsRolled .section {
+  margin-top: 0;
+}
+
+.detailsRolled .section:last-child {
+  /* Tools stays readable — keep space from the rolled evidence above */
+  margin-top: var(--jz-semantic-space-gap-md, 1rem);
+}
+
+.detailsRolled .section:not(:last-child) .sectionLabelIndent {
+  margin-bottom: 0;
+}
+
+.detailsRolled .lines {
+  gap: 0;
+}
+
+.detailsRolled .shell {
+  margin-block: 2px;
+}

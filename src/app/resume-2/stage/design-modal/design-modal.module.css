@@ -1,0 +1,13 @@
+.composer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+  width: 100%;
+  min-width: 0;
+}
+
+.input {
+  min-width: 0;
+  flex: 1;
+}

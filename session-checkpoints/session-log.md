@@ -866,3 +866,30 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 #### Next
 
 - None pending from this session
+
+### [2026-10-05T19:12:01-05:00]
+
+#### Summary
+
+- Resume 2 is a wide page at `/resume-2`: job posting on the left, every project in order in the middle, and the stage on the right. The top three projects for the selected job line are open cards; the rest are 6px bars.
+
+#### Changes
+
+- Evidence / records: none
+- Skills / tooling: none
+- Other: `src/app/resume-2` layout, fixed-height rows, and connector lines
+
+#### Decisions
+
+- Closed rows stay in resume order between the open cards, with the same 4px gap
+- Card height is fixed and titles ellipsize, so connector ends are computed instead of measured mid-animation
+- The three curves stay top, middle, and bottom. The job-line end jumps; the card ends slide
+- The walkthrough covers the header. The design-system package stays unstaged
+
+#### Plans cached
+
+- none
+
+#### Next
+
+- None pending from this session

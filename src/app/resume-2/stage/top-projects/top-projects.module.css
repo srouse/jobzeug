@@ -1,0 +1,133 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+  width: 100%;
+}
+
+.title {
+  align-self: flex-start;
+  text-align: left;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list > li + li,
+.more .list > li:first-child {
+  border-top: 1px solid var(--jz-semantic-color-border-subtle);
+}
+
+.more {
+  display: grid;
+  grid-template-rows: 0fr;
+  align-self: stretch;
+  width: 100%;
+  transition: grid-template-rows 450ms ease-out;
+}
+
+.more[data-open] {
+  grid-template-rows: 1fr;
+}
+
+.moreInner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .more {
+    transition: none;
+  }
+}
+
+.row {
+  appearance: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+  width: 100%;
+  margin: 0;
+  padding-block: var(--jz-semantic-space-padding-sm, 0.75rem);
+  padding-inline: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.row:focus-visible {
+  outline: var(--jz-primitive-stroke-width-md, 2px) solid
+    var(--jz-semantic-color-border-strong);
+  outline-offset: var(--jz-primitive-stroke-width-md, 2px);
+}
+
+.name {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.trailing {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: var(--jz-semantic-space-gap-md, 1rem);
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.score {
+  flex: 0 0 auto;
+  min-width: 2.5rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.fold {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  gap: var(--jz-semantic-space-gap-md, 1rem);
+}
+
+.foldControl {
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.foldControl:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.foldControl:focus-visible {
+  outline: var(--jz-primitive-stroke-width-md, 2px) solid
+    var(--jz-semantic-color-border-strong);
+  outline-offset: var(--jz-primitive-stroke-width-md, 2px);
+}
