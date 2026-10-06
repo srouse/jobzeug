@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, type ComponentPropsWithoutRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ComponentPropsWithoutRef, type ReactNode } from "react";
 import Markdown from "react-markdown";
 import { JzButton, JzIcon, JzIconButton, JzText } from "@jobzeug/design-system/react";
 import { useJobPosting } from "@/components/job-posting";
@@ -24,6 +24,7 @@ import {
 } from "../../project-presentation/project-presentation";
 
 import styles from "./answer-stage.module.css";
+import { PresentationEditor } from "./presentation-editor";
 
 function SummaryCopy({ text }: { text: string }) {
   return (
@@ -32,6 +33,10 @@ function SummaryCopy({ text }: { text: string }) {
         p: ({ children }: ComponentPropsWithoutRef<"p">) => (
           <JzText variant="body-default">{children}</JzText>
         ),
+        strong: ({ children }: ComponentPropsWithoutRef<"strong">) => (
+          <JzText variant="body-strong">{children}</JzText>
+        ),
+        em: ({ children }: ComponentPropsWithoutRef<"em">) => <em>{children}</em>,
         a: ({ href, children }: ComponentPropsWithoutRef<"a">) =>
           href?.startsWith("https://") || href?.startsWith("http://") ? (
             <JzText href={href} target="_blank" variant="body-default">
@@ -454,11 +459,15 @@ export function ConnectionHub({
   onViewProject,
   presentationId = null,
   onClosePresentation,
+  canEdit = false,
+  onPresentationSaved,
 }: {
   resume: ResumeViewModel | null;
   onViewProject: (projectId: string) => void;
   presentationId?: string | null;
   onClosePresentation?: () => void;
+  canEdit?: boolean;
+  onPresentationSaved?: () => Promise<void>;
 }) {
   const { stageProjectId, clearStageProject } = useResumeHighlights();
   const { data } = useJobPosting();
@@ -474,7 +483,7 @@ export function ConnectionHub({
     const focused = findProjectContext(resume, stageProjectId);
     const project = focused?.project ?? null;
     const showingVideo = Boolean(
-      project?.presentation &&
+      project?.presentation?.videoUrl &&
         presentationId &&
         onClosePresentation &&
         sameProjectId(project.evidenceId, presentationId),
@@ -504,8 +513,17 @@ export function ConnectionHub({
           inert={showingVideo ? true : undefined}
         >
           <div className={styles.projectCopyInner}>
-            {project?.summary ? <SummaryCopy text={project.summary} /> : null}
-            {project?.presentation ? (
+            {project?.presentation && canEdit ? (
+              <PresentationEditor
+                project={project}
+                onSaved={onPresentationSaved ?? (async () => {})}
+              />
+            ) : project?.presentation?.blurb ? (
+              <SummaryCopy text={project.presentation.blurb} />
+            ) : project?.presentation ? null : (
+              <JzText variant="body-default" color="muted" label="no presentation" />
+            )}
+            {project?.presentation && !canEdit && project.presentation.metrics.length > 0 ? (
               <div className={styles.metrics}>
                 {project.presentation.metrics.map((metric) => (
                   <div
@@ -522,7 +540,7 @@ export function ConnectionHub({
                 ))}
               </div>
             ) : null}
-            {project?.url && !project.summary?.includes(project.url) ? (
+            {project?.presentation && project.url && !project.summary?.includes(project.url) ? (
               <JzText
                 variant="body-default"
                 href={project.url}
@@ -530,7 +548,7 @@ export function ConnectionHub({
                 label="Read the article"
               />
             ) : null}
-            {project?.presentation ? (
+            {project?.presentation?.videoUrl ? (
               <div className={styles.hubActions}>
                 <JzButton
                   label="Details"
@@ -561,7 +579,7 @@ export function ConnectionHub({
             />
           </div>
         </div>
-        {project?.presentation && onClosePresentation ? (
+        {project?.presentation?.videoUrl && onClosePresentation ? (
           <ProjectVideoReveal
             open={showingVideo}
             project={project}

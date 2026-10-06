@@ -28,8 +28,6 @@ const projectId = z.string().regex(/^S\d{3,}$/);
 const presentationId = z.string().regex(/^S\d{3,}-presentation$/);
 const assetId = z.string().regex(/^[A-Za-z0-9]+$/, 'Expected a Contentful asset id');
 const blurb = z.string().trim().min(1).max(600);
-const metricValue = z.string().trim().min(1).max(16);
-const metricLabel = z.string().trim().min(1).max(32);
 export const applicationId = z.string().regex(/^A\d{3,}$/);
 export const postingId = z.string().regex(/^JP[\w-]+$/);
 const lineSection = z.enum(['description', 'responsibility', 'required', 'preferred']);
@@ -66,8 +64,8 @@ export const definitions = {
   projectPresentation: { name: 'Project Presentation', displayField: 'evidenceId', fields: {
     evidenceId: symbol(true, presentationId),
     blurb: field('Text', blurb, true), video: asset(),
-    metricOneValue: symbol(true, metricValue), metricOneLabel: symbol(true, metricLabel),
-    metricTwoValue: symbol(true, metricValue), metricTwoLabel: symbol(true, metricLabel),
+    metricOneValue: symbol(true), metricOneLabel: symbol(true),
+    metricTwoValue: symbol(true), metricTwoLabel: symbol(true),
   } },
   matchingVocabulary: { name: 'Matching Vocabulary', displayField: 'name', fields: {
     evidenceId: symbol(true, z.string().regex(/^MV-\d+\.\d+\.\d+$/)),

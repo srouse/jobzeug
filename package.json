@@ -6,9 +6,9 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --experimental-https",
     "dev:studio": "mastra dev",
-    "dev:all": "concurrently -n next,studio -c blue,magenta \"next dev\" \"mastra dev\"",
+    "dev:all": "concurrently -n next,studio -c blue,magenta \"next dev --experimental-https\" \"mastra dev\"",
     "ds:build": "npm run build -w @jobzeug/design-system",
     "ds:dev": "npm run dev -w @jobzeug/design-system",
     "ds2": "npm run ds2 -w @jobzeug/design-system --",

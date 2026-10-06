@@ -11,12 +11,9 @@ export type ResumeProject = {
   year?: number;
   contentfulUrl?: string;
   presentation?: {
-    blurb: string;
-    videoUrl: string;
-    metrics: [
-      { value: string; label: string },
-      { value: string; label: string },
-    ];
+    blurb?: string;
+    videoUrl?: string;
+    metrics: { value: string; label: string }[];
   };
 };
 

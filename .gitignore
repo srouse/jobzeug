@@ -61,3 +61,4 @@ scripts/contentful/backups/
 # agent scratch (Firecrawl CLI dumps)
 .firecrawl/
 
+certificates

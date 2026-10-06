@@ -35,12 +35,9 @@ export type NormalizedProject = {
 };
 
 export type ProjectPresentation = {
-  blurb: string;
-  videoUrl: string;
-  metrics: [
-    { value: string; label: string },
-    { value: string; label: string },
-  ];
+  blurb?: string;
+  videoUrl?: string;
+  metrics: { value: string; label: string }[];
 };
 
 export type CoreCatalog = {
@@ -235,24 +232,18 @@ export async function fetchCoreCatalog(): Promise<CoreCatalog> {
     const metricOneLabel = asString(fields.metricOneLabel);
     const metricTwoValue = asString(fields.metricTwoValue);
     const metricTwoLabel = asString(fields.metricTwoLabel);
-    if (
-      !evidenceId ||
-      !blurb ||
-      !videoUrl ||
-      !metricOneValue ||
-      !metricOneLabel ||
-      !metricTwoValue ||
-      !metricTwoLabel
-    ) {
-      continue;
+    const metrics: { value: string; label: string }[] = [];
+    if (metricOneValue && metricOneLabel) {
+      metrics.push({ value: metricOneValue, label: metricOneLabel });
     }
+    if (metricTwoValue && metricTwoLabel) {
+      metrics.push({ value: metricTwoValue, label: metricTwoLabel });
+    }
+    if (!evidenceId || (!blurb && !videoUrl && metrics.length === 0)) continue;
     presentationsById.set(evidenceId, {
       blurb,
       videoUrl,
-      metrics: [
-        { value: metricOneValue, label: metricOneLabel },
-        { value: metricTwoValue, label: metricTwoLabel },
-      ],
+      metrics,
     });
   }
 

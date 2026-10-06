@@ -168,6 +168,10 @@
   display: flex;
   flex-direction: column;
   gap: var(--jz-semantic-space-gap-md, 1rem);
+  /* Keeps the editor border on the text edge while its shadow paints past it.
+     overflow: hidden would clip that shadow if the border were flush. */
+  padding-inline: 0.75rem;
+  margin-inline: -0.75rem;
 }
 
 .projectVideoInner {
@@ -358,6 +362,96 @@
   flex-direction: row;
   align-items: center;
   gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+}
+
+.presentationHit {
+  display: flex;
+  flex-direction: column;
+  gap: var(--jz-semantic-space-gap-md, 1rem);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  width: 100%;
+}
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+  padding: var(--jz-semantic-space-padding-sm, 0.75rem);
+  border: var(--jz-primitive-stroke-width-sm, 1px) solid
+    var(--jz-semantic-color-border-subtle);
+  border-radius: var(--jz-primitive-radius-sm, 4px);
+  margin: 0;
+  box-shadow: var(--jz-primitive-effect-elevation-medium);
+}
+
+.editorActions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+}
+
+.editorActionSpacer {
+  flex: 1 1 auto;
+}
+
+.editorLabel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--jz-semantic-space-gap-2xs, 0.25rem);
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--jz-semantic-space-gap-2xs, 0.25rem);
+}
+
+.blurbInput {
+  width: 100%;
+  min-height: 6rem;
+  resize: vertical;
+  margin: 0;
+  padding: var(--jz-semantic-space-padding-sm);
+  border: var(--jz-primitive-stroke-width-sm, 1px) solid
+    var(--jz-semantic-color-border-subtle);
+  border-radius: var(--jz-primitive-radius-sm, 4px);
+  background: var(--jz-semantic-color-background-control-default);
+  font: var(--jz-semantic-type-body-default-font);
+  color: var(--jz-semantic-color-text-default);
+}
+
+.blurbInput:focus-visible {
+  outline: var(--jz-primitive-stroke-width-md, 2px) solid
+    var(--jz-semantic-color-border-strong);
+  outline-offset: var(--jz-primitive-stroke-width-md, 2px);
+}
+
+.uploadControl {
+  position: relative;
+  display: inline-flex;
+}
+
+.videoFile {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  font-size: 0;
+}
+
+.videoFile:disabled {
+  cursor: default;
 }
 
 .connectionBlock {

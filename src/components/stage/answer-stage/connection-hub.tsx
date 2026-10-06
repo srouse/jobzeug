@@ -520,7 +520,7 @@ export function ConnectionHub({
     const focused = findProjectContext(resume, stageProjectId);
     const project = focused?.project ?? null;
     const showingVideo = Boolean(
-      project?.presentation &&
+      project?.presentation?.videoUrl &&
         presentationId &&
         onClosePresentation &&
         sameProjectId(project.evidenceId, presentationId),
@@ -564,7 +564,7 @@ export function ConnectionHub({
                 label="Read the article"
               />
             ) : null}
-            {project?.presentation ? (
+            {project?.presentation?.videoUrl ? (
               <div className={styles.hubActions}>
                 <JzButton
                   label="Details"
@@ -595,7 +595,7 @@ export function ConnectionHub({
             />
           </div>
         </div>
-        {project?.presentation && onClosePresentation ? (
+        {project?.presentation?.videoUrl && onClosePresentation ? (
           <ProjectVideoReveal
             open={showingVideo}
             project={project}

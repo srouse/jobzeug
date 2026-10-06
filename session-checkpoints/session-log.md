@@ -922,3 +922,32 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 #### Next
 
 - None pending from this session
+
+### [2026-10-06T17:22:06-05:00]
+
+#### Summary
+
+- Resume 2 can edit a project presentation in place: the blurb, both metrics, and the video. Metric text uses the Contentful Symbol limit, and a video larger than 10MB uploads instead of failing as a bad form body.
+
+#### Changes
+
+- Evidence / records: none
+- Skills / tooling: none
+- Other: Contentful OAuth and presentation write API; presentation editor; metric Symbol cap of 256; video create-or-replace; proxy body limit 90MB; editor border aligned with the project title
+
+#### Decisions
+
+- Metric value and label keep the Contentful Symbol maximum of 256 characters. The old 16 and 32 caps were dropped
+- If the presentation already links a video asset, the upload replaces that file. Otherwise it creates an asset and links it
+- Next's proxy was keeping only the first 10MB, which broke multipart parsing. The limit is 90MB so an 80MB video plus the form wrapper fits
+- The editor border sits on the text edge. Extra inline room lets the shadow paint past that edge
+- The design-system package, debug logs, Contentful import error logs, and the German amount-words PDF stay unstaged
+
+#### Plans cached
+
+- contentful_oauth_editing_c7269e32.plan.md
+- seed_project_presentations_32673f97.plan.md
+
+#### Next
+
+- None pending from this session

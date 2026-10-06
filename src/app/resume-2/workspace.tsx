@@ -52,15 +52,15 @@ function ResumeCover({ resumeLoading }: { resumeLoading: boolean }) {
   );
 }
 
-function ResumePageBody() {
+function ResumePageBody({ canEdit }: { canEdit: boolean }) {
   return (
     <WatchedProjectsProvider>
-      <ResumePageView />
+      <ResumePageView canEdit={canEdit} />
     </WatchedProjectsProvider>
   );
 }
 
-function ResumePageView() {
+function ResumePageView({ canEdit }: { canEdit: boolean }) {
   const {
     lineFocus,
     stageProjectId,
@@ -110,6 +110,13 @@ function ResumePageView() {
     () => topThree.map((project) => project.id),
     [topThree],
   );
+
+  const reloadResume = useCallback(async () => {
+    const res = await fetch("/api/resume");
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error ?? `Request failed (${res.status})`);
+    setResume(data as ResumeViewModel);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -251,6 +258,8 @@ function ResumePageView() {
                   markWatched(projectId);
                 }}
                 onOpenDesign={() => setDesignOpen(true)}
+                canEdit={canEdit}
+                onPresentationSaved={reloadResume}
               />
             </div>
           </div>
@@ -338,10 +347,12 @@ export function ResumeWorkspace({
   initialEntryId,
   initialLineId,
   initialProjectId,
+  canEdit = false,
 }: {
   initialEntryId: string | null;
   initialLineId: string | null;
   initialProjectId: string | null;
+  canEdit?: boolean;
 }) {
   const [entryId, setEntryId] = useState<string | null>(() =>
     normalizeRouteEntryId(initialEntryId),
@@ -379,7 +390,7 @@ export function ResumeWorkspace({
             navEpoch={navEpoch}
             setEntryId={setEntryFromRoute}
           />
-          <ResumePageBody />
+          <ResumePageBody canEdit={canEdit} />
         </DesignSessionProvider>
       </JobPostingProvider>
     </ResumeHighlightProvider>

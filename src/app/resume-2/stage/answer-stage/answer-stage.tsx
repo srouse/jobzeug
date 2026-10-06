@@ -60,6 +60,8 @@ export function AnswerStage({
   onClosePresentation,
   onViewProject,
   onOpenDesign,
+  canEdit = false,
+  onPresentationSaved,
 }: {
   resume?: ResumeViewModel | null;
   /** Project whose walkthrough video is open. Null is the text stage. */
@@ -67,12 +69,14 @@ export function AnswerStage({
   onClosePresentation?: () => void;
   onViewProject: (projectId: string) => void;
   onOpenDesign?: () => void;
+  canEdit?: boolean;
+  onPresentationSaved?: () => Promise<void>;
 }) {
   const stageRef = useRef<HTMLDivElement>(null);
   const { stageProjectId } = useResumeHighlights();
   const presentation = presentedProject(resume, presentationId ?? null);
   const presenting = Boolean(
-    presentation &&
+    presentation?.presentation?.videoUrl &&
       onClosePresentation &&
       stageProjectId != null &&
       sameProjectId(stageProjectId, presentation.evidenceId),
@@ -172,6 +176,8 @@ export function AnswerStage({
           onViewProject={onViewProject}
           presentationId={presenting ? presentationId : null}
           onClosePresentation={onClosePresentation}
+          canEdit={canEdit}
+          onPresentationSaved={onPresentationSaved}
         />
       </article>
     </div>

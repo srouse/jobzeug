@@ -258,9 +258,9 @@ function ProjectRow({
         data-connected={connected ? "" : undefined}
         data-watched={watched ? "" : undefined}
         data-resume2-card={project.id}
-        aria-pressed={compact ? selected : undefined}
+        aria-pressed={selected}
         disabled={!interactive}
-        onClick={() => onOpenProject(compact && selected ? null : project.id)}
+        onClick={() => onOpenProject(selected ? null : project.id)}
       >
         <span className={styles.copy} aria-hidden={compact || undefined}>
           <span className={styles.employerName}>{project.employer}</span>
