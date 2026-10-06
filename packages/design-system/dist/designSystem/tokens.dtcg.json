@@ -1643,6 +1643,24 @@
         }
       },
       "weight": {
+        "200": {
+          "$type": "number",
+          "$value": 200,
+          "$extensions": {
+            "com.design2s": {
+              "figmaTokenPath": "primitive.font.weight.200"
+            }
+          }
+        },
+        "300": {
+          "$type": "number",
+          "$value": 300,
+          "$extensions": {
+            "com.design2s": {
+              "figmaTokenPath": "primitive.font.weight.300"
+            }
+          }
+        },
         "400": {
           "$type": "number",
           "$value": 400,
@@ -2338,7 +2356,7 @@
                 },
                 "emphasized": {
                   "$type": "color",
-                  "$value": "{primitive.color.secondary.500}",
+                  "$value": "{primitive.color.primary.400}",
                   "$extensions": {
                     "com.design2s": {
                       "figmaTokenPath": "semantic.color.background.control.brand.inverse.secondary",
@@ -2379,7 +2397,7 @@
                   },
                   "emphasized": {
                     "$type": "color",
-                    "$value": "{primitive.color.secondary.700}",
+                    "$value": "{primitive.color.primary.300}",
                     "$extensions": {
                       "com.design2s": {
                         "figmaTokenPath": "semantic.color.background.control.brand.inverse.secondary.active",
@@ -2421,7 +2439,7 @@
                   },
                   "emphasized": {
                     "$type": "color",
-                    "$value": "{primitive.color.neutral.400}",
+                    "$value": "{primitive.color.primary.400}",
                     "$extensions": {
                       "com.design2s": {
                         "figmaTokenPath": "semantic.color.background.control.brand.inverse.secondary.disabled",
@@ -2463,7 +2481,7 @@
                   },
                   "emphasized": {
                     "$type": "color",
-                    "$value": "{primitive.color.secondary.600}",
+                    "$value": "{primitive.color.primary.300}",
                     "$extensions": {
                       "com.design2s": {
                         "figmaTokenPath": "semantic.color.background.control.brand.inverse.secondary.hover",
@@ -2506,7 +2524,7 @@
                 },
                 "emphasized": {
                   "$type": "color",
-                  "$value": "{primitive.color.tertiary.500}",
+                  "$value": "{primitive.color.primary.400}",
                   "$extensions": {
                     "com.design2s": {
                       "figmaTokenPath": "semantic.color.background.control.brand.inverse.tertiary",
@@ -2547,7 +2565,7 @@
                   },
                   "emphasized": {
                     "$type": "color",
-                    "$value": "{primitive.color.tertiary.700}",
+                    "$value": "{primitive.color.primary.300}",
                     "$extensions": {
                       "com.design2s": {
                         "figmaTokenPath": "semantic.color.background.control.brand.inverse.tertiary.active",
@@ -2589,7 +2607,7 @@
                   },
                   "emphasized": {
                     "$type": "color",
-                    "$value": "{primitive.color.neutral.400}",
+                    "$value": "{primitive.color.primary.400}",
                     "$extensions": {
                       "com.design2s": {
                         "figmaTokenPath": "semantic.color.background.control.brand.inverse.tertiary.disabled",
@@ -2631,7 +2649,7 @@
                   },
                   "emphasized": {
                     "$type": "color",
-                    "$value": "{primitive.color.tertiary.600}",
+                    "$value": "{primitive.color.primary.300}",
                     "$extensions": {
                       "com.design2s": {
                         "figmaTokenPath": "semantic.color.background.control.brand.inverse.tertiary.hover",
@@ -2843,7 +2861,7 @@
               },
               "emphasized": {
                 "$type": "color",
-                "$value": "{primitive.color.secondary.100}",
+                "$value": "{primitive.color.primary.400}",
                 "$extensions": {
                   "com.design2s": {
                     "figmaTokenPath": "semantic.color.background.control.brand.secondary",
@@ -2885,7 +2903,7 @@
               },
               "emphasized": {
                 "$type": "color",
-                "$value": "{primitive.color.tertiary.100}",
+                "$value": "{primitive.color.primary.400}",
                 "$extensions": {
                   "com.design2s": {
                     "figmaTokenPath": "semantic.color.background.control.brand.tertiary",
@@ -3736,7 +3754,7 @@
                 },
                 "emphasized": {
                   "$type": "color",
-                  "$value": "{primitive.color.secondary.400}",
+                  "$value": "{primitive.color.primary.300}",
                   "$extensions": {
                     "com.design2s": {
                       "figmaTokenPath": "semantic.color.background.surface.brand.inverse.secondary",
@@ -3777,7 +3795,7 @@
                   },
                   "emphasized": {
                     "$type": "color",
-                    "$value": "{primitive.color.secondary.600}",
+                    "$value": "{primitive.color.primary.600}",
                     "$extensions": {
                       "com.design2s": {
                         "figmaTokenPath": "semantic.color.background.surface.brand.inverse.secondary.active",
@@ -3819,7 +3837,7 @@
                   },
                   "emphasized": {
                     "$type": "color",
-                    "$value": "{primitive.color.neutral.300}",
+                    "$value": "{primitive.color.primary.300}",
                     "$extensions": {
                       "com.design2s": {
                         "figmaTokenPath": "semantic.color.background.surface.brand.inverse.secondary.disabled",
@@ -3861,7 +3879,7 @@
                   },
                   "emphasized": {
                     "$type": "color",
-                    "$value": "{primitive.color.secondary.500}",
+                    "$value": "{primitive.color.primary.500}",
                     "$extensions": {
                       "com.design2s": {
                         "figmaTokenPath": "semantic.color.background.surface.brand.inverse.secondary.hover",
@@ -3904,7 +3922,7 @@
                 },
                 "emphasized": {
                   "$type": "color",
-                  "$value": "{primitive.color.tertiary.400}",
+                  "$value": "{primitive.color.primary.300}",
                   "$extensions": {
                     "com.design2s": {
                       "figmaTokenPath": "semantic.color.background.surface.brand.inverse.tertiary",
@@ -3945,7 +3963,7 @@
                   },
                   "emphasized": {
                     "$type": "color",
-                    "$value": "{primitive.color.tertiary.600}",
+                    "$value": "{primitive.color.primary.600}",
                     "$extensions": {
                       "com.design2s": {
                         "figmaTokenPath": "semantic.color.background.surface.brand.inverse.tertiary.active",
@@ -3987,7 +4005,7 @@
                   },
                   "emphasized": {
                     "$type": "color",
-                    "$value": "{primitive.color.neutral.300}",
+                    "$value": "{primitive.color.primary.300}",
                     "$extensions": {
                       "com.design2s": {
                         "figmaTokenPath": "semantic.color.background.surface.brand.inverse.tertiary.disabled",
@@ -4029,7 +4047,7 @@
                   },
                   "emphasized": {
                     "$type": "color",
-                    "$value": "{primitive.color.tertiary.500}",
+                    "$value": "{primitive.color.primary.500}",
                     "$extensions": {
                       "com.design2s": {
                         "figmaTokenPath": "semantic.color.background.surface.brand.inverse.tertiary.hover",
@@ -4155,7 +4173,7 @@
               },
               "emphasized": {
                 "$type": "color",
-                "$value": "{primitive.color.secondary.50}",
+                "$value": "{primitive.color.primary.200}",
                 "$extensions": {
                   "com.design2s": {
                     "figmaTokenPath": "semantic.color.background.surface.brand.secondary",
@@ -4197,7 +4215,7 @@
               },
               "emphasized": {
                 "$type": "color",
-                "$value": "{primitive.color.tertiary.50}",
+                "$value": "{primitive.color.primary.200}",
                 "$extensions": {
                   "com.design2s": {
                     "figmaTokenPath": "semantic.color.background.surface.brand.tertiary",
@@ -4781,7 +4799,7 @@
         "subtle": {
           "dark": {
             "$type": "color",
-            "$value": "{primitive.color.neutral.200}",
+            "$value": "{primitive.color.neutral.300}",
             "$extensions": {
               "com.design2s": {
                 "figmaTokenPath": "semantic.color.border.subtle",
@@ -4877,7 +4895,7 @@
           },
           "emphasized": {
             "$type": "color",
-            "$value": "{primitive.color.secondary.400}",
+            "$value": "{primitive.color.primary.400}",
             "$extensions": {
               "com.design2s": {
                 "figmaTokenPath": "semantic.color.brand.secondary",
@@ -4919,7 +4937,7 @@
           },
           "emphasized": {
             "$type": "color",
-            "$value": "{primitive.color.tertiary.400}",
+            "$value": "{primitive.color.primary.500}",
             "$extensions": {
               "com.design2s": {
                 "figmaTokenPath": "semantic.color.brand.tertiary",
@@ -4943,6 +4961,134 @@
             "$extensions": {
               "com.design2s": {
                 "figmaTokenPath": "semantic.color.brand.tertiary",
+                "figmaMode": "subtle"
+              }
+            }
+          }
+        }
+      },
+      "dataviz": {
+        "good": {
+          "dark": {
+            "$type": "color",
+            "$value": "{primitive.color.primary.200}",
+            "$extensions": {
+              "com.design2s": {
+                "figmaTokenPath": "semantic.color.dataviz.good",
+                "figmaMode": "dark"
+              }
+            }
+          },
+          "emphasized": {
+            "$type": "color",
+            "$value": "{primitive.color.primary.700}",
+            "$extensions": {
+              "com.design2s": {
+                "figmaTokenPath": "semantic.color.dataviz.good",
+                "figmaMode": "emphasized"
+              }
+            }
+          },
+          "light": {
+            "$type": "color",
+            "$value": "{primitive.color.primary.600}",
+            "$extensions": {
+              "com.design2s": {
+                "figmaTokenPath": "semantic.color.dataviz.good",
+                "figmaMode": "light"
+              }
+            }
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": "{primitive.color.primary.800}",
+            "$extensions": {
+              "com.design2s": {
+                "figmaTokenPath": "semantic.color.dataviz.good",
+                "figmaMode": "subtle"
+              }
+            }
+          }
+        },
+        "great": {
+          "dark": {
+            "$type": "color",
+            "$value": "{primitive.color.feedback.success.200}",
+            "$extensions": {
+              "com.design2s": {
+                "figmaTokenPath": "semantic.color.dataviz.great",
+                "figmaMode": "dark"
+              }
+            }
+          },
+          "emphasized": {
+            "$type": "color",
+            "$value": "{primitive.color.primary.500}",
+            "$extensions": {
+              "com.design2s": {
+                "figmaTokenPath": "semantic.color.dataviz.great",
+                "figmaMode": "emphasized"
+              }
+            }
+          },
+          "light": {
+            "$type": "color",
+            "$value": "{primitive.color.feedback.success.600}",
+            "$extensions": {
+              "com.design2s": {
+                "figmaTokenPath": "semantic.color.dataviz.great",
+                "figmaMode": "light"
+              }
+            }
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": "{primitive.color.feedback.success.800}",
+            "$extensions": {
+              "com.design2s": {
+                "figmaTokenPath": "semantic.color.dataviz.great",
+                "figmaMode": "subtle"
+              }
+            }
+          }
+        },
+        "ok": {
+          "dark": {
+            "$type": "color",
+            "$value": "{primitive.color.neutral.200}",
+            "$extensions": {
+              "com.design2s": {
+                "figmaTokenPath": "semantic.color.dataviz.ok",
+                "figmaMode": "dark"
+              }
+            }
+          },
+          "emphasized": {
+            "$type": "color",
+            "$value": "{primitive.color.primary.900}",
+            "$extensions": {
+              "com.design2s": {
+                "figmaTokenPath": "semantic.color.dataviz.ok",
+                "figmaMode": "emphasized"
+              }
+            }
+          },
+          "light": {
+            "$type": "color",
+            "$value": "{primitive.color.neutral.600}",
+            "$extensions": {
+              "com.design2s": {
+                "figmaTokenPath": "semantic.color.dataviz.ok",
+                "figmaMode": "light"
+              }
+            }
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": "{primitive.color.neutral.800}",
+            "$extensions": {
+              "com.design2s": {
+                "figmaTokenPath": "semantic.color.dataviz.ok",
                 "figmaMode": "subtle"
               }
             }
@@ -5385,7 +5531,7 @@
           },
           "emphasized": {
             "$type": "color",
-            "$value": "{primitive.color.secondary.400}",
+            "$value": "{primitive.color.primary.900}",
             "$extensions": {
               "com.design2s": {
                 "figmaTokenPath": "semantic.color.icon.secondary",
@@ -5427,7 +5573,7 @@
           },
           "emphasized": {
             "$type": "color",
-            "$value": "{primitive.color.tertiary.400}",
+            "$value": "{primitive.color.primary.900}",
             "$extensions": {
               "com.design2s": {
                 "figmaTokenPath": "semantic.color.icon.tertiary",
@@ -6645,7 +6791,7 @@
           "$value": {
             "fontFamily": "{primitive.font.family.sans}",
             "fontSize": {
-              "value": 42,
+              "value": 62,
               "unit": "px"
             },
             "lineHeight": "auto",

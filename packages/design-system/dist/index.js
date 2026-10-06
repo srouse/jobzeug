@@ -10,7 +10,7 @@ import { JzIconButtonElement as I } from "./jz-icon-button-yRQA05b7.js";
 import { JzHighlightElement as g } from "./jz-highlight-234G8MHL.js";
 import { JzProjectCardElement as h } from "./jz-project-card-BGy0G-wl.js";
 import { JzTagElement as B } from "./jz-tag-0vZcA7JM.js";
-import { JzTextElement as v } from "./jz-text-6aPdAKc6.js";
+import { JzTextElement as v } from "./jz-text-BmsGZJXT.js";
 export {
   t as JzAccordionElement,
   m as JzAccordionItemElement,

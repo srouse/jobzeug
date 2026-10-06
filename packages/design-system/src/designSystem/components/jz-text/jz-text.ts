@@ -20,7 +20,7 @@ export type JzTextVariant =
   | "caption"
   | "overline";
 
-export type JzTextWeight = "400" | "500" | "600" | "700";
+export type JzTextWeight = "200" | "300" | "400" | "500" | "600" | "700";
 
 export type JzTextColor =
   | "default"
@@ -50,7 +50,14 @@ const VARIANTS: readonly JzTextVariant[] = [
   "overline",
 ];
 
-const WEIGHTS: readonly JzTextWeight[] = ["400", "500", "600", "700"];
+const WEIGHTS: readonly JzTextWeight[] = [
+  "200",
+  "300",
+  "400",
+  "500",
+  "600",
+  "700",
+];
 
 const COLORS: readonly JzTextColor[] = [
   "default",
@@ -214,6 +221,14 @@ export class JzTextElement extends LitElement {
       line-height: var(--jz-semantic-type-overline-line-height);
     }
 
+    :host([weight="200"]) .text {
+      font-weight: var(--jz-primitive-font-weight-200);
+    }
+
+    :host([weight="300"]) .text {
+      font-weight: var(--jz-primitive-font-weight-300);
+    }
+
     :host([weight="400"]) .text {
       font-weight: var(--jz-primitive-font-weight-400);
     }
@@ -284,6 +299,30 @@ export class JzTextElement extends LitElement {
     :host([disabled]) .text {
       color: var(--jz-semantic-color-text-default-disabled);
     }
+
+    /* href → real anchor. Default color is primary; no underline. */
+    :host([href]) a {
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    :host([href]) a:not(.text) {
+      color: inherit;
+    }
+
+    :host([href][color="default"]) a {
+      color: var(--jz-semantic-color-text-primary);
+    }
+
+    :host([href][color="default"]) a:hover {
+      color: var(--jz-semantic-color-text-text-primary-hover);
+    }
+
+    :host([href]) a:focus-visible {
+      outline: var(--jz-primitive-stroke-width-md) solid
+        var(--jz-semantic-color-focus-ring);
+      outline-offset: var(--jz-primitive-stroke-width-md);
+    }
   `;
 
   @property({ type: String, reflect: true })
@@ -313,6 +352,17 @@ export class JzTextElement extends LitElement {
 
   @property({ type: Boolean, reflect: true })
   disabled = false;
+
+  /**
+   * When set, content is an inline anchor (`<a>`). Level `0` is the
+   * anchor; levels `1`–`6` keep the heading and wrap it. Code-only.
+   */
+  @property({ type: String })
+  href = "";
+
+  /** Forwarded to the anchor. `_blank` also sets `rel="noopener noreferrer"`. */
+  @property({ type: String })
+  target = "";
 
   #onKeyDown = (event: KeyboardEvent) => {
     if (!this.interactive || this.disabled) return;
@@ -348,9 +398,17 @@ export class JzTextElement extends LitElement {
     const n = Number(this.level);
     if (!Number.isInteger(n) || n < 0 || n > 6) this.level = 0;
     else this.level = n as JzTextLevel;
+    if (this.href) this.setAttribute("href", this.href);
+    else this.removeAttribute("href");
   }
 
   override updated(): void {
+    if (this.href) {
+      this.removeAttribute("role");
+      this.removeAttribute("tabindex");
+      this.removeAttribute("aria-disabled");
+      return;
+    }
     if (this.interactive && !this.disabled) {
       this.setAttribute("role", "button");
       this.tabIndex = 0;
@@ -370,10 +428,23 @@ export class JzTextElement extends LitElement {
   }
 
   override render() {
-    const tagName = LEVEL_TAGS[this.level] ?? LEVEL_TAGS[0];
-    const tag = unsafeStatic(tagName);
     const fallback = this.label ? this.label : nothing;
-    return html`<${tag} class="text"><slot>${fallback}</slot></${tag}>`;
+    const content = html`<slot>${fallback}</slot>`;
+    if (this.href) {
+      const anchor = html`<a
+        class=${this.level === 0 ? "text link" : "link"}
+        href=${this.disabled ? nothing : this.href}
+        target=${this.target || nothing}
+        rel=${this.target === "_blank" ? "noopener noreferrer" : nothing}
+        aria-disabled=${this.disabled ? "true" : nothing}
+        tabindex=${this.disabled ? "-1" : nothing}
+      >${content}</a>`;
+      if (this.level === 0) return anchor;
+      const tag = unsafeStatic(LEVEL_TAGS[this.level]);
+      return html`<${tag} class="text">${anchor}</${tag}>`;
+    }
+    const tag = unsafeStatic(LEVEL_TAGS[this.level] ?? LEVEL_TAGS[0]);
+    return html`<${tag} class="text">${content}</${tag}>`;
   }
 }
 

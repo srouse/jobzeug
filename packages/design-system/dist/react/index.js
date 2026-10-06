@@ -170,7 +170,7 @@ const j = o(async () => {
 }, "JzTag"), A = o(async () => {
   const [{ createComponent: t }, { JzTextElement: e }] = await Promise.all([
     import("@lit/react"),
-    import("../jz-text-6aPdAKc6.js")
+    import("../jz-text-BmsGZJXT.js")
   ]);
   return t({
     tagName: "jz-text",

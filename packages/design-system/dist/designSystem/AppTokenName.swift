@@ -102,6 +102,8 @@ public enum AppTokenName: String, CaseIterable {
     case primitive_font_size_700 = "primitive.font.size.700"
     case primitive_font_size_800 = "primitive.font.size.800"
     case primitive_font_size_900 = "primitive.font.size.900"
+    case primitive_font_weight_200 = "primitive.font.weight.200"
+    case primitive_font_weight_300 = "primitive.font.weight.300"
     case primitive_font_weight_400 = "primitive.font.weight.400"
     case primitive_font_weight_500 = "primitive.font.weight.500"
     case primitive_font_weight_600 = "primitive.font.weight.600"
@@ -203,6 +205,9 @@ public enum AppTokenName: String, CaseIterable {
     case semantic_color_brand_primary = "semantic.color.brand.primary"
     case semantic_color_brand_secondary = "semantic.color.brand.secondary"
     case semantic_color_brand_tertiary = "semantic.color.brand.tertiary"
+    case semantic_color_dataviz_good = "semantic.color.dataviz.good"
+    case semantic_color_dataviz_great = "semantic.color.dataviz.great"
+    case semantic_color_dataviz_ok = "semantic.color.dataviz.ok"
     case semantic_color_focus_ring = "semantic.color.focus.ring"
     case semantic_color_icon_default = "semantic.color.icon.default"
     case semantic_color_icon_default_active = "semantic.color.icon.default.active"
@@ -329,7 +334,7 @@ public struct AppSemanticTypeDisplay {
 public struct AppSemanticTypeDisplayLarge {
     public static let composite = AppTokenName.semantic_type_display_large
     public static let fontFamily = AppTokenName.primitive_font_family_sans
-    public static let fontSize: String = "42px"
+    public static let fontSize: String = "62px"
     public static let lineHeight: String = "auto"
     public static let fontWeight = AppTokenName.primitive_font_weight_700
 }

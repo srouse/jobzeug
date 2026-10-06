@@ -40,7 +40,7 @@ Do not invent letter-spacing, `text-transform`, or sizes that are not in this co
 
 Token-backed only. Unset weight keeps the recipe’s stock weight.
 
-- **`weight`:** `400` \| `500` \| `600` \| `700` → `--jz-primitive-font-weight-*`. Variants use longhand type vars so this can override `font-weight` without fighting the `font` shorthand.
+- **`weight`:** `200` \| `300` \| `400` \| `500` \| `600` \| `700` → `--jz-primitive-font-weight-*`. Variants use longhand type vars so this can override `font-weight` without fighting the `font` shorthand.
 - **`color`:** `default` (default) \| `muted` \| `primary` \| `secondary` \| `tertiary` \| `inverse` \| `error` \| `success` \| `warning` → `--jz-semantic-color-text-*`. Resting colors; overridden by **`disabled`**.
 
 `<jz-text variant="body-regular" weight="600">` is equivalent in type to `body-strong`. Keep `body-strong` as the named stock recipe; `weight` is the escape hatch.
@@ -64,6 +64,24 @@ React: `onClick` maps to the host `click` event (blocked when `disabled`).
 ```tsx
 <JzText interactive label="Filters" onClick={() => …} />
 <JzText interactive disabled label="Unavailable" />
+```
+
+## Link (code-only)
+
+`href` renders a real inline `<a>` (not `interactive`). No underline.
+
+| | |
+|---|---|
+| Color | `text/primary` when `color` is still `default`. An explicit `color` wins. |
+| Hover | `--jz-semantic-color-text-text-primary-hover` |
+| Focus | `:focus-visible` ring → `--jz-semantic-color-focus-ring` |
+| `level` `0` | The anchor is the text node |
+| `level` `1`–`6` | Heading stays; the anchor is inside it |
+| `target="_blank"` | `rel="noopener noreferrer"` |
+| `disabled` | `href` removed, `aria-disabled`, not tabbable |
+
+```html
+<jz-text href="/jobs" label="View role"></jz-text>
 ```
 
 ## Level (document outline)

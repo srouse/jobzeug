@@ -135,6 +135,8 @@ Generated summary: **resolved values** for this theme build. CSS prefix `jz`.
 | primitive.font.size.700 | dimension | `--jz-primitive-font-size-700` | base: "24px" |
 | primitive.font.size.800 | dimension | `--jz-primitive-font-size-800` | base: "30px" |
 | primitive.font.size.900 | dimension | `--jz-primitive-font-size-900` | base: "36px" |
+| primitive.font.weight.200 | number | `--jz-primitive-font-weight-200` | base: 200 |
+| primitive.font.weight.300 | number | `--jz-primitive-font-weight-300` | base: 300 |
 | primitive.font.weight.400 | number | `--jz-primitive-font-weight-400` | base: 400 |
 | primitive.font.weight.500 | number | `--jz-primitive-font-weight-500` | base: 500 |
 | primitive.font.weight.600 | number | `--jz-primitive-font-weight-600` | base: 600 |
@@ -199,20 +201,20 @@ Generated summary: **resolved values** for this theme build. CSS prefix `jz`.
 | semantic.color.background.control.brand.inverse.primary.active | color | `--jz-semantic-color-background-control-brand-inverse-primary-active` | dark: "#404040" · emphasized: "#1d4ed8" · light: "#1d4ed8" · subtle: "#2563eb" |
 | semantic.color.background.control.brand.inverse.primary.disabled | color | `--jz-semantic-color-background-control-brand-inverse-primary-disabled` | dark: "#262626" · emphasized: "#2563eb" · light: "#e5e5e5" · subtle: "#737373" |
 | semantic.color.background.control.brand.inverse.primary.hover | color | `--jz-semantic-color-background-control-brand-inverse-primary-hover` | dark: "#404040" · emphasized: "#1d4ed8" · light: "#2563eb" · subtle: "#3b82f6" |
-| semantic.color.background.control.brand.inverse.secondary | color | `--jz-semantic-color-background-control-brand-inverse-secondary` | dark: "#9a3412" · emphasized: "#f97316" · light: "#f97316" · subtle: "#fb923c" |
-| semantic.color.background.control.brand.inverse.secondary.active | color | `--jz-semantic-color-background-control-brand-inverse-secondary-active` | dark: "#ea580c" · emphasized: "#fdba74" · light: "#fdba74" · subtle: "#fed7aa" |
-| semantic.color.background.control.brand.inverse.secondary.disabled | color | `--jz-semantic-color-background-control-brand-inverse-secondary-disabled` | dark: "#737373" · emphasized: "#525252" · light: "#525252" · subtle: "#737373" |
-| semantic.color.background.control.brand.inverse.secondary.hover | color | `--jz-semantic-color-background-control-brand-inverse-secondary-hover` | dark: "#c2410c" · emphasized: "#fb923c" · light: "#fb923c" · subtle: "#fdba74" |
-| semantic.color.background.control.brand.inverse.tertiary | color | `--jz-semantic-color-background-control-brand-inverse-tertiary` | dark: "#072c13" · emphasized: "#006d23" · light: "#006d23" · subtle: "#04d246" |
-| semantic.color.background.control.brand.inverse.tertiary.active | color | `--jz-semantic-color-background-control-brand-inverse-tertiary-active` | dark: "#03531d" · emphasized: "#45f77e" · light: "#45f77e" · subtle: "#97f7b6" |
-| semantic.color.background.control.brand.inverse.tertiary.disabled | color | `--jz-semantic-color-background-control-brand-inverse-tertiary-disabled` | dark: "#737373" · emphasized: "#525252" · light: "#525252" · subtle: "#737373" |
-| semantic.color.background.control.brand.inverse.tertiary.hover | color | `--jz-semantic-color-background-control-brand-inverse-tertiary-hover` | dark: "#063c17" · emphasized: "#04d246" · light: "#04d246" · subtle: "#45f77e" |
+| semantic.color.background.control.brand.inverse.secondary | color | `--jz-semantic-color-background-control-brand-inverse-secondary` | dark: "#9a3412" · emphasized: "#2563eb" · light: "#f97316" · subtle: "#fb923c" |
+| semantic.color.background.control.brand.inverse.secondary.active | color | `--jz-semantic-color-background-control-brand-inverse-secondary-active` | dark: "#ea580c" · emphasized: "#1d4ed8" · light: "#fdba74" · subtle: "#fed7aa" |
+| semantic.color.background.control.brand.inverse.secondary.disabled | color | `--jz-semantic-color-background-control-brand-inverse-secondary-disabled` | dark: "#737373" · emphasized: "#2563eb" · light: "#525252" · subtle: "#737373" |
+| semantic.color.background.control.brand.inverse.secondary.hover | color | `--jz-semantic-color-background-control-brand-inverse-secondary-hover` | dark: "#c2410c" · emphasized: "#1d4ed8" · light: "#fb923c" · subtle: "#fdba74" |
+| semantic.color.background.control.brand.inverse.tertiary | color | `--jz-semantic-color-background-control-brand-inverse-tertiary` | dark: "#072c13" · emphasized: "#2563eb" · light: "#006d23" · subtle: "#04d246" |
+| semantic.color.background.control.brand.inverse.tertiary.active | color | `--jz-semantic-color-background-control-brand-inverse-tertiary-active` | dark: "#03531d" · emphasized: "#1d4ed8" · light: "#45f77e" · subtle: "#97f7b6" |
+| semantic.color.background.control.brand.inverse.tertiary.disabled | color | `--jz-semantic-color-background-control-brand-inverse-tertiary-disabled` | dark: "#737373" · emphasized: "#2563eb" · light: "#525252" · subtle: "#737373" |
+| semantic.color.background.control.brand.inverse.tertiary.hover | color | `--jz-semantic-color-background-control-brand-inverse-tertiary-hover` | dark: "#063c17" · emphasized: "#1d4ed8" · light: "#04d246" · subtle: "#45f77e" |
 | semantic.color.background.control.brand.primary | color | `--jz-semantic-color-background-control-brand-primary` | dark: "#1e3a8a" · emphasized: "#2563eb" · light: "#eff6ff" · subtle: "#dbeafe" |
 | semantic.color.background.control.brand.primary.active | color | `--jz-semantic-color-background-control-brand-primary-active` | dark: "#1d4ed8" · emphasized: "#1d4ed8" · light: "#93c5fd" · subtle: "#bfdbfe" |
 | semantic.color.background.control.brand.primary.disabled | color | `--jz-semantic-color-background-control-brand-primary-disabled` | dark: "#262626" · emphasized: "#2563eb" · light: "#e5e5e5" · subtle: "#737373" |
 | semantic.color.background.control.brand.primary.hover | color | `--jz-semantic-color-background-control-brand-primary-hover` | dark: "#1d4ed8" · emphasized: "#1d4ed8" · light: "#bfdbfe" · subtle: "#93c5fd" |
-| semantic.color.background.control.brand.secondary | color | `--jz-semantic-color-background-control-brand-secondary` | dark: "#7c2d12" · emphasized: "#7c2d12" · light: "#fff7ed" · subtle: "#ffedd5" |
-| semantic.color.background.control.brand.tertiary | color | `--jz-semantic-color-background-control-brand-tertiary` | dark: "#071d0e" · emphasized: "#071d0e" · light: "#eefbf3" · subtle: "#cff7dc" |
+| semantic.color.background.control.brand.secondary | color | `--jz-semantic-color-background-control-brand-secondary` | dark: "#7c2d12" · emphasized: "#2563eb" · light: "#fff7ed" · subtle: "#ffedd5" |
+| semantic.color.background.control.brand.tertiary | color | `--jz-semantic-color-background-control-brand-tertiary` | dark: "#071d0e" · emphasized: "#2563eb" · light: "#eefbf3" · subtle: "#cff7dc" |
 | semantic.color.background.control.default | color | `--jz-semantic-color-background-control-default` | dark: "#171717" · emphasized: "#1d4ed8" · light: "#ffffff" · subtle: "#f5f5f5" |
 | semantic.color.background.control.default.active | color | `--jz-semantic-color-background-control-default-active` | dark: "#262626" · emphasized: "#1d4ed8" · light: "#e5e5e5" · subtle: "#d4d4d4" |
 | semantic.color.background.control.default.disabled | color | `--jz-semantic-color-background-control-default-disabled` | dark: "#525252" · emphasized: "#2563eb" · light: "#e5e5e5" · subtle: "#737373" |
@@ -232,18 +234,18 @@ Generated summary: **resolved values** for this theme build. CSS prefix `jz`.
 | semantic.color.background.surface.brand.inverse.primary.active | color | `--jz-semantic-color-background-surface-brand-inverse-primary-active` | dark: "#1d4ed8" · emphasized: "#60a5fa" · light: "#60a5fa" · subtle: "#93c5fd" |
 | semantic.color.background.surface.brand.inverse.primary.disabled | color | `--jz-semantic-color-background-surface-brand-inverse-primary-disabled` | dark: "#525252" · emphasized: "#1d4ed8" · light: "#d4d4d4" · subtle: "#525252" |
 | semantic.color.background.surface.brand.inverse.primary.hover | color | `--jz-semantic-color-background-surface-brand-inverse-primary-hover` | dark: "#1e40af" · emphasized: "#3b82f6" · light: "#3b82f6" · subtle: "#60a5fa" |
-| semantic.color.background.surface.brand.inverse.secondary | color | `--jz-semantic-color-background-surface-brand-inverse-secondary` | dark: "#7c2d12" · emphasized: "#ea580c" · light: "#ea580c" · subtle: "#f97316" |
-| semantic.color.background.surface.brand.inverse.secondary.active | color | `--jz-semantic-color-background-surface-brand-inverse-secondary-active` | dark: "#c2410c" · emphasized: "#fb923c" · light: "#fb923c" · subtle: "#fdba74" |
-| semantic.color.background.surface.brand.inverse.secondary.disabled | color | `--jz-semantic-color-background-surface-brand-inverse-secondary-disabled` | dark: "#525252" · emphasized: "#404040" · light: "#404040" · subtle: "#525252" |
-| semantic.color.background.surface.brand.inverse.secondary.hover | color | `--jz-semantic-color-background-surface-brand-inverse-secondary-hover` | dark: "#9a3412" · emphasized: "#f97316" · light: "#f97316" · subtle: "#fb923c" |
-| semantic.color.background.surface.brand.inverse.tertiary | color | `--jz-semantic-color-background-surface-brand-inverse-tertiary` | dark: "#071d0e" · emphasized: "#03531d" · light: "#03531d" · subtle: "#006d23" |
-| semantic.color.background.surface.brand.inverse.tertiary.active | color | `--jz-semantic-color-background-surface-brand-inverse-tertiary-active` | dark: "#063c17" · emphasized: "#04d246" · light: "#04d246" · subtle: "#45f77e" |
-| semantic.color.background.surface.brand.inverse.tertiary.disabled | color | `--jz-semantic-color-background-surface-brand-inverse-tertiary-disabled` | dark: "#525252" · emphasized: "#404040" · light: "#404040" · subtle: "#525252" |
-| semantic.color.background.surface.brand.inverse.tertiary.hover | color | `--jz-semantic-color-background-surface-brand-inverse-tertiary-hover` | dark: "#072c13" · emphasized: "#006d23" · light: "#006d23" · subtle: "#04d246" |
+| semantic.color.background.surface.brand.inverse.secondary | color | `--jz-semantic-color-background-surface-brand-inverse-secondary` | dark: "#7c2d12" · emphasized: "#1d4ed8" · light: "#ea580c" · subtle: "#f97316" |
+| semantic.color.background.surface.brand.inverse.secondary.active | color | `--jz-semantic-color-background-surface-brand-inverse-secondary-active` | dark: "#c2410c" · emphasized: "#60a5fa" · light: "#fb923c" · subtle: "#fdba74" |
+| semantic.color.background.surface.brand.inverse.secondary.disabled | color | `--jz-semantic-color-background-surface-brand-inverse-secondary-disabled` | dark: "#525252" · emphasized: "#1d4ed8" · light: "#404040" · subtle: "#525252" |
+| semantic.color.background.surface.brand.inverse.secondary.hover | color | `--jz-semantic-color-background-surface-brand-inverse-secondary-hover` | dark: "#9a3412" · emphasized: "#3b82f6" · light: "#f97316" · subtle: "#fb923c" |
+| semantic.color.background.surface.brand.inverse.tertiary | color | `--jz-semantic-color-background-surface-brand-inverse-tertiary` | dark: "#071d0e" · emphasized: "#1d4ed8" · light: "#03531d" · subtle: "#006d23" |
+| semantic.color.background.surface.brand.inverse.tertiary.active | color | `--jz-semantic-color-background-surface-brand-inverse-tertiary-active` | dark: "#063c17" · emphasized: "#60a5fa" · light: "#04d246" · subtle: "#45f77e" |
+| semantic.color.background.surface.brand.inverse.tertiary.disabled | color | `--jz-semantic-color-background-surface-brand-inverse-tertiary-disabled` | dark: "#525252" · emphasized: "#1d4ed8" · light: "#404040" · subtle: "#525252" |
+| semantic.color.background.surface.brand.inverse.tertiary.hover | color | `--jz-semantic-color-background-surface-brand-inverse-tertiary-hover` | dark: "#072c13" · emphasized: "#3b82f6" · light: "#006d23" · subtle: "#04d246" |
 | semantic.color.background.surface.brand.primary | color | `--jz-semantic-color-background-surface-brand-primary` | dark: "#172554" · emphasized: "#1e40af" · light: "#dbeafe" · subtle: "#bfdbfe" |
 | semantic.color.background.surface.brand.primary.subtle | color | `--jz-semantic-color-background-surface-brand-primary-subtle` | dark: "#172554" · emphasized: "#1d4ed8" · light: "#eff6ff" · subtle: "#dbeafe" |
-| semantic.color.background.surface.brand.secondary | color | `--jz-semantic-color-background-surface-brand-secondary` | dark: "#431407" · emphasized: "#431407" · light: "#ffedd5" · subtle: "#fed7aa" |
-| semantic.color.background.surface.brand.tertiary | color | `--jz-semantic-color-background-surface-brand-tertiary` | dark: "#06140a" · emphasized: "#06140a" · light: "#cff7dc" · subtle: "#97f7b6" |
+| semantic.color.background.surface.brand.secondary | color | `--jz-semantic-color-background-surface-brand-secondary` | dark: "#431407" · emphasized: "#1e40af" · light: "#ffedd5" · subtle: "#fed7aa" |
+| semantic.color.background.surface.brand.tertiary | color | `--jz-semantic-color-background-surface-brand-tertiary` | dark: "#06140a" · emphasized: "#1e40af" · light: "#cff7dc" · subtle: "#97f7b6" |
 | semantic.color.background.surface.default | color | `--jz-semantic-color-background-surface-default` | dark: "#262626" · emphasized: "#2563eb" · light: "#ffffff" · subtle: "#d4d4d4" |
 | semantic.color.background.surface.default.active | color | `--jz-semantic-color-background-surface-default-active` | dark: "#171717" · emphasized: "#1e40af" · light: "#d4d4d4" · subtle: "#a3a3a3" |
 | semantic.color.background.surface.default.disabled | color | `--jz-semantic-color-background-surface-default-disabled` | dark: "#404040" · emphasized: "#1d4ed8" · light: "#d4d4d4" · subtle: "#525252" |
@@ -257,10 +259,13 @@ Generated summary: **resolved values** for this theme build. CSS prefix `jz`.
 | semantic.color.border.brand.strong | color | `--jz-semantic-color-border-brand-strong` | dark: "#1e40af" · emphasized: "#60a5fa" · light: "#2563eb" · subtle: "#404040" |
 | semantic.color.border.default | color | `--jz-semantic-color-border-default` | dark: "#404040" · emphasized: "#60a5fa" · light: "#a3a3a3" · subtle: "#737373" |
 | semantic.color.border.strong | color | `--jz-semantic-color-border-strong` | dark: "#737373" · emphasized: "#60a5fa" · light: "#262626" · subtle: "#a3a3a3" |
-| semantic.color.border.subtle | color | `--jz-semantic-color-border-subtle` | dark: "#262626" · emphasized: "#60a5fa" · light: "#e5e5e5" · subtle: "#a3a3a3" |
+| semantic.color.border.subtle | color | `--jz-semantic-color-border-subtle` | dark: "#404040" · emphasized: "#60a5fa" · light: "#e5e5e5" · subtle: "#a3a3a3" |
 | semantic.color.brand.primary | color | `--jz-semantic-color-brand-primary` | dark: "#60a5fa" · emphasized: "#2563eb" · light: "#2563eb" · subtle: "#3b82f6" |
-| semantic.color.brand.secondary | color | `--jz-semantic-color-brand-secondary` | dark: "#fb923c" · emphasized: "#ea580c" · light: "#ea580c" · subtle: "#f97316" |
-| semantic.color.brand.tertiary | color | `--jz-semantic-color-brand-tertiary` | dark: "#04d246" · emphasized: "#03531d" · light: "#03531d" · subtle: "#006d23" |
+| semantic.color.brand.secondary | color | `--jz-semantic-color-brand-secondary` | dark: "#fb923c" · emphasized: "#2563eb" · light: "#ea580c" · subtle: "#f97316" |
+| semantic.color.brand.tertiary | color | `--jz-semantic-color-brand-tertiary` | dark: "#04d246" · emphasized: "#3b82f6" · light: "#03531d" · subtle: "#006d23" |
+| semantic.color.dataviz.good | color | `--jz-semantic-color-dataviz-good` | dark: "#1e40af" · emphasized: "#93c5fd" · light: "#60a5fa" · subtle: "#bfdbfe" |
+| semantic.color.dataviz.great | color | `--jz-semantic-color-dataviz-great` | dark: "#166534" · emphasized: "#3b82f6" · light: "#4ade80" · subtle: "#bbf7d0" |
+| semantic.color.dataviz.ok | color | `--jz-semantic-color-dataviz-ok` | dark: "#262626" · emphasized: "#dbeafe" · light: "#a3a3a3" · subtle: "#e5e5e5" |
 | semantic.color.focus.ring | color | `--jz-semantic-color-focus-ring` | dark: "#60a5fa" · emphasized: "#1d4ed8" · light: "#3b82f6" · subtle: "#3b82f6" |
 | semantic.color.icon.default | color | `--jz-semantic-color-icon-default` | dark: "#ffffff" · emphasized: "#ffffff" · light: "#0a0a0a" · subtle: "#171717" |
 | semantic.color.icon.default.active | color | `--jz-semantic-color-icon-default-active` | dark: "#e5e5e5" · emphasized: "#93c5fd" · light: "#0a0a0a" · subtle: "#404040" |
@@ -271,8 +276,8 @@ Generated summary: **resolved values** for this theme build. CSS prefix `jz`.
 | semantic.color.icon.inverse.disabled | color | `--jz-semantic-color-icon-inverse-disabled` | dark: "#737373" · emphasized: "#60a5fa" · light: "#d4d4d4" · subtle: "#d4d4d4" |
 | semantic.color.icon.inverse.hover | color | `--jz-semantic-color-icon-inverse-hover` | dark: "#f5f5f5" · emphasized: "#ffffff" · light: "#ffffff" · subtle: "#f5f5f5" |
 | semantic.color.icon.primary | color | `--jz-semantic-color-icon-primary` | dark: "#bfdbfe" · emphasized: "#dbeafe" · light: "#2563eb" · subtle: "#3b82f6" |
-| semantic.color.icon.secondary | color | `--jz-semantic-color-icon-secondary` | dark: "#fb923c" · emphasized: "#ea580c" · light: "#ea580c" · subtle: "#f97316" |
-| semantic.color.icon.tertiary | color | `--jz-semantic-color-icon-tertiary` | dark: "#04d246" · emphasized: "#03531d" · light: "#03531d" · subtle: "#006d23" |
+| semantic.color.icon.secondary | color | `--jz-semantic-color-icon-secondary` | dark: "#fb923c" · emphasized: "#dbeafe" · light: "#ea580c" · subtle: "#f97316" |
+| semantic.color.icon.tertiary | color | `--jz-semantic-color-icon-tertiary` | dark: "#04d246" · emphasized: "#dbeafe" · light: "#03531d" · subtle: "#006d23" |
 | semantic.color.islightmode | boolean | `--jz-semantic-color-islightmode` | dark: false · emphasized: false · light: true · subtle: false |
 | semantic.color.text.default | color | `--jz-semantic-color-text-default` | dark: "#ffffff" · emphasized: "#dbeafe" · light: "#0a0a0a" · subtle: "#262626" |
 | semantic.color.text.default.active | color | `--jz-semantic-color-text-default-active` | dark: "#e5e5e5" · emphasized: "#93c5fd" · light: "#404040" · subtle: "#404040" |
@@ -347,7 +352,7 @@ Generated summary: **resolved values** for this theme build. CSS prefix `jz`.
 | semantic.type.body.strong | typography | `--jz-semantic-type-body-strong` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"14px","fontWeight":600,"lineHeight":"auto"} |
 | semantic.type.caption | typography | `--jz-semantic-type-caption` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"12px","fontWeight":400,"lineHeight":"auto"} |
 | semantic.type.display | typography | `--jz-semantic-type-display` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"32px","fontWeight":700,"lineHeight":"auto"} |
-| semantic.type.display.large | typography | `--jz-semantic-type-display-large` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"42px","fontWeight":700,"lineHeight":"auto"} |
+| semantic.type.display.large | typography | `--jz-semantic-type-display-large` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"62px","fontWeight":700,"lineHeight":"auto"} |
 | semantic.type.heading | typography | `--jz-semantic-type-heading` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"20px","fontWeight":600,"lineHeight":"auto"} |
 | semantic.type.heading2 | typography | `--jz-semantic-type-heading2` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"18px","fontWeight":500,"lineHeight":"auto"} |
 | semantic.type.heading3 | typography | `--jz-semantic-type-heading3` | base: {"fontFamily":{"css":"Geist","primary":"Geist"},"fontSize":"16px","fontWeight":500,"lineHeight":"auto"} |

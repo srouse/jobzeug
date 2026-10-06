@@ -2223,6 +2223,38 @@ export const tokenSet: TokenSet = {
       },
       "modes": {
         "base": {
+          "value": 200
+        }
+      },
+      "name": [
+        "font",
+        "weight",
+        "200"
+      ],
+      "type": "number"
+    },
+    {
+      "collectionRef": {
+        "type": "primitive"
+      },
+      "modes": {
+        "base": {
+          "value": 300
+        }
+      },
+      "name": [
+        "font",
+        "weight",
+        "300"
+      ],
+      "type": "number"
+    },
+    {
+      "collectionRef": {
+        "type": "primitive"
+      },
+      "modes": {
+        "base": {
           "value": 400
         }
       },
@@ -2784,7 +2816,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.secondary.600"
         },
         "emphasized": {
-          "ref": "primitive.color.secondary.400"
+          "ref": "primitive.color.primary.400"
         },
         "light": {
           "ref": "primitive.color.secondary.400"
@@ -2809,7 +2841,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.tertiary.600"
         },
         "emphasized": {
-          "ref": "primitive.color.tertiary.400"
+          "ref": "primitive.color.primary.500"
         },
         "light": {
           "ref": "primitive.color.tertiary.400"
@@ -2821,6 +2853,81 @@ export const tokenSet: TokenSet = {
       "name": [
         "brand",
         "tertiary"
+      ],
+      "type": "color"
+    },
+    {
+      "collectionRef": {
+        "name": "color",
+        "type": "semantic"
+      },
+      "modes": {
+        "dark": {
+          "ref": "primitive.color.primary.200"
+        },
+        "emphasized": {
+          "ref": "primitive.color.primary.700"
+        },
+        "light": {
+          "ref": "primitive.color.primary.600"
+        },
+        "subtle": {
+          "ref": "primitive.color.primary.800"
+        }
+      },
+      "name": [
+        "dataviz",
+        "good"
+      ],
+      "type": "color"
+    },
+    {
+      "collectionRef": {
+        "name": "color",
+        "type": "semantic"
+      },
+      "modes": {
+        "dark": {
+          "ref": "primitive.color.feedback.success.200"
+        },
+        "emphasized": {
+          "ref": "primitive.color.primary.500"
+        },
+        "light": {
+          "ref": "primitive.color.feedback.success.600"
+        },
+        "subtle": {
+          "ref": "primitive.color.feedback.success.800"
+        }
+      },
+      "name": [
+        "dataviz",
+        "great"
+      ],
+      "type": "color"
+    },
+    {
+      "collectionRef": {
+        "name": "color",
+        "type": "semantic"
+      },
+      "modes": {
+        "dark": {
+          "ref": "primitive.color.neutral.200"
+        },
+        "emphasized": {
+          "ref": "primitive.color.primary.900"
+        },
+        "light": {
+          "ref": "primitive.color.neutral.600"
+        },
+        "subtle": {
+          "ref": "primitive.color.neutral.800"
+        }
+      },
+      "name": [
+        "dataviz",
+        "ok"
       ],
       "type": "color"
     },
@@ -2906,7 +3013,7 @@ export const tokenSet: TokenSet = {
       },
       "modes": {
         "dark": {
-          "ref": "primitive.color.neutral.200"
+          "ref": "primitive.color.neutral.300"
         },
         "emphasized": {
           "ref": "primitive.color.primary.600"
@@ -3497,7 +3604,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.secondary.600"
         },
         "emphasized": {
-          "ref": "primitive.color.secondary.400"
+          "ref": "primitive.color.primary.900"
         },
         "light": {
           "ref": "primitive.color.secondary.400"
@@ -3522,7 +3629,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.tertiary.600"
         },
         "emphasized": {
-          "ref": "primitive.color.tertiary.400"
+          "ref": "primitive.color.primary.900"
         },
         "light": {
           "ref": "primitive.color.tertiary.400"
@@ -4135,7 +4242,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.secondary.100"
         },
         "emphasized": {
-          "ref": "primitive.color.secondary.400"
+          "ref": "primitive.color.primary.300"
         },
         "light": {
           "ref": "primitive.color.secondary.400"
@@ -4163,7 +4270,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.tertiary.100"
         },
         "emphasized": {
-          "ref": "primitive.color.tertiary.400"
+          "ref": "primitive.color.primary.300"
         },
         "light": {
           "ref": "primitive.color.tertiary.400"
@@ -4278,7 +4385,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.secondary.300"
         },
         "emphasized": {
-          "ref": "primitive.color.secondary.600"
+          "ref": "primitive.color.primary.600"
         },
         "light": {
           "ref": "primitive.color.secondary.600"
@@ -4307,7 +4414,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.neutral.400"
         },
         "emphasized": {
-          "ref": "primitive.color.neutral.300"
+          "ref": "primitive.color.primary.300"
         },
         "light": {
           "ref": "primitive.color.neutral.300"
@@ -4336,7 +4443,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.secondary.200"
         },
         "emphasized": {
-          "ref": "primitive.color.secondary.500"
+          "ref": "primitive.color.primary.500"
         },
         "light": {
           "ref": "primitive.color.secondary.500"
@@ -4365,7 +4472,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.tertiary.300"
         },
         "emphasized": {
-          "ref": "primitive.color.tertiary.600"
+          "ref": "primitive.color.primary.600"
         },
         "light": {
           "ref": "primitive.color.tertiary.600"
@@ -4394,7 +4501,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.neutral.400"
         },
         "emphasized": {
-          "ref": "primitive.color.neutral.300"
+          "ref": "primitive.color.primary.300"
         },
         "light": {
           "ref": "primitive.color.neutral.300"
@@ -4423,7 +4530,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.tertiary.200"
         },
         "emphasized": {
-          "ref": "primitive.color.tertiary.500"
+          "ref": "primitive.color.primary.500"
         },
         "light": {
           "ref": "primitive.color.tertiary.500"
@@ -4452,7 +4559,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.secondary.50"
         },
         "emphasized": {
-          "ref": "primitive.color.secondary.50"
+          "ref": "primitive.color.primary.200"
         },
         "light": {
           "ref": "primitive.color.secondary.900"
@@ -4479,7 +4586,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.tertiary.50"
         },
         "emphasized": {
-          "ref": "primitive.color.tertiary.50"
+          "ref": "primitive.color.primary.200"
         },
         "light": {
           "ref": "primitive.color.tertiary.900"
@@ -4857,7 +4964,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.secondary.100"
         },
         "emphasized": {
-          "ref": "primitive.color.secondary.100"
+          "ref": "primitive.color.primary.400"
         },
         "light": {
           "ref": "primitive.color.secondary.950"
@@ -4884,7 +4991,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.tertiary.100"
         },
         "emphasized": {
-          "ref": "primitive.color.tertiary.100"
+          "ref": "primitive.color.primary.400"
         },
         "light": {
           "ref": "primitive.color.tertiary.950"
@@ -4939,7 +5046,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.secondary.200"
         },
         "emphasized": {
-          "ref": "primitive.color.secondary.500"
+          "ref": "primitive.color.primary.400"
         },
         "light": {
           "ref": "primitive.color.secondary.500"
@@ -4967,7 +5074,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.tertiary.200"
         },
         "emphasized": {
-          "ref": "primitive.color.tertiary.500"
+          "ref": "primitive.color.primary.400"
         },
         "light": {
           "ref": "primitive.color.tertiary.500"
@@ -5082,7 +5189,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.secondary.300"
         },
         "emphasized": {
-          "ref": "primitive.color.secondary.600"
+          "ref": "primitive.color.primary.300"
         },
         "light": {
           "ref": "primitive.color.secondary.600"
@@ -5111,7 +5218,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.secondary.400"
         },
         "emphasized": {
-          "ref": "primitive.color.secondary.700"
+          "ref": "primitive.color.primary.300"
         },
         "light": {
           "ref": "primitive.color.secondary.700"
@@ -5140,7 +5247,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.neutral.500"
         },
         "emphasized": {
-          "ref": "primitive.color.neutral.400"
+          "ref": "primitive.color.primary.400"
         },
         "light": {
           "ref": "primitive.color.neutral.400"
@@ -5169,7 +5276,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.tertiary.300"
         },
         "emphasized": {
-          "ref": "primitive.color.tertiary.600"
+          "ref": "primitive.color.primary.300"
         },
         "light": {
           "ref": "primitive.color.tertiary.600"
@@ -5198,7 +5305,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.tertiary.400"
         },
         "emphasized": {
-          "ref": "primitive.color.tertiary.700"
+          "ref": "primitive.color.primary.300"
         },
         "light": {
           "ref": "primitive.color.tertiary.700"
@@ -5227,7 +5334,7 @@ export const tokenSet: TokenSet = {
           "ref": "primitive.color.neutral.500"
         },
         "emphasized": {
-          "ref": "primitive.color.neutral.400"
+          "ref": "primitive.color.primary.400"
         },
         "light": {
           "ref": "primitive.color.neutral.400"
@@ -6278,7 +6385,7 @@ export const tokenSet: TokenSet = {
               "ref": "primitive.font.family.sans"
             },
             "fontSize": {
-              "value": "42px"
+              "value": "62px"
             },
             "fontWeight": {
               "ref": "primitive.font.weight.700"
