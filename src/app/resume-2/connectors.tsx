@@ -5,8 +5,8 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { sameProjectId } from "./project-presentation/project-presentation";
 import styles from "./connectors.module.css";
 
-/** Line morph. Matches the resume connectors. */
-const MORPH_MS = 700;
+/** Line morph while the posting stays open. */
+const MORPH_MS = 500;
 
 type Cubic = {
   x0: number;
@@ -74,18 +74,42 @@ function cubicHorizontal(x0: number, y0: number, x1: number, y1: number): string
   return `M ${x0} ${y0} C ${c1x} ${y0}, ${c2x} ${y1}, ${x1} ${y1}`;
 }
 
-/** Straight segment as a cubic so it can morph with the curves. */
-function linearCubic(x0: number, y0: number, x1: number, y1: number): string {
-  const c1x = x0 + (x1 - x0) / 3;
-  const c1y = y0 + (y1 - y0) / 3;
-  const c2x = x0 + ((x1 - x0) * 2) / 3;
-  const c2y = y0 + ((y1 - y0) * 2) / 3;
-  return `M ${x0} ${y0} C ${c1x} ${c1y}, ${c2x} ${c2y}, ${x1} ${y1}`;
-}
-
 function pxVar(style: CSSStyleDeclaration, name: string, fallback: number): number {
   const value = Number.parseFloat(style.getPropertyValue(name));
   return Number.isFinite(value) ? value : fallback;
+}
+
+let padTopCache: { raw: string; px: number } | null = null;
+
+/** Target padding. The value does not change between compact and matched. */
+function stackPadTop(el: HTMLElement): number {
+  const raw = getComputedStyle(el).getPropertyValue("--stack-pad-top").trim();
+  if (padTopCache?.raw === raw) return padTopCache.px;
+  const px = lengthPx(el, raw, 16);
+  padTopCache = { raw, px };
+  return px;
+}
+
+function lengthPx(el: HTMLElement, raw: string, fallback: number): number {
+  const value = raw.trim();
+  if (!value) return fallback;
+  if (value.endsWith("px")) {
+    const px = Number.parseFloat(value);
+    return Number.isFinite(px) ? px : fallback;
+  }
+  const probe = el.ownerDocument.createElement("div");
+  probe.style.cssText = `position:absolute;visibility:hidden;pointer-events:none;height:${value}`;
+  el.appendChild(probe);
+  const resolved = probe.getBoundingClientRect().height;
+  probe.remove();
+  return resolved > 0 ? resolved : fallback;
+}
+
+function blockHeight(el: HTMLElement): number {
+  const style = getComputedStyle(el);
+  const marginTop = Number.parseFloat(style.marginTop) || 0;
+  const marginBottom = Number.parseFloat(style.marginBottom) || 0;
+  return marginTop + el.offsetHeight + marginBottom;
 }
 
 type Stack = {
@@ -95,8 +119,9 @@ type Stack = {
 };
 
 /**
- * Final row centers from the fixed closed/open sizes. Ignores the in-flight
- * height transition, which is what was leaving the measured lines behind.
+ * Final row centers from the fixed closed/open sizes, top-aligned.
+ * Ignores the in-flight height transition, which is what was leaving the
+ * measured lines behind.
  */
 function stackCenters(
   orderedIds: readonly string[],
@@ -113,23 +138,15 @@ function stackCenters(
   const openSet = new Set(projectIds);
 
   const heightOf = (id: string) => {
-    const isOpen = openSet.has(id) || projectIds.some((openId) => sameProjectId(openId, id));
-    return isOpen ? open : closed;
+    const linked =
+      openSet.has(id) || projectIds.some((openId) => sameProjectId(openId, id));
+    return linked ? open : closed;
   };
 
-  let content = 0;
-  orderedIds.forEach((id, index) => {
-    content += heightOf(id);
-    if (index < orderedIds.length - 1) content += gap;
-  });
-
-  const scrollerStyle = getComputedStyle(scroller);
-  const padTop = Number.parseFloat(scrollerStyle.paddingTop) || 0;
-  const padBottom = Number.parseFloat(scrollerStyle.paddingBottom) || 0;
-  const free = scroller.clientHeight - padTop - padBottom - content;
-  const leading = free > 0 ? free / 2 : 0;
   let y =
-    scroller.getBoundingClientRect().top + padTop + leading - scroller.scrollTop;
+    scroller.getBoundingClientRect().top +
+    stackPadTop(scroller) -
+    scroller.scrollTop;
 
   const centers = new Map<string, number>();
   orderedIds.forEach((id, index) => {
@@ -143,6 +160,43 @@ function stackCenters(
   return { left: listRect.left, right: listRect.right, centers };
 }
 
+/**
+ * Compact-list centers. Header text keeps its height while the grid row
+ * around it animates, and both modes share the same top padding.
+ */
+function compactCenters(): Stack | null {
+  const scroller = document.querySelector<HTMLElement>("[data-resume2-scroll]");
+  const list = scroller?.querySelector<HTMLElement>("[data-resume2-list]");
+  if (!scroller || !list) return null;
+
+  const listStyle = getComputedStyle(list);
+  const rowH = pxVar(listStyle, "--project-list", 28);
+  const gap = pxVar(listStyle, "--project-list-gap", 2);
+  const centers = new Map<string, number>();
+  let y =
+    scroller.getBoundingClientRect().top +
+    stackPadTop(scroller) -
+    scroller.scrollTop;
+
+  for (const group of list.children) {
+    if (!(group instanceof HTMLElement)) continue;
+    const header = group.querySelector<HTMLElement>("[data-resume2-employer]");
+    if (header) y += blockHeight(header);
+    const cards = group.querySelectorAll<HTMLElement>("[data-resume2-card]");
+    cards.forEach((card, index) => {
+      const id = card.getAttribute("data-resume2-card");
+      if (!id) return;
+      centers.set(id, y + rowH / 2);
+      y += rowH;
+      if (index < cards.length - 1) y += gap;
+    });
+  }
+
+  if (centers.size === 0) return null;
+  const listRect = list.getBoundingClientRect();
+  return { left: listRect.left, right: listRect.right, centers };
+}
+
 function centerOf(stack: Stack, projectId: string): number | null {
   const direct = stack.centers.get(projectId);
   if (direct != null) return direct;
@@ -152,21 +206,32 @@ function centerOf(stack: Stack, projectId: string): number | null {
   return null;
 }
 
+type StackLayout = "matched" | "compact";
+
 function measure(
   lineId: string,
   orderedIds: readonly string[],
   projectIds: readonly string[],
+  layout: StackLayout,
 ): ConnectorPath[] {
   const job = document.querySelector<HTMLElement>("[data-resume2-job]");
   const line = job?.querySelector<HTMLElement>(
     `[data-evidence-id="${CSS.escape(lineId)}"]`,
   );
-  const stack = stackCenters(orderedIds, projectIds);
-  if (!line || !stack) return [];
+  const stack =
+    layout === "compact"
+      ? compactCenters()
+      : stackCenters(orderedIds, projectIds);
+  if (!job || !line || !stack) return [];
   const lineRect = line.getBoundingClientRect();
-  if (lineRect.width <= 0 || lineRect.height <= 0) return [];
+  if (lineRect.height <= 0) return [];
+  if (layout === "matched" && lineRect.width <= 0) return [];
 
-  const startX = lineRect.right;
+  const startX =
+    layout === "compact"
+      ? job.getBoundingClientRect().left +
+        pxVar(getComputedStyle(job), "--resume-job-strip", 56)
+      : lineRect.right;
   const startY = lineRect.top + lineRect.height / 2;
   const paths: ConnectorPath[] = [];
 
@@ -185,33 +250,11 @@ function measure(
   return paths;
 }
 
-const STAGE_LINK = "stage-link";
-
-/** Straight line from the open project card to the left edge of the stage. */
-function stageLink(
-  stageProjectId: string | null,
-  orderedIds: readonly string[],
-  projectIds: readonly string[],
-): ConnectorPath | null {
-  if (!stageProjectId) return null;
-  const stack = stackCenters(orderedIds, projectIds);
-  const stage = document.querySelector<HTMLElement>("[data-answer-stage-card]");
-  if (!stack || !stage) return null;
-  const y0 = centerOf(stack, stageProjectId);
-  const stageRect = stage.getBoundingClientRect();
-  if (y0 == null || stageRect.width <= 0 || stageRect.height <= 0) return null;
-  const y1 = Math.min(Math.max(y0, stageRect.top), stageRect.bottom);
-  return {
-    id: STAGE_LINK,
-    d: linearCubic(stack.right, y0, stageRect.left, y1),
-    strong: true,
-  };
-}
-
 function blend(
   from: ConnectorPath[],
   to: ConnectorPath[],
   t: number,
+  pinStart: boolean,
 ): ConnectorPath[] {
   const eased = easeInOut(t);
   const fromById = new Map(from.map((path) => [path.id, path]));
@@ -221,7 +264,7 @@ function blend(
     const toCubic = parseCubic(path.d);
     if (!fromCubic || !toCubic) return path;
     const mixed = lerpCubic(fromCubic, toCubic, eased);
-    if (path.id.startsWith("slot-")) {
+    if (pinStart && path.id.startsWith("slot-")) {
       mixed.x0 = toCubic.x0;
       mixed.y0 = toCubic.y0;
       mixed.c1x = toCubic.c1x;
@@ -232,17 +275,21 @@ function blend(
 }
 
 /**
- * Curves from the selected job line to the top three cards, plus a straight
- * line from the open project to the stage.
+ * Curves from the selected job line to the top three cards.
+ * They draw only while the posting is fully open. Closing clears them
+ * immediately. A job-line change while the posting stays open keeps the
+ * start pinned.
  */
 export function ResumeConnectors({
-  enabled,
+  covered,
+  postingOpen,
   lineId,
   orderedIds,
   projectIds,
   stageProjectId,
 }: {
-  enabled: boolean;
+  covered: boolean;
+  postingOpen: boolean;
   lineId: string | null;
   orderedIds: readonly string[];
   projectIds: readonly string[];
@@ -250,14 +297,19 @@ export function ResumeConnectors({
 }) {
   const [paths, setPaths] = useState<ConnectorPath[]>([]);
   const pathsRef = useRef<ConnectorPath[]>([]);
+  const postingOpenRef = useRef(postingOpen);
 
   useLayoutEffect(() => {
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+    const postingChanged = postingOpenRef.current !== postingOpen;
+    postingOpenRef.current = postingOpen;
     let frame = 0;
     let morphFrame = 0;
+    let settleTimer = 0;
     let disposed = false;
+    let settled = !postingChanged || reduceMotion;
 
     const commit = (next: ConnectorPath[]) => {
       if (disposed) return;
@@ -265,11 +317,10 @@ export function ResumeConnectors({
       setPaths(next);
     };
 
-    const read = () => {
-      const curves = enabled && lineId ? measure(lineId, orderedIds, projectIds) : [];
-      const link = stageLink(stageProjectId, orderedIds, projectIds);
-      return link ? [...curves, link] : curves;
-    };
+    const read = () =>
+      !covered && postingOpen && lineId
+        ? measure(lineId, orderedIds, projectIds, "matched")
+        : [];
 
     const stopMorph = () => {
       if (morphFrame) {
@@ -278,7 +329,7 @@ export function ResumeConnectors({
       }
     };
 
-    const startMorph = () => {
+    const startMorph = (pinStart: boolean) => {
       const from = pathsRef.current;
       const dest = read();
       if (reduceMotion || from.length === 0) {
@@ -287,12 +338,12 @@ export function ResumeConnectors({
       }
       stopMorph();
       const started = performance.now();
-      commit(blend(from, dest, 0));
+      commit(blend(from, dest, 0, pinStart));
       const tick = (now: number) => {
         if (disposed) return;
         const next = read();
         const t = Math.min(1, (now - started) / MORPH_MS);
-        const blended = blend(from, next, t);
+        const blended = blend(from, next, t, pinStart);
         pathsRef.current = blended;
         setPaths(blended);
         if (t < 1) {
@@ -306,22 +357,56 @@ export function ResumeConnectors({
     };
 
     const snap = () => {
-      if (morphFrame || frame) return;
+      if (!settled || morphFrame || frame) return;
       frame = window.requestAnimationFrame(() => {
         frame = 0;
-        if (morphFrame) return;
+        if (!settled || morphFrame) return;
         commit(read());
       });
     };
 
-    const drawing = Boolean((enabled && lineId) || stageProjectId);
+    const drawing = Boolean(!covered && postingOpen && lineId);
+    const waitForOpen = drawing && postingChanged && !reduceMotion;
+    const job = drawing
+      ? document.querySelector<HTMLElement>("[data-resume2-job]")
+      : null;
 
-    const kick = window.requestAnimationFrame(() => {
-      if (!drawing) {
-        commit([]);
+    if (!drawing || waitForOpen) {
+      commit([]);
+    }
+
+    const showSettled = () => {
+      if (disposed || settled) return;
+      settled = true;
+      window.clearTimeout(settleTimer);
+      settleTimer = 0;
+      job?.removeEventListener("transitionend", onJobSettled);
+      startMorph(true);
+    };
+
+    const onJobSettled = (event: TransitionEvent) => {
+      if (event.target !== job) return;
+      if (event.propertyName !== "width" && event.propertyName !== "flex-basis") {
         return;
       }
-      startMorph();
+      showSettled();
+    };
+
+    if (waitForOpen && job) {
+      job.addEventListener("transitionend", onJobSettled);
+      const raw = getComputedStyle(job).getPropertyValue("--resume-collapse");
+      const ms = Number.parseFloat(raw);
+      settleTimer = window.setTimeout(
+        showSettled,
+        (Number.isFinite(ms) ? ms : 320) + 40,
+      );
+    } else if (waitForOpen) {
+      settled = true;
+    }
+
+    const kick = window.requestAnimationFrame(() => {
+      if (disposed || !drawing || !settled) return;
+      startMorph(!postingChanged);
     });
 
     const scrolls = drawing
@@ -340,6 +425,7 @@ export function ResumeConnectors({
       ? [
           document.querySelector("[data-resume2-job]"),
           document.querySelector("[data-resume2-scroll]"),
+          document.querySelector("[data-resume2-list]"),
           document.querySelector("[data-answer-stage-card]"),
         ].filter((node): node is Element => node != null)
       : [];
@@ -349,13 +435,15 @@ export function ResumeConnectors({
     return () => {
       disposed = true;
       stopMorph();
+      window.clearTimeout(settleTimer);
+      job?.removeEventListener("transitionend", onJobSettled);
       window.cancelAnimationFrame(kick);
       if (frame) window.cancelAnimationFrame(frame);
       for (const root of scrolls) root.removeEventListener("scroll", snap);
       window.removeEventListener("resize", snap);
       resizeObserver?.disconnect();
     };
-  }, [enabled, lineId, orderedIds, projectIds, stageProjectId]);
+  }, [covered, postingOpen, lineId, orderedIds, projectIds, stageProjectId]);
 
   if (paths.length === 0) return null;
 

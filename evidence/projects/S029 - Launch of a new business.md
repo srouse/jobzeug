@@ -30,7 +30,7 @@ year_note: The account does not date the work. 2013 is the gener8tor summer coho
 delivery_stage: mixed
 annotation:
   status: reviewed
-  vocabulary_version: "1.7.0"
+  vocabulary_version: "1.10.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review

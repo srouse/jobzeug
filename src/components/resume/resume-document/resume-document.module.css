@@ -115,10 +115,9 @@
 }
 
 .employerSpaceRoomy {
-  margin-top: calc(
-    var(--jz-semantic-space-gap-xl, 2rem) + var(--jz-semantic-space-gap-sm, 0.75rem)
-  );
-  transition: margin-top 400ms ease-in-out;
+  margin-top: var(--jz-semantic-space-gap-md, 1rem);
+  padding-top: var(--jz-semantic-space-gap-md, 1rem);
+  border-top: 1px solid var(--jz-semantic-color-border-subtle, #e5e5e5);
 }
 
 .roleSpaceRoomy {
@@ -129,19 +128,17 @@
 .employerHead {
   width: 100%;
   box-sizing: border-box;
-  padding-top: var(--jz-semantic-space-padding-2xs, 0.25rem);
-  padding-bottom: 0;
-  padding-inline: var(--jz-semantic-space-padding-sm, 0.75rem);
+  padding-block: 0;
+  padding-inline: var(--jz-semantic-space-padding-sm, 0.5rem) 0;
 }
 
 .employerTitleRow {
   display: flex;
-  align-items: center;
-  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--jz-semantic-space-gap-2xs, 0.125rem);
   width: 100%;
   box-sizing: border-box;
-  border-bottom: 1px solid var(--jz-semantic-color-border-subtle, #e5e5e5);
-  padding-bottom: var(--jz-semantic-space-padding-2xs, 0.25rem);
 }
 
 .employerTitle {
@@ -151,7 +148,6 @@
   max-width: 100%;
   margin: 0;
   box-sizing: border-box;
-  text-transform: uppercase;
 }
 
 .roles {
@@ -210,35 +206,30 @@
 }
 
 .projects {
-  margin-top: 0.375rem;
+  margin-top: var(--jz-semantic-space-gap-sm, 0.5rem);
+  margin-inline-start: calc(var(--jz-semantic-space-padding-sm, 0.5rem) * -1);
+  width: calc(100% + var(--jz-semantic-space-padding-sm, 0.5rem));
   display: flex;
   flex-direction: column;
   gap: 0;
-  transition: margin-top 400ms ease-in-out;
 }
 
 .projectStack {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 2px;
   align-items: stretch;
 }
 
 .projectName {
-  display: flex;
-  flex-direction: column;
-  gap: var(--jz-semantic-space-gap-2xs, 0.125rem);
+  display: block;
   min-width: 0;
   width: 100%;
   border-radius: 0;
   box-sizing: border-box;
-  padding-block: calc(var(--jz-semantic-space-padding-2xs, 0.25rem) + 4px);
-  padding-bottom: calc(var(--jz-semantic-space-padding-2xs, 0.25rem) + 10px);
-  padding-inline: var(--jz-semantic-space-padding-sm, 0.75rem);
-}
-
-.projectName[data-fit-bars="off"] {
-  padding-bottom: calc(var(--jz-semantic-space-padding-2xs, 0.25rem) + 4px);
+  padding-block: var(--jz-semantic-space-padding-xs, 0.25rem);
+  padding-inline: calc(var(--jz-semantic-space-padding-sm, 0.5rem) * 2)
+    var(--jz-semantic-space-padding-sm, 0.5rem);
 }
 
 .projectTitle {
@@ -257,9 +248,10 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: var(--project-mark-gap);
+  gap: 0.35rem;
   min-width: 0;
-  width: 100%;
+  max-width: 100%;
+  width: max-content;
 }
 
 .projectMark {
@@ -272,10 +264,10 @@
 
 .videoMark {
   flex: none;
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: var(--jz-semantic-color-text-success, #16a34a);
+  background: var(--jz-semantic-color-brand-primary);
 }
 
 .projectMeter {
@@ -292,6 +284,7 @@
 
 .projectNameClip {
   display: block;
+  min-width: 0;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -330,6 +323,20 @@
 .dimmed {
   background: var(--jz-semantic-color-background-control-subtle, #f5f5f5);
   box-shadow: inset -1px 0 0 var(--jz-semantic-color-border-default);
+}
+
+/* Project wash only. The connector meets the row; no edge stroke. */
+.projectName.subject,
+.projectName.cited,
+.projectName.dimmed {
+  border-radius: var(--jz-primitive-radius-sm, 0.25rem);
+  box-shadow: none;
+}
+
+.inner:has(.projectName.subject),
+.inner:has(.projectName.cited),
+.inner:has(.projectName.dimmed) {
+  border-radius: var(--jz-primitive-radius-sm, 0.25rem);
 }
 
 /* Smooth rollup: grid 1fr ↔ 0fr with residual skeleton bar */
@@ -394,11 +401,6 @@
 .stackRolled .roles,
 .stackRolled .projects {
   margin-top: 0;
-}
-
-.stackRolled .projects,
-.stackRolled .projectStack {
-  gap: 0;
 }
 
 .stackRolled .shell {

@@ -15,18 +15,9 @@ import type { JobPostingPanelData } from "@/lib/job-posting/schema";
 import {
   coverageLineIds,
   lineExampleCoverage,
-  lineFitBars,
-  projectFitBars,
-  projectLineHits,
   strongExampleProjects,
-  topHomeLines,
-  topHomeProjects,
-  type FitBar,
-  type HomeEdge,
   type HomeProject,
 } from "@/lib/matching/home-coverage";
-import { TopJobLines } from "../top-job-lines/top-job-lines";
-import { TopProjects, type TopProjectItem } from "../top-projects/top-projects";
 import {
   ProjectVideo,
   sameProjectId,
@@ -71,26 +62,6 @@ function resumeProjects(resume: ResumeViewModel | null): HomeProject[] {
   return projects;
 }
 
-function topProjectItems(
-  projects: ReadonlyArray<{
-    id: string;
-    name: string;
-    score?: number;
-    weighted?: number;
-  }>,
-  edges: readonly HomeEdge[],
-  lines: { required: readonly string[]; preferred: readonly string[] },
-): TopProjectItem[] {
-  return projects.map((project) => ({
-    id: project.id,
-    name: project.name,
-    required: projectLineHits(project.id, edges, lines.required),
-    preferred: projectLineHits(project.id, edges, lines.preferred),
-    score: project.score,
-    weighted: project.weighted,
-  }));
-}
-
 function HomeStat({
   value,
   detail,
@@ -118,39 +89,21 @@ function HomeLanding({
   resume: ResumeViewModel | null;
   posting: JobPostingPanelData;
 }) {
-  const { selectLine, applyStageProject } = useResumeHighlights();
   const edges = posting.matchGraph?.edges ?? [];
   const projects = resumeProjects(resume);
   const projectIds = projects.map((project) => project.id);
   const lines = coverageLineIds(posting.lines);
   const required = lineExampleCoverage(lines.required, edges, projectIds);
   const preferred = lineExampleCoverage(lines.preferred, edges, projectIds);
-  const strongExamples = strongExampleProjects(projectIds, edges, [
-    ...lines.required,
-    ...lines.preferred,
-  ]);
-  const top = topHomeProjects(
-    projects,
-    edges,
-    3,
-    posting.matchGraph?.projectYears,
-  );
-  const projectLineIds = new Set(lines.all);
-  const topLines = topHomeLines(
-    posting.lines.flatMap((line) =>
-      projectLineIds.has(line.entryId)
-        ? [{ entryId: line.entryId, name: line.theme }]
-        : [],
-    ),
-    edges,
+  const requiredStrong = strongExampleProjects(
     projectIds,
-    3,
-    posting.matchGraph?.projectYears,
-  );
-  const topLineBars = lineFitBars(
-    topLines.map((line) => line.lineId),
     edges,
+    lines.required,
+  );
+  const preferredStrong = strongExampleProjects(
     projectIds,
+    edges,
+    lines.preferred,
   );
 
   return (
@@ -162,51 +115,32 @@ function HomeLanding({
           detail={`${required.covered} / ${required.total}`}
         />
         <HomeStat
+          title="STRONG PROJECTS"
+          value={String(requiredStrong)}
+          detail="Required"
+        />
+      </div>
+      <div className={`${styles.homePair} ${styles.homeBand}`}>
+        <HomeStat
           title="PREFERRED"
           value={`${preferred.percent}%`}
           detail={`${preferred.covered} / ${preferred.total}`}
         />
         <HomeStat
-          title="STRONG EXAMPLES"
-          value={String(strongExamples)}
-          detail="Projects"
+          title="STRONG PROJECTS"
+          value={String(preferredStrong)}
+          detail="Preferred"
         />
       </div>
-      {top.length > 0 ? (
-        <div className={styles.homeBand}>
-          <TopProjects
-            projects={topProjectItems(
-              top.map((project) => ({
-                id: project.projectId,
-                name: project.name,
-                score: project.score,
-                weighted: project.ranked,
-              })),
-              edges,
-              lines,
-            )}
-            onSelect={(id) => applyStageProject(id)}
-          />
-        </div>
-      ) : null}
-      {topLines.length > 0 ? (
-        <div className={styles.homeBand}>
-          <TopJobLines
-            lines={topLines.map((line) => {
-              const bar = topLineBars.get(line.lineId);
-              return {
-                id: line.lineId,
-                name: line.name,
-                projects: bar?.rows ?? 0,
-                tags: bar?.tags ?? 0,
-              };
-            })}
-            onSelect={(id) => selectLine({ kind: "jobLine", id })}
-          />
-        </div>
-      ) : null}
     </div>
   );
+}
+
+function projectFocusMeta(employer?: string, year?: number): string | undefined {
+  const parts = [employer, year != null ? String(year) : undefined].filter(
+    (part): part is string => Boolean(part),
+  );
+  return parts.length ? parts.join(" · ") : undefined;
 }
 
 function HubHeader({
@@ -214,10 +148,8 @@ function HubHeader({
   contentfulUrl,
   contentfulLabel,
   analysisUrl,
-  score,
   employer,
-  projectTotal,
-  rowTotal,
+  year,
   onBack,
   onDismiss,
 }: {
@@ -225,27 +157,14 @@ function HubHeader({
   contentfulUrl?: string | null;
   contentfulLabel: string;
   analysisUrl?: string | null;
-  score?: FitBar;
   employer?: string;
-  /** Resume project count. Present on a job-line focus. */
-  projectTotal?: number;
-  /** Project-scoped job line count. Present on a project focus. */
-  rowTotal?: number;
+  year?: number;
   onBack?: () => void;
   /** Close the project page. Lines stay with the job line. */
   onDismiss?: () => void;
 }) {
   const { clearLineFocus } = useResumeHighlights();
-  const rows = score?.rows ?? 0;
-  const tags = score?.tags ?? 0;
-  const tagLabel = Number.isInteger(tags) ? String(tags) : tags.toFixed(1);
-  const countLabel =
-    projectTotal != null
-      ? `${rows} / ${projectTotal} ${projectTotal === 1 ? "project" : "projects"}`
-      : rowTotal != null
-        ? `${rows} / ${rowTotal} ${rowTotal === 1 ? "row" : "rows"}`
-        : `${rows} ${rows === 1 ? "row" : "rows"}`;
-  const stats = `${countLabel} · ${tagLabel} ${tags === 1 ? "tag" : "tags"} · ${score?.percent ?? 0}% overall`;
+  const meta = projectFocusMeta(employer, year);
   return (
     <div className={styles.hubIntro}>
       <div className={styles.hubHeader}>
@@ -289,12 +208,8 @@ function HubHeader({
           />
         </div>
       </div>
-      {score ? (
-        <JzText
-          variant="caption"
-          color="muted"
-          label={employer ? `${employer} · ${stats}` : stats}
-        />
+      {meta ? (
+        <JzText variant="caption" color="muted" label={meta} />
       ) : null}
     </div>
   );
@@ -548,22 +463,6 @@ export function ConnectionHub({
   const { stageProjectId, clearStageProject } = useResumeHighlights();
   const { data } = useJobPosting();
   const posting = data ?? null;
-  const edges = posting?.matchGraph?.edges;
-  const projectIds = useMemo(
-    () => resumeProjects(resume).map((project) => project.id),
-    [resume],
-  );
-  const lineCount = useMemo(
-    () =>
-      (posting?.lines ?? []).filter(
-        (line) => line.matchingRequirement?.scope === "project",
-      ).length,
-    [posting],
-  );
-  const projectBars = useMemo(
-    () => projectFitBars(projectIds, edges ?? [], lineCount),
-    [projectIds, edges, lineCount],
-  );
   const { scrollProps } = useIdleScrollbar();
   const [briefs, setBriefs] = useState<Record<string, string>>({});
   const saveBrief = (kind: "project" | "jobLine", id: string, text: string) => {
@@ -584,6 +483,7 @@ export function ConnectionHub({
       <HubHeader
         label={project?.name ?? "Project"}
         employer={focused?.employerName}
+        year={project?.year}
         analysisUrl={
           posting?.entryId
             ? `/analytics?jobPostingEntryId=${encodeURIComponent(posting.entryId)}&projectId=${encodeURIComponent(project?.evidenceId ?? stageProjectId)}`
@@ -591,12 +491,6 @@ export function ConnectionHub({
         }
         contentfulUrl={project?.contentfulUrl}
         contentfulLabel={`Open ${project?.name ?? "project"} in Contentful`}
-        rowTotal={lineCount}
-        score={
-          edges
-            ? projectBars.get(project?.evidenceId ?? stageProjectId)
-            : undefined
-        }
         onBack={showingVideo ? onClosePresentation : undefined}
         onDismiss={clearStageProject}
       />
@@ -611,6 +505,23 @@ export function ConnectionHub({
         >
           <div className={styles.projectCopyInner}>
             {project?.summary ? <SummaryCopy text={project.summary} /> : null}
+            {project?.presentation ? (
+              <div className={styles.metrics}>
+                {project.presentation.metrics.map((metric) => (
+                  <div
+                    key={`${metric.value}-${metric.label}`}
+                    className={styles.metric}
+                  >
+                    <JzText variant="body-strong" label={metric.value} />
+                    <JzText
+                      variant="caption"
+                      color="muted"
+                      label={metric.label}
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : null}
             {project?.url && !project.summary?.includes(project.url) ? (
               <JzText
                 variant="body-default"

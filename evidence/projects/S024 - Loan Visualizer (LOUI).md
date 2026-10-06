@@ -30,7 +30,7 @@ year_note: Project calendar was not supplied. Estimated inside R007 (Aug 2018–
 delivery_stage: prototype
 annotation:
   status: reviewed
-  vocabulary_version: "1.7.0"
+  vocabulary_version: "1.10.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review

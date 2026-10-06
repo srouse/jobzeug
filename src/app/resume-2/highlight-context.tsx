@@ -83,7 +83,7 @@ type ResumeHighlightContextValue = {
   /** Career timeline column in the resume. On until the stage toggle. */
   timelineVisible: boolean;
   setTimelineVisible: (next: boolean) => void;
-  /** Right-hand job posting column. Off lets the stage run flush to the right. */
+  /** Job posting column. Closed, it is a narrow strip and the project list opens up. */
   jobPostingOpen: boolean;
   setJobPostingOpen: (next: boolean) => void;
   /** Medium-layout page tab (resume vs job). Unused for visibility on wide. */

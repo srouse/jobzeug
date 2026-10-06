@@ -28,7 +28,7 @@ year_note: Estimated from R001 (February 2026–present as of September 2026). H
 delivery_stage: prototype
 annotation:
   status: draft
-  vocabulary_version: "1.7.0"
+  vocabulary_version: "1.10.0"
   reviewed_by: null
   reviewed_at: null
 public_disclosure: needs_review
@@ -192,8 +192,6 @@ Walkthrough:
 ## Presentation
 
 Blurb: I built a proof of concept for a knowledge-management system on Contentful, from a data lake of raw material to structured content. The recording is that path, including an answer a person can still stop.
-
-Video: 7fJNLe70kWYQLiHQ4Eb49L
 
 - value: Three parts
   label: In, structure, then use

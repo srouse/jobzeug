@@ -1,9 +1,0 @@
-{
-  "evidenceId": "S008-presentation",
-  "blurb": "I built Contentful for Figma, a public widget that signs in with a one-time code, then binds live fields onto components. The recording is that path, from sign-in to real content on the canvas.",
-  "video": "2rAtcKDtRArNx6ZwePxW29",
-  "metricOneValue": "2–3 days",
-  "metricOneLabel": "Initial v1",
-  "metricTwoValue": "Public",
-  "metricTwoLabel": "Live Figma widget"
-}

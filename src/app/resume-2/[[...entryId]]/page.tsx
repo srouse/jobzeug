@@ -14,5 +14,11 @@ export default async function Resume2Page({
 }) {
   const { entryId: segments } = await params;
   const route = resumeRouteFromSegments(segments);
-  return <ResumeWorkspace initialEntryId={route.entryId} />;
+  return (
+    <ResumeWorkspace
+      initialEntryId={route.entryId}
+      initialLineId={route.lineId}
+      initialProjectId={route.projectId}
+    />
+  );
 }

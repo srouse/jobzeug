@@ -6,7 +6,6 @@
   ],
   "name": "Contentful for Figma Widget",
   "summary": "I built [Contentful for Figma](https://www.contentful.com/help/apps/contentful-for-figma/), a public widget that signs in with a one-time code because Figma cannot share the Contentful login, then binds live fields onto components. The [concepts](https://www.contentful.com/help/apps/contentful-for-figma/concepts/) and [field mapping](https://www.contentful.com/help/apps/contentful-for-figma/map-figma-properties-to-contentful-field-types/) pages are the public docs. The recording is that path, from sign-in to real content on the canvas.",
-  "presentation": "S008-presentation",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S008",
@@ -46,7 +45,7 @@
       "status": "reviewed",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.7.0"
+      "vocabulary_version": "1.10.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [

@@ -1,9 +1,0 @@
-{
-  "evidenceId": "S031-presentation",
-  "blurb": "I built a proof of concept for a knowledge-management system on Contentful, from a data lake of raw material to structured content. The recording is that path, including an answer a person can still stop.",
-  "video": "7fJNLe70kWYQLiHQ4Eb49L",
-  "metricOneValue": "Three parts",
-  "metricOneLabel": "In, structure, then use",
-  "metricTwoValue": "One import",
-  "metricTwoLabel": "Becomes structured content"
-}

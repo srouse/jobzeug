@@ -108,7 +108,10 @@ export async function loadBundle(root, id) {
   ] };
 }
 export function payload(record, locale) {
-  return { fields: Object.fromEntries(Object.entries(record.fields).map(([name, value]) => {
+  const source = record.kind === 'projectPresentation'
+    ? Object.fromEntries(Object.entries(record.fields).filter(([name]) => name !== 'video'))
+    : record.fields;
+  return { fields: Object.fromEntries(Object.entries(source).map(([name, value]) => {
     const spec = definitions[record.kind].fields[name];
     const link = key => ({ sys: { type: 'Link', linkType: 'Entry', id: entryId(key) } });
     const assetLink = id => ({ sys: { type: 'Link', linkType: 'Asset', id } });

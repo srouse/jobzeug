@@ -3,7 +3,7 @@ name: update-project
 description: >-
   Update an existing evidence project from a new telling, transcript, or video
   so it can match any posting. Saves the source intact, rewrites the employer
-  line, refreshes claims, attaches a video when one is given, and adds missing
+  line, refreshes claims, and adds missing
   vocabulary as a new approved version. Use when the user invokes update-project,
   or brings a video, transcript, or further account for an existing S00x.
 disable-model-invocation: true
@@ -26,12 +26,12 @@ Before editing, read (paths from repo root):
 3. `evidence/matching/vocabulary.yaml` — approved concept IDs, definitions, and `evidence_rule`s
 4. `evidence/projects/INDEX.md` — confirm the target exists
 5. The full target project file, including the header and every linked source it names
-6. `evidence/projects/S014 - Design tokens Contentful blog.md` and `evidence/projects/S009 - AI binding research.md` — the shape of a walkthrough addition, a presentation, and claims that cite a source file
+6. `evidence/projects/S014 - Design tokens Contentful blog.md` and `evidence/projects/S009 - AI binding research.md` — the shape of a walkthrough addition and claims that cite a source file
 
 Then reply with a short ready-state:
 
 - Target `S00x`, `annotation.status`, claim count, pinned `vocabulary_version`
-- Whether he gave a video asset id, a transcript, or a spoken account
+- Whether he gave a transcript or a spoken account. A walkthrough video is attached in Contentful and is not part of this pass.
 - One line: what this pass will add
 
 If the id is not on file, stop. Do not create a project.
@@ -67,28 +67,7 @@ Two sentences, first person, under 280 characters. Voice is Scott's Contentful a
 - Sentence two: the sharp result or limit. When the project has a video, that sentence is the reason to open it. Do not say "click" or "watch."
 - Stay inside the file and the new source. No new metrics. No capture voice ("Scott describes", "the learnings are real", "innovation prototype").
 
-### 4. Video
-
-When he gives a Contentful asset id (`^[A-Za-z0-9]+$`), put it on `Video:`. A URL is not an asset id. Never invent an id. Keep an id already on the section if he does not replace it.
-
-Use this shape. Metrics stay inside the section, before the next heading.
-
-```markdown
-## Presentation
-
-Blurb: <one paragraph, 280 characters or fewer>
-
-Video: <asset id, or empty>
-
-- value: <16 characters or fewer>
-  label: <32 characters or fewer>
-- value: <16 characters or fewer>
-  label: <32 characters or fewer>
-```
-
-The blurb is first person and matches the employer line. Both metric pairs must already be in the file or the new source. An unconfirmed rank stays labeled as his account. A pair you cannot ground stays `REPLACE` on both lines. A blank `Video:` or any `REPLACE` leaves the presentation a stub, so the resume shows no play control.
-
-### 5. Claims
+### 4. Claims
 
 Use **annotate-project**'s claim rules. Read each concept's definition and `evidence_rule` before assigning it.
 
@@ -100,7 +79,7 @@ Use **annotate-project**'s claim rules. Read each concept's definition and `evid
 - Limitations stay on the claim: his judgment, no benchmark, unshipped, no names, caption errors, agreements not inspected.
 - Do not use `local:product-strategy` or `local:product-direction-influence` without a roadmap he owns or a recorded decision. Do not use `local:public-technical-presentation` for an audience inside the company. Do not use `local:technical-discovery` for anything other than customer discovery. Do not use `local:figma-extension` unless this project is the widget. Initiative and other work-style labels are not concepts and do not score.
 
-### 6. Vocabulary
+### 5. Vocabulary
 
 After the claims, list every meaning the new source supports that no approved concept covers. Read the registry before deciding. A synonym of an existing concept is not a new concept. Writing about a system is not the same concept as building that system when the `evidence_rule` says so.
 
@@ -114,11 +93,11 @@ The repo keeps one registry file. Compress checks every project against that ver
 
 Clear a promoted idea off this project's `concept_proposals`. Attach the new id on the claim the source supports.
 
-### 7. Validate
+### 6. Validate
 
-Run `parseProjectHeader` from `scripts/contentful/matching/load-inputs.mjs` on the project. If the vocabulary changed, run `loadMatchingInputs` so every pinned header still validates. If the presentation is complete, run `presentationFromMarkdown` from `scripts/contentful/compress.mjs` and confirm it returns fields.
+Run `parseProjectHeader` from `scripts/contentful/matching/load-inputs.mjs` on the project. If the vocabulary changed, run `loadMatchingInputs` so every pinned header still validates.
 
-Do not compress or push. Tell Scott to run **compress-to-contentful** when he wants the app to show the line, the video, and the new tags.
+Do not compress or push. Tell Scott to run **compress-to-contentful** when he wants the app to show the line and the new tags. Do not write or replace `## Presentation`. Blurb, metrics, and video are edited in Contentful.
 
 ## Report
 
@@ -126,7 +105,6 @@ Do not compress or push. Tell Scott to run **compress-to-contentful** when he wa
 - Employer line, in one sentence
 - Claims added or retagged, with concept IDs. Approved claims left alone.
 - Vocabulary: none, or the new version and the new ids
-- Video asset id, or that the presentation is still a stub and which field blocked it
 - Limitations still open
 
 ## Hard rules

@@ -5,8 +5,7 @@
     "R002"
   ],
   "name": "Contentful Bulk Edit App",
-  "summary": "Bulk Edit started as a prototype I built in a day or two to solve a specific prospect need: editing large amounts of structured content as easily as working in a spreadsheet. I demonstrated it to two prospects, and we closed both deals. It grew into a Contentful product, and I stayed with it from that first customer idea through design, development, and into the marketplace, where it is now the most popular app. I also extended it with the AI-guided interface I developed for DemAI, applying that same approach to large-scale content changes.",
-  "presentation": "S002-presentation",
+  "summary": "I created Bulk Edit, an AI-powered Contentful app for updating content at scale that became the most popular app in the Contentful marketplace and helped close two prospects. I guided the concept from a customer demo into production and the marketplace, and extended it with AI that turns plain-language requests into proposed edits across content. Every proposed change is visible and easy to accept or reject individually or in bulk, keeping users in control.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S002",
@@ -48,7 +47,7 @@
       "status": "reviewed",
       "reviewed_by": "Scott",
       "reviewed_at": "2026-09-28",
-      "vocabulary_version": "1.7.0"
+      "vocabulary_version": "1.10.0"
     },
     "public_disclosure": "restricted",
     "evidence": [
@@ -263,7 +262,8 @@
         ],
         "limitations": [
           "Guiding it in is his account. The recording does not name who else published it.",
-          "He calls it the most popular app in the store. No ranking source is in the file."
+          "He calls it the most popular app in the store. No ranking source is in the file.",
+          "The October 6 script says one of the more popular apps in the marketplace, if not the most popular."
         ],
         "public_disclosure": "needs_review",
         "review": {
@@ -335,6 +335,66 @@
           "The caption says Demi, DIMI, and Falk edit. The project on file for that interface is DemAI. The code was not inspected.",
           "The prompt says \"track fuel.\" He does not say semantic search, and he does not name a model. An earlier account names a customer that is not cleared for public use.",
           "He says this build is not the marketplace app, and that at scale it has to work differently. He declines one proposed edit in the demo."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S002-E010",
+        "statement": "Helped move Bulk Edit into production and says he shaped the final version that exists today.",
+        "concept_ids": [
+          "local:production-release",
+          "local:contentful",
+          "local:solution-specialist"
+        ],
+        "ownership": "contributor",
+        "scope": "multiple_teams",
+        "delivery_stage": "production",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s002-bulk-edits-2026-10-06.md",
+            "locator": "0:00:44",
+            "supports": "He says he created and presented the original demo, helped move the concept into production, and shaped the final version that exists today."
+          }
+        ],
+        "limitations": [
+          "His account. He does not name who else published it.",
+          "The walkthrough in the same script is his own build, not the marketplace app."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S002-E011",
+        "statement": "Says Bulk Edit became one of the more popular apps in the Contentful marketplace, if not the most popular.",
+        "concept_ids": [
+          "local:marketplace-popularity",
+          "local:contentful"
+        ],
+        "ownership": "contributor",
+        "scope": "external_audience",
+        "delivery_stage": "production",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s002-bulk-edits-2026-10-06.md",
+            "locator": "0:00:39",
+            "supports": "He says it went on to become one of the more popular Contentful applications in the marketplace, if not the most popular."
+          }
+        ],
+        "limitations": [
+          "His account. No ranking source, install count, or revenue figure is in the file.",
+          "This telling hedges the earlier \"most popular\" line.",
+          "The rank does not establish that he caused it."
         ],
         "public_disclosure": "needs_review",
         "review": {

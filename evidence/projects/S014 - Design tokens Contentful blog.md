@@ -30,7 +30,7 @@ year_note: 2024 publication year recorded for the May 16, 2024 article.
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: "1.7.0"
+  vocabulary_version: "1.10.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -237,14 +237,12 @@ Article (concept):
 
 ## Presentation
 
-Blurb: I wrote and illustrated Contentful’s public guide on layered tokens, using AI to clean a speech-to-text draft so editors made one or two fixes. The recording is the semantic grid.
+Blurb: I wrote Design Tokens Explained for Contentful to make a complex design systems topic accessible to people across design, engineering, and content. Through clear visuals and a practical example built step by step, I show how tokens turn design decisions into a shared language teams can use. More than two years after publication, it ranked among Contentful’s top 10 blog posts by performance, and our CEO highlighted it in a company-wide video. It reflects a strength I bring to my work: understanding complex systems deeply enough to make them approachable and useful to others.
 
-Video: 2tn2GLHJ4gYwd3j2szwhl9
-
-- value: Top 10
+- value: Top Blog Post
   label: Contentful blog performance
-- value: Semantic grid
-  label: Show what is missing too
+- value: CEO Call Out
+  label: Company wide
 
 ## Addition — September 28, 2026: walkthrough transcript
 

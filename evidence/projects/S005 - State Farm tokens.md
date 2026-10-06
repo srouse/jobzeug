@@ -31,7 +31,7 @@ year_note: Estimated as 2023, the main calendar year of R004 (July 2023–Januar
 delivery_stage: mixed
 annotation:
   status: reviewed
-  vocabulary_version: "1.7.0"
+  vocabulary_version: "1.10.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review

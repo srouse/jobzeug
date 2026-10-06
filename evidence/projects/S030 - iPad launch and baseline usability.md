@@ -36,7 +36,7 @@ year_note: The account does not date the work. 2012 sits inside the R012 tenure 
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: "1.7.0"
+  vocabulary_version: "1.10.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review

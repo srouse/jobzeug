@@ -1,15 +1,15 @@
 # Authoritative concept registry. Read engine.md and project-header-schema.md first.
 # Approval here covers vocabulary definitions only, never claims about Scott.
 schema_version: "1.0"
-vocabulary_version: 1.7.0
+vocabulary_version: 1.10.0
 title: Jobzeug project matching vocabulary
 status: approved
 created_at: 2026-09-26
 review:
   reviewed_by: Scott
-  reviewed_at: 2026-09-29
-  scope: 1.7.0 adds bulk content editing and AI edit approval at Scott's request while updating
-    S002. Prior concepts remain the 1.6.0 review. This file does not approve project claims.
+  reviewed_at: 2026-10-06
+  scope: 1.10.0 adds marketplace popularity at Scott's request while updating S002. Prior concepts
+    remain their earlier reviews. This file does not approve project claims.
 purpose: Shared controlled concepts for project evidence and incoming job requirements; no fixed
   employer, posting, or project ranking.
 categories:
@@ -2506,3 +2506,83 @@ concepts:
       reviewed_by: Scott
       reviewed_at: 2026-09-29
       scope: Added in vocabulary 1.7.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:storybook
+    label: Storybook
+    definition: The Storybook workshop for previewing UI components, including the stories that render
+      them.
+    category: tool
+    aliases: []
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Require stories or a preview pipeline he set up. Naming Storybook, or opening
+      someone else's, is not this tool.
+    basis:
+      project_ids:
+        - S001
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-10-06
+      scope: Added in vocabulary 1.8.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:experience-orchestration
+    label: Experience Orchestration
+    definition: Contentful's Experience Orchestration product, including configuration that connects a
+      design system to it.
+    category: tool
+    aliases:
+      - ExO
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Generating configuration, or researching the product, is not ownership of the
+      product. Keep that work distinct from building the product. A caption that says XO counts only
+      when the telling is about this product.
+    basis:
+      project_ids:
+        - S001
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-10-06
+      scope: Added in vocabulary 1.8.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:internal-recognition
+    label: Internal recognition
+    definition: Formal recognition from people inside the organization for work they judged beyond
+      what they expected.
+    category: outcome
+    aliases:
+      - internal award
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: Require who gave it. A missing award name or date stays a limitation. It does not
+      establish customer adoption, a public award, or that the work shipped.
+    basis:
+      project_ids:
+        - S001
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-10-06
+      scope: Added in vocabulary 1.9.0 at Scott's request. Definition only; not approval of a claim.
+  - id: local:marketplace-popularity
+    label: Marketplace popularity
+    definition: An account that a shipped app ranks among the most used listings in a public marketplace.
+    category: outcome
+    aliases:
+      - most popular app
+      - marketplace ranking
+    status: approved
+    broader_ids: []
+    external_mappings: []
+    evidence_rule: A spoken rank without a measured source stays his account. It does not establish
+      install counts, revenue, or that he caused the rank.
+    basis:
+      project_ids:
+        - S002
+      requirement_source_ids: []
+    review:
+      reviewed_by: Scott
+      reviewed_at: 2026-10-06
+      scope: Added in vocabulary 1.10.0 at Scott's request. Definition only; not approval of a claim.

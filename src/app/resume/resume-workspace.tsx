@@ -96,17 +96,23 @@ function lineFromRoute(focus: ResumeFocus | null): LineFocus | null {
   return focus ? { kind: focus.kind, id: focus.id } : null;
 }
 
-function routeFromLine(focus: LineFocus | null): ResumeFocus | null {
-  if (!focus || focus.kind === "answer") return null;
-  return { kind: focus.kind, id: focus.id };
+/**
+ * The address follows what the stage is showing.
+ * A project route opens that project and leaves the lines alone.
+ * A job-line route shows that line and draws from it.
+ * Clicks push a new entry. `/details` stays only while that same project is open.
+ */
+function stageRouteFocus(
+  stageProjectId: string | null,
+  lineFocus: LineFocus | null,
+): ResumeFocus | null {
+  if (stageProjectId) return { kind: "project", id: stageProjectId };
+  if (lineFocus?.kind === "jobLine") {
+    return { kind: "jobLine", id: lineFocus.id };
+  }
+  return null;
 }
 
-/**
- * Stage subject and the address stay the same value.
- * Route changes (load, Back, a new posting) apply onto line focus without
- * writing history. Clicks push a new entry.
- * `/details` stays on the path only while that same project is focused.
- */
 function FocusRouteSync({
   entryId,
   routeFocus,
@@ -118,17 +124,27 @@ function FocusRouteSync({
   onRouteFocus: (focus: ResumeFocus | null) => void;
   onDetails: (details: boolean) => void;
 }) {
-  const { lineFocus, applyLineFocus } = useResumeHighlights();
+  const { lineFocus, stageProjectId, applyLineFocus, applyStageProject } =
+    useResumeHighlights();
   const entryIdRef = useRef(entryId);
   entryIdRef.current = entryId;
 
   useEffect(() => {
-    applyLineFocus(lineFromRoute(routeFocus));
-  }, [routeFocus, applyLineFocus]);
+    if (routeFocus?.kind === "project") {
+      applyStageProject(routeFocus.id);
+      return;
+    }
+    applyStageProject(null);
+    applyLineFocus(
+      routeFocus?.kind === "jobLine"
+        ? { kind: "jobLine", id: routeFocus.id }
+        : null,
+    );
+  }, [routeFocus, applyLineFocus, applyStageProject]);
 
   useEffect(() => {
     if (lineFocus?.kind === "answer") return;
-    const next = routeFromLine(lineFocus);
+    const next = stageRouteFocus(stageProjectId, lineFocus);
     const current = resumeRouteFromPathname(window.location.pathname);
     const keepDetails =
       current.details &&
@@ -141,7 +157,7 @@ function FocusRouteSync({
       onRouteFocus(next);
     }
     if (current.details && !keepDetails) onDetails(false);
-  }, [lineFocus, onRouteFocus, onDetails]);
+  }, [lineFocus, stageProjectId, onRouteFocus, onDetails]);
 
   return null;
 }
@@ -480,7 +496,14 @@ export function ResumeWorkspace({
     details && focus?.kind === "project" ? focus.id : null;
 
   return (
-    <ResumeHighlightProvider initialLineFocus={lineFromRoute(initialFocus)}>
+    <ResumeHighlightProvider
+      initialLineFocus={
+        initialFocus?.kind === "jobLine" ? lineFromRoute(initialFocus) : null
+      }
+      initialStageProjectId={
+        initialFocus?.kind === "project" ? initialFocus.id : null
+      }
+    >
       <FocusRouteSync
         entryId={entryId}
         routeFocus={focus}

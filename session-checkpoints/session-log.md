@@ -893,3 +893,32 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 #### Next
 
 - None pending from this session
+
+### [2026-10-06T12:28:46-05:00]
+
+#### Summary
+
+- Resume 2 collapses the project list when no job line is selected, and the address stores the posting, job line, and selected project on the same page. Vocabulary 1.10.0 records new S001 and S002 sources.
+
+#### Changes
+
+- Evidence / records: vocabulary 1.8.0–1.10.0 (Storybook, Experience Orchestration, internal recognition, marketplace popularity); October 6 sources for S001 and S002 and an October 5 script for S009; local presentation output files removed
+- Skills / tooling: compress-to-contentful, stub-project-presentation, and update-project
+- Other: Resume 2 compact and matched list, connector timing, watched checks, and `history.pushState` for the job line and project
+
+#### Decisions
+
+- One page. Extra path segments are stored state. Selection changes use `history.pushState`, and a refresh is the only time the server reads the path
+- Job line comes first, then project. Binding a different posting clears both. An answer focus is not a path segment
+- Connector curves appear only when the posting is fully open and a job line is selected. Closing the posting drops them immediately
+- The design-system package, Contentful import error logs, debug logs, and the German amount-words PDF stay unstaged
+
+#### Plans cached
+
+- leave_presentations_in_contentful_f95cddc0.plan.md
+- stop_pushing_videos_25045958.plan.md
+- watched_video_checkmarks_ae9d4527.plan.md
+
+#### Next
+
+- None pending from this session

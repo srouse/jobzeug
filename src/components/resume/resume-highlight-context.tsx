@@ -19,6 +19,7 @@ import {
   type AskContextSource,
 } from "@/lib/resume-default-prompts";
 import type { LineFocus } from "@/lib/connection-targets";
+import { sameProjectId } from "./project-presentation/project-presentation";
 
 export type { LineFocus };
 
@@ -53,15 +54,24 @@ type ResumeHighlightContextValue = {
   /** Citations for the selected highlight section. Used when the line focus is the AI result. */
   focusedIds: Set<string>;
   /**
-   * Who the connector lines follow. A project, a job line, or the AI result.
-   * Only one of those at a time.
+   * Who the connector lines follow. A job line or the AI result.
+   * A project open in the stage does not move these lines.
    */
   lineFocus: LineFocus | null;
-  /** Select a project or job line. The same row again clears it. */
+  /**
+   * Project open in the stage. The same project again closes it.
+   * Separate from the lines.
+   */
+  stageProjectId: string | null;
+  /** Select a project or job line. The same row again clears that choice. */
   selectLine: (next: { kind: "project" | "jobLine"; id: string }) => void;
-  /** Set the stage subject exactly. Used when the URL changes. */
+  /** Set the line driver exactly. Used when the URL changes. */
   applyLineFocus: (next: LineFocus | null) => void;
-  /** Return the stage to the home landing. */
+  /** Set the project open in the stage. Used when the URL changes. */
+  applyStageProject: (id: string | null) => void;
+  /** Close the project in the stage. The lines stay. */
+  clearStageProject: () => void;
+  /** Return the stage to the home landing and clear the lines. */
   clearLineFocus: () => void;
   /** Hand the lines to the current AI result. */
   focusAnswer: () => void;
@@ -106,9 +116,11 @@ function sameLineFocus(a: LineFocus | null, b: LineFocus | null): boolean {
 export function ResumeHighlightProvider({
   children,
   initialLineFocus = null,
+  initialStageProjectId = null,
 }: {
   children: ReactNode;
   initialLineFocus?: LineFocus | null;
+  initialStageProjectId?: string | null;
 }) {
   const [activeCluster, setActiveClusterState] =
     useState<EvidenceCluster | null>(null);
@@ -129,10 +141,20 @@ export function ResumeHighlightProvider({
   const [askContextItems, setAskContextItems] = useState<AskContextItem[]>([]);
   const [pageBindingsVisible, setPageBindingsVisible] = useState(true);
   const [lineFocus, setLineFocus] = useState<LineFocus | null>(initialLineFocus);
+  const [stageProjectId, setStageProjectId] = useState<string | null>(
+    initialStageProjectId,
+  );
   const clusterIdRef = useRef<string | null>(null);
 
   const selectLine = useCallback(
     (next: { kind: "project" | "jobLine"; id: string }) => {
+      if (next.kind === "project") {
+        setStageProjectId((current) =>
+          current != null && sameProjectId(current, next.id) ? null : next.id,
+        );
+        return;
+      }
+      setStageProjectId(null);
       setLineFocus((current) => {
         if (
           current &&
@@ -151,8 +173,21 @@ export function ResumeHighlightProvider({
     setLineFocus((current) => (sameLineFocus(current, next) ? current : next));
   }, []);
 
+  const applyStageProject = useCallback((id: string | null) => {
+    setStageProjectId((current) => {
+      if (current === id) return current;
+      if (current && id && sameProjectId(current, id)) return current;
+      return id;
+    });
+  }, []);
+
+  const clearStageProject = useCallback(() => {
+    setStageProjectId(null);
+  }, []);
+
   const clearLineFocus = useCallback(() => {
     setLineFocus(null);
+    setStageProjectId(null);
   }, []);
 
   const focusAnswer = useCallback(() => {
@@ -254,8 +289,11 @@ export function ResumeHighlightProvider({
       highlightedIds,
       focusedIds,
       lineFocus,
+      stageProjectId,
       selectLine,
       applyLineFocus,
+      applyStageProject,
+      clearStageProject,
       clearLineFocus,
       focusAnswer,
       density,
@@ -284,8 +322,11 @@ export function ResumeHighlightProvider({
     evidencePage,
     askContextItems,
     lineFocus,
+    stageProjectId,
     selectLine,
     applyLineFocus,
+    applyStageProject,
+    clearStageProject,
     clearLineFocus,
     focusAnswer,
     setActiveCluster,

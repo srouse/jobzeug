@@ -32,6 +32,7 @@ export function StageTools({ onOpenDesign }: { onOpenDesign?: () => void }) {
     density,
     setDensity,
     lineFocus,
+    stageProjectId,
     clearLineFocus,
     fitBarsVisible,
     setFitBarsVisible,
@@ -61,7 +62,7 @@ export function StageTools({ onOpenDesign }: { onOpenDesign?: () => void }) {
         label="Home"
         icon="House"
         title="Home"
-        aria-pressed={lineFocus == null}
+        aria-pressed={lineFocus == null && stageProjectId == null}
         onClick={clearLineFocus}
       />
       <JzIconButton

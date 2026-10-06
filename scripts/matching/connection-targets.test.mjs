@@ -15,21 +15,10 @@ const edges = [
   { projectId: "S001", lineEntryId: "jz-line-6", points: 10 },
 ];
 
-test("a project focus keeps its four highest job lines blue", () => {
-  assert.deepEqual(
+test("a project open in the stage draws no lines", () => {
+  assert.equal(
     activeConnectionTarget({ kind: "project", id: "S001" }, edges, ["S009"], true),
-    {
-      hub: "selection",
-      ids: [
-        { id: "S001", role: "subject", strength: "primary" },
-        { id: "jz-line-1", role: "reference", strength: "primary" },
-        { id: "jz-line-2", role: "reference", strength: "primary" },
-        { id: "jz-line-3", role: "reference", strength: "primary" },
-        { id: "jz-line-4", role: "reference", strength: "primary" },
-        { id: "jz-line-5", role: "reference", strength: "secondary" },
-        { id: "jz-line-6", role: "reference", strength: "secondary" },
-      ],
-    },
+    null,
   );
 });
 
@@ -100,16 +89,16 @@ test("hiding answer bindings draws nothing while an AI result is focused", () =>
 
 test("a focus draws at most ten lines and drops the lowest scores", () => {
   const many = [
-    { projectId: "S001", lineEntryId: "jz-low", points: 1 },
+    { projectId: "S-low", lineEntryId: "jz-line-1", points: 1 },
     ...Array.from({ length: 10 }, (_, index) => ({
-      projectId: "S001",
-      lineEntryId: `jz-mid-${index + 1}`,
+      projectId: `S-mid-${index + 1}`,
+      lineEntryId: "jz-line-1",
       points: 20 + index,
     })),
-    { projectId: "S001", lineEntryId: "jz-high", points: 90 },
+    { projectId: "S-high", lineEntryId: "jz-line-1", points: 90 },
   ];
   const target = activeConnectionTarget(
-    { kind: "project", id: "S001" },
+    { kind: "jobLine", id: "jz-line-1" },
     many,
     [],
     true,
@@ -117,15 +106,15 @@ test("a focus draws at most ten lines and drops the lowest scores", () => {
   assert.equal(target.ids.length, 10);
   assert.equal(target.ids[0].role, "subject");
   assert.equal(
-    target.ids.some((endpoint) => endpoint.id === "jz-high"),
+    target.ids.some((endpoint) => endpoint.id === "S-high"),
     true,
   );
   assert.equal(
-    target.ids.some((endpoint) => endpoint.id === "jz-low"),
+    target.ids.some((endpoint) => endpoint.id === "S-low"),
     false,
   );
   assert.equal(
-    target.ids.some((endpoint) => endpoint.id === "jz-mid-1"),
+    target.ids.some((endpoint) => endpoint.id === "S-mid-1"),
     false,
   );
 });

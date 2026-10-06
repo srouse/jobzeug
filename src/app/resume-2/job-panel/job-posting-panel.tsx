@@ -191,7 +191,7 @@ function DetailsBody({
                           selectLine({ kind: "jobLine", id: line.entryId })
                         }
                         label="Select job line"
-                        edge="left"
+                        edge="right"
                         contentId={line.entryId}
                         fitBarsOff={!fitBarsVisible}
                         contentClassName={classNames(
@@ -413,6 +413,19 @@ export function UnboundBindForm() {
   );
 }
 
+function MinimizeJobButton() {
+  const { setJobPostingOpen } = useResumeHighlights();
+  return (
+    <JzIconButton
+      label="Hide job posting"
+      icon="SidebarSimple"
+      title="Hide job posting"
+      aria-pressed={true}
+      onClick={() => setJobPostingOpen(false)}
+    />
+  );
+}
+
 function BoundPanel({
   data,
   resumeProjectIds,
@@ -420,34 +433,15 @@ function BoundPanel({
   data: JobPostingPanelData;
   resumeProjectIds: readonly string[];
 }) {
-  const { busy, unbind } = useJobPosting();
   const { ref: scrollRef, scrolling } = useIdleScrollbar();
   const [fullOpen, setFullOpen] = useState(false);
   const modalTitle = data.company
     ? `${data.company} — ${data.title}`
     : data.title;
 
-  const clearPosting = async () => {
-    if (busy) return;
-    try {
-      await unbind();
-    } catch {
-      // error surfaced via context
-    }
-  };
-
   return (
     <>
-      <EvidencePageHeader
-        actions={
-          <JzIconButton
-            label="Unbind"
-            icon="X"
-            disabled={busy}
-            onClick={() => void clearPosting()}
-          />
-        }
-      >
+      <EvidencePageHeader actions={<MinimizeJobButton />}>
         <JzText
           variant="overline"
           color="muted"
@@ -494,7 +488,7 @@ function PanelChrome({ children }: { children: ReactNode }) {
   const { ref: scrollRef, scrolling } = useIdleScrollbar();
   return (
     <>
-      <EvidencePageHeader>
+      <EvidencePageHeader actions={<MinimizeJobButton />}>
         <JzText
           variant="overline"
           color="muted"

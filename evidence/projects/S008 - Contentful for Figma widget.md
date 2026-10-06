@@ -29,7 +29,7 @@ year_note: Estimated from R001 (February 2026–present as of September 2026); p
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: "1.7.0"
+  vocabulary_version: "1.10.0"
   reviewed_by: Codex
   reviewed_at: "2026-09-26"
 public_disclosure: needs_review
@@ -314,8 +314,6 @@ He presented that work during the Berlin event, now part of [Experience Orchestr
 ## Presentation
 
 Blurb: I built Contentful for Figma, a public widget that signs in with a one-time code, then binds live fields onto components. The recording is that path, from sign-in to real content on the canvas.
-
-Video: 2rAtcKDtRArNx6ZwePxW29
 
 - value: 2–3 days
   label: Initial v1

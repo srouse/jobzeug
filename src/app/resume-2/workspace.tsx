@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { EMPTY_MATCH_EDGES } from "@/lib/connection-targets";
 import type { ResumeViewModel } from "@/lib/contentful/resume-model";
 import {
@@ -10,12 +10,14 @@ import {
   useJobPosting,
 } from "@/components/job-posting";
 import { EvidencePageHeader } from "@/components/evidence-page-header";
-import { JzText } from "@jobzeug/design-system/react";
+import { JzButton, JzIconButton, JzText } from "@jobzeug/design-system/react";
+import { CareerTimeline } from "@/components/resume/career-timeline/career-timeline";
 
 import { ResumeConnectors } from "./connectors";
 import {
   ResumeHighlightProvider,
   useResumeHighlights,
+  type LineFocus,
 } from "./highlight-context";
 import { JobPostingPanel } from "./job-panel/job-posting-panel";
 import { MiddleProjects } from "./middle-projects";
@@ -30,6 +32,10 @@ import styles from "./resume-2.module.css";
 import { AnswerStage } from "./stage/answer-stage/answer-stage";
 import { DesignModal } from "./stage/design-modal/design-modal";
 import { DesignSessionProvider } from "./stage/design-session-context";
+import {
+  useWatchedProjects,
+  WatchedProjectsProvider,
+} from "./watched-projects";
 
 const DEFAULT_NAME = "Scott Rouse";
 
@@ -47,7 +53,22 @@ function ResumeCover({ resumeLoading }: { resumeLoading: boolean }) {
 }
 
 function ResumePageBody() {
-  const { lineFocus, stageProjectId, applyStageProject } = useResumeHighlights();
+  return (
+    <WatchedProjectsProvider>
+      <ResumePageView />
+    </WatchedProjectsProvider>
+  );
+}
+
+function ResumePageView() {
+  const {
+    lineFocus,
+    stageProjectId,
+    applyStageProject,
+    jobPostingOpen,
+    setJobPostingOpen,
+  } = useResumeHighlights();
+  const { markWatched, clearWatched } = useWatchedProjects();
   const { data: posting } = useJobPosting();
   const [resume, setResume] = useState<ResumeViewModel | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -129,11 +150,19 @@ function ResumePageBody() {
 
   const covered = !posting || loading;
   const name = resume?.name ?? DEFAULT_NAME;
+  const timelineSelection = useMemo(
+    () =>
+      stageProjectId
+        ? [{ id: stageProjectId, strength: "primary" as const }]
+        : [],
+    [stageProjectId],
+  );
 
   return (
     <main className={styles.root}>
       <div
         className={styles.shell}
+        data-job-closed={jobPostingOpen ? undefined : ""}
         inert={covered ? true : undefined}
         aria-hidden={covered || undefined}
       >
@@ -141,12 +170,39 @@ function ResumePageBody() {
           className={styles.job}
           data-resume2-job
           data-evidence-pane="job"
-          data-evidence-pane-active=""
+          data-evidence-pane-active={jobPostingOpen ? "" : undefined}
         >
-          <JobPostingPanel resumeProjectIds={resumeProjectIds} />
+          <div
+            className={styles.jobBody}
+            inert={jobPostingOpen ? undefined : true}
+            aria-hidden={jobPostingOpen ? undefined : true}
+          >
+            <JobPostingPanel resumeProjectIds={resumeProjectIds} />
+          </div>
         </div>
+        {jobPostingOpen ? null : (
+          <div className={styles.jobToggle}>
+            <JzIconButton
+              label="Show job posting"
+              icon="SidebarSimple"
+              title="Show job posting"
+              aria-pressed={false}
+              onClick={() => setJobPostingOpen(true)}
+            />
+          </div>
+        )}
         <div className={styles.main}>
-          <EvidencePageHeader>
+          <EvidencePageHeader
+            actions={
+              <JzButton
+                label="Clear watched"
+                variant="secondary"
+                size="small"
+                showIcon={false}
+                onClick={clearWatched}
+              />
+            }
+          >
             <JzText
               variant="overline"
               color="muted"
@@ -162,32 +218,38 @@ function ResumePageBody() {
           </EvidencePageHeader>
           <div className={styles.body}>
             <section className={styles.projects} aria-label="Projects">
-              {error ? (
-                <JzText
-                  variant="label"
-                  color="error"
-                  label={error}
-                  className={styles.status}
-                />
-              ) : (
-                <MiddleProjects
-                  lineSelected={lineId != null}
-                  topThree={topThree}
-                  allProjects={projects}
-                  stageProjectId={stageProjectId}
-                  onOpenProject={applyStageProject}
-                />
-              )}
+              <CareerTimeline
+                employers={resume?.employers}
+                selectedProjects={timelineSelection}
+                open={!jobPostingOpen}
+              >
+                {error ? (
+                  <JzText
+                    variant="label"
+                    color="error"
+                    label={error}
+                    className={styles.status}
+                  />
+                ) : (
+                  <MiddleProjects
+                    matched={jobPostingOpen && lineId != null}
+                    topThree={topThree}
+                    employers={resume?.employers ?? []}
+                    stageProjectId={stageProjectId}
+                    onOpenProject={applyStageProject}
+                  />
+                )}
+              </CareerTimeline>
             </section>
-            <div
-              className={styles.stageCol}
-              data-presenting={presentationId ? "" : undefined}
-            >
+            <div className={styles.stageCol}>
               <AnswerStage
                 resume={resume}
                 presentationId={presentationId}
                 onClosePresentation={() => setPresentationId(null)}
-                onViewProject={setPresentationId}
+                onViewProject={(projectId) => {
+                  setPresentationId(projectId);
+                  markWatched(projectId);
+                }}
                 onOpenDesign={() => setDesignOpen(true)}
               />
             </div>
@@ -195,7 +257,8 @@ function ResumePageBody() {
         </div>
       </div>
       <ResumeConnectors
-        enabled={!covered && lineId != null}
+        covered={covered}
+        postingOpen={jobPostingOpen}
         lineId={lineId}
         orderedIds={resumeProjectIds}
         projectIds={topThreeIds}
@@ -208,37 +271,114 @@ function ResumePageBody() {
 }
 
 /**
- * Client shell for `/resume-2` and `/resume-2/{entryId}`.
- * The posting id follows the address. The job line and the stage project
- * stay in React state so both can be active together.
+ * Writes the posting, job line, and stage project into the address.
+ * pushState only. The page stays mounted.
+ */
+function ResumeRouteSync({
+  entryId,
+  navEpoch,
+  setEntryId,
+}: {
+  entryId: string | null;
+  navEpoch: number;
+  setEntryId: (entryId: string | null) => void;
+}) {
+  const {
+    lineFocus,
+    stageProjectId,
+    applyLineFocus,
+    applyStageProject,
+  } = useResumeHighlights();
+  const lineId = lineFocus?.kind === "jobLine" ? lineFocus.id : null;
+  const navSeen = useRef(navEpoch);
+
+  useEffect(() => {
+    const onPopState = () => {
+      const route = resumeRouteFromPathname(window.location.pathname);
+      setEntryId(route.entryId);
+      applyLineFocus(route.lineId ? { kind: "jobLine", id: route.lineId } : null);
+      applyStageProject(route.projectId);
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, [applyLineFocus, applyStageProject, setEntryId]);
+
+  useEffect(() => {
+    if (navSeen.current !== navEpoch) {
+      navSeen.current = navEpoch;
+      const path = resumePath(entryId, null, null);
+      if (window.location.pathname !== path) {
+        window.history.pushState(null, "", path);
+      }
+      if (lineId) applyLineFocus(null);
+      if (stageProjectId) applyStageProject(null);
+      return;
+    }
+    const path = resumePath(entryId, lineId, stageProjectId);
+    if (window.location.pathname !== path) {
+      window.history.pushState(null, "", path);
+    }
+  }, [
+    applyLineFocus,
+    applyStageProject,
+    entryId,
+    lineId,
+    navEpoch,
+    stageProjectId,
+  ]);
+
+  return null;
+}
+
+/**
+ * Client shell for `/resume-2`. The posting, job line, and stage project
+ * are stored in the address. Selection changes use history.pushState.
  */
 export function ResumeWorkspace({
   initialEntryId,
+  initialLineId,
+  initialProjectId,
 }: {
   initialEntryId: string | null;
+  initialLineId: string | null;
+  initialProjectId: string | null;
 }) {
   const [entryId, setEntryId] = useState<string | null>(() =>
     normalizeRouteEntryId(initialEntryId),
   );
+  const [navEpoch, setNavEpoch] = useState(0);
+  const initialLineFocus: LineFocus | null = initialLineId
+    ? { kind: "jobLine", id: initialLineId }
+    : null;
 
-  useEffect(() => {
-    const onPopState = () => {
-      setEntryId(resumeRouteFromPathname(window.location.pathname).entryId);
-    };
-    window.addEventListener("popstate", onPopState);
-    return () => window.removeEventListener("popstate", onPopState);
+  const entryIdRef = useRef(normalizeRouteEntryId(initialEntryId));
+
+  const setEntryFromRoute = useCallback((next: string | null) => {
+    const resolved = normalizeRouteEntryId(next);
+    entryIdRef.current = resolved;
+    setEntryId(resolved);
   }, []);
 
   const navigateEntryId = useCallback((next: string | null) => {
     const resolved = normalizeRouteEntryId(next);
-    window.history.pushState(null, "", resumePath(resolved));
+    if (entryIdRef.current === resolved) return;
+    entryIdRef.current = resolved;
     setEntryId(resolved);
+    setNavEpoch((epoch) => epoch + 1);
   }, []);
 
   return (
-    <ResumeHighlightProvider>
+    <ResumeHighlightProvider
+      initialLineFocus={initialLineFocus}
+      initialStageProjectId={initialProjectId}
+    >
       <JobPostingProvider entryId={entryId} navigateEntryId={navigateEntryId}>
         <DesignSessionProvider>
+          <ResumeRouteSync
+            entryId={entryId}
+            navEpoch={navEpoch}
+            setEntryId={setEntryFromRoute}
+          />
           <ResumePageBody />
         </DesignSessionProvider>
       </JobPostingProvider>

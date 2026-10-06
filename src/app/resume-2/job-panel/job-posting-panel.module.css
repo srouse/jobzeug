@@ -318,22 +318,6 @@
   box-shadow: inset -1px 0 0 var(--jz-semantic-color-border-default);
 }
 
-/* Wide layout puts the job column on the right, so the connector meets the left edge. */
-@media (min-width: 1300px) {
-  .lineSubject {
-    box-shadow: inset 2px 0 0 var(--jz-semantic-color-brand-primary);
-  }
-
-  .lineCited {
-    box-shadow: inset 2px 0 0
-      var(--jz-semantic-color-border-brand-strong, #2563eb);
-  }
-
-  .lineDimmed {
-    box-shadow: inset 1px 0 0 var(--jz-semantic-color-border-default);
-  }
-}
-
 .lineCopy {
   position: relative;
   width: 100%;

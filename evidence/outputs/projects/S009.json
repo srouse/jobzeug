@@ -5,8 +5,7 @@
     "R001"
   ],
   "name": "AI Component Binding",
-  "summary": "I built AI Binding, a working agent prototype for the Contentful for Figma widget, to help people connect content to Figma components faster. Through extensive experimentation and many iterations, I solved a difficult matching problem and demonstrated the solution to a broad audience within Contentful. The work also revealed opportunities to improve the metadata describing content and components, laying the groundwork for more reliable automation.",
-  "presentation": "S009-presentation",
+  "summary": "I built an AI binding agent that connects Contentful content to Figma components, but getting it to choose the right content consistently took more than matching field names. Giving the LLM real examples and the purpose behind each component made those connections predictable and revealed ways to improve the content model itself. Shared with teams at Contentful, the work accelerated related research and raised a bigger question: what if content systems stored intent alongside data?",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S009",
@@ -42,10 +41,10 @@
     "year_note": "Estimated from R001 (February 2026–present as of September 2026); project-specific year was not supplied.",
     "delivery_stage": "prototype",
     "annotation": {
-      "status": "reviewed",
-      "reviewed_by": "Codex",
-      "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.7.0"
+      "status": "needs_review",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "vocabulary_version": "1.10.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -133,6 +132,11 @@
             "ref": "../sources/s009-ai-binding-walkthrough-2026-09-28.md",
             "locator": "0:01:23 and 0:02:12",
             "supports": "He used populated instances and Contentful entries to estimate natural size, including about 100 characters for a card, after name-only binding failed."
+          },
+          {
+            "ref": "../sources/s009-predictable-content-bindings-2026-10-05.md",
+            "locator": "0:01:15 through 0:01:35",
+            "supports": "He pointed the LLM at component instances and content entries, generalized usual title and short-bio size, and says that match became predictable. This telling does not give a character count."
           }
         ],
         "limitations": [
@@ -165,6 +169,11 @@
             "ref": "../sources/s009-ai-binding-walkthrough-2026-09-28.md",
             "locator": "0:02:40",
             "supports": "Length could not separate challenge from outcome; he chose challenge for previews and asked the agent to describe what each field is for."
+          },
+          {
+            "ref": "../sources/s009-predictable-content-bindings-2026-10-05.md",
+            "locator": "0:01:38 through 0:02:23",
+            "supports": "A case study degraded because challenge and outcome were a similar size. A card should show the challenge and not spread the outcome. He then produced intent, including what an image means and how a field relates to the whole, and says the bindings snapped into place. This telling does not say he chose challenge every time he populated a card."
           }
         ],
         "limitations": [
@@ -228,6 +237,11 @@
             "ref": "../sources/s009-ai-binding-walkthrough-2026-09-28.md",
             "locator": "0:00:39 through 0:01:23",
             "supports": "He expected name and title, or bio and short bio, to be obvious, and the bindings stayed unreliable because the inputs were too thin."
+          },
+          {
+            "ref": "../sources/s009-predictable-content-bindings-2026-10-05.md",
+            "locator": "0:00:54 through 0:01:15",
+            "supports": "The task looked too simple. Bio versus short bio was unpredictable because he knew the bio was too long and the model had no reason to know that."
           }
         ],
         "limitations": [
@@ -419,6 +433,105 @@
         ],
         "limitations": [
           "Unshipped is his account of the current boundary, not a release record."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S009-E013",
+        "statement": "Wanted predictable LLM matches so the first binding would be faster and a property change on the component or the content type could be propagated, which is what would let him change either side freely.",
+        "concept_ids": [
+          "local:content-component-binding",
+          "local:ai-workflow-engineering",
+          "local:systems-analysis",
+          "local:figma",
+          "local:contentful",
+          "local:senior-product-architect"
+        ],
+        "ownership": "sole",
+        "scope": "individual",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s009-predictable-content-bindings-2026-10-05.md",
+            "locator": "0:00:22 through 0:00:54",
+            "supports": "He wanted an LLM to make the matches predictably so the first binding is faster and a property change on the component or the content type can be healed."
+          }
+        ],
+        "limitations": [
+          "Healing is the reason he gives. This script does not show a logged repair after a change.",
+          "Faster is his goal, not a measured time reduction."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S009-E014",
+        "statement": "After the bindings became predictable, the model looked inside JSON fields on real entries, found consistent content, and he read that as a signal the content type had not been designed to expose that content on its own.",
+        "concept_ids": [
+          "local:ai-workflow-engineering",
+          "local:ai-output-evaluation",
+          "local:critical-thinking",
+          "local:contentful",
+          "local:senior-product-architect"
+        ],
+        "ownership": "sole",
+        "scope": "individual",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s009-predictable-content-bindings-2026-10-05.md",
+            "locator": "0:02:23 through 0:02:46",
+            "supports": "Looking at real entries, it found consistent content inside JSON fields and connected that to the card. He treats that as a signal the content type was not designed well enough."
+          }
+        ],
+        "limitations": [
+          "The signal is his judgment. No field names, counts, or a revised content model are in the script.",
+          "This telling does not name telephone numbers. That example stays in the September 28 walkthrough.",
+          "The export has a caption false start, \"Thank you. Bye.\", immediately before this point."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S009-E015",
+        "statement": "Presented the work to people inside Contentful, said a couple of them had started the same path but not as far, and asked whether the platform should store intent rather than only field values, somewhere that is not unique to his prototype.",
+        "concept_ids": [
+          "local:speaking",
+          "local:semantic-metadata-design",
+          "local:systems-analysis",
+          "local:senior-product-architect"
+        ],
+        "ownership": "sole",
+        "scope": "individual",
+        "delivery_stage": "prototype",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s009-predictable-content-bindings-2026-10-05.md",
+            "locator": "0:02:43 through 0:03:12",
+            "supports": "He presented to people inside Contentful, said others had not gone as far and that he accelerated their research, and asked whether they are making databases or stores of intent."
+          }
+        ],
+        "limitations": [
+          "No names, dates, or a record of what those people changed.",
+          "Not quite as far, and accelerated that research, are his account.",
+          "He asks where intent should live. He does not record a decision or a roadmap he owns.",
+          "The audience is inside the company. Positive side effects of sharing are unnamed."
         ],
         "public_disclosure": "needs_review",
         "review": {

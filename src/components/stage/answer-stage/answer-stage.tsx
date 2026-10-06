@@ -57,14 +57,14 @@ export function AnswerStage({
     removeAskContext,
     jobPostingOpen,
     setJobPostingOpen,
-    lineFocus,
+    stageProjectId,
   } = useResumeHighlights();
   const presentation = presentedProject(resume, presentationId ?? null);
   const presenting = Boolean(
     presentation &&
       onClosePresentation &&
-      lineFocus?.kind === "project" &&
-      sameProjectId(lineFocus.id, presentation.evidenceId),
+      stageProjectId != null &&
+      sameProjectId(stageProjectId, presentation.evidenceId),
   );
   const [ease, setEase] = useState(presenting);
 
@@ -82,7 +82,7 @@ export function AnswerStage({
       setEase(true);
       return;
     }
-    const timeout = window.setTimeout(() => setEase(false), 900);
+    const timeout = window.setTimeout(() => setEase(false), 700);
     return () => window.clearTimeout(timeout);
   }, [presenting]);
   const {

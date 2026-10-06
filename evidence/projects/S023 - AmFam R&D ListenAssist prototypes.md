@@ -28,7 +28,7 @@ year_note: Estimated within R006 tenure (Nov 2019–Aug 2020); project-specific 
 delivery_stage: prototype
 annotation:
   status: reviewed
-  vocabulary_version: "1.7.0"
+  vocabulary_version: "1.10.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review

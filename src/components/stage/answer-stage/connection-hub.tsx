@@ -12,22 +12,15 @@ import type {
   ResumeViewModel,
 } from "@/lib/contentful/resume-model";
 import type { JobPostingPanelData } from "@/lib/job-posting/schema";
-import { recencyWeight } from "@/lib/matching/recency";
 import {
   coverageLineIds,
   lineExampleCoverage,
   lineFitBars,
   projectFitBars,
-  projectLineHits,
   strongExampleProjects,
-  topHomeLines,
-  topHomeProjects,
   type FitBar,
-  type HomeEdge,
   type HomeProject,
 } from "@/lib/matching/home-coverage";
-import { TopJobLines } from "../top-job-lines";
-import { TopProjects, type TopProjectItem } from "../top-projects";
 import {
   ProjectVideo,
   sameProjectId,
@@ -79,75 +72,22 @@ function resumeProjects(resume: ResumeViewModel | null): HomeProject[] {
   return projects;
 }
 
-function topProjectItems(
-  projects: ReadonlyArray<{
-    id: string;
-    name: string;
-    score?: number;
-    weighted?: number;
-  }>,
-  edges: readonly HomeEdge[],
-  lines: { required: readonly string[]; preferred: readonly string[] },
-): TopProjectItem[] {
-  return projects.map((project) => ({
-    id: project.id,
-    name: project.name,
-    required: projectLineHits(project.id, edges, lines.required),
-    preferred: projectLineHits(project.id, edges, lines.preferred),
-    score: project.score,
-    weighted: project.weighted,
-  }));
-}
-
 function HomeStat({
   value,
   detail,
   title,
-  prominent,
 }: {
   value: string;
   detail: string;
   title?: string;
-  prominent?: boolean;
 }) {
   return (
     <div className={styles.homeStat}>
       {title ? (
         <JzText variant="overline" color="muted" label={title} />
       ) : null}
-      <JzText
-        variant={prominent ? "display-large" : "title"}
-        label={value}
-      />
+      <span className={styles.homeStatValue}>{value}</span>
       <JzText variant="caption" color="muted" label={detail} />
-    </div>
-  );
-}
-
-function CoveragePair({
-  label,
-  percent,
-  covered,
-  total,
-  strong,
-}: {
-  label: string;
-  percent: number;
-  covered: number;
-  total: number;
-  strong: number;
-}) {
-  return (
-    <div className={styles.homeColumn}>
-      <JzText variant="overline" color="muted" label={label.toUpperCase()} />
-      <div className={styles.homePair}>
-        <HomeStat
-          prominent
-          value={`${percent}%`}
-          detail={`${covered} / ${total}`}
-        />
-        <HomeStat prominent value={String(strong)} detail="Strong examples" />
-      </div>
     </div>
   );
 }
@@ -159,98 +99,49 @@ function HomeLanding({
   resume: ResumeViewModel | null;
   posting: JobPostingPanelData;
 }) {
-  const { selectLine } = useResumeHighlights();
   const edges = posting.matchGraph?.edges ?? [];
   const projects = resumeProjects(resume);
   const projectIds = projects.map((project) => project.id);
   const lines = coverageLineIds(posting.lines);
   const required = lineExampleCoverage(lines.required, edges, projectIds);
   const preferred = lineExampleCoverage(lines.preferred, edges, projectIds);
-  const strongRequired = strongExampleProjects(
+  const requiredStrong = strongExampleProjects(
     projectIds,
     edges,
     lines.required,
   );
-  const strongPreferred = strongExampleProjects(
+  const preferredStrong = strongExampleProjects(
     projectIds,
     edges,
     lines.preferred,
   );
-  const top = topHomeProjects(
-    projects,
-    edges,
-    3,
-    posting.matchGraph?.projectYears,
-  );
-  const projectLineIds = new Set(lines.all);
-  const topLines = topHomeLines(
-    posting.lines.flatMap((line) =>
-      projectLineIds.has(line.entryId)
-        ? [{ entryId: line.entryId, name: line.theme }]
-        : [],
-    ),
-    edges,
-    projectIds,
-    3,
-    posting.matchGraph?.projectYears,
-  );
-  const topLineBars = lineFitBars(
-    topLines.map((line) => line.lineId),
-    edges,
-    projectIds,
-  );
 
   return (
     <div className={styles.home}>
-      <CoveragePair
-        label="Required"
-        percent={required.percent}
-        covered={required.covered}
-        total={required.total}
-        strong={strongRequired}
-      />
-      <div className={styles.homeBand}>
-        <CoveragePair
-          label="Preferred"
-          percent={preferred.percent}
-          covered={preferred.covered}
-          total={preferred.total}
-          strong={strongPreferred}
+      <div className={styles.homePair}>
+        <HomeStat
+          title="REQUIRED"
+          value={`${required.percent}%`}
+          detail={`${required.covered} / ${required.total}`}
+        />
+        <HomeStat
+          title="STRONG PROJECTS"
+          value={String(requiredStrong)}
+          detail="Required"
         />
       </div>
-      {top.length > 0 ? (
-        <div className={styles.homeBand}>
-          <TopProjects
-            projects={topProjectItems(
-              top.map((project) => ({
-                id: project.projectId,
-                name: project.name,
-                score: project.score,
-                weighted: project.ranked,
-              })),
-              edges,
-              lines,
-            )}
-            onSelect={(id) => selectLine({ kind: "project", id })}
-          />
-        </div>
-      ) : null}
-      {topLines.length > 0 ? (
-        <div className={styles.homeBand}>
-          <TopJobLines
-            lines={topLines.map((line) => {
-              const bar = topLineBars.get(line.lineId);
-              return {
-                id: line.lineId,
-                name: line.name,
-                projects: bar?.rows ?? 0,
-                tags: bar?.tags ?? 0,
-              };
-            })}
-            onSelect={(id) => selectLine({ kind: "jobLine", id })}
-          />
-        </div>
-      ) : null}
+      <div className={`${styles.homePair} ${styles.homeBand}`}>
+        <HomeStat
+          title="PREFERRED"
+          value={`${preferred.percent}%`}
+          detail={`${preferred.covered} / ${preferred.total}`}
+        />
+        <HomeStat
+          title="STRONG PROJECTS"
+          value={String(preferredStrong)}
+          detail="Preferred"
+        />
+      </div>
     </div>
   );
 }
@@ -265,6 +156,7 @@ function HubHeader({
   projectTotal,
   rowTotal,
   onBack,
+  onDismiss,
 }: {
   label: string;
   contentfulUrl?: string | null;
@@ -277,6 +169,8 @@ function HubHeader({
   /** Project-scoped job line count. Present on a project focus. */
   rowTotal?: number;
   onBack?: () => void;
+  /** Close the project page. Lines stay with the job line. */
+  onDismiss?: () => void;
 }) {
   const { clearLineFocus } = useResumeHighlights();
   const rows = score?.rows ?? 0;
@@ -325,10 +219,10 @@ function HubHeader({
           ) : null}
           <JzIconButton
             className={styles.hubLink}
-            label={onBack ? "Done" : "Home"}
+            label={onBack ? "Done" : onDismiss ? "Close" : "Home"}
             icon="X"
-            title={onBack ? "Done" : "Home"}
-            onClick={onBack ?? clearLineFocus}
+            title={onBack ? "Done" : onDismiss ? "Close" : "Home"}
+            onClick={onBack ?? onDismiss ?? clearLineFocus}
           />
         </div>
       </div>
@@ -350,40 +244,6 @@ function findProject(
   return findProjectContext(resume, projectId)?.project ?? null;
 }
 
-/** Every resume project with a hit on this job line. */
-function projectsOnLine(
-  resume: ResumeViewModel | null,
-  edges: readonly HomeEdge[],
-  lineId: string | undefined,
-) {
-  if (!lineId) return [];
-  const ids = new Set<string>();
-  for (const edge of edges) {
-    if (edge.lineEntryId === lineId && edge.points > 0) ids.add(edge.projectId);
-  }
-  return [...ids].flatMap((id) => {
-    const name = findProject(resume, id)?.name;
-    return name ? [{ id, name }] : [];
-  });
-}
-
-/** Every job line with a hit on this resume project. */
-function linesOnProject(
-  posting: JobPostingPanelData | null,
-  edges: readonly HomeEdge[],
-  projectId: string | undefined,
-) {
-  if (!projectId || !posting) return [];
-  const ids = new Set<string>();
-  for (const edge of edges) {
-    if (edge.projectId === projectId && edge.points > 0) ids.add(edge.lineEntryId);
-  }
-  return [...ids].flatMap((id) => {
-    const name = posting.lines.find((line) => line.entryId === id)?.theme;
-    return name ? [{ id, name }] : [];
-  });
-}
-
 function findProjectContext(
   resume: ResumeViewModel | null,
   projectId: string,
@@ -398,131 +258,6 @@ function findProjectContext(
     }
   }
   return null;
-}
-
-/** Center a row in a side column. Returns false when that row is not laid out yet. */
-function centerEvidence(paneName: "resume" | "job", id: string): boolean {
-  const pane = document.querySelector<HTMLElement>(
-    `[data-evidence-pane="${paneName}"]`,
-  );
-  const node = pane?.querySelector<HTMLElement>(
-    `[data-evidence-id="${CSS.escape(id)}"]`,
-  );
-  const root = node?.closest<HTMLElement>("[data-evidence-scroll]");
-  if (!node || !root || node.getBoundingClientRect().height === 0) return false;
-  const rootRect = root.getBoundingClientRect();
-  const nodeRect = node.getBoundingClientRect();
-  const top =
-    root.scrollTop +
-    (nodeRect.top - rootRect.top) -
-    (root.clientHeight - nodeRect.height) / 2;
-  const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ? "auto"
-    : "smooth";
-  root.scrollTo({ top: Math.max(0, top), behavior });
-  return true;
-}
-
-/** Show the column if it is hidden, then center the row once it has layout. */
-function revealAndCenter(
-  paneName: "resume" | "job",
-  id: string,
-  showPage: () => void,
-) {
-  const pane = document.querySelector<HTMLElement>(
-    `[data-evidence-pane="${paneName}"]`,
-  );
-  if (pane?.hidden) showPage();
-  const attempt = (left: number) => {
-    if (centerEvidence(paneName, id) || left <= 0) return;
-    requestAnimationFrame(() => attempt(left - 1));
-  };
-  requestAnimationFrame(() => attempt(2));
-}
-
-function TopConnections({
-  kind,
-  resume,
-  posting,
-}: {
-  kind: "project" | "jobLine";
-  resume: ResumeViewModel | null;
-  posting: JobPostingPanelData | null;
-}) {
-  const { setEvidencePage } = useResumeHighlights();
-  const connection = useActiveConnectionTarget();
-  const subjectId = connection?.ids.find((endpoint) => endpoint.role === "subject")?.id;
-  const edges = posting?.matchGraph?.edges ?? [];
-  const years = posting?.matchGraph?.projectYears;
-  const yearOf = (id: string) => years?.[id] ?? years?.[id.replace(/^jz-/, "")];
-  const pointsOf = (id: string) => {
-    let best = 0;
-    for (const edge of edges) {
-      const match =
-        kind === "project"
-          ? edge.projectId === subjectId && edge.lineEntryId === id
-          : edge.lineEntryId === subjectId && edge.projectId === id;
-      if (match && edge.points > best) best = edge.points;
-    }
-    return best;
-  };
-  const rankOf = (id: string) =>
-    kind === "jobLine"
-      ? pointsOf(id) * recencyWeight(yearOf(id))
-      : pointsOf(id) * recencyWeight(yearOf(subjectId ?? ""));
-  const byRank = (a: { id: string }, b: { id: string }) =>
-    rankOf(b.id) - rankOf(a.id) || a.id.localeCompare(b.id);
-
-  if (kind === "jobLine") {
-    const ordered = projectsOnLine(resume, edges, subjectId).sort(byRank);
-    if (ordered.length === 0) return null;
-    return (
-      <TopProjects
-        key={subjectId}
-        previewCount={Math.min(3, ordered.length)}
-        projects={topProjectItems(
-          ordered.map((item) => ({
-            ...item,
-            score: pointsOf(item.id),
-            weighted: rankOf(item.id),
-          })),
-          edges,
-          coverageLineIds(posting?.lines ?? []),
-        )}
-        onSelect={(id) =>
-          revealAndCenter("resume", id, () => setEvidencePage("resume"))
-        }
-      />
-    );
-  }
-
-  const ordered = linesOnProject(posting, edges, subjectId).sort(byRank);
-  if (ordered.length === 0) return null;
-
-  const bars = lineFitBars(
-    ordered.map((item) => item.id),
-    edges,
-    resumeProjects(resume).map((project) => project.id),
-  );
-
-  return (
-    <TopJobLines
-      key={subjectId}
-      previewCount={Math.min(3, ordered.length)}
-      lines={ordered.map((item) => {
-        const bar = bars.get(item.id);
-        return {
-          id: item.id,
-          name: item.name,
-          projects: bar?.rows ?? 0,
-          tags: bar?.tags ?? 0,
-        };
-      })}
-      onSelect={(id) =>
-        revealAndCenter("job", id, () => setEvidencePage("job"))
-      }
-    />
-  );
 }
 
 function briefKey(kind: "project" | "jobLine", id: string): string {
@@ -547,7 +282,7 @@ function BriefCopy({ text }: { text: string }) {
 /** The brief stays in the app. Flip this to show it and let a focus load it again. */
 const FOCUS_BRIEF_PAUSED: boolean = true;
 
-const PRESENT_MS = 900;
+const PRESENT_MS = 700;
 
 function ProjectVideoReveal({
   open,
@@ -746,7 +481,7 @@ export function ConnectionHub({
   presentationId?: string | null;
   onClosePresentation?: () => void;
 }) {
-  const { lineFocus } = useResumeHighlights();
+  const { lineFocus, stageProjectId, clearStageProject } = useResumeHighlights();
   const { data } = useJobPosting();
   const posting = data ?? null;
   const edges = posting?.matchGraph?.edges;
@@ -781,8 +516,8 @@ export function ConnectionHub({
   };
 
   let body: ReactNode;
-  if (lineFocus?.kind === "project") {
-    const focused = findProjectContext(resume, lineFocus.id);
+  if (stageProjectId) {
+    const focused = findProjectContext(resume, stageProjectId);
     const project = focused?.project ?? null;
     const showingVideo = Boolean(
       project?.presentation &&
@@ -796,7 +531,7 @@ export function ConnectionHub({
         employer={focused?.employerName}
         analysisUrl={
           posting?.entryId
-            ? `/analytics?jobPostingEntryId=${encodeURIComponent(posting.entryId)}&projectId=${encodeURIComponent(project?.evidenceId ?? lineFocus.id)}`
+            ? `/analytics?jobPostingEntryId=${encodeURIComponent(posting.entryId)}&projectId=${encodeURIComponent(project?.evidenceId ?? stageProjectId)}`
             : null
         }
         contentfulUrl={project?.contentfulUrl}
@@ -804,10 +539,11 @@ export function ConnectionHub({
         rowTotal={lineCount}
         score={
           edges
-            ? projectBars.get(project?.evidenceId ?? lineFocus.id)
+            ? projectBars.get(project?.evidenceId ?? stageProjectId)
             : undefined
         }
         onBack={showingVideo ? onClosePresentation : undefined}
+        onDismiss={clearStageProject}
       />
     );
     body = (
@@ -839,23 +575,22 @@ export function ConnectionHub({
                 />
               </div>
             ) : null}
-            <TopConnections kind="project" resume={resume} posting={posting} />
             <FocusBrief
-              key={lineFocus.id}
+              key={stageProjectId}
               kind="project"
               subject={{
-                id: project?.evidenceId ?? lineFocus.id,
+                id: project?.evidenceId ?? stageProjectId,
                 title: project?.name ?? "Project",
                 text: project?.summary ?? "",
               }}
               resume={resume}
               posting={posting}
               paragraph={
-                briefs[briefKey("project", project?.evidenceId ?? lineFocus.id)] ??
+                briefs[briefKey("project", project?.evidenceId ?? stageProjectId)] ??
                 null
               }
               onParagraph={(text) =>
-                saveBrief("project", project?.evidenceId ?? lineFocus.id, text)
+                saveBrief("project", project?.evidenceId ?? stageProjectId, text)
               }
             />
           </div>
@@ -895,7 +630,6 @@ export function ConnectionHub({
             <JzText variant="body-default" label={line.text} />
           ) : null}
         </div>
-        <TopConnections kind="jobLine" resume={resume} posting={posting} />
         <FocusBrief
           key={lineFocus.id}
           kind="jobLine"

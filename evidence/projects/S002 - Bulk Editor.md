@@ -31,7 +31,7 @@ year_note: Estimated as 2025 within R002 (February 2025–early 2026, with confl
 delivery_stage: mixed
 annotation:
   status: reviewed
-  vocabulary_version: "1.7.0"
+  vocabulary_version: "1.10.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-28"
 public_disclosure: restricted
@@ -209,6 +209,8 @@ evidence:
     limitations:
       - Guiding it in is his account. The recording does not name who else published it.
       - He calls it the most popular app in the store. No ranking source is in the file.
+      - The October 6 script says one of the more popular apps in the marketplace, if not the
+        most popular.
     public_disclosure: needs_review
     review:
       status: proposed
@@ -279,6 +281,54 @@ evidence:
       status: proposed
       reviewed_by: null
       reviewed_at: null
+  - id: S002-E010
+    statement: Helped move Bulk Edit into production and says he shaped the final version that
+      exists today.
+    concept_ids:
+      - local:production-release
+      - local:contentful
+      - local:solution-specialist
+    ownership: contributor
+    scope: multiple_teams
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "../sources/s002-bulk-edits-2026-10-06.md"
+        locator: "0:00:44"
+        supports: He says he created and presented the original demo, helped move the concept
+          into production, and shaped the final version that exists today.
+    limitations:
+      - His account. He does not name who else published it.
+      - The walkthrough in the same script is his own build, not the marketplace app.
+    public_disclosure: needs_review
+    review:
+      status: proposed
+      reviewed_by: null
+      reviewed_at: null
+  - id: S002-E011
+    statement: Says Bulk Edit became one of the more popular apps in the Contentful marketplace,
+      if not the most popular.
+    concept_ids:
+      - local:marketplace-popularity
+      - local:contentful
+    ownership: contributor
+    scope: external_audience
+    delivery_stage: production
+    provenance: self_report
+    sources:
+      - ref: "../sources/s002-bulk-edits-2026-10-06.md"
+        locator: "0:00:39"
+        supports: He says it went on to become one of the more popular Contentful applications
+          in the marketplace, if not the most popular.
+    limitations:
+      - His account. No ranking source, install count, or revenue figure is in the file.
+      - This telling hedges the earlier "most popular" line.
+      - The rank does not establish that he caused it.
+    public_disclosure: needs_review
+    review:
+      status: proposed
+      reviewed_by: null
+      reviewed_at: null
 concept_proposals: []
 ---
 # S002: Contentful Bulk Edit App
@@ -297,16 +347,15 @@ Evidence: Scott's direct account, not yet supported by inspected artifacts
 - Customers: [CU001 Tri Pointe Homes](../customers/CU001-tri-pointe-homes.md) (V1); [CU002 Trek](../customers/CU002-trek.md) (V2). Scott reports both related sales closed. **Public disclosure not cleared** — do not use these names in application copy until cleared.
 - Walkthrough transcript, kept separate: [S002 walkthrough, September 28, 2026](../sources/s002-bulk-edit-walkthrough-2026-09-28.md). Open it for the spoken detail. Do not treat it as the project account.
 - Later transcript, kept separate: [How I built Bulk Edit, September 29, 2026](../sources/s002-bulk-edit-how-i-built-2026-09-29.md). Open it for the DemAI workbench. Do not treat it as the project account.
+- October 6 script, kept separate: [Bulk Edits, October 6, 2026](../sources/s002-bulk-edits-2026-10-06.md). Open it for the later telling. Do not treat it as the project account.
 
 ## Resume summary
 
-Bulk Edit started as a prototype I built in a day or two to solve a specific prospect need: editing large amounts of structured content as easily as working in a spreadsheet. I demonstrated it to two prospects, and we closed both deals. It grew into a Contentful product, and I stayed with it from that first customer idea through design, development, and into the marketplace, where it is now the most popular app. I also extended it with the AI-guided interface I developed for DemAI, applying that same approach to large-scale content changes.
+I created Bulk Edit, an AI-powered Contentful app for updating content at scale that became the most popular app in the Contentful marketplace and helped close two prospects. I guided the concept from a customer demo into production and the marketplace, and extended it with AI that turns plain-language requests into proposed edits across content. Every proposed change is visible and easy to accept or reject individually or in bulk, keeping users in control.
 
 ## Presentation
 
-Blurb: Bulk Edit started as a prototype I built in a day or two to solve a specific prospect need: editing large amounts of structured content as easily as working in a spreadsheet. I demonstrated it to two prospects, and we closed both deals. It grew into a Contentful product, and I stayed with it from that first customer idea through design, development, and into the marketplace, where it is now the most popular app. I also extended it with the AI-guided interface I developed for DemAI, applying that same approach to large-scale content changes.
-
-Video: 2mgK8Si7GF8ma5u59RzTxX
+Blurb: I created Bulk Edit, an AI-powered Contentful app for updating content at scale that became the most popular app in the Contentful marketplace and helped close two prospects. I guided the concept from a customer demo into production and the marketplace, and extended it with AI that turns plain-language requests into proposed edits across content. Every proposed change is visible and easy to accept or reject individually or in bulk, keeping users in control.
 
 - value: Couple of days
   label: Workable prototype
@@ -378,7 +427,7 @@ Stack, APIs, AI model/provider, preview implementation, and how ARR is attribute
 
 ## Candidate uses
 
-Strong portfolio/resume candidate for customer prototyping → production app, AI-assisted content operations, and sales-engineering impact—once images and outcome evidence are attached. Do not put ARR or “most popular app” into polished application copy until attribution is clear. Do not name Tri Pointe or Trek in public materials until disclosure is cleared. DemAI stays its own project. The September 29 transcript embeds that interface in a Bulk Edit build that is not the marketplace app.
+Strong portfolio/resume candidate for customer prototyping → production app, AI-assisted content operations, and sales-engineering impact—once images and outcome evidence are attached. Do not put ARR into polished application copy until attribution is clear. The stage summary uses his requested “most popular” line. The October 6 script hedges that to one of the more popular, if not the most popular. Do not name Tri Pointe or Trek in public materials until disclosure is cleared. DemAI stays its own project. The September 29 transcript and the October 6 script embed that interface in a Bulk Edit build that is not the marketplace app.
 
 ## Addition — September 20, 2026
 
@@ -397,3 +446,7 @@ The [walkthrough](../sources/s002-bulk-edit-walkthrough-2026-09-28.md) is him on
 The [September 29 transcript](../sources/s002-bulk-edit-how-i-built-2026-09-29.md) is a different telling. He says Bulk Edit is the most popular app in the marketplace, that he built the first prototype in a day or two, and that he demonstrated it to two prospects and both deals closed. He calls the role solutions specialist: he came in after the initial demo, alongside solution engineers, to build a more specialized version. The prospect was selling condos. Prices changed often. They needed dozens of entries that share an attribute, such as square footage, updated to one value, such as price, closer to Excel than a content list.
 
 What he shows is the presentation for the second prospect, and he says it is his own Bulk Edit, not the marketplace app. Content types sit on the left. He embedded the interface he built for DemAI, which the caption renders as Demi and DIMI, and put a workbench on the right. He wrote two or three AI functions for that context. A pre-filled prompt finds bike models called Fuel and changes them to Fire. The grid updates as the edits come back. He can accept or decline each one, on one entry or across the set, and he declines a slash the model tied to the fire models. He says a mention in a bio is the kind of hit he might have missed without AI, and that references work too. He does not say semantic search, and he does not name a model. He says at scale this build has to work differently. Popularity and the closed deals stay his account. The prospect is not named here.
+
+## Addition — October 6, 2026
+
+The [October 6 script](../sources/s002-bulk-edits-2026-10-06.md) opens with the origin, then repeats the non-marketplace walkthrough. He says he created Bulk Edit as a solutions specialist for a specific prospect request, built the first version in about a day or two, and that prospect closed. He later expanded the concept for another company and introduced AI. He credits the Contentful app framework for working across a space instead of one entry at a time. Popularity here is "one of the more popular" marketplace apps, "if not the most popular." He says he created and presented the original demo, helped move the concept into production, and shaped the final version that exists today. The walkthrough is still his own build, not the marketplace app. Caption errors stay in the source, including Demi, DIMI, and Falk edit. The second close is not restated in this opening.

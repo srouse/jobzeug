@@ -2,12 +2,10 @@
 
 import { useMemo, type ReactNode } from "react";
 import { JzIcon, JzIconButton, JzText } from "@jobzeug/design-system/react";
-import { useJobPosting } from "@/components/job-posting";
-import { FitMeter } from "@/components/fit-meter/fit-meter";
-import { projectFitBars, type FitBar } from "@/lib/matching/home-coverage";
 import type {
   ResumeEmployerGroup,
   ResumeProject,
+  ResumeRole,
   ResumeViewModel,
 } from "@/lib/contentful/resume-model";
 import { EvidencePageHeader } from "@/components/evidence-page-header";
@@ -15,15 +13,66 @@ import { AttachGutterRow } from "@/components/attach-gutter-row";
 import { CareerTimeline } from "../career-timeline/career-timeline";
 import { CAREER_TIMELINE_ENABLED } from "../career-timeline/enabled";
 import { useIdleScrollbar } from "@/lib/use-idle-scrollbar";
-import {
-  useResumeHighlights,
-  type LineFocus,
-} from "../resume-highlight-context";
+import { useResumeHighlights } from "../resume-highlight-context";
 import { useActiveConnectionTarget } from "../use-connection-target";
+import { sameProjectId } from "../project-presentation/project-presentation";
 import type { ConnectionStrength } from "@/lib/connection-targets";
 import styles from "./resume-document.module.css";
 
 const DEFAULT_NAME = "Scott Rouse";
+const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+function formatMonthYear(iso: string): string {
+  const [year, month] = iso.split("-");
+  const label = MONTHS[Number(month) - 1];
+  if (!label || !year) return "";
+  return `${label} ${year}`;
+}
+
+/** Earliest role start through the latest end. An open role ends at Present. */
+function companyDateLabel(roles: readonly ResumeRole[]): string {
+  if (roles.length === 0) return "";
+  let earliest = roles[0].startDate;
+  let latestEnd: string | null = null;
+  let open = false;
+  for (const role of roles) {
+    if (role.startDate < earliest) earliest = role.startDate;
+    if (!role.endDate) open = true;
+    else if (!latestEnd || role.endDate > latestEnd) latestEnd = role.endDate;
+  }
+  const start = formatMonthYear(earliest);
+  if (!start) return "";
+  if (open) return `${start} – Present`;
+  const end = latestEnd ? formatMonthYear(latestEnd) : "";
+  return end ? `${start} – ${end}` : start;
+}
+
+/** Newest role first, then that role's project order. Each project once. */
+function companyProjects(roles: readonly ResumeRole[]): ResumeProject[] {
+  const seen = new Set<string>();
+  const projects: ResumeProject[] = [];
+  for (const role of roles) {
+    for (const project of role.projects) {
+      if (seen.has(project.evidenceId)) continue;
+      seen.add(project.evidenceId);
+      projects.push(project);
+    }
+  }
+  return projects;
+}
 
 function classNames(...parts: Array<string | false | null | undefined>) {
   return parts.filter(Boolean).join(" ") || undefined;
@@ -124,28 +173,11 @@ export function ResumeDocument({
   const {
     density,
     lineFocus,
+    stageProjectId,
     selectLine,
-    fitBarsVisible,
     timelineVisible,
     setTimelineVisible,
   } = useResumeHighlights();
-  const { data: posting } = useJobPosting();
-  const projectBars = useMemo(() => {
-    const ids: string[] = [];
-    if (resume) {
-      for (const employer of resume.employers) {
-        for (const role of employer.roles) {
-          for (const project of role.projects) {
-            ids.push(project.evidenceId);
-          }
-        }
-      }
-    }
-    const lineCount = (posting?.lines ?? []).filter(
-      (line) => line.matchingRequirement?.scope === "project",
-    ).length;
-    return projectFitBars(ids, posting?.matchGraph?.edges ?? [], lineCount);
-  }, [resume, posting]);
   const connection = useActiveConnectionTarget();
   const strengthById = useMemo(() => {
     const map = new Map<string, ConnectionStrength>();
@@ -245,6 +277,7 @@ export function ResumeDocument({
             {resume.employers.map(
               (employer: ResumeEmployerGroup, employerIndex) => {
                 const employerStrength = strengthById.get(employer.evidenceId) ?? null;
+                const dateLabel = companyDateLabel(employer.roles);
 
                 return (
                   <section
@@ -264,66 +297,33 @@ export function ResumeDocument({
                       <div className={styles.employerTitleRow}>
                         <CitedTitle
                           level={2}
-                          variant="heading3"
-                          weight="200"
+                          variant="body-regular"
+                          color="muted"
                           label={employer.name}
                           className={styles.employerTitle}
                         />
+                        {dateLabel ? (
+                          <JzText
+                            variant="caption"
+                            color="muted"
+                            label={dateLabel}
+                          />
+                        ) : null}
                       </div>
                     </EvidenceShell>
-
-                    <div className={styles.roles}>
-                      {employer.roles.map((role, roleIndex) => {
-                        const roleStrength = strengthById.get(role.roleId) ?? null;
-
-                        return (
-                          <div
-                            key={role.roleId}
-                            className={
-                              roleIndex > 0
-                                ? styles.roleSpaceRoomy
-                                : undefined
-                            }
-                          >
-                            <EvidenceShell
-                              id={role.roleId}
-                              skeleton={false}
-                              strength={roleStrength}
-                              headClass={styles.roleBlock}
-                            >
-                              <div className={styles.roleHead}>
-                                <CitedTitle
-                                  level={3}
-                                  variant="heading3"
-                                  label={role.title}
-                                />
-                                <JzText
-                                  variant="caption"
-                                  color="muted"
-                                  label={role.dateLabel}
-                                />
-                              </div>
-                            </EvidenceShell>
-
-                            <ProjectLine
-                              projects={role.projects}
-                              strengthById={strengthById}
-                              referenceIds={referenceIds}
-                              hideUnselectedObjects={hideUnselectedObjects}
-                              lineFocus={lineFocus}
-                              projectBars={projectBars}
-                              fitBarsVisible={fitBarsVisible}
-                              onSelect={(project) =>
-                                selectLine({
-                                  kind: "project",
-                                  id: project.evidenceId,
-                                })
-                              }
-                            />
-                          </div>
-                        );
-                      })}
-                    </div>
+                    <ProjectLine
+                      projects={companyProjects(employer.roles)}
+                      strengthById={strengthById}
+                      referenceIds={referenceIds}
+                      hideUnselectedObjects={hideUnselectedObjects}
+                      stageProjectId={stageProjectId}
+                      onSelect={(project) =>
+                        selectLine({
+                          kind: "project",
+                          id: project.evidenceId,
+                        })
+                      }
+                    />
                   </section>
                 );
               },
@@ -341,18 +341,14 @@ function ProjectLine({
   strengthById,
   referenceIds,
   hideUnselectedObjects,
-  lineFocus,
-  projectBars,
-  fitBarsVisible,
+  stageProjectId,
   onSelect,
 }: {
   projects: ResumeProject[];
   strengthById: Map<string, ConnectionStrength>;
   referenceIds: Set<string>;
   hideUnselectedObjects: boolean;
-  lineFocus: LineFocus | null;
-  projectBars: Map<string, FitBar>;
-  fitBarsVisible: boolean;
+  stageProjectId: string | null;
   onSelect: (project: ResumeProject) => void;
 }) {
   const visible = hideUnselectedObjects
@@ -366,8 +362,8 @@ function ProjectLine({
         {visible.map((project) => {
           const strength = strengthById.get(project.evidenceId) ?? null;
           const selected =
-            lineFocus?.kind === "project" &&
-            lineFocus.id === project.evidenceId;
+            stageProjectId != null &&
+            sameProjectId(stageProjectId, project.evidenceId);
           return (
             <EvidenceShell
               key={project.evidenceId}
@@ -377,41 +373,27 @@ function ProjectLine({
               headClass={styles.projectName}
               interactive
               pressed={selected}
-              fitBarsOff={!fitBarsVisible}
               onActivate={() => onSelect(project)}
               activateLabel="Select project"
             >
-              <div className={styles.projectBody}>
-                <div className={styles.projectTitle}>
-                  <span className={styles.projectNameLine}>
-                    <span className={styles.projectMark} aria-hidden />
-                    <CitedTitle
-                      level={4}
-                      variant="label"
-                      weight="400"
-                      color="muted"
-                      className={styles.projectNameText}
-                    >
-                      <span className={styles.projectNameClip}>{project.name}</span>
-                    </CitedTitle>
-                    {project.presentation ? (
-                      <span
-                        className={styles.videoMark}
-                        role="img"
-                        aria-label="Video"
-                      />
-                    ) : null}
-                  </span>
-                  {fitBarsVisible ? (
-                    <span className={styles.projectMeter}>
-                      <FitMeter
-                        width={projectBars.get(project.evidenceId)?.width ?? 0}
-                        tone={projectBars.get(project.evidenceId)?.tone ?? null}
-                      />
-                    </span>
+              <CitedTitle
+                level={3}
+                variant="heading3"
+                weight="400"
+                className={styles.projectNameText}
+              >
+                <span className={styles.projectNameLine}>
+                  <span className={styles.projectNameClip}>{project.name}</span>
+                  {project.presentation?.videoUrl ? (
+                    <span
+                      className={styles.videoMark}
+                      title="Video"
+                      role="img"
+                      aria-label="Has a video"
+                    />
                   ) : null}
-                </div>
-              </div>
+                </span>
+              </CitedTitle>
             </EvidenceShell>
           );
         })}

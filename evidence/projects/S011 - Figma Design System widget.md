@@ -29,7 +29,7 @@ year_note: "Year unresolved: provisional R007 calendar anchor is 2018–2019, wh
 delivery_stage: production
 annotation:
   status: reviewed
-  vocabulary_version: "1.7.0"
+  vocabulary_version: "1.10.0"
   reviewed_by: Scott
   reviewed_at: "2026-09-27"
 public_disclosure: needs_review

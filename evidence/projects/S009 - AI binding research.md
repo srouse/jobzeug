@@ -28,10 +28,10 @@ year_note: Estimated from R001 (February 2026–present as of September 2026); p
   was not supplied.
 delivery_stage: prototype
 annotation:
-  status: reviewed
-  vocabulary_version: "1.7.0"
-  reviewed_by: Codex
-  reviewed_at: "2026-09-26"
+  status: needs_review
+  vocabulary_version: "1.10.0"
+  reviewed_by: null
+  reviewed_at: null
 public_disclosure: needs_review
 evidence:
   - id: S009-E001
@@ -106,6 +106,11 @@ evidence:
         locator: "0:01:23 and 0:02:12"
         supports: He used populated instances and Contentful entries to estimate natural size, including
           about 100 characters for a card, after name-only binding failed.
+      - ref: "../sources/s009-predictable-content-bindings-2026-10-05.md"
+        locator: "0:01:15 through 0:01:35"
+        supports: He pointed the LLM at component instances and content entries, generalized usual
+          title and short-bio size, and says that match became predictable. This telling does not
+          give a character count.
     limitations:
       - About 100 characters and “nine times out of ten” are his walkthrough impressions, not a measured
         sample or success rate.
@@ -133,6 +138,12 @@ evidence:
         locator: "0:02:40"
         supports: Length could not separate challenge from outcome; he chose challenge for previews and
           asked the agent to describe what each field is for.
+      - ref: "../sources/s009-predictable-content-bindings-2026-10-05.md"
+        locator: "0:01:38 through 0:02:23"
+        supports: A case study degraded because challenge and outcome were a similar size. A card
+          should show the challenge and not spread the outcome. He then produced intent, including
+          what an image means and how a field relates to the whole, and says the bindings snapped
+          into place. This telling does not say he chose challenge every time he populated a card.
     limitations:
       - “Every time” is his recollection of his own Figma population, not an exported history.
       - Intent metadata is described in speech, not as a schema.
@@ -185,6 +196,10 @@ evidence:
         locator: "0:00:39 through 0:01:23"
         supports: He expected name and title, or bio and short bio, to be obvious, and the bindings
           stayed unreliable because the inputs were too thin.
+      - ref: "../sources/s009-predictable-content-bindings-2026-10-05.md"
+        locator: "0:00:54 through 0:01:15"
+        supports: The task looked too simple. Bio versus short bio was unpredictable because he knew
+          the bio was too long and the model had no reason to know that.
     limitations:
       - The failure is his diagnosis from the walkthrough, not a logged evaluation.
     public_disclosure: needs_review
@@ -341,12 +356,96 @@ evidence:
       status: proposed
       reviewed_by: null
       reviewed_at: null
+  - id: S009-E013
+    statement: Wanted predictable LLM matches so the first binding would be faster and a property
+      change on the component or the content type could be propagated, which is what would let him
+      change either side freely.
+    concept_ids:
+      - local:content-component-binding
+      - local:ai-workflow-engineering
+      - local:systems-analysis
+      - local:figma
+      - local:contentful
+      - local:senior-product-architect
+    ownership: sole
+    scope: individual
+    delivery_stage: prototype
+    provenance: self_report
+    sources:
+      - ref: "../sources/s009-predictable-content-bindings-2026-10-05.md"
+        locator: "0:00:22 through 0:00:54"
+        supports: He wanted an LLM to make the matches predictably so the first binding is faster and
+          a property change on the component or the content type can be healed.
+    limitations:
+      - Healing is the reason he gives. This script does not show a logged repair after a change.
+      - Faster is his goal, not a measured time reduction.
+    public_disclosure: needs_review
+    review:
+      status: proposed
+      reviewed_by: null
+      reviewed_at: null
+  - id: S009-E014
+    statement: After the bindings became predictable, the model looked inside JSON fields on real
+      entries, found consistent content, and he read that as a signal the content type had not been
+      designed to expose that content on its own.
+    concept_ids:
+      - local:ai-workflow-engineering
+      - local:ai-output-evaluation
+      - local:critical-thinking
+      - local:contentful
+      - local:senior-product-architect
+    ownership: sole
+    scope: individual
+    delivery_stage: prototype
+    provenance: self_report
+    sources:
+      - ref: "../sources/s009-predictable-content-bindings-2026-10-05.md"
+        locator: "0:02:23 through 0:02:46"
+        supports: Looking at real entries, it found consistent content inside JSON fields and connected
+          that to the card. He treats that as a signal the content type was not designed well enough.
+    limitations:
+      - The signal is his judgment. No field names, counts, or a revised content model are in the script.
+      - This telling does not name telephone numbers. That example stays in the September 28 walkthrough.
+      - The export has a caption false start, "Thank you. Bye.", immediately before this point.
+    public_disclosure: needs_review
+    review:
+      status: proposed
+      reviewed_by: null
+      reviewed_at: null
+  - id: S009-E015
+    statement: Presented the work to people inside Contentful, said a couple of them had started the
+      same path but not as far, and asked whether the platform should store intent rather than only
+      field values, somewhere that is not unique to his prototype.
+    concept_ids:
+      - local:speaking
+      - local:semantic-metadata-design
+      - local:systems-analysis
+      - local:senior-product-architect
+    ownership: sole
+    scope: individual
+    delivery_stage: prototype
+    provenance: self_report
+    sources:
+      - ref: "../sources/s009-predictable-content-bindings-2026-10-05.md"
+        locator: "0:02:43 through 0:03:12"
+        supports: He presented to people inside Contentful, said others had not gone as far and that he
+          accelerated their research, and asked whether they are making databases or stores of intent.
+    limitations:
+      - No names, dates, or a record of what those people changed.
+      - Not quite as far, and accelerated that research, are his account.
+      - He asks where intent should live. He does not record a decision or a roadmap he owns.
+      - The audience is inside the company. Positive side effects of sharing are unnamed.
+    public_disclosure: needs_review
+    review:
+      status: proposed
+      reviewed_by: null
+      reviewed_at: null
 concept_proposals: []
 ---
 # S009: AI Component Binding
 Captured: September 21, 2026
-Status: Working title as of September 27, 2026. Innovation prototype. Learnings are real; he calls it a successful research project. Not integrated into Contentful for Figma; safe metadata storage is still unresolved. September 28, 2026 walkthrough transcript adds natural size, intent, and entry inspection; it does not show code or a stored metadata sample.
-Evidence: Scott's direct account, plus his spoken walkthrough transcript. No code, metadata samples, or evaluation results inspected.
+Status: Working title as of September 27, 2026. Innovation prototype. Learnings are real; he calls it a successful research project. Not integrated into Contentful for Figma; safe metadata storage is still unresolved. September 28, 2026 walkthrough transcript adds natural size, intent, and entry inspection. October 5, 2026 script is a later telling of the same prototype. Neither shows code or a stored metadata sample.
+Evidence: Scott's direct account, his spoken walkthrough transcript, and the October 5, 2026 script. No code, metadata samples, or evaluation results inspected.
 
 ## Resume connection
 
@@ -355,12 +454,13 @@ Evidence: Scott's direct account, plus his spoken walkthrough transcript. No cod
 - Parent / intended integration: [S008 Contentful for Figma Widget](S008%20-%20Contentful%20for%20Figma%20widget.md). This is a bounded AI exploration supporting that product, not evidence that its AI capabilities are already shipped.
 - Related presentation / prototype context: [Berlin, on Experience Orchestration Research](S025%20-%20Experience%20Orchestration%20%28ExO%29.md#berlin). Scott says he presented this binding work there. Berlin is no longer its own project.
 - Walkthrough transcript, kept separate so this record stays the summary: [S009 walkthrough, September 28, 2026](../sources/s009-ai-binding-walkthrough-2026-09-28.md). Open it for the spoken detail. Do not treat it as the project account.
+- October 5, 2026 script, kept separate: [Using LLMs for Predictable Content Bindings](../sources/s009-predictable-content-bindings-2026-10-05.md). Open it for the later telling. Do not treat it as the project account.
 - September 28 account, kept separate: [S009 account, September 28, 2026](../sources/s009-account-2026-09-28.md). Open it for what he said about solving the approach, sharing it inside the company, the storage blocker, and building it with Mastra and OpenAI.
 - Customers / clients: None named. Contentful is the employer and platform; Figma is the design platform, not a newly established customer or client engagement.
 
 ## Resume summary
 
-I built AI Binding, a working agent prototype for the Contentful for Figma widget, to help people connect content to Figma components faster. Through extensive experimentation and many iterations, I solved a difficult matching problem and demonstrated the solution to a broad audience within Contentful. The work also revealed opportunities to improve the metadata describing content and components, laying the groundwork for more reliable automation.
+I built an AI binding agent that connects Contentful content to Figma components, but getting it to choose the right content consistently took more than matching field names. Giving the LLM real examples and the purpose behind each component made those connections predictable and revealed ways to improve the content model itself. Shared with teams at Contentful, the work accelerated related research and raised a bigger question: what if content systems stored intent alongside data?
 
 ## Account summary
 
@@ -427,7 +527,7 @@ Scott presented this work successfully, in his assessment, during the Berlin eve
 - Metadata sample and how generated metadata was checked. Mastra and OpenAI are named; prompts and code are not saved. Short-bio and case-study examples are captured below.
 - Evaluation: number and diversity of types/components, remaining failure cases, and what counted as a correct mapping or repair.
 - Where experimental metadata lived; feasibility of Figma storage versus native Contentful metadata; progress of the internal storage conversation.
-- Available code and a metadata sample. The September 28, 2026 walkthrough transcript is stored; the final video is the S009 presentation asset. Permission to share the video beyond this workspace is still his call.
+- Available code and a metadata sample. The September 28, 2026 walkthrough transcript and the October 5, 2026 script are stored. The walkthrough file stays attached in Contentful. Permission to share it beyond this workspace is still his call.
 
 ## Candidate uses
 
@@ -458,14 +558,12 @@ Scott explicitly states that he did the research behind the scenes, developed th
 
 ## Presentation
 
-Blurb: I isolated AI binding into its own prototype and added semantic metadata on content and components so mappings stay consistent, including repair when one side changes. It is not in the shipped widget.
+Blurb: I built an AI binding agent that predictably connects Contentful content to Figma components. The breakthrough was giving the LLM real examples and explicit design intent, the context to understand why a card needs a short bio or a challenge that draws readers in. Beyond matching fields, it uncovered useful content buried in JSON and exposed opportunities to improve the content model itself. Shared with teams at Contentful, the work accelerated related research and raised a bigger question: what if content systems stored intent alongside data?
 
-Video: 765cv4GCgMRSzVd8QCmUHW
-
+- value: Size then intent
+  label: Predictable, his account
 - value: Prototype
   label: Not in the widget
-- value: Both sides
-  label: Content and components
 
 ## Addition — September 28, 2026: walkthrough transcript
 
@@ -492,3 +590,23 @@ He shared the research many times inside the company. Other people took it and r
 He could not execute the ship because there was no acceptable place to store the metadata. Some places were good and some were bad, in his judgment. The widget-only path was too narrow. The storage problem needed a larger solution. He turned the research into actionable items that contributed to larger conversations about storing metadata, content types, and components. He still intends to bring the work into the Contentful for Figma widget after that larger metadata problem is solved.
 
 He did the programming himself, using Mastra, OpenAI, and LLMs. The code is not in a source file yet.
+
+## Addition — October 5, 2026: predictable bindings script
+
+Faithful summary of the spoken script. The full transcript, with timestamps, is [stored separately](../sources/s009-predictable-content-bindings-2026-10-05.md).
+
+He calls it the AI Component Binding project, part of the Contentful for Figma widget. He is looking at bindings for a blog post and a case study, and mapping between the two sides.
+
+The goal was an LLM that could make those matches predictably. The mappings look intuitive, and there is not much ambiguity. If that worked, the first binding would be faster, and a property change on the component or the content type could be healed, so he would feel free to change the work.
+
+The problem was that the task was too simple. The model can know what a title is, and the same for a person, but the results were unpredictable: bio versus short bio. He knew the bio was too long because he knew the content. The model had no reason to know that.
+
+He pointed the LLM at instances of the component and at entries in the content type. Then it could generalize how big a title usually is, and how big a short bio is. He says that became really predictable, and he calls it a huge step up.
+
+The same move degraded on a case study. Outcomes and challenges were about the same size. A card should not spread the outcome. It should show the challenge and invite someone into the full case study. That distinction was not in the examples. He calls it a missing semantic layer.
+
+He went back through the entries and instances and produced intent: what an image means on the card, what an outcome is versus a challenge, the goal, and how a field relates to the whole. He says everything snapped into place.
+
+It also looked inside JSON fields and found consistent content there, because it was reading real entries, and connected that to the card. He reads those hits as a signal the content type had not been designed well enough to expose that content predictably. A caption false start, "Thank you. Bye.", sits in the export just before this point.
+
+He presented this to a number of people inside Contentful. A couple of others had gone down the same path, not as far, and he says he accelerated that research. He asked whether they are making databases or stores of intent, and where that information should live so it is not unique to his situation. He frames the work as a rabbit hole with positive side effects from sharing it. He does not name those effects, the people, or a decision that followed.

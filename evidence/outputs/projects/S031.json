@@ -6,7 +6,6 @@
   ],
   "name": "Knowledge Management System (KMS)",
   "summary": "I built a proof of concept for running a knowledge-management system on Contentful: a data lake of raw material, processed into structured content a team can use. The recording is that path, from one import to an answer a person can still stop.",
-  "presentation": "S031-presentation",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S031",
@@ -43,7 +42,7 @@
       "status": "draft",
       "reviewed_by": null,
       "reviewed_at": null,
-      "vocabulary_version": "1.7.0"
+      "vocabulary_version": "1.10.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [

@@ -62,7 +62,7 @@ function pointsOf(
 
 /**
  * Projects with a hit on this job line, highest match-points × recency first.
- * Same ordering the stage uses for a job line.
+ * A tie goes to the newer project, then to the lower project id.
  */
 export function topProjectsForLine(
   projects: readonly SimpleProject[],
@@ -74,17 +74,30 @@ export function topProjectsForLine(
   return projects
     .map((project) => {
       const points = pointsOf(edges, lineId, project.id);
+      const year = yearOf(years, project.id);
       return {
         project,
         points,
-        weighted: points * recencyWeight(yearOf(years, project.id)),
+        year: typeof year === "number" ? year : null,
+        weighted: points * recencyWeight(year),
       };
     })
     .filter((row) => row.points > 0)
-    .sort(
-      (a, b) =>
-        b.weighted - a.weighted || a.project.id.localeCompare(b.project.id),
-    )
+    .sort((a, b) => {
+      const byScore = b.weighted - a.weighted;
+      if (byScore !== 0) return byScore;
+      const byYear = compareYear(a.year, b.year);
+      if (byYear !== 0) return byYear;
+      return a.project.id.localeCompare(b.project.id);
+    })
     .slice(0, count)
     .map((row) => row.project);
+}
+
+/** Newer year first. A missing year loses to any known year. */
+function compareYear(a: number | null, b: number | null): number {
+  if (a == null && b == null) return 0;
+  if (a == null) return 1;
+  if (b == null) return -1;
+  return b - a;
 }

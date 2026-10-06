@@ -29,6 +29,8 @@ export type NormalizedProject = {
   name: string;
   summary?: string;
   url?: string;
+  /** Project year from matching metadata. Absent when the year is unknown. */
+  year?: number;
   tags: string[];
 };
 
@@ -103,6 +105,12 @@ function entryTags(entry: Entry): string[] {
 function asDateString(value: unknown): string | undefined {
   if (typeof value === "string" && value.trim()) return value.slice(0, 10);
   return undefined;
+}
+
+function projectYear(value: unknown): number | undefined {
+  if (!value || typeof value !== "object") return undefined;
+  const year = (value as { year?: unknown }).year;
+  return typeof year === "number" && Number.isInteger(year) ? year : undefined;
 }
 
 function assetFileUrl(value: unknown): string | undefined {
@@ -272,6 +280,7 @@ export async function fetchCoreCatalog(): Promise<CoreCatalog> {
       name,
       summary: asString(fields.summary),
       url: asString(fields.url),
+      year: projectYear(fields.matchingMetadata),
       tags: entryTags(entry),
     });
   }

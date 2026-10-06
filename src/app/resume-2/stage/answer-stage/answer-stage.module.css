@@ -2,6 +2,7 @@
 .stage {
   --present-ms: 700ms;
   --present-ease: cubic-bezier(0.45, 0, 0.55, 1);
+  --present-gap: 2.5rem;
   pointer-events: none;
   position: relative;
   width: 100%;
@@ -88,19 +89,13 @@
     pointer-events: auto;
   }
 
-  .stage[data-presenting],
   .stage[data-ease] {
+    z-index: var(--jz-semantic-layer-modal, 50);
     transition:
       top var(--present-ms) var(--present-ease),
-      right var(--present-ms) var(--present-ease),
-      bottom var(--present-ms) var(--present-ease),
-      left var(--present-ms) var(--present-ease);
-  }
-
-  .stage[data-presenting] {
-    position: fixed;
-    inset: 0;
-    z-index: var(--jz-semantic-layer-modal, 50);
+      left var(--present-ms) var(--present-ease),
+      width var(--present-ms) var(--present-ease),
+      height var(--present-ms) var(--present-ease);
   }
 
   .stage[data-presenting] .card,
@@ -236,7 +231,7 @@
 /* Reading column. The stage shell can run wider; this stays put. */
 .hubColumn {
   width: 100%;
-  max-width: 600px;
+  max-width: 520px;
   margin-inline: auto;
   min-width: 0;
   display: flex;
@@ -247,7 +242,7 @@
 
 .home {
   width: 100%;
-  max-width: 600px;
+  max-width: 24rem;
   margin-inline: auto;
   display: flex;
   flex-direction: column;
@@ -338,6 +333,24 @@
   flex-direction: row;
   align-items: center;
   gap: var(--jz-semantic-space-gap-2xs, 0.25rem);
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--jz-semantic-space-gap-2xs, 0.25rem);
+  min-width: 0;
+  padding: var(--jz-semantic-space-padding-sm, 0.75rem);
+  background: var(--jz-semantic-color-background-surface-default, #ffffff);
+  border: 1px solid var(--jz-semantic-color-border-subtle);
+  border-radius: var(--jz-primitive-radius-sm, 4px);
 }
 
 .hubActions {

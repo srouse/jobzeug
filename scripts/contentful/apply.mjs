@@ -35,6 +35,7 @@ async function omitRemovedFields(client, params, contentTypeId, existing, desire
 export async function applySchema({ dryRun = false, matchingOnly = false, only = null } = {}) {
   // jobLine/jobTool before jobPosting (parent links to children).
   const types = [...coreContentTypes(), ...jobPostingContentTypes()].filter(type =>
+    type.id !== 'jobzeugProjectPresentation' &&
     (only ? type.id === only : true) &&
     (!matchingOnly || ['jobzeugMatchingVocabulary', 'jobzeugProject'].includes(type.id)));
   if (dryRun) {

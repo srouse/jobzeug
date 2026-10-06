@@ -110,7 +110,8 @@ export function selectionIds(
 }
 
 /**
- * One target at a time. A project or job line meets the top hub.
+ * One target at a time. A job line meets the top hub.
+ * A project open in the stage does not draw lines.
  * An AI result meets the bottom card. They do not draw together.
  */
 export function activeConnectionTarget(
@@ -120,7 +121,7 @@ export function activeConnectionTarget(
   showAnswer: boolean,
   projectYears?: ProjectYears,
 ): ConnectionTarget | null {
-  if (!focus) return null;
+  if (!focus || focus.kind === "project") return null;
   if (focus.kind === "answer") {
     if (!showAnswer) return null;
     const ids = unique([...answerIds]).slice(0, CONNECTION_CAP).map((id) => ({

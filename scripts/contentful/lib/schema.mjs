@@ -65,7 +65,7 @@ export const definitions = {
   } },
   projectPresentation: { name: 'Project Presentation', displayField: 'evidenceId', fields: {
     evidenceId: symbol(true, presentationId),
-    blurb: field('Text', blurb, true), video: asset(true),
+    blurb: field('Text', blurb, true), video: asset(),
     metricOneValue: symbol(true, metricValue), metricOneLabel: symbol(true, metricLabel),
     metricTwoValue: symbol(true, metricValue), metricTwoLabel: symbol(true, metricLabel),
   } },

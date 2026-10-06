@@ -1,6 +1,6 @@
 /* One step above the header layer; still below modal (chat dock and dialogs). */
 .stage {
-  --present-ms: 900ms;
+  --present-ms: 700ms;
   --present-ease: cubic-bezier(0.45, 0, 0.55, 1);
   pointer-events: none;
   position: fixed;
@@ -44,7 +44,7 @@
 
 .jobToggle {
   display: none;
-  transition: opacity var(--present-ms, 900ms) var(--present-ease, cubic-bezier(0.45, 0, 0.55, 1));
+  transition: opacity var(--present-ms, 700ms) var(--present-ease, cubic-bezier(0.45, 0, 0.55, 1));
 }
 
 .stageTools {
@@ -61,7 +61,7 @@
   padding-top: 30px;
   padding-bottom: var(--jz-semantic-space-padding-lg, 1.5rem);
   pointer-events: none;
-  transition: opacity var(--present-ms, 900ms) var(--present-ease, cubic-bezier(0.45, 0, 0.55, 1));
+  transition: opacity var(--present-ms, 700ms) var(--present-ease, cubic-bezier(0.45, 0, 0.55, 1));
   background: linear-gradient(
     to bottom,
     transparent,
@@ -232,8 +232,8 @@
   padding-inline: var(--jz-semantic-space-padding-lg, 1.5rem);
   border-bottom: 1px solid var(--jz-semantic-color-border-subtle);
   transition:
-    padding-inline var(--present-ms, 900ms) var(--present-ease, cubic-bezier(0.45, 0, 0.55, 1)),
-    padding-bottom var(--present-ms, 900ms) var(--present-ease, cubic-bezier(0.45, 0, 0.55, 1));
+    padding-inline var(--present-ms, 700ms) var(--present-ease, cubic-bezier(0.45, 0, 0.55, 1)),
+    padding-bottom var(--present-ms, 700ms) var(--present-ease, cubic-bezier(0.45, 0, 0.55, 1));
 }
 
 /* Center a short column. These shrink away as it grows, so overflow does not snap it. */
@@ -242,7 +242,7 @@
   content: "";
   flex: 1 0 0;
   min-height: 0;
-  transition: flex-grow var(--present-ms, 900ms) var(--present-ease, cubic-bezier(0.45, 0, 0.55, 1));
+  transition: flex-grow var(--present-ms, 700ms) var(--present-ease, cubic-bezier(0.45, 0, 0.55, 1));
 }
 
 /* Reading column. The stage shell can run wider; this stays put. */
@@ -254,21 +254,15 @@
   display: flex;
   flex-direction: column;
   gap: var(--jz-semantic-space-gap-md, 1rem);
-  transition: max-width var(--present-ms, 900ms) var(--present-ease, cubic-bezier(0.45, 0, 0.55, 1));
+  transition: max-width var(--present-ms, 700ms) var(--present-ease, cubic-bezier(0.45, 0, 0.55, 1));
 }
 
 .home {
   width: 100%;
-  max-width: 600px;
+  max-width: 24rem;
   margin-inline: auto;
   display: flex;
   flex-direction: column;
-}
-
-.homeBand {
-  border-top: 1px solid var(--jz-semantic-color-border-subtle);
-  margin-top: var(--jz-semantic-space-gap-md, 1rem);
-  padding-top: var(--jz-semantic-space-padding-md, 1rem);
 }
 
 .homeStat {
@@ -280,13 +274,12 @@
   padding: var(--jz-semantic-space-padding-md, 1rem);
 }
 
-.homeColumn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: var(--jz-semantic-space-gap-sm, 0.75rem);
-  padding: var(--jz-semantic-space-padding-md, 1rem);
+.homeStatValue {
+  font-family: var(--jz-semantic-type-display-font-family);
+  font-weight: var(--jz-semantic-type-display-font-weight);
+  font-size: 44px;
+  line-height: var(--jz-semantic-type-display-line-height);
+  color: var(--jz-semantic-color-text-default);
 }
 
 .homePair {
@@ -295,6 +288,7 @@
   align-items: stretch;
   justify-content: center;
   width: 100%;
+  padding-block: var(--jz-semantic-space-padding-sm, 0.75rem);
 }
 
 .homePair > .homeStat {
@@ -305,6 +299,12 @@
 
 .homePair > .homeStat + .homeStat {
   border-left: 1px solid var(--jz-semantic-color-border-subtle);
+}
+
+.homeBand {
+  border-top: 1px solid var(--jz-semantic-color-border-subtle);
+  margin-top: var(--jz-semantic-space-gap-md, 1rem);
+  padding-top: var(--jz-semantic-space-padding-md, 1rem);
 }
 
 .hubLead {

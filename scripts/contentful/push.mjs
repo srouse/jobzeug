@@ -86,6 +86,13 @@ async function ensureTags(client, params) {
   return results;
 }
 
+/** Presentation entries are edited in Contentful. Keep the link already on the project. */
+function projectFields(bodyFields, existingFields) {
+  const { presentation: _ignored, ...rest } = bodyFields;
+  if (existingFields?.presentation) return { ...rest, presentation: existingFields.presentation };
+  return rest;
+}
+
 export async function upsertEntry(client, params, record, locale, matchingOnly = false) {
   const id = entryId(record.key);
   const body = payload(record, locale);
@@ -97,10 +104,14 @@ export async function upsertEntry(client, params, record, locale, matchingOnly =
     if (matchingOnly && (!existing.sys.publishedVersion || existing.sys.version > existing.sys.publishedVersion + 1)) {
       throw new Error(`${id} has unpublished changes; resolve them separately before metadata-only publishing.`);
     }
+    const fields = matchingOnly && record.kind === 'project'
+      ? { ...existing.fields, matchingMetadata: { ...existing.fields.matchingMetadata, ...body.fields.matchingMetadata } }
+      : record.kind === 'project'
+        ? projectFields(body.fields, existing.fields)
+        : body.fields;
     const updated = await client.entry.update(entryParams, {
       ...existing,
-      fields: matchingOnly && record.kind === 'project'
-        ? { ...existing.fields, matchingMetadata: { ...existing.fields.matchingMetadata, ...body.fields.matchingMetadata } } : body.fields,
+      fields,
       metadata: matchingOnly ? existing.metadata : { ...existing.metadata, ...metadata },
     });
     await client.entry.publish(entryParams, updated);
@@ -108,9 +119,12 @@ export async function upsertEntry(client, params, record, locale, matchingOnly =
   } catch (error) {
     if (!isNotFound(error)) throw error;
     if (matchingOnly && record.kind === 'project') throw new Error(`Missing ${id}; run the full core sync before metadata-only publishing.`);
+    const createBody = record.kind === 'project'
+      ? { fields: projectFields(body.fields) }
+      : body;
     const created = await client.entry.createWithId(
       { ...params, entryId: id, contentTypeId: typeId(record.kind) },
-      { ...body, metadata },
+      { ...createBody, metadata },
     );
     await client.entry.publish(entryParams, created);
     return { id, action: 'created', type: typeId(record.kind) };
@@ -118,7 +132,9 @@ export async function upsertEntry(client, params, record, locale, matchingOnly =
 }
 
 export async function pushCore({ dryRun = false, workspaceRoot = root, matchingOnly = false } = {}) {
-  const records = (await loadCoreOutputs(workspaceRoot)).filter(r => !matchingOnly || ['project', 'matchingVocabulary'].includes(r.kind));
+  const records = (await loadCoreOutputs(workspaceRoot)).filter(r =>
+    r.kind !== 'projectPresentation' &&
+    (!matchingOnly || ['project', 'matchingVocabulary'].includes(r.kind)));
   if (dryRun) {
     const { space, environment, locale } = contentfulEnv({ required: false });
     return {

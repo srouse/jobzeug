@@ -5,8 +5,7 @@
     "R001"
   ],
   "name": "Blueprints AI Design System",
-  "summary": "I took over Contentful’s Blueprints effort and built a ~50-component, Figma-centric design system with Design System Squared so Figma exports drive matching React components and tokens—battle-tested against real Contentful content.",
-  "presentation": "S001-presentation",
+  "summary": "I created Blueprints, an AI-first design system that earned an internal recognition award and gives Contentful customers an installable reference for best practices in content modeling and design systems. I built a custom workflow that deeply synchronizes Figma and code, combining shared tokens, design exports, and real content to drive AI implementation of every component. Storybook previews and Contentful integrations make the system easy to inspect and use.",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S001",
@@ -46,7 +45,7 @@
       "status": "reviewed",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.7.0"
+      "vocabulary_version": "1.10.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
@@ -143,6 +142,150 @@
           "status": "approved",
           "reviewed_by": "Codex",
           "reviewed_at": "2026-09-26"
+        }
+      },
+      {
+        "id": "S001-E004",
+        "statement": "Created an AI-first Figma system whose semantic variables let a model choose text, background, and color by role, checked components with live Contentful content, synced token differences both ways with code, and used a skill to regenerate React and CSS from a screenshot and Markdown token map, with Storybook previews and generated Experience Orchestration configuration files.",
+        "concept_ids": [
+          "local:design-system-development",
+          "local:design-system-fundamentals",
+          "local:component-library",
+          "local:design-token-engineering",
+          "local:design-token-pipeline",
+          "local:ai-workflow-engineering",
+          "local:figma",
+          "local:contentful",
+          "local:react",
+          "local:css",
+          "local:storybook",
+          "local:experience-orchestration",
+          "local:senior-product-architect"
+        ],
+        "ownership": "lead",
+        "scope": "single_team",
+        "delivery_stage": "unknown",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s001-ai-first-blueprints-2026-10-06.md",
+            "locator": "0:00:00–0:02:39",
+            "supports": "He describes the AI-first system, semantic variables, two-way token sync, live content in the component, the screenshot and Markdown token map, the React and CSS skill, Storybook, and generated Experience Orchestration configuration files."
+          }
+        ],
+        "limitations": [
+          "The caption \"Contemporary example for Figma widget\" is read as Contentful for Figma. \"XO\" is read as Experience Orchestration (ExO).",
+          "React and CSS are what the skill generates. He says the skill holds that code shape. This is not a claim that he hand-wrote the components or a full stylesheet.",
+          "Two-way token sync, and his line that there is no single source of truth, are his account. No repository or diff log was inspected. Layout changes still start in Figma.",
+          "Storybook stories and the Experience Orchestration configuration files are named in the walkthrough. The files and the Storybook URL were not inspected. Generating that configuration is not ownership of Experience Orchestration.",
+          "Every component going through this process is his account. The component count stays on the earlier claim.",
+          "The September 20 account still has coworkers starting the installable repo. This walkthrough does not name them. Lead here is the process he describes, not sole ownership of the initiative.",
+          "Customers and prospects are the audience he states in the walkthrough. Later the same day he said people can use it for inspection only. It looks like Contentful.com. He does not treat it as something someone would use as their own system."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S001-E005",
+        "statement": "Took on Blueprints and mentored an unnamed junior developer while driving the work.",
+        "concept_ids": [
+          "local:mentoring",
+          "local:instructing",
+          "local:senior-product-architect"
+        ],
+        "ownership": "lead",
+        "scope": "single_team",
+        "delivery_stage": "unknown",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s001-ownership-2026-10-06.md",
+            "locator": "October 6, 2026 account",
+            "supports": "He took the project on, mentored someone along the way, and calls that teaching."
+          },
+          {
+            "ref": "../sources/s001-design-award-use-2026-10-06.md",
+            "locator": "October 6, 2026 account",
+            "supports": "The person he mentored was a junior developer. He asked that the name stay off the record."
+          }
+        ],
+        "limitations": [
+          "He does not say what he taught, or how long the mentoring lasted.",
+          "The September 20 account says a design-team person and several weeks of mentoring, then a takeover because the timeline would not allow that pace. He has not said whether that person is this junior developer.",
+          "Initiative is his framing. It is not a separate scored concept."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S001-E006",
+        "statement": "Pulled the design from Contentful.com and matured it for the content they had. He calls that a from-zero design.",
+        "concept_ids": [
+          "local:visual-interface-design",
+          "local:design-system-development",
+          "local:senior-product-architect"
+        ],
+        "ownership": "lead",
+        "scope": "single_team",
+        "delivery_stage": "unknown",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s001-design-award-use-2026-10-06.md",
+            "locator": "October 6, 2026 account",
+            "supports": "He pulled the design from Contentful.com, matured it for their content, and calls the result a from-zero design."
+          }
+        ],
+        "limitations": [
+          "The starting visuals are the public Contentful site. Contentful.com was not inspected for which pieces he pulled.",
+          "From-zero is his description of that maturation. The September 18 account said he assembled the system rather than originating the visual design.",
+          "He does not list which content the matured designs had to fit."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
+        }
+      },
+      {
+        "id": "S001-E007",
+        "statement": "The Blueprints team, who are content experts, gave him an internal award because they had not expected a design system that mature or that deeply integrated with AI.",
+        "concept_ids": [
+          "local:internal-recognition",
+          "local:design-system-development",
+          "local:ai-workflow-engineering",
+          "local:senior-product-architect"
+        ],
+        "ownership": "lead",
+        "scope": "single_team",
+        "delivery_stage": "unknown",
+        "provenance": "self_report",
+        "sources": [
+          {
+            "ref": "../sources/s001-design-award-use-2026-10-06.md",
+            "locator": "October 6, 2026 account",
+            "supports": "The Blueprints team are content experts, they had not expected that mature an AI-integrated design system, and they gave him the award."
+          }
+        ],
+        "limitations": [
+          "The award name and date are not recorded.",
+          "Team members are unnamed. He does not say this was a company-wide or public award.",
+          "People can use the result for inspection. It looks like Contentful.com. He does not treat it as something someone would use as their own system. That is not adoption."
+        ],
+        "public_disclosure": "needs_review",
+        "review": {
+          "status": "proposed",
+          "reviewed_by": null,
+          "reviewed_at": null
         }
       }
     ],

@@ -7,7 +7,6 @@
   "name": "Design Tokens Explained (article)",
   "summary": "I wrote [Design Tokens Explained](https://www.contentful.com/blog/design-token-system/) for Contentful to make a complex design systems topic accessible to people across design, engineering, and content. Through clear visuals and a practical example built step by step, I show how tokens turn design decisions into a shared language teams can use. More than two years after publication, it ranked among Contentful’s top 10 blog posts by performance, and our CEO highlighted it in a company-wide video. It reflects a strength I bring to my work: understanding complex systems deeply enough to make them approachable and useful to others.",
   "url": "https://www.contentful.com/blog/design-token-system/",
-  "presentation": "S014-presentation",
   "matchingMetadata": {
     "schema_version": "1.1",
     "project_id": "S014",
@@ -48,7 +47,7 @@
       "status": "reviewed",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-09-26",
-      "vocabulary_version": "1.7.0"
+      "vocabulary_version": "1.10.0"
     },
     "public_disclosure": "needs_review",
     "evidence": [
