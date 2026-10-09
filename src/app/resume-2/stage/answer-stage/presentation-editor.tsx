@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type ComponentPropsWithoutRef, type MouseEvent } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type ComponentPropsWithoutRef, type MouseEvent } from "react";
 import Markdown from "react-markdown";
 import { JzButton, JzInput, JzText } from "@jobzeug/design-system/react";
 
@@ -11,18 +11,26 @@ import styles from "./answer-stage.module.css";
 export function PresentationEditor({
   project,
   onSaved,
+  onEditingChange,
+  titleEditRequest = 0,
 }: {
   project: ResumeProject;
   onSaved: () => Promise<void>;
+  onEditingChange?: (editing: boolean) => void;
+  titleEditRequest?: number;
 }) {
   const presentation = project.presentation;
+  const [name, setName] = useState(project.name);
   const [blurb, setBlurb] = useState(presentation?.blurb ?? "");
   const [metricOneValue, setMetricOneValue] = useState(presentation?.metrics[0]?.value ?? "");
   const [metricOneLabel, setMetricOneLabel] = useState(presentation?.metrics[0]?.label ?? "");
   const [metricTwoValue, setMetricTwoValue] = useState(presentation?.metrics[1]?.value ?? "");
   const [metricTwoLabel, setMetricTwoLabel] = useState(presentation?.metrics[1]?.label ?? "");
   const blurbRef = useRef<HTMLTextAreaElement>(null);
+  const titleFieldRef = useRef<HTMLLabelElement>(null);
   const videoRef = useRef<HTMLInputElement>(null);
+  const seenTitleEdit = useRef(0);
+  const openTitleEdit = useRef<() => void>(() => {});
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [editing, setEditing] = useState(false);
@@ -31,6 +39,7 @@ export function PresentationEditor({
   if (projectId !== project.evidenceId) {
     setProjectId(project.evidenceId);
     setEditing(false);
+    setName(project.name);
     setBlurb(presentation?.blurb ?? "");
     setMetricOneValue(presentation?.metrics[0]?.value ?? "");
     setMetricOneLabel(presentation?.metrics[0]?.label ?? "");
@@ -40,6 +49,7 @@ export function PresentationEditor({
   }
 
   const fillFromPresentation = () => {
+    setName(project.name);
     setBlurb(presentation?.blurb ?? "");
     setMetricOneValue(presentation?.metrics[0]?.value ?? "");
     setMetricOneLabel(presentation?.metrics[0]?.label ?? "");
@@ -51,12 +61,48 @@ export function PresentationEditor({
   const openEditor = () => {
     fillFromPresentation();
     setEditing(true);
+    onEditingChange?.(true);
   };
 
   const cancel = () => {
     fillFromPresentation();
     setEditing(false);
+    onEditingChange?.(false);
   };
+
+  openTitleEdit.current = () => {
+    fillFromPresentation();
+    setEditing(true);
+    onEditingChange?.(true);
+    let frames = 0;
+    const focusTitle = () => {
+      const host = titleFieldRef.current?.querySelector("jz-input");
+      const input = host?.shadowRoot?.querySelector("input");
+      if (input) {
+        input.focus();
+        return;
+      }
+      if (frames >= 8) return;
+      frames += 1;
+      requestAnimationFrame(focusTitle);
+    };
+    requestAnimationFrame(focusTitle);
+  };
+
+  useEffect(() => {
+    if (!titleEditRequest || titleEditRequest === seenTitleEdit.current) return;
+    seenTitleEdit.current = titleEditRequest;
+    openTitleEdit.current();
+  }, [titleEditRequest]);
+
+  useLayoutEffect(() => {
+    if (!editing) return;
+    const node = blurbRef.current;
+    if (!node) return;
+    node.style.height = "0px";
+    const border = node.offsetHeight - node.clientHeight;
+    node.style.height = `${node.scrollHeight + border}px`;
+  }, [editing, blurb]);
 
   const formatBlurb = (kind: "bold" | "italic" | "link") => {
     const field = blurbRef.current;
@@ -115,6 +161,7 @@ export function PresentationEditor({
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
+            name,
             blurb,
             metricOneValue,
             metricOneLabel,
@@ -127,6 +174,7 @@ export function PresentationEditor({
       if (!res.ok) throw new Error(data.error ?? `Save failed (${res.status})`);
       await onSaved();
       setEditing(false);
+      onEditingChange?.(false);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not save the presentation.");
     } finally {
@@ -171,6 +219,16 @@ export function PresentationEditor({
 
   return (
     <div className={styles.editor}>
+      <label ref={titleFieldRef} className={styles.titleField}>
+        <span className={styles.titleName}>Title</span>
+        <JzInput
+          value={name}
+          onInput={(event: Event) => {
+            if (saving || uploading) return;
+            setName(hostValue(event));
+          }}
+        />
+      </label>
       <div className={styles.editorLabel}>
         <div className={styles.toolbar}>
           <JzButton
@@ -203,7 +261,7 @@ export function PresentationEditor({
           className={styles.blurbInput}
           value={blurb}
           maxLength={600}
-          rows={4}
+          rows={1}
           disabled={saving}
           onChange={(event) => setBlurb(event.target.value)}
         />

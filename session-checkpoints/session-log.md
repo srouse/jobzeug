@@ -952,3 +952,30 @@ Running log of Jobzeug session checkpoints. Entries are appended by the `session
 #### Next
 
 - Set `CONTENTFUL_OAUTH_REDIRECT_URI` to the redirect URI registered on the production OAuth app and restart the dev server
+
+### [2026-10-09T18:39:33-05:00]
+
+#### Summary
+
+- The presentation editor now includes the project title, and the blurb field grows with its text. Connector curves leave the job line 4 pixels apart.
+
+#### Changes
+
+- Evidence / records: none
+- Skills / tooling: none
+- Other: title input takes over the project detail and publishes `name` on `jobzeugProject` before the presentation fields; clicking the title opens that editor; blurb textarea height follows its content; job-line curve starts are staggered by 4 pixels
+
+#### Decisions
+
+- The title is the project `name`, not a presentation field. Employer and date stay out of the form. Cancel or a finished Save returns the header
+- A later evidence push still writes `name` from the project markdown
+- The blurb stays a textarea so Bold, Italic, and Link can use the selection. Its height is the text height, with no inner scroll
+- Curve ends on the project cards stay centered. Only the job-line starts are separated
+
+#### Plans cached
+
+- edit_project_title_572f24da.plan.md
+
+#### Next
+
+- None pending from this session

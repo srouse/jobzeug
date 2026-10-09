@@ -157,6 +157,7 @@ function HubHeader({
   year,
   onBack,
   onDismiss,
+  onEditTitle,
 }: {
   label: string;
   contentfulUrl?: string | null;
@@ -167,6 +168,7 @@ function HubHeader({
   onBack?: () => void;
   /** Close the project page. Lines stay with the job line. */
   onDismiss?: () => void;
+  onEditTitle?: () => void;
 }) {
   const { clearLineFocus } = useResumeHighlights();
   const meta = projectFocusMeta(employer, year);
@@ -174,12 +176,23 @@ function HubHeader({
     <div className={styles.hubIntro}>
       <div className={styles.hubHeader}>
         <div className={styles.hubTitleRow}>
-          <JzText
-            level={1}
-            variant="heading"
-            label={label}
-            className={styles.hubTitle}
-          />
+          {onEditTitle ? (
+            <button type="button" className={styles.hubTitleButton} onClick={onEditTitle}>
+              <JzText
+                level={1}
+                variant="heading"
+                label={label}
+                className={styles.hubTitle}
+              />
+            </button>
+          ) : (
+            <JzText
+              level={1}
+              variant="heading"
+              label={label}
+              className={styles.hubTitle}
+            />
+          )}
         </div>
         <div className={styles.hubHeaderTools}>
           {analysisUrl ? (
@@ -474,6 +487,14 @@ export function ConnectionHub({
   const posting = data ?? null;
   const { scrollProps } = useIdleScrollbar();
   const [briefs, setBriefs] = useState<Record<string, string>>({});
+  const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
+  const [titleEditRequest, setTitleEditRequest] = useState(0);
+  if (
+    editingProjectId &&
+    (!stageProjectId || !sameProjectId(editingProjectId, stageProjectId))
+  ) {
+    setEditingProjectId(null);
+  }
   const saveBrief = (kind: "project" | "jobLine", id: string, text: string) => {
     setBriefs((current) => ({ ...current, [briefKey(kind, id)]: text }));
   };
@@ -482,8 +503,11 @@ export function ConnectionHub({
   if (stageProjectId) {
     const focused = findProjectContext(resume, stageProjectId);
     const project = focused?.project ?? null;
+    const editingPresentation =
+      editingProjectId != null && sameProjectId(editingProjectId, stageProjectId);
     const showingVideo = Boolean(
-      project?.presentation?.videoUrl &&
+      !editingPresentation &&
+        project?.presentation?.videoUrl &&
         presentationId &&
         onClosePresentation &&
         sameProjectId(project.evidenceId, presentationId),
@@ -502,11 +526,16 @@ export function ConnectionHub({
         contentfulLabel={`Open ${project?.name ?? "project"} in Contentful`}
         onBack={showingVideo ? onClosePresentation : undefined}
         onDismiss={clearStageProject}
+        onEditTitle={
+          canEdit && project?.presentation
+            ? () => setTitleEditRequest((current) => current + 1)
+            : undefined
+        }
       />
     );
     body = (
       <>
-        <div className={styles.hubLead}>{header}</div>
+        {editingPresentation ? null : <div className={styles.hubLead}>{header}</div>}
         <div
           className={styles.projectCopy}
           data-hidden={showingVideo ? "" : undefined}
@@ -517,6 +546,10 @@ export function ConnectionHub({
               <PresentationEditor
                 project={project}
                 onSaved={onPresentationSaved ?? (async () => {})}
+                onEditingChange={(open) => {
+                  setEditingProjectId(open ? project.evidenceId : null);
+                }}
+                titleEditRequest={titleEditRequest}
               />
             ) : project?.presentation?.blurb ? (
               <SummaryCopy text={project.presentation.blurb} />
@@ -540,7 +573,10 @@ export function ConnectionHub({
                 ))}
               </div>
             ) : null}
-            {project?.presentation && project.url && !project.summary?.includes(project.url) ? (
+            {!editingPresentation &&
+            project?.presentation &&
+            project.url &&
+            !project.summary?.includes(project.url) ? (
               <JzText
                 variant="body-default"
                 href={project.url}
@@ -548,7 +584,7 @@ export function ConnectionHub({
                 label="Read the article"
               />
             ) : null}
-            {project?.presentation?.videoUrl ? (
+            {!editingPresentation && project?.presentation?.videoUrl ? (
               <div className={styles.hubActions}>
                 <JzButton
                   label="Details"
@@ -559,24 +595,26 @@ export function ConnectionHub({
                 />
               </div>
             ) : null}
-            <FocusBrief
-              key={stageProjectId}
-              kind="project"
-              subject={{
-                id: project?.evidenceId ?? stageProjectId,
-                title: project?.name ?? "Project",
-                text: project?.summary ?? "",
-              }}
-              resume={resume}
-              posting={posting}
-              paragraph={
-                briefs[briefKey("project", project?.evidenceId ?? stageProjectId)] ??
-                null
-              }
-              onParagraph={(text) =>
-                saveBrief("project", project?.evidenceId ?? stageProjectId, text)
-              }
-            />
+            {editingPresentation ? null : (
+              <FocusBrief
+                key={stageProjectId}
+                kind="project"
+                subject={{
+                  id: project?.evidenceId ?? stageProjectId,
+                  title: project?.name ?? "Project",
+                  text: project?.summary ?? "",
+                }}
+                resume={resume}
+                posting={posting}
+                paragraph={
+                  briefs[briefKey("project", project?.evidenceId ?? stageProjectId)] ??
+                  null
+                }
+                onParagraph={(text) =>
+                  saveBrief("project", project?.evidenceId ?? stageProjectId, text)
+                }
+              />
+            )}
           </div>
         </div>
         {project?.presentation?.videoUrl && onClosePresentation ? (

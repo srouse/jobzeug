@@ -4,8 +4,9 @@ import { contentfulOAuthConfig } from "./oauth";
 
 const PROJECT_ID = /^S\d{3,}$/;
 const BLURB_MAX = 600;
-/** Contentful Symbol fields hold 256 characters. Both metric fields are Symbols. */
-const METRIC_MAX = 256;
+/** Contentful Symbol fields hold 256 characters. The project name and both metric fields are Symbols. */
+const SYMBOL_MAX = 256;
+const METRIC_MAX = SYMBOL_MAX;
 const VIDEO_MAX_BYTES = 80 * 1024 * 1024;
 const VIDEO_TYPES = new Set(["video/mp4", "video/webm", "video/quicktime"]);
 
@@ -19,6 +20,7 @@ export class PresentationWriteError extends Error {
 }
 
 export type PresentationText = {
+  name: string;
   blurb: string;
   metricOneValue: string;
   metricOneLabel: string;
@@ -41,6 +43,7 @@ export function assertProjectId(projectId: string): string {
 }
 
 export function parsePresentationText(input: {
+  name?: unknown;
   blurb?: unknown;
   metricOneValue?: unknown;
   metricOneLabel?: unknown;
@@ -56,6 +59,7 @@ export function parsePresentationText(input: {
   ].some((value) => value !== undefined);
   if (!present) return null;
   return {
+    name: boundedText(input.name, SYMBOL_MAX, "Title"),
     blurb: boundedText(input.blurb, BLURB_MAX, "Blurb"),
     metricOneValue: boundedText(input.metricOneValue, METRIC_MAX, "Metric value"),
     metricOneLabel: boundedText(input.metricOneLabel, METRIC_MAX, "Metric label"),
@@ -99,9 +103,13 @@ export async function savePresentation(input: {
   const client = plainClient(input.token);
   const params = { spaceId: config.spaceId, environmentId: config.environmentId };
 
+  let project;
   let entry;
   try {
-    const project = await client.entry.get({ ...params, entryId: `jz-${projectId}` });
+    project = await client.entry.get({ ...params, entryId: `jz-${projectId}` });
+    if (project.sys.contentType?.sys?.id !== "jobzeugProject") {
+      throw new PresentationWriteError("Unknown project.", 404);
+    }
     const entryId = presentationLinkId(project.fields.presentation, config.locale);
     if (!entryId) {
       throw new PresentationWriteError("No presentation for this project.", 404);
@@ -109,6 +117,14 @@ export async function savePresentation(input: {
     entry = await client.entry.get({ ...params, entryId });
   } catch (error) {
     throw mapContentfulError(error);
+  }
+
+  if (input.text) {
+    try {
+      await publishProjectName(client, params, project, config.locale, input.text.name);
+    } catch (error) {
+      throw mapContentfulError(error);
+    }
   }
   const contentTypeId = entry.sys.contentType?.sys?.id;
   if (contentTypeId !== "jobzeugProjectPresentation") {
@@ -149,6 +165,25 @@ export async function savePresentation(input: {
   } catch (error) {
     throw mapContentfulError(error);
   }
+}
+
+async function publishProjectName(
+  client: PlainClientAPI,
+  params: { spaceId: string; environmentId: string },
+  project: Awaited<ReturnType<PlainClientAPI["entry"]["get"]>>,
+  locale: string,
+  name: string,
+): Promise<void> {
+  const current = project.fields.name;
+  const nameField =
+    current && typeof current === "object"
+      ? { ...current, [locale]: name }
+      : { [locale]: name };
+  const updated = await client.entry.update(
+    { ...params, entryId: project.sys.id },
+    { ...project, fields: { ...project.fields, name: nameField } },
+  );
+  await client.entry.publish({ ...params, entryId: project.sys.id }, updated);
 }
 
 /** CMA reference fields are localized: `{ "en-US": { sys: { id } } }`. */
@@ -279,7 +314,7 @@ async function replaceVideoAsset(
 
 function boundedText(value: unknown, max: number, label: string): string {
   if (typeof value !== "string") {
-    throw new PresentationWriteError(`Send the blurb and both metrics together.`, 400);
+    throw new PresentationWriteError(`${label} is required.`, 400);
   }
   const trimmed = value.trim();
   if (!trimmed) {

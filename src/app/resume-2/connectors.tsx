@@ -7,6 +7,8 @@ import styles from "./connectors.module.css";
 
 /** Line morph while the posting stays open. */
 const MORPH_MS = 500;
+/** Vertical gap between curve starts on the job line. */
+const JOB_START_GAP = 8;
 
 type Cubic = {
   x0: number;
@@ -239,11 +241,12 @@ function measure(
     .map((projectId) => ({ endY: centerOf(stack, projectId) }))
     .filter((row): row is { endY: number } => row.endY != null)
     .sort((a, b) => a.endY - b.endY);
+  const seriesTop = startY - ((ends.length - 1) * JOB_START_GAP) / 2;
 
   ends.forEach((row, index) => {
     paths.push({
       id: `slot-${index}`,
-      d: cubicHorizontal(startX, startY, stack.left, row.endY),
+      d: cubicHorizontal(startX, seriesTop + index * JOB_START_GAP, stack.left, row.endY),
       strong: false,
     });
   });
